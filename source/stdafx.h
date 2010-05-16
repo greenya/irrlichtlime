@@ -1,7 +1,3 @@
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently,
-// but are changed infrequently
-
 #pragma once
 
 #pragma unmanaged
@@ -10,27 +6,14 @@
 
 #include "Lime.h"
 
-// IrrlichtLime::Core
+// IrrlichtLime::Core types
 #include "Vector.h"
 #include "Dimension.h"
 #include "Rect.h"
 
-// IrrlichtLime::Video
+// Enums
+#include "AnimationTypeMD2.h"
 #include "DriverType.h"
-#include "VideoDriver.h"
-
-// IrrlichtLime::Scene
-#include "Mesh.h"
-#include "SceneNode.h"
-#include "AnimatedMesh.h"
-#include "AnimatedMeshSceneNode.h"
-#include "SceneManager.h"
-
-// IrrlichtLime::GUI
 #include "GUIElementType.h"
-#include "GUIElement.h"
-#include "GUIStaticText.h"
-#include "GUIEnvironment.h"
-
-// IrrlichtLime
-#include "IrrlichtDevice.h"
+#include "MaterialFlag.h"
+#include "SceneNodeType.h"
