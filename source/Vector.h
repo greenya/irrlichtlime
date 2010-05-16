@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+
 using namespace irr;
 using namespace System;
 

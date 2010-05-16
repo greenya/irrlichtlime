@@ -16,7 +16,7 @@ namespace _01.HelloWorld
 		static void Main(string[] args)
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(
-				DriverType.Software, new Dimension2Du(512, 384), 16, false, false, false);
+				DriverType.Software, new Dimension2Du(640, 480), 16, false, false, false);
 
 			device.WindowCaption = "Hello World! - Irrlicht Engine Demo";
 			
@@ -30,7 +30,14 @@ namespace _01.HelloWorld
 			AnimatedMesh mesh = scene.GetMesh("../media/sydney.md2");
 			AnimatedMeshSceneNode node = scene.AddAnimatedMeshSceneNode(mesh);
 
-			//...
+			if (node != null)
+			{
+				node.SetMaterialFlag(MaterialFlag.Lighting, false);
+				node.SetMD2Animation(AnimationTypeMD2.Stand);
+				node.SetMaterialTexture(0, driver.GetTexture("../media/sydney.bmp"));
+			}
+
+			scene.AddCameraSceneNode(null, new Vector3Df(0, 30, -40), new Vector3Df(0, 5, 0));
 
 			device.Drop();
 		}

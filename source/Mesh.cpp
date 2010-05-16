@@ -9,16 +9,11 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public ref class AnimatedMesh : Mesh
+Mesh::Mesh(scene::IMesh* mesh)
 {
-public:
-
-internal:
-
-	AnimatedMesh(scene::IAnimatedMesh* animatedMesh);
-
-	scene::IAnimatedMesh* m_AnimatedMesh;
-};
+	LIME_ASSERT(mesh != nullptr);
+	m_Mesh = mesh;
+}
 
 } // end namespace Scene
 } // end namespace IrrlichtLime

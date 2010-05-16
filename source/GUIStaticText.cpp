@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "GUIElement.h"
+#include "GUIStaticText.h"
 
 using namespace irr;
 using namespace System;
@@ -9,16 +10,12 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-public ref class GUIStaticText : GUIElement
+GUIStaticText::GUIStaticText(gui::IGUIStaticText* guiStaticText)
+	: GUIElement(guiStaticText)
 {
-public:
-
-internal:
-
-	GUIStaticText(gui::IGUIStaticText* guiStaticText);
-
-	gui::IGUIStaticText* m_GUIStaticText;
-};
+	LIME_ASSERT(guiStaticText != nullptr);
+	m_GUIStaticText = guiStaticText;
+}
 
 } // end namespace GUI
 } // end namespace IrrlichtLime
