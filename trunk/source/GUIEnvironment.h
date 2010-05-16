@@ -1,64 +1,34 @@
 #pragma once
 
 #include "stdafx.h"
+
 using namespace irr;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime
+namespace IrrlichtLime {
+namespace GUI {
+
+ref class GUIElement;
+ref class GUIStaticText;
+
+public ref class GUIEnvironment
 {
-namespace GUI
-{
-	public ref class GUIEnvironment
-	{
-	public:
+public:
 
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, Int32 id, bool fillBackground)
-		{
-			gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-				Lime::StringToStringW(text).c_str(),
-				*((core::recti*)rectangle->m_NativeObject),
-				border,
-				wordWrap,
-				parent == nullptr ? nullptr : parent->m_GUIElement,
-				id,
-				fillBackground);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, Int32 id, bool fillBackground);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, Int32 id);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
+	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
 
-			return gcnew GUIStaticText(t);
-		}
+internal:
 
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, Int32 id)
-		{
-			return AddStaticText(text, rectangle, border, wordWrap, parent, id, false);
-		}
+	GUIEnvironment(gui::IGUIEnvironment* guiEnvironment);
 
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent)
-		{
-			return AddStaticText(text, rectangle, border, wordWrap, parent, -1);
-		}
+	gui::IGUIEnvironment* m_GUIEnvironment;
+};
 
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle, bool border, bool wordWrap)
-		{
-			return AddStaticText(text, rectangle, border, wordWrap, nullptr);
-		}
-
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle, bool border)
-		{
-			return AddStaticText(text, rectangle, border, true);
-		}
-
-		GUIStaticText^ AddStaticText(String^ text, Core::Recti^ rectangle)
-		{
-			return AddStaticText(text, rectangle, false);
-		}
-
-	internal:
-
-		gui::IGUIEnvironment* m_GUIEnvironment;
-
-		GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
-		{
-			m_GUIEnvironment = guiEnvironment;
-		}
-	};
-}
-}
+} // end namespace GUI
+} // end namespace IrrlichtLime

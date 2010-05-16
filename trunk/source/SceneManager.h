@@ -1,89 +1,48 @@
 #pragma once
 
 #include "stdafx.h"
+
 using namespace irr;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime
+namespace IrrlichtLime {
+namespace Scene {
+
+ref class AnimatedMesh;
+ref class AnimatedMeshSceneNode;
+ref class CameraSceneNode;
+ref class SceneNode;
+
+public ref class SceneManager
 {
-namespace Scene
-{
-	public ref class SceneManager
-	{
-	public:
+public:
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
-				Core::Vector3Df^ position, Core::Vector3Df^ rotation, Core::Vector3Df^ scale,
-				bool alsoAddIfMeshPointerZero)
-		{
-			scene::IAnimatedMeshSceneNode* m = m_SceneManager->addAnimatedMeshSceneNode(
-				mesh->m_AnimatedMesh,
-				parent == nullptr ? nullptr : parent->m_SceneNode,
-				id,
-				*((core::vector3df*)position->m_NativeObject),
-				*((core::vector3df*)rotation->m_NativeObject),
-				*((core::vector3df*)scale->m_NativeObject),
-				alsoAddIfMeshPointerZero);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, bool alsoAddIfMeshPointerZero);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id, Vector3Df^ position, Vector3Df^ rotation);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id, Vector3Df^ position);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent);
+	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh);
 
-			return m == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(m);
-		}
+	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id, bool makeActive);
+	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id);
+	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat);
+	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position);
+	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent);
+	CameraSceneNode^ AddCameraSceneNode();
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
-				Core::Vector3Df^ position, Core::Vector3Df^ rotation, Core::Vector3Df^ scale)
-		{
-			return AddAnimatedMeshSceneNode(mesh, parent, id, position, rotation, scale, false);
-		}
+	AnimatedMesh^ GetMesh(String^ filename);
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
-				Core::Vector3Df^ position, Core::Vector3Df^ rotation)
-		{
-			return AddAnimatedMeshSceneNode(mesh, parent, id, position, rotation, gcnew Core::Vector3Df(1.0f));
-		}
+	property SceneNode^ RootSceneNode { SceneNode^ get(); }
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
-				Core::Vector3Df^ position)
-		{
-			return AddAnimatedMeshSceneNode(mesh, parent, id, position, gcnew Core::Vector3Df());
-		}
+internal:
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id)
-		{
-			return AddAnimatedMeshSceneNode(mesh, parent, id, gcnew Core::Vector3Df());
-		}
+	SceneManager(scene::ISceneManager* sceneManager);
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent)
-		{
-			return AddAnimatedMeshSceneNode(mesh, parent, -1);
-		}
+	scene::ISceneManager* m_SceneManager;
+};
 
-		AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh)
-		{
-			return AddAnimatedMeshSceneNode(mesh, nullptr);
-		}
-
-		AnimatedMesh^ GetMesh(String^ filename)
-		{
-			scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToStringC(filename));
-			return m == nullptr ? nullptr : gcnew AnimatedMesh(m);
-		}
-
-		property SceneNode^ RootSceneNode
-		{
-			SceneNode^ get()
-			{
-				scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
-				return n == nullptr ? nullptr : gcnew SceneNode(n);
-			}
-		}
-
-	internal:
-
-		scene::ISceneManager* m_SceneManager;
-
-		SceneManager(scene::ISceneManager* sceneManager)
-		{
-			m_SceneManager = sceneManager;
-		}
-	};
-}
-}
+} // end namespace Scene
+} // end namespace IrrlichtLime

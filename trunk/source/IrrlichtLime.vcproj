@@ -188,6 +188,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MaterialFlag.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Texture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoDriver.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\VideoDriver.h"
 				>
 			</File>
@@ -212,7 +228,15 @@
 			Name="Scene"
 			>
 			<File
+				RelativePath=".\AnimatedMesh.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AnimatedMesh.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AnimatedMeshSceneNode.cpp"
 				>
 			</File>
 			<File
@@ -220,7 +244,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnimationTypeMD2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CameraSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CameraSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Mesh.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Mesh.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneManager.cpp"
 				>
 			</File>
 			<File
@@ -228,13 +272,25 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneNode.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneNodeType.h"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="GUI"
 			>
+			<File
+				RelativePath=".\GUIElement.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\GUIElement.h"
 				>
@@ -244,7 +300,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIEnvironment.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIEnvironment.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIStaticText.cpp"
 				>
 			</File>
 			<File
@@ -257,6 +321,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\IrrlichtDevice.cpp"
+			>
+		</File>
+		<File
 			RelativePath=".\IrrlichtDevice.h"
 			>
 		</File>
@@ -265,7 +333,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\StdAfx.cpp"
+			RelativePath=".\stdafx.cpp"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"
@@ -277,7 +345,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath=".\StdAfx.h"
+			RelativePath=".\stdafx.h"
 			>
 		</File>
 	</Files>

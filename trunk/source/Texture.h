@@ -4,20 +4,21 @@
 
 using namespace irr;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
-namespace Scene {
+namespace Video {
 
-public ref class Mesh
+public ref class Texture
 {
 public:
 
 internal:
 
-	Mesh(scene::IMesh* mesh);
+	Texture(video::ITexture* texture);
 
-	scene::IMesh* m_Mesh;
+	video::ITexture* m_Texture;
 };
 
-} // end namespace Scene
+} // end namespace Video
 } // end namespace IrrlichtLime

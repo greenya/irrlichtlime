@@ -1,139 +1,44 @@
 #pragma once
 
 #include "stdafx.h"
+
 using namespace irr;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime
+namespace IrrlichtLime {
+namespace Video {
+
+ref class Texture;
+
+public ref class VideoDriver
 {
-namespace Video
-{
-	public ref class VideoDriver
-	{
-	public:
+public:
 
-		property Video::DriverType DriverType
-		{
-			Video::DriverType get()
-			{
-				return (Video::DriverType)m_VideoDriver->getDriverType();
-			}
-		}
+	Texture^ GetTexture(String^ filename);
 
-		property Core::Recti^ ViewPort
-		{
-			Core::Recti^ get()
-			{
-				return gcnew Core::Recti(m_VideoDriver->getViewPort());
-			}
+	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
+	property Video::DriverType DriverType { Video::DriverType get(); }
+	property UInt32 DynamicLightCount { UInt32 get(); }
+	property Int32 FPS { Int32 get(); }
+	property UInt32 MaterialRendererCount { UInt32 get(); }
+	property UInt32 MaximalDynamicLightAmount { UInt32 get(); }
+	property UInt32 MaximalPrimitiveCount { UInt32 get(); }
+	property Dimension2Du^ MaxTextureSize { Dimension2Du^ get(); }
+	property String^ Name { String^ get(); }
+	property UInt32 PrimitiveCountDrawn { UInt32 get(); }
+	property Dimension2Du^ ScreenSize { Dimension2Du^ get(); }
+	property String^ VendorInfo { String^ get(); }
+	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }
 
-			void set(Core::Recti^ value)
-			{
-				m_VideoDriver->setViewPort(*((core::recti*)value->m_NativeObject));
-			}
-		}
+	virtual String^ ToString() override;
 
-		property Core::Dimension2Du^ ScreenSize
-		{
-			Core::Dimension2Du^ get()
-			{
-				return gcnew Core::Dimension2Du(m_VideoDriver->getScreenSize());
-			}
-		}
+internal:
 
-		property Core::Dimension2Du^ CurrentRenderTargetSize
-		{
-			Core::Dimension2Du^ get()
-			{
-				return gcnew Core::Dimension2Du(m_VideoDriver->getCurrentRenderTargetSize());
-			}
-		}
+	VideoDriver(video::IVideoDriver* videoDriver);
 
-		property Core::Dimension2Du^ MaxTextureSize
-		{
-			Core::Dimension2Du^ get()
-			{
-				return gcnew Core::Dimension2Du(m_VideoDriver->getMaxTextureSize());
-			}
-		}
+	video::IVideoDriver* m_VideoDriver;
+};
 
-		property Int32 FPS
-		{
-			Int32 get()
-			{
-				return m_VideoDriver->getFPS();
-			}
-		}
-
-		property UInt32 PrimitiveCountDrawn
-		{
-			UInt32 get()
-			{
-				return m_VideoDriver->getPrimitiveCountDrawn();
-			}
-		}
-
-		property UInt32 MaximalDynamicLightAmount
-		{
-			UInt32 get()
-			{
-				return m_VideoDriver->getMaximalDynamicLightAmount();
-			}
-		}
-
-		property UInt32 DynamicLightCount
-		{
-			UInt32 get()
-			{
-				return m_VideoDriver->getDynamicLightCount();
-			}
-		}
-
-		property UInt32 MaximalPrimitiveCount
-		{
-			UInt32 get()
-			{
-				return m_VideoDriver->getMaximalPrimitiveCount();
-			}
-		}
-
-		property UInt32 MaterialRendererCount
-		{
-			UInt32 get()
-			{
-				return m_VideoDriver->getMaterialRendererCount();
-			}
-		}
-
-		property String^ Name
-		{
-			String^ get()
-			{
-				return gcnew String(m_VideoDriver->getName());
-			}
-		}
-
-		property String^ VendorInfo
-		{
-			String^ get()
-			{
-				return gcnew String(m_VideoDriver->getVendorInfo().c_str());
-			}
-		}
-
-		virtual String^ ToString() override
-		{
-			return Name;
-		}
-
-	internal:
-
-		video::IVideoDriver* m_VideoDriver;
-
-		VideoDriver(video::IVideoDriver* videoDriver)
-		{
-			m_VideoDriver = videoDriver;
-		}
-	};
-}
-}
+} // end namespace Video
+} // end namespace IrrlichtLime

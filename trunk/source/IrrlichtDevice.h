@@ -1,118 +1,43 @@
 #pragma once
 
 #include "stdafx.h"
+#include "GUIEnvironment.h"
+#include "SceneManager.h"
+#include "VideoDriver.h"
+
 using namespace irr;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime
+namespace IrrlichtLime {
+
+public ref class IrrlichtDevice
 {
-	public ref class IrrlichtDevice
-	{
-	public:
+public:
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Core::Dimension2Du^ windowSize, UInt32 bits,
-			bool fullscreen, bool stencilbuffer, bool vsync)
-		{
-			Console::WriteLine("Irrlicht Lime version " + Lime::Version);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen, bool stencilbuffer, bool vsync);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen, bool stencilbuffer);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType);
+	static IrrlichtDevice^ CreateDevice();
 
-			irr::IrrlichtDevice* d = createDevice(
-				(video::E_DRIVER_TYPE)driverType,
-				*(core::dimension2du*)windowSize->m_NativeObject,
-				bits, fullscreen, stencilbuffer, vsync);
+	void Drop();
 
-			return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
-		}
+	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
+	property String^ Version { String^ get(); }
+	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
+	property String^ WindowCaption { void set(String^ value); }
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Core::Dimension2Du^ windowSize, UInt32 bits,
-			bool fullscreen, bool stencilbuffer)
-		{
-			return CreateDevice(driverType, windowSize, bits, fullscreen, stencilbuffer, false);
-		}
+	virtual String^ ToString() override;
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Core::Dimension2Du^ windowSize, UInt32 bits,
-			bool fullscreen)
-		{
-			return CreateDevice(driverType, windowSize, bits, fullscreen, false);
-		}
+internal:
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Core::Dimension2Du^ windowSize, UInt32 bits)
-		{
-			return CreateDevice(driverType, windowSize, bits, false);
-		}
+	IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice);
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Core::Dimension2Du^ windowSize)
-		{
-			return CreateDevice(driverType, windowSize, 16);
-		}
+	irr::IrrlichtDevice* m_IrrlichtDevice;
+};
 
-		static IrrlichtDevice^ CreateDevice(Video::DriverType driverType)
-		{
-			return CreateDevice(driverType, gcnew Core::Dimension2Du(640, 480));
-		}
-
-		static IrrlichtDevice^ CreateDevice()
-		{
-			return CreateDevice(Video::DriverType::Software);
-		}
-
-		void Drop()
-		{
-			m_IrrlichtDevice->drop();
-		}
-
-		property Video::VideoDriver^ VideoDriver
-		{
-			Video::VideoDriver^ get()
-			{
-				return gcnew Video::VideoDriver(m_IrrlichtDevice->getVideoDriver());
-			}
-		}
-
-		property Scene::SceneManager^ SceneManager
-		{
-			Scene::SceneManager^ get()
-			{
-				return gcnew Scene::SceneManager(m_IrrlichtDevice->getSceneManager());
-			}
-		}
-
-		property GUI::GUIEnvironment^ GUIEnvironment
-		{
-			GUI::GUIEnvironment^ get()
-			{
-				return gcnew GUI::GUIEnvironment(m_IrrlichtDevice->getGUIEnvironment());
-			}
-		}
-
-		property String^ Version
-		{
-			String^ get()
-			{
-				return gcnew String(m_IrrlichtDevice->getVersion());
-			}
-		}
-
-		property String^ WindowCaption
-		{
-			void set(String^ value)
-			{
-				m_IrrlichtDevice->setWindowCaption(Lime::StringToStringW(value).c_str());
-			}
-		}
-
-		virtual String^ ToString() override
-		{
-			return String::Format("Irrlicht {0}{1}", Version,
-				m_IrrlichtDevice->getDebugName() == nullptr ? "" : " DEBUG");
-		}
-
-	internal:
-
-		irr::IrrlichtDevice* m_IrrlichtDevice;
-
-		IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice)
-		{
-			m_IrrlichtDevice = irrlichtDevice;
-		}
-	};
-}
+} // end namespace IrrlichtLime
