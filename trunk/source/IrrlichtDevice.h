@@ -1,15 +1,16 @@
 #pragma once
 
 #include "stdafx.h"
-#include "GUIEnvironment.h"
-#include "SceneManager.h"
-#include "VideoDriver.h"
 
 using namespace irr;
 using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+
+namespace GUI { ref class GUIEnvironment; }
+namespace Scene { ref class SceneManager; }
+namespace Video { ref class VideoDriver; }
 
 public ref class IrrlichtDevice
 {
@@ -24,6 +25,8 @@ public:
 	static IrrlichtDevice^ CreateDevice();
 
 	void Drop();
+	bool Run();
+	void Yield();
 
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
@@ -38,6 +41,10 @@ internal:
 	IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice);
 
 	irr::IrrlichtDevice* m_IrrlichtDevice;
+
+private:
+
+	static void CreateDevice_start();
 };
 
 } // end namespace IrrlichtLime

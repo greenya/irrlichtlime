@@ -24,33 +24,68 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		id,
 		fillBackground);
 
-	return gcnew GUIStaticText(t);
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
 	Int32 id)
 {
-	return AddStaticText(text, rectangle, border, wordWrap, parent, id, false);
+	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
+		Lime::StringToStringW(text).c_str(),
+		*((core::recti*)rectangle->m_NativeObject),
+		border,
+		wordWrap,
+		parent == nullptr ? nullptr : parent->m_GUIElement,
+		id);
+
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent)
 {
-	return AddStaticText(text, rectangle, border, wordWrap, parent, -1);
+	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
+		Lime::StringToStringW(text).c_str(),
+		*((core::recti*)rectangle->m_NativeObject),
+		border,
+		wordWrap,
+		parent == nullptr ? nullptr : parent->m_GUIElement);
+
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap)
 {
-	return AddStaticText(text, rectangle, border, wordWrap, nullptr);
+	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
+		Lime::StringToStringW(text).c_str(),
+		*((core::recti*)rectangle->m_NativeObject),
+		border,
+		wordWrap);
+
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border)
 {
-	return AddStaticText(text, rectangle, border, true);
+	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
+		Lime::StringToStringW(text).c_str(),
+		*((core::recti*)rectangle->m_NativeObject),
+		border);
+
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 {
-	return AddStaticText(text, rectangle, false);
+	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
+		Lime::StringToStringW(text).c_str(),
+		*((core::recti*)rectangle->m_NativeObject));
+
+	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+}
+
+void GUIEnvironment::DrawAll()
+{
+	m_GUIEnvironment->drawAll();
 }
 
 GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)

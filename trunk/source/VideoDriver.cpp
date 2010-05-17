@@ -11,6 +11,31 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru ^color)
+{
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, *((video::SColor*)color->m_NativeObject));
+}
+
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer)
+{
+	return m_VideoDriver->beginScene(backBuffer, zBuffer);
+}
+
+bool VideoDriver::BeginScene(bool backBuffer)
+{
+	return m_VideoDriver->beginScene(backBuffer);
+}
+
+bool VideoDriver::BeginScene()
+{
+	return m_VideoDriver->beginScene();
+}
+
+bool VideoDriver::EndScene()
+{
+	return m_VideoDriver->endScene();
+}
+
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
 	video::ITexture* t = m_VideoDriver->getTexture(Lime::StringToStringC(filename).c_str());

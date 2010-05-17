@@ -18,7 +18,8 @@ GUIElement^ GUIElement::GetElementFromID(Int32 id, bool searchchildren)
 
 GUIElement^ GUIElement::GetElementFromID(Int32 id)
 {
-	return GetElementFromID(id, false);
+	gui::IGUIElement *e = m_GUIElement->getElementFromId(id);
+	return e == nullptr ? nullptr : gcnew GUIElement(e);
 }
 
 GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)

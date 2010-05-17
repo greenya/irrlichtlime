@@ -6,10 +6,13 @@
 
 #include "Lime.h"
 
-// IrrlichtLime::Core types
+// ::Core types
 #include "Vector.h"
 #include "Dimension.h"
 #include "Rect.h"
+
+// ::Video types
+#include "Color.h"
 
 // Enums
 #include "AnimationTypeMD2.h"

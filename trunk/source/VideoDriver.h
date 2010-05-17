@@ -15,6 +15,13 @@ public ref class VideoDriver
 {
 public:
 
+	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color);
+	bool BeginScene(bool backBuffer, bool zBuffer);
+	bool BeginScene(bool backBuffer);
+	bool BeginScene();
+
+	bool EndScene();
+
 	Texture^ GetTexture(String^ filename);
 
 	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }

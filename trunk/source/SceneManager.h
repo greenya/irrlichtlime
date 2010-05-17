@@ -33,6 +33,8 @@ public:
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNode();
 
+	void DrawAll();
+
 	AnimatedMesh^ GetMesh(String^ filename);
 
 	property SceneNode^ RootSceneNode { SceneNode^ get(); }

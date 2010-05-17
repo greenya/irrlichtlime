@@ -21,7 +21,7 @@ IrrlichtDevice::IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice)
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
 	bool stencilbuffer, bool vsync)
 {
-	Console::WriteLine("Irrlicht Lime version " + Lime::Version);
+	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
@@ -34,37 +34,83 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
 	bool stencilbuffer)
 {
-	return IrrlichtDevice::CreateDevice(driverType, windowSize, bits, fullscreen, stencilbuffer, false);
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice(
+		(video::E_DRIVER_TYPE)driverType,
+		*(core::dimension2du*)windowSize->m_NativeObject,
+		bits, fullscreen, stencilbuffer);
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen)
 {
-	return IrrlichtDevice::CreateDevice(driverType, windowSize, bits, fullscreen, false);
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice(
+		(video::E_DRIVER_TYPE)driverType,
+		*(core::dimension2du*)windowSize->m_NativeObject,
+		bits, fullscreen);
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits)
 {
-	return IrrlichtDevice::CreateDevice(driverType, windowSize, bits, false);
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice(
+		(video::E_DRIVER_TYPE)driverType,
+		*(core::dimension2du*)windowSize->m_NativeObject,
+		bits);
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize)
 {
-	return IrrlichtDevice::CreateDevice(driverType, windowSize, 16);
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice(
+		(video::E_DRIVER_TYPE)driverType,
+		*(core::dimension2du*)windowSize->m_NativeObject);
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType)
 {
-	return IrrlichtDevice::CreateDevice(driverType, gcnew Dimension2Du(640, 480));
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice(
+		(video::E_DRIVER_TYPE)driverType);
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice()
 {
-	return IrrlichtDevice::CreateDevice(Video::DriverType::Software);
+	CreateDevice_start();
+
+	irr::IrrlichtDevice* d = createDevice();
+
+	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
 
 void IrrlichtDevice::Drop()
 {
 	m_IrrlichtDevice->drop();
+}
+
+bool IrrlichtDevice::Run()
+{
+	return m_IrrlichtDevice->run();
+}
+
+void IrrlichtDevice::Yield()
+{
+	m_IrrlichtDevice->yield();
 }
 
 Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
@@ -96,6 +142,11 @@ String^ IrrlichtDevice::ToString()
 {
 	return String::Format("Irrlicht {0}{1}", Version,
 		m_IrrlichtDevice->getDebugName() == nullptr ? "" : " DEBUG");
+}
+
+void IrrlichtDevice::CreateDevice_start()
+{
+	Console::WriteLine("Irrlicht Lime version " + Lime::Version);
 }
 
 } // end namespace IrrlichtLime
