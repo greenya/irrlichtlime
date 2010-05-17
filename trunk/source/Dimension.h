@@ -8,30 +8,30 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Dimension2Du : Lime::NativeObject
+public ref class Dimension2Du : Lime::NativeValue<core::dimension2du>
 {
 public:
 
 	Dimension2Du(UInt32 width, UInt32 height)
 	{
-		m_NativeObject = new core::dimension2du(width, height);
+		m_NativeValue = new core::dimension2du(width, height);
 	}
 
 	property UInt32 Width
 	{
-		UInt32 get() { return ((core::dimension2du*)m_NativeObject)->Width; }
-		void set(UInt32 value) { ((core::dimension2du*)m_NativeObject)->Width = value; }
+		UInt32 get() { return m_NativeValue->Width; }
+		void set(UInt32 value) { m_NativeValue->Width = value; }
 	}
 
 	property UInt32 Height
 	{
-		UInt32 get() { return ((core::dimension2du*)m_NativeObject)->Height; }
-		void set(UInt32 value) { ((core::dimension2du*)m_NativeObject)->Height = value; }
+		UInt32 get() { return m_NativeValue->Height; }
+		void set(UInt32 value) { m_NativeValue->Height = value; }
 	}
 
 	property UInt32 Area
 	{
-		UInt32 get() { return ((core::dimension2du*)m_NativeObject)->getArea(); }
+		UInt32 get() { return m_NativeValue->getArea(); }
 	}
 
 	virtual String^ ToString() override
@@ -43,7 +43,7 @@ internal:
 
 	Dimension2Du(core::dimension2du value)
 	{
-		m_NativeObject = new core::dimension2du(value);
+		m_NativeValue = new core::dimension2du(value);
 	}
 };
 

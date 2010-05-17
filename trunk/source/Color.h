@@ -8,73 +8,73 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class Coloru : Lime::NativeObject
+public ref class Coloru : Lime::NativeValue<video::SColor>
 {
 public:
 
 	Coloru(UInt32 color)
 	{
-		m_NativeObject = new video::SColor(color);
+		m_NativeValue = new video::SColor(color);
 	}
 
 	Coloru(UInt32 a, UInt32 r, UInt32 g, UInt32 b)
 	{
-		m_NativeObject = new video::SColor(a, r, g, b);
+		m_NativeValue = new video::SColor(a, r, g, b);
 	}
 
 	void Set(UInt32 a, UInt32 r, UInt32 g, UInt32 b)
 	{
-		((video::SColor*)m_NativeObject)->set(a, r, g, b);
+		((video::SColor*)m_NativeValue)->set(a, r, g, b);
 	}
 
 	property UInt32 Alpha
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->getAlpha(); }
-		void set(UInt32 value) { ((video::SColor*)m_NativeObject)->setAlpha(value); }
+		UInt32 get() { return m_NativeValue->getAlpha(); }
+		void set(UInt32 value) { m_NativeValue->setAlpha(value); }
 	}
 
 	property UInt32 Average
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->getAverage(); }
+		UInt32 get() { return m_NativeValue->getAverage(); }
 	}
 
 	property UInt32 Blue
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->getBlue(); }
-		void set(UInt32 value) { ((video::SColor*)m_NativeObject)->setBlue(value); }
+		UInt32 get() { return m_NativeValue->getBlue(); }
+		void set(UInt32 value) { m_NativeValue->setBlue(value); }
 	}
 
 	property UInt32 Color
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->color; }
-		void set(UInt32 value) { ((video::SColor*)m_NativeObject)->color = value; }
+		UInt32 get() { return m_NativeValue->color; }
+		void set(UInt32 value) { m_NativeValue->color = value; }
 	}
 
 	property UInt32 Green
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->getGreen(); }
-		void set(UInt32 value) { ((video::SColor*)m_NativeObject)->setGreen(value); }
+		UInt32 get() { return m_NativeValue->getGreen(); }
+		void set(UInt32 value) { m_NativeValue->setGreen(value); }
 	}
 
 	property float Lightness
 	{
-		float get() { return ((video::SColor*)m_NativeObject)->getLightness(); }
+		float get() { return m_NativeValue->getLightness(); }
 	}
 
 	property float Luminance
 	{
-		float get() { return ((video::SColor*)m_NativeObject)->getLuminance(); }
+		float get() { return m_NativeValue->getLuminance(); }
 	}
 
 	property UInt32 Red
 	{
-		UInt32 get() { return ((video::SColor*)m_NativeObject)->getRed(); }
-		void set(UInt32 value) { ((video::SColor*)m_NativeObject)->setRed(value); }
+		UInt32 get() { return m_NativeValue->getRed(); }
+		void set(UInt32 value) { m_NativeValue->setRed(value); }
 	}
 
 	property UInt16 A1R5G5B5
 	{
-		UInt16 get() { return ((video::SColor*)m_NativeObject)->toA1R5G5B5(); }
+		UInt16 get() { return m_NativeValue->toA1R5G5B5(); }
 	}
 
 	virtual String^ ToString() override
@@ -86,7 +86,7 @@ internal:
 
 	Coloru(video::SColor value)
 	{
-		m_NativeObject = new video::SColor(value);
+		m_NativeValue = new video::SColor(value);
 	}
 };
 

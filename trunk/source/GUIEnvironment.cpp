@@ -17,7 +17,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject),
+		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
 		parent == nullptr ? nullptr : parent->m_GUIElement,
@@ -32,7 +32,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject),
+		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
 		parent == nullptr ? nullptr : parent->m_GUIElement,
@@ -45,7 +45,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject),
+		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
 		parent == nullptr ? nullptr : parent->m_GUIElement);
@@ -57,7 +57,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject),
+		*rectangle->m_NativeValue,
 		border,
 		wordWrap);
 
@@ -68,7 +68,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject),
+		*rectangle->m_NativeValue,
 		border);
 
 	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
@@ -78,7 +78,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 {
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
-		*((core::recti*)rectangle->m_NativeObject));
+		*rectangle->m_NativeValue);
 
 	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
 }
