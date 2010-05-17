@@ -8,33 +8,30 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Recti : Lime::NativeObject
+public ref class Recti : Lime::NativeValue<core::recti>
 {
 public:
 
 	Recti(Int32 x1, Int32 y1, Int32 x2, Int32 y2)
 	{
-		m_NativeObject = new core::recti(x1, y1, x2, y2);
+		m_NativeValue = new core::recti(x1, y1, x2, y2);
 	}
 
 	Recti(Vector2Di^ upperLeft, Vector2Di^ lowerRight)
 	{
-		m_NativeObject = new core::recti(
-			*(core::vector2di*)upperLeft->m_NativeObject,
-			*(core::vector2di*)lowerRight->m_NativeObject);
+		m_NativeValue = new core::recti(*upperLeft->m_NativeValue, *lowerRight->m_NativeValue);
 	}
 
 	property Vector2Di^ UpperLeftCorner
 	{
 		Vector2Di^ get()
 		{
-			core::vector2di v = ((core::recti*)m_NativeObject)->UpperLeftCorner;
-			return gcnew Vector2Di(v.X, v.Y);
+			return gcnew Vector2Di(m_NativeValue->UpperLeftCorner.X, m_NativeValue->UpperLeftCorner.Y);
 		}
 
 		void set(Vector2Di^ value)
 		{
-			((core::recti*)m_NativeObject)->UpperLeftCorner = *((core::vector2di*)value->m_NativeObject);
+			m_NativeValue->UpperLeftCorner = *value->m_NativeValue;
 		}
 	}
 
@@ -42,29 +39,28 @@ public:
 	{
 		Vector2Di^ get()
 		{
-			core::vector2di v = ((core::recti*)m_NativeObject)->LowerRightCorner;
-			return gcnew Vector2Di(v.X, v.Y);
+			return gcnew Vector2Di(m_NativeValue->LowerRightCorner.X, m_NativeValue->LowerRightCorner.Y);
 		}
 
 		void set(Vector2Di^ value)
 		{
-			((core::recti*)m_NativeObject)->LowerRightCorner = *((core::vector2di*)value->m_NativeObject);
+			m_NativeValue->LowerRightCorner = *value->m_NativeValue;
 		}
 	}
 
 	property Int32 Width
 	{
-		Int32 get() { return ((core::recti*)m_NativeObject)->getWidth(); }
+		Int32 get() { return m_NativeValue->getWidth(); }
 	}
 
 	property Int32 Height
 	{
-		Int32 get() { return ((core::recti*)m_NativeObject)->getHeight(); }
+		Int32 get() { return m_NativeValue->getHeight(); }
 	}
 
 	property Int32 Area
 	{
-		Int32 get() { return ((core::recti*)m_NativeObject)->getArea(); }
+		Int32 get() { return m_NativeValue->getArea(); }
 	}
 
 	virtual String^ ToString() override
@@ -76,7 +72,7 @@ internal:
 
 	Recti(core::recti value)
 	{
-		m_NativeObject = new core::recti(value);
+		m_NativeValue = new core::recti(value);
 	}
 };
 

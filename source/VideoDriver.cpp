@@ -13,7 +13,7 @@ namespace Video {
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru ^color)
 {
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *((video::SColor*)color->m_NativeObject));
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue);
 }
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer)
@@ -54,7 +54,7 @@ Recti^ VideoDriver::ViewPort::get()
 
 void VideoDriver::ViewPort::set(Recti^ value)
 {
-	m_VideoDriver->setViewPort(*((core::recti*)value->m_NativeObject));
+	m_VideoDriver->setViewPort(*value->m_NativeValue);
 }
 
 Dimension2Du^ VideoDriver::ScreenSize::get()

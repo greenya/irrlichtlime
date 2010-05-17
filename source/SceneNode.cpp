@@ -125,7 +125,7 @@ Vector3Df^ SceneNode::Position::get()
 
 void SceneNode::Position::set(Vector3Df^ value)
 {
-	m_SceneNode->setPosition(*((core::vector3df*)value->m_NativeObject));
+	m_SceneNode->setPosition(*value->m_NativeValue);
 }
 
 Vector3Df^ SceneNode::Rotation::get()
@@ -136,7 +136,7 @@ Vector3Df^ SceneNode::Rotation::get()
 
 void SceneNode::Rotation::set(Vector3Df^ value)
 {
-	m_SceneNode->setRotation(*((core::vector3df*)value->m_NativeObject));
+	m_SceneNode->setRotation(*value->m_NativeValue);
 }
 
 Vector3Df^ SceneNode::Scale::get()
@@ -147,7 +147,7 @@ Vector3Df^ SceneNode::Scale::get()
 
 void SceneNode::Scale::set(Vector3Df^ value)
 {
-	m_SceneNode->setScale(*((core::vector3df*)value->m_NativeObject));
+	m_SceneNode->setScale(*value->m_NativeValue);
 }
 
 Scene::SceneManager^ SceneNode::SceneManager::get()

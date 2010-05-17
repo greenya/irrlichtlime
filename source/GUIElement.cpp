@@ -24,7 +24,7 @@ GUIElement^ GUIElement::GetElementFromID(Int32 id)
 
 GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 {
-	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*((core::vector2di*)point->m_NativeObject));
+	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*point->m_NativeValue);
 	return e == nullptr ? nullptr : gcnew GUIElement(e);
 }
 
@@ -35,7 +35,7 @@ bool GUIElement::IsMyChild(GUIElement^ child)
 
 bool GUIElement::IsPointInside(Vector2Di^ point)
 {
-	return m_GUIElement->isPointInside(*((core::vector2di*)point->m_NativeObject));
+	return m_GUIElement->isPointInside(*point->m_NativeValue);
 }
 
 GUIElementType GUIElement::Type::get()
@@ -100,7 +100,7 @@ Recti^ GUIElement::RelativePosition::get()
 
 void GUIElement::RelativePosition::set(Recti^ value)
 {
-	m_GUIElement->setRelativePosition(*((core::recti*)value->m_NativeObject));
+	m_GUIElement->setRelativePosition(*value->m_NativeValue);
 }
 
 Recti^ GUIElement::AbsolutePosition::get()

@@ -21,9 +21,9 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
 		parent == nullptr ? nullptr : parent->m_SceneNode,
 		id,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)rotation->m_NativeObject),
-		*((core::vector3df*)scale->m_NativeObject),
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
 		alsoAddIfMeshPointerZero);
 
 	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
@@ -36,9 +36,9 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
 		parent == nullptr ? nullptr : parent->m_SceneNode,
 		id,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)rotation->m_NativeObject),
-		*((core::vector3df*)scale->m_NativeObject));
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
 
 	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
 }
@@ -50,8 +50,8 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
 		parent == nullptr ? nullptr : parent->m_SceneNode,
 		id,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)rotation->m_NativeObject));
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
 
 	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
 }
@@ -63,7 +63,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
 		parent == nullptr ? nullptr : parent->m_SceneNode,
 		id,
-		*((core::vector3df*)position->m_NativeObject));
+		*position->m_NativeValue);
 
 	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
 }
@@ -99,8 +99,8 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ 
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
 		parent == nullptr ? nullptr : parent->m_SceneNode,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)lookat->m_NativeObject),
+		*position->m_NativeValue,
+		*lookat->m_NativeValue,
 		id,
 		makeActive);
 
@@ -111,8 +111,8 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ 
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
 		parent == nullptr ? nullptr : parent->m_SceneNode,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)lookat->m_NativeObject),
+		*position->m_NativeValue,
+		*lookat->m_NativeValue,
 		id);
 
 	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
@@ -122,8 +122,8 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ 
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
 		parent == nullptr ? nullptr : parent->m_SceneNode,
-		*((core::vector3df*)position->m_NativeObject),
-		*((core::vector3df*)lookat->m_NativeObject));
+		*position->m_NativeValue,
+		*lookat->m_NativeValue);
 
 	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
 }
@@ -132,7 +132,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ 
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
 		parent == nullptr ? nullptr : parent->m_SceneNode,
-		*((core::vector3df*)position->m_NativeObject));
+		*position->m_NativeValue);
 
 	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
 }

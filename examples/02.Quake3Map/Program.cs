@@ -64,7 +64,7 @@ namespace _02.Quake3Map
 
 			while (device.Run())
 			{
-				//if (device.WindowActive)
+				if (device.WindowActive)
 				{
 					driver.BeginScene(true, true, new Coloru(255, 200, 200, 200));
 					scene.DrawAll();

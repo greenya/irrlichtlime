@@ -54,29 +54,32 @@ public:
 		return strW;
 	}
 
-	ref class NativeObject
+	template <class T>
+	ref class NativeValue
 	{
 		public:
 
-			~NativeObject()
+			~NativeValue()
 			{
-				this->!NativeObject();
+				this->!NativeValue();
 			}
 
-			!NativeObject()
+			!NativeValue()
 			{
-				if (m_NativeObject != nullptr)
+				if (m_NativeValue != nullptr)
 				{
-					delete m_NativeObject;
-					m_NativeObject = nullptr;
+					delete m_NativeValue;
+					m_NativeValue = nullptr;
 				}
 			}
 
 		internal:
 
-			NativeObject() {}
+			T* m_NativeValue;
 
-			void* m_NativeObject;
+		protected:
+
+			NativeValue() {}
 	};
 
 private:

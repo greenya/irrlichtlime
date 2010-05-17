@@ -26,7 +26,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*(core::dimension2du*)windowSize->m_NativeObject,
+		*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer, vsync);
 
 	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
@@ -39,7 +39,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*(core::dimension2du*)windowSize->m_NativeObject,
+		*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer);
 
 	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
@@ -51,7 +51,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*(core::dimension2du*)windowSize->m_NativeObject,
+		*windowSize->m_NativeValue,
 		bits, fullscreen);
 
 	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
@@ -63,7 +63,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*(core::dimension2du*)windowSize->m_NativeObject,
+		*windowSize->m_NativeValue,
 		bits);
 
 	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
@@ -75,7 +75,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*(core::dimension2du*)windowSize->m_NativeObject);
+		*windowSize->m_NativeValue);
 
 	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
 }
@@ -104,9 +104,38 @@ void IrrlichtDevice::Drop()
 	m_IrrlichtDevice->drop();
 }
 
+bool IrrlichtDevice::GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast)
+{
+	float r, g, b, rb, rv;
+	bool o = m_IrrlichtDevice->getGammaRamp(r, g, b, rb, rv);
+
+	red = r;
+	green = g;
+	blue = b;
+	relativebrightness = rb;
+	relativecontrast = rv;
+
+	return o;
+}
+
 bool IrrlichtDevice::Run()
 {
 	return m_IrrlichtDevice->run();
+}
+
+bool IrrlichtDevice::SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast)
+{
+	return m_IrrlichtDevice->setGammaRamp(red, green, blue, relativebrightness, relativecontrast);
+}
+
+void IrrlichtDevice::Sleep(UInt32 timeMs, bool pauseTimer)
+{
+	m_IrrlichtDevice->sleep(timeMs, pauseTimer);
+}
+
+void IrrlichtDevice::Sleep(UInt32 timeMs)
+{
+	m_IrrlichtDevice->sleep(timeMs);
 }
 
 void IrrlichtDevice::Yield()
@@ -129,6 +158,11 @@ IO::FileSystem^ IrrlichtDevice::FileSystem::get()
 	return gcnew IO::FileSystem(m_IrrlichtDevice->getFileSystem());
 }
 
+bool IrrlichtDevice::Fullscreen::get()
+{
+	return m_IrrlichtDevice->isFullscreen();
+}
+
 GUI::GUIEnvironment^ IrrlichtDevice::GUIEnvironment::get()
 {
 	return gcnew GUI::GUIEnvironment(m_IrrlichtDevice->getGUIEnvironment());
@@ -139,9 +173,29 @@ String^ IrrlichtDevice::Version::get()
 	return gcnew String(m_IrrlichtDevice->getVersion());
 }
 
+bool IrrlichtDevice::WindowActive::get()
+{
+	return m_IrrlichtDevice->isWindowActive();
+}
+
 void IrrlichtDevice::WindowCaption::set(String^ value)
 {
 	m_IrrlichtDevice->setWindowCaption(Lime::StringToStringW(value).c_str());
+}
+
+bool IrrlichtDevice::WindowFocused::get()
+{
+	return m_IrrlichtDevice->isWindowFocused();
+}
+
+bool IrrlichtDevice::WindowMinimized::get()
+{
+	return m_IrrlichtDevice->isWindowMinimized();
+}
+
+void IrrlichtDevice::WindowResizable::set(bool value)
+{
+	m_IrrlichtDevice->setResizable(value);
 }
 
 String^ IrrlichtDevice::ToString()
