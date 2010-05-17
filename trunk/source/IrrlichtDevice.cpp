@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "IrrlichtDevice.h"
 #include "SceneManager.h"
@@ -121,6 +122,11 @@ Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
 {
 	return gcnew Scene::SceneManager(m_IrrlichtDevice->getSceneManager());
+}
+
+IO::FileSystem^ IrrlichtDevice::FileSystem::get()
+{
+	return gcnew IO::FileSystem(m_IrrlichtDevice->getFileSystem());
 }
 
 GUI::GUIEnvironment^ IrrlichtDevice::GUIEnvironment::get()

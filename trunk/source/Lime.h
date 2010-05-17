@@ -31,6 +31,11 @@ public:
 		}
 	}
 
+	static io::path StringToPath(String^ s)
+	{
+		return io::path(StringToStringW(s));
+	}
+
 	static core::stringc StringToStringC(String^ s)
 	{
 		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();

@@ -17,6 +17,7 @@
 // Enums
 #include "AnimationTypeMD2.h"
 #include "DriverType.h"
+#include "FileArchiveType.h"
 #include "GUIElementType.h"
 #include "MaterialFlag.h"
 #include "SceneNodeType.h"

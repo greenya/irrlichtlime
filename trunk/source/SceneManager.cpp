@@ -158,7 +158,7 @@ void SceneManager::DrawAll()
 
 AnimatedMesh^ SceneManager::GetMesh(String^ filename)
 {
-	scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToStringC(filename));
+	scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToPath(filename));
 	return m == nullptr ? nullptr : gcnew AnimatedMesh(m);
 }
 
