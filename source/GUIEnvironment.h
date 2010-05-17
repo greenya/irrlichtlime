@@ -23,6 +23,8 @@ public:
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
 
+	void DrawAll();
+
 internal:
 
 	GUIEnvironment(gui::IGUIEnvironment* guiEnvironment);

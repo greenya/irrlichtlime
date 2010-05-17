@@ -184,6 +184,10 @@
 			Name="Video"
 			>
 			<File
+				RelativePath=".\Color.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DriverType.h"
 				>
 			</File>

@@ -5,80 +5,80 @@
 using namespace irr;
 using namespace System;
 
-namespace IrrlichtLime
+namespace IrrlichtLime {
+namespace Core {
+
+public ref class Recti : Lime::NativeObject
 {
-namespace Core
-{
-	public ref class Recti : Lime::NativeObject
+public:
+
+	Recti(Int32 x1, Int32 y1, Int32 x2, Int32 y2)
 	{
-	public:
+		m_NativeObject = new core::recti(x1, y1, x2, y2);
+	}
 
-		Recti(Int32 x1, Int32 y1, Int32 x2, Int32 y2)
+	Recti(Vector2Di^ upperLeft, Vector2Di^ lowerRight)
+	{
+		m_NativeObject = new core::recti(
+			*(core::vector2di*)upperLeft->m_NativeObject,
+			*(core::vector2di*)lowerRight->m_NativeObject);
+	}
+
+	property Vector2Di^ UpperLeftCorner
+	{
+		Vector2Di^ get()
 		{
-			m_NativeObject = new core::recti(x1, y1, x2, y2);
+			core::vector2di v = ((core::recti*)m_NativeObject)->UpperLeftCorner;
+			return gcnew Vector2Di(v.X, v.Y);
 		}
 
-		Recti(Vector2Di^ upperLeft, Vector2Di^ lowerRight)
+		void set(Vector2Di^ value)
 		{
-			m_NativeObject = new core::recti(
-				*(core::vector2di*)upperLeft->m_NativeObject,
-				*(core::vector2di*)lowerRight->m_NativeObject);
+			((core::recti*)m_NativeObject)->UpperLeftCorner = *((core::vector2di*)value->m_NativeObject);
+		}
+	}
+
+	property Vector2Di^ LowerRightCorner
+	{
+		Vector2Di^ get()
+		{
+			core::vector2di v = ((core::recti*)m_NativeObject)->LowerRightCorner;
+			return gcnew Vector2Di(v.X, v.Y);
 		}
 
-		property Vector2Di^ UpperLeftCorner
+		void set(Vector2Di^ value)
 		{
-			Vector2Di^ get()
-			{
-				core::vector2di v = ((core::recti*)m_NativeObject)->UpperLeftCorner;
-				return gcnew Vector2Di(v.X, v.Y);
-			}
-
-			void set(Vector2Di^ value)
-			{
-				((core::recti*)m_NativeObject)->UpperLeftCorner = *((core::vector2di*)value->m_NativeObject);
-			}
+			((core::recti*)m_NativeObject)->LowerRightCorner = *((core::vector2di*)value->m_NativeObject);
 		}
+	}
 
-		property Vector2Di^ LowerRightCorner
-		{
-			Vector2Di^ get()
-			{
-				core::vector2di v = ((core::recti*)m_NativeObject)->LowerRightCorner;
-				return gcnew Vector2Di(v.X, v.Y);
-			}
+	property Int32 Width
+	{
+		Int32 get() { return ((core::recti*)m_NativeObject)->getWidth(); }
+	}
 
-			void set(Vector2Di^ value)
-			{
-				((core::recti*)m_NativeObject)->LowerRightCorner = *((core::vector2di*)value->m_NativeObject);
-			}
-		}
+	property Int32 Height
+	{
+		Int32 get() { return ((core::recti*)m_NativeObject)->getHeight(); }
+	}
 
-		property Int32 Width
-		{
-			Int32 get() { return ((core::recti*)m_NativeObject)->getWidth(); }
-		}
+	property Int32 Area
+	{
+		Int32 get() { return ((core::recti*)m_NativeObject)->getArea(); }
+	}
 
-		property Int32 Height
-		{
-			Int32 get() { return ((core::recti*)m_NativeObject)->getHeight(); }
-		}
+	virtual String^ ToString() override
+	{
+		return String::Format("UpperLeftCorner={{{0}}}; LowerRightCorner={{{1}}}", UpperLeftCorner, LowerRightCorner);
+	}
 
-		property Int32 Area
-		{
-			Int32 get() { return ((core::recti*)m_NativeObject)->getArea(); }
-		}
+internal:
 
-		virtual String^ ToString() override
-		{
-			return String::Format("UpperLeftCorner={{{0}}}; LowerRightCorner={{{1}}}", UpperLeftCorner, LowerRightCorner);
-		}
+	Recti(core::recti value)
+	{
+		m_NativeObject = new core::recti(value);
+	}
+};
 
-	internal:
-
-		Recti(core::recti value)
-		{
-			m_NativeObject = new core::recti(value);
-		}
-	};
-}
-}
+} // end namespace Core
+} // end namespace IrrlichtLime

@@ -39,6 +39,16 @@ namespace _01.HelloWorld
 
 			scene.AddCameraSceneNode(null, new Vector3Df(0, 30, -40), new Vector3Df(0, 5, 0));
 
+			while (device.Run())
+			{
+				driver.BeginScene(true, true, new Coloru(255, 100, 101, 140));
+				
+				scene.DrawAll();
+				gui.DrawAll();
+
+				driver.EndScene();
+			}
+
 			device.Drop();
 		}
 	}
