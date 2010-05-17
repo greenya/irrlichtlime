@@ -38,7 +38,7 @@ bool VideoDriver::EndScene()
 
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
-	video::ITexture* t = m_VideoDriver->getTexture(Lime::StringToStringC(filename).c_str());
+	video::ITexture* t = m_VideoDriver->getTexture(Lime::StringToPath(filename));
 	return t == nullptr ? nullptr : gcnew Texture(t);
 }
 

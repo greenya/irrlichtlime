@@ -9,6 +9,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 
 namespace GUI { ref class GUIEnvironment; }
+namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; }
 
@@ -28,6 +29,7 @@ public:
 	bool Run();
 	void Yield();
 
+	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
 	property String^ Version { String^ get(); }
