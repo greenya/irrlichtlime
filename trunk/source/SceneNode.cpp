@@ -20,8 +20,7 @@ SceneNode::SceneNode(scene::ISceneNode* sceneNode)
 
 void SceneNode::AddChild(SceneNode^ child)
 {
-	LIME_ASSERT(child != nullptr);
-	m_SceneNode->addChild(child->m_SceneNode);
+	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
 void SceneNode::Remove()
@@ -36,8 +35,7 @@ void SceneNode::RemoveAll()
 
 bool SceneNode::RemoveChild(SceneNode^ child)
 {
-	LIME_ASSERT(child != nullptr);
-	return m_SceneNode->removeChild(child->m_SceneNode);
+	return m_SceneNode->removeChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
 void SceneNode::Render()
@@ -52,7 +50,7 @@ void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
 
 void SceneNode::SetMaterialTexture(UInt32 textureLayer, Video::Texture^ texture)
 {
-	m_SceneNode->setMaterialTexture(textureLayer, texture->m_Texture);
+	m_SceneNode->setMaterialTexture(textureLayer, LIME_SAFEREF(texture, m_Texture));
 }
 
 void SceneNode::UpdateAbsolutePosition()
@@ -109,7 +107,7 @@ void SceneNode::Name::set(String^ value)
 SceneNode^ SceneNode::Parent::get()
 {
 	scene::ISceneNode* n = m_SceneNode->getParent();
-	return n == nullptr ? nullptr : gcnew SceneNode(n);
+	return LIME_SAFEWRAP(SceneNode, n);
 }
 
 void SceneNode::Parent::set(SceneNode^ value)
@@ -125,6 +123,7 @@ Vector3Df^ SceneNode::Position::get()
 
 void SceneNode::Position::set(Vector3Df^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_SceneNode->setPosition(*value->m_NativeValue);
 }
 
@@ -136,6 +135,7 @@ Vector3Df^ SceneNode::Rotation::get()
 
 void SceneNode::Rotation::set(Vector3Df^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_SceneNode->setRotation(*value->m_NativeValue);
 }
 
@@ -147,12 +147,13 @@ Vector3Df^ SceneNode::Scale::get()
 
 void SceneNode::Scale::set(Vector3Df^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_SceneNode->setScale(*value->m_NativeValue);
 }
 
 Scene::SceneManager^ SceneNode::SceneManager::get()
 {
-	return gcnew Scene::SceneManager(m_SceneNode->getSceneManager());
+	return LIME_SAFEWRAP(Scene::SceneManager, m_SceneNode->getSceneManager());
 }
 
 bool SceneNode::TrulyVisible::get()

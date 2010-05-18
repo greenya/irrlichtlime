@@ -10,31 +10,39 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
+GUIElement::GUIElement(gui::IGUIElement* guiElement)
+{
+	LIME_ASSERT(guiElement != nullptr);
+	m_GUIElement = guiElement;
+}
+
 GUIElement^ GUIElement::GetElementFromID(Int32 id, bool searchchildren)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id, searchchildren);
-	return e == nullptr ? nullptr : gcnew GUIElement(e);
+	return LIME_SAFEWRAP(GUIElement, e);
 }
 
 GUIElement^ GUIElement::GetElementFromID(Int32 id)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id);
-	return e == nullptr ? nullptr : gcnew GUIElement(e);
+	return LIME_SAFEWRAP(GUIElement, e);
 }
 
 GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 {
+	LIME_ASSERT(point != nullptr);
 	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*point->m_NativeValue);
-	return e == nullptr ? nullptr : gcnew GUIElement(e);
+	return LIME_SAFEWRAP(GUIElement, e);
 }
 
 bool GUIElement::IsMyChild(GUIElement^ child)
 {
-	return m_GUIElement->isMyChild(child->m_GUIElement);
+	return m_GUIElement->isMyChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
 bool GUIElement::IsPointInside(Vector2Di^ point)
 {
+	LIME_ASSERT(point != nullptr);
 	return m_GUIElement->isPointInside(*point->m_NativeValue);
 }
 
@@ -100,6 +108,7 @@ Recti^ GUIElement::RelativePosition::get()
 
 void GUIElement::RelativePosition::set(Recti^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_GUIElement->setRelativePosition(*value->m_NativeValue);
 }
 
@@ -146,12 +155,6 @@ void GUIElement::ToolTipText::set(String^ value)
 String^ GUIElement::ToString()
 {
 	return String::Format("Type={0}; Text={1}", Type, Text);
-}
-
-GUIElement::GUIElement(gui::IGUIElement* guiElement)
-{
-	LIME_ASSERT(guiElement != nullptr);
-	m_GUIElement = guiElement;
 }
 
 } // end namespace GUI

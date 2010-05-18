@@ -13,6 +13,14 @@ public ref class AnimatedMesh : Mesh
 {
 public:
 
+	Mesh^ GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop, Int32 endFrameLoop);
+	Mesh^ GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop);
+	Mesh^ GetMesh(Int32 frame, Int32 detailLevel);
+	Mesh^ GetMesh(Int32 frame);
+
+	property UInt32 FrameCount { UInt32 get(); }
+	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
+
 internal:
 
 	AnimatedMesh(scene::IAnimatedMesh* animatedMesh);

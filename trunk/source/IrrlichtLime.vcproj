@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="IrrlichtLime"
 	ProjectGUID="{4F6EF8E3-F26F-49DB-867D-FD10FB083B0D}"
 	RootNamespace="IrrlichtLime"
@@ -245,6 +245,10 @@
 			</File>
 			<File
 				RelativePath=".\AnimatedMeshSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AnimatedMeshType.h"
 				>
 			</File>
 			<File

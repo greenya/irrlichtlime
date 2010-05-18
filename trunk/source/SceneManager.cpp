@@ -14,141 +14,171 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Scene {
 
+SceneManager::SceneManager(scene::ISceneManager* sceneManager)
+{
+	LIME_ASSERT(sceneManager != nullptr);
+	m_SceneManager = sceneManager;
+}
+
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
 	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, bool alsoAddIfMeshPointerZero)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		*position->m_NativeValue,
 		*rotation->m_NativeValue,
 		*scale->m_NativeValue,
 		alsoAddIfMeshPointerZero);
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
 	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		*position->m_NativeValue,
 		*rotation->m_NativeValue,
 		*scale->m_NativeValue);
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
 	Vector3Df^ position, Vector3Df^ rotation)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		*position->m_NativeValue,
 		*rotation->m_NativeValue);
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
 	Vector3Df^ position)
 {
+	LIME_ASSERT(position != nullptr);
+
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		*position->m_NativeValue);
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id)
 {
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode),
 		id);
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent)
 {
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh,
-		parent == nullptr ? nullptr : parent->m_SceneNode);
+		LIME_SAFEREF(mesh, m_AnimatedMesh),
+		LIME_SAFEREF(parent, m_SceneNode));
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh)
 {
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
-		mesh == nullptr ? nullptr : mesh->m_AnimatedMesh);
+		LIME_SAFEREF(mesh, m_AnimatedMesh));
 
-	return n == nullptr ? nullptr : gcnew AnimatedMeshSceneNode(n);
+	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id, bool makeActive)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(lookat != nullptr);
+
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue,
 		*lookat->m_NativeValue,
 		id,
 		makeActive);
 
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(lookat != nullptr);
+
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue,
 		*lookat->m_NativeValue,
 		id);
 
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(lookat != nullptr);
+
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue,
 		*lookat->m_NativeValue);
 
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position)
 {
+	LIME_ASSERT(position != nullptr);
+
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
-		parent == nullptr ? nullptr : parent->m_SceneNode,
+		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue);
 
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent)
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode(
-		parent == nullptr ? nullptr : parent->m_SceneNode);
+		LIME_SAFEREF(parent, m_SceneNode));
 
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode()
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode();
-	return n == nullptr ? nullptr : gcnew CameraSceneNode(n);
+	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
 void SceneManager::DrawAll()
@@ -159,19 +189,13 @@ void SceneManager::DrawAll()
 AnimatedMesh^ SceneManager::GetMesh(String^ filename)
 {
 	scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToPath(filename));
-	return m == nullptr ? nullptr : gcnew AnimatedMesh(m);
+	return LIME_SAFEWRAP(AnimatedMesh, m);
 }
 
 SceneNode^ SceneManager::RootSceneNode::get()
 {
 	scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
-	return n == nullptr ? nullptr : gcnew SceneNode(n);
-}
-
-SceneManager::SceneManager(scene::ISceneManager* sceneManager)
-{
-	LIME_ASSERT(sceneManager != nullptr);
-	m_SceneManager = sceneManager;
+	return LIME_SAFEWRAP(SceneNode, n);
 }
 
 } // end namespace Scene

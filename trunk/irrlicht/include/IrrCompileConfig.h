@@ -166,7 +166,7 @@ you will not be able to use anything provided by the GUI Environment, including 
 /** This enables the engine to read/write from unicode filesystem. If you
 disable this feature, the engine behave as before (ansi). This is currently only supported
 for Windows based systems. */
-//#define _IRR_WCHAR_FILESYSTEM
+#define _IRR_WCHAR_FILESYSTEM
 
 //! Define _IRR_COMPILE_WITH_JPEGLIB_ to enable compiling the engine using libjpeg.
 /** This enables the engine to read jpeg images. If you comment this out,
@@ -499,6 +499,10 @@ precision will be lower but speed higher. currently X86 only
 
 #if defined(_IRR_SOLARIS_PLATFORM_)
 	#undef _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
+#endif
+
+#if defined(_IRR_WCHAR_FILESYSTEM) && !defined(UNICODE)
+	#define UNICODE
 #endif
 
 #endif // __IRR_COMPILE_CONFIG_H_INCLUDED__
