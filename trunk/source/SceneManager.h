@@ -35,6 +35,8 @@ public:
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNode();
 
+	//CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, List^<Object^> keyMapList, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive);
+
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id);
