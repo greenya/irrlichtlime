@@ -50,8 +50,8 @@ namespace _02.Quake3Map
 			AnimatedMesh mesh = scene.GetMesh("20kdm2.bsp");
 			SceneNode node = null;
 
-			//if (mesh != null)
-				//node = scene.AddOctreeSceneNode(mesh.GetMesh(0), 0, -1, 1024);
+			if (mesh != null)
+				node = scene.AddOctreeSceneNode(mesh.GetMesh(0), null, -1, 1024);
 
 			if (node != null)
 				node.Position = new Vector3Df(-1300, -144, -1249);

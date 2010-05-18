@@ -4,6 +4,8 @@
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
 #include "CameraSceneNode.h"
+#include "Mesh.h"
+#include "MeshSceneNode.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
 
@@ -179,6 +181,56 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode()
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNode();
 	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		minimalPolysPerNode,
+		alsoAddIfMeshPointerZero);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		minimalPolysPerNode);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh));
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
 }
 
 void SceneManager::DrawAll()
