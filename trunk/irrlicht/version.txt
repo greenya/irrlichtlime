@@ -1,5 +1,9 @@
 3291
 1.7.1-beta
 
-+ _IRR_COMPILE_WITH_DIRECT3D_8_
-+ _IRR_WCHAR_FILESYSTEM
+Irrlicht9.0.vcproj
+	Character Set = Use Unicode Character Set
+
+IrrCompileConfig.h
+	+ _IRR_COMPILE_WITH_DIRECT3D_8_
+	+ _IRR_WCHAR_FILESYSTEM
