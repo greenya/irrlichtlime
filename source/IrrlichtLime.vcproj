@@ -361,6 +361,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\KeyAction.h"
+			>
+		</File>
+		<File
+			RelativePath=".\KeyCode.h"
+			>
+		</File>
+		<File
 			RelativePath=".\Lime.h"
 			>
 		</File>
