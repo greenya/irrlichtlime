@@ -12,6 +12,8 @@ namespace Scene {
 ref class AnimatedMesh;
 ref class AnimatedMeshSceneNode;
 ref class CameraSceneNode;
+ref class Mesh;
+ref class MeshSceneNode;
 ref class SceneNode;
 
 public ref class SceneManager
@@ -32,6 +34,12 @@ public:
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position);
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNode();
+
+	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
+	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode);
+	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id);
+	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
+	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
 
 	void DrawAll();
 
