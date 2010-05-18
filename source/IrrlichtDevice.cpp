@@ -22,6 +22,8 @@ IrrlichtDevice::IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice)
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
 	bool stencilbuffer, bool vsync)
 {
+	LIME_ASSERT(windowSize != nullptr);
+
 	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
@@ -29,12 +31,14 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 		*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer, vsync);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
 	bool stencilbuffer)
 {
+	LIME_ASSERT(windowSize != nullptr);
+
 	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
@@ -42,11 +46,13 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 		*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen)
 {
+	LIME_ASSERT(windowSize != nullptr);
+
 	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
@@ -54,11 +60,13 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 		*windowSize->m_NativeValue,
 		bits, fullscreen);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits)
 {
+	LIME_ASSERT(windowSize != nullptr);
+
 	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
@@ -66,18 +74,20 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 		*windowSize->m_NativeValue,
 		bits);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize)
 {
+	LIME_ASSERT(windowSize != nullptr);
+
 	CreateDevice_start();
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
 		*windowSize->m_NativeValue);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType)
@@ -87,7 +97,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType)
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType);
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice()
@@ -96,7 +106,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice()
 
 	irr::IrrlichtDevice* d = createDevice();
 
-	return d == nullptr ? nullptr : gcnew IrrlichtDevice(d);
+	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
 void IrrlichtDevice::Drop()
@@ -145,17 +155,17 @@ void IrrlichtDevice::Yield()
 
 Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
 {
-	return gcnew Video::VideoDriver(m_IrrlichtDevice->getVideoDriver());
+	return LIME_SAFEWRAP(Video::VideoDriver, m_IrrlichtDevice->getVideoDriver());
 }
 
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
 {
-	return gcnew Scene::SceneManager(m_IrrlichtDevice->getSceneManager());
+	return LIME_SAFEWRAP(Scene::SceneManager, m_IrrlichtDevice->getSceneManager());
 }
 
 IO::FileSystem^ IrrlichtDevice::FileSystem::get()
 {
-	return gcnew IO::FileSystem(m_IrrlichtDevice->getFileSystem());
+	return LIME_SAFEWRAP(IO::FileSystem, m_IrrlichtDevice->getFileSystem());
 }
 
 bool IrrlichtDevice::Fullscreen::get()
@@ -165,7 +175,7 @@ bool IrrlichtDevice::Fullscreen::get()
 
 GUI::GUIEnvironment^ IrrlichtDevice::GUIEnvironment::get()
 {
-	return gcnew GUI::GUIEnvironment(m_IrrlichtDevice->getGUIEnvironment());
+	return LIME_SAFEWRAP(GUI::GUIEnvironment, m_IrrlichtDevice->getGUIEnvironment());
 }
 
 String^ IrrlichtDevice::Version::get()

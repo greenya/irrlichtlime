@@ -12,86 +12,98 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
+GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
+{
+	LIME_ASSERT(guiEnvironment != nullptr);
+	m_GUIEnvironment = guiEnvironment;
+}
+
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
 	Int32 id, bool fillBackground)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
-		parent == nullptr ? nullptr : parent->m_GUIElement,
+		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		fillBackground);
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
 	Int32 id)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
-		parent == nullptr ? nullptr : parent->m_GUIElement,
+		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
-		parent == nullptr ? nullptr : parent->m_GUIElement);
+		LIME_SAFEREF(parent, m_GUIElement));
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap);
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue,
 		border);
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue);
 
-	return t == nullptr ? nullptr : gcnew GUIStaticText(t);
+	return LIME_SAFEWRAP(GUIStaticText, t);
 }
 
 void GUIEnvironment::DrawAll()
 {
 	m_GUIEnvironment->drawAll();
-}
-
-GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
-{
-	LIME_ASSERT(guiEnvironment != nullptr);
-	m_GUIEnvironment = guiEnvironment;
 }
 
 } // end namespace GUI

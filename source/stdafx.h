@@ -15,6 +15,7 @@
 #include "Color.h"
 
 // Enums
+#include "AnimatedMeshType.h"
 #include "AnimationTypeMD2.h"
 #include "DriverType.h"
 #include "FileArchiveType.h"

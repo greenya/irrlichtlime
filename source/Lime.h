@@ -4,14 +4,17 @@
 
 using namespace irr;
 using namespace System;
-using namespace System::Reflection;
-using namespace System::Runtime::InteropServices;
+using namespace System::Reflection; // for Assembly
+using namespace System::Runtime::InteropServices; // for Marshal
 
 #ifdef _DEBUG
 #define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
 #else
 #define LIME_ASSERT(condition)
 #endif
+
+#define LIME_SAFEWRAP(managedType, nativeRef) (nativeRef == nullptr ? nullptr : gcnew managedType(nativeRef))
+#define LIME_SAFEREF(object, member) (object == nullptr ? nullptr : object->member)
 
 namespace IrrlichtLime {
 
@@ -38,6 +41,9 @@ public:
 
 	static core::stringc StringToStringC(String^ s)
 	{
+		if (s == nullptr)
+			return core::stringc();
+
 		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
 		core::stringc strC = core::stringc(c);
 
@@ -47,6 +53,9 @@ public:
 
 	static core::stringw StringToStringW(String^ s)
 	{
+		if (s == nullptr)
+			return core::stringw();
+
 		wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
 		core::stringw strW = core::stringw(w);
 
@@ -57,29 +66,29 @@ public:
 	template <class T>
 	ref class NativeValue
 	{
-		public:
+	public:
 
-			~NativeValue()
+		~NativeValue()
+		{
+			this->!NativeValue();
+		}
+
+		!NativeValue()
+		{
+			if (m_NativeValue != nullptr)
 			{
-				this->!NativeValue();
+				delete m_NativeValue;
+				m_NativeValue = nullptr;
 			}
+		}
 
-			!NativeValue()
-			{
-				if (m_NativeValue != nullptr)
-				{
-					delete m_NativeValue;
-					m_NativeValue = nullptr;
-				}
-			}
+	internal:
 
-		internal:
+		T* m_NativeValue;
 
-			T* m_NativeValue;
+	protected:
 
-		protected:
-
-			NativeValue() {}
+		NativeValue() {}
 	};
 
 private:

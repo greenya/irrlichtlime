@@ -11,8 +11,15 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
+VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
+{
+	LIME_ASSERT(videoDriver != nullptr);
+	m_VideoDriver = videoDriver;
+}
+
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru ^color)
 {
+	LIME_ASSERT(color != nullptr);
 	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue);
 }
 
@@ -38,8 +45,7 @@ bool VideoDriver::EndScene()
 
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
-	video::ITexture* t = m_VideoDriver->getTexture(Lime::StringToPath(filename));
-	return t == nullptr ? nullptr : gcnew Texture(t);
+	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTexture(Lime::StringToPath(filename)));
 }
 
 Video::DriverType VideoDriver::DriverType::get()
@@ -115,12 +121,6 @@ String^ VideoDriver::VendorInfo::get()
 String^ VideoDriver::ToString()
 {
 	return Name;
-}
-
-VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
-{
-	LIME_ASSERT(videoDriver != nullptr);
-	m_VideoDriver = videoDriver;
 }
 
 } // end namespace Video
