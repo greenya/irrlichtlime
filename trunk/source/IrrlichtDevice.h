@@ -9,7 +9,7 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 
-namespace GUI { ref class GUIEnvironment; }
+namespace GUI { ref class CursorControl; ref class GUIEnvironment; }
 namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; }
@@ -34,6 +34,7 @@ public:
 	void Sleep(UInt32 timeMs);
 	void Yield();
 
+	property GUI::CursorControl^ CursorControl { GUI::CursorControl^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property bool Fullscreen { bool get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }

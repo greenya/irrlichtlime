@@ -58,7 +58,7 @@ namespace _02.Quake3Map
 
 			scene.AddCameraSceneNodeFPS();
 
-			//device.CursorControl.Visible = false;
+			device.CursorControl.Visible = false;
 
 			int lastFPS = -1;
 
