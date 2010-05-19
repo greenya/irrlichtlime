@@ -369,6 +369,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\KeyMap.h"
+			>
+		</File>
+		<File
 			RelativePath=".\Lime.h"
 			>
 		</File>

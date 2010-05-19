@@ -56,7 +56,7 @@ namespace _02.Quake3Map
 			if (node != null)
 				node.Position = new Vector3Df(-1300, -144, -1249);
 
-			//scene.AddCameraSceneNodeFPS();
+			scene.AddCameraSceneNodeFPS();
 
 			//device.CursorControl.Visible = false;
 
