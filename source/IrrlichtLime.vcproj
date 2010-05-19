@@ -304,6 +304,14 @@
 			Name="GUI"
 			>
 			<File
+				RelativePath=".\CursorControl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CursorControl.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIElement.cpp"
 				>
 			</File>

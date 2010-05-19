@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "CursorControl.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "IrrlichtDevice.h"
@@ -161,6 +162,11 @@ Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
 {
 	return LIME_SAFEWRAP(Scene::SceneManager, m_IrrlichtDevice->getSceneManager());
+}
+
+GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
+{
+	return LIME_SAFEWRAP(GUI::CursorControl, m_IrrlichtDevice->getCursorControl());
 }
 
 IO::FileSystem^ IrrlichtDevice::FileSystem::get()

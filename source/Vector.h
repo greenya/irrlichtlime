@@ -12,12 +12,12 @@ public ref class Vector2Di : Lime::NativeValue<core::vector2di>
 {
 public:
 
-	Vector2Di(Int32 x, Int32 y)
+	Vector2Di(int x, int y)
 	{
 		m_NativeValue = new core::vector2di(x, y);
 	}
 
-	Vector2Di(Int32 xy)
+	Vector2Di(int xy)
 	{
 		m_NativeValue = new core::vector2di(xy);
 	}
@@ -27,16 +27,53 @@ public:
 		m_NativeValue = new core::vector2di();
 	}
 
-	property Int32 X
+	property int X
 	{
-		Int32 get() { return m_NativeValue->X; }
-		void set(Int32 value) { m_NativeValue->X = value; }
+		int get() { return m_NativeValue->X; }
+		void set(int value) { m_NativeValue->X = value; }
 	}
 
-	property Int32 Y
+	property int Y
 	{
-		Int32 get() { return m_NativeValue->Y; }
-		void set(Int32 value) { m_NativeValue->Y = value; }
+		int get() { return m_NativeValue->Y; }
+		void set(int value) { m_NativeValue->Y = value; }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("X={0}; Y={1}", X, Y);
+	}
+};
+
+public ref class Vector2Df : Lime::NativeValue<core::vector2df>
+{
+public:
+
+	Vector2Df(float x, float y)
+	{
+		m_NativeValue = new core::vector2df(x, y);
+	}
+
+	Vector2Df(float xy)
+	{
+		m_NativeValue = new core::vector2df(xy);
+	}
+
+	Vector2Df()
+	{
+		m_NativeValue = new core::vector2df();
+	}
+
+	property float X
+	{
+		float get() { return m_NativeValue->X; }
+		void set(float value) { m_NativeValue->X = value; }
+	}
+
+	property float Y
+	{
+		float get() { return m_NativeValue->Y; }
+		void set(float value) { m_NativeValue->Y = value; }
 	}
 
 	virtual String^ ToString() override
