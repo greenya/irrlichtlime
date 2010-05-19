@@ -26,14 +26,14 @@ public:
 
 	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
-	property UInt32 DynamicLightCount { UInt32 get(); }
-	property Int32 FPS { Int32 get(); }
-	property UInt32 MaterialRendererCount { UInt32 get(); }
-	property UInt32 MaximalDynamicLightAmount { UInt32 get(); }
-	property UInt32 MaximalPrimitiveCount { UInt32 get(); }
+	property unsigned int DynamicLightCount { unsigned int get(); }
+	property int FPS { int get(); }
+	property unsigned int MaterialRendererCount { unsigned int get(); }
+	property unsigned int MaximalDynamicLightAmount { unsigned int get(); }
+	property unsigned int MaximalPrimitiveCount { unsigned int get(); }
 	property Dimension2Du^ MaxTextureSize { Dimension2Du^ get(); }
 	property String^ Name { String^ get(); }
-	property UInt32 PrimitiveCountDrawn { UInt32 get(); }
+	property unsigned int PrimitiveCountDrawn { unsigned int get(); }
 	property Dimension2Du^ ScreenSize { Dimension2Du^ get(); }
 	property String^ VendorInfo { String^ get(); }
 	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }

@@ -16,27 +16,27 @@ AnimatedMesh::AnimatedMesh(scene::IAnimatedMesh* animatedMesh)
 	m_AnimatedMesh = animatedMesh;
 }
 
-Mesh^ AnimatedMesh::GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop, Int32 endFrameLoop)
+Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel, int startFrameLoop, int endFrameLoop)
 {
 	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop, endFrameLoop));
 }
 
-Mesh^ AnimatedMesh::GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop)
+Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel, int startFrameLoop)
 {
 	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop));
 }
 
-Mesh^ AnimatedMesh::GetMesh(Int32 frame, Int32 detailLevel)
+Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel)
 {
 	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel));
 }
 
-Mesh^ AnimatedMesh::GetMesh(Int32 frame)
+Mesh^ AnimatedMesh::GetMesh(int frame)
 {
 	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame));
 }
 
-UInt32 AnimatedMesh::FrameCount::get()
+unsigned int AnimatedMesh::FrameCount::get()
 {
 	return m_AnimatedMesh->getFrameCount();
 }

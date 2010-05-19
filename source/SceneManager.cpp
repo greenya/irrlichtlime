@@ -22,7 +22,7 @@ SceneManager::SceneManager(scene::ISceneManager* sceneManager)
 	m_SceneManager = sceneManager;
 }
 
-AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
+AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id,
 	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, bool alsoAddIfMeshPointerZero)
 {
 	LIME_ASSERT(position != nullptr);
@@ -41,7 +41,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
-AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
+AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id,
 	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
 {
 	LIME_ASSERT(position != nullptr);
@@ -59,7 +59,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
-AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
+AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id,
 	Vector3Df^ position, Vector3Df^ rotation)
 {
 	LIME_ASSERT(position != nullptr);
@@ -75,7 +75,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
-AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id,
+AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id,
 	Vector3Df^ position)
 {
 	LIME_ASSERT(position != nullptr);
@@ -89,7 +89,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
-AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, Int32 id)
+AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id)
 {
 	scene::IAnimatedMeshSceneNode* n = m_SceneManager->addAnimatedMeshSceneNode(
 		LIME_SAFEREF(mesh, m_AnimatedMesh),
@@ -116,7 +116,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return LIME_SAFEWRAP(AnimatedMeshSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id, bool makeActive)
+CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id, bool makeActive)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(lookat != nullptr);
@@ -131,7 +131,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ 
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, Int32 id)
+CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(lookat != nullptr);
@@ -183,7 +183,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode()
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive)
 {
 	SKeyMap* keyMapArray = 0;
 	int keyMapSize = 0;
@@ -208,7 +208,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse)
 {
 	SKeyMap* keyMapArray = 0;
 	int keyMapSize = 0;
@@ -232,7 +232,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed)
 {
 	SKeyMap* keyMapArray = 0;
 	int keyMapSize = 0;
@@ -255,7 +255,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id, KeyMap^ keyMap, bool noVerticalMovement)
 {
 	SKeyMap* keyMapArray = 0;
 	int keyMapSize = 0;
@@ -277,7 +277,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id, KeyMap^ keyMap)
 {
 	SKeyMap* keyMapArray = 0;
 	int keyMapSize = 0;
@@ -298,7 +298,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id)
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, int id)
 {
 	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
 		LIME_SAFEREF(parent, m_SceneNode),
@@ -342,7 +342,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS()
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
@@ -354,7 +354,7 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, I
 	return LIME_SAFEWRAP(MeshSceneNode, n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode)
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
@@ -365,7 +365,7 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, I
 	return LIME_SAFEWRAP(MeshSceneNode, n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id)
+MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),

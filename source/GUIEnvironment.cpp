@@ -19,7 +19,7 @@ GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
-	Int32 id, bool fillBackground)
+	int id, bool fillBackground)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
@@ -36,7 +36,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
-	Int32 id)
+	int id)
 {
 	LIME_ASSERT(rectangle != nullptr);
 

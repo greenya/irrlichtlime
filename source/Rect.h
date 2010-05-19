@@ -12,7 +12,7 @@ public ref class Recti : Lime::NativeValue<core::recti>
 {
 public:
 
-	Recti(Int32 x1, Int32 y1, Int32 x2, Int32 y2)
+	Recti(int x1, int y1, int x2, int y2)
 	{
 		m_NativeValue = new core::recti(x1, y1, x2, y2);
 	}
@@ -48,19 +48,19 @@ public:
 		}
 	}
 
-	property Int32 Width
+	property int Width
 	{
-		Int32 get() { return m_NativeValue->getWidth(); }
+		int get() { return m_NativeValue->getWidth(); }
 	}
 
-	property Int32 Height
+	property int Height
 	{
-		Int32 get() { return m_NativeValue->getHeight(); }
+		int get() { return m_NativeValue->getHeight(); }
 	}
 
-	property Int32 Area
+	property int Area
 	{
-		Int32 get() { return m_NativeValue->getArea(); }
+		int get() { return m_NativeValue->getArea(); }
 	}
 
 	virtual String^ ToString() override

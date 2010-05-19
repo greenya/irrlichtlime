@@ -18,10 +18,10 @@ public ref class IrrlichtDevice
 {
 public:
 
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen, bool stencilbuffer, bool vsync);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen, bool stencilbuffer);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen, bool stencilbuffer, bool vsync);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen, bool stencilbuffer);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits);
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize);
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType);
 	static IrrlichtDevice^ CreateDevice();
@@ -30,8 +30,8 @@ public:
 	bool GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast);
 	bool Run();
 	bool SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast);
-	void Sleep(UInt32 timeMs, bool pauseTimer);
-	void Sleep(UInt32 timeMs);
+	void Sleep(unsigned int timeMs, bool pauseTimer);
+	void Sleep(unsigned int timeMs);
 	void Yield();
 
 	property GUI::CursorControl^ CursorControl { GUI::CursorControl^ get(); }

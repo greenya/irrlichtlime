@@ -22,13 +22,13 @@ public:
 	bool RemoveChild(SceneNode^ child);
 	void Render();
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
-	void SetMaterialTexture(UInt32 textureLayer, Video::Texture^ texture);
+	void SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture);
 	void UpdateAbsolutePosition();
 
 	property Vector3Df^ AbsolutePosition { Vector3Df^ get(); }
-	property UInt32 AutomaticCulling { UInt32 get(); void set(UInt32 value); }
+	property unsigned int AutomaticCulling { unsigned int get(); void set(unsigned int value); }
 	property bool DebugObject { bool get(); void set(bool value); }
-	property Int32 ID { Int32 get(); void set(Int32 value); }
+	property int ID { int get(); void set(int value); }
 	property String^ Name { String^ get(); void set(String^ value); }
 	property SceneNode^ Parent { SceneNode^ get(); void set(SceneNode^ value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }

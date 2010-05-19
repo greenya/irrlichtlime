@@ -7,7 +7,7 @@ using namespace System;
 
 namespace IrrlichtLime {
 
-public enum class KeyCode : UInt32
+public enum class KeyCode : unsigned int
 {
 	MouseLButton = KEY_LBUTTON,
 	MouseRButton = KEY_RBUTTON,
