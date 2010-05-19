@@ -2,4 +2,20 @@
 Changes in 0.1 (??.??.2010)
 ===========================
 
-...list of changes goes here...
+- Added and completly ported examples 01.HelloWorld and 02.Quake3Map.
+
+- Added classes Coloru, Texture and VideoDriver; enums DriverType and MaterialFlag.
+
+- Added classes AnimatedMesh, AnimatedMeshSceneNode, CameraSceneNode, Mesh, MeshSceneNode, SceneManager and SceneNode; enums AnimatedMeshType, AnimationTypeMD2 and SceneNodeType.
+
+- Added class FileSystem and FileArchiveType enum.
+
+- Added classes CursorControl, GUIElement, GUIEnvironment and GUIStaticText; GUIElementType enum.
+
+- Added classes Dimension2Du, Recti, Vector2Df, Vector2Di and Vector3Df.
+
+- Added class KeyMap, enums KeyCode and KeyAction.
+
+- Added class IrrlichtDevice, and its methods: CreateDevice, Drop, Run, Sleep, Yield, GetGammaRamp, SetGammaRamp; properties: CursorControl, FileSystem, FullScreen, GUIEnvironment, SceneManager, Version, VideoDriver, WindowActive, WindowCaption, WindowFocused, WindowMinimized, WindowResizable.
+
+- Added class Lime - wrapper core class.
