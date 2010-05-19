@@ -35,7 +35,16 @@ public:
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNode();
 
-	//CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, List^<Object^> keyMapList, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed);
+	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent);
+	CameraSceneNode^ AddCameraSceneNodeFPS();
 
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode);

@@ -6,7 +6,7 @@
 
 #include "Lime.h"
 
-// Enums
+// enums
 #include "AnimatedMeshType.h"
 #include "AnimationTypeMD2.h"
 #include "DriverType.h"
@@ -17,10 +17,13 @@
 #include "MaterialFlag.h"
 #include "SceneNodeType.h"
 
-// IrrlichtLime::Core types
+// IrrlichtLime::Core
 #include "Vector.h"
 #include "Dimension.h"
 #include "Rect.h"
 
-// IrrlichtLime::Video types
+// IrrlichtLime::Video
 #include "Color.h"
+
+// IrrlichtLime
+#include "KeyMap.h"

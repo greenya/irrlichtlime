@@ -183,6 +183,165 @@ CameraSceneNode^ SceneManager::AddCameraSceneNode()
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse, bool makeActive)
+{
+	SKeyMap* keyMapArray = 0;
+	int keyMapSize = 0;
+	
+	if (keyMap != nullptr)
+		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
+
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id,
+		keyMapArray, keyMapSize,
+		noVerticalMovement,
+		jumpSpeed,
+		invertMouse,
+		makeActive);
+
+	if (keyMapArray != 0)
+		delete keyMapArray;
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed, bool invertMouse)
+{
+	SKeyMap* keyMapArray = 0;
+	int keyMapSize = 0;
+	
+	if (keyMap != nullptr)
+		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
+
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id,
+		keyMapArray, keyMapSize,
+		noVerticalMovement,
+		jumpSpeed,
+		invertMouse);
+
+	if (keyMapArray != 0)
+		delete keyMapArray;
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement, float jumpSpeed)
+{
+	SKeyMap* keyMapArray = 0;
+	int keyMapSize = 0;
+	
+	if (keyMap != nullptr)
+		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
+
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id,
+		keyMapArray, keyMapSize,
+		noVerticalMovement,
+		jumpSpeed);
+
+	if (keyMapArray != 0)
+		delete keyMapArray;
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap, bool noVerticalMovement)
+{
+	SKeyMap* keyMapArray = 0;
+	int keyMapSize = 0;
+	
+	if (keyMap != nullptr)
+		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
+
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id,
+		keyMapArray, keyMapSize,
+		noVerticalMovement);
+
+	if (keyMapArray != 0)
+		delete keyMapArray;
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id, KeyMap^ keyMap)
+{
+	SKeyMap* keyMapArray = 0;
+	int keyMapSize = 0;
+	
+	if (keyMap != nullptr)
+		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
+
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id,
+		keyMapArray, keyMapSize);
+
+	if (keyMapArray != 0)
+		delete keyMapArray;
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed, Int32 id)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed,
+		id);
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed, float moveSpeed)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		moveSpeed);
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float rotateSpeed)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed);
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS(
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS()
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeFPS();
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
 MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, Int32 id, Int32 minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
