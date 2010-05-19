@@ -501,9 +501,5 @@ precision will be lower but speed higher. currently X86 only
 	#undef _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 #endif
 
-#if defined(_IRR_WCHAR_FILESYSTEM) && !defined(UNICODE)
-	#define UNICODE
-#endif
-
 #endif // __IRR_COMPILE_CONFIG_H_INCLUDED__
 
