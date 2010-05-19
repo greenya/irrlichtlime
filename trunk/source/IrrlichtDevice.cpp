@@ -20,7 +20,7 @@ IrrlichtDevice::IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice)
 	m_IrrlichtDevice = irrlichtDevice;
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen,
 	bool stencilbuffer, bool vsync)
 {
 	LIME_ASSERT(windowSize != nullptr);
@@ -35,7 +35,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen,
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen,
 	bool stencilbuffer)
 {
 	LIME_ASSERT(windowSize != nullptr);
@@ -50,7 +50,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits, bool fullscreen)
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen)
 {
 	LIME_ASSERT(windowSize != nullptr);
 
@@ -64,7 +64,7 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimen
 	return LIME_SAFEWRAP(IrrlichtDevice, d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, UInt32 bits)
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits)
 {
 	LIME_ASSERT(windowSize != nullptr);
 
@@ -139,12 +139,12 @@ bool IrrlichtDevice::SetGammaRamp(float red, float green, float blue, float rela
 	return m_IrrlichtDevice->setGammaRamp(red, green, blue, relativebrightness, relativecontrast);
 }
 
-void IrrlichtDevice::Sleep(UInt32 timeMs, bool pauseTimer)
+void IrrlichtDevice::Sleep(unsigned int timeMs, bool pauseTimer)
 {
 	m_IrrlichtDevice->sleep(timeMs, pauseTimer);
 }
 
-void IrrlichtDevice::Sleep(UInt32 timeMs)
+void IrrlichtDevice::Sleep(unsigned int timeMs)
 {
 	m_IrrlichtDevice->sleep(timeMs);
 }

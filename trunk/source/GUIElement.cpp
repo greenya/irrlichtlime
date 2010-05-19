@@ -16,13 +16,13 @@ GUIElement::GUIElement(gui::IGUIElement* guiElement)
 	m_GUIElement = guiElement;
 }
 
-GUIElement^ GUIElement::GetElementFromID(Int32 id, bool searchchildren)
+GUIElement^ GUIElement::GetElementFromID(int id, bool searchchildren)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id, searchchildren);
 	return LIME_SAFEWRAP(GUIElement, e);
 }
 
-GUIElement^ GUIElement::GetElementFromID(Int32 id)
+GUIElement^ GUIElement::GetElementFromID(int id)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id);
 	return LIME_SAFEWRAP(GUIElement, e);
@@ -51,12 +51,12 @@ GUIElementType GUIElement::Type::get()
 	return (GUIElementType)m_GUIElement->getType();
 }
 
-Int32 GUIElement::ID::get()
+int GUIElement::ID::get()
 {
 	return m_GUIElement->getID();
 }
 
-void GUIElement::ID::set(Int32 value)
+void GUIElement::ID::set(int value)
 {
 	m_GUIElement->setID(value);
 }
@@ -91,12 +91,12 @@ void GUIElement::TabStop::set(bool value)
 	m_GUIElement->setTabStop(value);
 }
 
-Int32 GUIElement::TabOrder::get()
+int GUIElement::TabOrder::get()
 {
 	return m_GUIElement->getTabOrder();
 }
 
-void GUIElement::TabOrder::set(Int32 value)
+void GUIElement::TabOrder::set(int value)
 {
 	m_GUIElement->setTabOrder(value);
 }

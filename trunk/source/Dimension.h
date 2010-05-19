@@ -12,26 +12,26 @@ public ref class Dimension2Du : Lime::NativeValue<core::dimension2du>
 {
 public:
 
-	Dimension2Du(UInt32 width, UInt32 height)
+	Dimension2Du(unsigned int width, unsigned int height)
 	{
 		m_NativeValue = new core::dimension2du(width, height);
 	}
 
-	property UInt32 Width
+	property unsigned int Width
 	{
-		UInt32 get() { return m_NativeValue->Width; }
-		void set(UInt32 value) { m_NativeValue->Width = value; }
+		unsigned int get() { return m_NativeValue->Width; }
+		void set(unsigned int value) { m_NativeValue->Width = value; }
 	}
 
-	property UInt32 Height
+	property unsigned int Height
 	{
-		UInt32 get() { return m_NativeValue->Height; }
-		void set(UInt32 value) { m_NativeValue->Height = value; }
+		unsigned int get() { return m_NativeValue->Height; }
+		void set(unsigned int value) { m_NativeValue->Height = value; }
 	}
 
-	property UInt32 Area
+	property unsigned int Area
 	{
-		UInt32 get() { return m_NativeValue->getArea(); }
+		unsigned int get() { return m_NativeValue->getArea(); }
 	}
 
 	virtual String^ ToString() override

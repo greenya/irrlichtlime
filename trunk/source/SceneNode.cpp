@@ -48,7 +48,7 @@ void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
 	m_SceneNode->setMaterialFlag((video::E_MATERIAL_FLAG)flag, value);
 }
 
-void SceneNode::SetMaterialTexture(UInt32 textureLayer, Video::Texture^ texture)
+void SceneNode::SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture)
 {
 	m_SceneNode->setMaterialTexture(textureLayer, LIME_SAFEREF(texture, m_Texture));
 }
@@ -64,12 +64,12 @@ Vector3Df^ SceneNode::AbsolutePosition::get()
 	return gcnew Vector3Df(v.X, v.Y, v.Z);
 }
 
-UInt32 SceneNode::AutomaticCulling::get()
+unsigned int SceneNode::AutomaticCulling::get()
 {
 	return m_SceneNode->getAutomaticCulling();
 }
 
-void SceneNode::AutomaticCulling::set(UInt32 value)
+void SceneNode::AutomaticCulling::set(unsigned int value)
 {
 	m_SceneNode->setAutomaticCulling(value);
 }
@@ -84,12 +84,12 @@ void SceneNode::DebugObject::set(bool value)
 	m_SceneNode->setIsDebugObject(value);
 }
 
-Int32 SceneNode::ID::get()
+int SceneNode::ID::get()
 {
 	return m_SceneNode->getID();
 }
 
-void SceneNode::ID::set(Int32 value)
+void SceneNode::ID::set(int value)
 {
 	m_SceneNode->setID(value);
 }

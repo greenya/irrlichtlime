@@ -81,12 +81,12 @@ String^ FileSystem::GetFileDirectory(String^ filename)
 	return gcnew String(m_FileSystem->getFileDir(Lime::StringToPath(filename)).c_str());
 }
 
-bool FileSystem::MoveFileArchive(UInt32 sourceIndex, Int32 relative)
+bool FileSystem::MoveFileArchive(unsigned int sourceIndex, int relative)
 {
 	return m_FileSystem->moveFileArchive(sourceIndex, relative);
 }
 
-bool FileSystem::RemoveFileArchive(UInt32 index)
+bool FileSystem::RemoveFileArchive(unsigned int index)
 {
 	return m_FileSystem->removeFileArchive(index);
 }
@@ -96,7 +96,7 @@ bool FileSystem::RemoveFileArchive(String^ filename)
 	return m_FileSystem->removeFileArchive(Lime::StringToPath(filename));
 }
 
-UInt32 FileSystem::FileArchiveCount::get()
+unsigned int FileSystem::FileArchiveCount::get()
 {
 	return m_FileSystem->getFileArchiveCount();
 }

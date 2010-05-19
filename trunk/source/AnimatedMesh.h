@@ -13,12 +13,12 @@ public ref class AnimatedMesh : Mesh
 {
 public:
 
-	Mesh^ GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop, Int32 endFrameLoop);
-	Mesh^ GetMesh(Int32 frame, Int32 detailLevel, Int32 startFrameLoop);
-	Mesh^ GetMesh(Int32 frame, Int32 detailLevel);
-	Mesh^ GetMesh(Int32 frame);
+	Mesh^ GetMesh(int frame, int detailLevel, int startFrameLoop, int endFrameLoop);
+	Mesh^ GetMesh(int frame, int detailLevel, int startFrameLoop);
+	Mesh^ GetMesh(int frame, int detailLevel);
+	Mesh^ GetMesh(int frame);
 
-	property UInt32 FrameCount { UInt32 get(); }
+	property unsigned int FrameCount { unsigned int get(); }
 	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 
 internal:

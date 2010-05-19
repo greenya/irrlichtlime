@@ -13,8 +13,8 @@ public ref class GUIElement
 {
 public:
 
-	GUIElement^ GetElementFromID(Int32 id, bool searchchildren);
-	GUIElement^ GetElementFromID(Int32 id);
+	GUIElement^ GetElementFromID(int id, bool searchchildren);
+	GUIElement^ GetElementFromID(int id);
 	GUIElement^ GetElementFromPoint(Vector2Di^ point);
 	bool IsMyChild(GUIElement^ child);
 	bool IsPointInside(Vector2Di^ point);
@@ -22,10 +22,10 @@ public:
 	property Recti^ AbsoluteClippingRect { Recti^ get(); }
 	property Recti^ AbsolutePosition { Recti^ get(); }
 	property bool Enabled { bool get(); void set(bool value); }
-	property Int32 ID { Int32 get(); void set(Int32 value); }
+	property int ID { int get(); void set(int value); }
 	property bool NotClipped { bool get(); void set(bool value); }
 	property Recti^ RelativePosition { Recti^ get(); void set(Recti^ value); }
-	property Int32 TabOrder { Int32 get(); void set(Int32 value); }
+	property int TabOrder { int get(); void set(int value); }
 	property bool TabStop { bool get(); void set(bool value); }
 	property String^ Text { String^ get(); void set(String^ value); }
 	property String^ ToolTipText { String^ get(); void set(String^ value); }

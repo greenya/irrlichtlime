@@ -7,7 +7,7 @@ using namespace System;
 
 namespace IrrlichtLime {
 
-public enum class KeyAction : UInt32
+public enum class KeyAction : unsigned int
 {
 	MoveForward = EKA_MOVE_FORWARD,
 	MoveBackward = EKA_MOVE_BACKWARD,

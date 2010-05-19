@@ -12,48 +12,48 @@ public ref class Coloru : Lime::NativeValue<video::SColor>
 {
 public:
 
-	Coloru(UInt32 color)
+	Coloru(unsigned int color)
 	{
 		m_NativeValue = new video::SColor(color);
 	}
 
-	Coloru(UInt32 a, UInt32 r, UInt32 g, UInt32 b)
+	Coloru(unsigned int a, unsigned int r, unsigned int g, unsigned int b)
 	{
 		m_NativeValue = new video::SColor(a, r, g, b);
 	}
 
-	void Set(UInt32 a, UInt32 r, UInt32 g, UInt32 b)
+	void Set(unsigned int a, unsigned int r, unsigned int g, unsigned int b)
 	{
 		((video::SColor*)m_NativeValue)->set(a, r, g, b);
 	}
 
-	property UInt32 Alpha
+	property unsigned int Alpha
 	{
-		UInt32 get() { return m_NativeValue->getAlpha(); }
-		void set(UInt32 value) { m_NativeValue->setAlpha(value); }
+		unsigned int get() { return m_NativeValue->getAlpha(); }
+		void set(unsigned int value) { m_NativeValue->setAlpha(value); }
 	}
 
-	property UInt32 Average
+	property unsigned int Average
 	{
-		UInt32 get() { return m_NativeValue->getAverage(); }
+		unsigned int get() { return m_NativeValue->getAverage(); }
 	}
 
-	property UInt32 Blue
+	property unsigned int Blue
 	{
-		UInt32 get() { return m_NativeValue->getBlue(); }
-		void set(UInt32 value) { m_NativeValue->setBlue(value); }
+		unsigned int get() { return m_NativeValue->getBlue(); }
+		void set(unsigned int value) { m_NativeValue->setBlue(value); }
 	}
 
-	property UInt32 Color
+	property unsigned int Color
 	{
-		UInt32 get() { return m_NativeValue->color; }
-		void set(UInt32 value) { m_NativeValue->color = value; }
+		unsigned int get() { return m_NativeValue->color; }
+		void set(unsigned int value) { m_NativeValue->color = value; }
 	}
 
-	property UInt32 Green
+	property unsigned int Green
 	{
-		UInt32 get() { return m_NativeValue->getGreen(); }
-		void set(UInt32 value) { m_NativeValue->setGreen(value); }
+		unsigned int get() { return m_NativeValue->getGreen(); }
+		void set(unsigned int value) { m_NativeValue->setGreen(value); }
 	}
 
 	property float Lightness
@@ -66,10 +66,10 @@ public:
 		float get() { return m_NativeValue->getLuminance(); }
 	}
 
-	property UInt32 Red
+	property unsigned int Red
 	{
-		UInt32 get() { return m_NativeValue->getRed(); }
-		void set(UInt32 value) { m_NativeValue->setRed(value); }
+		unsigned int get() { return m_NativeValue->getRed(); }
+		void set(unsigned int value) { m_NativeValue->setRed(value); }
 	}
 
 	property UInt16 A1R5G5B5

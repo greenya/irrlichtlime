@@ -78,32 +78,32 @@ Dimension2Du^ VideoDriver::MaxTextureSize::get()
 	return gcnew Dimension2Du(m_VideoDriver->getMaxTextureSize());
 }
 
-Int32 VideoDriver::FPS::get()
+int VideoDriver::FPS::get()
 {
 	return m_VideoDriver->getFPS();
 }
 
-UInt32 VideoDriver::PrimitiveCountDrawn::get()
+unsigned int VideoDriver::PrimitiveCountDrawn::get()
 {
 	return m_VideoDriver->getPrimitiveCountDrawn();
 }
 
-UInt32 VideoDriver::MaximalDynamicLightAmount::get()
+unsigned int VideoDriver::MaximalDynamicLightAmount::get()
 {
 	return m_VideoDriver->getMaximalDynamicLightAmount();
 }
 
-UInt32 VideoDriver::DynamicLightCount::get()
+unsigned int VideoDriver::DynamicLightCount::get()
 {
 	return m_VideoDriver->getDynamicLightCount();
 }
 
-UInt32 VideoDriver::MaximalPrimitiveCount::get()
+unsigned int VideoDriver::MaximalPrimitiveCount::get()
 {
 	return m_VideoDriver->getMaximalPrimitiveCount();
 }
 
-UInt32 VideoDriver::MaterialRendererCount::get()
+unsigned int VideoDriver::MaterialRendererCount::get()
 {
 	return m_VideoDriver->getMaterialRendererCount();
 }

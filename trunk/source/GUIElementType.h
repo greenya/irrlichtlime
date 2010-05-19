@@ -9,7 +9,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-public enum class GUIElementType : UInt32
+public enum class GUIElementType : unsigned int
 {
 	Button = EGUIET_BUTTON,
 	CheckBox = EGUIET_CHECK_BOX,
