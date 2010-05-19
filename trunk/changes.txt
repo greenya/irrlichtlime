@@ -1,6 +1,6 @@
-===========================
-Changes in 0.1 (??.??.2010)
-===========================
+============================
+Changes in 0.1 (19-May-2010)
+============================
 
 - Added and completly ported examples 01.HelloWorld and 02.Quake3Map.
 
