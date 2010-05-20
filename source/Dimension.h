@@ -47,5 +47,44 @@ internal:
 	}
 };
 
+public ref class Dimension2Di : Lime::NativeValue<core::dimension2di>
+{
+public:
+
+	Dimension2Di(int width, int height)
+	{
+		m_NativeValue = new core::dimension2di(width, height);
+	}
+
+	property int Width
+	{
+		int get() { return m_NativeValue->Width; }
+		void set(int value) { m_NativeValue->Width = value; }
+	}
+
+	property int Height
+	{
+		int get() { return m_NativeValue->Height; }
+		void set(int value) { m_NativeValue->Height = value; }
+	}
+
+	property int Area
+	{
+		int get() { return m_NativeValue->getArea(); }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("Width={0}; Height={1}", Width, Height);
+	}
+
+internal:
+
+	Dimension2Di(core::dimension2di value)
+	{
+		m_NativeValue = new core::dimension2di(value);
+	}
+};
+
 } // end namespace Core
 } // end namespace IrrlichtLime
