@@ -28,6 +28,11 @@ void CursorControl::Position::set(Vector2Di^ value)
 	m_CursorControl->setPosition(*value->m_NativeValue);
 }
 
+void CursorControl::ReferenceRect::set(Recti^ value)
+{
+	m_CursorControl->setReferenceRect(LIME_SAFEREF(value, m_NativeValue));
+}
+
 Vector2Df^ CursorControl::RelativePosition::get()
 {
 	core::vector2df v = m_CursorControl->getRelativePosition();
