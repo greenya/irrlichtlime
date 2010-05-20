@@ -30,6 +30,7 @@ void CursorControl::Position::set(Vector2Di^ value)
 
 void CursorControl::ReferenceRect::set(Recti^ value)
 {
+	// we omit checking value != nullprt because it is valid value for setReferenceRect()
 	m_CursorControl->setReferenceRect(LIME_SAFEREF(value, m_NativeValue));
 }
 
