@@ -14,6 +14,7 @@ public ref class CursorControl
 public:
 
 	property Vector2Di^ Position { Vector2Di^ get(); void set(Vector2Di^ value); }
+	property Recti^ ReferenceRect { void set(Recti^ value); }
 	property Vector2Df^ RelativePosition { Vector2Df^ get(); }
 	property bool Visible { bool get(); void set(bool value); }
 
