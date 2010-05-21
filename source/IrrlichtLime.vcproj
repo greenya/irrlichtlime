@@ -184,7 +184,19 @@
 			Name="Video"
 			>
 			<File
+				RelativePath=".\AntiAliasingMode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Color.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ColorMaterial.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ColorPlane.h"
 				>
 			</File>
 			<File
@@ -192,7 +204,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Material.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Material.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MaterialFlag.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MaterialType.h"
 				>
 			</File>
 			<File
@@ -219,6 +243,10 @@
 				RelativePath=".\VideoDriver.h"
 				>
 			</File>
+			<File
+				RelativePath=".\ZBufferCompFunc.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Core"
@@ -229,6 +257,10 @@
 			</File>
 			<File
 				RelativePath=".\Dimension.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Matrix.h"
 				>
 			</File>
 			<File
