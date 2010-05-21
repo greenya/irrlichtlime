@@ -4,10 +4,13 @@
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
 #include "CameraSceneNode.h"
+#include "FileSystem.h"
+#include "GUIEnvironment.h"
 #include "Mesh.h"
 #include "MeshSceneNode.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
+#include "VideoDriver.h"
 
 using namespace irr;
 using namespace System;
@@ -392,6 +395,11 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
 	return LIME_SAFEWRAP(MeshSceneNode, n);
 }
 
+void SceneManager::Clear()
+{
+	m_SceneManager->clear();
+}
+
 void SceneManager::DrawAll()
 {
 	m_SceneManager->drawAll();
@@ -403,10 +411,118 @@ AnimatedMesh^ SceneManager::GetMesh(String^ filename)
 	return LIME_SAFEWRAP(AnimatedMesh, m);
 }
 
+SceneNode^ SceneManager::GetSceneNodeFromID(int id, SceneNode^ start)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromId(id, LIME_SAFEREF(start, m_SceneNode));
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+SceneNode^ SceneManager::GetSceneNodeFromID(int id)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromId(id);
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+SceneNode^ SceneManager::GetSceneNodeFromName(String^ name, SceneNode^ start)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(Lime::StringToStringC(name).c_str(), LIME_SAFEREF(start, m_SceneNode));
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+SceneNode^ SceneManager::GetSceneNodeFromName(String^ name)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(Lime::StringToStringC(name).c_str());
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+SceneNode^ SceneManager::GetSceneNodeFromType(SceneNodeType type, SceneNode^ start)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromType((scene::ESCENE_NODE_TYPE)type, LIME_SAFEREF(start, m_SceneNode));
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+SceneNode^ SceneManager::GetSceneNodeFromType(SceneNodeType type)
+{
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromType((scene::ESCENE_NODE_TYPE)type);
+	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+String^ SceneManager::GetAnimatorTypeName(SceneNodeAnimatorType type)
+{
+	return gcnew String(m_SceneManager->getAnimatorTypeName((scene::ESCENE_NODE_ANIMATOR_TYPE)type));
+}
+
+String^ SceneManager::GetSceneNodeTypeName(SceneNodeType type)
+{
+	return gcnew String(m_SceneManager->getSceneNodeTypeName((scene::ESCENE_NODE_TYPE)type));
+}
+
+unsigned int SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRenderPass pass)
+{
+	return m_SceneManager->registerNodeForRendering(LIME_SAFEREF(node, m_SceneNode), (E_SCENE_NODE_RENDER_PASS)pass);
+}
+
+unsigned int SceneManager::RegisterNodeForRendering(SceneNode^ node)
+{
+	return m_SceneManager->registerNodeForRendering(LIME_SAFEREF(node, m_SceneNode));
+}
+
+bool SceneManager::SaveScene(String^ filename)
+{
+	return m_SceneManager->saveScene(Lime::StringToPath(filename));
+}
+
+bool SceneManager::LoadScene(String^ filename)
+{
+	return m_SceneManager->loadScene(Lime::StringToPath(filename));
+}
+
+CameraSceneNode^ SceneManager::ActiveCamera::get()
+{
+	scene::ICameraSceneNode* n = m_SceneManager->getActiveCamera();
+	return LIME_SAFEWRAP(CameraSceneNode, n);
+}
+
+void SceneManager::ActiveCamera::set(CameraSceneNode^ value)
+{
+	m_SceneManager->setActiveCamera(LIME_SAFEREF(value, m_CameraSceneNode));
+}
+
 SceneNode^ SceneManager::RootSceneNode::get()
 {
 	scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
 	return LIME_SAFEWRAP(SceneNode, n);
+}
+
+IO::FileSystem^ SceneManager::FileSystem::get()
+{
+	return LIME_SAFEWRAP(IO::FileSystem, m_SceneManager->getFileSystem());
+}
+
+GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
+{
+	return LIME_SAFEWRAP(GUI::GUIEnvironment, m_SceneManager->getGUIEnvironment());
+}
+
+Scene::SceneNodeRenderPass SceneManager::SceneNodeRenderPass::get()
+{
+	return (Scene::SceneNodeRenderPass)m_SceneManager->getSceneNodeRenderPass();
+}
+
+Video::Coloru^ SceneManager::ShadowColor::get()
+{
+	return gcnew Video::Coloru(m_SceneManager->getShadowColor());
+}
+
+void SceneManager::ShadowColor::set(Video::Coloru^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_SceneManager->setShadowColor(*value->m_NativeValue);
+}
+
+Video::VideoDriver^ SceneManager::VideoDriver::get()
+{
+	return LIME_SAFEWRAP(Video::VideoDriver, m_SceneManager->getVideoDriver());
 }
 
 } // end namespace Scene
