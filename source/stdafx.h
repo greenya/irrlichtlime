@@ -16,13 +16,15 @@
 #include "KeyCode.h"
 #include "MaterialFlag.h"
 #include "SceneNodeType.h"
+#include "VertexType.h"
 
 // basic types
 #include "Vector.h"
+#include "Color.h"
+#include "Vertex.h"
 #include "AABBox.h"
 #include "Dimension.h"
 #include "Rect.h"
-#include "Color.h"
 #include "KeyMap.h"
 
 // inheritors
