@@ -90,6 +90,11 @@ public:
 		VertexType get() { return (VertexType)m_NativeValue->getType(); }
 	}
 
+	virtual String^ ToString() override
+	{
+		return String::Format("Position={0}; Type={1}", Position, Type);
+	}
+
 internal:
 
 	Vertex3D(const video::S3DVertex& other)

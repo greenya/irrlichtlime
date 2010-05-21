@@ -62,31 +62,38 @@ namespace _03.CustomSceneNode
 
 	class CSampleSceneNode : SceneNode
 	{
-		AABBox3Df Box;
-		//video::S3DVertex Vertices[4];
-		//video::SMaterial Material;
+		AABBox3Df Box = new AABBox3Df();
+		List<Vertex3D> Vertices = new List<Vertex3D>();
+		Material Material = new Material();
 
 		public CSampleSceneNode(SceneNode parent, SceneManager smgr, int id)
 			: base(parent, smgr, id, new Vector3Df(), new Vector3Df(), new Vector3Df())
 		{
 			this.OnRender += new RenderEventHandler(CSampleSceneNode_OnRender);
 
-			//Material.Wireframe = false;
-			//Material.Lighting = false;
+			Material.Wireframe = false;
+			Material.Lighting = false;
 
-			//Vertices[0] = video::S3DVertex(0,0,10, 1,1,0,video::SColor(255,0,255,255),0,1);
-			//Vertices[1] = video::S3DVertex(10,0,-10, 1,0,0,video::SColor(255,255,0,255),1,1); 
-			//Vertices[2] = video::S3DVertex(0,20,0, 0,1,1,video::SColor(255,255,255,0),1,0);
-			//Vertices[3] = video::S3DVertex(-10,0,-10, 0,0,1,video::SColor(255,0,255,0),0,0);
+			Vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Coloru(255, 0, 255, 255), 0, 1));
+			Vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Coloru(255, 255, 0, 255), 1, 1));
+			Vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Coloru(255, 255, 255, 0), 1, 0));
+			Vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Coloru(255, 0, 255, 0), 0, 0));
 
-			//Box.Reset(Vertices[0].Pos);
-			//for (int i = 1; i < 4; ++i)
-			//    Box.addInternalPoint(Vertices[i].Pos);
+			Box.Reset(Vertices[0].Position);
+			for (int i = 1; i < Vertices.Count; i++)
+				Box.AddInternalPoint(Vertices[i].Position);
 		}
 
 		void CSampleSceneNode_OnRender()
 		{
 			Console.WriteLine(">>> Hello from CSampleSceneNode_OnRender()!");
+
+			//u16 indices[] = {       0,2,3, 2,1,3, 1,0,3, 2,0,1      };
+			//video::IVideoDriver* driver = SceneManager->getVideoDriver();
+
+			//driver->setMaterial(Material);
+			//driver->setTransform(video::ETS_WORLD, AbsoluteTransformation);
+			//driver->drawVertexPrimitiveList(&Vertices[0], 4, &indices[0], 4, video::EVT_STANDARD, scene::EPT_TRIANGLES, video::EIT_16BIT);
 		}
 	}
 }
