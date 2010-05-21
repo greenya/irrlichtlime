@@ -26,11 +26,12 @@ public:
 	{
 		Vector2Di^ get()
 		{
-			return gcnew Vector2Di(m_NativeValue->UpperLeftCorner.X, m_NativeValue->UpperLeftCorner.Y);
+			return gcnew Vector2Di(m_NativeValue->UpperLeftCorner);
 		}
 
 		void set(Vector2Di^ value)
 		{
+			LIME_ASSERT(value != nullptr);
 			m_NativeValue->UpperLeftCorner = *value->m_NativeValue;
 		}
 	}
@@ -39,11 +40,12 @@ public:
 	{
 		Vector2Di^ get()
 		{
-			return gcnew Vector2Di(m_NativeValue->LowerRightCorner.X, m_NativeValue->LowerRightCorner.Y);
+			return gcnew Vector2Di(m_NativeValue->LowerRightCorner);
 		}
 
 		void set(Vector2Di^ value)
 		{
+			LIME_ASSERT(value != nullptr);
 			m_NativeValue->LowerRightCorner = *value->m_NativeValue;
 		}
 	}
@@ -70,7 +72,7 @@ public:
 
 internal:
 
-	Recti(core::recti value)
+	Recti(const core::recti& value)
 	{
 		m_NativeValue = new core::recti(value);
 	}

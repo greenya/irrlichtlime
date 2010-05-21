@@ -44,6 +44,11 @@ void SceneNode::AddChild(SceneNode^ child)
 	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
+void SceneNode::Drop()
+{
+	m_SceneNode->drop();
+}
+
 void SceneNode::Remove()
 {
 	m_SceneNode->remove();
@@ -84,8 +89,7 @@ void SceneNode::UpdateAbsolutePosition()
 
 Vector3Df^ SceneNode::AbsolutePosition::get()
 {
-	core::vector3df v = m_SceneNode->getAbsolutePosition();
-	return gcnew Vector3Df(v.X, v.Y, v.Z);
+	return gcnew Vector3Df(m_SceneNode->getAbsolutePosition());
 }
 
 unsigned int SceneNode::AutomaticCulling::get()
@@ -141,8 +145,7 @@ void SceneNode::Parent::set(SceneNode^ value)
 
 Vector3Df^ SceneNode::Position::get()
 {
-	core::vector3df v = m_SceneNode->getPosition();
-	return gcnew Vector3Df(v.X, v.Y, v.Z);
+	return gcnew Vector3Df(m_SceneNode->getPosition());
 }
 
 void SceneNode::Position::set(Vector3Df^ value)
@@ -153,8 +156,7 @@ void SceneNode::Position::set(Vector3Df^ value)
 
 Vector3Df^ SceneNode::Rotation::get()
 {
-	core::vector3df v = m_SceneNode->getRotation();
-	return gcnew Vector3Df(v.X, v.Y, v.Z);
+	return gcnew Vector3Df(m_SceneNode->getRotation());
 }
 
 void SceneNode::Rotation::set(Vector3Df^ value)
@@ -165,8 +167,7 @@ void SceneNode::Rotation::set(Vector3Df^ value)
 
 Vector3Df^ SceneNode::Scale::get()
 {
-	core::vector3df v = m_SceneNode->getScale();
-	return gcnew Vector3Df(v.X, v.Y, v.Z);
+	return gcnew Vector3Df(m_SceneNode->getScale());
 }
 
 void SceneNode::Scale::set(Vector3Df^ value)

@@ -8,6 +8,50 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
+public ref class Vector2Df : Lime::NativeValue<core::vector2df>
+{
+public:
+
+	Vector2Df(float x, float y)
+	{
+		m_NativeValue = new core::vector2df(x, y);
+	}
+
+	Vector2Df(float xy)
+	{
+		m_NativeValue = new core::vector2df(xy);
+	}
+
+	Vector2Df()
+	{
+		m_NativeValue = new core::vector2df();
+	}
+
+	property float X
+	{
+		float get() { return m_NativeValue->X; }
+		void set(float value) { m_NativeValue->X = value; }
+	}
+
+	property float Y
+	{
+		float get() { return m_NativeValue->Y; }
+		void set(float value) { m_NativeValue->Y = value; }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("X={0}; Y={1}", X, Y);
+	}
+
+internal:
+
+	Vector2Df(const core::vector2df& other)
+	{
+		m_NativeValue = new core::vector2df(other);
+	}
+};
+
 public ref class Vector2Di : Lime::NativeValue<core::vector2di>
 {
 public:
@@ -43,42 +87,12 @@ public:
 	{
 		return String::Format("X={0}; Y={1}", X, Y);
 	}
-};
 
-public ref class Vector2Df : Lime::NativeValue<core::vector2df>
-{
-public:
+internal:
 
-	Vector2Df(float x, float y)
+	Vector2Di(const core::vector2di& other)
 	{
-		m_NativeValue = new core::vector2df(x, y);
-	}
-
-	Vector2Df(float xy)
-	{
-		m_NativeValue = new core::vector2df(xy);
-	}
-
-	Vector2Df()
-	{
-		m_NativeValue = new core::vector2df();
-	}
-
-	property float X
-	{
-		float get() { return m_NativeValue->X; }
-		void set(float value) { m_NativeValue->X = value; }
-	}
-
-	property float Y
-	{
-		float get() { return m_NativeValue->Y; }
-		void set(float value) { m_NativeValue->Y = value; }
-	}
-
-	virtual String^ ToString() override
-	{
-		return String::Format("X={0}; Y={1}", X, Y);
+		m_NativeValue = new core::vector2di(other);
 	}
 };
 
@@ -122,6 +136,13 @@ public:
 	virtual String^ ToString() override
 	{
 		return String::Format("X={0}; Y={1}; Z={2}", X, Y, Z);
+	}
+
+internal:
+
+	Vector3Df(const core::vector3df& other)
+	{
+		m_NativeValue = new core::vector3df(other);
 	}
 };
 

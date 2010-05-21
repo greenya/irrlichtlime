@@ -19,6 +19,7 @@
 
 // basic types
 #include "Vector.h"
+#include "AABBox.h"
 #include "Dimension.h"
 #include "Rect.h"
 #include "Color.h"

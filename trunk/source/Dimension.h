@@ -41,7 +41,7 @@ public:
 
 internal:
 
-	Dimension2Du(core::dimension2du value)
+	Dimension2Du(const core::dimension2du& value)
 	{
 		m_NativeValue = new core::dimension2du(value);
 	}
@@ -80,7 +80,7 @@ public:
 
 internal:
 
-	Dimension2Di(core::dimension2di value)
+	Dimension2Di(const core::dimension2di& value)
 	{
 		m_NativeValue = new core::dimension2di(value);
 	}

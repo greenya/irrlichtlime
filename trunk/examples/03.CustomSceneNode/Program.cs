@@ -36,8 +36,8 @@ namespace _03.CustomSceneNode
 			//    anim = 0;
 			//}
 
-			//myNode.Drop();
-			//myNode = null;
+			myNode.Drop();
+			myNode = null;
 
 			int frames = 0;
 			while (device.Run())
@@ -62,7 +62,7 @@ namespace _03.CustomSceneNode
 
 	class CSampleSceneNode : SceneNode
 	{
-		//core::aabbox3d<f32> Box;
+		AABBox3Df Box;
 		//video::S3DVertex Vertices[4];
 		//video::SMaterial Material;
 
@@ -79,7 +79,7 @@ namespace _03.CustomSceneNode
 			//Vertices[2] = video::S3DVertex(0,20,0, 0,1,1,video::SColor(255,255,255,0),1,0);
 			//Vertices[3] = video::S3DVertex(-10,0,-10, 0,0,1,video::SColor(255,0,255,0),0,0);
 
-			//Box.reset(Vertices[0].Pos);
+			//Box.Reset(Vertices[0].Pos);
 			//for (int i = 1; i < 4; ++i)
 			//    Box.addInternalPoint(Vertices[i].Pos);
 		}
