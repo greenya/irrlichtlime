@@ -216,6 +216,10 @@
 			Name="Core"
 			>
 			<File
+				RelativePath=".\AABBox.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Dimension.h"
 				>
 			</File>

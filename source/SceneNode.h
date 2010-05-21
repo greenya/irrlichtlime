@@ -17,6 +17,7 @@ public ref class SceneNode
 public:
 
 	void AddChild(SceneNode^ child);
+	void Drop();
 	void Remove();
 	void RemoveAll();
 	bool RemoveChild(SceneNode^ child);
