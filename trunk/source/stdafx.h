@@ -17,13 +17,12 @@
 #include "MaterialFlag.h"
 #include "SceneNodeType.h"
 
-// IrrlichtLime::Core
+// basic types
 #include "Vector.h"
 #include "Dimension.h"
 #include "Rect.h"
-
-// IrrlichtLime::Video
 #include "Color.h"
-
-// IrrlichtLime
 #include "KeyMap.h"
+
+// inheritors
+#include "SceneNodeInheritor.h"
