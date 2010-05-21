@@ -24,7 +24,7 @@ public:
 
 	void Set(unsigned int a, unsigned int r, unsigned int g, unsigned int b)
 	{
-		((video::SColor*)m_NativeValue)->set(a, r, g, b);
+		m_NativeValue->set(a, r, g, b);
 	}
 
 	property unsigned int Alpha
@@ -84,7 +84,7 @@ public:
 
 internal:
 
-	Coloru(video::SColor value)
+	Coloru(const video::SColor& value)
 	{
 		m_NativeValue = new video::SColor(value);
 	}

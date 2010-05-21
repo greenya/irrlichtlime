@@ -204,6 +204,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Vertex.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VertexType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VideoDriver.cpp"
 				>
 			</File>
