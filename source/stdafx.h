@@ -19,6 +19,8 @@
 #include "KeyCode.h"
 #include "MaterialFlag.h"
 #include "MaterialType.h"
+#include "SceneNodeAnimatorType.h"
+#include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
 #include "VertexType.h"
 #include "ZBufferCompFunc.h"

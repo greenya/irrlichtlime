@@ -340,7 +340,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneNodeAnimatorType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneNodeInheritor.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneNodeRenderPass.h"
 				>
 			</File>
 			<File

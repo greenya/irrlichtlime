@@ -7,6 +7,9 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+namespace IO { ref class FileSystem; }
+namespace GUI { ref class GUIEnvironment; }
+namespace Video { ref class VideoDriver; }
 namespace Scene {
 
 ref class AnimatedMesh;
@@ -52,11 +55,34 @@ public:
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
 
+	void Clear();
 	void DrawAll();
 
 	AnimatedMesh^ GetMesh(String^ filename);
 
+	SceneNode^ GetSceneNodeFromID(int id, SceneNode^ start);
+	SceneNode^ GetSceneNodeFromID(int id);
+	SceneNode^ GetSceneNodeFromName(String^ name, SceneNode^ start);
+	SceneNode^ GetSceneNodeFromName(String^ name);
+	SceneNode^ GetSceneNodeFromType(SceneNodeType type, SceneNode^ start);
+	SceneNode^ GetSceneNodeFromType(SceneNodeType type);
+
+	String^ GetAnimatorTypeName(SceneNodeAnimatorType type);
+	String^ GetSceneNodeTypeName(SceneNodeType type);
+
+	unsigned int RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
+	unsigned int RegisterNodeForRendering(SceneNode^ node);
+
+	bool SaveScene(String^ filename); // 2nd argument ISceneUserDataSerializer* currently not supported
+	bool LoadScene(String^ filename); // *same here*
+
+	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property SceneNode^ RootSceneNode { SceneNode^ get(); }
+	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
+	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	property Scene::SceneNodeRenderPass SceneNodeRenderPass { Scene::SceneNodeRenderPass get(); }
+	property Video::Coloru^ ShadowColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 
 internal:
 
