@@ -296,6 +296,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneNodeInheritor.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneNodeType.h"
 				>
 			</File>

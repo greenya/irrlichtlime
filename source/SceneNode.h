@@ -41,11 +41,20 @@ public:
 
 	virtual String^ ToString() override;
 
+	delegate void RenderEventHandler();
+
+protected:
+
+	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+
+	event RenderEventHandler^ OnRender;
+
 internal:
 
 	SceneNode(scene::ISceneNode* sceneNode);
 
 	scene::ISceneNode* m_SceneNode;
+	bool m_isInherited;
 };
 
 } // end namespace Scene

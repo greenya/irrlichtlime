@@ -16,6 +16,27 @@ SceneNode::SceneNode(scene::ISceneNode* sceneNode)
 {
 	LIME_ASSERT(sceneNode != nullptr);
 	m_SceneNode = sceneNode;
+	m_isInherited = false;
+}
+
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	SceneNodeInheritor* i = new SceneNodeInheritor(
+		LIME_SAFEREF(parent, m_SceneNode),
+		LIME_SAFEREF(manager, m_SceneManager),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	i->m_renderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
+
+	m_SceneNode = i;
+	m_isInherited = true;
 }
 
 void SceneNode::AddChild(SceneNode^ child)
@@ -40,7 +61,10 @@ bool SceneNode::RemoveChild(SceneNode^ child)
 
 void SceneNode::Render()
 {
-	m_SceneNode->render();
+	if (m_isInherited)
+		OnRender();
+	else
+		m_SceneNode->render();
 }
 
 void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
