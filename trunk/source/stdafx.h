@@ -10,6 +10,7 @@
 #include "AnimatedMeshType.h"
 #include "AnimationTypeMD2.h"
 #include "AntiAliasingMode.h"
+#include "ColorFormat.h"
 #include "ColorMaterial.h"
 #include "ColorPlane.h"
 #include "DriverType.h"
@@ -22,7 +23,9 @@
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
+#include "TransformationState.h"
 #include "VertexType.h"
+#include "VideoDriverFeature.h"
 #include "ZBufferCompFunc.h"
 
 // basic types
@@ -34,6 +37,7 @@
 #include "Dimension.h"
 #include "Rect.h"
 #include "KeyMap.h"
+#include "ExposedVideoData.h"
 
 // inheritors
 #include "SceneNodeInheritor.h"
