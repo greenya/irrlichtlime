@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ColorFormat.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ColorMaterial.h"
 				>
 			</File>
@@ -201,6 +205,10 @@
 			</File>
 			<File
 				RelativePath=".\DriverType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ExposedVideoData.h"
 				>
 			</File>
 			<File
@@ -228,6 +236,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TransformationState.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Vertex.h"
 				>
 			</File>
@@ -241,6 +253,10 @@
 			</File>
 			<File
 				RelativePath=".\VideoDriver.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoDriverFeature.h"
 				>
 			</File>
 			<File

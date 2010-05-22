@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "Material.h"
 #include "Texture.h"
 #include "VideoDriver.h"
 
@@ -15,6 +16,23 @@ VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
 {
 	LIME_ASSERT(videoDriver != nullptr);
 	m_VideoDriver = videoDriver;
+}
+
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(videoData != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue, sourceRect->m_NativeValue);
+}
+
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(videoData != nullptr);
+
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue);
 }
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru ^color)
@@ -38,14 +56,66 @@ bool VideoDriver::BeginScene()
 	return m_VideoDriver->beginScene();
 }
 
+bool VideoDriver::CheckDriverReset()
+{
+	return m_VideoDriver->checkDriverReset();
+}
+
+void VideoDriver::DisableFeature(VideoDriverFeature feature, bool flag)
+{
+	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature, flag);
+}
+
+void VideoDriver::DisableFeature(VideoDriverFeature feature)
+{
+	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
+}
+
 bool VideoDriver::EndScene()
 {
 	return m_VideoDriver->endScene();
 }
 
+ExposedVideoData^ VideoDriver::GetExposedVideoData()
+{
+	return gcnew ExposedVideoData(m_VideoDriver->getExposedVideoData());
+}
+
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
 	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTexture(Lime::StringToPath(filename)));
+}
+
+Texture^ VideoDriver::GetTextureByIndex(unsigned int index)
+{
+	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTextureByIndex(index));
+}
+
+Matrix4f^ VideoDriver::GetTransform(TransformationState state)
+{
+	return gcnew Matrix4f(m_VideoDriver->getTransform((video::E_TRANSFORMATION_STATE)state));
+}
+
+bool VideoDriver::QueryFeature(VideoDriverFeature feature)
+{
+	return m_VideoDriver->queryFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
+}
+
+void VideoDriver::RenameTexture(Texture^ texture, String^ newName)
+{
+	m_VideoDriver->renameTexture(LIME_SAFEREF(texture, m_Texture), Lime::StringToPath(newName));
+}
+
+void VideoDriver::SetMaterial(Material^ material)
+{
+	LIME_ASSERT(material != nullptr);
+	m_VideoDriver->setMaterial(*material->m_NativeValue);
+}
+
+void VideoDriver::SetTransform(TransformationState state, Matrix4f^ mat)
+{
+	LIME_ASSERT(mat != nullptr);
+	m_VideoDriver->setTransform((video::E_TRANSFORMATION_STATE)state, *mat->m_NativeValue);
 }
 
 Video::DriverType VideoDriver::DriverType::get()
@@ -111,6 +181,11 @@ unsigned int VideoDriver::MaterialRendererCount::get()
 String^ VideoDriver::Name::get()
 {
 	return gcnew String(m_VideoDriver->getName());
+}
+
+unsigned int VideoDriver::TextureCount::get()
+{
+	return m_VideoDriver->getTextureCount();
 }
 
 String^ VideoDriver::VendorInfo::get()
