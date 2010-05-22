@@ -212,6 +212,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Image.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Image.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Material.cpp"
 				>
 			</File>
@@ -225,6 +233,10 @@
 			</File>
 			<File
 				RelativePath=".\MaterialType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderTarget.h"
 				>
 			</File>
 			<File
@@ -324,11 +336,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DebugSceneType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Mesh.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Mesh.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MeshBuffer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MeshBuffer.h"
 				>
 			</File>
 			<File
@@ -353,6 +377,14 @@
 			</File>
 			<File
 				RelativePath=".\SceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneNodeAnimator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneNodeAnimator.h"
 				>
 			</File>
 			<File

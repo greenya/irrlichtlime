@@ -147,6 +147,13 @@ public:
 	{
 		return String::Format("MinEdge={0}; MaxEdge={1}", MinEdge, MaxEdge);
 	}
+
+internal:
+
+	AABBox3Df(const core::aabbox3df& other)
+	{
+		m_NativeValue = new core::aabbox3df(other);
+	}
 };
 
 } // end namespace Core

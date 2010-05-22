@@ -7,35 +7,55 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
-namespace Video { ref class Texture; }
+namespace Video { ref class Material; ref class Texture; }
 namespace Scene {
 
 ref class SceneManager;
+ref class SceneNodeAnimator;
 
 public ref class SceneNode
 {
 public:
 
+	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
+
 	void Drop();
+
+	Video::Material^ GetMaterial(unsigned int num);
+
 	void Remove();
 	void RemoveAll();
+	void RemoveAnimator(SceneNodeAnimator^ animator);
+	void RemoveAnimators();
 	bool RemoveChild(SceneNode^ child);
+
 	void Render();
+
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
 	void SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture);
+	void SetMaterialType(Video::MaterialType newType);
+
 	void UpdateAbsolutePosition();
 
 	property Vector3Df^ AbsolutePosition { Vector3Df^ get(); }
+	property Matrix4f^ AbsoluteTransformation { Matrix4f^ get(); protected: void set(Matrix4f^ value); }
+	property List<SceneNodeAnimator^>^ AnimatorList { List<SceneNodeAnimator^>^ get(); }
 	property unsigned int AutomaticCulling { unsigned int get(); void set(unsigned int value); }
+	property AABBox3Df^ BoundingBox { AABBox3Df^ get(); }
+	property AABBox3Df^ BoundingBoxTransformed { AABBox3Df^ get(); }
+	property List<SceneNode^>^ ChildList { List<SceneNode^>^ get(); }
+	property DebugSceneType DebugDataVisible { DebugSceneType get(); void set(DebugSceneType value); }
 	property bool DebugObject { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
+	property unsigned int MaterialCount { unsigned int get(); }
 	property String^ Name { String^ get(); void set(String^ value); }
 	property SceneNode^ Parent { SceneNode^ get(); void set(SceneNode^ value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Matrix4f^ RelativeTransformation { Matrix4f^ get(); }
 	property Vector3Df^ Rotation { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Vector3Df^ Scale { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
+	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); protected: void set(Scene::SceneManager^ value); }
 	property bool TrulyVisible { bool get(); }
 	property SceneNodeType Type { SceneNodeType get(); }
 	property bool Visible { bool get(); void set(bool value); }
@@ -55,7 +75,7 @@ internal:
 	SceneNode(scene::ISceneNode* sceneNode);
 
 	scene::ISceneNode* m_SceneNode;
-	bool m_isInherited;
+	bool m_Inherited;
 };
 
 } // end namespace Scene
