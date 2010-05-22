@@ -8,6 +8,8 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
+ref class Texture;
+
 public ref class Material : Lime::NativeValue<video::SMaterial>
 {
 public:

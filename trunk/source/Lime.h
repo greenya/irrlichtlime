@@ -9,8 +9,10 @@ using namespace System::Runtime::InteropServices; // for Marshal
 
 #ifdef _DEBUG
 #define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
+#define LIME_ASSERT2(condition, details) System::Diagnostics::Debug::Assert(condition, #condition, details);
 #else
 #define LIME_ASSERT(condition)
+#define LIME_ASSERT2(condition, details)
 #endif
 
 #define LIME_SAFEWRAP(managedType, nativeRef) (nativeRef == nullptr ? nullptr : gcnew managedType(nativeRef))

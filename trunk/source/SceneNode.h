@@ -24,6 +24,8 @@ public:
 
 	Video::Material^ GetMaterial(unsigned int num);
 
+	void RegisterSceneNode();
+
 	void Remove();
 	void RemoveAll();
 	void RemoveAnimator(SceneNodeAnimator^ animator);
@@ -62,12 +64,20 @@ public:
 
 	virtual String^ ToString() override;
 
+	delegate AABBox3Df^ GetBoundingBoxEventHandler();
+	delegate unsigned int GetMaterialCountEventHandler();
+	delegate Video::Material^ GetMaterialEventHandler(unsigned int index);
+	delegate void RegisterSceneNodeEventHandler();
 	delegate void RenderEventHandler();
 
 protected:
 
 	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 
+	event GetBoundingBoxEventHandler^ OnGetBoundingBox;
+	event GetMaterialCountEventHandler^ OnGetMaterialCount;
+	event GetMaterialEventHandler^ OnGetMaterial;
+	event RegisterSceneNodeEventHandler^ OnRegisterSceneNode;
 	event RenderEventHandler^ OnRender;
 
 internal:
