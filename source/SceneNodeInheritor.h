@@ -2,13 +2,13 @@
 
 #include <vcclr.h> // for gcroot
 #include "stdafx.h"
+#include "Material.h"
 #include "SceneNode.h"
 
 using namespace irr;
 using namespace System;
 
 namespace IrrlichtLime {
-namespace Video { ref class Texture; }
 namespace Scene {
 
 class SceneNodeInheritor : public scene::ISceneNode
@@ -21,39 +21,48 @@ public:
 		const core::vector3df& scale = core::vector3df(1))
 		: ISceneNode(parent, manager, id, position, rotation, scale)
 	{
-		m_BoundingBox = core::aabbox3df();
 	}
 
-	gcroot<SceneNode::RenderEventHandler^> m_RenderHandler;
+	gcroot<SceneNode::RenderEventHandler^> m_renderHandler;
 	virtual void render()
 	{
-		m_RenderHandler->Invoke();
+		m_renderHandler->Invoke();
 	}
 
-	virtual const core::aabbox3df& getBoundingBox() const
-	{// temp code
-		return m_BoundingBox;
-	}
-
+	gcroot<SceneNode::RegisterSceneNodeEventHandler^> m_OnRegisterSceneNodeHandler;
 	virtual void OnRegisterSceneNode()
-	{// temp code
-		if (IsVisible)
-			SceneManager->registerNodeForRendering(this);
-
+	{
+		m_OnRegisterSceneNodeHandler->Invoke();
 		ISceneNode::OnRegisterSceneNode();
 	}
 
+	gcroot<SceneNode::GetBoundingBoxEventHandler^> m_getBoundingBoxHandler;
+	virtual const core::aabbox3df& getBoundingBox() const
+	{
+		AABBox3Df^ b = m_getBoundingBoxHandler->Invoke();
+		if (b != nullptr)
+			return *b->m_NativeValue;
+		else
+			return *((core::aabbox3df*)0);
+	}
+
+	gcroot<SceneNode::GetMaterialCountEventHandler^> m_getMaterialCountHandler;
 	virtual u32 getMaterialCount() const
-	{// temp code
-		return 1;
+	{
+		return m_getMaterialCountHandler->Invoke();
 	}
 
+	gcroot<SceneNode::GetMaterialEventHandler^> m_getMaterialHandler;
 	virtual video::SMaterial& getMaterial(u32 i)
-	{// temp code
-		return m_Material;
+	{
+		Video::Material^ m = m_getMaterialHandler->Invoke(i);
+		if (m != nullptr)
+			return *m->m_NativeValue;
+		else
+			return *((video::SMaterial*)0);
 	}
 
-// "internal" section (C++ does not support this modificator)
+// internal:
 
 	void AbsoluteTransformation_set(const core::matrix4& value)
 	{
@@ -64,11 +73,6 @@ public:
 	{
 		setSceneManager(newManager);
 	}
-
-private:
-
-	core::aabbox3df m_BoundingBox;
-	video::SMaterial m_Material;
 };
 
 } // end namespace Scene

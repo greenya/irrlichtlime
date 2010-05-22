@@ -145,7 +145,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("MinEdge={0}; MaxEdge={1}", MinEdge, MaxEdge);
+		return String::Format("MinEdge={{{0}}}; MaxEdge={{{1}}}", MinEdge, MaxEdge);
 	}
 
 internal:

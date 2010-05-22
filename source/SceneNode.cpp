@@ -35,7 +35,11 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 		*rotation->m_NativeValue,
 		*scale->m_NativeValue);
 
-	i->m_RenderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
+	i->m_renderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
+	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
+	i->m_getBoundingBoxHandler = gcnew GetBoundingBoxEventHandler(this, &SceneNode::BoundingBox::get);
+	i->m_getMaterialCountHandler = gcnew GetMaterialCountEventHandler(this, &SceneNode::MaterialCount::get);
+	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
 
 	m_SceneNode = i;
 	m_Inherited = true;
@@ -58,7 +62,25 @@ void SceneNode::Drop()
 
 Video::Material^ SceneNode::GetMaterial(unsigned int num)
 {
+	if (m_Inherited)
+	{
+		Video::Material^ m = OnGetMaterial(num);
+		LIME_ASSERT2(m != nullptr, "If you inherit SceneNode, you must handle OnGetMaterial event and return valid Material value.");
+		return m;
+	}
+
 	return gcnew Video::Material(m_SceneNode->getMaterial(num));
+}
+
+void SceneNode::RegisterSceneNode()
+{
+	if (m_Inherited)
+	{
+		OnRegisterSceneNode();
+		return;
+	}
+	
+	m_SceneNode->OnRegisterSceneNode();
 }
 
 void SceneNode::Remove()
@@ -89,9 +111,12 @@ bool SceneNode::RemoveChild(SceneNode^ child)
 void SceneNode::Render()
 {
 	if (m_Inherited)
+	{
 		OnRender();
-	else
-		m_SceneNode->render();
+		return;
+	}
+
+	m_SceneNode->render();
 }
 
 void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
@@ -160,11 +185,28 @@ void SceneNode::AutomaticCulling::set(unsigned int value)
 
 AABBox3Df^ SceneNode::BoundingBox::get()
 {
+	if (m_Inherited)
+	{
+		AABBox3Df^ b = OnGetBoundingBox();
+		LIME_ASSERT2(b != nullptr, "If you inherit SceneNode, you must handle OnGetBoundingBox event and return valid AABBox3Df value.");
+		return b;
+	}
+	
+#if _DEBUG
+	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
+		return gcnew AABBox3Df();
+#endif
+
 	return gcnew AABBox3Df(m_SceneNode->getBoundingBox());
 }
 
 AABBox3Df^ SceneNode::BoundingBoxTransformed::get()
 {
+#if _DEBUG
+	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
+		return gcnew AABBox3Df();
+#endif
+
 	return gcnew AABBox3Df(m_SceneNode->getTransformedBoundingBox());
 }
 
@@ -215,6 +257,9 @@ void SceneNode::ID::set(int value)
 
 unsigned int SceneNode::MaterialCount::get()
 {
+	if (m_Inherited)
+		return OnGetMaterialCount();
+
 	return m_SceneNode->getMaterialCount();
 }
 
@@ -312,7 +357,7 @@ void SceneNode::Visible::set(bool value)
 
 String^ SceneNode::ToString()
 {
-	return String::Format("Name={0}", Name);
+	return String::Format("ID={0}; Type={1}; Name={2}", ID, Type, Name);
 }
 
 } // end namespace Scene
