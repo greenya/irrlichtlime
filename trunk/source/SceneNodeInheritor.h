@@ -21,18 +21,18 @@ public:
 		const core::vector3df& scale = core::vector3df(1))
 		: ISceneNode(parent, manager, id, position, rotation, scale)
 	{
-		m_boundingBox = core::aabbox3df();
+		m_BoundingBox = core::aabbox3df();
 	}
 
-	gcroot<SceneNode::RenderEventHandler^> m_renderHandler;
+	gcroot<SceneNode::RenderEventHandler^> m_RenderHandler;
 	virtual void render()
 	{
-		m_renderHandler->Invoke();
+		m_RenderHandler->Invoke();
 	}
 
 	virtual const core::aabbox3df& getBoundingBox() const
 	{// temp code
-		return m_boundingBox;
+		return m_BoundingBox;
 	}
 
 	virtual void OnRegisterSceneNode()
@@ -50,13 +50,25 @@ public:
 
 	virtual video::SMaterial& getMaterial(u32 i)
 	{// temp code
-		SMaterial m;
-		return m;
-	} 
+		return m_Material;
+	}
+
+// "internal" section (C++ does not support this modificator)
+
+	void AbsoluteTransformation_set(const core::matrix4& value)
+	{
+		AbsoluteTransformation = value;
+	}
+
+	void SceneManager_set(scene::ISceneManager* newManager)
+	{
+		setSceneManager(newManager);
+	}
 
 private:
 
-	core::aabbox3df m_boundingBox;
+	core::aabbox3df m_BoundingBox;
+	video::SMaterial m_Material;
 };
 
 } // end namespace Scene

@@ -1,7 +1,11 @@
 #pragma once
 
 #include "stdafx.h"
+#include "Image.h"
 #include "Material.h"
+#include "Mesh.h"
+#include "MeshBuffer.h"
+#include "SceneNode.h"
 #include "Texture.h"
 #include "VideoDriver.h"
 
@@ -16,6 +20,47 @@ VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
 {
 	LIME_ASSERT(videoDriver != nullptr);
 	m_VideoDriver = videoDriver;
+}
+
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name, ColorFormat format)
+{
+	LIME_ASSERT(size != nullptr);
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
+	return LIME_SAFEWRAP(Texture, t);
+}
+
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name)
+{
+	LIME_ASSERT(size != nullptr);
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name));
+	return LIME_SAFEWRAP(Texture, t);
+}
+
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size)
+{
+	LIME_ASSERT(size != nullptr);
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue);
+	return LIME_SAFEWRAP(Texture, t);
+}
+
+Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name, ColorFormat format)
+{
+	LIME_ASSERT(size != nullptr);
+	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
+	return LIME_SAFEWRAP(Texture, t);
+}
+
+Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name)
+{
+	LIME_ASSERT(size != nullptr);
+	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name));
+	return LIME_SAFEWRAP(Texture, t);
+}
+
+Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
+{
+	video::ITexture* t = m_VideoDriver->addTexture(Lime::StringToPath(name), LIME_SAFEREF(image, m_Image));
+	return LIME_SAFEWRAP(Texture, t);
 }
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect)
@@ -61,6 +106,16 @@ bool VideoDriver::CheckDriverReset()
 	return m_VideoDriver->checkDriverReset();
 }
 
+void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh)
+{
+	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), LIME_SAFEREF(mesh, m_Mesh));
+}
+
+void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node)
+{
+	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
 void VideoDriver::DisableFeature(VideoDriverFeature feature, bool flag)
 {
 	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature, flag);
@@ -81,6 +136,11 @@ ExposedVideoData^ VideoDriver::GetExposedVideoData()
 	return gcnew ExposedVideoData(m_VideoDriver->getExposedVideoData());
 }
 
+unsigned int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
+{
+	return m_VideoDriver->getOcclusionQueryResult(LIME_SAFEREF(node, m_SceneNode));
+}
+
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
 	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTexture(Lime::StringToPath(filename)));
@@ -96,14 +156,98 @@ Matrix4f^ VideoDriver::GetTransform(TransformationState state)
 	return gcnew Matrix4f(m_VideoDriver->getTransform((video::E_TRANSFORMATION_STATE)state));
 }
 
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Coloru^ color, bool zeroTexels)
+{
+	LIME_ASSERT(color != nullptr);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *color->m_NativeValue, zeroTexels);
+}
+
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *color->m_NativeValue);
+}
+
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos, bool zeroTexels)
+{
+	LIME_ASSERT(colorKeyPixelPos != nullptr);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *colorKeyPixelPos->m_NativeValue, zeroTexels);
+}
+
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos)
+{
+	LIME_ASSERT(colorKeyPixelPos != nullptr);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *colorKeyPixelPos->m_NativeValue);
+}
+
+void VideoDriver::MakeNormalMapTexture(Texture^ texture, float amplitude)
+{
+	m_VideoDriver->makeNormalMapTexture(LIME_SAFEREF(texture, m_Texture), amplitude);
+}
+
+void VideoDriver::MakeNormalMapTexture(Texture^ texture)
+{
+	m_VideoDriver->makeNormalMapTexture(LIME_SAFEREF(texture, m_Texture));
+}
+
 bool VideoDriver::QueryFeature(VideoDriverFeature feature)
 {
 	return m_VideoDriver->queryFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
+void VideoDriver::RemoveAllHardwareBuffers()
+{
+	m_VideoDriver->removeAllHardwareBuffers();
+}
+
+void VideoDriver::RemoveAllOcclusionQueries()
+{
+	m_VideoDriver->removeAllOcclusionQueries();
+}
+
+void VideoDriver::RemoveAllTextures()
+{
+	m_VideoDriver->removeAllTextures();
+}
+
+void VideoDriver::RemoveHardwareBuffer(Scene::MeshBuffer^ mb)
+{
+	m_VideoDriver->removeHardwareBuffer(LIME_SAFEREF(mb, m_MeshBuffer));
+}
+
+void VideoDriver::RemoveOcclusionQuery(Scene::SceneNode^ node)
+{
+	m_VideoDriver->removeOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+void VideoDriver::RemoveTexture(Texture^ texture)
+{
+	m_VideoDriver->removeTexture(LIME_SAFEREF(texture, m_Texture));
+}
+
 void VideoDriver::RenameTexture(Texture^ texture, String^ newName)
 {
 	m_VideoDriver->renameTexture(LIME_SAFEREF(texture, m_Texture), Lime::StringToPath(newName));
+}
+
+void VideoDriver::RunAllOcclusionQueries(bool visible)
+{
+	m_VideoDriver->runAllOcclusionQueries(visible);
+}
+
+void VideoDriver::RunAllOcclusionQueries()
+{
+	m_VideoDriver->runAllOcclusionQueries();
+}
+
+void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node, bool visible)
+{
+	m_VideoDriver->runOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), visible);
+}
+
+void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node)
+{
+	m_VideoDriver->runOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
 }
 
 void VideoDriver::SetMaterial(Material^ material)
@@ -112,10 +256,72 @@ void VideoDriver::SetMaterial(Material^ material)
 	m_VideoDriver->setMaterial(*material->m_NativeValue);
 }
 
+bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, *color->m_NativeValue);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer)
+{
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer)
+{
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture)
+{
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture));
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer, *color->m_NativeValue);
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer)
+{
+	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer);
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget)
+{
+	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget);
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget target)
+{
+	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target);
+}
+
 void VideoDriver::SetTransform(TransformationState state, Matrix4f^ mat)
 {
 	LIME_ASSERT(mat != nullptr);
 	m_VideoDriver->setTransform((video::E_TRANSFORMATION_STATE)state, *mat->m_NativeValue);
+}
+
+void VideoDriver::UpdateAllOcclusionQueries(bool block)
+{
+	m_VideoDriver->updateAllOcclusionQueries(block);
+}
+
+void VideoDriver::UpdateAllOcclusionQueries()
+{
+	m_VideoDriver->updateAllOcclusionQueries();
+}
+
+void VideoDriver::UpdateOcclusionQuery(Scene::SceneNode^ node, bool block)
+{
+	m_VideoDriver->updateOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), block);
+}
+
+void VideoDriver::UpdateOcclusionQuery(Scene::SceneNode^ node)
+{
+	m_VideoDriver->updateOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
 }
 
 Video::DriverType VideoDriver::DriverType::get()

@@ -7,14 +7,24 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+namespace Scene { ref class MeshBuffer; ref class SceneNode; ref class Mesh; }
 namespace Video {
 
+ref class Image;
 ref class Material;
 ref class Texture;
 
 public ref class VideoDriver
 {
 public:
+
+	Texture^ AddRenderTargetTexture(Dimension2Du^ size, String^ name, ColorFormat format);
+	Texture^ AddRenderTargetTexture(Dimension2Du^ size, String^ name);
+	Texture^ AddRenderTargetTexture(Dimension2Du^ size);
+
+	Texture^ AddTexture(Dimension2Du^ size, String^ name, ColorFormat format);
+	Texture^ AddTexture(Dimension2Du^ size, String^ name);
+	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
 	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
 	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData);
@@ -24,17 +34,59 @@ public:
 	bool BeginScene();
 
 	bool CheckDriverReset();
+
+	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
+	void CreateOcclusionQuery(Scene::SceneNode^ node);
+
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
+
 	bool EndScene();
+
 	ExposedVideoData^ GetExposedVideoData();
+	unsigned int GetOcclusionQueryResult(Scene::SceneNode^ node);
 	Texture^ GetTexture(String^ filename);
 	Texture^ GetTextureByIndex(unsigned int index);
 	Matrix4f^ GetTransform(TransformationState state);
+
+	void MakeColorKeyTexture(Texture^ texture, Coloru^ color, bool zeroTexels);
+	void MakeColorKeyTexture(Texture^ texture, Coloru^ color);
+	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos, bool zeroTexels);
+	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos);
+	void MakeNormalMapTexture(Texture^ texture, float amplitude);
+	void MakeNormalMapTexture(Texture^ texture);
+
 	bool QueryFeature(VideoDriverFeature feature);
+
+	void RemoveAllHardwareBuffers();
+	void RemoveAllOcclusionQueries();
+	void RemoveAllTextures();
+	void RemoveHardwareBuffer(Scene::MeshBuffer^ mb);
+	void RemoveOcclusionQuery(Scene::SceneNode^ node);
+	void RemoveTexture(Texture^ texture);
+
 	void RenameTexture(Texture^ texture, String^ newName);
+
+	void RunAllOcclusionQueries(bool visible);
+	void RunAllOcclusionQueries();
+	void RunOcclusionQuery(Scene::SceneNode^ node, bool visible);
+	void RunOcclusionQuery(Scene::SceneNode^ node);
+
 	void SetMaterial(Material^ material);
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Coloru^ color);
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
+	bool SetRenderTarget(Texture^ texture);
+	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Coloru^ color);
+	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
+	bool SetRenderTarget(RenderTarget target, bool clearTarget);
+	bool SetRenderTarget(RenderTarget target);
 	void SetTransform(TransformationState state, Matrix4f^ mat);
+
+	void UpdateAllOcclusionQueries(bool block);
+	void UpdateAllOcclusionQueries();
+	void UpdateOcclusionQuery(Scene::SceneNode^ node, bool block);
+	void UpdateOcclusionQuery(Scene::SceneNode^ node);
 
 	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
