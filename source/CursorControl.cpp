@@ -1,7 +1,6 @@
-#pragma once
-
 #include "stdafx.h"
 #include "CursorControl.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -11,6 +10,7 @@ namespace IrrlichtLime {
 namespace GUI {
 
 CursorControl::CursorControl(gui::ICursorControl* cursorControl)
+	: ReferenceCounted(cursorControl)
 {
 	LIME_ASSERT(cursorControl != nullptr);
 	m_CursorControl = cursorControl;

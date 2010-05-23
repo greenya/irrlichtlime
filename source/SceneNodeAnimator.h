@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 
 using namespace irr;
 using namespace System;
@@ -10,13 +11,11 @@ namespace Scene {
 
 ref class SceneNode;
 
-public ref class SceneNodeAnimator
+public ref class SceneNodeAnimator : IO::AttributeExchangingObject
 {
 public:
 
 	void AnimateNode(SceneNode^ node, unsigned int timeMs);
-
-	void Drop();
 
 	property bool EventReceiverEnabled { bool get(); }
 	property bool Finished { bool get(); }

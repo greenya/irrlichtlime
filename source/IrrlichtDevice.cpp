@@ -1,10 +1,9 @@
-#pragma once
-
 #include "stdafx.h"
 #include "CursorControl.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "IrrlichtDevice.h"
+#include "ReferenceCounted.h"
 #include "SceneManager.h"
 #include "VideoDriver.h"
 
@@ -15,6 +14,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 
 IrrlichtDevice::IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice)
+	: ReferenceCounted(irrlichtDevice)
 {
 	LIME_ASSERT(irrlichtDevice != nullptr);
 	m_IrrlichtDevice = irrlichtDevice;
@@ -108,11 +108,6 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice()
 	irr::IrrlichtDevice* d = createDevice();
 
 	return LIME_SAFEWRAP(IrrlichtDevice, d);
-}
-
-void IrrlichtDevice::Drop()
-{
-	m_IrrlichtDevice->drop();
 }
 
 bool IrrlichtDevice::GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast)

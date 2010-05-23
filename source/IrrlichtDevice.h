@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -14,7 +15,7 @@ namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; }
 
-public ref class IrrlichtDevice
+public ref class IrrlichtDevice : ReferenceCounted
 {
 public:
 
@@ -26,7 +27,6 @@ public:
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType);
 	static IrrlichtDevice^ CreateDevice();
 
-	void Drop();
 	bool GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast);
 	bool Run();
 	bool SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast);

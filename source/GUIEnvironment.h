@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -12,7 +13,7 @@ namespace GUI {
 ref class GUIElement;
 ref class GUIStaticText;
 
-public ref class GUIEnvironment
+public ref class GUIEnvironment : ReferenceCounted
 {
 public:
 

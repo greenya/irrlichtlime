@@ -1,5 +1,3 @@
-#pragma once
-
 #include "stdafx.h"
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
@@ -8,6 +6,7 @@
 #include "GUIEnvironment.h"
 #include "Mesh.h"
 #include "MeshSceneNode.h"
+#include "ReferenceCounted.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
@@ -21,6 +20,7 @@ namespace IrrlichtLime {
 namespace Scene {
 
 SceneManager::SceneManager(scene::ISceneManager* sceneManager)
+	: ReferenceCounted(sceneManager)
 {
 	LIME_ASSERT(sceneManager != nullptr);
 	m_SceneManager = sceneManager;

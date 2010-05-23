@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 
 using namespace irr;
 using namespace System;
@@ -9,13 +10,14 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-public ref class GUIElement
+public ref class GUIElement : IO::AttributeExchangingObject
 {
 public:
 
 	GUIElement^ GetElementFromID(int id, bool searchchildren);
 	GUIElement^ GetElementFromID(int id);
 	GUIElement^ GetElementFromPoint(Vector2Di^ point);
+
 	bool IsMyChild(GUIElement^ child);
 	bool IsPointInside(Vector2Di^ point);
 

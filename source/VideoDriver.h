@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -14,7 +15,7 @@ ref class Image;
 ref class Material;
 ref class Texture;
 
-public ref class VideoDriver
+public ref class VideoDriver : ReferenceCounted
 {
 public:
 
