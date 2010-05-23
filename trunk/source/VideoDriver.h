@@ -7,7 +7,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
-namespace Scene { ref class MeshBuffer; ref class SceneNode; ref class Mesh; }
+namespace Scene { ref class Mesh; ref class MeshBuffer; ref class SceneNode; }
 namespace Video {
 
 ref class Image;
@@ -40,6 +40,9 @@ public:
 
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
+
+	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices);
 
 	bool EndScene();
 
@@ -110,6 +113,10 @@ internal:
 	VideoDriver(video::IVideoDriver* videoDriver);
 
 	video::IVideoDriver* m_VideoDriver;
+
+private:
+
+	unsigned int calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType);
 };
 
 } // end namespace Video

@@ -26,15 +26,14 @@ namespace _03.CustomSceneNode
 
 			CSampleSceneNode myNode = new CSampleSceneNode(smgr.RootSceneNode, smgr, 666);
 
-			//scene::ISceneNodeAnimator* anim =
-			//    smgr->createRotationAnimator(core::vector3df(0.8f, 0, 0.8f));
+			SceneNodeAnimator anim = smgr.CreateRotationAnimator(new Vector3Df(0.8f, 0, 0.8f));
 
-			//if(anim)
-			//{
-			//    myNode->addAnimator(anim);
-			//    anim->drop();
-			//    anim = 0;
-			//}
+			if (anim != null)
+			{
+				myNode.AddAnimator(anim);
+				anim.Drop();
+				anim = null;
+			}
 
 			myNode.Drop();
 			myNode = null;
@@ -62,38 +61,61 @@ namespace _03.CustomSceneNode
 
 	class CSampleSceneNode : SceneNode
 	{
-		AABBox3Df Box = new AABBox3Df();
-		List<Vertex3D> Vertices = new List<Vertex3D>();
-		Material Material = new Material();
+		AABBox3Df bbox = new AABBox3Df();
+		List<Vertex3D> vertices = new List<Vertex3D>();
+		Material material = new Material();
 
 		public CSampleSceneNode(SceneNode parent, SceneManager smgr, int id)
-			: base(parent, smgr, id, new Vector3Df(), new Vector3Df(), new Vector3Df())
+			: base(parent, smgr, id)
 		{
+			this.OnRegisterSceneNode += new RegisterSceneNodeEventHandler(CSampleSceneNode_OnRegisterSceneNode);
 			this.OnRender += new RenderEventHandler(CSampleSceneNode_OnRender);
+			this.OnGetBoundingBox += new GetBoundingBoxEventHandler(CSampleSceneNode_OnGetBoundingBox);
+			this.OnGetMaterialCount += new GetMaterialCountEventHandler(CSampleSceneNode_OnGetMaterialCount);
+			this.OnGetMaterial += new GetMaterialEventHandler(CSampleSceneNode_OnGetMaterial);
 
-			Material.Wireframe = false;
-			Material.Lighting = false;
+			material.Wireframe = false;
+			material.Lighting = false;
 
-			Vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Coloru(255, 0, 255, 255), 0, 1));
-			Vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Coloru(255, 255, 0, 255), 1, 1));
-			Vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Coloru(255, 255, 255, 0), 1, 0));
-			Vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Coloru(255, 0, 255, 0), 0, 0));
+			vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Coloru(255, 0, 255, 255), 0, 1));
+			vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Coloru(255, 255, 0, 255), 1, 1));
+			vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Coloru(255, 255, 255, 0), 1, 0));
+			vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Coloru(255, 0, 255, 0), 0, 0));
 
-			Box.Reset(Vertices[0].Position);
-			for (int i = 1; i < Vertices.Count; i++)
-				Box.AddInternalPoint(Vertices[i].Position);
+			bbox.Reset(vertices[0].Position);
+			for (int i = 1; i < vertices.Count; i++)
+				bbox.AddInternalPoint(vertices[i].Position);
+		}
+
+		void CSampleSceneNode_OnRegisterSceneNode()
+		{
+			if (Visible)
+				SceneManager.RegisterNodeForRendering(this);
 		}
 
 		void CSampleSceneNode_OnRender()
 		{
-			Console.WriteLine(">>> Hello from CSampleSceneNode_OnRender()!");
+			List<ushort> indices = new List<ushort>() { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
+			VideoDriver driver = SceneManager.VideoDriver;
 
-			//u16 indices[] = {       0,2,3, 2,1,3, 1,0,3, 2,0,1      };
-			//video::IVideoDriver* driver = SceneManager->getVideoDriver();
+			driver.SetMaterial(material);
+			driver.SetTransform(TransformationState.World, AbsoluteTransformation);
+			driver.DrawVertexPrimitiveList(vertices, indices);
+		}
 
-			//driver->setMaterial(Material);
-			//driver->setTransform(video::ETS_WORLD, AbsoluteTransformation);
-			//driver->drawVertexPrimitiveList(&Vertices[0], 4, &indices[0], 4, video::EVT_STANDARD, scene::EPT_TRIANGLES, video::EIT_16BIT);
+		AABBox3Df CSampleSceneNode_OnGetBoundingBox()
+		{
+			return bbox;
+		}
+
+		uint CSampleSceneNode_OnGetMaterialCount()
+		{
+			return 1;
+		}
+
+		Material CSampleSceneNode_OnGetMaterial(uint index)
+		{
+			return material;
 		}
 	}
 }

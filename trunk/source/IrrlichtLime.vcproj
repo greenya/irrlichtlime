@@ -364,6 +364,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PrimitiveType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneManager.cpp"
 				>
 			</File>

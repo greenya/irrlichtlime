@@ -21,6 +21,7 @@
 #include "KeyCode.h"
 #include "MaterialFlag.h"
 #include "MaterialType.h"
+#include "PrimitiveType.h"
 #include "RenderTarget.h"
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
