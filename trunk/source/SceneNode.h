@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 
 using namespace irr;
 using namespace System;
@@ -14,14 +15,12 @@ ref class SceneManager;
 ref class SceneNodeAnimator;
 class SceneNodeInheritor;
 
-public ref class SceneNode
+public ref class SceneNode : IO::AttributeExchangingObject
 {
 public:
 
 	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
-
-	void Drop();
 
 	Video::Material^ GetMaterial(unsigned int num);
 

@@ -1,7 +1,6 @@
-#pragma once
-
 #include "stdafx.h"
 #include "Image.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -11,6 +10,7 @@ namespace IrrlichtLime {
 namespace Video {
 
 Image::Image(video::IImage* image)
+	: ReferenceCounted(image)
 {
 	LIME_ASSERT(image != nullptr);
 	m_Image = image;

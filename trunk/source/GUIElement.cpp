@@ -1,6 +1,5 @@
-#pragma once
-
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 #include "GUIElement.h"
 
 using namespace irr;
@@ -11,6 +10,7 @@ namespace IrrlichtLime {
 namespace GUI {
 
 GUIElement::GUIElement(gui::IGUIElement* guiElement)
+	: IO::AttributeExchangingObject(guiElement)
 {
 	LIME_ASSERT(guiElement != nullptr);
 	m_GUIElement = guiElement;

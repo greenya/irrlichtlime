@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -9,7 +10,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-public ref class CursorControl
+public ref class CursorControl : ReferenceCounted
 {
 public:
 

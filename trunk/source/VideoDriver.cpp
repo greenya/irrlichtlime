@@ -1,10 +1,9 @@
-#pragma once
-
 #include "stdafx.h"
 #include "Image.h"
 #include "Material.h"
 #include "Mesh.h"
 #include "MeshBuffer.h"
+#include "ReferenceCounted.h"
 #include "SceneNode.h"
 #include "Texture.h"
 #include "VideoDriver.h"
@@ -17,6 +16,7 @@ namespace IrrlichtLime {
 namespace Video {
 
 VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
+	: ReferenceCounted(videoDriver)
 {
 	LIME_ASSERT(videoDriver != nullptr);
 	m_VideoDriver = videoDriver;

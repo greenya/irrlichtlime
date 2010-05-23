@@ -1,6 +1,5 @@
-#pragma once
-
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
 
@@ -11,6 +10,7 @@ namespace IrrlichtLime {
 namespace Scene {
 
 SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* sceneNodeAnimator)
+	: IO::AttributeExchangingObject(sceneNodeAnimator)
 {
 	LIME_ASSERT(sceneNodeAnimator != nullptr);
 	m_SceneNodeAnimator = sceneNodeAnimator;
@@ -19,11 +19,6 @@ SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* sceneNodeAnimato
 void SceneNodeAnimator::AnimateNode(SceneNode^ node, unsigned int timeMs)
 {
 	m_SceneNodeAnimator->animateNode(LIME_SAFEREF(node, m_SceneNode), timeMs);
-}
-
-void SceneNodeAnimator::Drop()
-{
-	m_SceneNodeAnimator->drop();
 }
 
 bool SceneNodeAnimator::EventReceiverEnabled::get()

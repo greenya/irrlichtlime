@@ -1,6 +1,5 @@
-#pragma once
-
 #include "stdafx.h"
+#include "AttributeExchangingObject.h"
 #include "Material.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
@@ -15,6 +14,7 @@ namespace IrrlichtLime {
 namespace Scene {
 
 SceneNode::SceneNode(scene::ISceneNode* sceneNode)
+	: IO::AttributeExchangingObject(sceneNode)
 {
 	LIME_ASSERT(sceneNode != nullptr);
 	m_SceneNode = sceneNode;
@@ -22,6 +22,7 @@ SceneNode::SceneNode(scene::ISceneNode* sceneNode)
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+	: IO::AttributeExchangingObject(0)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -36,11 +37,13 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 		*scale->m_NativeValue);
 
 	initInheritor(i);
+	setAttributeExchangingObject(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation)
+	: IO::AttributeExchangingObject(0)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -53,11 +56,13 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 		*rotation->m_NativeValue);
 
 	initInheritor(i);
+	setAttributeExchangingObject(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position)
+	: IO::AttributeExchangingObject(0)
 {
 	LIME_ASSERT(position != nullptr);
 
@@ -68,11 +73,13 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 		*position->m_NativeValue);
 
 	initInheritor(i);
+	setAttributeExchangingObject(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id)
+	: IO::AttributeExchangingObject(0)
 {
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
@@ -80,17 +87,20 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id)
 		id);
 
 	initInheritor(i);
+	setAttributeExchangingObject(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager)
+	: IO::AttributeExchangingObject(0)
 {
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
 		LIME_SAFEREF(manager, m_SceneManager));
 
 	initInheritor(i);
+	setAttributeExchangingObject(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
@@ -103,11 +113,6 @@ void SceneNode::AddAnimator(SceneNodeAnimator^ animator)
 void SceneNode::AddChild(SceneNode^ child)
 {
 	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
-}
-
-void SceneNode::Drop()
-{
-	m_SceneNode->drop();
 }
 
 Video::Material^ SceneNode::GetMaterial(unsigned int num)

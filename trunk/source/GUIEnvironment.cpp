@@ -1,9 +1,8 @@
-#pragma once
-
 #include "stdafx.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
 #include "GUIStaticText.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -13,6 +12,7 @@ namespace IrrlichtLime {
 namespace GUI {
 
 GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
+	: ReferenceCounted(guiEnvironment)
 {
 	LIME_ASSERT(guiEnvironment != nullptr);
 	m_GUIEnvironment = guiEnvironment;

@@ -1,7 +1,6 @@
-#pragma once
-
 #include "stdafx.h"
 #include "FileSystem.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -11,6 +10,7 @@ namespace IrrlichtLime {
 namespace IO {
 
 FileSystem::FileSystem(io::IFileSystem* fileSystem)
+	: ReferenceCounted(fileSystem)
 {
 	LIME_ASSERT(fileSystem != nullptr);
 	m_FileSystem = fileSystem;

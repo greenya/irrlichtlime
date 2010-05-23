@@ -452,6 +452,14 @@
 			Name="IO"
 			>
 			<File
+				RelativePath=".\AttributeExchangingObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AttributeExchangingObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FileArchiveType.h"
 				>
 			</File>
@@ -490,6 +498,14 @@
 		</File>
 		<File
 			RelativePath=".\Lime.h"
+			>
+		</File>
+		<File
+			RelativePath=".\ReferenceCounted.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\ReferenceCounted.h"
 			>
 		</File>
 		<File

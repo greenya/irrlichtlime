@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 
 using namespace irr;
 using namespace System;
@@ -20,7 +21,7 @@ ref class MeshSceneNode;
 ref class SceneNode;
 ref class SceneNodeAnimator;
 
-public ref class SceneManager
+public ref class SceneManager : ReferenceCounted
 {
 public:
 
