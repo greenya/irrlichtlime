@@ -12,6 +12,7 @@ namespace Scene {
 
 ref class SceneManager;
 ref class SceneNodeAnimator;
+class SceneNodeInheritor;
 
 public ref class SceneNode
 {
@@ -73,6 +74,10 @@ public:
 protected:
 
 	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation);
+	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position);
+	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id);
+	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager);
 
 	event GetBoundingBoxEventHandler^ OnGetBoundingBox;
 	event GetMaterialCountEventHandler^ OnGetMaterialCount;
@@ -86,6 +91,10 @@ internal:
 
 	scene::ISceneNode* m_SceneNode;
 	bool m_Inherited;
+
+private:
+
+	void initInheritor(SceneNodeInheritor* i);
 };
 
 } // end namespace Scene

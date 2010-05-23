@@ -126,6 +126,41 @@ void VideoDriver::DisableFeature(VideoDriverFeature feature)
 	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType)
+{
+	LIME_ASSERT(vertices != nullptr);
+	LIME_ASSERT(vertices->Count > 0);
+	LIME_ASSERT(indices != nullptr);
+	LIME_ASSERT(indices->Count > 0);
+
+	unsigned int primCount = calculatePrimitiveCount(indices->Count, pType);
+
+	S3DVertex* vertexList = new S3DVertex[vertices->Count];
+	for (int i = 0; i < vertices->Count; i++)
+	{
+		LIME_ASSERT(vertices[i] != nullptr);
+		vertexList[i] = *vertices[i]->m_NativeValue;
+	}
+
+	u16* indexList = new u16[indices->Count];
+	for (int i = 0; i < indices->Count; i++)
+	{
+		LIME_ASSERT(indices[i] >= 0);
+		indexList[i] = indices[i];
+	}
+
+	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Count, indexList, primCount,
+		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_16BIT);
+
+	delete indexList;
+	delete vertexList;
+}
+
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices)
+{
+	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+}
+
 bool VideoDriver::EndScene()
 {
 	return m_VideoDriver->endScene();
@@ -402,6 +437,56 @@ String^ VideoDriver::VendorInfo::get()
 String^ VideoDriver::ToString()
 {
 	return Name;
+}
+
+unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType)
+{
+	unsigned int c;
+
+	switch (pType)
+	{
+	case Scene::PrimitiveType::Points:
+	case Scene::PrimitiveType::LineStrip:
+	case Scene::PrimitiveType::LineLoop:
+	case Scene::PrimitiveType::Polygon:
+	case Scene::PrimitiveType::PointSprites:
+		c = indexCount;
+		break;
+
+	case Scene::PrimitiveType::Lines:
+		LIME_ASSERT(indexCount == (indexCount / 2) * 2);
+		c = indexCount / 2;
+		break;
+
+	case Scene::PrimitiveType::TriangleStrip:
+	case Scene::PrimitiveType::TriangleFan:
+		LIME_ASSERT(indexCount >= 3);
+		c = indexCount - 2;
+		break;
+
+	case Scene::PrimitiveType::Triangles:
+		LIME_ASSERT(indexCount == (indexCount / 3) * 3);
+		c = indexCount / 3;
+		break;
+
+	case Scene::PrimitiveType::QuadStrip:
+		LIME_ASSERT(indexCount == (indexCount / 2) * 2);
+		LIME_ASSERT(indexCount >= 4);
+		c = (indexCount - 2) / 2;
+		break;
+
+	case Scene::PrimitiveType::Quads:
+		LIME_ASSERT(indexCount == (indexCount / 4) * 4);
+		c = indexCount / 4;
+		break;
+
+	default:
+		c = 0;
+	}
+
+	LIME_ASSERT2(c > 0, "Failed to calculate count of primitives: unexpected value of PrimitiveType or number of indices invalid.");
+
+	return c;
 }
 
 } // end namespace Video

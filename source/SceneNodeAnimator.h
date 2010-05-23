@@ -16,9 +16,13 @@ public:
 
 	void AnimateNode(SceneNode^ node, unsigned int timeMs);
 
+	void Drop();
+
 	property bool EventReceiverEnabled { bool get(); }
 	property bool Finished { bool get(); }
 	property SceneNodeAnimatorType Type { SceneNodeAnimatorType get(); }
+
+	virtual String^ ToString() override;
 
 internal:
 

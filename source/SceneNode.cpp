@@ -35,12 +35,62 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 		*rotation->m_NativeValue,
 		*scale->m_NativeValue);
 
-	i->m_renderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
-	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
-	i->m_getBoundingBoxHandler = gcnew GetBoundingBoxEventHandler(this, &SceneNode::BoundingBox::get);
-	i->m_getMaterialCountHandler = gcnew GetMaterialCountEventHandler(this, &SceneNode::MaterialCount::get);
-	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
+	initInheritor(i);
+	m_SceneNode = i;
+	m_Inherited = true;
+}
 
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	SceneNodeInheritor* i = new SceneNodeInheritor(
+		LIME_SAFEREF(parent, m_SceneNode),
+		LIME_SAFEREF(manager, m_SceneManager),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	initInheritor(i);
+	m_SceneNode = i;
+	m_Inherited = true;
+}
+
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	SceneNodeInheritor* i = new SceneNodeInheritor(
+		LIME_SAFEREF(parent, m_SceneNode),
+		LIME_SAFEREF(manager, m_SceneManager),
+		id,
+		*position->m_NativeValue);
+
+	initInheritor(i);
+	m_SceneNode = i;
+	m_Inherited = true;
+}
+
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id)
+{
+	SceneNodeInheritor* i = new SceneNodeInheritor(
+		LIME_SAFEREF(parent, m_SceneNode),
+		LIME_SAFEREF(manager, m_SceneManager),
+		id);
+
+	initInheritor(i);
+	m_SceneNode = i;
+	m_Inherited = true;
+}
+
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager)
+{
+	SceneNodeInheritor* i = new SceneNodeInheritor(
+		LIME_SAFEREF(parent, m_SceneNode),
+		LIME_SAFEREF(manager, m_SceneManager));
+
+	initInheritor(i);
 	m_SceneNode = i;
 	m_Inherited = true;
 }
@@ -358,6 +408,15 @@ void SceneNode::Visible::set(bool value)
 String^ SceneNode::ToString()
 {
 	return String::Format("ID={0}; Type={1}; Name={2}", ID, Type, Name);
+}
+
+void SceneNode::initInheritor(SceneNodeInheritor* i)
+{
+	i->m_renderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
+	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
+	i->m_getBoundingBoxHandler = gcnew GetBoundingBoxEventHandler(this, &SceneNode::BoundingBox::get);
+	i->m_getMaterialCountHandler = gcnew GetMaterialCountEventHandler(this, &SceneNode::MaterialCount::get);
+	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
 }
 
 } // end namespace Scene

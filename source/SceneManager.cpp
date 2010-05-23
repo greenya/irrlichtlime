@@ -10,6 +10,7 @@
 #include "MeshSceneNode.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
+#include "SceneNodeAnimator.h"
 #include "VideoDriver.h"
 
 using namespace irr;
@@ -398,6 +399,13 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
 void SceneManager::Clear()
 {
 	m_SceneManager->clear();
+}
+
+SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed)
+{
+	LIME_ASSERT(rotationSpeed != nullptr);
+	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(*rotationSpeed->m_NativeValue);
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
 }
 
 void SceneManager::DrawAll()

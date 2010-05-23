@@ -18,6 +18,7 @@ ref class CameraSceneNode;
 ref class Mesh;
 ref class MeshSceneNode;
 ref class SceneNode;
+ref class SceneNodeAnimator;
 
 public ref class SceneManager
 {
@@ -56,6 +57,9 @@ public:
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
 
 	void Clear();
+
+	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
+
 	void DrawAll();
 
 	AnimatedMesh^ GetMesh(String^ filename);
