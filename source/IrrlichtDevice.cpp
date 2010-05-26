@@ -5,6 +5,7 @@
 #include "IrrlichtDevice.h"
 #include "ReferenceCounted.h"
 #include "SceneManager.h"
+#include "Timer.h"
 #include "VideoDriver.h"
 
 using namespace irr;
@@ -149,16 +150,6 @@ void IrrlichtDevice::Yield()
 	m_IrrlichtDevice->yield();
 }
 
-Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
-{
-	return LIME_SAFEWRAP(Video::VideoDriver, m_IrrlichtDevice->getVideoDriver());
-}
-
-Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
-{
-	return LIME_SAFEWRAP(Scene::SceneManager, m_IrrlichtDevice->getSceneManager());
-}
-
 GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
 {
 	return LIME_SAFEWRAP(GUI::CursorControl, m_IrrlichtDevice->getCursorControl());
@@ -179,9 +170,24 @@ GUI::GUIEnvironment^ IrrlichtDevice::GUIEnvironment::get()
 	return LIME_SAFEWRAP(GUI::GUIEnvironment, m_IrrlichtDevice->getGUIEnvironment());
 }
 
+Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
+{
+	return LIME_SAFEWRAP(Scene::SceneManager, m_IrrlichtDevice->getSceneManager());
+}
+
+IrrlichtLime::Timer^ IrrlichtDevice::Timer::get()
+{
+	return LIME_SAFEWRAP(IrrlichtLime::Timer, m_IrrlichtDevice->getTimer());
+}
+
 String^ IrrlichtDevice::Version::get()
 {
 	return gcnew String(m_IrrlichtDevice->getVersion());
+}
+
+Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
+{
+	return LIME_SAFEWRAP(Video::VideoDriver, m_IrrlichtDevice->getVideoDriver());
 }
 
 bool IrrlichtDevice::WindowActive::get()

@@ -15,6 +15,8 @@ namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; }
 
+ref class Timer;
+
 public ref class IrrlichtDevice : ReferenceCounted
 {
 public:
@@ -39,6 +41,7 @@ public:
 	property bool Fullscreen { bool get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
+	property IrrlichtLime::Timer^ Timer { IrrlichtLime::Timer^ get(); }
 	property String^ Version { String^ get(); }
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 	property bool WindowActive { bool get(); }
