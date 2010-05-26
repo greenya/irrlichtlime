@@ -130,6 +130,7 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Count > 0);
+	LIME_ASSERT(vertices->Count <= 0xFFFF);
 	LIME_ASSERT(indices != nullptr);
 	LIME_ASSERT(indices->Count > 0);
 
@@ -478,14 +479,20 @@ unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene
 {
 	unsigned int c;
 
+	LIME_ASSERT(indexCount > 0);
+
 	switch (pType)
 	{
 	case Scene::PrimitiveType::Points:
-	case Scene::PrimitiveType::LineStrip:
+	case Scene::PrimitiveType::PointSprites:
 	case Scene::PrimitiveType::LineLoop:
 	case Scene::PrimitiveType::Polygon:
-	case Scene::PrimitiveType::PointSprites:
 		c = indexCount;
+		break;
+
+	case Scene::PrimitiveType::LineStrip:
+		LIME_ASSERT(indexCount >= 2);
+		c = indexCount - 1;
 		break;
 
 	case Scene::PrimitiveType::Lines:

@@ -17,8 +17,6 @@ namespace _03.CustomSceneNode
 			IrrlichtDevice device =
 				IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Du(640, 480), 16, false);
 
-			device.WindowCaption = "Custom Scene Node - Irrlicht Engine Demo";
-
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
@@ -48,7 +46,7 @@ namespace _03.CustomSceneNode
 				if (++frames == 100)
 				{
 					device.WindowCaption = String.Format(
-						"Irrlicht Engine [{0}] FPS: {1}",
+						"Custom Scene Node - Irrlicht Engine [{0}] fps: {1}",
 						driver.Name, driver.FPS);
 
 					frames = 0;

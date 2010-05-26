@@ -36,27 +36,25 @@ namespace _02.Quake3Map
 					return;
 			}
 
-			IrrlichtDevice device =
-				IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(640, 480));
-
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(640, 480));
 			if (device == null)
 				return;
 
 			VideoDriver driver = device.VideoDriver;
-			SceneManager scene = device.SceneManager;
+			SceneManager smgr = device.SceneManager;
 
 			device.FileSystem.AddFileArchive("../media/map-20kdm2.pk3");
 
-			AnimatedMesh mesh = scene.GetMesh("20kdm2.bsp");
+			AnimatedMesh mesh = smgr.GetMesh("20kdm2.bsp");
 			SceneNode node = null;
 
 			if (mesh != null)
-				node = scene.AddOctreeSceneNode(mesh.GetMesh(0), null, -1, 1024);
+				node = smgr.AddOctreeSceneNode(mesh.GetMesh(0), null, -1, 1024);
 
 			if (node != null)
 				node.Position = new Vector3Df(-1300, -144, -1249);
 
-			scene.AddCameraSceneNodeFPS();
+			smgr.AddCameraSceneNodeFPS();
 
 			device.CursorControl.Visible = false;
 
@@ -67,14 +65,14 @@ namespace _02.Quake3Map
 				if (device.WindowActive)
 				{
 					driver.BeginScene(true, true, new Coloru(255, 200, 200, 200));
-					scene.DrawAll();
+					smgr.DrawAll();
 					driver.EndScene();
 
 					int fps = driver.FPS;
 					if (lastFPS != fps)
 					{
 						device.WindowCaption = String.Format(
-							"Irrlicht Engine - Quake 3 Map example [{0}] FPS:{1}",
+							"Quake 3 Map Example - Irrlicht Engine [{0}] fps: {1}",
 							driver.Name, fps);
 
 						lastFPS = fps;
