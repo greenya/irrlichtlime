@@ -16,6 +16,11 @@ CursorControl::CursorControl(gui::ICursorControl* cursorControl)
 	m_CursorControl = cursorControl;
 }
 
+void CursorControl::SetReferenceRect(Recti^ rect_or_null)
+{
+	m_CursorControl->setReferenceRect(LIME_SAFEREF(rect_or_null, m_NativeValue));
+}
+
 Vector2Di^ CursorControl::Position::get()
 {
 	return gcnew Vector2Di(m_CursorControl->getPosition());
@@ -25,12 +30,6 @@ void CursorControl::Position::set(Vector2Di^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_CursorControl->setPosition(*value->m_NativeValue);
-}
-
-void CursorControl::ReferenceRect::set(Recti^ value)
-{
-	// we omit assert "value != nullprt" because it is valid value for setReferenceRect()
-	m_CursorControl->setReferenceRect(LIME_SAFEREF(value, m_NativeValue));
 }
 
 Vector2Df^ CursorControl::RelativePosition::get()
