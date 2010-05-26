@@ -51,11 +51,28 @@ public:
 	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNodeFPS();
 
+	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position);
+	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id);
+	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent);
+	MeshSceneNode^ AddCubeSceneNode(float size);
+	MeshSceneNode^ AddCubeSceneNode();
+
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
+
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position);
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id);
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent);
+	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount);
+	MeshSceneNode^ AddSphereSceneNode(float radius);
+	MeshSceneNode^ AddSphereSceneNode();
 
 	void Clear();
 

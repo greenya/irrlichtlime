@@ -346,6 +346,82 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS()
 	return LIME_SAFEWRAP(CameraSceneNode, n);
 }
 
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(
+		size,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(
+		size,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(
+		size,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent, int id)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(
+		size,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(
+		size,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode(float size)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode(size);
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddCubeSceneNode()
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode();
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
 MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
@@ -393,6 +469,105 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh));
 
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id,
+	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(polyCount < 256);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(
+		radius,
+		polyCount,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id,
+	Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(polyCount < 256);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(
+		radius,
+		polyCount,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id,
+	Vector3Df^ position)
+{
+	LIME_ASSERT(polyCount < 256);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(
+		radius,
+		polyCount,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id)
+{
+	LIME_ASSERT(polyCount < 256);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(
+		radius,
+		polyCount,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent)
+{
+	LIME_ASSERT(polyCount < 256);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(
+		radius,
+		polyCount,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount)
+{
+	LIME_ASSERT(polyCount < 256);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(radius, polyCount);
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode(radius);
+	return LIME_SAFEWRAP(MeshSceneNode, n);
+}
+
+MeshSceneNode^ SceneManager::AddSphereSceneNode()
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode();
 	return LIME_SAFEWRAP(MeshSceneNode, n);
 }
 

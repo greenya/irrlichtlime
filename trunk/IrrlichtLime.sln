@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Quake3Map", "examples\02
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.CustomSceneNode", "examples\03.CustomSceneNode\03.CustomSceneNode.csproj", "{DCF3AC38-0AEC-41A8-A4EB-3FE5AEB1E4E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Movement", "examples\04.Movement\04.Movement.csproj", "{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{DCF3AC38-0AEC-41A8-A4EB-3FE5AEB1E4E6}.Release|Win32.ActiveCfg = Release|x86
 		{DCF3AC38-0AEC-41A8-A4EB-3FE5AEB1E4E6}.Release|x86.ActiveCfg = Release|x86
 		{DCF3AC38-0AEC-41A8-A4EB-3FE5AEB1E4E6}.Release|x86.Build.0 = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|Win32.ActiveCfg = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|x86.ActiveCfg = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Debug|x86.Build.0 = Debug|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|Any CPU.ActiveCfg = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|Win32.ActiveCfg = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|x86.ActiveCfg = Release|x86
+		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
