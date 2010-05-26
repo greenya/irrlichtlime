@@ -576,6 +576,120 @@ void SceneManager::Clear()
 	m_SceneManager->clear();
 }
 
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition, float radiusEllipsoid)
+{
+	LIME_ASSERT(center != nullptr);
+	LIME_ASSERT(direction != nullptr);
+	
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(
+		*center->m_NativeValue,
+		radius,
+		speed,
+		*direction->m_NativeValue,
+		startPosition,
+		radiusEllipsoid);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition)
+{
+	LIME_ASSERT(center != nullptr);
+	LIME_ASSERT(direction != nullptr);
+	
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(
+		*center->m_NativeValue,
+		radius,
+		speed,
+		*direction->m_NativeValue,
+		startPosition);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction)
+{
+	LIME_ASSERT(center != nullptr);
+	LIME_ASSERT(direction != nullptr);
+	
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(
+		*center->m_NativeValue,
+		radius,
+		speed,
+		*direction->m_NativeValue);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed)
+{
+	LIME_ASSERT(center != nullptr);
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(*center->m_NativeValue, radius, speed);
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius)
+{
+	LIME_ASSERT(center != nullptr);
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(*center->m_NativeValue, radius);
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center)
+{
+	LIME_ASSERT(center != nullptr);
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator(*center->m_NativeValue);
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator()
+{
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyCircleAnimator();
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop, bool pingpong)
+{
+	LIME_ASSERT(startPoint != nullptr);
+	LIME_ASSERT(endPoint != nullptr);
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyStraightAnimator(
+		*startPoint->m_NativeValue,
+		*endPoint->m_NativeValue,
+		timeForWay,
+		loop,
+		pingpong);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop)
+{
+	LIME_ASSERT(startPoint != nullptr);
+	LIME_ASSERT(endPoint != nullptr);
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyStraightAnimator(
+		*startPoint->m_NativeValue,
+		*endPoint->m_NativeValue,
+		timeForWay,
+		loop);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay)
+{
+	LIME_ASSERT(startPoint != nullptr);
+	LIME_ASSERT(endPoint != nullptr);
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createFlyStraightAnimator(
+		*startPoint->m_NativeValue,
+		*endPoint->m_NativeValue,
+		timeForWay);
+
+	return LIME_SAFEWRAP(SceneNodeAnimator, a);
+}
+
 SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed)
 {
 	LIME_ASSERT(rotationSpeed != nullptr);

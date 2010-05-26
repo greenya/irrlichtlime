@@ -76,6 +76,18 @@ public:
 
 	void Clear();
 
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition, float radiusEllipsoid);
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition);
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction);
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed);
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius);
+	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center);
+	SceneNodeAnimator^ CreateFlyCircleAnimator();
+
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop, bool pingpong);
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop);
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay);
+
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
 
 	void DrawAll();
