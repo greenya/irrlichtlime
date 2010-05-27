@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "Timer.h"
 #include "VideoDriver.h"
+#include "VideoModeList.h"
 
 using namespace irr;
 using namespace System;
@@ -105,10 +106,18 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType)
 IrrlichtDevice^ IrrlichtDevice::CreateDevice()
 {
 	CreateDevice_start();
-
 	irr::IrrlichtDevice* d = createDevice();
-
 	return LIME_SAFEWRAP(IrrlichtDevice, d);
+}
+
+bool IrrlichtDevice::IsDriverSupported(Video::DriverType driver)
+{
+	return irr::IrrlichtDevice::isDriverSupported((video::E_DRIVER_TYPE)driver);
+}
+
+void IrrlichtDevice::ClearSystemMessages()
+{
+	m_IrrlichtDevice->clearSystemMessages();
 }
 
 bool IrrlichtDevice::GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast)
@@ -125,6 +134,21 @@ bool IrrlichtDevice::GetGammaRamp([Out] float% red, [Out] float% green, [Out] fl
 	return o;
 }
 
+void IrrlichtDevice::MaximizeWindow()
+{
+	m_IrrlichtDevice->maximizeWindow();
+}
+
+void IrrlichtDevice::MinimizeWindow()
+{
+	m_IrrlichtDevice->minimizeWindow();
+}
+
+void IrrlichtDevice::RestoreWindow()
+{
+	m_IrrlichtDevice->restoreWindow();
+}
+
 bool IrrlichtDevice::Run()
 {
 	return m_IrrlichtDevice->run();
@@ -133,6 +157,11 @@ bool IrrlichtDevice::Run()
 bool IrrlichtDevice::SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast)
 {
 	return m_IrrlichtDevice->setGammaRamp(red, green, blue, relativebrightness, relativecontrast);
+}
+
+void IrrlichtDevice::SetInputReceivingSceneManager(Scene::SceneManager^ sceneManager)
+{
+	m_IrrlichtDevice->setInputReceivingSceneManager(LIME_SAFEREF(sceneManager, m_SceneManager));
 }
 
 void IrrlichtDevice::Sleep(unsigned int timeMs, bool pauseTimer)
@@ -148,6 +177,11 @@ void IrrlichtDevice::Sleep(unsigned int timeMs)
 void IrrlichtDevice::Yield()
 {
 	m_IrrlichtDevice->yield();
+}
+
+Video::ColorFormat IrrlichtDevice::ColorFormat::get()
+{
+	return (Video::ColorFormat)m_IrrlichtDevice->getColorFormat();
 }
 
 GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
@@ -180,6 +214,11 @@ IrrlichtLime::Timer^ IrrlichtDevice::Timer::get()
 	return LIME_SAFEWRAP(IrrlichtLime::Timer, m_IrrlichtDevice->getTimer());
 }
 
+DeviceType IrrlichtDevice::Type::get()
+{
+	return (DeviceType)m_IrrlichtDevice->getType();
+}
+
 String^ IrrlichtDevice::Version::get()
 {
 	return gcnew String(m_IrrlichtDevice->getVersion());
@@ -188,6 +227,11 @@ String^ IrrlichtDevice::Version::get()
 Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
 {
 	return LIME_SAFEWRAP(Video::VideoDriver, m_IrrlichtDevice->getVideoDriver());
+}
+
+Video::VideoModeList^ IrrlichtDevice::VideoModeList::get()
+{
+	return LIME_SAFEWRAP(Video::VideoModeList, m_IrrlichtDevice->getVideoModeList());
 }
 
 bool IrrlichtDevice::WindowActive::get()
