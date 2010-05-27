@@ -440,6 +440,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIImage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIImage.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIStaticText.cpp"
 				>
 			</File>

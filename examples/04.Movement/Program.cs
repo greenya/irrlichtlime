@@ -40,29 +40,29 @@ namespace _04.Movement
 				n.SetMaterialTexture(0, driver.GetTexture("../media/t351sml.jpg"));
 				n.SetMaterialFlag(MaterialFlag.Lighting, false);
 
-				//SceneNodeAnimator anim = smgr.CreateFlyCircleAnimator(new Vector3Df(0, 0, 30), 20.0f);
-				//if (anim != null)
-				//{
-				//    n.AddAnimator(anim);
-				//    anim.Drop();
-				//}
+				SceneNodeAnimator anim = smgr.CreateFlyCircleAnimator(new Vector3Df(0, 0, 30), 20.0f);
+				if (anim != null)
+				{
+					n.AddAnimator(anim);
+					anim.Drop();
+				}
 			}
 
 			AnimatedMeshSceneNode anms = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/ninja.b3d"));
 			if (anms != null)
 			{
-				//SceneNodeAnimator anim = smgr.CreateFlyStraightAnimator(
-				//    new Vector3Df(100, 0, 60), new Vector3Df(-100, 0, 60), 3500, true);
-				//if (anim != null)
-				//{
-				//    anms.AddAnimator(anim);
-				//    anim.Drop();
-				//}
+				SceneNodeAnimator anim = smgr.CreateFlyStraightAnimator(
+					new Vector3Df(100, 0, 60), new Vector3Df(-100, 0, 60), 3500, true);
+				if (anim != null)
+				{
+					anms.AddAnimator(anim);
+					anim.Drop();
+				}
 
 				anms.SetMaterialFlag(MaterialFlag.Lighting, false);
 
-				//anms.SetFrameLoop(0, 13);
-				//anms.SetAnimationSpeed(15);
+				anms.SetFrameLoop(0, 13);
+				anms.AnimationSpeed = 15;
 
 				anms.Scale = new Vector3Df(2);
 				anms.Rotation = new Vector3Df(0, -90, 0);
@@ -71,23 +71,21 @@ namespace _04.Movement
 			smgr.AddCameraSceneNodeFPS();
 			device.CursorControl.Visible = false;
 
-			//device.GUIEnvironment.AddImage(
-			//    driver.GetTexture("../media/irrlichtlogoalpha2.tga"),
-			//    new Vector2Di(10, 20));
-
-			GUIStaticText diagnostics = device.GUIEnvironment.AddStaticText("", new Recti(10, 10, 400, 20));
-			//diagnostics.SetOverrideColor(new Coloru(255, 255, 255, 0));
+			device.GUIEnvironment.AddImage(
+				driver.GetTexture("../media/irrlichtlogoalpha2.tga"),
+				new Vector2Di(10, 20));
 
 			int lastFPS = -1;
-			//uint then = device.Timer.Time;
+
+			uint then = device.Timer.Time;
 
 			const float MOVEMENT_SPEED = 5.0f;
 
 			while (device.Run())
 			{
-				//uint now = device.Timer.Time;
-				//float frameDeltaTime = (float)(now - then) / 1000.0f;
-				//then = now;
+				uint now = device.Timer.Time;
+				float frameDeltaTime = (float)(now - then) / 1000.0f;
+				then = now;
 
 				Vector3Df nodePosition = node.Position;
 
