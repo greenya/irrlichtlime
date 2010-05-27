@@ -272,6 +272,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\VideoMode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoModeList.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoModeList.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ZBufferCompFunc.h"
 				>
 			</File>
@@ -482,6 +494,10 @@
 		</Filter>
 		<File
 			RelativePath=".\AssemblyInfo.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\DeviceType.h"
 			>
 		</File>
 		<File
