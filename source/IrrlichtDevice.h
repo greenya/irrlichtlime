@@ -15,7 +15,9 @@ namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; ref class VideoModeList; }
 
+ref class Event;
 ref class Timer;
+class EventReceiverInheritor;
 
 public ref class IrrlichtDevice : ReferenceCounted
 {
@@ -30,6 +32,9 @@ public:
 	static IrrlichtDevice^ CreateDevice();
 
 	static bool IsDriverSupported(Video::DriverType driver);
+
+	~IrrlichtDevice();
+	!IrrlichtDevice();
 
 	void ClearSystemMessages();
 	bool GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast);
@@ -62,15 +67,20 @@ public:
 
 	virtual String^ ToString() override;
 
+	delegate bool EventHandler(IrrlichtLime::Event^ e);
+	event EventHandler^ OnEvent;
+
 internal:
 
 	IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice);
+	bool Event(IrrlichtLime::Event^ e);
 
 	irr::IrrlichtDevice* m_IrrlichtDevice;
+	EventReceiverInheritor* m_EventReceiverInheritor;
 
 private:
 
-	static void CreateDevice_start();
+	static void deviceHasBeenCreated(IrrlichtDevice^ device);
 };
 
 } // end namespace IrrlichtLime

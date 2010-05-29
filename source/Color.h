@@ -72,9 +72,9 @@ public:
 		void set(unsigned int value) { m_NativeValue->setRed(value); }
 	}
 
-	property UInt16 A1R5G5B5
+	property unsigned __int16 A1R5G5B5
 	{
-		UInt16 get() { return m_NativeValue->toA1R5G5B5(); }
+		unsigned __int16 get() { return m_NativeValue->toA1R5G5B5(); }
 	}
 
 	virtual String^ ToString() override

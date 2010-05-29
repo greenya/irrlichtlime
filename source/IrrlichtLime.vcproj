@@ -452,6 +452,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIEventType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIImage.cpp"
 				>
 			</File>
@@ -501,6 +505,22 @@
 			>
 		</File>
 		<File
+			RelativePath=".\Event.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Event.h"
+			>
+		</File>
+		<File
+			RelativePath=".\EventReceiverInheritor.h"
+			>
+		</File>
+		<File
+			RelativePath=".\EventType.h"
+			>
+		</File>
+		<File
 			RelativePath=".\IrrlichtDevice.cpp"
 			>
 		</File>
@@ -522,6 +542,14 @@
 		</File>
 		<File
 			RelativePath=".\Lime.h"
+			>
+		</File>
+		<File
+			RelativePath=".\LogLevel.h"
+			>
+		</File>
+		<File
+			RelativePath=".\MouseEventType.h"
 			>
 		</File>
 		<File
