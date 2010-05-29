@@ -23,6 +23,8 @@ namespace _04.Movement
 			if (device == null)
 				return;
 
+			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
+
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
@@ -78,7 +80,7 @@ namespace _04.Movement
 			int lastFPS = -1;
 
 			uint then = device.Timer.Time;
-
+			
 			const float MOVEMENT_SPEED = 5.0f;
 
 			while (device.Run())
@@ -89,15 +91,15 @@ namespace _04.Movement
 
 				Vector3Df nodePosition = node.Position;
 
-				//if(receiver.IsKeyDown(irr::KEY_KEY_W))
-				//        nodePosition.Y += MOVEMENT_SPEED * frameDeltaTime;
-				//else if(receiver.IsKeyDown(irr::KEY_KEY_S))
-				//        nodePosition.Y -= MOVEMENT_SPEED * frameDeltaTime;
+				if (IsKeyDown(KeyCode.KeyW))
+					nodePosition.Y += MOVEMENT_SPEED * frameDeltaTime;
+				else if (IsKeyDown(KeyCode.KeyS))
+					nodePosition.Y -= MOVEMENT_SPEED * frameDeltaTime;
 
-				//if(receiver.IsKeyDown(irr::KEY_KEY_A))
-				//        nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-				//else if(receiver.IsKeyDown(irr::KEY_KEY_D))
-				//        nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+				if (IsKeyDown(KeyCode.KeyA))
+					nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+				else if (IsKeyDown(KeyCode.KeyD))
+					nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
 
 				node.Position = nodePosition;
 
@@ -118,6 +120,26 @@ namespace _04.Movement
 			}
 
 			device.Drop();
+		}
+
+		static Dictionary<KeyCode, bool> KeyIsDown = new Dictionary<KeyCode, bool>();
+
+		static bool device_OnEvent(Event e)
+		{
+			if (e.Type == EventType.Key)
+			{
+				if (KeyIsDown.ContainsKey(e.Key.Key))
+					KeyIsDown[e.Key.Key] = e.Key.PressedDown;
+				else
+					KeyIsDown.Add(e.Key.Key, e.Key.PressedDown);
+			}
+
+			return false;
+		}
+
+		static bool IsKeyDown(KeyCode keyCode)
+		{
+			return KeyIsDown.ContainsKey(keyCode) ? KeyIsDown[keyCode] : false;
 		}
 
 		static bool AskUserForDriver(out DriverType driverType)
