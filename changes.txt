@@ -1,4 +1,50 @@
 ============================
+Changes in 0.2 (29-May-2010)
+============================
+
+- Added and completly ported examples 03.CustomSceneNode and 04.Movement.
+
+- Added classes Event, GUIEvent, MouseEvent, KeyEvent, JoystickEvent, LogEvent, UserEvent. Added enums EventType, GUIEventType, MouseEventType, LogLevel. Added event IrrlichtDevice.OnEvent.
+
+- Added classes VideoModeList, VideoMode; enum DeviceType; IrrlichtDevice extended with methods IsDriverSupported, ClearSystemMessages, MaximizeWindow, MinimizeWindow, RestoreWindow and properties ColorFormat, Type, VideoModeList.
+
+- Added class GUIImage. Added method GUIEnvironment.AddImage.
+
+- Added class Timer. Added property IrrlichtDevice.Timer.
+
+- Added method SetFrameLoop and properties AnimationSpeed, CurrentFrame, EndFrame, Mesh, StartFrame, ReadOnlyMaterials to AnimatedMeshSceneNode.
+
+- Added methods CreateFlyCircleAnimator and CreateFlyStraightAnimator to SceneManager.
+
+- Added methods AddCubeSceneNode and AddSphereSceneNode to SceneManager.
+
+- Added overloading for VideoDriver.DrawVertexPrimitiveList() with 32bit indices.
+
+- Added classes AttributeExchangingObject, ReferenceCounted. All inherited classes from ReferenceCounted got Drop(), Grab(), ReferenceCount and DebugName.
+
+- Added enum PrimitiveType; added VideoDriver.DrawVertexPrimitiveList(), SceneManager.CreateRotationAnimator().
+
+- SceneNode extended, added events OnGetBoundingBox, OnGetMaterialCount, OnGetMaterial, OnRegisterSceneNode.
+
+- Added classes Image, SceneNodeAnimator, MeshBuffer; enums DebugSceneType, RenderTarget. VideoDriver extended with methods AddRenderTargetTexture, AddTexture, CreateOcclusionQuery, GetOcclusionQueryResult, MakeColorKeyTexture, MakeNormalMapTexture, RemoveAllHardwareBuffers, RemoveAllOcclusionQueries, RemoveAllTextures, RemoveHardwareBuffer, RemoveOcclusionQuery, RemoveTexture, RunAllOcclusionQueries, RunOcclusionQuery, SetRenderTarget, UpdateAllOcclusionQueries, UpdateOcclusionQuery. SceneNode extended with methods AddAnimator, GetMaterial, RemoveAnimator, RemoveAnimators, SetMaterialType; properties AbsoluteTransformation, AnimatorList, BoundingBox, BoundingBoxTransformed, ChildList, DebugDataVisible, MaterialCount, RelativeTransformation.
+
+- Added enums ColorFormat, ExposedVideoData, TransformationState, VideoDriverFeature; VideoDriver class extended with methods CheckDriverReset, DisableFeature, GetExposedVideoData, GetTextureByIndex, GetTransform, QueryFeature, RenameTexture, SetMaterial, SetTransform; property TextureCount.
+
+- Added enums SceneNodeRenderPass, SceneNodeAnimatorType; SceneManager extended with methods: Clear, GetSceneNodeFromId, GetSceneNodeFromName, GetSceneNodeFromType, GetAnimatorTypeName, GetSceneNodeTypeName, RegisterNodeForRendering, SaveScene, LoadScene; properties: ActiveCamera, FileSystem, GUIEnvironment, SceneNodeRenderPass, ShadowColor, VideoDriver.
+
+- Added classes Matrix, Material; enums AntiAliasingMode, ColorMaterial, ColorPlane, MaterialType, ZBufferCompFunc.
+
+- Added Vertex3D class; VertexType enum.
+
+- Added AABBox3Df class.
+
+- Added protected constructor for SceneNode. Added SceneNode.OnRender event.
+
+- Added Dimension2Di class.
+
+- Added CursorControl.ReferenceRect property.
+
+============================
 Changes in 0.1 (19-May-2010)
 ============================
 
