@@ -283,6 +283,12 @@ String^ IrrlichtDevice::ToString()
 
 void IrrlichtDevice::deviceHasBeenCreated(IrrlichtDevice^ device)
 {
+	if (device == nullptr)
+	{
+		Console::WriteLine("Device creation failed.");
+		return;
+	}
+
 	core::stringw s = "Irrlicht Lime version ";
 	s += Lime::StringToStringW(Lime::Version);
 	device->m_IrrlichtDevice->getLogger()->log(s.c_str());
