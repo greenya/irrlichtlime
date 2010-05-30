@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.CustomSceneNode", "examp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Movement", "examples\04.Movement\04.Movement.csproj", "{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.UserInterface", "examples\05.UserInterface\05.UserInterface.csproj", "{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|Win32.ActiveCfg = Release|x86
 		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|x86.ActiveCfg = Release|x86
 		{3FB822C3-EE0F-4F0F-ABE7-92EA699573D5}.Release|x86.Build.0 = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|Win32.ActiveCfg = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|x86.ActiveCfg = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Debug|x86.Build.0 = Debug|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|Any CPU.ActiveCfg = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|Win32.ActiveCfg = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|x86.ActiveCfg = Release|x86
+		{0483DEB0-3901-4BAC-8AE1-87C77105EFE7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
