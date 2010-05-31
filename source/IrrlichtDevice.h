@@ -37,6 +37,7 @@ public:
 	!IrrlichtDevice();
 
 	void ClearSystemMessages();
+	void Close();
 	bool GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast);
 	void MaximizeWindow();
 	void MinimizeWindow();

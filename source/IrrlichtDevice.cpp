@@ -136,6 +136,11 @@ void IrrlichtDevice::ClearSystemMessages()
 	m_IrrlichtDevice->clearSystemMessages();
 }
 
+void IrrlichtDevice::Close()
+{
+	m_IrrlichtDevice->closeDevice();
+}
+
 bool IrrlichtDevice::GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast)
 {
 	float r, g, b, rb, rv;

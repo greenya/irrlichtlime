@@ -14,13 +14,10 @@ namespace _05.UserInterface
 	{
 		static IrrlichtDevice device;
 
-		enum guiID
-		{
-			ButtonQuit = 101,
-			ButtonWindowNew,
-			ButtonFileOpen,
-			ScrollbarTransparency
-		}
+		const int GUI_ID_ButtonQuit = 101;
+		const int GUI_ID_ButtonWindowNew = 102;
+		const int GUI_ID_ButtonFileOpen = 103;
+		const int GUI_ID_ScrollbarTransparency = 104;
 
 		static void Main(string[] args)
 		{
@@ -38,12 +35,12 @@ namespace _05.UserInterface
 			VideoDriver driver = device.VideoDriver;
 			GUIEnvironment env = device.GUIEnvironment;
 
-			//IGUISkin* skin = env->getSkin();
-			//IGUIFont* font = env->getFont("../../media/fonthaettenschweiler.bmp");
-			//if (font)
-			//    skin->setFont(font);
+			GUISkin skin = env.Skin;
+			GUIFont font = env.GetFont("../media/fonthaettenschweiler.bmp");
+			if (font != null)
+				skin.SetFont(GUIDefaultFont.Default, font);
 
-			//skin->setFont(env->getBuiltInFont(), EGDF_TOOLTIP);
+			skin.SetFont(GUIDefaultFont.Tooltip, env.BuiltInFont);
 
 			//env->addButton(rect<s32>(10,240,110,240 + 32), 0, GUI_ID_QUIT_BUTTON,
 			//    L"Quit", L"Exits Program");
@@ -80,6 +77,65 @@ namespace _05.UserInterface
 
 		static bool device_OnEvent(Event e)
 		{
+			if (e.Type == EventType.GUI)
+			{
+				Console.WriteLine("GUI EVENT: {0}", e.GUI.Type);
+				/*
+				int id = e.GUI.Caller.ID;
+				GUIEnvironment env = device.GUIEnvironment;
+
+				switch (e.GUI.Type)
+				{
+					case GUIEventType.ScrollBarChanged:
+						if (id == GUI_ID_ScrollbarTransparency)
+						{
+							//s32 pos = ((IGUIScrollBar*)event.GUIEvent.Caller)->getPos();
+
+							//for (u32 i=0; i<EGDC_COUNT ; ++i)
+							//{
+							//    SColor col = env->getSkin()->getColor((EGUI_DEFAULT_COLOR)i);
+							//    col.setAlpha(pos);
+							//    env->getSkin()->setColor((EGUI_DEFAULT_COLOR)i, col);
+							//}
+						}
+						break;
+
+					case GUIEventType.ButtonClicked:
+						switch (id)
+						{
+							case GUI_ID_ButtonQuit:
+								device.Close();
+								return true;
+
+							case GUI_ID_ButtonWindowNew:
+								//Context.listbox->addItem(L"Window created");
+								//Context.counter += 30;
+								//if (Context.counter > 200)
+								//    Context.counter = 0;
+
+								//IGUIWindow* window = env->addWindow(
+								//    rect<s32>(100 + Context.counter, 100 + Context.counter, 300 + Context.counter, 200 + Context.counter),
+								//    false, // modal?
+								//    L"Test window");
+
+								//env->addStaticText(L"Please close me",
+								//    rect<s32>(35,35,140,50),
+								//    true, // border?
+								//    false, // wordwrap?
+								//    window);
+								return true;
+
+							case GUI_ID_ButtonFileOpen:
+								//Context.listbox->addItem(L"File open");
+								//env->addFileOpenDialog(L"Please choose a file.");
+								return true;
+
+							default:
+								return false;
+						}
+				}*/
+			}
+
 			return false;
 		}
 
