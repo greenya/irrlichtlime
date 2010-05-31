@@ -154,7 +154,7 @@ void GUIElement::ToolTipText::set(String^ value)
 
 String^ GUIElement::ToString()
 {
-	return String::Format("Type={0}; Text={1}", Type, Text);
+	return String::Format("ID={0}; Type={1}; Text={2}", ID, Type, Text);
 }
 
 } // end namespace GUI

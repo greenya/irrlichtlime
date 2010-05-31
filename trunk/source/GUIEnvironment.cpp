@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "GUIButton.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
 #include "GUIFont.h"
@@ -20,6 +21,63 @@ GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
 {
 	LIME_ASSERT(guiEnvironment != nullptr);
 	m_GUIEnvironment = guiEnvironment;
+}
+
+GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		Lime::StringToStringW(text).c_str(),
+		Lime::StringToStringW(tooltiptext).c_str());
+
+	return LIME_SAFEWRAP(GUIButton, b);
+}
+
+GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		Lime::StringToStringW(text).c_str());
+
+	return LIME_SAFEWRAP(GUIButton, b);
+}
+
+GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return LIME_SAFEWRAP(GUIButton, b);
+}
+
+GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return LIME_SAFEWRAP(GUIButton, b);
+}
+
+GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(*rectangle->m_NativeValue);
+	return LIME_SAFEWRAP(GUIButton, b);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)

@@ -436,6 +436,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIButton.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIButton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIButtonState.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIDefaultColor.h"
 				>
 			</File>

@@ -11,6 +11,7 @@ namespace IrrlichtLime {
 namespace Video { ref class Texture; }
 namespace GUI {
 
+ref class GUIButton;
 ref class GUIElement;
 ref class GUIFont;
 ref class GUIImage;
@@ -20,6 +21,12 @@ ref class GUIStaticText;
 public ref class GUIEnvironment : ReferenceCounted
 {
 public:
+
+	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext);
+	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
+	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
+	GUIButton^ AddButton(Recti^ rectangle);
 
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id);
