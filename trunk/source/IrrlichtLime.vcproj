@@ -432,6 +432,30 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIAlignment.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIDefaultColor.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIDefaultFont.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIDefaultIcon.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIDefaultSize.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIDefaultText.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIElement.cpp"
 				>
 			</File>
@@ -456,11 +480,43 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIFont.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIFont.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIFontType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIImage.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\GUIImage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISkin.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISkin.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISkinType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISpriteBank.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISpriteBank.h"
 				>
 			</File>
 			<File

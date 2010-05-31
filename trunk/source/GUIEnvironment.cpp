@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
+#include "GUIFont.h"
 #include "GUIImage.h"
+#include "GUISkin.h"
 #include "GUIStaticText.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
@@ -171,6 +173,33 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 void GUIEnvironment::DrawAll()
 {
 	m_GUIEnvironment->drawAll();
+}
+
+GUIFont^ GUIEnvironment::GetFont(String^ filename)
+{
+	gui::IGUIFont* f = m_GUIEnvironment->getFont(Lime::StringToPath(filename));
+	return LIME_SAFEWRAP(GUIFont, f);
+}
+
+GUIFont^ GUIEnvironment::BuiltInFont::get()
+{
+	return LIME_SAFEWRAP(GUIFont, m_GUIEnvironment->getBuiltInFont());
+}
+
+GUISkin^ GUIEnvironment::Skin::get()
+{
+	gui::IGUISkin* s = m_GUIEnvironment->getSkin();
+	return LIME_SAFEWRAP(GUISkin, s);
+}
+
+void GUIEnvironment::Skin::set(GUISkin^ value)
+{
+	m_GUIEnvironment->setSkin(LIME_SAFEREF(value, m_GUISkin));
+}
+
+String^ GUIEnvironment::ToString()
+{
+	return String::Format("gui environment...");
 }
 
 } // end namespace GUI

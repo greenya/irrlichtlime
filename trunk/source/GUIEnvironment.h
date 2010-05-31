@@ -12,7 +12,9 @@ namespace Video { ref class Texture; }
 namespace GUI {
 
 ref class GUIElement;
+ref class GUIFont;
 ref class GUIImage;
+ref class GUISkin;
 ref class GUIStaticText;
 
 public ref class GUIEnvironment : ReferenceCounted
@@ -33,6 +35,13 @@ public:
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
 
 	void DrawAll();
+
+	GUIFont^ GetFont(String^ filename);
+
+	property GUIFont^ BuiltInFont { GUIFont^ get(); }
+	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
+
+	virtual String^ ToString() override;
 
 internal:
 
