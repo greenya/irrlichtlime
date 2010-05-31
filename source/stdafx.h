@@ -19,6 +19,7 @@
 #include "EventType.h"
 #include "FileArchiveType.h"
 #include "GUIAlignment.h"
+#include "GUIButtonState.h"
 #include "GUIDefaultColor.h"
 #include "GUIDefaultFont.h"
 #include "GUIDefaultIcon.h"
