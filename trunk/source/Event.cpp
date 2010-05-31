@@ -14,6 +14,23 @@ Event::Event(const SEvent& other)
 Event::GUIEvent Event::GUI::get()
 {
 	LIME_ASSERT(Type == EventType::GUI);
+
+	// patch for currently present bug (http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669) {
+	switch (m_NativeValue->GUIEvent.EventType)
+	{
+	case IrrlichtLime::GUI::GUIEventType::ElementMouseLeft :
+	case IrrlichtLime::GUI::GUIEventType::TableHeaderChanged :
+	case IrrlichtLime::GUI::GUIEventType::TableChanged :
+	case IrrlichtLime::GUI::GUIEventType::TableSelectedAgain :
+	case IrrlichtLime::GUI::GUIEventType::TreeviewNodeDeselect :
+	case IrrlichtLime::GUI::GUIEventType::TreeviewNodeSelect :
+	case IrrlichtLime::GUI::GUIEventType::TreeviewNodeExpand :
+	case IrrlichtLime::GUI::GUIEventType::TreeviewNodeCollapse :
+		m_NativeValue->GUIEvent.Element = nullptr;
+		break;
+	}
+	// }
+
 	return Event::GUIEvent(m_NativeValue->GUIEvent);
 }
 

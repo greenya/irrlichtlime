@@ -41,7 +41,7 @@ public enum class GUIEventType
 	TreeviewNodeDeselect = EGET_TREEVIEW_NODE_DESELECT,
 	TreeviewNodeSelect = EGET_TREEVIEW_NODE_SELECT,
 	TreeviewNodeExpand = EGET_TREEVIEW_NODE_EXPAND,
-	TreeviewNodeCollaps = EGET_TREEVIEW_NODE_COLLAPS
+	TreeviewNodeCollapse = EGET_TREEVIEW_NODE_COLLAPS
 };
 
 } // end namespace GUI
