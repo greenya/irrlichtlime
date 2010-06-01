@@ -4,6 +4,7 @@
 #include "GUIEnvironment.h"
 #include "GUIFont.h"
 #include "GUIImage.h"
+#include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
 #include "ReferenceCounted.h"
@@ -143,6 +144,42 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
 		*pos->m_NativeValue);
 
 	return LIME_SAFEWRAP(GUIImage, i);
+}
+
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
+		horizontal,
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return LIME_SAFEWRAP(GUIScrollBar, s);
+}
+
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
+		horizontal,
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return LIME_SAFEWRAP(GUIScrollBar, s);
+}
+
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
+		horizontal,
+		*rectangle->m_NativeValue);
+
+	return LIME_SAFEWRAP(GUIScrollBar, s);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
