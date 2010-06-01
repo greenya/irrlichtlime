@@ -15,6 +15,7 @@ ref class GUIButton;
 ref class GUIElement;
 ref class GUIFont;
 ref class GUIImage;
+ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
 
@@ -33,6 +34,10 @@ public:
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos);
+
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle);
 
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id, bool fillBackground);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id);
