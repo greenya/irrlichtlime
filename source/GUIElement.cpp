@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "AttributeExchangingObject.h"
+#include "GUIButton.h"
 #include "GUIElement.h"
+#include "GUIImage.h"
+#include "GUIScrollBar.h"
+#include "GUIStaticText.h"
 
 using namespace irr;
 using namespace System;
@@ -8,6 +12,43 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace GUI {
+
+GUIElement^ GUIElement::Wrap(gui::IGUIElement* guiElement)
+{
+	if (guiElement == nullptr)
+		return nullptr;
+
+	switch (guiElement->getType())
+	{
+	case gui::EGUIET_BUTTON: return gcnew GUIButton((gui::IGUIButton*)guiElement);
+	//case gui::EGUIET_CHECK_BOX: return ...
+	//case gui::EGUIET_COMBO_BOX: return ...
+	//case gui::EGUIET_CONTEXT_MENU: return ...
+	//case gui::EGUIET_MENU: return ...
+	//case gui::EGUIET_EDIT_BOX: return ...
+	//case gui::EGUIET_FILE_OPEN_DIALOG: return ...
+	//case gui::EGUIET_COLOR_SELECT_DIALOG: return ...
+	//case gui::EGUIET_IN_OUT_FADER: return ...
+	case gui::EGUIET_IMAGE: return gcnew GUIImage((gui::IGUIImage*)guiElement);
+	//case gui::EGUIET_LIST_BOX: return ...
+	//case gui::EGUIET_MESH_VIEWER: return ...
+	//case gui::EGUIET_MESSAGE_BOX: return ...
+	//case gui::EGUIET_MODAL_SCREEN: return ...
+	case gui::EGUIET_SCROLL_BAR: return gcnew GUIScrollBar((gui::IGUIScrollBar*)guiElement);
+	//case gui::EGUIET_SPIN_BOX: return ...
+	case gui::EGUIET_STATIC_TEXT: return gcnew GUIStaticText((gui::IGUIStaticText*)guiElement);
+	//case gui::EGUIET_TAB: return ...
+	//case gui::EGUIET_TAB_CONTROL: return ...
+	//case gui::EGUIET_TABLE: return ...
+	//case gui::EGUIET_TOOL_BAR: return ...
+	//case gui::EGUIET_TREE_VIEW: return ...
+	//case gui::EGUIET_WINDOW: return ...
+	case gui::EGUIET_ELEMENT: return gcnew GUIElement(guiElement);
+	}
+
+	LIME_ASSERT2(false, "GUI element type is not supported");
+	return nullptr;
+}
 
 GUIElement::GUIElement(gui::IGUIElement* guiElement)
 	: IO::AttributeExchangingObject(guiElement)
@@ -19,20 +60,20 @@ GUIElement::GUIElement(gui::IGUIElement* guiElement)
 GUIElement^ GUIElement::GetElementFromID(int id, bool searchchildren)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id, searchchildren);
-	return LIME_SAFEWRAP(GUIElement, e);
+	return Wrap(e);
 }
 
 GUIElement^ GUIElement::GetElementFromID(int id)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id);
-	return LIME_SAFEWRAP(GUIElement, e);
+	return Wrap(e);
 }
 
 GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 {
 	LIME_ASSERT(point != nullptr);
 	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*point->m_NativeValue);
-	return LIME_SAFEWRAP(GUIElement, e);
+	return Wrap(e);
 }
 
 bool GUIElement::IsMyChild(GUIElement^ child)

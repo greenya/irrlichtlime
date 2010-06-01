@@ -20,8 +20,8 @@ public:
 		IrrlichtLime::GUI::GUIEventType Type;
 	internal:
 		GUIEvent(const SEvent::SGUIEvent& v)
-			: Caller(LIME_SAFEWRAP(IrrlichtLime::GUI::GUIElement, v.Caller))
-			, Element(LIME_SAFEWRAP(IrrlichtLime::GUI::GUIElement, v.Element))
+			: Caller(IrrlichtLime::GUI::GUIElement::Wrap(v.Caller))
+			, Element(IrrlichtLime::GUI::GUIElement::Wrap(v.Element))
 			, Type((IrrlichtLime::GUI::GUIEventType)v.EventType) {}
 	};
 
