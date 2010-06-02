@@ -528,6 +528,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIListBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIListBox.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIListBoxColor.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIScrollBar.cpp"
 				>
 			</File>

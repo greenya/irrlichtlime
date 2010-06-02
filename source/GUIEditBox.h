@@ -22,9 +22,6 @@ public:
 	void SetPasswordChar(Char x);
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
-	//property Video::Coloru^ OverrideColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
-	//property bool OverrideColorEnabled { bool get(); void set(bool value); }
-
 	property bool AutoScroll { bool get(); void set(bool value); }
 	property unsigned int MaxLength { unsigned int get(); void set(unsigned int value); }
 	property bool MultiLine { bool get(); void set(bool value); }
