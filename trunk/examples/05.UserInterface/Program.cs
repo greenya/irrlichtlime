@@ -13,6 +13,8 @@ namespace _05.UserInterface
 	class Program
 	{
 		static IrrlichtDevice device;
+		static GUIListBox listbox;
+		static int winPosCounter = 0;
 
 		const int GUI_ID_ButtonQuit = 101;
 		const int GUI_ID_ButtonWindowNew = 102;
@@ -52,8 +54,8 @@ namespace _05.UserInterface
 			scrollbar.Position = (int)env.Skin.GetColor(GUIDefaultColor.WindowBackground).Alpha;
 
 			GUIStaticText trq = env.AddStaticText("Logging ListBox:", new Recti(50,110,250,130), true);
-			//IGUIListBox * listbox = env->addListBox(rect<s32>(50, 140, 250, 210));
-			//env->addEditBox(L"Editable Text", rect<s32>(350, 80, 550, 100));
+			listbox = env.AddListBox(new Recti(50, 140, 250, 210));
+			env.AddEditBox("Editable Text", new Recti(350, 80, 550, 100));
 
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 
@@ -100,26 +102,19 @@ namespace _05.UserInterface
 								return true;
 
 							case GUI_ID_ButtonWindowNew:
-								//Context.listbox->addItem(L"Window created");
-								//Context.counter += 30;
-								//if (Context.counter > 200)
-								//    Context.counter = 0;
+								listbox.AddItem("Window created");
+								winPosCounter += 30;
+								if (winPosCounter > 200)
+									winPosCounter = 0;
 
-								//IGUIWindow* window = env->addWindow(
-								//    rect<s32>(100 + Context.counter, 100 + Context.counter, 300 + Context.counter, 200 + Context.counter),
-								//    false, // modal?
-								//    L"Test window");
-
-								//env->addStaticText(L"Please close me",
-								//    rect<s32>(35,35,140,50),
-								//    true, // border?
-								//    false, // wordwrap?
-								//    window);
+								int c = winPosCounter;
+								GUIWindow window = env.AddWindow(new Recti(100 + c, 100 + c, 300 + c, 200 + c), false, "Test window");
+								env.AddStaticText("Please close me", new Recti(35, 35, 140, 50), true, false, window);
 								return true;
 
 							case GUI_ID_ButtonFileOpen:
-								//Context.listbox->addItem(L"File open");
-								//env->addFileOpenDialog(L"Please choose a file.");
+								listbox.AddItem("File open");
+								env.AddFileOpenDialog("Choose a file");
 								return true;
 
 							default:
