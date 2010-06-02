@@ -13,6 +13,7 @@ namespace GUI {
 
 ref class GUIButton;
 ref class GUIElement;
+ref class GUIFileOpenDialog;
 ref class GUIFont;
 ref class GUIImage;
 ref class GUIScrollBar;
@@ -29,6 +30,12 @@ public:
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
 	GUIButton^ AddButton(Recti^ rectangle);
+
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id);
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent);
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal);
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title);
+	GUIFileOpenDialog^ AddFileOpenDialog();
 
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id);

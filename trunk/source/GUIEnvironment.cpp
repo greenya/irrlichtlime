@@ -2,6 +2,7 @@
 #include "GUIButton.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
+#include "GUIFileOpenDialog.h"
 #include "GUIFont.h"
 #include "GUIImage.h"
 #include "GUIScrollBar.h"
@@ -86,8 +87,55 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent)
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 {
 	LIME_ASSERT(rectangle != nullptr);
-	gui::IGUIButton* b = m_GUIEnvironment->addButton(*rectangle->m_NativeValue);
+
+	gui::IGUIButton* b = m_GUIEnvironment->addButton(
+		*rectangle->m_NativeValue);
+
 	return GUIButton::Wrap(b);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal);
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str());
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog()
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog();
+	return GUIFileOpenDialog::Wrap(f);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
