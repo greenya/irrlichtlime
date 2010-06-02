@@ -23,9 +23,9 @@ public:
 
 	property Recti^ AbsoluteClippingRect { Recti^ get(); }
 	property Recti^ AbsolutePosition { Recti^ get(); }
+	property bool Clipped { bool get(); void set(bool value); }
 	property bool Enabled { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
-	property bool NotClipped { bool get(); void set(bool value); }
 	property Recti^ RelativePosition { Recti^ get(); void set(Recti^ value); }
 	property int TabOrder { int get(); void set(int value); }
 	property bool TabStop { bool get(); void set(bool value); }
