@@ -12,6 +12,7 @@ namespace Video { ref class Texture; }
 namespace GUI {
 
 ref class GUIButton;
+ref class GUIEditBox;
 ref class GUIElement;
 ref class GUIFileOpenDialog;
 ref class GUIFont;
@@ -30,6 +31,11 @@ public:
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
 	GUIButton^ AddButton(Recti^ rectangle);
+
+	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id);
+	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent);
+	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border);
+	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle);
 
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent);
