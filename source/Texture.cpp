@@ -9,11 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-Texture::Texture(video::ITexture* texture)
-	: ReferenceCounted(texture)
+Texture^ Texture::Wrap(video::ITexture* ref)
 {
-	LIME_ASSERT(texture != nullptr);
-	m_Texture = texture;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew Texture(ref);
+}
+
+Texture::Texture(video::ITexture* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_Texture = ref;
 }
 
 } // end namespace Video

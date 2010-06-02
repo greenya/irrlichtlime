@@ -8,11 +8,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Scene {
 
-CameraSceneNode::CameraSceneNode(scene::ICameraSceneNode* cameraSceneNode)
-	: SceneNode(cameraSceneNode)
+CameraSceneNode^ CameraSceneNode::Wrap(scene::ICameraSceneNode* ref)
 {
-	LIME_ASSERT(cameraSceneNode != nullptr);
-	m_CameraSceneNode = cameraSceneNode;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew CameraSceneNode(ref);
+}
+
+CameraSceneNode::CameraSceneNode(scene::ICameraSceneNode* ref)
+	: SceneNode(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_CameraSceneNode = ref;
 }
 
 } // end namespace Scene

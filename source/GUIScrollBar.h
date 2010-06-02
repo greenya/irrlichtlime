@@ -21,7 +21,8 @@ public:
 
 internal:
 
-	GUIScrollBar(gui::IGUIScrollBar* guiScrollBar);
+	static GUIScrollBar^ Wrap(gui::IGUIScrollBar* ref);
+	GUIScrollBar(gui::IGUIScrollBar* ref);
 
 	gui::IGUIScrollBar* m_GUIScrollBar;
 };

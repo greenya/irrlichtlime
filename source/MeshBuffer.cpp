@@ -8,11 +8,11 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-MeshBuffer::MeshBuffer(scene::IMeshBuffer* meshBuffer)
-	: ReferenceCounted(meshBuffer)
+MeshBuffer::MeshBuffer(scene::IMeshBuffer* ref)
+	: ReferenceCounted(ref)
 {
-	LIME_ASSERT(meshBuffer != nullptr);
-	m_MeshBuffer = meshBuffer;
+	LIME_ASSERT(ref != nullptr);
+	m_MeshBuffer = ref;
 }
 
 } // end namespace Scene

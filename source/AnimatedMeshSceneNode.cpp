@@ -8,11 +8,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-AnimatedMeshSceneNode::AnimatedMeshSceneNode(scene::IAnimatedMeshSceneNode* animatedMeshSceneNode)
-	: SceneNode(animatedMeshSceneNode)
+AnimatedMeshSceneNode^ AnimatedMeshSceneNode::Wrap(scene::IAnimatedMeshSceneNode* ref)
 {
-	LIME_ASSERT(animatedMeshSceneNode != nullptr);
-	m_AnimatedMeshSceneNode = animatedMeshSceneNode;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew AnimatedMeshSceneNode(ref);
+}
+
+AnimatedMeshSceneNode::AnimatedMeshSceneNode(scene::IAnimatedMeshSceneNode* ref)
+	: SceneNode(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_AnimatedMeshSceneNode = ref;
 }
 
 bool AnimatedMeshSceneNode::SetFrameLoop(int begin, int end)
@@ -58,7 +66,7 @@ int AnimatedMeshSceneNode::EndFrame::get()
 AnimatedMesh^ AnimatedMeshSceneNode::Mesh::get()
 {
 	scene::IAnimatedMesh* m = m_AnimatedMeshSceneNode->getMesh();
-	return LIME_SAFEWRAP(AnimatedMesh, m);
+	return AnimatedMesh::Wrap(m);
 }
 
 void AnimatedMeshSceneNode::Mesh::set(AnimatedMesh^ value)

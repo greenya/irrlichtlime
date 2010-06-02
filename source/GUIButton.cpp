@@ -11,11 +11,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIButton::GUIButton(gui::IGUIButton* guiButton)
-	: GUIElement(guiButton)
+GUIButton^ GUIButton::Wrap(gui::IGUIButton* ref)
 {
-	LIME_ASSERT(guiButton != nullptr);
-	m_GUIButton = guiButton;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIButton(ref);
+}
+
+GUIButton::GUIButton(gui::IGUIButton* ref)
+	: GUIElement(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIButton = ref;
 }
 
 void GUIButton::SetNormalImage(Video::Texture^ image, Recti^ pos)

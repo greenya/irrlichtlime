@@ -15,52 +15,60 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-VideoDriver::VideoDriver(video::IVideoDriver* videoDriver)
-	: ReferenceCounted(videoDriver)
+VideoDriver^ VideoDriver::Wrap(video::IVideoDriver* ref)
 {
-	LIME_ASSERT(videoDriver != nullptr);
-	m_VideoDriver = videoDriver;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew VideoDriver(ref);
+}
+
+VideoDriver::VideoDriver(video::IVideoDriver* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_VideoDriver = ref;
 }
 
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name, ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
 	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name)
 {
 	LIME_ASSERT(size != nullptr);
 	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name));
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size)
 {
 	LIME_ASSERT(size != nullptr);
 	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue);
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name, ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
 	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name)
 {
 	LIME_ASSERT(size != nullptr);
 	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name));
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
 {
 	video::ITexture* t = m_VideoDriver->addTexture(Lime::StringToPath(name), LIME_SAFEREF(image, m_Image));
-	return LIME_SAFEWRAP(Texture, t);
+	return Texture::Wrap(t);
 }
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect)
@@ -214,12 +222,14 @@ unsigned int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
 
 Texture^ VideoDriver::GetTexture(String^ filename)
 {
-	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTexture(Lime::StringToPath(filename)));
+	video::ITexture* t = m_VideoDriver->getTexture(Lime::StringToPath(filename));
+	return Texture::Wrap(t);
 }
 
 Texture^ VideoDriver::GetTextureByIndex(unsigned int index)
 {
-	return LIME_SAFEWRAP(Texture, m_VideoDriver->getTextureByIndex(index));
+	video::ITexture* t = m_VideoDriver->getTextureByIndex(index);
+	return Texture::Wrap(t);
 }
 
 Matrix4f^ VideoDriver::GetTransform(TransformationState state)
@@ -472,7 +482,7 @@ String^ VideoDriver::VendorInfo::get()
 
 String^ VideoDriver::ToString()
 {
-	return Name;
+	return String::Format("VideoDriver: {0}; ScreenSize={1}", Name, ScreenSize);
 }
 
 unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType)

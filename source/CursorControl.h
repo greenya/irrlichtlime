@@ -24,7 +24,8 @@ public:
 
 internal:
 
-	CursorControl(gui::ICursorControl* cursorControl);
+	static CursorControl^ Wrap(gui::ICursorControl* ref);
+	CursorControl(gui::ICursorControl* ref);
 
 	gui::ICursorControl* m_CursorControl;
 };

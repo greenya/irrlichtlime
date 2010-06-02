@@ -36,7 +36,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("Width={0}; Height={1}", Width, Height);
+		return String::Format("{0}x{1}", Width, Height);
 	}
 
 internal:
@@ -75,7 +75,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("Width={0}; Height={1}", Width, Height);
+		return String::Format("{0}x{1}", Width, Height);
 	}
 
 internal:

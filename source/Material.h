@@ -23,7 +23,7 @@ public:
 	void SetTexture(int level, Texture^ tex);
 	void SetTextureMatrix(int level, Matrix4f^ mat);
 
-	property Video::MaterialType MaterialType { Video::MaterialType get(); void set(Video::MaterialType value); }
+	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
 	property Coloru^ AmbientColor { Coloru^ get(); void set(Coloru^ value); }
 	property Coloru^ DiffuseColor { Coloru^ get(); void set(Coloru^ value); }
 	property Coloru^ EmissiveColor { Coloru^ get(); void set(Coloru^ value); }

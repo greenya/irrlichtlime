@@ -75,7 +75,8 @@ public:
 
 internal:
 
-	GUISkin(gui::IGUISkin* guiSkin);
+	static GUISkin^ Wrap(gui::IGUISkin* ref);
+	GUISkin(gui::IGUISkin* ref);
 
 	gui::IGUISkin* m_GUISkin;
 };

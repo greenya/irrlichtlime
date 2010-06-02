@@ -43,7 +43,8 @@ public:
 
 internal:
 
-	GUIButton(gui::IGUIButton* guiButton);
+	static GUIButton^ Wrap(gui::IGUIButton* ref);
+	GUIButton(gui::IGUIButton* ref);
 
 	gui::IGUIButton* m_GUIButton;
 };

@@ -9,11 +9,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIStaticText::GUIStaticText(gui::IGUIStaticText* guiStaticText)
-	: GUIElement(guiStaticText)
+GUIStaticText^ GUIStaticText::Wrap(gui::IGUIStaticText* ref)
 {
-	LIME_ASSERT(guiStaticText != nullptr);
-	m_GUIStaticText = guiStaticText;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIStaticText(ref);
+}
+
+GUIStaticText::GUIStaticText(gui::IGUIStaticText* ref)
+	: GUIElement(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIStaticText = ref;
 }
 
 void GUIStaticText::SetBackgroundColor(Video::Coloru^ color)
@@ -60,7 +68,7 @@ void GUIStaticText::OverrideColorEnabled::set(bool value)
 
 GUIFont^ GUIStaticText::OverrideFont::get()
 {
-	return LIME_SAFEWRAP(GUIFont, m_GUIStaticText->getOverrideFont());
+	return GUIFont::Wrap(m_GUIStaticText->getOverrideFont());
 }
 
 void GUIStaticText::OverrideFont::set(GUIFont^ value)

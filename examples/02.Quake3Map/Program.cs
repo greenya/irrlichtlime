@@ -18,7 +18,7 @@ namespace _02.Quake3Map
 			DriverType driverType;
 
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL 1.5\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
+						" (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
 						" (d) Burning's Software Renderer\n (e) Software Renderer\n" +
 						" (f) NullDevice\n (otherKey) exit\n\n");
 

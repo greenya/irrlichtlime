@@ -15,7 +15,6 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #define LIME_ASSERT2(condition, details)
 #endif
 
-#define LIME_SAFEWRAP(managedType, nativeRef) (nativeRef == nullptr ? nullptr : gcnew managedType(nativeRef))
 #define LIME_SAFEREF(object, member) (object == nullptr ? nullptr : object->member)
 
 namespace IrrlichtLime {

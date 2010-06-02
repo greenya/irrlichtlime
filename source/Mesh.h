@@ -15,7 +15,8 @@ public:
 
 internal:
 
-	Mesh(scene::IMesh* mesh);
+	static Mesh^ Wrap(scene::IMesh* ref);
+	Mesh(scene::IMesh* ref);
 
 	scene::IMesh* m_Mesh;
 };

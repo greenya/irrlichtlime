@@ -9,11 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-VideoModeList::VideoModeList(video::IVideoModeList* videoModeList)
-	: ReferenceCounted(videoModeList)
+VideoModeList^ VideoModeList::Wrap(video::IVideoModeList* ref)
 {
-	LIME_ASSERT(videoModeList != nullptr);
-	m_VideoModeList = videoModeList;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew VideoModeList(ref);
+}
+
+VideoModeList::VideoModeList(video::IVideoModeList* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_VideoModeList = ref;
 }
 
 Dimension2Du^ VideoModeList::GetResolution(Dimension2Du^ minSize, Dimension2Du^ maxSize)
@@ -40,7 +48,7 @@ List<VideoMode>^ VideoModeList::ModeList::get()
 
 String^ VideoModeList::ToString()
 {
-	return String::Format("Desktop={0}", Desktop);
+	return String::Format("VideoModeList: Desktop={0}", Desktop);
 }
 
 } // end namespace Video

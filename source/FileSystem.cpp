@@ -9,11 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO {
 
-FileSystem::FileSystem(io::IFileSystem* fileSystem)
-	: ReferenceCounted(fileSystem)
+FileSystem^ FileSystem::Wrap(io::IFileSystem* ref)
 {
-	LIME_ASSERT(fileSystem != nullptr);
-	m_FileSystem = fileSystem;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew FileSystem(ref);
+}
+
+FileSystem::FileSystem(io::IFileSystem* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_FileSystem = ref;
 }
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
@@ -104,6 +112,11 @@ unsigned int FileSystem::FileArchiveCount::get()
 String^ FileSystem::WorkingDirectory::get()
 {
 	return gcnew String(m_FileSystem->getWorkingDirectory().c_str());
+}
+
+String^ FileSystem::ToString()
+{
+	return String::Format("FileSystem: {0}", WorkingDirectory);
 }
 
 } // end namespace IO

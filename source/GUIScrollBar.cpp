@@ -8,11 +8,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIScrollBar::GUIScrollBar(gui::IGUIScrollBar* guiScrollBar)
-	: GUIElement(guiScrollBar)
+GUIScrollBar^ GUIScrollBar::Wrap(gui::IGUIScrollBar* ref)
 {
-	LIME_ASSERT(guiScrollBar != nullptr);
-	m_GUIScrollBar = guiScrollBar;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIScrollBar(ref);
+}
+
+GUIScrollBar::GUIScrollBar(gui::IGUIScrollBar* ref)
+	: GUIElement(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIScrollBar = ref;
 }
 
 int GUIScrollBar::LargeStep::get()

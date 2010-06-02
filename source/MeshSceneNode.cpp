@@ -8,16 +8,24 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-MeshSceneNode::MeshSceneNode(scene::IMeshSceneNode* meshSceneNode)
-	: SceneNode(meshSceneNode)
+MeshSceneNode^ MeshSceneNode::Wrap(scene::IMeshSceneNode* ref)
 {
-	LIME_ASSERT(meshSceneNode != nullptr);
-	m_MeshSceneNode = meshSceneNode;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew MeshSceneNode(ref);
+}
+
+MeshSceneNode::MeshSceneNode(scene::IMeshSceneNode* ref)
+	: SceneNode(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_MeshSceneNode = ref;
 }
 
 Scene::Mesh^ MeshSceneNode::Mesh::get()
 {
-	return LIME_SAFEWRAP(Scene::Mesh, m_MeshSceneNode->getMesh());
+	return Scene::Mesh::Wrap(m_MeshSceneNode->getMesh());
 }
 
 void MeshSceneNode::Mesh::set(Scene::Mesh^ value)

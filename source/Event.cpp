@@ -71,7 +71,7 @@ EventType Event::Type::get()
 
 String^ Event::ToString()
 {
-	return String::Format("Type={0}", Type);
+	return String::Format("Event: Type={0}", Type);
 }
 
 } // end namespace IrrlichtLime

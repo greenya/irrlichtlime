@@ -73,15 +73,12 @@ public:
 
 internal:
 
-	IrrlichtDevice(irr::IrrlichtDevice* irrlichtDevice);
+	static IrrlichtDevice^ Wrap(irr::IrrlichtDevice* ref);
+	IrrlichtDevice(irr::IrrlichtDevice* ref);
 	bool Event(IrrlichtLime::Event^ e);
 
 	irr::IrrlichtDevice* m_IrrlichtDevice;
 	EventReceiverInheritor* m_EventReceiverInheritor;
-
-private:
-
-	static void deviceHasBeenCreated(IrrlichtDevice^ device);
 };
 
 } // end namespace IrrlichtLime

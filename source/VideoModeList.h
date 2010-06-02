@@ -23,7 +23,8 @@ public:
 
 internal:
 
-	VideoModeList(video::IVideoModeList* videoModeList);
+	static VideoModeList^ Wrap(video::IVideoModeList* ref);
+	VideoModeList(video::IVideoModeList* ref);
 
 	video::IVideoModeList* m_VideoModeList;
 };

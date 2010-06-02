@@ -53,11 +53,10 @@ public:
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
 	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
 
-	virtual String^ ToString() override;
-
 internal:
 
-	GUIEnvironment(gui::IGUIEnvironment* guiEnvironment);
+	static GUIEnvironment^ Wrap(gui::IGUIEnvironment* ref);
+	GUIEnvironment(gui::IGUIEnvironment* ref);
 
 	gui::IGUIEnvironment* m_GUIEnvironment;
 };

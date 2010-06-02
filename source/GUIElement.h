@@ -38,8 +38,8 @@ public:
 
 internal:
 
-	static GUIElement^ Wrap(gui::IGUIElement* guiElement);
-	GUIElement(gui::IGUIElement* guiElement);
+	static GUIElement^ Wrap(gui::IGUIElement* ref);
+	GUIElement(gui::IGUIElement* ref);
 
 	gui::IGUIElement* m_GUIElement;
 };

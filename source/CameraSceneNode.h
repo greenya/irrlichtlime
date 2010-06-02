@@ -16,7 +16,8 @@ public:
 
 internal:
 
-	CameraSceneNode(scene::ICameraSceneNode* cameraSceneNode);
+	static CameraSceneNode^ Wrap(scene::ICameraSceneNode* ref);
+	CameraSceneNode(scene::ICameraSceneNode* ref);
 
 	scene::ICameraSceneNode* m_CameraSceneNode;
 };

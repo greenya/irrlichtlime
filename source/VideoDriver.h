@@ -113,7 +113,8 @@ public:
 
 internal:
 
-	VideoDriver(video::IVideoDriver* videoDriver);
+	static VideoDriver^ Wrap(video::IVideoDriver* ref);
+	VideoDriver(video::IVideoDriver* ref);
 
 	video::IVideoDriver* m_VideoDriver;
 

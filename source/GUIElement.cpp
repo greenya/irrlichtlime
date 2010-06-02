@@ -13,14 +13,14 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIElement^ GUIElement::Wrap(gui::IGUIElement* guiElement)
+GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 {
-	if (guiElement == nullptr)
+	if (ref == nullptr)
 		return nullptr;
 
-	switch (guiElement->getType())
+	switch (ref->getType())
 	{
-	case gui::EGUIET_BUTTON: return gcnew GUIButton((gui::IGUIButton*)guiElement);
+	case gui::EGUIET_BUTTON: return gcnew GUIButton((gui::IGUIButton*)ref);
 	//case gui::EGUIET_CHECK_BOX: return ...
 	//case gui::EGUIET_COMBO_BOX: return ...
 	//case gui::EGUIET_CONTEXT_MENU: return ...
@@ -29,32 +29,32 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* guiElement)
 	//case gui::EGUIET_FILE_OPEN_DIALOG: return ...
 	//case gui::EGUIET_COLOR_SELECT_DIALOG: return ...
 	//case gui::EGUIET_IN_OUT_FADER: return ...
-	case gui::EGUIET_IMAGE: return gcnew GUIImage((gui::IGUIImage*)guiElement);
+	case gui::EGUIET_IMAGE: return gcnew GUIImage((gui::IGUIImage*)ref);
 	//case gui::EGUIET_LIST_BOX: return ...
 	//case gui::EGUIET_MESH_VIEWER: return ...
 	//case gui::EGUIET_MESSAGE_BOX: return ...
 	//case gui::EGUIET_MODAL_SCREEN: return ...
-	case gui::EGUIET_SCROLL_BAR: return gcnew GUIScrollBar((gui::IGUIScrollBar*)guiElement);
+	case gui::EGUIET_SCROLL_BAR: return gcnew GUIScrollBar((gui::IGUIScrollBar*)ref);
 	//case gui::EGUIET_SPIN_BOX: return ...
-	case gui::EGUIET_STATIC_TEXT: return gcnew GUIStaticText((gui::IGUIStaticText*)guiElement);
+	case gui::EGUIET_STATIC_TEXT: return gcnew GUIStaticText((gui::IGUIStaticText*)ref);
 	//case gui::EGUIET_TAB: return ...
 	//case gui::EGUIET_TAB_CONTROL: return ...
 	//case gui::EGUIET_TABLE: return ...
 	//case gui::EGUIET_TOOL_BAR: return ...
 	//case gui::EGUIET_TREE_VIEW: return ...
 	//case gui::EGUIET_WINDOW: return ...
-	case gui::EGUIET_ELEMENT: return gcnew GUIElement(guiElement);
+	case gui::EGUIET_ELEMENT: return gcnew GUIElement(ref);
 	}
 
-	LIME_ASSERT2(false, "GUI element type is not supported");
+	LIME_ASSERT2(ref->getType() ? true : true, "GUI element type is not supported");
 	return nullptr;
 }
 
-GUIElement::GUIElement(gui::IGUIElement* guiElement)
-	: IO::AttributeExchangingObject(guiElement)
+GUIElement::GUIElement(gui::IGUIElement* ref)
+	: IO::AttributeExchangingObject(ref)
 {
-	LIME_ASSERT(guiElement != nullptr);
-	m_GUIElement = guiElement;
+	LIME_ASSERT(ref != nullptr);
+	m_GUIElement = ref;
 }
 
 GUIElement^ GUIElement::GetElementFromID(int id, bool searchchildren)
@@ -195,7 +195,7 @@ void GUIElement::ToolTipText::set(String^ value)
 
 String^ GUIElement::ToString()
 {
-	return String::Format("ID={0}; Type={1}; Text={2}", ID, Type, Text);
+	return String::Format("GUIElement: Type={0}; ID={1}; Text={2}", Type, ID, Text);
 }
 
 } // end namespace GUI

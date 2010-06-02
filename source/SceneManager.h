@@ -120,7 +120,8 @@ public:
 
 internal:
 
-	SceneManager(scene::ISceneManager* sceneManager);
+	static SceneManager^ Wrap(scene::ISceneManager* ref);
+	SceneManager(scene::ISceneManager* ref);
 
 	scene::ISceneManager* m_SceneManager;
 };
