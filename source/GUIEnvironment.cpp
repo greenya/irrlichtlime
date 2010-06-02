@@ -7,6 +7,7 @@
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
+#include "GUIWindow.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
 
@@ -271,6 +272,66 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIStaticText::Wrap(t);
+}
+
+GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
+		*rectangle->m_NativeValue,
+		modal,
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
+		*rectangle->m_NativeValue,
+		modal,
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
+		*rectangle->m_NativeValue,
+		modal,
+		Lime::StringToStringW(text).c_str());
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
+		*rectangle->m_NativeValue,
+		modal);
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
+		*rectangle->m_NativeValue);
+
+	return GUIWindow::Wrap(w);
 }
 
 void GUIEnvironment::DrawAll()

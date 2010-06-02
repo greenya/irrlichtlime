@@ -38,10 +38,10 @@ public enum class GUIEventType
 	TableChanged = EGET_TABLE_CHANGED,
 	TableHeaderChanged = EGET_TABLE_HEADER_CHANGED,
 	TableSelectedAgain = EGET_TABLE_SELECTED_AGAIN,
-	TreeviewNodeDeselect = EGET_TREEVIEW_NODE_DESELECT,
-	TreeviewNodeSelect = EGET_TREEVIEW_NODE_SELECT,
-	TreeviewNodeExpand = EGET_TREEVIEW_NODE_EXPAND,
-	TreeviewNodeCollapse = EGET_TREEVIEW_NODE_COLLAPS
+	TreeViewNodeDeselect = EGET_TREEVIEW_NODE_DESELECT,
+	TreeViewNodeSelect = EGET_TREEVIEW_NODE_SELECT,
+	TreeViewNodeExpand = EGET_TREEVIEW_NODE_EXPAND,
+	TreeViewNodeCollapse = EGET_TREEVIEW_NODE_COLLAPS
 };
 
 } // end namespace GUI
