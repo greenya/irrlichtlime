@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GUIButton.h"
+#include "GUIEditBox.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
 #include "GUIFileOpenDialog.h"
@@ -92,6 +93,56 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIButton::Wrap(b);
+}
+
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIEditBox::Wrap(b);
+}
+
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIEditBox::Wrap(b);
+}
+
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border);
+
+	return GUIEditBox::Wrap(b);
+}
+
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue);
+
+	return GUIEditBox::Wrap(b);
 }
 
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id)

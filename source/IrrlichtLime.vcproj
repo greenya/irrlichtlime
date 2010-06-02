@@ -468,6 +468,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIEditBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIEditBox.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIElement.cpp"
 				>
 			</File>
