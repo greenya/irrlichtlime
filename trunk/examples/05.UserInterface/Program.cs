@@ -42,21 +42,16 @@ namespace _05.UserInterface
 
 			skin.SetFont(GUIDefaultFont.Tooltip, env.BuiltInFont);
 
-			//env->addButton(rect<s32>(10,240,110,240 + 32), 0, GUI_ID_QUIT_BUTTON,
-			//    L"Quit", L"Exits Program");
-			//env->addButton(rect<s32>(10,280,110,280 + 32), 0, GUI_ID_NEW_WINDOW_BUTTON,
-			//    L"New Window", L"Launches a new Window");
-			//env->addButton(rect<s32>(10,320,110,320 + 32), 0, GUI_ID_FILE_OPEN_BUTTON,
-			//    L"File Open", L"Opens a file");
+			env.AddButton(new Recti(10, 240, 110, 240 + 32), null, GUI_ID_ButtonQuit, "Quit", "Exits Program");
+			env.AddButton(new Recti(10, 280, 110, 280 + 32), null, GUI_ID_ButtonWindowNew, "New Window", "Launches a new Window");
+			env.AddButton(new Recti(10, 320, 110, 320 + 32), null, GUI_ID_ButtonFileOpen, "File Open", "Opens a file");
 
 			env.AddStaticText("Transparent Control:", new Recti(150, 20, 350, 40), true);
-			//IGUIScrollBar* scrollbar = env->addScrollBar(true,
-			//            rect<s32>(150, 45, 350, 60), 0, GUI_ID_TRANSPARENCY_SCROLL_BAR);
-			//scrollbar->setMax(255);
+			GUIScrollBar scrollbar = env.AddScrollBar(true, new Recti(150, 45, 350, 60), null, GUI_ID_ScrollbarTransparency);
+			scrollbar.MaxValue = 255;
+			scrollbar.Position = (int)env.Skin.GetColor(GUIDefaultColor.WindowBackground).Alpha;
 
-			//scrollbar->setPos(env->getSkin()->getColor(EGDC_WINDOW).getAlpha());
-
-			env.AddStaticText("Logging ListBox:", new Recti(50,110,250,130), true);
+			GUIStaticText trq = env.AddStaticText("Logging ListBox:", new Recti(50,110,250,130), true);
 			//IGUIListBox * listbox = env->addListBox(rect<s32>(50, 140, 250, 210));
 			//env->addEditBox(L"Editable Text", rect<s32>(350, 80, 550, 100));
 
@@ -79,8 +74,6 @@ namespace _05.UserInterface
 		{
 			if (e.Type == EventType.GUI)
 			{
-				Console.WriteLine("GUI EVENT: {0}", e.GUI.Type);
-				/*
 				int id = e.GUI.Caller.ID;
 				GUIEnvironment env = device.GUIEnvironment;
 
@@ -89,14 +82,13 @@ namespace _05.UserInterface
 					case GUIEventType.ScrollBarChanged:
 						if (id == GUI_ID_ScrollbarTransparency)
 						{
-							//s32 pos = ((IGUIScrollBar*)event.GUIEvent.Caller)->getPos();
-
-							//for (u32 i=0; i<EGDC_COUNT ; ++i)
-							//{
-							//    SColor col = env->getSkin()->getColor((EGUI_DEFAULT_COLOR)i);
-							//    col.setAlpha(pos);
-							//    env->getSkin()->setColor((EGUI_DEFAULT_COLOR)i, col);
-							//}
+							int pos = ((GUIScrollBar)e.GUI.Caller).Position;
+							foreach (GUIDefaultColor which in Enum.GetValues(typeof(GUIDefaultColor)))
+							{
+								Coloru color = env.Skin.GetColor(which);
+								color.Alpha = (uint)pos;
+								env.Skin.SetColor(which, color);
+							}
 						}
 						break;
 
@@ -133,7 +125,7 @@ namespace _05.UserInterface
 							default:
 								return false;
 						}
-				}*/
+				}
 			}
 
 			return false;
@@ -144,7 +136,7 @@ namespace _05.UserInterface
 			driverType = DriverType.Null;
 
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL 1.5\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
+						" (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
 						" (d) Burning's Software Renderer\n (e) Software Renderer\n" +
 						" (f) NullDevice\n (otherKey) exit\n\n");
 

@@ -12,11 +12,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUISkin::GUISkin(gui::IGUISkin* guiSkin)
-	: IO::AttributeExchangingObject(guiSkin)
+GUISkin^ GUISkin::Wrap(gui::IGUISkin* ref)
 {
-	LIME_ASSERT(guiSkin != nullptr);
-	m_GUISkin = guiSkin;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUISkin(ref);
+}
+
+GUISkin::GUISkin(gui::IGUISkin* ref)
+	: IO::AttributeExchangingObject(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUISkin = ref;
 }
 
 void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Coloru^ color, Recti^ pos, Recti^ clip)
@@ -361,7 +369,7 @@ String^ GUISkin::GetText(GUIDefaultText text)
 
 GUIFont^ GUISkin::GetFont(GUIDefaultFont which)
 {
-	return LIME_SAFEWRAP(GUIFont, m_GUISkin->getFont((gui::EGUI_DEFAULT_FONT)which));
+	return GUIFont::Wrap(m_GUISkin->getFont((gui::EGUI_DEFAULT_FONT)which));
 }
 
 unsigned int GUISkin::GetIcon(GUIDefaultIcon icon)
@@ -402,7 +410,7 @@ void GUISkin::SetSize(GUIDefaultSize which, int size)
 
 GUISpriteBank^ GUISkin::SpriteBank::get()
 {
-	return LIME_SAFEWRAP(GUISpriteBank, m_GUISkin->getSpriteBank());
+	return GUISpriteBank::Wrap(m_GUISkin->getSpriteBank());
 }
 
 void GUISkin::SpriteBank::set(GUISpriteBank^ value)
@@ -417,7 +425,7 @@ GUISkinType GUISkin::Type::get()
 
 String^ GUISkin::ToString()
 {
-	return String::Format("Type={0}", Type);
+	return String::Format("GUISkin: Type={0}", Type);
 }
 
 } // end namespace GUI

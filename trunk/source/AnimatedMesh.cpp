@@ -7,31 +7,43 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-AnimatedMesh::AnimatedMesh(scene::IAnimatedMesh* animatedMesh)
-	: Mesh(animatedMesh)
+AnimatedMesh^ AnimatedMesh::Wrap(scene::IAnimatedMesh* ref)
 {
-	LIME_ASSERT(animatedMesh != nullptr);
-	m_AnimatedMesh = animatedMesh;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew AnimatedMesh(ref);
+}
+
+AnimatedMesh::AnimatedMesh(scene::IAnimatedMesh* ref)
+	: Mesh(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_AnimatedMesh = ref;
 }
 
 Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel, int startFrameLoop, int endFrameLoop)
 {
-	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop, endFrameLoop));
+	scene::IMesh* m = m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop, endFrameLoop);
+	return Mesh::Wrap(m);
 }
 
 Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel, int startFrameLoop)
 {
-	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop));
+	scene::IMesh* m = m_AnimatedMesh->getMesh(frame, detailLevel, startFrameLoop);
+	return Mesh::Wrap(m);
 }
 
 Mesh^ AnimatedMesh::GetMesh(int frame, int detailLevel)
 {
-	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame, detailLevel));
+	scene::IMesh* m = m_AnimatedMesh->getMesh(frame, detailLevel);
+	return Mesh::Wrap(m);
 }
 
 Mesh^ AnimatedMesh::GetMesh(int frame)
 {
-	return LIME_SAFEWRAP(Mesh, m_AnimatedMesh->getMesh(frame));
+	scene::IMesh* m = m_AnimatedMesh->getMesh(frame);
+	return Mesh::Wrap(m);
 }
 
 unsigned int AnimatedMesh::FrameCount::get()

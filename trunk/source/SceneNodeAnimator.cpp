@@ -9,11 +9,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* sceneNodeAnimator)
-	: IO::AttributeExchangingObject(sceneNodeAnimator)
+SceneNodeAnimator^ SceneNodeAnimator::Wrap(scene::ISceneNodeAnimator* ref)
 {
-	LIME_ASSERT(sceneNodeAnimator != nullptr);
-	m_SceneNodeAnimator = sceneNodeAnimator;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew SceneNodeAnimator(ref);
+}
+
+SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* ref)
+	: IO::AttributeExchangingObject(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_SceneNodeAnimator = ref;
 }
 
 void SceneNodeAnimator::AnimateNode(SceneNode^ node, unsigned int timeMs)
@@ -38,7 +46,7 @@ SceneNodeAnimatorType SceneNodeAnimator::Type::get()
 
 String^ SceneNodeAnimator::ToString()
 {
-	return String::Format("Type={0}", Type);
+	return String::Format("SceneNodeAnimator: Type={0}", Type);
 }
 
 } // end namespace Scene

@@ -20,7 +20,8 @@ public:
 
 internal:
 
-	MeshSceneNode(scene::IMeshSceneNode* meshSceneNode);
+	static MeshSceneNode^ Wrap(scene::IMeshSceneNode* ref);
+	MeshSceneNode(scene::IMeshSceneNode* ref);
 
 	scene::IMeshSceneNode* m_MeshSceneNode;
 };

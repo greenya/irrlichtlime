@@ -17,11 +17,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* guiEnvironment)
-	: ReferenceCounted(guiEnvironment)
+GUIEnvironment^ GUIEnvironment::Wrap(gui::IGUIEnvironment* ref)
 {
-	LIME_ASSERT(guiEnvironment != nullptr);
-	m_GUIEnvironment = guiEnvironment;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIEnvironment(ref);
+}
+
+GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIEnvironment = ref;
 }
 
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext)
@@ -35,7 +43,7 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 		Lime::StringToStringW(text).c_str(),
 		Lime::StringToStringW(tooltiptext).c_str());
 
-	return LIME_SAFEWRAP(GUIButton, b);
+	return GUIButton::Wrap(b);
 }
 
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
@@ -48,7 +56,7 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 		id,
 		Lime::StringToStringW(text).c_str());
 
-	return LIME_SAFEWRAP(GUIButton, b);
+	return GUIButton::Wrap(b);
 }
 
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id)
@@ -60,7 +68,7 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
-	return LIME_SAFEWRAP(GUIButton, b);
+	return GUIButton::Wrap(b);
 }
 
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent)
@@ -71,14 +79,14 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent)
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement));
 
-	return LIME_SAFEWRAP(GUIButton, b);
+	return GUIButton::Wrap(b);
 }
 
 GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 {
 	LIME_ASSERT(rectangle != nullptr);
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(*rectangle->m_NativeValue);
-	return LIME_SAFEWRAP(GUIButton, b);
+	return GUIButton::Wrap(b);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
@@ -93,7 +101,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 		id,
 		Lime::StringToStringW(text).c_str());
 
-	return LIME_SAFEWRAP(GUIImage, i);
+	return GUIImage::Wrap(i);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id)
@@ -107,7 +115,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
-	return LIME_SAFEWRAP(GUIImage, i);
+	return GUIImage::Wrap(i);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent)
@@ -120,7 +128,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 		useAlphaChannel,
 		LIME_SAFEREF(parent, m_GUIElement));
 
-	return LIME_SAFEWRAP(GUIImage, i);
+	return GUIImage::Wrap(i);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel)
@@ -132,7 +140,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 		*pos->m_NativeValue,
 		useAlphaChannel);
 
-	return LIME_SAFEWRAP(GUIImage, i);
+	return GUIImage::Wrap(i);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
@@ -143,7 +151,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
 		LIME_SAFEREF(image, m_Texture),
 		*pos->m_NativeValue);
 
-	return LIME_SAFEWRAP(GUIImage, i);
+	return GUIImage::Wrap(i);
 }
 
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)
@@ -156,7 +164,7 @@ GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GU
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
-	return LIME_SAFEWRAP(GUIScrollBar, s);
+	return GUIScrollBar::Wrap(s);
 }
 
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent)
@@ -168,7 +176,7 @@ GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GU
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement));
 
-	return LIME_SAFEWRAP(GUIScrollBar, s);
+	return GUIScrollBar::Wrap(s);
 }
 
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle)
@@ -179,7 +187,7 @@ GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle)
 		horizontal,
 		*rectangle->m_NativeValue);
 
-	return LIME_SAFEWRAP(GUIScrollBar, s);
+	return GUIScrollBar::Wrap(s);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
@@ -196,7 +204,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		id,
 		fillBackground);
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
@@ -212,7 +220,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent)
@@ -226,7 +234,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		wordWrap,
 		LIME_SAFEREF(parent, m_GUIElement));
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap)
@@ -239,7 +247,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		border,
 		wordWrap);
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border)
@@ -251,7 +259,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 		*rectangle->m_NativeValue,
 		border);
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
@@ -262,7 +270,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 		Lime::StringToStringW(text).c_str(),
 		*rectangle->m_NativeValue);
 
-	return LIME_SAFEWRAP(GUIStaticText, t);
+	return GUIStaticText::Wrap(t);
 }
 
 void GUIEnvironment::DrawAll()
@@ -273,28 +281,23 @@ void GUIEnvironment::DrawAll()
 GUIFont^ GUIEnvironment::GetFont(String^ filename)
 {
 	gui::IGUIFont* f = m_GUIEnvironment->getFont(Lime::StringToPath(filename));
-	return LIME_SAFEWRAP(GUIFont, f);
+	return GUIFont::Wrap(f);
 }
 
 GUIFont^ GUIEnvironment::BuiltInFont::get()
 {
-	return LIME_SAFEWRAP(GUIFont, m_GUIEnvironment->getBuiltInFont());
+	return GUIFont::Wrap(m_GUIEnvironment->getBuiltInFont());
 }
 
 GUISkin^ GUIEnvironment::Skin::get()
 {
 	gui::IGUISkin* s = m_GUIEnvironment->getSkin();
-	return LIME_SAFEWRAP(GUISkin, s);
+	return GUISkin::Wrap(s);
 }
 
 void GUIEnvironment::Skin::set(GUISkin^ value)
 {
 	m_GUIEnvironment->setSkin(LIME_SAFEREF(value, m_GUISkin));
-}
-
-String^ GUIEnvironment::ToString()
-{
-	return String::Format("gui environment...");
 }
 
 } // end namespace GUI

@@ -34,9 +34,12 @@ public:
 	property unsigned int FileArchiveCount { unsigned int get(); }
 	property String^ WorkingDirectory { String^ get(); }
 
+	virtual String^ ToString() override;
+
 internal:
 
-	FileSystem(io::IFileSystem* fileSystem);
+	static FileSystem^ Wrap(io::IFileSystem* ref);
+	FileSystem(io::IFileSystem* ref);
 
 	io::IFileSystem* m_FileSystem;
 };

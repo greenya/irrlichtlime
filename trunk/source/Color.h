@@ -79,7 +79,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("Color={0:X}", Color);
+		return String::Format("{0:X2}^{1:X2}{2:X2}{3:X2}", Alpha, Red, Green, Blue);
 	}
 
 internal:

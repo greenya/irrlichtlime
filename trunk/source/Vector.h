@@ -41,7 +41,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("X={0}; Y={1}", X, Y);
+		return String::Format("{0},{1}", X, Y);
 	}
 
 internal:
@@ -85,7 +85,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("X={0}; Y={1}", X, Y);
+		return String::Format("{0},{1}", X, Y);
 	}
 
 internal:
@@ -135,7 +135,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("X={0}; Y={1}; Z={2}", X, Y, Z);
+		return String::Format("{0},{1},{2}", X, Y, Z);
 	}
 
 internal:

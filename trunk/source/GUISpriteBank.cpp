@@ -9,16 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUISpriteBank::GUISpriteBank(gui::IGUISpriteBank* guiSpriteBank)
-	: ReferenceCounted(guiSpriteBank)
+GUISpriteBank^ GUISpriteBank::Wrap(gui::IGUISpriteBank* ref)
 {
-	LIME_ASSERT(guiSpriteBank != nullptr);
-	m_GUISpriteBank = guiSpriteBank;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUISpriteBank(ref);
 }
 
-String^ GUISpriteBank::ToString()
+GUISpriteBank::GUISpriteBank(gui::IGUISpriteBank* ref)
+	: ReferenceCounted(ref)
 {
-	return String::Format("gui sprite bank...");
+	LIME_ASSERT(ref != nullptr);
+	m_GUISpriteBank = ref;
 }
 
 } // end namespace GUI

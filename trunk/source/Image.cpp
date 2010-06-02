@@ -9,11 +9,11 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-Image::Image(video::IImage* image)
-	: ReferenceCounted(image)
+Image::Image(video::IImage* ref)
+	: ReferenceCounted(ref)
 {
-	LIME_ASSERT(image != nullptr);
-	m_Image = image;
+	LIME_ASSERT(ref != nullptr);
+	m_Image = ref;
 }
 
 void Image::Fill(Coloru^ color)
@@ -102,6 +102,11 @@ unsigned int Image::AlphaMask::get()
 unsigned int Image::Pitch::get()
 {
 	return m_Image->getPitch();
+}
+
+String^ Image::ToString()
+{
+	return String::Format("Image: Dimension={{{0}}}; ColorFormat={1}", Dimension, ColorFormat);
 }
 
 } // end namespace Video

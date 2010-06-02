@@ -50,14 +50,15 @@ void Material::SetTextureMatrix(int level, Matrix4f^ mat)
 Texture^ Material::GetTexture(int level)
 {
 	LIME_ASSERT(level >= 0 && level < MATERIAL_MAX_TEXTURES);
-	return LIME_SAFEWRAP(Texture, m_NativeValue->getTexture(level));
+	video::ITexture* t = m_NativeValue->getTexture(level);
+	return Texture::Wrap(t);
 }
 
-Video::MaterialType Material::MaterialType::get()
+Video::MaterialType Material::Type::get()
 {
 	return (Video::MaterialType)m_NativeValue->MaterialType;
 }
-void Material::MaterialType::set(Video::MaterialType value)
+void Material::Type::set(Video::MaterialType value)
 {
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;
 }
@@ -291,7 +292,7 @@ bool Material::Transparent::get()
 
 String^ Material::ToString()
 {
-	return String::Format("MaterialType={0}", MaterialType);
+	return String::Format("Material: Type={0}", Type);
 }
 
 } // end namespace Video

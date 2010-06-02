@@ -33,7 +33,8 @@ public:
 
 internal:
 
-	GUIFont(gui::IGUIFont* guiFont);
+	static GUIFont^ Wrap(gui::IGUIFont* ref);
+	GUIFont(gui::IGUIFont* ref);
 
 	gui::IGUIFont* m_GUIFont;
 };

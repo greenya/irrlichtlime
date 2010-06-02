@@ -9,11 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIFont::GUIFont(gui::IGUIFont* guiFont)
-	: ReferenceCounted(guiFont)
+GUIFont^ GUIFont::Wrap(gui::IGUIFont* ref)
 {
-	LIME_ASSERT(guiFont != nullptr);
-	m_GUIFont = guiFont;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIFont(ref);
+}
+
+GUIFont::GUIFont(gui::IGUIFont* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIFont = ref;
 }
 
 void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter, bool vcenter, Recti^ clip)
@@ -119,7 +127,7 @@ GUIFontType GUIFont::Type::get()
 
 String^ GUIFont::ToString()
 {
-	return String::Format("Type={0}", Type);
+	return String::Format("GUIFont: Type={0}", Type);
 }
 
 } // end namespace GUI

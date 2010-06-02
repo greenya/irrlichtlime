@@ -86,7 +86,8 @@ protected:
 
 internal:
 
-	SceneNode(scene::ISceneNode* sceneNode);
+	static SceneNode^ Wrap(scene::ISceneNode* ref);
+	SceneNode(scene::ISceneNode* ref);
 
 	scene::ISceneNode* m_SceneNode;
 	bool m_Inherited;

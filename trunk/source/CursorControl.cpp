@@ -9,11 +9,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace GUI {
 
-CursorControl::CursorControl(gui::ICursorControl* cursorControl)
-	: ReferenceCounted(cursorControl)
+CursorControl^ CursorControl::Wrap(gui::ICursorControl* ref)
 {
-	LIME_ASSERT(cursorControl != nullptr);
-	m_CursorControl = cursorControl;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew CursorControl(ref);
+}
+
+CursorControl::CursorControl(gui::ICursorControl* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_CursorControl = ref;
 }
 
 void CursorControl::SetReferenceRect(Recti^ rect_or_null)
@@ -49,7 +57,7 @@ void CursorControl::Visible::set(bool value)
 
 String^ CursorControl::ToString()
 {
-	return String::Format("{0}; Visible={1}", Position, Visible);
+	return String::Format("CursorControl: Position={{{0}}}; Visible={1}", Position, Visible);
 }
 
 } // end namespace GUI

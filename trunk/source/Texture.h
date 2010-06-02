@@ -16,7 +16,8 @@ public:
 
 internal:
 
-	Texture(video::ITexture* texture);
+	static Texture^ Wrap(video::ITexture* ref);
+	Texture(video::ITexture* ref);
 
 	video::ITexture* m_Texture;
 };

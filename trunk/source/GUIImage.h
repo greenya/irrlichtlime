@@ -22,7 +22,8 @@ public:
 
 internal:
 
-	GUIImage(gui::IGUIImage* guiImage);
+	static GUIImage^ Wrap(gui::IGUIImage* ref);
+	GUIImage(gui::IGUIImage* ref);
 
 	gui::IGUIImage* m_GUIImage;
 };

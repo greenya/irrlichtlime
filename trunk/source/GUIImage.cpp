@@ -9,11 +9,19 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-GUIImage::GUIImage(gui::IGUIImage* guiImage)
-	: GUIElement(guiImage)
+GUIImage^ GUIImage::Wrap(gui::IGUIImage* ref)
 {
-	LIME_ASSERT(guiImage != nullptr);
-	m_GUIImage = guiImage;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew GUIImage(ref);
+}
+
+GUIImage::GUIImage(gui::IGUIImage* ref)
+	: GUIElement(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_GUIImage = ref;
 }
 
 void GUIImage::SetColor(Video::Coloru^ color)

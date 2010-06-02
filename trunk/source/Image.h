@@ -35,9 +35,11 @@ public:
 	property unsigned int AlphaMask { unsigned int get(); }
 	property unsigned int Pitch { unsigned int get(); }
 
+	virtual String^ ToString() override;
+
 internal:
 
-	Image(video::IImage* image);
+	Image(video::IImage* ref);
 
 	video::IImage* m_Image;
 };

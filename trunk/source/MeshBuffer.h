@@ -15,7 +15,7 @@ public:
 
 internal:
 
-	MeshBuffer(scene::IMeshBuffer* meshBuffer);
+	MeshBuffer(scene::IMeshBuffer* ref);
 
 	scene::IMeshBuffer* m_MeshBuffer;
 };

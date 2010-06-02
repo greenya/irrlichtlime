@@ -26,7 +26,8 @@ public:
 
 internal:
 
-	Timer(irr::ITimer* timer);
+	static Timer^ Wrap(irr::ITimer* ref);
+	Timer(irr::ITimer* ref);
 
 	irr::ITimer* m_Timer;
 };

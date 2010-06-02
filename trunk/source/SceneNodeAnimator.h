@@ -25,7 +25,8 @@ public:
 
 internal:
 
-	SceneNodeAnimator(scene::ISceneNodeAnimator* sceneNodeAnimator);
+	static SceneNodeAnimator^ Wrap(scene::ISceneNodeAnimator* ref);
+	SceneNodeAnimator(scene::ISceneNodeAnimator* ref);
 
 	scene::ISceneNodeAnimator* m_SceneNodeAnimator;
 };

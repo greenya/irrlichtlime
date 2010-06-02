@@ -29,7 +29,8 @@ public:
 
 internal:
 
-	AnimatedMeshSceneNode(scene::IAnimatedMeshSceneNode* animatedMeshSceneNode);
+	static AnimatedMeshSceneNode^ Wrap(scene::IAnimatedMeshSceneNode* ref);
+	AnimatedMeshSceneNode(scene::IAnimatedMeshSceneNode* ref);
 
 	scene::IAnimatedMeshSceneNode* m_AnimatedMeshSceneNode;
 };

@@ -13,11 +13,19 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Scene {
 
-SceneNode::SceneNode(scene::ISceneNode* sceneNode)
-	: IO::AttributeExchangingObject(sceneNode)
+SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 {
-	LIME_ASSERT(sceneNode != nullptr);
-	m_SceneNode = sceneNode;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew SceneNode(ref);
+}
+
+SceneNode::SceneNode(scene::ISceneNode* ref)
+	: IO::AttributeExchangingObject(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_SceneNode = ref;
 	m_Inherited = false;
 }
 
@@ -220,7 +228,7 @@ List<SceneNodeAnimator^>^ SceneNode::AnimatorList::get()
 	core::list<scene::ISceneNodeAnimator*> a = m_SceneNode->getAnimators();
 	for (core::list<scene::ISceneNodeAnimator*>::ConstIterator i = a.begin(); i != a.end(); ++i)
 	{
-		SceneNodeAnimator^ n = LIME_SAFEWRAP(SceneNodeAnimator, *i);
+		SceneNodeAnimator^ n = SceneNodeAnimator::Wrap(*i);
 		if (n != nullptr)
 			l->Add(n);
 	}
@@ -272,7 +280,7 @@ List<SceneNode^>^ SceneNode::ChildList::get()
 	core::list<scene::ISceneNode*> a = m_SceneNode->getChildren();
 	for (core::list<scene::ISceneNode*>::ConstIterator i = a.begin(); i != a.end(); ++i)
 	{
-		SceneNode^ n = LIME_SAFEWRAP(SceneNode, *i);
+		SceneNode^ n = Wrap(*i);
 		if (n != nullptr)
 			l->Add(n);
 	}
@@ -331,7 +339,7 @@ void SceneNode::Name::set(String^ value)
 SceneNode^ SceneNode::Parent::get()
 {
 	scene::ISceneNode* n = m_SceneNode->getParent();
-	return LIME_SAFEWRAP(SceneNode, n);
+	return SceneNode::Wrap(n);
 }
 
 void SceneNode::Parent::set(SceneNode^ value)
@@ -379,7 +387,7 @@ void SceneNode::Scale::set(Vector3Df^ value)
 
 Scene::SceneManager^ SceneNode::SceneManager::get()
 {
-	return LIME_SAFEWRAP(Scene::SceneManager, m_SceneNode->getSceneManager());
+	return Scene::SceneManager::Wrap(m_SceneNode->getSceneManager());
 }
 
 void SceneNode::SceneManager::set(Scene::SceneManager^ value)
@@ -412,7 +420,7 @@ void SceneNode::Visible::set(bool value)
 
 String^ SceneNode::ToString()
 {
-	return String::Format("ID={0}; Type={1}; Name={2}", ID, Type, Name);
+	return String::Format("SceneNode: Type={0}; ID={1}; Name={2}", Type, ID, Name);
 }
 
 void SceneNode::initInheritor(SceneNodeInheritor* i)

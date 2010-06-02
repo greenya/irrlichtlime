@@ -23,7 +23,8 @@ public:
 
 internal:
 
-	AnimatedMesh(scene::IAnimatedMesh* animatedMesh);
+	static AnimatedMesh^ Wrap(scene::IAnimatedMesh* ref);
+	AnimatedMesh(scene::IAnimatedMesh* ref);
 
 	scene::IAnimatedMesh* m_AnimatedMesh;
 };

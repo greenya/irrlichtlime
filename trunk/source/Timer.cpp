@@ -7,11 +7,19 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 
-Timer::Timer(irr::ITimer* timer)
-	: ReferenceCounted(timer)
+Timer^ Timer::Wrap(irr::ITimer* ref)
 {
-	LIME_ASSERT(timer != nullptr);
-	m_Timer = timer;
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew Timer(ref);
+}
+
+Timer::Timer(irr::ITimer* ref)
+	: ReferenceCounted(ref)
+{
+	LIME_ASSERT(ref != nullptr);
+	m_Timer = ref;
 }
 
 void Timer::Start()
@@ -68,7 +76,7 @@ String^ Timer::ToString()
 	unsigned int minutes = t % 60; t /= 60;
 	unsigned int hours = t;
 
-	return String::Format("{0}:{1:00}:{2:00}.{3:000}", hours, minutes, seconds, millisecs);
+	return String::Format("Timer: {0}:{1:00}:{2:00}.{3:000}", hours, minutes, seconds, millisecs);
 }
 
 } // end namespace IrrlichtLime

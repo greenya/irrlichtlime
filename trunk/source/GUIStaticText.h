@@ -29,7 +29,8 @@ public:
 
 internal:
 
-	GUIStaticText(gui::IGUIStaticText* guiStaticText);
+	static GUIStaticText^ Wrap(gui::IGUIStaticText* ref);
+	GUIStaticText(gui::IGUIStaticText* ref);
 
 	gui::IGUIStaticText* m_GUIStaticText;
 };

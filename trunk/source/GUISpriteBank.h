@@ -16,11 +16,10 @@ public:
 
 	//...
 
-	virtual String^ ToString() override;
-
 internal:
 
-	GUISpriteBank(gui::IGUISpriteBank* guiSpriteBank);
+	static GUISpriteBank^ Wrap(gui::IGUISpriteBank* ref);
+	GUISpriteBank(gui::IGUISpriteBank* ref);
 
 	gui::IGUISpriteBank* m_GUISpriteBank;
 };
