@@ -159,14 +159,14 @@ Recti^ GUIElement::AbsolutePosition::get()
 	return gcnew Recti(m_GUIElement->getAbsolutePosition());
 }
 
-bool GUIElement::NotClipped::get()
+bool GUIElement::Clipped::get()
 {
-	return m_GUIElement->isNotClipped();
+	return !m_GUIElement->isNotClipped();
 }
 
-void GUIElement::NotClipped::set(bool value)
+void GUIElement::Clipped::set(bool value)
 {
-	m_GUIElement->setNotClipped(value);
+	m_GUIElement->setNotClipped(!value);
 }
 
 Recti^ GUIElement::AbsoluteClippingRect::get()
