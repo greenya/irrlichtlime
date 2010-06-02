@@ -17,6 +17,7 @@ ref class GUIElement;
 ref class GUIFileOpenDialog;
 ref class GUIFont;
 ref class GUIImage;
+ref class GUIListBox;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
@@ -48,6 +49,11 @@ public:
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos);
+
+	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent);
+	GUIListBox^ AddListBox(Recti^ rectangle);
 
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);

@@ -28,6 +28,7 @@
 #include "GUIElementType.h"
 #include "GUIEventType.h"
 #include "GUIFontType.h"
+#include "GUIListBoxColor.h"
 #include "GUISkinType.h"
 #include "KeyAction.h"
 #include "KeyCode.h"

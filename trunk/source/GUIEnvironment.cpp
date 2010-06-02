@@ -6,6 +6,7 @@
 #include "GUIFileOpenDialog.h"
 #include "GUIFont.h"
 #include "GUIImage.h"
+#include "GUIListBox.h"
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
@@ -252,6 +253,52 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
 		*pos->m_NativeValue);
 
 	return GUIImage::Wrap(i);
+}
+
+GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		drawBackground);
+
+	return GUIListBox::Wrap(b);
+}
+
+GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIListBox::Wrap(b);
+}
+
+GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIListBox::Wrap(b);
+}
+
+GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
+		*rectangle->m_NativeValue);
+
+	return GUIListBox::Wrap(b);
 }
 
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)

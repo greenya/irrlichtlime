@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "GUIButton.h"
 #include "GUIEditBox.h"
 #include "GUIElement.h"
 #include "GUIFont.h"
