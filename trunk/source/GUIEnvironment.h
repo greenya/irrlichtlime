@@ -18,6 +18,7 @@ ref class GUIImage;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
+ref class GUIWindow;
 
 public ref class GUIEnvironment : ReferenceCounted
 {
@@ -45,6 +46,12 @@ public:
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
+
+	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id);
+	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent);
+	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text);
+	GUIWindow^ AddWindow(Recti^ rectangle, bool modal);
+	GUIWindow^ AddWindow(Recti^ rectangle);
 
 	void DrawAll();
 

@@ -547,6 +547,14 @@
 				RelativePath=".\GUIStaticText.h"
 				>
 			</File>
+			<File
+				RelativePath=".\GUIWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIWindow.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="IO"

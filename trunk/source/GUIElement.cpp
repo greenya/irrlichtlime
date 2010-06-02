@@ -5,6 +5,7 @@
 #include "GUIImage.h"
 #include "GUIScrollBar.h"
 #include "GUIStaticText.h"
+#include "GUIWindow.h"
 
 using namespace irr;
 using namespace System;
@@ -42,12 +43,10 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 	//case gui::EGUIET_TABLE: return ...
 	//case gui::EGUIET_TOOL_BAR: return ...
 	//case gui::EGUIET_TREE_VIEW: return ...
-	//case gui::EGUIET_WINDOW: return ...
-	case gui::EGUIET_ELEMENT: return gcnew GUIElement(ref);
+	case gui::EGUIET_WINDOW: return gcnew GUIWindow((gui::IGUIWindow*)ref);
 	}
 
-	LIME_ASSERT2(ref->getType() ? true : true, "GUI element type is not supported");
-	return nullptr;
+	return gcnew GUIElement(ref); // gui::EGUIET_ELEMENT and anything other
 }
 
 GUIElement::GUIElement(gui::IGUIElement* ref)
