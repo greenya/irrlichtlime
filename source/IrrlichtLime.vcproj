@@ -492,6 +492,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIFileOpenDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIFileOpenDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIFont.cpp"
 				>
 			</File>
