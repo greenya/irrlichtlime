@@ -45,6 +45,8 @@ public:
 	bool Run();
 	bool SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast);
 	void SetInputReceivingSceneManager(Scene::SceneManager^ sceneManager);
+	void SetWindowCaption(String^ text);
+	void SetWindowResizable(bool resize);
 	void Sleep(unsigned int timeMs, bool pauseTimer);
 	void Sleep(unsigned int timeMs);
 	void Yield();
@@ -61,10 +63,8 @@ public:
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 	property Video::VideoModeList^ VideoModeList { Video::VideoModeList^ get(); }
 	property bool WindowActive { bool get(); }
-	property String^ WindowCaption { void set(String^ value); }
 	property bool WindowFocused { bool get(); }
 	property bool WindowMinimized { bool get(); }
-	property bool WindowResizable { void set(bool value); }
 
 	virtual String^ ToString() override;
 
