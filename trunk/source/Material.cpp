@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Material.h"
+#include "MaterialLayer.h"
 #include "Texture.h"
 
 using namespace irr;
@@ -8,9 +9,16 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-Material::Material(const video::SMaterial& value)
+//Material::Material(const video::SMaterial& value)
+//{
+//	m_NativeValue = new video::SMaterial(value);
+//}
+
+Material::Material(video::SMaterial* ref)
 {
-	m_NativeValue = new video::SMaterial(value);
+	LIME_ASSERT(ref != nullptr);
+	m_NativeValue = ref;
+	m_DeleteOnFinalization = false;
 }
 
 Material::Material()
@@ -28,29 +36,39 @@ void Material::SetFlag(MaterialFlag flag, bool value)
 	m_NativeValue->setFlag((E_MATERIAL_FLAG)flag, value);
 }
 
-Matrix4f^ Material::GetTextureMatrix(int level)
+Matrix4f^ Material::GetTextureMatrix(unsigned int index)
 {
-	LIME_ASSERT(level >= 0 && level < MATERIAL_MAX_TEXTURES);
-	return gcnew Matrix4f(m_NativeValue->getTextureMatrix(level));
+	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+	return gcnew Matrix4f(m_NativeValue->getTextureMatrix(index));
 }
 
-void Material::SetTexture(int level, Texture^ tex)
+void Material::SetTexture(unsigned int index, Texture^ tex)
 {
-	LIME_ASSERT(level >= 0 && level < MATERIAL_MAX_TEXTURES);
-	m_NativeValue->setTexture(level, LIME_SAFEREF(tex, m_Texture));
+	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+	m_NativeValue->setTexture(index, LIME_SAFEREF(tex, m_Texture));
 }
 
-void Material::SetTextureMatrix(int level, Matrix4f^ mat)
+void Material::SetTextureMatrix(unsigned int index, Matrix4f^ mat)
 {
 	LIME_ASSERT(mat != nullptr);
-	LIME_ASSERT(level >= 0 && level < MATERIAL_MAX_TEXTURES);
-	m_NativeValue->setTextureMatrix(level, *mat->m_NativeValue);
+	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+	m_NativeValue->setTextureMatrix(index, *mat->m_NativeValue);
 }
 
-Texture^ Material::GetTexture(int level)
+List<MaterialLayer^>^ Material::Layer::get()
 {
-	LIME_ASSERT(level >= 0 && level < MATERIAL_MAX_TEXTURES);
-	video::ITexture* t = m_NativeValue->getTexture(level);
+	List<MaterialLayer^>^ l = gcnew List<MaterialLayer^>();
+
+	for (unsigned int i = 0; i < Material::TextureCount; i++)
+		l->Add(gcnew MaterialLayer(&m_NativeValue->TextureLayer[i]));
+
+	return l;
+}
+
+Texture^ Material::GetTexture(unsigned int index)
+{
+	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+	video::ITexture* t = m_NativeValue->getTexture(index);
 	return Texture::Wrap(t);
 }
 
@@ -58,6 +76,7 @@ Video::MaterialType Material::Type::get()
 {
 	return (Video::MaterialType)m_NativeValue->MaterialType;
 }
+
 void Material::Type::set(Video::MaterialType value)
 {
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;

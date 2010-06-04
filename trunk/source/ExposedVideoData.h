@@ -15,9 +15,11 @@ public:
 
 internal:
 
-	ExposedVideoData(const video::SExposedVideoData& value)
+	ExposedVideoData(video::SExposedVideoData* ref)
 	{
-		m_NativeValue = new video::SExposedVideoData(value);
+		LIME_ASSERT(ref != nullptr);
+		m_NativeValue = ref;
+		m_DeleteOnFinalization = false;
 	}
 };
 

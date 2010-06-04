@@ -41,6 +41,7 @@
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
+#include "TextureClamp.h"
 #include "TransformationState.h"
 #include "VertexType.h"
 #include "VideoDriverFeature.h"

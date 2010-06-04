@@ -76,7 +76,8 @@ public:
 
 		!NativeValue()
 		{
-			if (m_NativeValue != nullptr)
+			if (m_DeleteOnFinalization &&
+				m_NativeValue != nullptr)
 			{
 				delete m_NativeValue;
 				m_NativeValue = nullptr;
@@ -86,10 +87,15 @@ public:
 	internal:
 
 		T* m_NativeValue;
+		bool m_DeleteOnFinalization;
 
 	protected:
 
-		NativeValue() {}
+		NativeValue()
+		{
+			m_NativeValue = nullptr;
+			m_DeleteOnFinalization = true;
+		}
 	};
 
 private:

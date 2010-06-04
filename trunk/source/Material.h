@@ -8,20 +8,23 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
+ref class MaterialLayer;
 ref class Texture;
 
 public ref class Material : Lime::NativeValue<video::SMaterial>
 {
 public:
 
+	static property const unsigned int TextureCount { const unsigned int get() { return video::MATERIAL_MAX_TEXTURES; } }
+
 	Material();
 
 	bool GetFlag(MaterialFlag flag);
-	Texture^ GetTexture(int level);
-	Matrix4f^ GetTextureMatrix(int level);
+	Texture^ GetTexture(unsigned int index);
+	Matrix4f^ GetTextureMatrix(unsigned int index);
 	void SetFlag(MaterialFlag flag, bool value);
-	void SetTexture(int level, Texture^ tex);
-	void SetTextureMatrix(int level, Matrix4f^ mat);
+	void SetTexture(unsigned int index, Texture^ tex);
+	void SetTextureMatrix(unsigned int index, Matrix4f^ mat);
 
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
 	property Coloru^ AmbientColor { Coloru^ get(); void set(Coloru^ value); }
@@ -48,11 +51,14 @@ public:
 	property bool Mipmaps { bool get(); void set(bool value); }
 	property bool Transparent { bool get(); }
 
+	property List<MaterialLayer^>^ Layer { List<MaterialLayer^>^ get(); }
+
 	virtual String^ ToString() override;
 
 internal:
 
-	Material(const video::SMaterial& value);
+	//Material(const video::SMaterial& value);
+	Material(video::SMaterial* ref);
 };
 
 } // end namespace Video
