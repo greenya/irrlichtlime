@@ -132,7 +132,7 @@ Video::Material^ SceneNode::GetMaterial(unsigned int num)
 		return m;
 	}
 
-	return gcnew Video::Material(m_SceneNode->getMaterial(num));
+	return gcnew Video::Material(&m_SceneNode->getMaterial(num));
 }
 
 void SceneNode::RegisterSceneNode()

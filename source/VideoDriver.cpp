@@ -71,7 +71,7 @@ Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
 	return Texture::Wrap(t);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect)
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, Video::ExposedVideoData^ videoData, Recti^ sourceRect)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(videoData != nullptr);
@@ -80,7 +80,7 @@ bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, Expos
 	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue, sourceRect->m_NativeValue);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData)
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, Video::ExposedVideoData^ videoData)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(videoData != nullptr);
@@ -205,14 +205,19 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
 }
 
+void VideoDriver::EnableMaterial2D(bool enable)
+{
+	m_VideoDriver->enableMaterial2D(enable);
+}
+
+void VideoDriver::EnableMaterial2D()
+{
+	m_VideoDriver->enableMaterial2D();
+}
+
 bool VideoDriver::EndScene()
 {
 	return m_VideoDriver->endScene();
-}
-
-ExposedVideoData^ VideoDriver::GetExposedVideoData()
-{
-	return gcnew ExposedVideoData(m_VideoDriver->getExposedVideoData());
 }
 
 unsigned int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
@@ -440,6 +445,11 @@ int VideoDriver::FPS::get()
 	return m_VideoDriver->getFPS();
 }
 
+Material^ VideoDriver::Material2D::get()
+{
+	return gcnew Material(&m_VideoDriver->getMaterial2D());
+}
+
 unsigned int VideoDriver::PrimitiveCountDrawn::get()
 {
 	return m_VideoDriver->getPrimitiveCountDrawn();
@@ -453,6 +463,11 @@ unsigned int VideoDriver::MaximalDynamicLightAmount::get()
 unsigned int VideoDriver::DynamicLightCount::get()
 {
 	return m_VideoDriver->getDynamicLightCount();
+}
+
+Video::ExposedVideoData^ VideoDriver::ExposedVideoData::get()
+{
+	return gcnew Video::ExposedVideoData((video::SExposedVideoData*)&m_VideoDriver->getExposedVideoData());
 }
 
 unsigned int VideoDriver::MaximalPrimitiveCount::get()

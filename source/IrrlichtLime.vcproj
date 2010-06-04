@@ -232,6 +232,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MaterialLayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MaterialLayer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MaterialType.h"
 				>
 			</File>
@@ -245,6 +253,10 @@
 			</File>
 			<File
 				RelativePath=".\Texture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TextureClamp.h"
 				>
 			</File>
 			<File

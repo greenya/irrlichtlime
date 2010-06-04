@@ -47,9 +47,11 @@ public:
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices);
 
+	void EnableMaterial2D(bool enable);
+	void EnableMaterial2D();
+
 	bool EndScene();
 
-	ExposedVideoData^ GetExposedVideoData();
 	unsigned int GetOcclusionQueryResult(Scene::SceneNode^ node);
 	Texture^ GetTexture(String^ filename);
 	Texture^ GetTextureByIndex(unsigned int index);
@@ -97,7 +99,9 @@ public:
 	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property unsigned int DynamicLightCount { unsigned int get(); }
+	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
 	property int FPS { int get(); }
+	property Material^ Material2D { Material^ get(); }
 	property unsigned int MaterialRendererCount { unsigned int get(); }
 	property unsigned int MaximalDynamicLightAmount { unsigned int get(); }
 	property unsigned int MaximalPrimitiveCount { unsigned int get(); }
