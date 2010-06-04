@@ -9,16 +9,10 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-//Material::Material(const video::SMaterial& value)
-//{
-//	m_NativeValue = new video::SMaterial(value);
-//}
-
 Material::Material(video::SMaterial* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_NativeValue = ref;
-	m_DeleteOnFinalization = false;
 }
 
 Material::Material()

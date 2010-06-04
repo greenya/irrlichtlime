@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class AABBox3Df : Lime::NativeValue<core::aabbox3df>
+public ref class AABBox3Df : Lime::NativeValue<core::aabbox3df, Lime::NativeValueKind::Value>
 {
 public:
 

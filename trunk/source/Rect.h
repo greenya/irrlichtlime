@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Recti : Lime::NativeValue<core::recti>
+public ref class Recti : Lime::NativeValue<core::recti, Lime::NativeValueKind::Value>
 {
 public:
 

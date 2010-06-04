@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Vector2Df : Lime::NativeValue<core::vector2df>
+public ref class Vector2Df : Lime::NativeValue<core::vector2df, Lime::NativeValueKind::Value>
 {
 public:
 
@@ -52,7 +52,7 @@ internal:
 	}
 };
 
-public ref class Vector2Di : Lime::NativeValue<core::vector2di>
+public ref class Vector2Di : Lime::NativeValue<core::vector2di, Lime::NativeValueKind::Value>
 {
 public:
 
@@ -96,7 +96,7 @@ internal:
 	}
 };
 
-public ref class Vector3Df : Lime::NativeValue<core::vector3df>
+public ref class Vector3Df : Lime::NativeValue<core::vector3df, Lime::NativeValueKind::Value>
 {
 public:
 
