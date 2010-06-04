@@ -45,9 +45,9 @@ namespace _03.CustomSceneNode
 
 				if (++frames == 100)
 				{
-					device.WindowCaption = String.Format(
+					device.SetWindowCaption(String.Format(
 						"Custom Scene Node - Irrlicht Engine [{0}] fps: {1}",
-						driver.Name, driver.FPS);
+						driver.Name, driver.FPS));
 
 					frames = 0;
 				}

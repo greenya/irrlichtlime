@@ -18,7 +18,7 @@ namespace _01.HelloWorld
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(
 				DriverType.Software, new Dimension2Du(640, 480), 16, false, false, false);
 
-			device.WindowCaption = "Hello World! - Irrlicht Engine Demo";
+			device.SetWindowCaption("Hello World! - Irrlicht Engine Demo");
 			
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;

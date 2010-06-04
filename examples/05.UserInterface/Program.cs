@@ -31,8 +31,8 @@ namespace _05.UserInterface
 			if (device == null)
 				return;
 
-			device.WindowCaption = "Irrlicht Engine - User Interface Demo";
-			device.WindowResizable = true;
+			device.SetWindowCaption("Irrlicht Engine - User Interface Demo");
+			device.SetWindowResizable(true);
 
 			VideoDriver driver = device.VideoDriver;
 			GUIEnvironment env = device.GUIEnvironment;

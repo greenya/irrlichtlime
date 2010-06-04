@@ -195,6 +195,16 @@ void IrrlichtDevice::SetInputReceivingSceneManager(Scene::SceneManager^ sceneMan
 	m_IrrlichtDevice->setInputReceivingSceneManager(LIME_SAFEREF(sceneManager, m_SceneManager));
 }
 
+void IrrlichtDevice::SetWindowCaption(String^ text)
+{
+	m_IrrlichtDevice->setWindowCaption(Lime::StringToStringW(text).c_str());
+}
+
+void IrrlichtDevice::SetWindowResizable(bool resize)
+{
+	m_IrrlichtDevice->setResizable(resize);
+}
+
 void IrrlichtDevice::Sleep(unsigned int timeMs, bool pauseTimer)
 {
 	m_IrrlichtDevice->sleep(timeMs, pauseTimer);
@@ -270,11 +280,6 @@ bool IrrlichtDevice::WindowActive::get()
 	return m_IrrlichtDevice->isWindowActive();
 }
 
-void IrrlichtDevice::WindowCaption::set(String^ value)
-{
-	m_IrrlichtDevice->setWindowCaption(Lime::StringToStringW(value).c_str());
-}
-
 bool IrrlichtDevice::WindowFocused::get()
 {
 	return m_IrrlichtDevice->isWindowFocused();
@@ -283,11 +288,6 @@ bool IrrlichtDevice::WindowFocused::get()
 bool IrrlichtDevice::WindowMinimized::get()
 {
 	return m_IrrlichtDevice->isWindowMinimized();
-}
-
-void IrrlichtDevice::WindowResizable::set(bool value)
-{
-	m_IrrlichtDevice->setResizable(value);
 }
 
 String^ IrrlichtDevice::ToString()

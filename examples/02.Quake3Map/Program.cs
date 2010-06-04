@@ -71,9 +71,9 @@ namespace _02.Quake3Map
 					int fps = driver.FPS;
 					if (lastFPS != fps)
 					{
-						device.WindowCaption = String.Format(
+						device.SetWindowCaption(String.Format(
 							"Quake 3 Map Example - Irrlicht Engine [{0}] fps: {1}",
-							driver.Name, fps);
+							driver.Name, fps));
 
 						lastFPS = fps;
 					}
