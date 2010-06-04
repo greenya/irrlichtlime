@@ -9,7 +9,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class Vertex3D : Lime::NativeValue<video::S3DVertex>
+public ref class Vertex3D : Lime::NativeValue<video::S3DVertex, Lime::NativeValueKind::Value>
 {
 public:
 

@@ -10,7 +10,7 @@ namespace Video {
 
 ref class Texture;
 
-public ref class MaterialLayer : Lime::NativeValue<video::SMaterialLayer>
+public ref class MaterialLayer : Lime::NativeValue<video::SMaterialLayer, Lime::NativeValueKind::Ref>
 {
 public:
 
@@ -29,7 +29,6 @@ public:
 
 internal:
 
-	//MaterialLayer(const video::SMaterialLayer& value);
 	MaterialLayer(video::SMaterialLayer* ref);
 };
 

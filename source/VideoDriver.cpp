@@ -134,6 +134,197 @@ void VideoDriver::DisableFeature(VideoDriverFeature feature)
 	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Coloru^>^ colors_or_null, bool useAlphaChannelOfTexture)
+{
+	LIME_ASSERT(destRect != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	video::SColor* colorList = nullptr;
+	if (colors_or_null != nullptr)
+	{
+		LIME_ASSERT(colors_or_null->Count == 4);
+		colorList = new video::SColor[4];
+		for (int i = 0; i < 4; i++)
+			colorList[i] = *colors_or_null[i]->m_NativeValue;
+	}
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destRect->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		colorList,
+		useAlphaChannelOfTexture);
+
+	if (colorList != nullptr)
+		delete colorList;
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Coloru^>^ colors_or_null)
+{
+	LIME_ASSERT(destRect != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	video::SColor* colorList = nullptr;
+	if (colors_or_null != nullptr)
+	{
+		LIME_ASSERT(colors_or_null->Count == 4);
+		colorList = new video::SColor[4];
+		for (int i = 0; i < 4; i++)
+			colorList[i] = *colors_or_null[i]->m_NativeValue;
+	}
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destRect->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		colorList);
+
+	if (colorList != nullptr)
+		delete colorList;
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null)
+{
+	LIME_ASSERT(destRect != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destRect->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue));
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect)
+{
+	LIME_ASSERT(destRect != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destRect->m_NativeValue,
+		*sourceRect->m_NativeValue);
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Coloru^ color, bool useAlphaChannelOfTexture)
+{
+	LIME_ASSERT(destPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		*color->m_NativeValue,
+		useAlphaChannelOfTexture);
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Coloru^ color)
+{
+	LIME_ASSERT(destPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null)
+{
+	LIME_ASSERT(destPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect_or_null, m_NativeValue));
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect)
+{
+	LIME_ASSERT(destPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destPos->m_NativeValue,
+		*sourceRect->m_NativeValue);
+}
+
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos)
+{
+	LIME_ASSERT(destPos != nullptr);
+
+	m_VideoDriver->draw2DImage(
+		LIME_SAFEREF(texture, m_Texture),
+		*destPos->m_NativeValue);
+}
+
+void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown, Recti^ clip)
+{
+	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(colorLeftUp != nullptr);
+	LIME_ASSERT(colorRightUp != nullptr);
+	LIME_ASSERT(colorLeftDown != nullptr);
+	LIME_ASSERT(colorRightDown != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
+	m_VideoDriver->draw2DRectangle(
+		*pos->m_NativeValue,
+		*colorLeftUp->m_NativeValue,
+		*colorRightUp->m_NativeValue,
+		*colorLeftDown->m_NativeValue,
+		*colorRightDown->m_NativeValue,
+		clip->m_NativeValue);
+}
+
+void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown)
+{
+	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(colorLeftUp != nullptr);
+	LIME_ASSERT(colorRightUp != nullptr);
+	LIME_ASSERT(colorLeftDown != nullptr);
+	LIME_ASSERT(colorRightDown != nullptr);
+
+	m_VideoDriver->draw2DRectangle(
+		*pos->m_NativeValue,
+		*colorLeftUp->m_NativeValue,
+		*colorRightUp->m_NativeValue,
+		*colorLeftDown->m_NativeValue,
+		*colorRightDown->m_NativeValue);
+}
+
+void VideoDriver::Draw2DRectangle(Coloru^ color, Recti^ pos, Recti^ clip)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(clip != nullptr);
+	
+	m_VideoDriver->draw2DRectangle(
+		*color->m_NativeValue,
+		*pos->m_NativeValue,
+		clip->m_NativeValue);
+}
+
+void VideoDriver::Draw2DRectangle(Coloru^ color, Recti^ pos)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(pos != nullptr);
+	
+	m_VideoDriver->draw2DRectangle(
+		*color->m_NativeValue,
+		*pos->m_NativeValue);
+}
+
 void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
@@ -467,7 +658,7 @@ unsigned int VideoDriver::DynamicLightCount::get()
 
 Video::ExposedVideoData^ VideoDriver::ExposedVideoData::get()
 {
-	return gcnew Video::ExposedVideoData((video::SExposedVideoData*)&m_VideoDriver->getExposedVideoData());
+	return gcnew Video::ExposedVideoData(m_VideoDriver->getExposedVideoData());
 }
 
 unsigned int VideoDriver::MaximalPrimitiveCount::get()

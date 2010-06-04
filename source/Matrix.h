@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Matrix4f : Lime::NativeValue<core::matrix4>
+public ref class Matrix4f : Lime::NativeValue<core::matrix4, Lime::NativeValueKind::Value>
 {
 public:
 
