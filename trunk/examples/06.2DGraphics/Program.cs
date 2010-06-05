@@ -35,8 +35,8 @@ namespace _06._2DGraphics
 			Recti imp1 = new Recti(349, 15, 385, 78);
 			Recti imp2 = new Recti(387, 15, 423, 78);
 
-			//driver->getMaterial2D().TextureLayer[0].BilinearFilter=true;
-			//driver->getMaterial2D().AntiAliasing=video::EAAM_FULL_BASIC;
+			driver.Material2D.Layer[0].BilinearFilter = true;
+			driver.Material2D.AntiAliasing = AntiAliasingMode.FullBasic;
 
 			while (device.Run())
 			{
@@ -47,19 +47,19 @@ namespace _06._2DGraphics
 					driver.BeginScene(true, true, new Coloru(255, 120, 102, 136));
 
 					// draw fire & dragons background world
-					//driver->draw2DImage(images, core::position2d<s32>(50,50),
-					//    core::rect<s32>(0,0,342,224), 0,
-					//    video::SColor(255,255,255,255), true);
+					driver.Draw2DImage(images, new Vector2Di(50, 50),
+						new Recti(0, 0, 342, 224), null,
+						new Coloru(255, 255, 255, 255), true);
 
 					// draw flying imp
-					//driver->draw2DImage(images, core::position2d<s32>(164,125),
-					//    (time/500 % 2) ? imp1 : imp2, 0,
-					//    video::SColor(255,255,255,255), true);
+					driver.Draw2DImage(images, new Vector2Di(164, 125),
+						(time / 500 % 2) == 1 ? imp1 : imp2, null,
+						new Coloru(255, 255, 255, 255), true);
 
 					// draw second flying imp with colorcylce
-					//driver->draw2DImage(images, core::position2d<s32>(270,105),
-					//    (time/500 % 2) ? imp1 : imp2, 0,
-					//    video::SColor(255,(time) % 255,255,255), true);
+					driver.Draw2DImage(images, new Vector2Di(270, 105),
+						(time / 500 % 2) == 1 ? imp1 : imp2, null,
+						new Coloru(255, time % 255, 255, 255), true);
 
 					// draw some text
 					if (font != null)
@@ -71,12 +71,12 @@ namespace _06._2DGraphics
 						font2.Draw("Also mixing with 3d graphics is possible.",
 							new Recti(130, 20, 300, 60), new Coloru(255, time % 255, time % 255, 255));
 
-					//driver->enableMaterial2D();
-					//driver->draw2DImage(images, core::rect<s32>(10,10,108,48), core::rect<s32>(354,87,442,118));
-					//driver->enableMaterial2D(false);
+					driver.EnableMaterial2D();
+					driver.Draw2DImage(images, new Recti(10, 10, 108, 48), new Recti(354, 87, 442, 118));
+					driver.EnableMaterial2D(false);
 
 					Vector2Di m = device.CursorControl.Position;
-					//driver->draw2DRectangle(video::SColor(100,255,255,255), core::rect<s32>(m.X-20, m.Y-20, m.X+20, m.Y+20));
+					driver.Draw2DRectangle(new Coloru(100, 255, 255, 255), new Recti(m.X - 20, m.Y - 20, m.X + 20, m.Y + 20));
 
 					driver.EndScene();
 				}
