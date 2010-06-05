@@ -1,4 +1,36 @@
 ============================
+Changes in 0.3 (05-Jun-2010)
+============================
+
+- Added and completly ported examples 05.UserInterface and 06.2DGraphics.
+
+- Changes in IrrlichtDevice class: prop WindowResizable became SetWindowResizable method, prop WindowCaption became SetWindowCaption method (since they both had only setters).
+
+- Added class GUIListBox, enum GUIListBoxColor, method GUIEnvironment.AddListBox.
+
+- Renamed property in GUIElement: "NotClipped" => "Clipped" (the meaning also inverted).
+
+- Added class GUIEditBox. Added method GUIEnvironment.AddEditBox.
+
+- Added class GUIFileOpenDialog. Added method GUIEnvironment.AddFileOpenDialog.
+
+- Added class GUIWindow. Added method GUIEnvironment.AddWindow.
+
+- Made changes in wrapping technique and various classes' ToString() formatting.
+
+- Added class GUIScrollBar. Added method GUIEnvironment.AddScrollBar.
+
+- GUIStaticText extended with methods: SetBackgroundColor, SetDrawBackground, SetDrawBorder, SetTextAlignment; props: OverrideColor, OverrideColorEnabled, OverrideFont, TextHeight, TextWidth, WordWrap.
+
+- Added class GUIButton, enum GUIButtonState, method GUIEnvironment.AddButton.
+
+- Added patch which avoids small bug described at http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669.
+
+- Added enums GUIAlignment, GUIDefaultColor, GUIDefaultFont, GUIDefaultIcon, GUIDefaultSize, GUIDefaultText, GUIFontType and GUISkinType. Added classes GUIFont, GUISkin and GUISpriteBank. Added to GUIEnvironment: GetFont(), BuiltInFont, Skin. Added IrrlichtDevice.Close().
+
+- Fixed bug when IrrlichtDevice::createDevice() returns null, IrrlichtLime fails.
+
+============================
 Changes in 0.2 (29-May-2010)
 ============================
 
