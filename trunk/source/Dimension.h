@@ -90,5 +90,46 @@ internal:
 	}
 };
 
+public ref class Dimension2Df : Lime::NativeValue<core::dimension2df>
+{
+public:
+
+	Dimension2Df(float width, float height)
+		: Lime::NativeValue<core::dimension2df>(true)
+	{
+		m_NativeValue = new core::dimension2df(width, height);
+	}
+
+	property float Width
+	{
+		float get() { return m_NativeValue->Width; }
+		void set(float value) { m_NativeValue->Width = value; }
+	}
+
+	property float Height
+	{
+		float get() { return m_NativeValue->Height; }
+		void set(float value) { m_NativeValue->Height = value; }
+	}
+
+	property float Area
+	{
+		float get() { return m_NativeValue->getArea(); }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("{0}x{1}", Width, Height);
+	}
+
+internal:
+
+	Dimension2Df(const core::dimension2df& value)
+		: Lime::NativeValue<core::dimension2df>(true)
+	{
+		m_NativeValue = new core::dimension2df(value);
+	}
+};
+
 } // end namespace Core
 } // end namespace IrrlichtLime

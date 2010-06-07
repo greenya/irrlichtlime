@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
+#include "BillboardSceneNode.h"
 #include "CameraSceneNode.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
@@ -127,6 +128,94 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 		LIME_SAFEREF(mesh, m_AnimatedMesh));
 
 	return AnimatedMeshSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id,
+	Video::Coloru^ colorTop, Video::Coloru^ colorBottom)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(colorTop != nullptr);
+	LIME_ASSERT(colorBottom != nullptr);
+
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue,
+		id,
+		*colorTop->m_NativeValue,
+		*colorBottom->m_NativeValue);
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id,
+	Video::Coloru^ colorTop)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(colorTop != nullptr);
+
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue,
+		id,
+		*colorTop->m_NativeValue);
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue,
+		id);
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue);
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size)
+{
+	LIME_ASSERT(size != nullptr);
+
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue);
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent)
+{
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardSceneNode^ SceneManager::AddBillboardSceneNode()
+{
+	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode();
+	return BillboardSceneNode::Wrap(n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id, bool makeActive)

@@ -364,6 +364,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BillboardSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BillboardSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\CameraSceneNode.cpp"
 				>
 			</File>
