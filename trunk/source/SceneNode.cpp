@@ -132,6 +132,7 @@ Video::Material^ SceneNode::GetMaterial(unsigned int num)
 		return m;
 	}
 
+	LIME_ASSERT(num >= 0 && num < MaterialCount);
 	return gcnew Video::Material(&m_SceneNode->getMaterial(num));
 }
 
