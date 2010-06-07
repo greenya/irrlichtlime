@@ -12,25 +12,63 @@ public ref class Coloru : Lime::NativeValue<video::SColor, Lime::NativeValueKind
 {
 public:
 
+	Coloru()
+	{
+		m_NativeValue = new video::SColor();
+	}
+
 	Coloru(unsigned int color)
 	{
 		m_NativeValue = new video::SColor(color);
 	}
 
-	Coloru(unsigned int a, unsigned int r, unsigned int g, unsigned int b)
+	Coloru(unsigned int r, unsigned int g, unsigned int b, unsigned int a)
 	{
+		LIME_ASSERT(r <= 255);
+		LIME_ASSERT(g <= 255);
+		LIME_ASSERT(b <= 255);
+		LIME_ASSERT(a <= 255);
+
 		m_NativeValue = new video::SColor(a, r, g, b);
 	}
 
-	void Set(unsigned int a, unsigned int r, unsigned int g, unsigned int b)
+	Coloru(unsigned int r, unsigned int g, unsigned int b)
 	{
+		LIME_ASSERT(r <= 255);
+		LIME_ASSERT(g <= 255);
+		LIME_ASSERT(b <= 255);
+
+		m_NativeValue = new video::SColor(255, r, g, b);
+	}
+
+	void Set(unsigned int r, unsigned int g, unsigned int b, unsigned int a)
+	{
+		LIME_ASSERT(r <= 255);
+		LIME_ASSERT(g <= 255);
+		LIME_ASSERT(b <= 255);
+		LIME_ASSERT(a <= 255);
+
 		m_NativeValue->set(a, r, g, b);
+	}
+
+	void Set(unsigned int r, unsigned int g, unsigned int b)
+	{
+		LIME_ASSERT(r <= 255);
+		LIME_ASSERT(g <= 255);
+		LIME_ASSERT(b <= 255);
+
+		m_NativeValue->set(m_NativeValue->getAlpha(), r, g, b);
+	}
+
+	void Set(unsigned int argb)
+	{
+		m_NativeValue->set(argb);
 	}
 
 	property unsigned int Alpha
 	{
 		unsigned int get() { return m_NativeValue->getAlpha(); }
-		void set(unsigned int value) { m_NativeValue->setAlpha(value); }
+		void set(unsigned int value) { LIME_ASSERT(value <= 255); m_NativeValue->setAlpha(value); }
 	}
 
 	property unsigned int Average
@@ -41,7 +79,7 @@ public:
 	property unsigned int Blue
 	{
 		unsigned int get() { return m_NativeValue->getBlue(); }
-		void set(unsigned int value) { m_NativeValue->setBlue(value); }
+		void set(unsigned int value) { LIME_ASSERT(value <= 255); m_NativeValue->setBlue(value); }
 	}
 
 	property unsigned int Color
@@ -53,7 +91,7 @@ public:
 	property unsigned int Green
 	{
 		unsigned int get() { return m_NativeValue->getGreen(); }
-		void set(unsigned int value) { m_NativeValue->setGreen(value); }
+		void set(unsigned int value) { LIME_ASSERT(value <= 255); m_NativeValue->setGreen(value); }
 	}
 
 	property float Lightness
@@ -69,7 +107,7 @@ public:
 	property unsigned int Red
 	{
 		unsigned int get() { return m_NativeValue->getRed(); }
-		void set(unsigned int value) { m_NativeValue->setRed(value); }
+		void set(unsigned int value) { LIME_ASSERT(value <= 255); m_NativeValue->setRed(value); }
 	}
 
 	property unsigned __int16 A1R5G5B5
@@ -79,7 +117,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("{0:X2}^{1:X2}{2:X2}{3:X2}", Alpha, Red, Green, Blue);
+		return String::Format("{0:X2}, {1:X2}, {2:X2} ^ {3:X2}", Red, Green, Blue, Alpha);
 	}
 
 internal:
@@ -87,6 +125,101 @@ internal:
 	Coloru(const video::SColor& value)
 	{
 		m_NativeValue = new video::SColor(value);
+	}
+};
+
+public ref class Colorf : Lime::NativeValue<video::SColorf, Lime::NativeValueKind::Value>
+{
+public:
+
+	Colorf()
+	{
+		m_NativeValue = new video::SColorf();
+	}
+
+	Colorf(float r, float g, float b, float a)
+	{
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+		LIME_ASSERT(a >= 0.0f && a <= 1.0f);
+
+		m_NativeValue = new video::SColorf(r, g, b, a);
+	}
+
+	Colorf(float r, float g, float b)
+	{
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+
+		m_NativeValue = new video::SColorf(r, g, b);
+	}
+
+	Colorf(Coloru^ color)
+	{
+		LIME_ASSERT(color != nullptr);
+		m_NativeValue = new video::SColorf(*color->m_NativeValue);
+	}
+
+	void Set(float r, float g, float b)
+	{
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+
+		m_NativeValue->set(r, g, b);
+	}
+
+	void Set(float r, float g, float b, float a)
+	{
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+		LIME_ASSERT(a >= 0.0f && a <= 1.0f);
+
+		m_NativeValue->set(a, r, g, b);
+	}
+
+	Coloru^ ToColoru()
+	{
+		return gcnew Coloru(m_NativeValue->toSColor());
+	}
+
+	property float Alpha
+	{
+		float get() { return m_NativeValue->a; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->a = value; }
+	}
+
+	property float Blue
+	{
+		float get() { return m_NativeValue->b; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->b = value; }
+	}
+
+	property float Green
+	{
+		float get() { return m_NativeValue->g; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->g = value; }
+	}
+
+	property float Red
+	{
+		float get() { return m_NativeValue->r; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->r = value; }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("{0:F3}, {1:F3}, {2:F3} ^ {3:F3}", Red, Green, Blue, Alpha);
+	}
+
+internal:
+
+	Colorf(const video::SColorf& value)
+	{
+		m_NativeValue = new video::SColorf(value);
 	}
 };
 

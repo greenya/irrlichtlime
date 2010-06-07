@@ -220,6 +220,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Light.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Light.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LightType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Material.cpp"
 				>
 			</File>
@@ -361,6 +373,14 @@
 			</File>
 			<File
 				RelativePath=".\DebugSceneType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LightSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LightSceneNode.h"
 				>
 			</File>
 			<File

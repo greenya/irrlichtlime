@@ -32,6 +32,7 @@
 #include "GUISkinType.h"
 #include "KeyAction.h"
 #include "KeyCode.h"
+#include "LightType.h"
 #include "LogLevel.h"
 #include "MaterialFlag.h"
 #include "MaterialType.h"

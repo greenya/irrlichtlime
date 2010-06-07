@@ -60,7 +60,7 @@ public:
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); protected: void set(Scene::SceneManager^ value); }
 	property bool TrulyVisible { bool get(); }
 	property SceneNodeType Type { SceneNodeType get(); }
-	property bool Visible { bool get(); void set(bool value); }
+	property bool Visible { bool get(); virtual void set(bool value); }
 
 	virtual String^ ToString() override;
 
