@@ -52,7 +52,7 @@ namespace _07.Collision
 			// when used with the gravity of (0, -10, 0) in the collision response animator.
 			CameraSceneNode camera = smgr.AddCameraSceneNodeFPS(null, 100.0f, 0.3f, ID_IsNotPickable, null, true, 3.0f);
 			camera.Rotation = new Vector3Df(50, 50, -60);
-			//camera->setTarget(core::vector3df(-70,30,-60));
+			camera.Target = new Vector3Df(-70, 30, -60);
 
 			//if (selector)
 			//{
@@ -67,8 +67,7 @@ namespace _07.Collision
 			// Now I create three animated characters which we can pick, a dynamic light for
 			// lighting them, and a billboard for drawing where we found an intersection.
 
-			// First, let's get rid of the mouse cursor.  We'll use a billboard to show
-			// what we're looking at.
+			// First, let's get rid of the mouse cursor. We'll use a billboard to show what we're looking at.
 			device.CursorControl.Visible = false;
 
 			// Add the billboard.
@@ -120,8 +119,8 @@ namespace _07.Collision
 			//selector->drop();
 
 			// Add a light, so that the unselected nodes aren't completely dark.
-			//scene::ILightSceneNode * light = smgr->addLightSceneNode(0, core::vector3df(-60,100,400), video::SColorf(1.0f,1.0f,1.0f,1.0f), 600.0f);
-			//light->setID(ID_IsNotPickable); // Make it an invalid target for selection.
+			LightSceneNode light = smgr.AddLightSceneNode(null, new Vector3Df(-60, 100, 400), new Colorf(1.0f, 1.0f, 1.0f), 600.0f);
+			light.ID = ID_IsNotPickable; // Make it an invalid target for selection.
 
 			// Remember which scene node is highlighted
 			SceneNode highlightedSceneNode = null;
@@ -205,8 +204,8 @@ namespace _07.Collision
 				if (lastFPS != fps)
 				{
 					device.SetWindowCaption(String.Format(
-							"Collision detection example - Irrlicht Engine [{0}] fps: {1}",
-							driver.Name, fps));
+						"Collision detection example - Irrlicht Engine [{0}] fps: {1}",
+						driver.Name, fps));
 
 					lastFPS = fps;
 				}

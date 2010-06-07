@@ -4,6 +4,7 @@
 #include "CameraSceneNode.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
+#include "LightSceneNode.h"
 #include "Mesh.h"
 #include "MeshSceneNode.h"
 #include "ReferenceCounted.h"
@@ -428,6 +429,73 @@ MeshSceneNode^ SceneManager::AddCubeSceneNode()
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addCubeSceneNode();
 	return MeshSceneNode::Wrap(n);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius, int id)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue,
+		*color->m_NativeValue,
+		radius,
+		id);
+
+	return LightSceneNode::Wrap(l);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue,
+		*color->m_NativeValue,
+		radius);
+
+	return LightSceneNode::Wrap(l);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue,
+		*color->m_NativeValue);
+
+	return LightSceneNode::Wrap(l);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue);
+
+	return LightSceneNode::Wrap(l);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent)
+{
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return LightSceneNode::Wrap(l);
+}
+
+LightSceneNode^ SceneManager::AddLightSceneNode()
+{
+	scene::ILightSceneNode* l = m_SceneManager->addLightSceneNode();
+	return LightSceneNode::Wrap(l);
 }
 
 MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)

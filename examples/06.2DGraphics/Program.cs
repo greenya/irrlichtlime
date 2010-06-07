@@ -44,39 +44,39 @@ namespace _06._2DGraphics
 				{
 					uint time = device.Timer.Time;
 
-					driver.BeginScene(true, true, new Coloru(255, 120, 102, 136));
+					driver.BeginScene(true, true, new Coloru(120, 102, 136));
 
 					// draw fire & dragons background world
 					driver.Draw2DImage(images, new Vector2Di(50, 50),
 						new Recti(0, 0, 342, 224), null,
-						new Coloru(255, 255, 255, 255), true);
+						new Coloru(255, 255, 255), true);
 
 					// draw flying imp
 					driver.Draw2DImage(images, new Vector2Di(164, 125),
 						(time / 500 % 2) == 1 ? imp1 : imp2, null,
-						new Coloru(255, 255, 255, 255), true);
+						new Coloru(255, 255, 255), true);
 
 					// draw second flying imp with colorcylce
 					driver.Draw2DImage(images, new Vector2Di(270, 105),
 						(time / 500 % 2) == 1 ? imp1 : imp2, null,
-						new Coloru(255, time % 255, 255, 255), true);
+						new Coloru(time % 255, 255, 255), true);
 
 					// draw some text
 					if (font != null)
 						font.Draw("This demo shows that Irrlicht is also capable of drawing 2D graphics.",
-							new Recti(130, 10, 300, 50), new Coloru(255, 255, 255, 255));
+							new Recti(130, 10, 300, 50), new Coloru(255, 255, 255));
 
 					// draw some other text
 					if (font2 != null)
 						font2.Draw("Also mixing with 3d graphics is possible.",
-							new Recti(130, 20, 300, 60), new Coloru(255, time % 255, time % 255, 255));
+							new Recti(130, 20, 300, 60), new Coloru(time % 255, time % 255, 255));
 
 					driver.EnableMaterial2D();
 					driver.Draw2DImage(images, new Recti(10, 10, 108, 48), new Recti(354, 87, 442, 118));
 					driver.EnableMaterial2D(false);
 
 					Vector2Di m = device.CursorControl.Position;
-					driver.Draw2DRectangle(new Coloru(100, 255, 255, 255), new Recti(m.X - 20, m.Y - 20, m.X + 20, m.Y + 20));
+					driver.Draw2DRectangle(new Coloru(255, 255, 255, 100), new Recti(m.X - 20, m.Y - 20, m.X + 20, m.Y + 20));
 
 					driver.EndScene();
 				}

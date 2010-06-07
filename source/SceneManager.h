@@ -16,6 +16,7 @@ namespace Scene {
 ref class AnimatedMesh;
 ref class AnimatedMeshSceneNode;
 ref class CameraSceneNode;
+ref class LightSceneNode;
 ref class Mesh;
 ref class MeshSceneNode;
 ref class SceneNode;
@@ -58,6 +59,13 @@ public:
 	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent);
 	MeshSceneNode^ AddCubeSceneNode(float size);
 	MeshSceneNode^ AddCubeSceneNode();
+
+	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius, int id);
+	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius);
+	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color);
+	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position);
+	LightSceneNode^ AddLightSceneNode(SceneNode^ parent);
+	LightSceneNode^ AddLightSceneNode();
 
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode);
