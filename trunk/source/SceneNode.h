@@ -55,7 +55,7 @@ public:
 	property SceneNode^ Parent { SceneNode^ get(); void set(SceneNode^ value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Matrix4f^ RelativeTransformation { Matrix4f^ get(); }
-	property Vector3Df^ Rotation { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df^ Rotation { Vector3Df^ get(); virtual void set(Vector3Df^ value); }
 	property Vector3Df^ Scale { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); protected: void set(Scene::SceneManager^ value); }
 	property bool TrulyVisible { bool get(); }
