@@ -8,21 +8,24 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class Coloru : Lime::NativeValue<video::SColor, Lime::NativeValueKind::Value>
+public ref class Coloru : Lime::NativeValue<video::SColor>
 {
 public:
 
 	Coloru()
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		m_NativeValue = new video::SColor();
 	}
 
 	Coloru(unsigned int color)
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		m_NativeValue = new video::SColor(color);
 	}
 
 	Coloru(unsigned int r, unsigned int g, unsigned int b, unsigned int a)
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		LIME_ASSERT(r <= 255);
 		LIME_ASSERT(g <= 255);
@@ -33,6 +36,7 @@ public:
 	}
 
 	Coloru(unsigned int r, unsigned int g, unsigned int b)
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		LIME_ASSERT(r <= 255);
 		LIME_ASSERT(g <= 255);
@@ -123,21 +127,24 @@ public:
 internal:
 
 	Coloru(const video::SColor& value)
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		m_NativeValue = new video::SColor(value);
 	}
 };
 
-public ref class Colorf : Lime::NativeValue<video::SColorf, Lime::NativeValueKind::Value>
+public ref class Colorf : Lime::NativeValue<video::SColorf>
 {
 public:
 
 	Colorf()
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		m_NativeValue = new video::SColorf();
 	}
 
 	Colorf(float r, float g, float b, float a)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
 		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
@@ -148,6 +155,7 @@ public:
 	}
 
 	Colorf(float r, float g, float b)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
 		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
@@ -157,6 +165,7 @@ public:
 	}
 
 	Colorf(Coloru^ color)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(color != nullptr);
 		m_NativeValue = new video::SColorf(*color->m_NativeValue);
@@ -218,6 +227,7 @@ public:
 internal:
 
 	Colorf(const video::SColorf& value)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		m_NativeValue = new video::SColorf(value);
 	}

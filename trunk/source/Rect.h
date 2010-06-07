@@ -8,16 +8,18 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Recti : Lime::NativeValue<core::recti, Lime::NativeValueKind::Value>
+public ref class Recti : Lime::NativeValue<core::recti>
 {
 public:
 
 	Recti(int x1, int y1, int x2, int y2)
+		: Lime::NativeValue<core::recti>(true)
 	{
 		m_NativeValue = new core::recti(x1, y1, x2, y2);
 	}
 
 	Recti(Vector2Di^ upperLeft, Vector2Di^ lowerRight)
+		: Lime::NativeValue<core::recti>(true)
 	{
 		m_NativeValue = new core::recti(*upperLeft->m_NativeValue, *lowerRight->m_NativeValue);
 	}
@@ -73,6 +75,7 @@ public:
 internal:
 
 	Recti(const core::recti& value)
+		: Lime::NativeValue<core::recti>(true)
 	{
 		m_NativeValue = new core::recti(value);
 	}

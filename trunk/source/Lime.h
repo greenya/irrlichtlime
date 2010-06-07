@@ -64,13 +64,7 @@ public:
 		return strW;
 	}
 
-	enum class NativeValueKind
-	{
-		Ref,
-		Value
-	};
-
-	template <class T, NativeValueKind K>
+	template <class T>
 	ref class NativeValue
 	{
 	public:
@@ -82,7 +76,7 @@ public:
 
 		!NativeValue()
 		{
-			if (K == NativeValueKind::Value &&
+			if (m_DeleteOnFinalize &&
 				m_NativeValue != nullptr)
 			{
 				delete m_NativeValue;
@@ -96,7 +90,14 @@ public:
 
 	protected:
 
-		NativeValue() {}
+		NativeValue(bool deleteOnFinalize)
+		{
+			m_DeleteOnFinalize = deleteOnFinalize;
+		}
+
+	private:
+
+		bool m_DeleteOnFinalize;
 	};
 
 private:
