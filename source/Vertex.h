@@ -9,27 +9,31 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class Vertex3D : Lime::NativeValue<video::S3DVertex, Lime::NativeValueKind::Value>
+public ref class Vertex3D : Lime::NativeValue<video::S3DVertex>
 {
 public:
 
 	Vertex3D()
+		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		m_NativeValue = new video::S3DVertex();
 	}
 
 	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Coloru^ c, float tu, float tv)
+		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(c != nullptr);
 		m_NativeValue = new video::S3DVertex(x, y, z, nx, ny, nz, *c->m_NativeValue, tu, tv);
 	}
 
 	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Coloru^ color, Vector2Df^ tcoords)
+		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(pos != nullptr);
 		LIME_ASSERT(normal != nullptr);
 		LIME_ASSERT(color != nullptr);
 		LIME_ASSERT(tcoords != nullptr);
+
 		m_NativeValue = new video::S3DVertex(*pos->m_NativeValue, *normal->m_NativeValue, *color->m_NativeValue, *tcoords->m_NativeValue);
 	}
 
@@ -98,6 +102,7 @@ public:
 internal:
 
 	Vertex3D(const video::S3DVertex& other)
+		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		m_NativeValue = new video::S3DVertex(other);
 	}

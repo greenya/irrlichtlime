@@ -9,12 +9,14 @@ namespace IrrlichtLime {
 namespace Video {
 
 MaterialLayer::MaterialLayer(video::SMaterialLayer* ref)
+	: Lime::NativeValue<video::SMaterialLayer>(false)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_NativeValue = ref;
 }
 
 MaterialLayer::MaterialLayer()
+	: Lime::NativeValue<video::SMaterialLayer>(true)
 {
 	m_NativeValue = new video::SMaterialLayer();
 }

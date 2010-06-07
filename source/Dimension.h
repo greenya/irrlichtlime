@@ -8,11 +8,12 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Dimension2Du : Lime::NativeValue<core::dimension2du, Lime::NativeValueKind::Value>
+public ref class Dimension2Du : Lime::NativeValue<core::dimension2du>
 {
 public:
 
 	Dimension2Du(unsigned int width, unsigned int height)
+		: Lime::NativeValue<core::dimension2du>(true)
 	{
 		m_NativeValue = new core::dimension2du(width, height);
 	}
@@ -42,16 +43,18 @@ public:
 internal:
 
 	Dimension2Du(const core::dimension2du& value)
+		: Lime::NativeValue<core::dimension2du>(true)
 	{
 		m_NativeValue = new core::dimension2du(value);
 	}
 };
 
-public ref class Dimension2Di : Lime::NativeValue<core::dimension2di, Lime::NativeValueKind::Value>
+public ref class Dimension2Di : Lime::NativeValue<core::dimension2di>
 {
 public:
 
 	Dimension2Di(int width, int height)
+		: Lime::NativeValue<core::dimension2di>(true)
 	{
 		m_NativeValue = new core::dimension2di(width, height);
 	}
@@ -81,6 +84,7 @@ public:
 internal:
 
 	Dimension2Di(const core::dimension2di& value)
+		: Lime::NativeValue<core::dimension2di>(true)
 	{
 		m_NativeValue = new core::dimension2di(value);
 	}

@@ -8,7 +8,7 @@ using namespace System;
 
 namespace IrrlichtLime {
 
-public ref class Event : Lime::NativeValue<SEvent, Lime::NativeValueKind::Value>
+public ref class Event : Lime::NativeValue<SEvent>
 {
 public:
 

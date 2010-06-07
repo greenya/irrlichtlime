@@ -7,7 +7,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class ExposedVideoData : Lime::NativeValue<video::SExposedVideoData, Lime::NativeValueKind::Value>
+public ref class ExposedVideoData : Lime::NativeValue<video::SExposedVideoData>
 {
 public:
 
@@ -16,6 +16,7 @@ public:
 internal:
 
 	ExposedVideoData(const video::SExposedVideoData& value)
+		: Lime::NativeValue<video::SExposedVideoData>(true)
 	{
 		m_NativeValue = new video::SExposedVideoData(value);
 	}

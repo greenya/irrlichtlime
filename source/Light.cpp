@@ -8,12 +8,14 @@ namespace IrrlichtLime {
 namespace Video {
 
 Light::Light(video::SLight* ref)
+	: Lime::NativeValue<video::SLight>(false)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_NativeValue = ref;
 }
 
 Light::Light()
+	: Lime::NativeValue<video::SLight>(true)
 {
 	m_NativeValue = new video::SLight();
 }

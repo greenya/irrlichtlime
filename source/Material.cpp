@@ -10,12 +10,14 @@ namespace IrrlichtLime {
 namespace Video {
 
 Material::Material(video::SMaterial* ref)
+	: Lime::NativeValue<video::SMaterial>(false)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_NativeValue = ref;
 }
 
 Material::Material()
+	: Lime::NativeValue<video::SMaterial>(true)
 {
 	m_NativeValue = new video::SMaterial();
 }

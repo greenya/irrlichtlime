@@ -8,29 +8,34 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class AABBox3Df : Lime::NativeValue<core::aabbox3df, Lime::NativeValueKind::Value>
+public ref class AABBox3Df : Lime::NativeValue<core::aabbox3df>
 {
 public:
 
 	AABBox3Df(float minx, float miny, float minz, float maxx, float maxy, float maxz)
+		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		m_NativeValue = new core::aabbox3df(minx, miny, minz, maxx, maxy, maxz);
 	}
 
 	AABBox3Df(Vector3Df^ min, Vector3Df^ max)
+		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		LIME_ASSERT(min != nullptr);
 		LIME_ASSERT(max != nullptr);
+
 		m_NativeValue = new core::aabbox3df(*min->m_NativeValue, *max->m_NativeValue);
 	}
 
 	AABBox3Df(Vector3Df^ point)
+		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		LIME_ASSERT(point != nullptr);
 		m_NativeValue = new core::aabbox3df(*point->m_NativeValue);
 	}
 
 	AABBox3Df()
+		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		m_NativeValue = new core::aabbox3df();
 	}
@@ -151,6 +156,7 @@ public:
 internal:
 
 	AABBox3Df(const core::aabbox3df& other)
+		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		m_NativeValue = new core::aabbox3df(other);
 	}

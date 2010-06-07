@@ -7,6 +7,7 @@ using namespace System;
 namespace IrrlichtLime {
 
 Event::Event(const SEvent& other)
+	: Lime::NativeValue<SEvent>(true)
 {
 	m_NativeValue = new SEvent(other);
 }

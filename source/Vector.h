@@ -8,21 +8,24 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Vector2Df : Lime::NativeValue<core::vector2df, Lime::NativeValueKind::Value>
+public ref class Vector2Df : Lime::NativeValue<core::vector2df>
 {
 public:
 
 	Vector2Df(float x, float y)
+		: Lime::NativeValue<core::vector2df>(true)
 	{
 		m_NativeValue = new core::vector2df(x, y);
 	}
 
 	Vector2Df(float xy)
+		: Lime::NativeValue<core::vector2df>(true)
 	{
 		m_NativeValue = new core::vector2df(xy);
 	}
 
 	Vector2Df()
+		: Lime::NativeValue<core::vector2df>(true)
 	{
 		m_NativeValue = new core::vector2df();
 	}
@@ -47,26 +50,30 @@ public:
 internal:
 
 	Vector2Df(const core::vector2df& other)
+		: Lime::NativeValue<core::vector2df>(true)
 	{
 		m_NativeValue = new core::vector2df(other);
 	}
 };
 
-public ref class Vector2Di : Lime::NativeValue<core::vector2di, Lime::NativeValueKind::Value>
+public ref class Vector2Di : Lime::NativeValue<core::vector2di>
 {
 public:
 
 	Vector2Di(int x, int y)
+		: Lime::NativeValue<core::vector2di>(true)
 	{
 		m_NativeValue = new core::vector2di(x, y);
 	}
 
 	Vector2Di(int xy)
+		: Lime::NativeValue<core::vector2di>(true)
 	{
 		m_NativeValue = new core::vector2di(xy);
 	}
 
 	Vector2Di()
+		: Lime::NativeValue<core::vector2di>(true)
 	{
 		m_NativeValue = new core::vector2di();
 	}
@@ -91,26 +98,30 @@ public:
 internal:
 
 	Vector2Di(const core::vector2di& other)
+		: Lime::NativeValue<core::vector2di>(true)
 	{
 		m_NativeValue = new core::vector2di(other);
 	}
 };
 
-public ref class Vector3Df : Lime::NativeValue<core::vector3df, Lime::NativeValueKind::Value>
+public ref class Vector3Df : Lime::NativeValue<core::vector3df>
 {
 public:
 
 	Vector3Df(float x, float y, float z)
+		: Lime::NativeValue<core::vector3df>(true)
 	{
 		m_NativeValue = new core::vector3df(x, y, z);
 	}
 
 	Vector3Df(float xyz)
+		: Lime::NativeValue<core::vector3df>(true)
 	{
 		m_NativeValue = new core::vector3df(xyz);
 	}
 
 	Vector3Df()
+		: Lime::NativeValue<core::vector3df>(true)
 	{
 		m_NativeValue = new core::vector3df();
 	}
@@ -141,6 +152,7 @@ public:
 internal:
 
 	Vector3Df(const core::vector3df& other)
+		: Lime::NativeValue<core::vector3df>(true)
 	{
 		m_NativeValue = new core::vector3df(other);
 	}

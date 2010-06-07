@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public ref class Light : Lime::NativeValue<video::SLight, Lime::NativeValueKind::Ref>
+public ref class Light : Lime::NativeValue<video::SLight>
 {
 public:
 
