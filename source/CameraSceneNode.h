@@ -14,6 +14,20 @@ public ref class CameraSceneNode : SceneNode
 {
 public:
 
+	property float AspectRatio { float get(); void set(float value); }
+	property float FarValue { float get(); void set(float value); }
+	property float FOV { float get(); void set(float value); }
+	property bool InputReceiverEnabled { bool get(); void set(bool value); }
+	property float NearValue { float get(); void set(float value); }
+	property bool Orthogonal { bool get(); }
+	property Matrix4f^ ProjectionMatrix { Matrix4f^ get(); }
+	property Vector3Df^ Rotation { virtual void set(Vector3Df^ value) override; }
+	property Vector3Df^ Target { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property bool TargetAndRotationBinding { bool get(); void set(bool value); }
+	property Vector3Df^ UpVector { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Matrix4f^ ViewMatrix { Matrix4f^ get(); }
+	property Matrix4f^ ViewMatrixAffector { Matrix4f^ get(); void set(Matrix4f^ value); }
+
 internal:
 
 	static CameraSceneNode^ Wrap(scene::ICameraSceneNode* ref);
