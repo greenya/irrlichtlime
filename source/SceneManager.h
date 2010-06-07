@@ -15,6 +15,7 @@ namespace Scene {
 
 ref class AnimatedMesh;
 ref class AnimatedMeshSceneNode;
+ref class BillboardSceneNode;
 ref class CameraSceneNode;
 ref class LightSceneNode;
 ref class Mesh;
@@ -33,6 +34,14 @@ public:
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent, int id);
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent);
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh);
+
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent);
+	BillboardSceneNode^ AddBillboardSceneNode();
 
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id, bool makeActive);
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id);
