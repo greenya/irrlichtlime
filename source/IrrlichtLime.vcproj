@@ -392,6 +392,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CollisionResponseSceneNodeAnimator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CollisionResponseSceneNodeAnimator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DebugSceneType.h"
 				>
 			</File>

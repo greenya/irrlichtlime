@@ -3,6 +3,7 @@
 #include "AnimatedMeshSceneNode.h"
 #include "BillboardSceneNode.h"
 #include "CameraSceneNode.h"
+#include "CollisionResponseSceneNodeAnimator.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "LightSceneNode.h"
@@ -740,6 +741,77 @@ MeshSceneNode^ SceneManager::AddSphereSceneNode()
 void SceneManager::Clear()
 {
 	m_SceneManager->clear();
+}
+
+CollisionResponseSceneNodeAnimator^ SceneManager::CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius,
+	Vector3Df^ gravityPerSecond, Vector3Df^ ellipsoidTranslation, float slidingValue)
+{
+	LIME_ASSERT(ellipsoidRadius != nullptr);
+	LIME_ASSERT(gravityPerSecond != nullptr);
+	LIME_ASSERT(ellipsoidTranslation != nullptr);
+
+	scene::ISceneNodeAnimatorCollisionResponse* a = m_SceneManager->createCollisionResponseAnimator(
+		LIME_SAFEREF(world, m_TriangleSelector),
+		LIME_SAFEREF(node, m_SceneNode),
+		*ellipsoidRadius->m_NativeValue,
+		*gravityPerSecond->m_NativeValue,
+		*ellipsoidTranslation->m_NativeValue,
+		slidingValue);
+
+	return CollisionResponseSceneNodeAnimator::Wrap(a);
+}
+
+CollisionResponseSceneNodeAnimator^ SceneManager::CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius,
+	Vector3Df^ gravityPerSecond, Vector3Df^ ellipsoidTranslation)
+{
+	LIME_ASSERT(ellipsoidRadius != nullptr);
+	LIME_ASSERT(gravityPerSecond != nullptr);
+	LIME_ASSERT(ellipsoidTranslation != nullptr);
+
+	scene::ISceneNodeAnimatorCollisionResponse* a = m_SceneManager->createCollisionResponseAnimator(
+		LIME_SAFEREF(world, m_TriangleSelector),
+		LIME_SAFEREF(node, m_SceneNode),
+		*ellipsoidRadius->m_NativeValue,
+		*gravityPerSecond->m_NativeValue,
+		*ellipsoidTranslation->m_NativeValue);
+
+	return CollisionResponseSceneNodeAnimator::Wrap(a);
+}
+
+CollisionResponseSceneNodeAnimator^ SceneManager::CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius,
+	Vector3Df^ gravityPerSecond)
+{
+	LIME_ASSERT(ellipsoidRadius != nullptr);
+	LIME_ASSERT(gravityPerSecond != nullptr);
+
+	scene::ISceneNodeAnimatorCollisionResponse* a = m_SceneManager->createCollisionResponseAnimator(
+		LIME_SAFEREF(world, m_TriangleSelector),
+		LIME_SAFEREF(node, m_SceneNode),
+		*ellipsoidRadius->m_NativeValue,
+		*gravityPerSecond->m_NativeValue);
+
+	return CollisionResponseSceneNodeAnimator::Wrap(a);
+}
+
+CollisionResponseSceneNodeAnimator^ SceneManager::CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius)
+{
+	LIME_ASSERT(ellipsoidRadius != nullptr);
+
+	scene::ISceneNodeAnimatorCollisionResponse* a = m_SceneManager->createCollisionResponseAnimator(
+		LIME_SAFEREF(world, m_TriangleSelector),
+		LIME_SAFEREF(node, m_SceneNode),
+		*ellipsoidRadius->m_NativeValue);
+
+	return CollisionResponseSceneNodeAnimator::Wrap(a);
+}
+
+CollisionResponseSceneNodeAnimator^ SceneManager::CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node)
+{
+	scene::ISceneNodeAnimatorCollisionResponse* a = m_SceneManager->createCollisionResponseAnimator(
+		LIME_SAFEREF(world, m_TriangleSelector),
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return CollisionResponseSceneNodeAnimator::Wrap(a);
 }
 
 SceneNodeAnimator^ SceneManager::CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition, float radiusEllipsoid)
