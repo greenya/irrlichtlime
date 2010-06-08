@@ -14,6 +14,7 @@ namespace Scene {
 ref class SceneManager;
 ref class SceneNodeAnimator;
 class SceneNodeInheritor;
+ref class TriangleSelector;
 
 public ref class SceneNode : IO::AttributeExchangingObject
 {
@@ -58,6 +59,7 @@ public:
 	property Vector3Df^ Rotation { Vector3Df^ get(); virtual void set(Vector3Df^ value); }
 	property Vector3Df^ Scale { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); protected: void set(Scene::SceneManager^ value); }
+	property Scene::TriangleSelector^ TriangleSelector { Scene::TriangleSelector^ get(); void set(Scene::TriangleSelector^ value); }
 	property bool TrulyVisible { bool get(); }
 	property SceneNodeType Type { SceneNodeType get(); }
 	property bool Visible { bool get(); virtual void set(bool value); }

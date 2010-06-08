@@ -12,6 +12,7 @@
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
+#include "TriangleSelector.h"
 #include "VideoDriver.h"
 
 using namespace irr;
@@ -855,11 +856,47 @@ SceneNodeAnimator^ SceneManager::CreateFlyStraightAnimator(Vector3Df^ startPoint
 	return SceneNodeAnimator::Wrap(a);
 }
 
+TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node, int minimalPolysPerNode)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createOctreeTriangleSelector(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(node, m_SceneNode),
+		minimalPolysPerNode);
+
+	return TriangleSelector::Wrap(s);
+}
+
+TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createOctreeTriangleSelector(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return TriangleSelector::Wrap(s);
+}
+
 SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed)
 {
 	LIME_ASSERT(rotationSpeed != nullptr);
 	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(*rotationSpeed->m_NativeValue);
 	return SceneNodeAnimator::Wrap(a);
+}
+
+TriangleSelector^ SceneManager::CreateTriangleSelector(AnimatedMeshSceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
+		LIME_SAFEREF(node, m_AnimatedMeshSceneNode));
+
+	return TriangleSelector::Wrap(s);
+}
+
+TriangleSelector^ SceneManager::CreateTriangleSelector(Mesh^ mesh, SceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return TriangleSelector::Wrap(s);
 }
 
 void SceneManager::DrawAll()

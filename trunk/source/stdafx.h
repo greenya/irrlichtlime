@@ -50,10 +50,13 @@
 
 // basic types
 #include "Vector.h"
+#include "Plane.h"
+#include "Line.h"
 #include "Color.h"
 #include "Vertex.h"
 #include "Matrix.h"
 #include "AABBox.h"
+#include "Triangle.h"
 #include "Dimension.h"
 #include "VideoMode.h"
 #include "Rect.h"

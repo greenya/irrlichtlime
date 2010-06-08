@@ -324,11 +324,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Line.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Matrix.h"
 				>
 			</File>
 			<File
+				RelativePath=".\Plane.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Rect.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Triangle.h"
 				>
 			</File>
 			<File
@@ -457,6 +469,14 @@
 			</File>
 			<File
 				RelativePath=".\SceneNodeType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TriangleSelector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TriangleSelector.h"
 				>
 			</File>
 		</Filter>
