@@ -5,6 +5,7 @@
 #include "SceneNodeAnimator.h"
 #include "SceneManager.h"
 #include "Texture.h"
+#include "TriangleSelector.h"
 
 using namespace irr;
 using namespace System;
@@ -397,6 +398,16 @@ void SceneNode::SceneManager::set(Scene::SceneManager^ value)
 
 	SceneNodeInheritor* i = (SceneNodeInheritor*)m_SceneNode;
 	i->SceneManager_set(LIME_SAFEREF(value, m_SceneManager));
+}
+
+Scene::TriangleSelector^ SceneNode::TriangleSelector::get()
+{
+	return Scene::TriangleSelector::Wrap(m_SceneNode->getTriangleSelector());
+}
+
+void SceneNode::TriangleSelector::set(Scene::TriangleSelector^ value)
+{
+	m_SceneNode->setTriangleSelector(LIME_SAFEREF(value, m_TriangleSelector));
 }
 
 bool SceneNode::TrulyVisible::get()

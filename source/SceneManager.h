@@ -22,6 +22,7 @@ ref class Mesh;
 ref class MeshSceneNode;
 ref class SceneNode;
 ref class SceneNodeAnimator;
+ref class TriangleSelector;
 
 public ref class SceneManager : ReferenceCounted
 {
@@ -105,7 +106,13 @@ public:
 	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop);
 	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay);
 
+	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node, int minimalPolysPerNode);
+	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node);
+
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
+
+	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node);
+	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node);
 
 	void DrawAll();
 
