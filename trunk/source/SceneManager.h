@@ -17,6 +17,7 @@ ref class AnimatedMesh;
 ref class AnimatedMeshSceneNode;
 ref class BillboardSceneNode;
 ref class CameraSceneNode;
+ref class CollisionResponseSceneNodeAnimator;
 ref class LightSceneNode;
 ref class Mesh;
 ref class MeshSceneNode;
@@ -93,6 +94,12 @@ public:
 	MeshSceneNode^ AddSphereSceneNode();
 
 	void Clear();
+
+	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius, Vector3Df^ gravityPerSecond, Vector3Df^ ellipsoidTranslation, float slidingValue);
+	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius, Vector3Df^ gravityPerSecond, Vector3Df^ ellipsoidTranslation);
+	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius, Vector3Df^ gravityPerSecond);
+	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius);
+	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node);
 
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition, float radiusEllipsoid);
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition);
