@@ -12,6 +12,12 @@ public ref class Matrix4f : Lime::NativeValue<core::matrix4>
 {
 public:
 
+	Matrix4f()
+		: Lime::NativeValue<core::matrix4>(true)
+	{
+		m_NativeValue = new core::matrix4();
+	}
+
 internal:
 
 	Matrix4f(const core::matrix4& other)

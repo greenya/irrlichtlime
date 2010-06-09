@@ -10,6 +10,7 @@
 #include "Mesh.h"
 #include "MeshSceneNode.h"
 #include "ReferenceCounted.h"
+#include "SceneCollisionManager.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
@@ -1073,6 +1074,11 @@ IO::FileSystem^ SceneManager::FileSystem::get()
 GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 {
 	return GUI::GUIEnvironment::Wrap(m_SceneManager->getGUIEnvironment());
+}
+
+Scene::SceneCollisionManager^ SceneManager::SceneCollisionManager::get()
+{
+	return Scene::SceneCollisionManager::Wrap(m_SceneManager->getSceneCollisionManager());
 }
 
 Scene::SceneNodeRenderPass SceneManager::SceneNodeRenderPass::get()
