@@ -440,6 +440,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneCollisionManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneCollisionManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneManager.cpp"
 				>
 			</File>

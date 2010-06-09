@@ -4,7 +4,6 @@
 
 using namespace irr;
 using namespace System;
-using namespace System::Runtime::InteropServices; // for OutAttribute
 
 namespace IrrlichtLime {
 namespace Core {
