@@ -114,6 +114,11 @@ bool VideoDriver::CheckDriverReset()
 	return m_VideoDriver->checkDriverReset();
 }
 
+void VideoDriver::ClearZBuffer()
+{
+	m_VideoDriver->clearZBuffer();
+}
+
 void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh)
 {
 	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), LIME_SAFEREF(mesh, m_Mesh));
@@ -122,6 +127,17 @@ void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh
 void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node)
 {
 	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+Image^ VideoDriver::CreateScreenShot()
+{
+	video::IImage* i = m_VideoDriver->createScreenShot();
+	return Image::Wrap(i);
+}
+
+void VideoDriver::DeleteAllDynamicLights()
+{
+	m_VideoDriver->deleteAllDynamicLights();
 }
 
 void VideoDriver::DisableFeature(VideoDriverFeature feature, bool flag)
@@ -269,6 +285,39 @@ void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos)
 		*destPos->m_NativeValue);
 }
 
+void VideoDriver::Draw2DLine(int x1, int y1, int x2, int y2, Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DLine(
+		core::vector2di(x1, y1),
+		core::vector2di(x2, y2),
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw2DLine(Vector2Di^ start, Vector2Di^ end, Coloru^ color)
+{
+	LIME_ASSERT(start != nullptr);
+	LIME_ASSERT(end != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DLine(
+		*start->m_NativeValue,
+		*end->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw2DLine(Line2Di^ line, Coloru^ color)
+{
+	LIME_ASSERT(line != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DLine(
+		line->m_NativeValue->start,
+		line->m_NativeValue->end,
+		*color->m_NativeValue);
+}
+
 void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown, Recti^ clip)
 {
 	LIME_ASSERT(pos != nullptr);
@@ -303,10 +352,10 @@ void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ color
 		*colorRightDown->m_NativeValue);
 }
 
-void VideoDriver::Draw2DRectangle(Coloru^ color, Recti^ pos, Recti^ clip)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ color, Recti^ clip)
 {
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 	
 	m_VideoDriver->draw2DRectangle(
@@ -315,14 +364,80 @@ void VideoDriver::Draw2DRectangle(Coloru^ color, Recti^ pos, Recti^ clip)
 		clip->m_NativeValue);
 }
 
-void VideoDriver::Draw2DRectangle(Coloru^ color, Recti^ pos)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Coloru^ color)
 {
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(color != nullptr);
 	
 	m_VideoDriver->draw2DRectangle(
 		*color->m_NativeValue,
 		*pos->m_NativeValue);
+}
+
+void VideoDriver::Draw3DBox(AABBox3Df^ box, Coloru^ color)
+{
+	LIME_ASSERT(box != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DBox(
+		*box->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw3DLine(Vector3Df^ start, Vector3Df^ end, Coloru^ color)
+{
+	LIME_ASSERT(start != nullptr);
+	LIME_ASSERT(end != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DLine(
+		*start->m_NativeValue,
+		*end->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw3DLine(Line3Df^ line, Coloru^ color)
+{
+	LIME_ASSERT(line != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DLine(
+		line->m_NativeValue->start,
+		line->m_NativeValue->end,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Coloru^ color)
+{
+	LIME_ASSERT(pointA != nullptr);
+	LIME_ASSERT(pointB != nullptr);
+	LIME_ASSERT(pointC != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DTriangle(
+		core::triangle3df(*pointA->m_NativeValue, *pointB->m_NativeValue, *pointC->m_NativeValue),
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw3DTriangle(Triangle3Df^ triangle, Coloru^ color)
+{
+	LIME_ASSERT(triangle != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DTriangle(
+		*triangle->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::DrawMeshBuffer(Scene::MeshBuffer^ mb)
+{
+	m_VideoDriver->drawMeshBuffer(LIME_SAFEREF(mb, m_MeshBuffer));
+}
+
+void VideoDriver::DrawPixel(int x, int y, Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	m_VideoDriver->drawPixel((unsigned int)x, (unsigned int)y, *color->m_NativeValue); // !!! signed to unsigned conversion
 }
 
 void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType)
@@ -394,6 +509,18 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices)
 {
 	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+}
+
+void VideoDriver::EnableClipPlane(unsigned int index, bool enable)
+{
+	LIME_ASSERT(index < 6);
+	m_VideoDriver->enableClipPlane(index, enable);
+}
+
+void VideoDriver::EnableClipPlane(unsigned int index)
+{
+	LIME_ASSERT(index < 6);
+	m_VideoDriver->enableClipPlane(index, true);
 }
 
 void VideoDriver::EnableMaterial2D(bool enable)

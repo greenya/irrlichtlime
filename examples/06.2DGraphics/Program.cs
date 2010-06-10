@@ -76,7 +76,7 @@ namespace _06._2DGraphics
 					driver.EnableMaterial2D(false);
 
 					Vector2Di m = device.CursorControl.Position;
-					driver.Draw2DRectangle(new Coloru(255, 255, 255, 100), new Recti(m.X - 20, m.Y - 20, m.X + 20, m.Y + 20));
+					driver.Draw2DRectangle(new Recti(m.X - 20, m.Y - 20, m.X + 20, m.Y + 20), new Coloru(255, 255, 255, 100));
 
 					driver.EndScene();
 				}
