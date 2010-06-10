@@ -9,6 +9,14 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
+Image^ Image::Wrap(video::IImage* ref)
+{
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew Image(ref);
+}
+
 Image::Image(video::IImage* ref)
 	: ReferenceCounted(ref)
 {

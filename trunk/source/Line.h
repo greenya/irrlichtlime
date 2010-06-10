@@ -8,6 +8,27 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
+public ref class Line2Di : Lime::NativeValue<core::line2di>
+{
+public:
+
+	Line2Di()
+		: Lime::NativeValue<core::line2di>(true)
+	{
+		m_NativeValue = new core::line2di();
+	}
+
+	// ...
+
+internal:
+
+	Line2Di(const core::line2di& value)
+		: Lime::NativeValue<core::line2di>(true)
+	{
+		m_NativeValue = new core::line2di(value);
+	}
+};
+
 public ref class Line3Df : Lime::NativeValue<core::line3df>
 {
 public:

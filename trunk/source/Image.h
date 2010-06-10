@@ -39,6 +39,7 @@ public:
 
 internal:
 
+	static Image^ Wrap(video::IImage* ref);
 	Image(video::IImage* ref);
 
 	video::IImage* m_Image;

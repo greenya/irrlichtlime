@@ -36,8 +36,14 @@ public:
 
 	bool CheckDriverReset();
 
+	void ClearZBuffer();
+
 	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void CreateOcclusionQuery(Scene::SceneNode^ node);
+
+	Image^ CreateScreenShot();
+
+	void DeleteAllDynamicLights();
 
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
@@ -51,16 +57,35 @@ public:
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos);
+	
+	void Draw2DLine(int x1, int y1, int x2, int y2, Coloru^ color);
+	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Coloru^ color);
+	void Draw2DLine(Line2Di^ line, Coloru^ color);
 
 	void Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown, Recti^ clip);
 	void Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown);
-	void Draw2DRectangle(Coloru^ color, Recti^ pos, Recti^ clip);
-	void Draw2DRectangle(Coloru^ color, Recti^ pos);
+	void Draw2DRectangle(Recti^ pos, Coloru^ color, Recti^ clip);
+	void Draw2DRectangle(Recti^ pos, Coloru^ color);
+
+	void Draw3DBox(AABBox3Df^ box, Coloru^ color);
+
+	void Draw3DLine(Vector3Df^ start, Vector3Df^ end, Coloru^ color);
+	void Draw3DLine(Line3Df^ line, Coloru^ color);
+
+	void Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Coloru^ color);
+	void Draw3DTriangle(Triangle3Df^ triangle, Coloru^ color);
+
+	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
+
+	void DrawPixel(int x, int y, Coloru^ color);
 
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices);
+
+	void EnableClipPlane(unsigned int index, bool enable);
+	void EnableClipPlane(unsigned int index);
 
 	void EnableMaterial2D(bool enable);
 	void EnableMaterial2D();
