@@ -38,31 +38,34 @@ namespace _07.Collision
 			if (q3levelmesh != null)
 				q3node = smgr.AddOctreeSceneNode(q3levelmesh.GetMesh(0), null, IDFlag_IsPickable);
 
-			//scene::ITriangleSelector* selector = 0;
+			TriangleSelector selector = null;
 
 			if (q3node != null)
 			{
 				q3node.Position = new Vector3Df(-1350, -130, -1400);
-				//selector = smgr->createOctreeTriangleSelector(q3node->getMesh(), q3node, 128);
-				//q3node->setTriangleSelector(selector);
+				selector = smgr.CreateOctreeTriangleSelector(q3node.Mesh, q3node, 128);
+				q3node.TriangleSelector = selector;
 				// We're not done with this selector yet, so don't drop it.
 			}
 
 			// Set a jump speed of 3 units per second, which gives a fairly realistic jump
 			// when used with the gravity of (0, -10, 0) in the collision response animator.
 			CameraSceneNode camera = smgr.AddCameraSceneNodeFPS(null, 100.0f, 0.3f, ID_IsNotPickable, null, true, 3.0f);
-			camera.Rotation = new Vector3Df(50, 50, -60);
+			camera.Position = new Vector3Df(50, 50, -60);
 			camera.Target = new Vector3Df(-70, 30, -60);
 
-			//if (selector)
-			//{
-			//    scene::ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(
-			//            selector, camera, core::vector3df(30,50,30),
-			//            core::vector3df(0,-10,0), core::vector3df(0,30,0));
-			//    selector->drop(); // As soon as we're done with the selector, drop it.
-			//    camera->addAnimator(anim);
-			//    anim->drop();  // And likewise, drop the animator when we're done referring to it.
-			//}
+			if (selector != null)
+			{
+				SceneNodeAnimator anim = smgr.CreateCollisionResponseAnimator(
+					selector, camera,
+					new Vector3Df(30, 50, 30),
+					new Vector3Df(0, -10, 0),
+					new Vector3Df(0, 30, 0));
+
+				selector.Drop(); // As soon as we're done with the selector, drop it.
+				camera.AddAnimator(anim);
+				anim.Drop(); // And likewise, drop the animator when we're done referring to it.
+			}
 
 			// Now I create three animated characters which we can pick, a dynamic light for
 			// lighting them, and a billboard for drawing where we found an intersection.
@@ -71,13 +74,13 @@ namespace _07.Collision
 			device.CursorControl.Visible = false;
 
 			// Add the billboard.
-			//scene::IBillboardSceneNode * bill = smgr->addBillboardSceneNode();
-			//bill->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR );
-			//bill->setMaterialTexture(0, driver->getTexture("../../media/particle.bmp"));
-			//bill->setMaterialFlag(video::EMF_LIGHTING, false);
-			//bill->setMaterialFlag(video::EMF_ZBUFFER, false);
-			//bill->setSize(core::dimension2d<f32>(20.0f, 20.0f));
-			//bill->setID(ID_IsNotPickable); // This ensures that we don't accidentally ray-pick it
+			BillboardSceneNode bill = smgr.AddBillboardSceneNode();
+			bill.SetMaterialType(MaterialType.TransparentAddColor);
+			bill.SetMaterialTexture(0, driver.GetTexture("../media/particle.bmp"));
+			bill.SetMaterialFlag(MaterialFlag.Lighting, false);
+			bill.SetMaterialFlag(MaterialFlag.ZBuffer, false);
+			bill.Size = new Dimension2Df(20.0f, 20.0f);
+			bill.ID = ID_IsNotPickable; // This ensures that we don't accidentally ray-pick it
 
 			AnimatedMeshSceneNode node = null;
 
@@ -93,18 +96,18 @@ namespace _07.Collision
 
 			// Now create a triangle selector for it.  The selector will know that it
 			// is associated with an animated node, and will update itself as necessary.
-			//selector = smgr->createTriangleSelector(node);
-			//node->setTriangleSelector(selector);
-			//selector->drop(); // We're done with this selector, so drop it now.
+			selector = smgr.CreateTriangleSelector(node);
+			node.TriangleSelector = selector;
+			selector.Drop(); // We're done with this selector, so drop it now.
 
 			// This X files uses skeletal animation, but without skinning.
 			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/dwarf.x"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
 			node.Position = new Vector3Df(-70, -66, 0); // Put its feet on the floor.
 			node.Rotation = new Vector3Df(0, -90, 0); // And turn it towards the camera.
 			node.AnimationSpeed = 20.0f;
-			//selector = smgr->createTriangleSelector(node);
-			//node->setTriangleSelector(selector);
-			//selector->drop();
+			selector = smgr.CreateTriangleSelector(node);
+			node.TriangleSelector = selector;
+			selector.Drop();
 
 			// And this B3D file uses skinned skeletal animation.
 			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/ninja.b3d"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
@@ -114,9 +117,9 @@ namespace _07.Collision
 			node.AnimationSpeed = 10.0f;
 			node.GetMaterial(0).NormalizeNormals = true;
 			// Just do the same as we did above.
-			//selector = smgr->createTriangleSelector(node);
-			//node->setTriangleSelector(selector);
-			//selector->drop();
+			selector = smgr.CreateTriangleSelector(node);
+			node.TriangleSelector = selector;
+			selector.Drop();
 
 			// Add a light, so that the unselected nodes aren't completely dark.
 			LightSceneNode light = smgr.AddLightSceneNode(null, new Vector3Df(-60, 100, 400), new Colorf(1.0f, 1.0f, 1.0f), 600.0f);
@@ -124,7 +127,7 @@ namespace _07.Collision
 
 			// Remember which scene node is highlighted
 			SceneNode highlightedSceneNode = null;
-			//scene::ISceneCollisionManager* collMan = smgr->getSceneCollisionManager();
+			SceneCollisionManager collMan = smgr.SceneCollisionManager;
 			int lastFPS = -1;
 
 			// draw the selection triangle only as wireframe
@@ -133,10 +136,8 @@ namespace _07.Collision
 			material.Wireframe = true;
 
 			while (device.Run())
+			if (device.WindowActive)
 			{
-				if (!device.WindowActive)
-					continue;
-
 				driver.BeginScene(true, true, new Coloru(0));
 				smgr.DrawAll();
 
@@ -151,14 +152,14 @@ namespace _07.Collision
 				// a distance of 1000.  You can easily modify this to check (e.g.) a bullet
 				// trajectory or a sword's position, or create a ray from a mouse click position using
 				// ISceneCollisionManager::getRayFromScreenCoordinates()
-				//core::line3d<f32> ray;
-				//ray.start = camera->getPosition();
-				//ray.end = ray.start + (camera->getTarget() - ray.start).normalize() * 1000.0f;
+				Line3Df ray = new Line3Df();
+				ray.Start = new Vector3Df(camera.Position);
+				ray.End = ray.Start + (camera.Target - ray.Start).Normalize() * 1000.0f;
 
 				// Tracks the current intersection point with the level or a mesh
-				Vector3Df intersection;
+				Vector3Df intersection = new Vector3Df();
 				// Used to show with triangle has been hit
-				//core::triangle3df hitTriangle;
+				Triangle3Df hitTriangle = new Triangle3Df();
 
 				// This call is all you need to perform ray/triangle collision on every scene node
 				// that has a triangle selector, including the Quake level mesh.  It finds the nearest
@@ -166,36 +167,35 @@ namespace _07.Collision
 				// Irrlicht provides other types of selection, including ray/triangle selector,
 				// ray/box and ellipse/triangle selector, plus associated helpers.
 				// See the methods of ISceneCollisionManager
-				//scene::ISceneNode* selectedSceneNode =
-				//        collMan->getSceneNodeAndCollisionPointFromRay(
-				//                        ray,
-				//                        intersection, // This will be the position of the collision
-				//                        hitTriangle, // This will be the triangle hit in the collision
-				//                        IDFlag_IsPickable, // This ensures that only nodes that we have set up to be pickable are considered
-				//                        0); // Check the entire scene (this is actually the implicit default)
+				SceneNode selectedSceneNode =
+					collMan.GetSceneNodeAndCollisionPointFromRay(
+						ray,
+						out intersection, // This will be the position of the collision
+						out hitTriangle, // This will be the triangle hit in the collision
+						IDFlag_IsPickable); // This ensures that only nodes that we have set up to be pickable are considered
 
 				// If the ray hit anything, move the billboard to the collision position
 				// and draw the triangle that was hit.
-				//if (selectedSceneNode != null)
-				//{
-				//    //bill->setPosition(intersection);
+				if (selectedSceneNode != null)
+				{
+					bill.Position = new Vector3Df(intersection);
 
-				//    // We need to reset the transform before doing our own rendering.
-				//    driver.SetTransform(TransformationState.World, new Matrix4f());
-				//    driver.SetMaterial(material);
-				//    //driver->draw3DTriangle(hitTriangle, video::SColor(0,255,0,0));
+					// We need to reset the transform before doing our own rendering.
+					driver.SetTransform(TransformationState.World, new Matrix4f());
+					driver.SetMaterial(material);
+					driver.Draw3DTriangle(hitTriangle, new Coloru(255, 0, 0));
 
-				//    // We can check the flags for the scene node that was hit to see if it should be
-				//    // highlighted. The animated nodes can be highlighted, but not the Quake level mesh
-				//    //if((selectedSceneNode->getID() & IDFlag_IsHighlightable) == IDFlag_IsHighlightable)
-				//    //{
-				//    //    highlightedSceneNode = selectedSceneNode;
+					// We can check the flags for the scene node that was hit to see if it should be
+					// highlighted. The animated nodes can be highlighted, but not the Quake level mesh
+					if ((selectedSceneNode.ID & IDFlag_IsHighlightable) == IDFlag_IsHighlightable)
+					{
+						highlightedSceneNode = selectedSceneNode;
 
-				//    //    // Highlighting in this case means turning lighting OFF for this node,
-				//    //    // which means that it will be drawn with full brightness.
-				//    //    highlightedSceneNode->setMaterialFlag(video::EMF_LIGHTING, false);
-				//    //}
-				//}
+						// Highlighting in this case means turning lighting OFF for this node,
+						// which means that it will be drawn with full brightness.
+						highlightedSceneNode.SetMaterialFlag(MaterialFlag.Lighting, false);
+					}
+				}
 
 				// We're all done drawing, so end the scene.
 				driver.EndScene();
