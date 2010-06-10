@@ -1,5 +1,9 @@
 #pragma once
 
+#if defined(_REFCLASS_) || defined(_WRAPCLASS_) || defined(_WRAPTYPE_)
+#error _REFCLASS_, _WRAPCLASS_ and _WRAPTYPE_ must be undefined for this file to process.
+#endif
+
 #include "stdafx.h"
 
 using namespace irr;
@@ -11,6 +15,13 @@ namespace Core {
 public ref class Vector2Df : Lime::NativeValue<core::vector2df>
 {
 public:
+
+	Vector2Df(Vector2Df^ copy)
+		: Lime::NativeValue<core::vector2df>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::vector2df(*copy->m_NativeValue);
+	}
 
 	Vector2Df(float x, float y)
 		: Lime::NativeValue<core::vector2df>(true)
@@ -60,6 +71,13 @@ public ref class Vector2Di : Lime::NativeValue<core::vector2di>
 {
 public:
 
+	Vector2Di(Vector2Di^ copy)
+		: Lime::NativeValue<core::vector2di>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::vector2di(*copy->m_NativeValue);
+	}
+
 	Vector2Di(int x, int y)
 		: Lime::NativeValue<core::vector2di>(true)
 	{
@@ -104,59 +122,21 @@ internal:
 	}
 };
 
-public ref class Vector3Df : Lime::NativeValue<core::vector3df>
-{
-public:
+#define _REFCLASS_ Vector3Df
+#define _WRAPCLASS_ core::vector3df
+#define _WRAPTYPE_ float
+#include "Vector3D_template.h"
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
 
-	Vector3Df(float x, float y, float z)
-		: Lime::NativeValue<core::vector3df>(true)
-	{
-		m_NativeValue = new core::vector3df(x, y, z);
-	}
-
-	Vector3Df(float xyz)
-		: Lime::NativeValue<core::vector3df>(true)
-	{
-		m_NativeValue = new core::vector3df(xyz);
-	}
-
-	Vector3Df()
-		: Lime::NativeValue<core::vector3df>(true)
-	{
-		m_NativeValue = new core::vector3df();
-	}
-
-	property float X
-	{
-		float get() { return m_NativeValue->X; }
-		void set(float value) { m_NativeValue->X = value; }
-	}
-
-	property float Y
-	{
-		float get() { return m_NativeValue->Y; }
-		void set(float value) { m_NativeValue->Y = value; }
-	}
-
-	property float Z
-	{
-		float get() { return m_NativeValue->Z; }
-		void set(float value) { m_NativeValue->Z = value; }
-	}
-
-	virtual String^ ToString() override
-	{
-		return String::Format("{0},{1},{2}", X, Y, Z);
-	}
-
-internal:
-
-	Vector3Df(const core::vector3df& other)
-		: Lime::NativeValue<core::vector3df>(true)
-	{
-		m_NativeValue = new core::vector3df(other);
-	}
-};
+#define _REFCLASS_ Vector3Di
+#define _WRAPCLASS_ core::vector3di
+#define _WRAPTYPE_ int
+#include "Vector3D_template.h"
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
 
 } // end namespace Core
 } // end namespace IrrlichtLime

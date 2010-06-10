@@ -347,6 +347,10 @@
 				RelativePath=".\Vector.h"
 				>
 			</File>
+			<File
+				RelativePath=".\Vector3D_template.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Scene"
