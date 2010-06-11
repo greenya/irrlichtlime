@@ -344,6 +344,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Rect_template.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Triangle.h"
 				>
 			</File>

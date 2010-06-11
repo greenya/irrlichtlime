@@ -135,7 +135,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("({0})-({1})", Start, End);
+		return String::Format("({0}) - ({1})", Start, End);
 	}
 
 internal:
