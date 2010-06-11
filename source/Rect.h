@@ -1,5 +1,9 @@
 #pragma once
 
+#if defined(_REFCLASS_) || defined(_WRAPCLASS_) || defined(_WRAPTYPE_) || defined(_OTHERTYPE1_) || defined(_OTHERTYPE2_)
+#error _REFCLASS_, _WRAPCLASS_, _WRAPTYPE_ , _OTHERTYPE1_ and _OTHERTYPE2_ must be undefined for this file to process.
+#endif
+
 #include "stdafx.h"
 
 using namespace irr;
@@ -8,78 +12,29 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Recti : Lime::NativeValue<core::recti>
-{
-public:
+#define _REFCLASS_ Recti
+#define _WRAPCLASS_ core::recti
+#define _WRAPTYPE_ int
+#define _OTHERTYPE1_ Vector2Di
+#define _OTHERTYPE2_ Dimension2Du
+#include "Rect_template.h"
+#undef _OTHERTYPE2_
+#undef _OTHERTYPE1_
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
 
-	Recti(int x1, int y1, int x2, int y2)
-		: Lime::NativeValue<core::recti>(true)
-	{
-		m_NativeValue = new core::recti(x1, y1, x2, y2);
-	}
-
-	Recti(Vector2Di^ upperLeft, Vector2Di^ lowerRight)
-		: Lime::NativeValue<core::recti>(true)
-	{
-		m_NativeValue = new core::recti(*upperLeft->m_NativeValue, *lowerRight->m_NativeValue);
-	}
-
-	property Vector2Di^ UpperLeftCorner
-	{
-		Vector2Di^ get()
-		{
-			return gcnew Vector2Di(m_NativeValue->UpperLeftCorner);
-		}
-
-		void set(Vector2Di^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->UpperLeftCorner = *value->m_NativeValue;
-		}
-	}
-
-	property Vector2Di^ LowerRightCorner
-	{
-		Vector2Di^ get()
-		{
-			return gcnew Vector2Di(m_NativeValue->LowerRightCorner);
-		}
-
-		void set(Vector2Di^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->LowerRightCorner = *value->m_NativeValue;
-		}
-	}
-
-	property int Width
-	{
-		int get() { return m_NativeValue->getWidth(); }
-	}
-
-	property int Height
-	{
-		int get() { return m_NativeValue->getHeight(); }
-	}
-
-	property int Area
-	{
-		int get() { return m_NativeValue->getArea(); }
-	}
-
-	virtual String^ ToString() override
-	{
-		return String::Format("UpperLeftCorner={{{0}}}; LowerRightCorner={{{1}}}", UpperLeftCorner, LowerRightCorner);
-	}
-
-internal:
-
-	Recti(const core::recti& value)
-		: Lime::NativeValue<core::recti>(true)
-	{
-		m_NativeValue = new core::recti(value);
-	}
-};
+#define _REFCLASS_ Rectf
+#define _WRAPCLASS_ core::rectf
+#define _WRAPTYPE_ float
+#define _OTHERTYPE1_ Vector2Df
+#define _OTHERTYPE2_ Dimension2Df
+#include "Rect_template.h"
+#undef _OTHERTYPE2_
+#undef _OTHERTYPE1_
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
 
 } // end namespace Core
 } // end namespace IrrlichtLime

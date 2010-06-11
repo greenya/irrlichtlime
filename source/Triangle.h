@@ -157,7 +157,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("({0})-({1})-({2})", A, B, C);
+		return String::Format("({0}) - ({1}) - ({2})", A, B, C);
 	}
 
 internal:
