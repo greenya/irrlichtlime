@@ -324,6 +324,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Dimension2D_template.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Line.h"
 				>
 			</File>

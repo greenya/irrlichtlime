@@ -117,6 +117,6 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("{0},{1},{2}", X, Y, Z);
+		return String::Format("{0}, {1}, {2}", X, Y, Z);
 	}
 };
