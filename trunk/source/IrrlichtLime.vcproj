@@ -348,7 +348,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Vector2D_template.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Vector3D_template.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector_common_template.h"
 				>
 			</File>
 		</Filter>
