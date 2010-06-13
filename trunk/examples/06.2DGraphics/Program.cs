@@ -64,12 +64,12 @@ namespace _06._2DGraphics
 					// draw some text
 					if (font != null)
 						font.Draw("This demo shows that Irrlicht is also capable of drawing 2D graphics.",
-							new Recti(130, 10, 300, 50), new Coloru(255, 255, 255));
+							130, 10, new Coloru(255, 255, 255));
 
 					// draw some other text
 					if (font2 != null)
 						font2.Draw("Also mixing with 3d graphics is possible.",
-							new Recti(130, 20, 300, 60), new Coloru(time % 255, time % 255, 255));
+							130, 20, new Coloru(time % 255, time % 255, 255));
 
 					driver.EnableMaterial2D();
 					driver.Draw2DImage(images, new Recti(10, 10, 108, 48), new Recti(354, 87, 442, 118));

@@ -157,9 +157,9 @@ namespace _07.Collision
 				ray.End = ray.Start + (camera.Target - ray.Start).Normalize() * 1000.0f;
 
 				// Tracks the current intersection point with the level or a mesh
-				Vector3Df intersection = new Vector3Df();
+				Vector3Df intersection;
 				// Used to show with triangle has been hit
-				Triangle3Df hitTriangle = new Triangle3Df();
+				Triangle3Df hitTriangle;
 
 				// This call is all you need to perform ray/triangle collision on every scene node
 				// that has a triangle selector, including the Quake level mesh.  It finds the nearest
