@@ -20,6 +20,7 @@ ref class CameraSceneNode;
 ref class CollisionResponseSceneNodeAnimator;
 ref class LightSceneNode;
 ref class Mesh;
+ref class MeshManipulator;
 ref class MeshSceneNode;
 ref class SceneCollisionManager;
 ref class SceneNode;
@@ -146,6 +147,7 @@ public:
 	property SceneNode^ RootSceneNode { SceneNode^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
 	property Scene::SceneNodeRenderPass SceneNodeRenderPass { Scene::SceneNodeRenderPass get(); }
 	property Video::Coloru^ ShadowColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
