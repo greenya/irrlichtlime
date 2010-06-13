@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.2DGraphics", "examples\0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.Collision", "examples\07.Collision\07.Collision.csproj", "{2EC4B4A2-A038-4FA9-885D-F1E1FB9A0EB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.SpecialFX", "examples\08.SpecialFX\08.SpecialFX.csproj", "{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{2EC4B4A2-A038-4FA9-885D-F1E1FB9A0EB9}.Release|Win32.ActiveCfg = Release|x86
 		{2EC4B4A2-A038-4FA9-885D-F1E1FB9A0EB9}.Release|x86.ActiveCfg = Release|x86
 		{2EC4B4A2-A038-4FA9-885D-F1E1FB9A0EB9}.Release|x86.Build.0 = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|Win32.ActiveCfg = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|x86.ActiveCfg = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Debug|x86.Build.0 = Debug|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|Any CPU.ActiveCfg = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|Win32.ActiveCfg = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|x86.ActiveCfg = Release|x86
+		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
