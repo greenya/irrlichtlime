@@ -448,6 +448,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MeshManipulator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MeshManipulator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MeshSceneNode.cpp"
 				>
 			</File>

@@ -8,6 +8,7 @@
 #include "GUIEnvironment.h"
 #include "LightSceneNode.h"
 #include "Mesh.h"
+#include "MeshManipulator.h"
 #include "MeshSceneNode.h"
 #include "ReferenceCounted.h"
 #include "SceneCollisionManager.h"
@@ -1074,6 +1075,11 @@ IO::FileSystem^ SceneManager::FileSystem::get()
 GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 {
 	return GUI::GUIEnvironment::Wrap(m_SceneManager->getGUIEnvironment());
+}
+
+Scene::MeshManipulator^ SceneManager::MeshManipulator::get()
+{
+	return Scene::MeshManipulator::Wrap(m_SceneManager->getMeshManipulator());
 }
 
 Scene::SceneCollisionManager^ SceneManager::SceneCollisionManager::get()
