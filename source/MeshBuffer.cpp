@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Material.h"
 #include "MeshBuffer.h"
 #include "ReferenceCounted.h"
 
@@ -21,6 +22,90 @@ MeshBuffer::MeshBuffer(scene::IMeshBuffer* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_MeshBuffer = ref;
+}
+
+void MeshBuffer::Append(MeshBuffer^ other)
+{
+	m_MeshBuffer->append(LIME_SAFEREF(other, m_MeshBuffer));
+}
+
+Vector3Df^ MeshBuffer::GetNormal(unsigned int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex < VertexCount);
+	return gcnew Vector3Df(m_MeshBuffer->getNormal(vertexIndex));
+}
+
+Vector3Df^ MeshBuffer::GetPosition(unsigned int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex < VertexCount);
+	return gcnew Vector3Df(m_MeshBuffer->getPosition(vertexIndex));
+}
+
+Vector2Df^ MeshBuffer::GetTCoords(unsigned int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex < VertexCount);
+	return gcnew Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
+}
+
+void MeshBuffer::RecalculateBoundingBox()
+{
+	m_MeshBuffer->recalculateBoundingBox();
+}
+
+void MeshBuffer::SetDirty(HardwareBufferType buffer)
+{
+	m_MeshBuffer->setDirty((scene::E_BUFFER_TYPE)buffer);
+}
+
+void MeshBuffer::SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer)
+{
+	m_MeshBuffer->setHardwareMappingHint((scene::E_HARDWARE_MAPPING)mappingHint, (scene::E_BUFFER_TYPE)buffer);
+}
+
+AABBox3Df^ MeshBuffer::BoundingBox::get()
+{
+	return gcnew AABBox3Df(m_MeshBuffer->getBoundingBox());
+}
+
+void MeshBuffer::BoundingBox::set(AABBox3Df^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_MeshBuffer->setBoundingBox(*value->m_NativeValue);
+}
+
+HardwareMappingHint MeshBuffer::HardwareMappingHintForIndex::get()
+{
+	return (HardwareMappingHint)m_MeshBuffer->getHardwareMappingHint_Index();
+}
+
+HardwareMappingHint MeshBuffer::HardwareMappingHintForVertex::get()
+{
+	return (HardwareMappingHint)m_MeshBuffer->getHardwareMappingHint_Vertex();
+}
+
+unsigned int MeshBuffer::IndexCount::get()
+{
+	return m_MeshBuffer->getIndexCount();
+}
+
+Video::IndexType MeshBuffer::IndexType::get()
+{
+	return (Video::IndexType)m_MeshBuffer->getIndexType();
+}
+
+Video::Material^ MeshBuffer::Material::get()
+{
+	return Video::Material::Wrap(&m_MeshBuffer->getMaterial());
+}
+
+unsigned int MeshBuffer::VertexCount::get()
+{
+	return m_MeshBuffer->getVertexCount();
+}
+
+Video::VertexType MeshBuffer::VertexType::get()
+{
+	return (Video::VertexType)m_MeshBuffer->getVertexType();
 }
 
 } // end namespace Scene

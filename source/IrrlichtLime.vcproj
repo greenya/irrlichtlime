@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\IndexType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Light.cpp"
 				>
 			</File>
