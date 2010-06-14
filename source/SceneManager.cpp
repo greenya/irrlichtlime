@@ -524,6 +524,87 @@ MeshSceneNode^ SceneManager::AddCubeSceneNode()
 	return MeshSceneNode::Wrap(n);
 }
 
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+	float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(countHills != nullptr);
+	LIME_ASSERT(textureRepeatCount != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
+		Lime::StringToPath(name),
+		*tileSize->m_NativeValue,
+		*tileCount->m_NativeValue,
+		LIME_SAFEREF(material, m_NativeValue),
+		hillHeight,
+		*countHills->m_NativeValue,
+		*textureRepeatCount->m_NativeValue);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+	float hillHeight, Dimension2Df^ countHills)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(countHills != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
+		Lime::StringToPath(name),
+		*tileSize->m_NativeValue,
+		*tileCount->m_NativeValue,
+		LIME_SAFEREF(material, m_NativeValue),
+		hillHeight,
+		*countHills->m_NativeValue);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+	float hillHeight)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileCount != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
+		Lime::StringToPath(name),
+		*tileSize->m_NativeValue,
+		*tileCount->m_NativeValue,
+		LIME_SAFEREF(material, m_NativeValue),
+		hillHeight);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileCount != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
+		Lime::StringToPath(name),
+		*tileSize->m_NativeValue,
+		*tileCount->m_NativeValue,
+		LIME_SAFEREF(material, m_NativeValue));
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileCount != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
+		Lime::StringToPath(name),
+		*tileSize->m_NativeValue,
+		*tileCount->m_NativeValue);
+
+	return AnimatedMesh::Wrap(m);
+}
+
 LightSceneNode^ SceneManager::AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius, int id)
 {
 	LIME_ASSERT(position != nullptr);
@@ -738,6 +819,125 @@ MeshSceneNode^ SceneManager::AddSphereSceneNode()
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addSphereSceneNode();
 	return MeshSceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent,
+	int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent,
+	int id, Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent,
+	int id, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent,
+	int id)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed,
+		waveLength);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight,
+		waveSpeed);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		waveHeight);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh)
+{
+	scene::ISceneNode* n = m_SceneManager->addWaterSurfaceSceneNode(LIME_SAFEREF(mesh, m_Mesh));
+	return SceneNode::Wrap(n);
 }
 
 void SceneManager::Clear()
