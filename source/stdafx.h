@@ -40,6 +40,8 @@
 #include "MaterialFlag.h"
 #include "MaterialType.h"
 #include "MouseEventType.h"
+#include "ParticleAffectorType.h"
+#include "ParticleEmitterType.h"
 #include "PrimitiveType.h"
 #include "RenderTarget.h"
 #include "SceneNodeAnimatorType.h"
