@@ -73,6 +73,12 @@ public:
 	MeshSceneNode^ AddCubeSceneNode(float size);
 	MeshSceneNode^ AddCubeSceneNode();
 
+	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount);
+	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills);
+	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight);
+	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material);
+	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount);
+
 	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius, int id);
 	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color, float radius);
 	LightSceneNode^ AddLightSceneNode(SceneNode^ parent, Vector3Df^ position, Video::Colorf^ color);
@@ -94,6 +100,16 @@ public:
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount);
 	MeshSceneNode^ AddSphereSceneNode(float radius);
 	MeshSceneNode^ AddSphereSceneNode();
+
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight);
+	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh);
 
 	void Clear();
 

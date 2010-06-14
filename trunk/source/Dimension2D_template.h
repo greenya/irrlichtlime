@@ -69,6 +69,12 @@ public:
 		m_NativeValue = new _WRAPCLASS_();
 	}
 
+	_REFCLASS_(_WRAPTYPE_ widthAndHeight)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
+	{
+		m_NativeValue = new _WRAPCLASS_(widthAndHeight, widthAndHeight);
+	}
+
 	_REFCLASS_(_WRAPTYPE_ width, _WRAPTYPE_ height)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
