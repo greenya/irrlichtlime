@@ -424,6 +424,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\HardwareBufferType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\HardwareMappingHint.h"
+				>
+			</File>
+			<File
 				RelativePath=".\LightSceneNode.cpp"
 				>
 			</File>

@@ -1,5 +1,7 @@
 #include "stdafx.h"
+#include "Material.h"
 #include "Mesh.h"
+#include "MeshBuffer.h"
 #include "ReferenceCounted.h"
 
 using namespace irr;
@@ -21,6 +23,53 @@ Mesh::Mesh(scene::IMesh* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_Mesh = ref;
+}
+
+MeshBuffer^ Mesh::GetMeshBuffer(Video::Material^ material)
+{
+	LIME_ASSERT(material != nullptr);
+	
+	scene::IMeshBuffer* b = m_Mesh->getMeshBuffer(*material->m_NativeValue);
+	return MeshBuffer::Wrap(b);
+}
+
+MeshBuffer^ Mesh::GetMeshBuffer(unsigned int index)
+{
+	LIME_ASSERT(index < MeshBufferCount);
+	
+	scene::IMeshBuffer* b = m_Mesh->getMeshBuffer(index);
+	return MeshBuffer::Wrap(b);
+}
+
+void Mesh::SetDirty(HardwareBufferType buffer)
+{
+	m_Mesh->setDirty((scene::E_BUFFER_TYPE)buffer);
+}
+
+void Mesh::SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer)
+{
+	m_Mesh->setHardwareMappingHint((scene::E_HARDWARE_MAPPING)mappingHint, (scene::E_BUFFER_TYPE)buffer);
+}
+
+void Mesh::SetMaterialFlag(Video::MaterialFlag flag, bool newvalue)
+{
+	m_Mesh->setMaterialFlag((video::E_MATERIAL_FLAG)flag, newvalue);
+}
+
+AABBox3Df^ Mesh::BoundingBox::get()
+{
+	return gcnew AABBox3Df(m_Mesh->getBoundingBox());
+}
+
+void Mesh::BoundingBox::set(AABBox3Df^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_Mesh->setBoundingBox(*value->m_NativeValue);
+}
+
+unsigned int Mesh::MeshBufferCount::get()
+{
+	return m_Mesh->getMeshBufferCount();
 }
 
 } // end namespace Scene

@@ -30,6 +30,8 @@
 #include "GUIFontType.h"
 #include "GUIListBoxColor.h"
 #include "GUISkinType.h"
+#include "HardwareBufferType.h"
+#include "HardwareMappingHint.h"
 #include "KeyAction.h"
 #include "KeyCode.h"
 #include "LightType.h"
