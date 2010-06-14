@@ -32,6 +32,7 @@
 #include "GUISkinType.h"
 #include "HardwareBufferType.h"
 #include "HardwareMappingHint.h"
+#include "IndexType.h"
 #include "KeyAction.h"
 #include "KeyCode.h"
 #include "LightType.h"

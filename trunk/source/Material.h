@@ -57,6 +57,7 @@ public:
 
 internal:
 
+	static Material^ Wrap(video::SMaterial* ref);
 	Material(video::SMaterial* ref);
 };
 

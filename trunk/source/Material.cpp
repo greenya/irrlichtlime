@@ -9,6 +9,14 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
+Material^ Material::Wrap(video::SMaterial* ref)
+{
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew Material(ref);
+}
+
 Material::Material(video::SMaterial* ref)
 	: Lime::NativeValue<video::SMaterial>(false)
 {

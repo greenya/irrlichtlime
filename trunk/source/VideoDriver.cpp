@@ -765,7 +765,7 @@ int VideoDriver::FPS::get()
 
 Material^ VideoDriver::Material2D::get()
 {
-	return gcnew Material(&m_VideoDriver->getMaterial2D());
+	return Material::Wrap(&m_VideoDriver->getMaterial2D());
 }
 
 unsigned int VideoDriver::PrimitiveCountDrawn::get()
