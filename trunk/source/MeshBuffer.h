@@ -15,6 +15,7 @@ public:
 
 internal:
 
+	static MeshBuffer^ Wrap(scene::IMeshBuffer* ref);
 	MeshBuffer(scene::IMeshBuffer* ref);
 
 	scene::IMeshBuffer* m_MeshBuffer;

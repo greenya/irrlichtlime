@@ -8,6 +8,14 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
+MeshBuffer^ MeshBuffer::Wrap(scene::IMeshBuffer* ref)
+{
+	if (ref == nullptr)
+		return nullptr;
+
+	return gcnew MeshBuffer(ref);
+}
+
 MeshBuffer::MeshBuffer(scene::IMeshBuffer* ref)
 	: ReferenceCounted(ref)
 {
