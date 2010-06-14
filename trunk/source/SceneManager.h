@@ -22,6 +22,7 @@ ref class LightSceneNode;
 ref class Mesh;
 ref class MeshManipulator;
 ref class MeshSceneNode;
+ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
 ref class SceneNode;
 ref class SceneNodeAnimator;
@@ -91,6 +92,14 @@ public:
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
+
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id, Vector3Df^ position);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter);
+	ParticleSystemSceneNode^ AddParticleSystemSceneNode();
 
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);

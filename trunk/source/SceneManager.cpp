@@ -10,6 +10,7 @@
 #include "Mesh.h"
 #include "MeshManipulator.h"
 #include "MeshSceneNode.h"
+#include "ParticleSystemSceneNode.h"
 #include "ReferenceCounted.h"
 #include "SceneCollisionManager.h"
 #include "SceneManager.h"
@@ -720,6 +721,85 @@ MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
 		LIME_SAFEREF(mesh, m_Mesh));
 
 	return MeshSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id,
+	Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(
+		withDefaultEmitter,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id,
+	Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(
+		withDefaultEmitter,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id,
+	Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(
+		withDefaultEmitter,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id)
+{
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(
+		withDefaultEmitter,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent)
+{
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(
+		withDefaultEmitter,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter)
+{
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode(withDefaultEmitter);
+	return ParticleSystemSceneNode::Wrap(n);
+}
+
+ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode()
+{
+	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode();
+	return ParticleSystemSceneNode::Wrap(n);
 }
 
 MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id,

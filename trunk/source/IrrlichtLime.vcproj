@@ -476,6 +476,46 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Particle.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Particle.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAffector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAffector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAffectorType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleEmitterType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleSystemSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleSystemSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\PrimitiveType.h"
 				>
 			</File>
