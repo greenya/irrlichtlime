@@ -238,14 +238,14 @@ List<SceneNodeAnimator^>^ SceneNode::AnimatorList::get()
 	return l;
 }
 
-unsigned int SceneNode::AutomaticCulling::get()
+CullingType SceneNode::AutomaticCulling::get()
 {
-	return m_SceneNode->getAutomaticCulling();
+	return (CullingType)m_SceneNode->getAutomaticCulling();
 }
 
-void SceneNode::AutomaticCulling::set(unsigned int value)
+void SceneNode::AutomaticCulling::set(CullingType value)
 {
-	m_SceneNode->setAutomaticCulling(value);
+	m_SceneNode->setAutomaticCulling((scene::E_CULLING_TYPE)value);
 }
 
 AABBox3Df^ SceneNode::BoundingBox::get()
@@ -258,6 +258,7 @@ AABBox3Df^ SceneNode::BoundingBox::get()
 	}
 	
 #if _DEBUG
+	// this allows to browse properties of the root scene node in debugger when you stop code execution (on breakpoint, etc.)
 	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
 		return gcnew AABBox3Df();
 #endif

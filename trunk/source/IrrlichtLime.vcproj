@@ -408,6 +408,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BoneAnimationMode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BoneSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BoneSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BoneSkinningSpace.h"
+				>
+			</File>
+			<File
 				RelativePath=".\CameraSceneNode.cpp"
 				>
 			</File>
@@ -424,6 +440,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CullingType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DebugSceneType.h"
 				>
 			</File>
@@ -433,6 +453,10 @@
 			</File>
 			<File
 				RelativePath=".\HardwareMappingHint.h"
+				>
+			</File>
+			<File
+				RelativePath=".\JointUpdateOnRender.h"
 				>
 			</File>
 			<File
