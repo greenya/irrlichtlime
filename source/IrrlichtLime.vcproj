@@ -568,6 +568,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ShadowVolumeSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ShadowVolumeSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriangleSelector.cpp"
 				>
 			</File>
