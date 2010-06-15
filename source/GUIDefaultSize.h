@@ -25,7 +25,7 @@ public enum class GUIDefaultSize
 	TitleBarTextDistanceY = EGDS_TITLEBARTEXT_DISTANCE_Y,
 	MessageBoxGapSpace = EGDS_MESSAGE_BOX_GAP_SPACE,
 	MessageBoxMinTextWidth = EGDS_MESSAGE_BOX_MIN_TEXT_WIDTH,
-	MessageBoxMaxTextWidth = EGDS_MESSAGE_BOX_MAX_TEST_WIDTH,
+	MessageBoxMaxTextWidth = EGDS_MESSAGE_BOX_MAX_TEXT_WIDTH,
 	MessageBoxMinTextHeight = EGDS_MESSAGE_BOX_MIN_TEXT_HEIGHT,
 	MessageBoxMaxTextHeight = EGDS_MESSAGE_BOX_MAX_TEXT_HEIGHT
 };

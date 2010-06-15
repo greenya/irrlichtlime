@@ -16,7 +16,7 @@ Event::GUIEvent Event::GUI::get()
 {
 	LIME_ASSERT(Type == EventType::GUI);
 
-	// patch for currently present bug (http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669) {
+	// !!! patch for currently present bug (http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669) {
 	switch (m_NativeValue->GUIEvent.EventType)
 	{
 	case gui::EGET_ELEMENT_LEFT :

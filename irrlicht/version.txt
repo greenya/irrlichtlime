@@ -1,9 +1,11 @@
-3291
-1.7.1-beta
-
-Irrlicht9.0.vcproj
-	Character Set = Use Unicode Character Set
+SRC: https://irrlicht.svn.sourceforge.net/svnroot/irrlicht/trunk
+REV: 3313
 
 IrrCompileConfig.h
 	+ _IRR_COMPILE_WITH_DIRECT3D_8_
 	+ _IRR_WCHAR_FILESYSTEM
+
+Irrlicht9.0.vcproj
+	Character Set = "Use Unicode Character Set"
+	Additional Include Directories += ";..\..\..\DX89SDK\Include"
+	Additional Library Directories = "..\..\..\DX89SDK\Lib\x86"
