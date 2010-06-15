@@ -69,7 +69,7 @@ The Irrlicht Lime SDK
   The Irrlicht Lime License
   =========================
 
-  Copyright (C) 2010 greenya
+  Copyright (C) 2010 Yuriy Grinevich
 
   This software is provided 'as-is', without any express or implied
   warranty. In no event will the authors be held liable for any damages

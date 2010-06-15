@@ -41,7 +41,7 @@ public:
 		double get() { return m_NativeValue->getAngle(); }
 	}
 
-	//excluded becuase of http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?p=225930#225930
+	// !!! excluded becuase of http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?p=225930#225930
 	//property double AngleTrig
 	//{
 	//	double get() { return m_NativeValue->getAngleTrig(); }

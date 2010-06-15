@@ -11,7 +11,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("Irrlicht Lime")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) greenya 2010")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Yuriy Grinevich 2010")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
