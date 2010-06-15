@@ -33,7 +33,7 @@ public:
 	void RemoveAnimators();
 	bool RemoveChild(SceneNode^ child);
 
-	void Render();
+	virtual void Render();
 
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
 	void SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture);
@@ -44,7 +44,7 @@ public:
 	property Vector3Df^ AbsolutePosition { Vector3Df^ get(); }
 	property Matrix4f^ AbsoluteTransformation { Matrix4f^ get(); protected: void set(Matrix4f^ value); }
 	property List<SceneNodeAnimator^>^ AnimatorList { List<SceneNodeAnimator^>^ get(); }
-	property unsigned int AutomaticCulling { unsigned int get(); void set(unsigned int value); }
+	property CullingType AutomaticCulling { CullingType get(); void set(CullingType value); }
 	property AABBox3Df^ BoundingBox { AABBox3Df^ get(); }
 	property AABBox3Df^ BoundingBoxTransformed { AABBox3Df^ get(); }
 	property List<SceneNode^>^ ChildList { List<SceneNode^>^ get(); }
