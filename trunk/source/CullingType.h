@@ -8,12 +8,14 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
+[Flags]
 public enum class CullingType
 {
 	Off = EAC_OFF,
 	Box = EAC_BOX,
 	FrustumBox = EAC_FRUSTUM_BOX,
-	FrustumSphere = EAC_FRUSTUM_SPHERE
+	FrustumSphere = EAC_FRUSTUM_SPHERE,
+	OcclusionQuery = EAC_OCC_QUERY
 };
 
 } // end namespace Scene

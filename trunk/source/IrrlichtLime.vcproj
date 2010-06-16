@@ -520,6 +520,38 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ParticleAnimatedMeshSceneNodeEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAnimatedMeshSceneNodeEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAttractionAffector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleAttractionAffector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleBoxEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleBoxEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleCylinderEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleCylinderEmitter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ParticleEmitter.cpp"
 				>
 			</File>
@@ -529,6 +561,22 @@
 			</File>
 			<File
 				RelativePath=".\ParticleEmitterType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleFadeOutAffector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleFadeOutAffector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleGravityAffector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleGravityAffector.h"
 				>
 			</File>
 			<File
