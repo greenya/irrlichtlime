@@ -580,6 +580,38 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ParticleMeshEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleMeshEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleRingEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleRingEmitter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleRotationAffector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleRotationAffector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleSphereEmitter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParticleSphereEmitter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ParticleSystemSceneNode.cpp"
 				>
 			</File>

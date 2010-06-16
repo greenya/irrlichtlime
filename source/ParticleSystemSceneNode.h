@@ -10,6 +10,7 @@ namespace IrrlichtLime {
 namespace Scene {
 
 ref class AnimatedMeshSceneNode;
+ref class Mesh;
 ref class ParticleAffector;
 ref class ParticleAnimatedMeshSceneNodeEmitter;
 ref class ParticleAttractionAffector;
@@ -18,6 +19,10 @@ ref class ParticleCylinderEmitter;
 ref class ParticleEmitter;
 ref class ParticleFadeOutAffector;
 ref class ParticleGravityAffector;
+ref class ParticleMeshEmitter;
+ref class ParticleRingEmitter;
+ref class ParticleRotationAffector;
+ref class ParticleSphereEmitter;
 
 public ref class ParticleSystemSceneNode : SceneNode
 {
@@ -67,6 +72,49 @@ public:
 	ParticleGravityAffector^ CreateGravityAffector(Vector3Df^ gravity, float timeForceLost);
 	ParticleGravityAffector^ CreateGravityAffector(Vector3Df^ gravity);
 	ParticleGravityAffector^ CreateGravityAffector();
+
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection);
+	ParticleMeshEmitter^ CreateMeshEmitter(Mesh^ particleMesh);
+
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize);
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees);
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax);
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor);
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond);
+	ParticleEmitter^ CreatePointEmitter(Vector3Df^ direction);
+	ParticleEmitter^ CreatePointEmitter();
+
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction);
+	ParticleRingEmitter^ CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness);
+
+	ParticleRotationAffector^ CreateRotationAffector(Vector3Df^ speed, Vector3Df^ pivot);
+	ParticleRotationAffector^ CreateRotationAffector(Vector3Df^ speed);
+	ParticleRotationAffector^ CreateRotationAffector();
+
+	ParticleAffector^ CreateScaleParticleAffector(Dimension2Df^ scaleTo);
+	ParticleAffector^ CreateScaleParticleAffector();
+
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond, Video::Coloru^ minStartColor, Video::Coloru^ maxStartColor);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction, unsigned int minParticlesPerSecond, unsigned int maxParticlesPerSecond);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction);
+	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius);
 
 	void RemoveAllAffectors();
 
