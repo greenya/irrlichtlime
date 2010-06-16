@@ -1,5 +1,5 @@
 #if !defined(_REFCLASS_) || !defined(_WRAPCLASS_) || !defined(_WRAPTYPE_) || !defined(_OTHERTYPE1_) || !defined(_OTHERTYPE2_)
-#error _REFCLASS_, _WRAPCLASS_, _WRAPTYPE_ and _OTHERTYPE1_ must be defined for this file to process.
+#error _REFCLASS_, _WRAPCLASS_, _WRAPTYPE_, _OTHERTYPE1_ and _OTHERTYPE2_ must be defined for this file to process.
 #endif
 
 public ref class _REFCLASS_ : Lime::NativeValue<_WRAPCLASS_>
