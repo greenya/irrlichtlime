@@ -16,8 +16,10 @@
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
+#include "Texture.h"
 #include "TriangleSelector.h"
 #include "VideoDriver.h"
+#include "VolumeLightSceneNode.h"
 
 using namespace irr;
 using namespace System;
@@ -901,6 +903,145 @@ MeshSceneNode^ SceneManager::AddSphereSceneNode()
 	return MeshSceneNode::Wrap(n);
 }
 
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV,
+	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(foot != nullptr);
+	LIME_ASSERT(tail != nullptr);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV,
+		*foot->m_NativeValue,
+		*tail->m_NativeValue,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV,
+	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(foot != nullptr);
+	LIME_ASSERT(tail != nullptr);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV,
+		*foot->m_NativeValue,
+		*tail->m_NativeValue,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV,
+	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position)
+{
+	LIME_ASSERT(foot != nullptr);
+	LIME_ASSERT(tail != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV,
+		*foot->m_NativeValue,
+		*tail->m_NativeValue,
+		*position->m_NativeValue);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV,
+	Video::Coloru^ foot, Video::Coloru^ tail)
+{
+	LIME_ASSERT(foot != nullptr);
+	LIME_ASSERT(tail != nullptr);
+
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV,
+		*foot->m_NativeValue,
+		*tail->m_NativeValue);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV,
+	Video::Coloru^ foot)
+{
+	LIME_ASSERT(foot != nullptr);
+
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV,
+		*foot->m_NativeValue);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV)
+{
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU,
+		subdivV);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU)
+{
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		subdivU);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id)
+{
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent)
+{
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode(
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return VolumeLightSceneNode::Wrap(n);
+}
+
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode()
+{
+	scene::IVolumeLightSceneNode* n = m_SceneManager->addVolumeLightSceneNode();
+	return VolumeLightSceneNode::Wrap(n);
+}
+
 SceneNode^ SceneManager::AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent,
 	int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
 {
@@ -1233,6 +1374,45 @@ SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed
 {
 	LIME_ASSERT(rotationSpeed != nullptr);
 	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(*rotationSpeed->m_NativeValue);
+	return SceneNodeAnimator::Wrap(a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop)
+{
+	LIME_ASSERT(textures != nullptr);
+	LIME_ASSERT(textures->Count > 0);
+
+	core::array<video::ITexture*> r;
+	for (int i = 0; i < textures->Count; i++)
+	{
+		LIME_ASSERT(textures[i] != nullptr);
+		r.push_back(LIME_SAFEREF(textures[i], m_Texture));
+	}
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createTextureAnimator(
+		r,
+		(s32)(timePerFrame * 1000),
+		loop);
+
+	return SceneNodeAnimator::Wrap(a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame)
+{
+	LIME_ASSERT(textures != nullptr);
+	LIME_ASSERT(textures->Count > 0);
+
+	core::array<video::ITexture*> r;
+	for (int i = 0; i < textures->Count; i++)
+	{
+		LIME_ASSERT(textures[i] != nullptr);
+		r.push_back(LIME_SAFEREF(textures[i], m_Texture));
+	}
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createTextureAnimator(
+		r,
+		(s32)(timePerFrame * 1000));
+
 	return SceneNodeAnimator::Wrap(a);
 }
 

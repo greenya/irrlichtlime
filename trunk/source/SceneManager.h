@@ -10,7 +10,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO { ref class FileSystem; }
 namespace GUI { ref class GUIEnvironment; }
-namespace Video { ref class VideoDriver; }
+namespace Video { ref class Texture; ref class VideoDriver; }
 namespace Scene {
 
 ref class AnimatedMesh;
@@ -27,6 +27,7 @@ ref class SceneCollisionManager;
 ref class SceneNode;
 ref class SceneNodeAnimator;
 ref class TriangleSelector;
+ref class VolumeLightSceneNode;
 
 public ref class SceneManager : ReferenceCounted
 {
@@ -110,6 +111,17 @@ public:
 	MeshSceneNode^ AddSphereSceneNode(float radius);
 	MeshSceneNode^ AddSphereSceneNode();
 
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode();
+
 	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
 	SceneNode^ AddWaterSurfaceSceneNode(Mesh^ mesh, float waveHeight, float waveSpeed, float waveLength, SceneNode^ parent, int id, Vector3Df^ position);
@@ -144,6 +156,9 @@ public:
 	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node);
 
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
+
+	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop);
+	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame);
 
 	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node);
 	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node);
