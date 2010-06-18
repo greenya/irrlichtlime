@@ -687,6 +687,14 @@
 				RelativePath=".\TriangleSelector.h"
 				>
 			</File>
+			<File
+				RelativePath=".\VolumeLightSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VolumeLightSceneNode.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="GUI"
