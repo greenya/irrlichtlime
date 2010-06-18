@@ -29,7 +29,7 @@ namespace _08.SpecialFX
 
 			AnimatedMesh mesh = smgr.GetMesh("../media/room.3ds");
 
-			//smgr->getMeshManipulator()->makePlanarTextureMapping(mesh->getMesh(0), 0.004f);
+			smgr.MeshManipulator.MakePlanarTextureMapping(mesh.GetMesh(0), 0.004f);
 
 			SceneNode node = null;
 
@@ -37,19 +37,19 @@ namespace _08.SpecialFX
 			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.jpg"));
 			node.GetMaterial(0).SpecularColor.Set(0, 0, 0, 0);
 
-			//mesh = smgr->addHillPlaneMesh( "myHill",
-			//    core::dimension2d<f32>(20,20),
-			//    core::dimension2d<u32>(40,40), 0, 0,
-			//    core::dimension2d<f32>(0,0),
-			//    core::dimension2d<f32>(10,10));
+			mesh = smgr.AddHillPlaneMesh("myHill",
+				new Dimension2Df(20, 20),
+				new Dimension2Du(40, 40), null, 0,
+				new Dimension2Df(0),
+				new Dimension2Df(10, 10));
 
-			//node = smgr->addWaterSurfaceSceneNode(mesh->getMesh(0), 3.0f, 300.0f, 30.0f);
-			//node->setPosition(core::vector3df(0,7,0));
+			node = smgr.AddWaterSurfaceSceneNode(mesh.GetMesh(0), 3.0f, 300.0f, 30.0f);
+			node.Position = new Vector3Df(0, 7, 0);
 
-			//node->setMaterialTexture(0, driver->getTexture("../../media/stones.jpg"));
-			//node->setMaterialTexture(1, driver->getTexture("../../media/water.jpg"));
+			node.SetMaterialTexture(0, driver.GetTexture("../media/stones.jpg"));
+			node.SetMaterialTexture(1, driver.GetTexture("../media/water.jpg"));
 
-			//node->setMaterialType(video::EMT_REFLECTION_2_LAYER);
+			node.SetMaterialType(MaterialType.Reflection2Layer);
 
 			// create light
 
@@ -67,66 +67,61 @@ namespace _08.SpecialFX
 
 			// create a particle system
 
-			//scene::IParticleSystemSceneNode* ps =
-			//    smgr->addParticleSystemSceneNode(false);
+			ParticleSystemSceneNode ps = smgr.AddParticleSystemSceneNode(false);
 
-			//scene::IParticleEmitter* em = ps->createBoxEmitter(
-			//        core::aabbox3d<f32>(-7,0,-7,7,1,7), // emitter size
-			//        core::vector3df(0.0f,0.06f,0.0f),   // initial direction
-			//        80,100,                             // emit rate
-			//        video::SColor(0,255,255,255),       // darkest color
-			//        video::SColor(0,255,255,255),       // brightest color
-			//        800,2000,0,                         // min and max age, angle
-			//        core::dimension2df(10.f,10.f),         // min size
-			//        core::dimension2df(20.f,20.f));        // max size
+			ParticleEmitter em = ps.CreateBoxEmitter(
+				new AABBox3Df(-7, 0, -7, 7, 1, 7),	// emitter size
+				new Vector3Df(0.0f, 0.06f, 0.0f),	// initial direction
+				80, 100,							// emit rate
+				new Coloru(255, 255, 255, 0),		// darkest color
+				new Coloru(255, 255, 255, 0),		// brightest color
+				800, 2000, 0,						// min and max age, angle
+				new Dimension2Df(10.0f),			// min size
+				new Dimension2Df(20.0f));			// max size
 
-			//ps->setEmitter(em); // this grabs the emitter
-			//em->drop(); // so we can drop it here without deleting it
+			ps.Emitter = em; // this grabs the emitter
+			em.Drop(); // so we can drop it here without deleting it
 
-			//scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+			ParticleAffector paf = ps.CreateFadeOutParticleAffector();
 
-			//ps->addAffector(paf); // same goes for the affector
-			//paf->drop();
+			ps.AddAffector(paf); // same goes for the affector
+			paf.Drop();
 
-			//ps->setPosition(core::vector3df(-70,60,40));
-			//ps->setScale(core::vector3df(2,2,2));
-			//ps->setMaterialFlag(video::EMF_LIGHTING, false);
-			//ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-			//ps->setMaterialTexture(0, driver->getTexture("../../media/fire.bmp"));
-			//ps->setMaterialType(video::EMT_TRANSPARENT_VERTEX_ALPHA);
+			ps.Position = new Vector3Df(-70, 60, 40);
+			ps.Scale = new Vector3Df(2);
+			ps.SetMaterialFlag(MaterialFlag.Lighting, false);
+			ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
+			ps.SetMaterialTexture(0, driver.GetTexture("../media/fire.bmp"));
+			ps.SetMaterialType(MaterialType.TransparentVertexAlpha);
 
-			//scene::IVolumeLightSceneNode * n = smgr->addVolumeLightSceneNode(0, -1,
-			//                    32,                              // Subdivisions on U axis
-			//                    32,                              // Subdivisions on V axis
-			//                    video::SColor(0, 255, 255, 255), // foot color
-			//                    video::SColor(0, 0, 0, 0));      // tail color
+			VolumeLightSceneNode n = smgr.AddVolumeLightSceneNode(null, -1,
+				32,								// Subdivisions on U axis
+				32,								// Subdivisions on V axis
+				new Coloru(255, 255, 255, 0),	// foot color
+				new Coloru(0, 0, 0, 0));		// tail color
 
-			//if (n)
-			//{
-			//        n->setScale(core::vector3df(56.0f, 56.0f, 56.0f));
-			//        n->setPosition(core::vector3df(-120,50,40));
+			if (n != null)
+			{
+				n.Scale = new Vector3Df(56);
+				n.Position = new Vector3Df(-120, 50, 40);
 
-			//        // load textures for animation
-			//        core::array<video::ITexture*> textures;
-			//        for (s32 g=7; g > 0; --g)
-			//        {
-			//                core::stringc tmp;
-			//                tmp = "../../media/portal";
-			//                tmp += g;
-			//                tmp += ".bmp";
-			//                video::ITexture* t = driver->getTexture( tmp.c_str() );
-			//                textures.push_back(t);
-			//        }
+				// load textures for animation
+				List<Texture> textures = new List<Texture>();
+				for (int i = 7; i > 0; i--)
+				{
+					string s = string.Format("../media/portal{0}.bmp", i);
+					textures.Add(driver.GetTexture(s));
+				}
 
-			//        // create texture animator
-			//        scene::ISceneNodeAnimator* glow = smgr->createTextureAnimator(textures, 150);
+				// create texture animator
+				SceneNodeAnimator glow = smgr.CreateTextureAnimator(textures, 0.150f);
 
-			//        // add the animator
-			//        n->addAnimator(glow);
+				// add the animator
+				n.AddAnimator(glow);
 
-			//        // drop the animator because it was created with a create() function
-			//        glow->drop();
-			//}
+				// drop the animator because it was created with a create() function
+				glow.Drop();
+			}
 
 			// add animated character
 
@@ -137,7 +132,7 @@ namespace _08.SpecialFX
 			anode.AnimationSpeed = 15;
 
 			// add shadow
-			//anode->addShadowVolumeSceneNode();
+			anode.AddShadowVolumeSceneNode();
 			smgr.ShadowColor = new Coloru(0, 0, 0, 150);
 
 			// make the model a little bit bigger and normalize its normals
