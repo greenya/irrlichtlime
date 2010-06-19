@@ -1,4 +1,56 @@
 ============================
+Changes in 0.4 (19-Jun-2010)
+============================
+
+- Added and completly ported examples 07.Collision and 08.SpecialFX.
+
+- Added class VolumeLightSceneNode. Added methods AddVolumeLightSceneNode and CreateTextureAnimator to SceneManager.
+
+- Added classes ParticleMeshEmitter, ParticleRingEmitter, ParticleRotationAffector and ParticleSphereEmitter. Class ParticleSystemSceneNode extended with methods: CreateMeshEmitter, CreatePointEmitter, CreateRingEmitter, CreateRotationAffector, CreateScaleParticleAffector and CreateSphereEmitter.
+
+- Added classes ParticleAnimatedMeshSceneNodeEmitter, ParticleAttractionAffector, ParticleBoxEmitter, ParticleCylinderEmitter, ParticleFadeOutAffector, ParticleGravityAffector. Class ParticleSystemSceneNode extended with methods: CreateAnimatedMeshSceneNodeEmitter, CreateAttractionAffector, CreateBoxEmitter, CreateCylinderEmitter, CreateFadeOutParticleAffector and CreateGravityAffector.
+
+- Added enums BoneAnimationMode, BoneSkinningSpace, CullingType and JointUpdateOnRender. Added class BoneSceneNode. Changed ISceneNode.AutomaticCulling prop: now it operates with CullingType values. Class AnimatedMeshSceneNode extended with methods: AddShadowVolumeSceneNode, AnimateJoints, Clone, GetJointNode, SetJointMode, SetLoopMode, SetRenderFromIdentity, SetTransitionTime and prop JointCount.
+
+- Added class ShadowVolumeSceneNode.
+
+- Updated Irrlicht SDK to trunk rev. 3313.
+
+- Added enums ParticleAffectorType and ParticleEmitterType. Added classes Particle, ParticleAffector, ParticleEmitter and ParticleSystemSceneNode. Added method AddParticleSystemSceneNode to SceneManager.
+
+- Added methods AddHillPlaneMesh and AddWaterSurfaceSceneNode to SceneManager.
+
+- Added enum IndexType. MeshBuffer extended with methods Append, GetNormal, GetPosition, GetTCoords, RecalculateBoundingBox, SetDirty, SetHardwareMappingHint; props BoundingBox, HardwareMappingHintForIndex, HardwareMappingHintForVertex, IndexCount, IndexType, Material, VertexCount, VertexType.
+
+- Added enums HardwareBufferType and HardwareMappingHint. Mesh extended with methods GetMeshBuffer, SetDirty, SetHardwareMappingHint, SetMaterialFlag; props BoundingBox, MeshBufferCount.
+
+- Added class MeshManipulator; added prop SceneManager.MeshManipulator.
+
+- Added overloads to GUIFont.Draw(): now position can be specified as Recti, Vector2Di or two int values (x and y).
+
+- Rect improved; now available int and float versions.
+
+- Dimension2D improved; now available unsigned int and float versions.
+
+- Vector2D improved; now available int and float versions.
+
+- VideoDriver has been extended with new methods: ClearZBuffer, CreateScreenShot, DeleteAllDynamicLights, Draw2DLine, Draw3DBox, Draw3DLine, Draw3DTriangle, DrawMeshBuffer, DrawPixel, EnableClipPlane. Changed argument order of some VideoDriver.DrawXXX methods to be same structured: now color follows at the end (or before clip if present) and it became mandatory.
+
+- Vector3D class has been improved: all native functionality wrapped (including operators). Templates imitation has been implemented and now there are two classes for 3d vectors: Vector3Df and Vector3Di.
+
+- Added class SceneCollisionManager, prop SceneManager.SceneCollisionManager and default constructor to Matrix4f.
+
+- Added class CollisionResponseSceneNodeAnimator and method SceneManager.CreateCollisionResponseAnimator.
+
+- Added classes Line3Df, Plane3Df, Triangle3Df and TriangleSelector; prop SceneNode.TriangleSelector; added methods CreateOctreeTriangleSelector and CreateTriangleSelector to SceneManager.
+
+- Added classes Dimension2Df and BillboardSceneNode; added SceneManager.AddBillboardSceneNode().
+
+- Added enum LightType, classes LightSceneNode, Light and Colorf. Normalized argument list of RGBA values in constructors and Set() methods of Coloru/f classes: for constructors: R, G, B, A = 255 or 1.0f, for Set(): R, G, B, A? (if A not set, than it will not be changed). All the examples updated to this change, since there is no need to specify alpha value all the time now (if its 255).
+
+- Added props AspectRatio, FarValue, FOV, InputReceiverEnabled, NearValue, Orthogonal, ProjectionMatrix, Rotation (setter overridden), Target, TargetAndRotationBinding, UpVector, ViewMatrix and ViewMatrixAffector to CameraSceneNode.
+
+============================
 Changes in 0.3 (05-Jun-2010)
 ============================
 

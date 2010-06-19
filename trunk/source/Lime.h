@@ -23,47 +23,6 @@ public ref class Lime
 {
 public:
 
-	static property String^ Version
-	{
-		String^ get()
-		{
-			String^ s = Assembly::GetAssembly(Lime::typeid)->GetName()->Version->ToString();
-#if _DEBUG
-			s += " DEBUG";
-#endif
-			return s;
-		}
-	}
-
-	static io::path StringToPath(String^ s)
-	{
-		return io::path(StringToStringW(s));
-	}
-
-	static core::stringc StringToStringC(String^ s)
-	{
-		if (s == nullptr)
-			return core::stringc();
-
-		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
-		core::stringc strC = core::stringc(c);
-
-		Marshal::FreeHGlobal(IntPtr(c));
-		return strC;
-	}
-
-	static core::stringw StringToStringW(String^ s)
-	{
-		if (s == nullptr)
-			return core::stringw();
-
-		wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
-		core::stringw strW = core::stringw(w);
-
-		Marshal::FreeHGlobal(IntPtr(w));
-		return strW;
-	}
-
 	template <class T>
 	ref class NativeValue
 	{
@@ -99,6 +58,50 @@ public:
 
 		bool m_DeleteOnFinalize;
 	};
+
+	static property String^ Version
+	{
+		String^ get()
+		{
+			System::Version^ v = Assembly::GetAssembly(Lime::typeid)->GetName()->Version;
+			String^ s = String::Format("{0}.{1}.{2}", v->Major, v->Minor, v->Build);
+#if _DEBUG
+			s += " DEBUG";
+#endif
+			return s;
+		}
+	}
+
+internal:
+
+	static io::path StringToPath(String^ s)
+	{
+		return io::path(StringToStringW(s));
+	}
+
+	static core::stringc StringToStringC(String^ s)
+	{
+		if (s == nullptr)
+			return core::stringc();
+
+		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
+		core::stringc strC = core::stringc(c);
+
+		Marshal::FreeHGlobal(IntPtr(c));
+		return strC;
+	}
+
+	static core::stringw StringToStringW(String^ s)
+	{
+		if (s == nullptr)
+			return core::stringw();
+
+		wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
+		core::stringw strW = core::stringw(w);
+
+		Marshal::FreeHGlobal(IntPtr(w));
+		return strW;
+	}
 
 private:
 
