@@ -10,6 +10,9 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO {
 
+ref class FileArchive;
+ref class FileList;
+
 public ref class FileSystem : ReferenceCounted
 {
 public:
@@ -22,14 +25,20 @@ public:
 
 	bool ChangeWorkingDirectory(String^ newDirectory);
 
+	FileList^ CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths);
+	FileList^ CreateFileListFromWorkingDirectory();
+
 	String^ GetFileAbsolutePath(String^ filename);
+	FileArchive^ GetFileArchive(unsigned int index);
 	String^ GetFileBasename(String^ filename, bool keepExtension);
 	String^ GetFileBasename(String^ filename);
 	String^ GetFileDirectory(String^ filename);
 
-	bool MoveFileArchive(unsigned int sourceIndex, int relative);
+	bool MoveFileArchive(unsigned int index, int relative);
 	bool RemoveFileArchive(unsigned int index);
 	bool RemoveFileArchive(String^ filename);
+
+	FileSystemType SetFileSystemType(FileSystemType newType);
 
 	property unsigned int FileArchiveCount { unsigned int get(); }
 	property String^ WorkingDirectory { String^ get(); }

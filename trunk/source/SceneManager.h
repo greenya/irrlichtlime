@@ -67,6 +67,14 @@ public:
 	CameraSceneNode^ AddCameraSceneNodeFPS(SceneNode^ parent);
 	CameraSceneNode^ AddCameraSceneNodeFPS();
 
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed, int id, bool makeActive);
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed, int id);
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed);
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed);
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed);
+	CameraSceneNode^ AddCameraSceneNodeMaya(SceneNode^ parent);
+	CameraSceneNode^ AddCameraSceneNodeMaya();
+
 	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
 	MeshSceneNode^ AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position);
@@ -101,6 +109,13 @@ public:
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent);
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter);
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode();
+
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent, int id);
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent);
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back);
+	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back, SceneNode^ parent, int id);
+	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back, SceneNode^ parent);
+	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back);
 
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
@@ -184,6 +199,7 @@ public:
 	bool LoadScene(String^ filename); // *same here*
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
+	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }
 	property SceneNode^ RootNode { SceneNode^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }

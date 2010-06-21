@@ -9,17 +9,17 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO {
 
-AttributeExchangingObject::AttributeExchangingObject(io::IAttributeExchangingObject* attributeExchangingObject_or_null)
-	: ReferenceCounted(attributeExchangingObject_or_null)
+AttributeExchangingObject::AttributeExchangingObject(io::IAttributeExchangingObject* ref_or_null)
+	: ReferenceCounted(ref_or_null)
 {
-	m_AttributeExchangingObject = attributeExchangingObject_or_null;
+	m_AttributeExchangingObject = ref_or_null;
 }
 
-void AttributeExchangingObject::setAttributeExchangingObject(io::IAttributeExchangingObject* attributeExchangingObject)
+void AttributeExchangingObject::setAttributeExchangingObject(io::IAttributeExchangingObject* ref)
 {
-	LIME_ASSERT(attributeExchangingObject != nullptr);
-	m_ReferenceCounted = attributeExchangingObject;
-	m_AttributeExchangingObject = attributeExchangingObject;
+	LIME_ASSERT(ref != nullptr);
+	m_ReferenceCounted = ref;
+	m_AttributeExchangingObject = ref;
 }
 
 } // end namespace IO

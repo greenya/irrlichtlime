@@ -21,6 +21,7 @@
 #include "DriverType.h"
 #include "EventType.h"
 #include "FileArchiveType.h"
+#include "FileSystemType.h"
 #include "FogType.h"
 #include "GUIAlignment.h"
 #include "GUIButtonState.h"

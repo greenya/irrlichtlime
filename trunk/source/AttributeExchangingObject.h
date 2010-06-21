@@ -19,8 +19,8 @@ public:
 
 internal:
 
-	AttributeExchangingObject(io::IAttributeExchangingObject* attributeExchangingObject_or_null);
-	void setAttributeExchangingObject(io::IAttributeExchangingObject* attributeExchangingObject);
+	AttributeExchangingObject(io::IAttributeExchangingObject* ref_or_null);
+	void setAttributeExchangingObject(io::IAttributeExchangingObject* ref);
 
 	io::IAttributeExchangingObject* m_AttributeExchangingObject;
 };
