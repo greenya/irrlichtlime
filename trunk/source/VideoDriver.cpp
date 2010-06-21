@@ -660,6 +660,11 @@ void VideoDriver::SetMaterial(Material^ material)
 	m_VideoDriver->setMaterial(*material->m_NativeValue);
 }
 
+void VideoDriver::SetMinHardwareBufferVertexCount(unsigned int count)
+{
+	m_VideoDriver->setMinHardwareBufferVertexCount(count);
+}
+
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Coloru^ color)
 {
 	LIME_ASSERT(color != nullptr);
@@ -702,10 +707,20 @@ bool VideoDriver::SetRenderTarget(RenderTarget target)
 	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target);
 }
 
+void VideoDriver::SetTextureCreationFlag(TextureCreationFlag flag, bool enabled)
+{
+	m_VideoDriver->setTextureCreationFlag((video::E_TEXTURE_CREATION_FLAG)flag, enabled);
+}
+
 void VideoDriver::SetTransform(TransformationState state, Matrix4f^ mat)
 {
 	LIME_ASSERT(mat != nullptr);
 	m_VideoDriver->setTransform((video::E_TRANSFORMATION_STATE)state, *mat->m_NativeValue);
+}
+
+void VideoDriver::TurnLight(int lightIndex, bool turnOn)
+{
+	m_VideoDriver->turnLightOn(lightIndex, turnOn);
 }
 
 void VideoDriver::UpdateAllOcclusionQueries(bool block)
@@ -726,6 +741,21 @@ void VideoDriver::UpdateOcclusionQuery(Scene::SceneNode^ node, bool block)
 void VideoDriver::UpdateOcclusionQuery(Scene::SceneNode^ node)
 {
 	m_VideoDriver->updateOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+bool VideoDriver::WriteImageToFile(Image^ image, String^ filename, unsigned int param)
+{
+	return m_VideoDriver->writeImageToFile(
+		LIME_SAFEREF(image, m_Image),
+		Lime::StringToPath(filename),
+		param);
+}
+
+bool VideoDriver::WriteImageToFile(Image^ image, String^ filename)
+{
+	return m_VideoDriver->writeImageToFile(
+		LIME_SAFEREF(image, m_Image),
+		Lime::StringToPath(filename));
 }
 
 Video::DriverType VideoDriver::DriverType::get()
@@ -756,6 +786,36 @@ Dimension2Du^ VideoDriver::CurrentRenderTargetSize::get()
 Dimension2Du^ VideoDriver::MaxTextureSize::get()
 {
 	return gcnew Dimension2Du(m_VideoDriver->getMaxTextureSize());
+}
+
+Video::Fog^ VideoDriver::Fog::get()
+{
+	video::SColor c;
+	video::E_FOG_TYPE t;
+	float s;
+	float e;
+	float d;
+	bool p;
+	bool r;
+
+	m_VideoDriver->getFog(c, t, s, e, d, p, r);
+
+	return gcnew Video::Fog(gcnew Coloru(c), (FogType)t, s, e, d, p, r);
+}
+
+void VideoDriver::Fog::set(Video::Fog^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	LIME_ASSERT(value->Color != nullptr);
+
+	m_VideoDriver->setFog(
+		*value->Color->m_NativeValue,
+		(video::E_FOG_TYPE)value->Type,
+		value->Start,
+		value->End,
+		value->Density,
+		value->PixelFog,
+		value->RangeFog);
 }
 
 int VideoDriver::FPS::get()

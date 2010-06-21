@@ -121,6 +121,9 @@ public:
 	void RunOcclusionQuery(Scene::SceneNode^ node);
 
 	void SetMaterial(Material^ material);
+
+	void SetMinHardwareBufferVertexCount(unsigned int count);
+
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Coloru^ color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
@@ -129,17 +132,26 @@ public:
 	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
 	bool SetRenderTarget(RenderTarget target, bool clearTarget);
 	bool SetRenderTarget(RenderTarget target);
+
+	void SetTextureCreationFlag(TextureCreationFlag flag, bool enabled);
+
 	void SetTransform(TransformationState state, Matrix4f^ mat);
+
+	void TurnLight(int lightIndex, bool turnOn);
 
 	void UpdateAllOcclusionQueries(bool block);
 	void UpdateAllOcclusionQueries();
 	void UpdateOcclusionQuery(Scene::SceneNode^ node, bool block);
 	void UpdateOcclusionQuery(Scene::SceneNode^ node);
 
+	bool WriteImageToFile(Image^ image, String^ filename, unsigned int param);
+	bool WriteImageToFile(Image^ image, String^ filename);
+
 	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property unsigned int DynamicLightCount { unsigned int get(); }
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
+	property Video::Fog^ Fog { Video::Fog^ get(); void set(Video::Fog^ value); }
 	property int FPS { int get(); }
 	property Material^ Material2D { Material^ get(); }
 	property unsigned int MaterialRendererCount { unsigned int get(); }
