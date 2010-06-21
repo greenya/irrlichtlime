@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include "FileArchive.h"
+#include "FileList.h"
 #include "FileSystem.h"
 #include "ReferenceCounted.h"
 
@@ -69,9 +71,33 @@ bool FileSystem::ChangeWorkingDirectory(String^ newDirectory)
 	return m_FileSystem->changeWorkingDirectoryTo(Lime::StringToPath(newDirectory));
 }
 
+FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths)
+{
+	io::IFileList* l = m_FileSystem->createEmptyFileList(
+		Lime::StringToPath(path),
+		ignoreCase,
+		ignorePaths);
+
+	return FileList::Wrap(l);
+}
+
+FileList^ FileSystem::CreateFileListFromWorkingDirectory()
+{
+	io::IFileList* l = m_FileSystem->createFileList();
+	return FileList::Wrap(l);
+}
+
 String^ FileSystem::GetFileAbsolutePath(String^ filename)
 {
 	return gcnew String(m_FileSystem->getAbsolutePath(Lime::StringToPath(filename)).c_str());
+}
+
+FileArchive^ FileSystem::GetFileArchive(unsigned int index)
+{
+	LIME_ASSERT(index < FileArchiveCount);
+
+	io::IFileArchive* a = m_FileSystem->getFileArchive(index);
+	return FileArchive::Wrap(a);
 }
 
 String^ FileSystem::GetFileBasename(String^ filename, bool keepExtension)
@@ -89,19 +115,26 @@ String^ FileSystem::GetFileDirectory(String^ filename)
 	return gcnew String(m_FileSystem->getFileDir(Lime::StringToPath(filename)).c_str());
 }
 
-bool FileSystem::MoveFileArchive(unsigned int sourceIndex, int relative)
+bool FileSystem::MoveFileArchive(unsigned int index, int relative)
 {
-	return m_FileSystem->moveFileArchive(sourceIndex, relative);
+	LIME_ASSERT(index < FileArchiveCount);
+	return m_FileSystem->moveFileArchive(index, relative);
 }
 
 bool FileSystem::RemoveFileArchive(unsigned int index)
 {
+	LIME_ASSERT(index < FileArchiveCount);
 	return m_FileSystem->removeFileArchive(index);
 }
 
 bool FileSystem::RemoveFileArchive(String^ filename)
 {
 	return m_FileSystem->removeFileArchive(Lime::StringToPath(filename));
+}
+
+FileSystemType FileSystem::SetFileSystemType(FileSystemType newType)
+{
+	return (FileSystemType)m_FileSystem->setFileListSystem((io::EFileSystemType)newType);
 }
 
 unsigned int FileSystem::FileArchiveCount::get()

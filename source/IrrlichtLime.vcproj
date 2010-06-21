@@ -888,7 +888,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FileArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FileArchive.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FileArchiveType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileList.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FileList.h"
 				>
 			</File>
 			<File
@@ -897,6 +913,10 @@
 			</File>
 			<File
 				RelativePath=".\FileSystem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileSystemType.h"
 				>
 			</File>
 		</Filter>

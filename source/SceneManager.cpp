@@ -451,6 +451,75 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS()
 	return CameraSceneNode::Wrap(n);
 }
 
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed, int id, bool makeActive)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		zoomSpeed,
+		translationSpeed,
+		id,
+		makeActive);
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed, int id)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		zoomSpeed,
+		translationSpeed,
+		id);
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed, float translationSpeed)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		zoomSpeed,
+		translationSpeed);
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed, float zoomSpeed)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed,
+		zoomSpeed);
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent, float rotateSpeed)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode),
+		rotateSpeed);
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya(SceneNode^ parent)
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya(
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return CameraSceneNode::Wrap(n);
+}
+
+CameraSceneNode^ SceneManager::AddCameraSceneNodeMaya()
+{
+	scene::ICameraSceneNode* n = m_SceneManager->addCameraSceneNodeMaya();
+	return CameraSceneNode::Wrap(n);
+}
+
 MeshSceneNode^ SceneManager::AddCubeSceneNode(float size, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
 {
 	LIME_ASSERT(position != nullptr);
@@ -802,6 +871,98 @@ ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode()
 {
 	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode();
 	return ParticleSystemSceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
+	Video::Texture^ front, Video::Texture^ back, SceneNode^ parent, int id)
+{
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
+		LIME_SAFEREF(top, m_Texture),
+		LIME_SAFEREF(bottom, m_Texture),
+		LIME_SAFEREF(left, m_Texture),
+		LIME_SAFEREF(right, m_Texture),
+		LIME_SAFEREF(front, m_Texture),
+		LIME_SAFEREF(back, m_Texture),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
+	Video::Texture^ front, Video::Texture^ back, SceneNode^ parent)
+{
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
+		LIME_SAFEREF(top, m_Texture),
+		LIME_SAFEREF(bottom, m_Texture),
+		LIME_SAFEREF(left, m_Texture),
+		LIME_SAFEREF(right, m_Texture),
+		LIME_SAFEREF(front, m_Texture),
+		LIME_SAFEREF(back, m_Texture),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
+	Video::Texture^ front, Video::Texture^ back)
+{
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
+		LIME_SAFEREF(top, m_Texture),
+		LIME_SAFEREF(bottom, m_Texture),
+		LIME_SAFEREF(left, m_Texture),
+		LIME_SAFEREF(right, m_Texture),
+		LIME_SAFEREF(front, m_Texture),
+		LIME_SAFEREF(back, m_Texture));
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back,
+	SceneNode^ parent, int id)
+{
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k,
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back,
+	SceneNode^ parent)
+{
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back)
+{
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k);
+
+	return SceneNode::Wrap(n);
 }
 
 MeshSceneNode^ SceneManager::AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id,
@@ -1519,6 +1680,17 @@ CameraSceneNode^ SceneManager::ActiveCamera::get()
 void SceneManager::ActiveCamera::set(CameraSceneNode^ value)
 {
 	m_SceneManager->setActiveCamera(LIME_SAFEREF(value, m_CameraSceneNode));
+}
+
+Video::Colorf^ SceneManager::AmbientLight::get()
+{
+	return gcnew Video::Colorf(m_SceneManager->getAmbientLight());
+}
+
+void SceneManager::AmbientLight::set(Video::Colorf^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_SceneManager->setAmbientLight(*value->m_NativeValue);
 }
 
 SceneNode^ SceneManager::RootNode::get()
