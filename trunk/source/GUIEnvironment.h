@@ -77,6 +77,7 @@ public:
 	GUIFont^ GetFont(String^ filename);
 
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
+	property GUIElement^ RootElement { GUIElement^ get(); }
 	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
 
 internal:

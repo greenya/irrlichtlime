@@ -40,9 +40,9 @@ namespace _05.UserInterface
 			GUISkin skin = env.Skin;
 			GUIFont font = env.GetFont("../media/fonthaettenschweiler.bmp");
 			if (font != null)
-				skin.SetFont(GUIDefaultFont.Default, font);
+				skin.SetFont(font);
 
-			skin.SetFont(GUIDefaultFont.Tooltip, env.BuiltInFont);
+			skin.SetFont(env.BuiltInFont, GUIDefaultFont.Tooltip);
 
 			env.AddButton(new Recti(10, 240, 110, 240 + 32), null, GUI_ID_ButtonQuit, "Quit", "Exits Program");
 			env.AddButton(new Recti(10, 280, 110, 280 + 32), null, GUI_ID_ButtonWindowNew, "New Window", "Launches a new Window");
@@ -89,7 +89,7 @@ namespace _05.UserInterface
 							{
 								Coloru color = env.Skin.GetColor(which);
 								color.Alpha = (uint)pos;
-								env.Skin.SetColor(which, color);
+								env.Skin.SetColor(color, which);
 							}
 						}
 						break;

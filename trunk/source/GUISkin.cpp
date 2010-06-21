@@ -382,28 +382,33 @@ int GUISkin::GetSize(GUIDefaultSize size)
 	return m_GUISkin->getSize((gui::EGUI_DEFAULT_SIZE)size);
 }
 
-void GUISkin::SetColor(GUIDefaultColor which, Video::Coloru^ newColor)
+void GUISkin::SetColor(Video::Coloru^ newColor, GUIDefaultColor which)
 {
 	LIME_ASSERT(newColor != nullptr);
 	m_GUISkin->setColor((gui::EGUI_DEFAULT_COLOR)which, *newColor->m_NativeValue);
 }
 
-void GUISkin::SetText(GUIDefaultText which, String^ newText)
+void GUISkin::SetText(String^ newText, GUIDefaultText which)
 {
 	m_GUISkin->setDefaultText((gui::EGUI_DEFAULT_TEXT)which, Lime::StringToStringW(newText).c_str());
 }
 
-void GUISkin::SetFont(GUIDefaultFont which, GUIFont^ font)
+void GUISkin::SetFont(GUIFont^ font, GUIDefaultFont which)
 {
 	m_GUISkin->setFont(LIME_SAFEREF(font, m_GUIFont), (gui::EGUI_DEFAULT_FONT)which);
 }
 
-void GUISkin::SetIcon(GUIDefaultIcon which, unsigned int index)
+void GUISkin::SetFont(GUIFont^ font)
+{
+	m_GUISkin->setFont(LIME_SAFEREF(font, m_GUIFont));
+}
+
+void GUISkin::SetIcon(unsigned int index, GUIDefaultIcon which)
 {
 	m_GUISkin->setIcon((gui::EGUI_DEFAULT_ICON)which, index);
 }
 
-void GUISkin::SetSize(GUIDefaultSize which, int size)
+void GUISkin::SetSize(int size, GUIDefaultSize which)
 {
 	m_GUISkin->setSize((gui::EGUI_DEFAULT_SIZE)which, size);
 }

@@ -496,6 +496,12 @@ GUIFont^ GUIEnvironment::BuiltInFont::get()
 	return GUIFont::Wrap(m_GUIEnvironment->getBuiltInFont());
 }
 
+GUIElement^ GUIEnvironment::RootElement::get()
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getRootGUIElement();
+	return GUIElement::Wrap(e);
+}
+
 GUISkin^ GUIEnvironment::Skin::get()
 {
 	gui::IGUISkin* s = m_GUIEnvironment->getSkin();

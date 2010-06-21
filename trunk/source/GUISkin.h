@@ -61,11 +61,12 @@ public:
 	unsigned int GetIcon(GUIDefaultIcon icon);
 	int GetSize(GUIDefaultSize size);
 
-	void SetColor(GUIDefaultColor which, Video::Coloru^ newColor);
-	void SetText(GUIDefaultText which, String^ newText);
-	void SetFont(GUIDefaultFont which, GUIFont^ font);
-	void SetIcon(GUIDefaultIcon which, unsigned int index);
-	void SetSize(GUIDefaultSize which, int size);
+	void SetColor(Video::Coloru^ newColor, GUIDefaultColor which);
+	void SetText(String^ newText, GUIDefaultText which);
+	void SetFont(GUIFont^ font, GUIDefaultFont which);
+	void SetFont(GUIFont^ font);
+	void SetIcon(unsigned int index, GUIDefaultIcon which);
+	void SetSize(int size, GUIDefaultSize which);
 
 	property GUISpriteBank^ SpriteBank { GUISpriteBank^ get(); void set(GUISpriteBank^ value); }
 	property GUISkinType Type { GUISkinType get(); }

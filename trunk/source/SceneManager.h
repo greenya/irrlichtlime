@@ -184,7 +184,7 @@ public:
 	bool LoadScene(String^ filename); // *same here*
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
-	property SceneNode^ RootSceneNode { SceneNode^ get(); }
+	property SceneNode^ RootNode { SceneNode^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
