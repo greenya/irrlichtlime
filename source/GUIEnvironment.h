@@ -55,6 +55,13 @@ public:
 	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent);
 	GUIListBox^ AddListBox(Recti^ rectangle);
 
+	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image);
+	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id);
+	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent);
+	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags);
+	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal);
+	GUIWindow^ AddMessageBox(String^ caption, String^ text);
+
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle);

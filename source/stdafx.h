@@ -32,6 +32,7 @@
 #include "GUIEventType.h"
 #include "GUIFontType.h"
 #include "GUIListBoxColor.h"
+#include "GUIMessageBoxFlag.h"
 #include "GUISkinType.h"
 #include "HardwareBufferType.h"
 #include "HardwareMappingHint.h"
