@@ -59,6 +59,21 @@ GUIElement::GUIElement(gui::IGUIElement* ref)
 	m_GUIElement = ref;
 }
 
+void GUIElement::AddChild(GUIElement^ child)
+{
+	m_GUIElement->addChild(LIME_SAFEREF(child, m_GUIElement));
+}
+
+bool GUIElement::BringToFront(GUIElement^ child)
+{
+	return m_GUIElement->bringToFront(LIME_SAFEREF(child, m_GUIElement));
+}
+
+void GUIElement::Draw()
+{
+	m_GUIElement->draw();
+}
+
 GUIElement^ GUIElement::GetElementFromID(int id, bool searchchildren)
 {
 	gui::IGUIElement *e = m_GUIElement->getElementFromId(id, searchchildren);
@@ -78,6 +93,38 @@ GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 	return Wrap(e);
 }
 
+bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible)
+{
+	gui::IGUIElement* f;
+	gui::IGUIElement* c;
+
+	bool b = m_GUIElement->getNextElement(startOrder, reverse, group, f, c, includeInvisible);
+
+	if (b)
+	{
+		first = GUIElement::Wrap(f);
+		closest = GUIElement::Wrap(c);
+	}
+
+	return b;
+}
+
+bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest)
+{
+	gui::IGUIElement* f;
+	gui::IGUIElement* c;
+
+	bool b = m_GUIElement->getNextElement(startOrder, reverse, group, f, c);
+
+	if (b)
+	{
+		first = GUIElement::Wrap(f);
+		closest = GUIElement::Wrap(c);
+	}
+
+	return b;
+}
+
 bool GUIElement::IsMyChild(GUIElement^ child)
 {
 	return m_GUIElement->isMyChild(LIME_SAFEREF(child, m_GUIElement));
@@ -89,29 +136,87 @@ bool GUIElement::IsPointInside(Vector2Di^ point)
 	return m_GUIElement->isPointInside(*point->m_NativeValue);
 }
 
-GUIElementType GUIElement::Type::get()
+void GUIElement::Move(Vector2Di^ absoluteMovement)
 {
-	return (GUIElementType)m_GUIElement->getType();
+	LIME_ASSERT(absoluteMovement != nullptr);
+	m_GUIElement->move(*absoluteMovement->m_NativeValue);
 }
 
-int GUIElement::ID::get()
+void GUIElement::Remove()
 {
-	return m_GUIElement->getID();
+	m_GUIElement->remove();
 }
 
-void GUIElement::ID::set(int value)
+void GUIElement::RemoveChild(GUIElement^ child)
 {
-	m_GUIElement->setID(value);
+	m_GUIElement->removeChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
-bool GUIElement::Visible::get()
+void GUIElement::SetAlignment(GUIAlignment left, GUIAlignment right, GUIAlignment top, GUIAlignment bottom)
 {
-	return m_GUIElement->isVisible();
+	m_GUIElement->setAlignment(
+		(gui::EGUI_ALIGNMENT)left,
+		(gui::EGUI_ALIGNMENT)right,
+		(gui::EGUI_ALIGNMENT)top,
+		(gui::EGUI_ALIGNMENT)bottom);
 }
 
-void GUIElement::Visible::set(bool value)
+void GUIElement::SetMaxSize(Dimension2Du^ size)
 {
-	m_GUIElement->setVisible(value);
+	LIME_ASSERT(size != nullptr);
+	m_GUIElement->setMaxSize(*size->m_NativeValue);
+}
+
+void GUIElement::SetMinSize(Dimension2Du^ size)
+{
+	LIME_ASSERT(size != nullptr);
+	m_GUIElement->setMinSize(*size->m_NativeValue);
+}
+
+void GUIElement::SetRelativePositionProportional(Rectf^ relativePosition)
+{
+	LIME_ASSERT(relativePosition != nullptr);
+	m_GUIElement->setRelativePositionProportional(*relativePosition->m_NativeValue);
+}
+
+void GUIElement::UpdateAbsolutePosition()
+{
+	m_GUIElement->updateAbsolutePosition();
+}
+
+Recti^ GUIElement::AbsoluteClippingRect::get()
+{
+	return gcnew Recti(m_GUIElement->getAbsoluteClippingRect());
+}
+
+Recti^ GUIElement::AbsolutePosition::get()
+{
+	return gcnew Recti(m_GUIElement->getAbsolutePosition());
+}
+
+List<GUIElement^>^ GUIElement::ChildList::get()
+{
+	List<GUIElement^>^ l = gcnew List<GUIElement^>();
+
+	core::list<IGUIElement*> u = m_GUIElement->getChildren();
+	for (core::list<gui::IGUIElement*>::ConstIterator i = u.begin(); i != u.end(); ++i)
+	{
+		GUIElement^ e = GUIElement::Wrap(*i);
+		if (e != nullptr)
+			l->Add(e);
+	}
+
+	return l;
+}
+
+bool GUIElement::Clipped::get()
+{
+	return !m_GUIElement->isNotClipped();
+}
+
+void GUIElement::Clipped::set(bool value)
+{
+	m_GUIElement->setNotClipped(!value);
 }
 
 bool GUIElement::Enabled::get()
@@ -124,24 +229,20 @@ void GUIElement::Enabled::set(bool value)
 	m_GUIElement->setEnabled(value);
 }
 
-bool GUIElement::TabStop::get()
+int GUIElement::ID::get()
 {
-	return m_GUIElement->isTabStop();
+	return m_GUIElement->getID();
 }
 
-void GUIElement::TabStop::set(bool value)
+void GUIElement::ID::set(int value)
 {
-	m_GUIElement->setTabStop(value);
+	m_GUIElement->setID(value);
 }
 
-int GUIElement::TabOrder::get()
+GUIElement^ GUIElement::Parent::get()
 {
-	return m_GUIElement->getTabOrder();
-}
-
-void GUIElement::TabOrder::set(int value)
-{
-	m_GUIElement->setTabOrder(value);
+	gui::IGUIElement* e = m_GUIElement->getParent();
+	return GUIElement::Wrap(e);
 }
 
 Recti^ GUIElement::RelativePosition::get()
@@ -155,24 +256,50 @@ void GUIElement::RelativePosition::set(Recti^ value)
 	m_GUIElement->setRelativePosition(*value->m_NativeValue);
 }
 
-Recti^ GUIElement::AbsolutePosition::get()
+bool GUIElement::SubElement::get()
 {
-	return gcnew Recti(m_GUIElement->getAbsolutePosition());
+	return m_GUIElement->isSubElement();
 }
 
-bool GUIElement::Clipped::get()
+void GUIElement::SubElement::set(bool value)
 {
-	return !m_GUIElement->isNotClipped();
+	m_GUIElement->setSubElement(value);
 }
 
-void GUIElement::Clipped::set(bool value)
+bool GUIElement::TabGroup::get()
 {
-	m_GUIElement->setNotClipped(!value);
+	return m_GUIElement->isTabGroup();
 }
 
-Recti^ GUIElement::AbsoluteClippingRect::get()
+void GUIElement::TabGroup::set(bool value)
 {
-	return gcnew Recti(m_GUIElement->getAbsoluteClippingRect());
+	m_GUIElement->setTabGroup(value);
+}
+
+GUIElement^ GUIElement::TabGroupElement::get()
+{
+	gui::IGUIElement* e = m_GUIElement->getTabGroup();
+	return GUIElement::Wrap(e);
+}
+
+int GUIElement::TabOrder::get()
+{
+	return m_GUIElement->getTabOrder();
+}
+
+void GUIElement::TabOrder::set(int value)
+{
+	m_GUIElement->setTabOrder(value);
+}
+
+bool GUIElement::TabStop::get()
+{
+	return m_GUIElement->isTabStop();
+}
+
+void GUIElement::TabStop::set(bool value)
+{
+	m_GUIElement->setTabStop(value);
 }
 
 String^ GUIElement::Text::get()
@@ -193,6 +320,26 @@ String^ GUIElement::ToolTipText::get()
 void GUIElement::ToolTipText::set(String^ value)
 {
 	m_GUIElement->setToolTipText(Lime::StringToStringW(value).c_str());
+}
+
+GUIElementType GUIElement::Type::get()
+{
+	return (GUIElementType)m_GUIElement->getType();
+}
+
+String^ GUIElement::TypeName::get()
+{
+	return gcnew String(m_GUIElement->getTypeName());
+}
+
+bool GUIElement::Visible::get()
+{
+	return m_GUIElement->isVisible();
+}
+
+void GUIElement::Visible::set(bool value)
+{
+	m_GUIElement->setVisible(value);
 }
 
 String^ GUIElement::ToString()

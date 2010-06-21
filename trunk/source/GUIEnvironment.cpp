@@ -301,6 +301,75 @@ GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle)
 	return GUIListBox::Wrap(b);
 }
 
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str(),
+		modal,
+		(gui::EMESSAGE_BOX_FLAG)flags,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		LIME_SAFEREF(image, m_Texture));
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str(),
+		modal,
+		(gui::EMESSAGE_BOX_FLAG)flags,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str(),
+		modal,
+		(gui::EMESSAGE_BOX_FLAG)flags,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str(),
+		modal,
+		(gui::EMESSAGE_BOX_FLAG)flags);
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str(),
+		modal);
+
+	return GUIWindow::Wrap(w);
+}
+
+GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text)
+{
+	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
+		Lime::StringToStringW(caption).c_str(),
+		Lime::StringToStringW(text).c_str());
+
+	return GUIWindow::Wrap(w);
+}
+
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)
 {
 	LIME_ASSERT(rectangle != nullptr);

@@ -816,6 +816,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIMessageBoxFlag.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIScrollBar.cpp"
 				>
 			</File>
