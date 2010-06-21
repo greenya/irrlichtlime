@@ -212,6 +212,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Fog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FogType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Image.cpp"
 				>
 			</File>
@@ -273,6 +281,10 @@
 			</File>
 			<File
 				RelativePath=".\TextureClamp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TextureCreationFlag.h"
 				>
 			</File>
 			<File
