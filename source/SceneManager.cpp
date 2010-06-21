@@ -1521,7 +1521,7 @@ void SceneManager::ActiveCamera::set(CameraSceneNode^ value)
 	m_SceneManager->setActiveCamera(LIME_SAFEREF(value, m_CameraSceneNode));
 }
 
-SceneNode^ SceneManager::RootSceneNode::get()
+SceneNode^ SceneManager::RootNode::get()
 {
 	scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
 	return SceneNode::Wrap(n);

@@ -22,7 +22,7 @@ namespace _03.CustomSceneNode
 
 			smgr.AddCameraSceneNode(null, new Vector3Df(0, -40, 0), new Vector3Df(0));
 
-			CSampleSceneNode myNode = new CSampleSceneNode(smgr.RootSceneNode, smgr, 666);
+			CSampleSceneNode myNode = new CSampleSceneNode(smgr.RootNode, smgr, 667);
 
 			SceneNodeAnimator anim = smgr.CreateRotationAnimator(new Vector3Df(0.8f, 0, 0.8f));
 
