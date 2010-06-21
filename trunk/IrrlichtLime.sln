@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.Collision", "examples\07
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.SpecialFX", "examples\08.SpecialFX\08.SpecialFX.csproj", "{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.Meshviewer", "examples\09.Meshviewer\09.Meshviewer.csproj", "{B58EA1E2-9ED2-4B33-B6EA-63931323E941}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|Win32.ActiveCfg = Release|x86
 		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|x86.ActiveCfg = Release|x86
 		{8C159A17-1BAD-49C6-ADB5-9FEA5FE33B69}.Release|x86.Build.0 = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|Win32.ActiveCfg = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|x86.ActiveCfg = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Debug|x86.Build.0 = Debug|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|Any CPU.ActiveCfg = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|Win32.ActiveCfg = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|x86.ActiveCfg = Release|x86
+		{B58EA1E2-9ED2-4B33-B6EA-63931323E941}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
