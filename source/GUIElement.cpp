@@ -10,6 +10,8 @@
 #include "GUIListBox.h"
 #include "GUIScrollBar.h"
 #include "GUIStaticText.h"
+#include "GUITab.h"
+#include "GUITabControl.h"
 #include "GUIToolBar.h"
 #include "GUIWindow.h"
 
@@ -44,8 +46,8 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 	case gui::EGUIET_SCROLL_BAR: return gcnew GUIScrollBar((gui::IGUIScrollBar*)ref);
 	//case gui::EGUIET_SPIN_BOX: return ...
 	case gui::EGUIET_STATIC_TEXT: return gcnew GUIStaticText((gui::IGUIStaticText*)ref);
-	//case gui::EGUIET_TAB: return ...
-	//case gui::EGUIET_TAB_CONTROL: return ...
+	case gui::EGUIET_TAB: return gcnew GUITab((gui::IGUITab*)ref);
+	case gui::EGUIET_TAB_CONTROL: return gcnew GUITabControl((gui::IGUITabControl*)ref);
 	//case gui::EGUIET_TABLE: return ...
 	case gui::EGUIET_TOOL_BAR: return gcnew GUIToolBar((gui::IGUIToolBar*)ref);
 	//case gui::EGUIET_TREE_VIEW: return ...

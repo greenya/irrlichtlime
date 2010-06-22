@@ -12,6 +12,8 @@
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
+#include "GUITab.h"
+#include "GUITabControl.h"
 #include "GUIToolBar.h"
 #include "GUIWindow.h"
 #include "ReferenceCounted.h"
@@ -579,6 +581,95 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIStaticText::Wrap(t);
+}
+
+GUITab^ GUIEnvironment::AddTab(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITab* t = m_GUIEnvironment->addTab(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUITab::Wrap(t);
+}
+
+GUITab^ GUIEnvironment::AddTab(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITab* t = m_GUIEnvironment->addTab(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUITab::Wrap(t);
+}
+
+GUITab^ GUIEnvironment::AddTab(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITab* t = m_GUIEnvironment->addTab(*rectangle->m_NativeValue);
+	return GUITab::Wrap(t);
+}
+
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		fillBackground,
+		border,
+		id);
+
+	return GUITabControl::Wrap(t);
+}
+
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		fillBackground,
+		border);
+
+	return GUITabControl::Wrap(t);
+}
+
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		fillBackground);
+
+	return GUITabControl::Wrap(t);
+}
+
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUITabControl::Wrap(t);
+}
+
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(*rectangle->m_NativeValue);
+	return GUITabControl::Wrap(t);
 }
 
 GUIToolBar^ GUIEnvironment::AddToolBar(GUIElement^ parent, int id)
