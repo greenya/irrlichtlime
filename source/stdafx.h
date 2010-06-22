@@ -25,6 +25,7 @@
 #include "FogType.h"
 #include "GUIAlignment.h"
 #include "GUIButtonState.h"
+#include "GUIContextMenuClose.h"
 #include "GUIDefaultColor.h"
 #include "GUIDefaultFont.h"
 #include "GUIDefaultIcon.h"

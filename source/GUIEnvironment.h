@@ -12,6 +12,8 @@ namespace Video { ref class Texture; }
 namespace GUI {
 
 ref class GUIButton;
+ref class GUIComboBox;
+ref class GUIContextMenu;
 ref class GUIEditBox;
 ref class GUIElement;
 ref class GUIFileOpenDialog;
@@ -21,6 +23,7 @@ ref class GUIListBox;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
+ref class GUIToolBar;
 ref class GUIWindow;
 
 public ref class GUIEnvironment : ReferenceCounted
@@ -32,6 +35,14 @@ public:
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
 	GUIButton^ AddButton(Recti^ rectangle);
+
+	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent);
+	GUIComboBox^ AddComboBox(Recti^ rectangle);
+
+	GUIContextMenu^ AddContextMenu(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIContextMenu^ AddContextMenu(Recti^ rectangle, GUIElement^ parent);
+	GUIContextMenu^ AddContextMenu(Recti^ rectangle);
 
 	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id);
 	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent);
@@ -55,6 +66,10 @@ public:
 	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent);
 	GUIListBox^ AddListBox(Recti^ rectangle);
 
+	GUIContextMenu^ AddMenu(GUIElement^ parent, int id);
+	GUIContextMenu^ AddMenu(GUIElement^ parent);
+	GUIContextMenu^ AddMenu();
+
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image);
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id);
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent);
@@ -72,6 +87,10 @@ public:
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
+
+	GUIToolBar^ AddToolBar(GUIElement^ parent, int id);
+	GUIToolBar^ AddToolBar(GUIElement^ parent);
+	GUIToolBar^ AddToolBar();
 
 	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id);
 	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent);
