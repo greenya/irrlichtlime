@@ -736,6 +736,26 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIComboBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIComboBox.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIContextMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIContextMenu.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIContextMenuClose.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIDefaultColor.h"
 				>
 			</File>
@@ -865,6 +885,14 @@
 			</File>
 			<File
 				RelativePath=".\GUIStaticText.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIToolBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIToolBar.h"
 				>
 			</File>
 			<File

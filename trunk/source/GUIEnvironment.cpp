@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "GUIButton.h"
+#include "GUIComboBox.h"
+#include "GUIContextMenu.h"
 #include "GUIEditBox.h"
 #include "GUIElement.h"
 #include "GUIEnvironment.h"
@@ -10,6 +12,7 @@
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
+#include "GUIToolBar.h"
 #include "GUIWindow.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
@@ -94,6 +97,72 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIButton::Wrap(b);
+}
+
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIComboBox::Wrap(c);
+}
+
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIComboBox::Wrap(c);
+}
+
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
+		*rectangle->m_NativeValue);
+
+	return GUIComboBox::Wrap(c);
+}
+
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIContextMenu::Wrap(m);
+}
+
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIContextMenu::Wrap(m);
+}
+
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
+		*rectangle->m_NativeValue);
+
+	return GUIContextMenu::Wrap(m);
 }
 
 GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id)
@@ -301,6 +370,29 @@ GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle)
 	return GUIListBox::Wrap(b);
 }
 
+GUIContextMenu^ GUIEnvironment::AddMenu(GUIElement^ parent, int id)
+{
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addMenu(
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIContextMenu::Wrap(m);
+}
+
+GUIContextMenu^ GUIEnvironment::AddMenu(GUIElement^ parent)
+{
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addMenu(
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIContextMenu::Wrap(m);
+}
+
+GUIContextMenu^ GUIEnvironment::AddMenu()
+{
+	gui::IGUIContextMenu* m = m_GUIEnvironment->addMenu();
+	return GUIContextMenu::Wrap(m);
+}
+
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
@@ -487,6 +579,29 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIStaticText::Wrap(t);
+}
+
+GUIToolBar^ GUIEnvironment::AddToolBar(GUIElement^ parent, int id)
+{
+	gui::IGUIToolBar* b = m_GUIEnvironment->addToolBar(
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIToolBar::Wrap(b);
+}
+
+GUIToolBar^ GUIEnvironment::AddToolBar(GUIElement^ parent)
+{
+	gui::IGUIToolBar* b = m_GUIEnvironment->addToolBar(
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIToolBar::Wrap(b);
+}
+
+GUIToolBar^ GUIEnvironment::AddToolBar()
+{
+	gui::IGUIToolBar* b = m_GUIEnvironment->addToolBar();
+	return GUIToolBar::Wrap(b);
 }
 
 GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id)
