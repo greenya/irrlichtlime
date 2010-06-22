@@ -23,6 +23,8 @@ ref class GUIListBox;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
+ref class GUITab;
+ref class GUITabControl;
 ref class GUIToolBar;
 ref class GUIWindow;
 
@@ -87,6 +89,16 @@ public:
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
+
+	GUITab^ AddTab(Recti^ rectangle, GUIElement^ parent, int id);
+	GUITab^ AddTab(Recti^ rectangle, GUIElement^ parent);
+	GUITab^ AddTab(Recti^ rectangle);
+
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border, int id);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent);
+	GUITabControl^ AddTabControl(Recti^ rectangle);
 
 	GUIToolBar^ AddToolBar(GUIElement^ parent, int id);
 	GUIToolBar^ AddToolBar(GUIElement^ parent);

@@ -888,6 +888,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUITab.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITab.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITabControl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITabControl.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIToolBar.cpp"
 				>
 			</File>
