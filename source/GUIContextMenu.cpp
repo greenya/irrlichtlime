@@ -23,7 +23,7 @@ GUIContextMenu::GUIContextMenu(gui::IGUIContextMenu* ref)
 	m_GUIContextMenu = ref;
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking)
+int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking)
 {
 	return m_GUIContextMenu->addItem(
 		Lime::StringToStringW(text).c_str(),
@@ -34,7 +34,7 @@ unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, 
 		autoChecking);
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked)
+int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked)
 {
 	return m_GUIContextMenu->addItem(
 		Lime::StringToStringW(text).c_str(),
@@ -44,7 +44,7 @@ unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, 
 		isChecked);
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu)
+int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu)
 {
 	return m_GUIContextMenu->addItem(
 		Lime::StringToStringW(text).c_str(),
@@ -53,7 +53,7 @@ unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled, 
 		hasSubMenu);
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled)
+int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled)
 {
 	return m_GUIContextMenu->addItem(
 		Lime::StringToStringW(text).c_str(),
@@ -61,14 +61,14 @@ unsigned int GUIContextMenu::AddItem(String^ text, int commandID, bool enabled)
 		enabled);
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text, int commandID)
+int GUIContextMenu::AddItem(String^ text, int commandID)
 {
 	return m_GUIContextMenu->addItem(
 		Lime::StringToStringW(text).c_str(),
 		commandID);
 }
 
-unsigned int GUIContextMenu::AddItem(String^ text)
+int GUIContextMenu::AddItem(String^ text)
 {
 	return m_GUIContextMenu->addItem(Lime::StringToStringW(text).c_str());
 }
@@ -78,7 +78,7 @@ void GUIContextMenu::AddSeparator()
 	m_GUIContextMenu->addSeparator();
 }
 
-int GUIContextMenu::FindItem(int commandID, unsigned int indexStartSearch)
+int GUIContextMenu::FindItem(int commandID, int indexStartSearch)
 {
 	LIME_ASSERT(indexStartSearch < ItemCount);
 	return m_GUIContextMenu->findItemWithCommandId(commandID, indexStartSearch);
@@ -89,46 +89,48 @@ int GUIContextMenu::FindItem(int commandID)
 	return m_GUIContextMenu->findItemWithCommandId(commandID);
 }
 
-bool GUIContextMenu::GetItemAutoChecking(unsigned int index)
+bool GUIContextMenu::GetItemAutoChecking(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIContextMenu->getItemAutoChecking(index);
 }
 
-bool GUIContextMenu::GetItemChecked(unsigned int index)
+bool GUIContextMenu::GetItemChecked(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIContextMenu->isItemChecked(index);
 }
 
-int GUIContextMenu::GetItemCommandID(unsigned int index)
+int GUIContextMenu::GetItemCommandID(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIContextMenu->getItemCommandId(index);
 }
 
-bool GUIContextMenu::GetItemEnabled(unsigned int index)
+bool GUIContextMenu::GetItemEnabled(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIContextMenu->isItemEnabled(index);
 }
 
-String^ GUIContextMenu::GetItemText(unsigned int index)
+String^ GUIContextMenu::GetItemText(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return gcnew String(m_GUIContextMenu->getItemText(index));
 }
 
-GUIContextMenu^ GUIContextMenu::GetSubMenu(unsigned int index)
+GUIContextMenu^ GUIContextMenu::GetSubMenu(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 
 	gui::IGUIContextMenu* m = m_GUIContextMenu->getSubMenu(index);
 	return GUIContextMenu::Wrap(m);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking)
+int GUIContextMenu::InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str(),
@@ -139,8 +141,10 @@ unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int co
 		autoChecking);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked)
+int GUIContextMenu::InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str(),
@@ -150,8 +154,10 @@ unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int co
 		isChecked);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu)
+int GUIContextMenu::InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str(),
@@ -160,8 +166,10 @@ unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int co
 		hasSubMenu);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int commandID, bool enabled)
+int GUIContextMenu::InsertItem(int index, String^ text, int commandID, bool enabled)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str(),
@@ -169,16 +177,20 @@ unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int co
 		enabled);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text, int commandID)
+int GUIContextMenu::InsertItem(int index, String^ text, int commandID)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str(),
 		commandID);
 }
 
-unsigned int GUIContextMenu::InsertItem(unsigned int index, String^ text)
+int GUIContextMenu::InsertItem(int index, String^ text)
 {
+	LIME_ASSERT(index >= 0);
+
 	return m_GUIContextMenu->insertItem(
 		index,
 		Lime::StringToStringW(text).c_str());
@@ -189,9 +201,9 @@ void GUIContextMenu::RemoveAllItems()
 	m_GUIContextMenu->removeAllItems();
 }
 
-void GUIContextMenu::RemoveItem(unsigned int index)
+void GUIContextMenu::RemoveItem(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->removeItem(index);
 }
 
@@ -200,33 +212,33 @@ void GUIContextMenu::SetEventParent(GUIElement^ parent)
 	m_GUIContextMenu->setEventParent(LIME_SAFEREF(parent, m_GUIElement));
 }
 
-void GUIContextMenu::SetItemAutoChecking(unsigned int index, bool autoChecking)
+void GUIContextMenu::SetItemAutoChecking(int index, bool autoChecking)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->setItemAutoChecking(index, autoChecking);
 }
 
-void GUIContextMenu::SetItemChecked(unsigned int index, bool isChecked)
+void GUIContextMenu::SetItemChecked(int index, bool isChecked)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->setItemChecked(index, isChecked);
 }
 
-void GUIContextMenu::SetItemCommandID(unsigned int index, int commandID)
+void GUIContextMenu::SetItemCommandID(int index, int commandID)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->setItemCommandId(index, commandID);
 }
 
-void GUIContextMenu::SetItemEnabled(unsigned int index, bool enabled)
+void GUIContextMenu::SetItemEnabled(int index, bool enabled)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->setItemEnabled(index, enabled);
 }
 
-void GUIContextMenu::SetItemText(unsigned int index, String^ text)
+void GUIContextMenu::SetItemText(int index, String^ text)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIContextMenu->setItemText(index, Lime::StringToStringW(text).c_str());
 }
 
@@ -240,9 +252,15 @@ void GUIContextMenu::CloseHandling::set(GUIContextMenuClose value)
 	m_GUIContextMenu->setCloseHandling((gui::ECONTEXT_MENU_CLOSE)value);
 }
 
-unsigned int GUIContextMenu::ItemCount::get()
+int GUIContextMenu::ItemCount::get()
 {
 	return m_GUIContextMenu->getItemCount();
+}
+
+int GUIContextMenu::SelectedCommandID::get()
+{
+	int i = m_GUIContextMenu->getSelectedItem();
+	return i == -1 ? -1 : m_GUIContextMenu->getItemCommandId(i);
 }
 
 int GUIContextMenu::SelectedIndex::get()

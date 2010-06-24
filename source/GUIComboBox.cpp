@@ -23,12 +23,12 @@ GUIComboBox::GUIComboBox(gui::IGUIComboBox* ref)
 	m_GUIComboBox = ref;
 }
 
-unsigned int GUIComboBox::AddItem(String^ text, unsigned int data)
+int GUIComboBox::AddItem(String^ text, unsigned int data)
 {
 	return m_GUIComboBox->addItem(Lime::StringToStringW(text).c_str(), data);
 }
 
-unsigned int GUIComboBox::AddItem(String^ text)
+int GUIComboBox::AddItem(String^ text)
 {
 	return m_GUIComboBox->addItem(Lime::StringToStringW(text).c_str());
 }
@@ -43,21 +43,21 @@ int GUIComboBox::GetIndexForItemData(unsigned int data)
 	return m_GUIComboBox->getIndexForItemData(data);
 }
 
-String^ GUIComboBox::GetItem(unsigned int index)
+String^ GUIComboBox::GetItem(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return gcnew String(m_GUIComboBox->getItem(index));
 }
 
-unsigned int GUIComboBox::GetItemData(unsigned int index)
+unsigned int GUIComboBox::GetItemData(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIComboBox->getItemData(index);
 }
 
-void GUIComboBox::RemoveItem(unsigned int index)
+void GUIComboBox::RemoveItem(int index)
 {
-	LIME_ASSERT(index < ItemCount);
+	LIME_ASSERT(index >= 0 && index < ItemCount);
 	m_GUIComboBox->removeItem(index);
 }
 
@@ -66,7 +66,7 @@ void GUIComboBox::SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertica
 	m_GUIComboBox->setTextAlignment((EGUI_ALIGNMENT)horizontal, (EGUI_ALIGNMENT)vertical);
 }
 
-unsigned int GUIComboBox::ItemCount::get()
+int GUIComboBox::ItemCount::get()
 {
 	return m_GUIComboBox->getItemCount();
 }

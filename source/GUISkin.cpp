@@ -372,7 +372,7 @@ GUIFont^ GUISkin::GetFont(GUIDefaultFont which)
 	return GUIFont::Wrap(m_GUISkin->getFont((gui::EGUI_DEFAULT_FONT)which));
 }
 
-unsigned int GUISkin::GetIcon(GUIDefaultIcon icon)
+int GUISkin::GetIcon(GUIDefaultIcon icon)
 {
 	return m_GUISkin->getIcon((gui::EGUI_DEFAULT_ICON)icon);
 }
@@ -403,8 +403,9 @@ void GUISkin::SetFont(GUIFont^ font)
 	m_GUISkin->setFont(LIME_SAFEREF(font, m_GUIFont));
 }
 
-void GUISkin::SetIcon(unsigned int index, GUIDefaultIcon which)
+void GUISkin::SetIcon(int index, GUIDefaultIcon which)
 {
+	LIME_ASSERT(index >= 0);
 	m_GUISkin->setIcon((gui::EGUI_DEFAULT_ICON)which, index);
 }
 
