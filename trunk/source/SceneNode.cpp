@@ -1,11 +1,19 @@
 #include "stdafx.h"
+#include "AnimatedMeshSceneNode.h"
 #include "AttributeExchangingObject.h"
+#include "BillboardSceneNode.h"
+#include "CameraSceneNode.h"
+#include "LightSceneNode.h"
 #include "Material.h"
+#include "MeshSceneNode.h"
+#include "ParticleSystemSceneNode.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
 #include "SceneManager.h"
+#include "ShadowVolumeSceneNode.h"
 #include "Texture.h"
 #include "TriangleSelector.h"
+#include "VolumeLightSceneNode.h"
 
 using namespace irr;
 using namespace System;
@@ -19,7 +27,57 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	if (ref == nullptr)
 		return nullptr;
 
-	return gcnew SceneNode(ref);
+	switch (ref->getType())
+	{
+	case scene::ESNT_CUBE:
+	case scene::ESNT_SPHERE:
+	case scene::ESNT_OCTREE:
+	case scene::ESNT_MESH:
+	case scene::ESNT_Q3SHADER_SCENE_NODE:
+	case scene::ESNT_MD3_SCENE_NODE:
+		return gcnew MeshSceneNode((scene::IMeshSceneNode*)ref);
+
+	case scene::ESNT_CAMERA:
+	case scene::ESNT_CAMERA_MAYA:
+	case scene::ESNT_CAMERA_FPS:
+		return gcnew CameraSceneNode((scene::ICameraSceneNode*)ref);
+
+	//case scene::ESNT_TEXT:
+	//	return gcnew TextSceneNode((scene::ITextSceneNode*)ref);
+
+	//case scene::ESNT_TERRAIN:
+	//	return gcnew TerrainSceneNode((scene::ITerrainSceneNode*)ref);
+
+	case scene::ESNT_SHADOW_VOLUME:
+		return gcnew ShadowVolumeSceneNode((scene::IShadowVolumeSceneNode*)ref);
+	
+	case scene::ESNT_LIGHT:
+		return gcnew LightSceneNode((scene::ILightSceneNode*)ref);
+
+	//case scene::ESNT_DUMMY_TRANSFORMATION:
+	//	return gcnew DummyTransformationSceneNode((scene::IDummyTransformationSceneNode*)ref);
+	
+	case scene::ESNT_BILLBOARD:
+		return gcnew BillboardSceneNode((scene::IBillboardSceneNode*)ref);
+
+	case scene::ESNT_ANIMATED_MESH:
+		return gcnew AnimatedMeshSceneNode((scene::IAnimatedMeshSceneNode*)ref);
+
+	case scene::ESNT_PARTICLE_SYSTEM:
+		return gcnew ParticleSystemSceneNode((scene::IParticleSystemSceneNode*)ref);
+
+	case scene::ESNT_VOLUME_LIGHT:
+		return gcnew VolumeLightSceneNode((scene::IVolumeLightSceneNode*)ref);
+
+	// this is SceneNode
+	//case scene::ESNT_WATER_SURFACE:
+	//case scene::ESNT_SKY_BOX:
+	//case scene::ESNT_SKY_DOME:
+	//case scene::ESNT_EMPTY:
+	//	return gcnew SceneNode(ref);
+	}
+
+	return gcnew SceneNode(ref); // scene::ESNT_UNKNOWN and anything other
 }
 
 SceneNode::SceneNode(scene::ISceneNode* ref)
