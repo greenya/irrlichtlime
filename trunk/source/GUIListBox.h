@@ -15,29 +15,29 @@ public ref class GUIListBox : GUIElement
 {
 public:
 
-	unsigned int AddItem(String^ text, int icon);
-	unsigned int AddItem(String^ text);
-	void ClearItemColor(unsigned int index, GUIListBoxColor colorType);
-	void ClearItemColors(unsigned int index);
+	int AddItem(String^ text, int icon);
+	int AddItem(String^ text);
+	void ClearItemColor(int index, GUIListBoxColor colorType);
+	void ClearItemColors(int index);
 	void ClearItems();
-	String^ GetItem(unsigned int index);
+	String^ GetItem(int index);
 	Video::Coloru^ GetItemDefaultColor(GUIListBoxColor colorType);
-	Video::Coloru^ GetItemColor(unsigned int index, GUIListBoxColor colorType);
-	int GetItemIcon(unsigned int index);
-	int InsertItem(unsigned int index, String^ text, int icon);
-	int InsertItem(unsigned int index, String^ text);
-	bool ItemColorOverrided(unsigned int index, GUIListBoxColor colorType);
-	void RemoveItem (unsigned int index);
+	Video::Coloru^ GetItemColor(int index, GUIListBoxColor colorType);
+	int GetItemIcon(int index);
+	int InsertItem(int index, String^ text, int icon);
+	int InsertItem(int index, String^ text);
+	bool ItemColorOverrided(int index, GUIListBoxColor colorType);
+	void RemoveItem(int index);
 	void SetDrawBackground(bool draw);
-	void SetItem(unsigned int index, String^ text, int icon);
-	void SetItem(unsigned int index, String^ text);
-	void SetItemColor(unsigned int index, GUIListBoxColor colorType, Video::Coloru^ color);
+	void SetItem(int index, String^ text, int icon);
+	void SetItem(int index, String^ text);
+	void SetItemColor(int index, GUIListBoxColor colorType, Video::Coloru^ color);
 	void SetItemHeight(int height);
 	void SetSpriteBank(GUISpriteBank^ bank);
-	void SwapItems(unsigned int index1, unsigned int index2);
+	void SwapItems(int index1, int index2);
 
 	property bool AutoScroll { bool get(); void set(bool value); }
-	property unsigned int ItemCount { unsigned int get(); }
+	property int ItemCount { int get(); }
 	property int SelectedIndex { int get(); void set(int value); }
 	property String^ SelectedItem { String^ get(); void set(String^ value); }
 

@@ -58,14 +58,14 @@ public:
 	Video::Coloru^ GetColor(GUIDefaultColor color);
 	String^ GetText(GUIDefaultText text);
 	GUIFont^ GetFont(GUIDefaultFont which);
-	unsigned int GetIcon(GUIDefaultIcon icon);
+	int GetIcon(GUIDefaultIcon icon);
 	int GetSize(GUIDefaultSize size);
 
 	void SetColor(Video::Coloru^ newColor, GUIDefaultColor which);
 	void SetText(String^ newText, GUIDefaultText which);
 	void SetFont(GUIFont^ font, GUIDefaultFont which);
 	void SetFont(GUIFont^ font);
-	void SetIcon(unsigned int index, GUIDefaultIcon which);
+	void SetIcon(int index, GUIDefaultIcon which);
 	void SetSize(int size, GUIDefaultSize which);
 
 	property GUISpriteBank^ SpriteBank { GUISpriteBank^ get(); void set(GUISpriteBank^ value); }

@@ -13,45 +13,46 @@ public ref class GUIContextMenu : GUIElement
 {
 public:
 
-	unsigned int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking);
-	unsigned int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked);
-	unsigned int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu);
-	unsigned int AddItem(String^ text, int commandID, bool enabled);
-	unsigned int AddItem(String^ text, int commandID);
-	unsigned int AddItem(String^ text);
+	int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking);
+	int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked);
+	int AddItem(String^ text, int commandID, bool enabled, bool hasSubMenu);
+	int AddItem(String^ text, int commandID, bool enabled);
+	int AddItem(String^ text, int commandID);
+	int AddItem(String^ text);
 
 	void AddSeparator();
 
-	int FindItem(int commandID, unsigned int indexStartSearch);
+	int FindItem(int commandID, int indexStartSearch);
 	int FindItem(int commandID);
 
-	bool GetItemAutoChecking(unsigned int index);
-	bool GetItemChecked(unsigned int index);
-	int GetItemCommandID(unsigned int index);
-	bool GetItemEnabled(unsigned int index);
-	String^ GetItemText(unsigned int index);
-	GUIContextMenu^ GetSubMenu(unsigned int index);
+	bool GetItemAutoChecking(int index);
+	bool GetItemChecked(int index);
+	int GetItemCommandID(int index);
+	bool GetItemEnabled(int index);
+	String^ GetItemText(int index);
+	GUIContextMenu^ GetSubMenu(int index);
 
-	unsigned int InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking);
-	unsigned int InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked);
-	unsigned int InsertItem(unsigned int index, String^ text, int commandID, bool enabled, bool hasSubMenu);
-	unsigned int InsertItem(unsigned int index, String^ text, int commandID, bool enabled);
-	unsigned int InsertItem(unsigned int index, String^ text, int commandID);
-	unsigned int InsertItem(unsigned int index, String^ text);
+	int InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked, bool autoChecking);
+	int InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu, bool isChecked);
+	int InsertItem(int index, String^ text, int commandID, bool enabled, bool hasSubMenu);
+	int InsertItem(int index, String^ text, int commandID, bool enabled);
+	int InsertItem(int index, String^ text, int commandID);
+	int InsertItem(int index, String^ text);
 
 	void RemoveAllItems();
-	void RemoveItem(unsigned int index);
+	void RemoveItem(int index);
 
 	void SetEventParent(GUIElement^ parent);
 
-	void SetItemAutoChecking(unsigned int index, bool autoChecking);
-	void SetItemChecked(unsigned int index, bool isChecked);
-	void SetItemCommandID(unsigned int index, int commandID);
-	void SetItemEnabled(unsigned int index, bool enabled);
-	void SetItemText(unsigned int index, String^ text);
+	void SetItemAutoChecking(int index, bool autoChecking);
+	void SetItemChecked(int index, bool isChecked);
+	void SetItemCommandID(int index, int commandID);
+	void SetItemEnabled(int index, bool enabled);
+	void SetItemText(int index, String^ text);
 
 	property GUIContextMenuClose CloseHandling { GUIContextMenuClose get(); void set(GUIContextMenuClose value); }
-	property unsigned int ItemCount { unsigned int get(); }
+	property int ItemCount { int get(); }
+	property int SelectedCommandID { int get(); }
 	property int SelectedIndex { int get(); }
 
 internal:

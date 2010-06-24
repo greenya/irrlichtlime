@@ -13,20 +13,20 @@ public ref class GUIComboBox : GUIElement
 {
 public:
 
-	unsigned int AddItem(String^ text, unsigned int data);
-	unsigned int AddItem(String^ text);
+	int AddItem(String^ text, unsigned int data);
+	int AddItem(String^ text);
 
 	void Clear();
 
 	int GetIndexForItemData(unsigned int data);
-	String^ GetItem(unsigned int index);
-	unsigned int GetItemData(unsigned int index);
+	String^ GetItem(int index);
+	unsigned int GetItemData(int index);
 
-	void RemoveItem(unsigned int index);
+	void RemoveItem(int index);
 
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
-	property unsigned int ItemCount { unsigned int get(); }
+	property int ItemCount { int get(); }
 	property int SelectedIndex { int get(); void set(int value); }
 
 internal:
