@@ -736,6 +736,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUICheckBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUICheckBox.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIColorSelectDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIColorSelectDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIComboBox.cpp"
 				>
 			</File>
@@ -836,6 +852,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIInOutFader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIInOutFader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIListBox.cpp"
 				>
 			</File>
@@ -845,6 +869,14 @@
 			</File>
 			<File
 				RelativePath=".\GUIListBoxColor.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIMeshViewer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIMeshViewer.h"
 				>
 			</File>
 			<File
