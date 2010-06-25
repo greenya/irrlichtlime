@@ -12,6 +12,8 @@ namespace Video { ref class Texture; }
 namespace GUI {
 
 ref class GUIButton;
+ref class GUICheckBox;
+ref class GUIColorSelectDialog;
 ref class GUIComboBox;
 ref class GUIContextMenu;
 ref class GUIEditBox;
@@ -19,7 +21,9 @@ ref class GUIElement;
 ref class GUIFileOpenDialog;
 ref class GUIFont;
 ref class GUIImage;
+ref class GUIInOutFader;
 ref class GUIListBox;
+ref class GUIMeshViewer;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUIStaticText;
@@ -37,6 +41,17 @@ public:
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
 	GUIButton^ AddButton(Recti^ rectangle);
+
+	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent, int id);
+	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent);
+	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text);
+	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle);
+
+	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent, int id);
+	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent);
+	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal);
+	GUIColorSelectDialog^ AddColorSelectDialog(String^ title);
+	GUIColorSelectDialog^ AddColorSelectDialog();
 
 	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent);
@@ -63,6 +78,11 @@ public:
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos);
 
+	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent);
+	GUIInOutFader^ AddInOutFader(Recti^ rectangle);
+	GUIInOutFader^ AddInOutFader();
+
 	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
 	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent);
@@ -71,6 +91,11 @@ public:
 	GUIContextMenu^ AddMenu(GUIElement^ parent, int id);
 	GUIContextMenu^ AddMenu(GUIElement^ parent);
 	GUIContextMenu^ AddMenu();
+
+	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
+	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent);
+	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle);
 
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image);
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id);

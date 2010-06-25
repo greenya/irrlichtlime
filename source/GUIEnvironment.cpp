@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "GUIButton.h"
+#include "GUICheckBox.h"
+#include "GUIColorSelectDialog.h"
 #include "GUIComboBox.h"
 #include "GUIContextMenu.h"
 #include "GUIEditBox.h"
@@ -8,7 +10,9 @@
 #include "GUIFileOpenDialog.h"
 #include "GUIFont.h"
 #include "GUIImage.h"
+#include "GUIInOutFader.h"
 #include "GUIListBox.h"
+#include "GUIMeshViewer.h"
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUIStaticText.h"
@@ -99,6 +103,103 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIButton::Wrap(b);
+}
+
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
+		checked,
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		Lime::StringToStringW(text).c_str());
+
+	return GUICheckBox::Wrap(c);
+}
+
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
+		checked,
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		-1,
+		Lime::StringToStringW(text).c_str());
+
+	return GUICheckBox::Wrap(c);
+}
+
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
+		checked,
+		*rectangle->m_NativeValue,
+		nullptr,
+		-1,
+		Lime::StringToStringW(text).c_str());
+
+	return GUICheckBox::Wrap(c);
+}
+
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
+		checked,
+		*rectangle->m_NativeValue);
+
+	return GUICheckBox::Wrap(c);
+}
+
+GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent, int id)
+{
+	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIColorSelectDialog::Wrap(d);
+}
+
+GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent)
+{
+	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIColorSelectDialog::Wrap(d);
+}
+
+GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal)
+{
+	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal);
+
+	return GUIColorSelectDialog::Wrap(d);
+}
+
+GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title)
+{
+	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
+		Lime::StringToStringW(title).c_str());
+
+	return GUIColorSelectDialog::Wrap(d);
+}
+
+GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog()
+{
+	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog();
+	return GUIColorSelectDialog::Wrap(d);
 }
 
 GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle, GUIElement^ parent, int id)
@@ -326,6 +427,43 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
 	return GUIImage::Wrap(i);
 }
 
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(
+		rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIInOutFader::Wrap(f);
+}
+
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(
+		rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIInOutFader::Wrap(f);
+}
+
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(rectangle->m_NativeValue);
+	return GUIInOutFader::Wrap(f);
+}
+
+GUIInOutFader^ GUIEnvironment::AddInOutFader()
+{
+	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader();
+	return GUIInOutFader::Wrap(f);
+}
+
 GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
 {
 	LIME_ASSERT(rectangle != nullptr);
@@ -393,6 +531,50 @@ GUIContextMenu^ GUIEnvironment::AddMenu()
 {
 	gui::IGUIContextMenu* m = m_GUIEnvironment->addMenu();
 	return GUIContextMenu::Wrap(m);
+}
+
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		Lime::StringToStringW(text).c_str());
+
+	return GUIMeshViewer::Wrap(v);
+}
+
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIMeshViewer::Wrap(v);
+}
+
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIMeshViewer::Wrap(v);
+}
+
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(*rectangle->m_NativeValue);
+	return GUIMeshViewer::Wrap(v);
 }
 
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image)

@@ -1,13 +1,17 @@
 #include "stdafx.h"
 #include "AttributeExchangingObject.h"
 #include "GUIButton.h"
+#include "GUICheckBox.h"
+#include "GUIColorSelectDialog.h"
 #include "GUIComboBox.h"
 #include "GUIContextMenu.h"
 #include "GUIEditBox.h"
 #include "GUIElement.h"
 #include "GUIFileOpenDialog.h"
 #include "GUIImage.h"
+#include "GUIInOutFader.h"
 #include "GUIListBox.h"
+#include "GUIMeshViewer.h"
 #include "GUIScrollBar.h"
 #include "GUIStaticText.h"
 #include "GUITab.h"
@@ -29,29 +33,70 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 
 	switch (ref->getType())
 	{
-	case gui::EGUIET_BUTTON: return gcnew GUIButton((gui::IGUIButton*)ref);
-	//case gui::EGUIET_CHECK_BOX: return ...
-	case gui::EGUIET_COMBO_BOX: return gcnew GUIComboBox((gui::IGUIComboBox*)ref);
-	case gui::EGUIET_CONTEXT_MENU: return gcnew GUIContextMenu((gui::IGUIContextMenu*)ref);
-	case gui::EGUIET_MENU: return gcnew GUIContextMenu((gui::IGUIContextMenu*)ref);
-	case gui::EGUIET_EDIT_BOX: return gcnew GUIEditBox((gui::IGUIEditBox*)ref);
-	case gui::EGUIET_FILE_OPEN_DIALOG: return gcnew GUIFileOpenDialog((gui::IGUIFileOpenDialog*)ref);
-	//case gui::EGUIET_COLOR_SELECT_DIALOG: return ...
-	//case gui::EGUIET_IN_OUT_FADER: return ...
-	case gui::EGUIET_IMAGE: return gcnew GUIImage((gui::IGUIImage*)ref);
-	case gui::EGUIET_LIST_BOX: return gcnew GUIListBox((gui::IGUIListBox*)ref);
-	//case gui::EGUIET_MESH_VIEWER: return ...
-	case gui::EGUIET_MESSAGE_BOX: return gcnew GUIWindow((gui::IGUIWindow*)ref);
+	case gui::EGUIET_BUTTON:
+		return gcnew GUIButton((gui::IGUIButton*)ref);
+
+	case gui::EGUIET_CHECK_BOX:
+		return gcnew GUICheckBox((gui::IGUICheckBox*)ref);
+
+	case gui::EGUIET_COMBO_BOX:
+		return gcnew GUIComboBox((gui::IGUIComboBox*)ref);
+
+	case gui::EGUIET_CONTEXT_MENU:
+		return gcnew GUIContextMenu((gui::IGUIContextMenu*)ref);
+
+	case gui::EGUIET_MENU:
+		return gcnew GUIContextMenu((gui::IGUIContextMenu*)ref);
+
+	case gui::EGUIET_EDIT_BOX:
+		return gcnew GUIEditBox((gui::IGUIEditBox*)ref);
+
+	case gui::EGUIET_FILE_OPEN_DIALOG:
+		return gcnew GUIFileOpenDialog((gui::IGUIFileOpenDialog*)ref);
+
+	case gui::EGUIET_COLOR_SELECT_DIALOG:
+		return gcnew GUIColorSelectDialog((gui::IGUIColorSelectDialog*)ref);
+
+	case gui::EGUIET_IN_OUT_FADER:
+		return gcnew GUIInOutFader((gui::IGUIInOutFader*)ref);
+
+	case gui::EGUIET_IMAGE:
+		return gcnew GUIImage((gui::IGUIImage*)ref);
+
+	case gui::EGUIET_LIST_BOX:
+		return gcnew GUIListBox((gui::IGUIListBox*)ref);
+
+	case gui::EGUIET_MESH_VIEWER:
+		return gcnew GUIMeshViewer((gui::IGUIMeshViewer*)ref);
+
+	case gui::EGUIET_MESSAGE_BOX:
+		return gcnew GUIWindow((gui::IGUIWindow*)ref);
+
 	//case gui::EGUIET_MODAL_SCREEN: return ...
-	case gui::EGUIET_SCROLL_BAR: return gcnew GUIScrollBar((gui::IGUIScrollBar*)ref);
+
+	case gui::EGUIET_SCROLL_BAR:
+		return gcnew GUIScrollBar((gui::IGUIScrollBar*)ref);
+
 	//case gui::EGUIET_SPIN_BOX: return ...
-	case gui::EGUIET_STATIC_TEXT: return gcnew GUIStaticText((gui::IGUIStaticText*)ref);
-	case gui::EGUIET_TAB: return gcnew GUITab((gui::IGUITab*)ref);
-	case gui::EGUIET_TAB_CONTROL: return gcnew GUITabControl((gui::IGUITabControl*)ref);
+
+	case gui::EGUIET_STATIC_TEXT:
+		return gcnew GUIStaticText((gui::IGUIStaticText*)ref);
+
+	case gui::EGUIET_TAB:
+		return gcnew GUITab((gui::IGUITab*)ref);
+
+	case gui::EGUIET_TAB_CONTROL:
+		return gcnew GUITabControl((gui::IGUITabControl*)ref);
+
 	//case gui::EGUIET_TABLE: return ...
-	case gui::EGUIET_TOOL_BAR: return gcnew GUIToolBar((gui::IGUIToolBar*)ref);
+
+	case gui::EGUIET_TOOL_BAR:
+		return gcnew GUIToolBar((gui::IGUIToolBar*)ref);
+
 	//case gui::EGUIET_TREE_VIEW: return ...
-	case gui::EGUIET_WINDOW: return gcnew GUIWindow((gui::IGUIWindow*)ref);
+
+	case gui::EGUIET_WINDOW:
+		return gcnew GUIWindow((gui::IGUIWindow*)ref);
 	}
 
 	return gcnew GUIElement(ref); // gui::EGUIET_ELEMENT and anything other
