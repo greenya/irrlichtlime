@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include "Event.h"
+#include "FileSystem.h"
 #include "GUIButton.h"
 #include "GUICheckBox.h"
 #include "GUIColorSelectDialog.h"
@@ -10,18 +12,23 @@
 #include "GUIFileOpenDialog.h"
 #include "GUIFont.h"
 #include "GUIImage.h"
+#include "GUIImageList.h"
 #include "GUIInOutFader.h"
 #include "GUIListBox.h"
 #include "GUIMeshViewer.h"
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
+#include "GUISpinBox.h"
+#include "GUISpriteBank.h"
 #include "GUIStaticText.h"
 #include "GUITab.h"
 #include "GUITabControl.h"
+#include "GUITable.h"
 #include "GUIToolBar.h"
 #include "GUIWindow.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
+#include "VideoDriver.h"
 
 using namespace irr;
 using namespace System;
@@ -318,6 +325,12 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle)
 	return GUIEditBox::Wrap(b);
 }
 
+GUISpriteBank^ GUIEnvironment::AddEmptySpriteBank(String^ name)
+{
+	gui::IGUISpriteBank* b = m_GUIEnvironment->addEmptySpriteBank(Lime::StringToPath(name));
+	return GUISpriteBank::Wrap(b);
+}
+
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
@@ -360,6 +373,78 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog()
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog();
 	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFont^ GUIEnvironment::AddFont(String^ name, GUIFont^ font)
+{
+	LIME_ASSERT(font != nullptr);
+
+	gui::IGUIFont* f = m_GUIEnvironment->addFont(
+		Lime::StringToPath(name),
+		LIME_SAFEREF(font, m_GUIFont));
+
+	return GUIFont::Wrap(f);
+}
+
+GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName, GUIElement^ parent)
+{
+	gui::IGUIElement* e = m_GUIEnvironment->addGUIElement(
+		Lime::StringToStringC(elementName).c_str(),
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIElement::Wrap(e);
+}
+
+GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName)
+{
+	gui::IGUIElement* e = m_GUIEnvironment->addGUIElement(
+		Lime::StringToStringC(elementName).c_str());
+
+	return GUIElement::Wrap(e);
+}
+
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		Lime::StringToStringW(text).c_str());
+
+	return GUIImage::Wrap(i);
+}
+
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIImage::Wrap(i);
+}
+
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIImage::Wrap(i);
+}
+
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(*rectangle->m_NativeValue);
+	return GUIImage::Wrap(i);
 }
 
 GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
@@ -646,6 +731,12 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text)
 	return GUIWindow::Wrap(w);
 }
 
+GUIElement^ GUIEnvironment::AddModalScreen(GUIElement^ parent)
+{
+	gui::IGUIElement* e = m_GUIEnvironment->addModalScreen(LIME_SAFEREF(parent, m_GUIElement));
+	return GUIElement::Wrap(e);
+}
+
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)
 {
 	LIME_ASSERT(rectangle != nullptr);
@@ -680,6 +771,56 @@ GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle)
 		*rectangle->m_NativeValue);
 
 	return GUIScrollBar::Wrap(s);
+}
+
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUISpinBox::Wrap(b);
+}
+
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUISpinBox::Wrap(b);
+}
+
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue,
+		border);
+
+	return GUISpinBox::Wrap(b);
+}
+
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
+		Lime::StringToStringW(text).c_str(),
+		*rectangle->m_NativeValue);
+
+	return GUISpinBox::Wrap(b);
 }
 
 GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
@@ -854,6 +995,50 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle)
 	return GUITabControl::Wrap(t);
 }
 
+GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITable* t = m_GUIEnvironment->addTable(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		drawBackground);
+
+	return GUITable::Wrap(t);
+}
+
+GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITable* t = m_GUIEnvironment->addTable(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUITable::Wrap(t);
+}
+
+GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITable* t = m_GUIEnvironment->addTable(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUITable::Wrap(t);
+}
+
+GUITable^ GUIEnvironment::AddTable(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITable* t = m_GUIEnvironment->addTable(*rectangle->m_NativeValue);
+	return GUITable::Wrap(t);
+}
+
 GUIToolBar^ GUIEnvironment::AddToolBar(GUIElement^ parent, int id)
 {
 	gui::IGUIToolBar* b = m_GUIEnvironment->addToolBar(
@@ -937,9 +1122,42 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle)
 	return GUIWindow::Wrap(w);
 }
 
+void GUIEnvironment::Clear()
+{
+	m_GUIEnvironment->clear();
+}
+
+bool GUIEnvironment::ClearFocus(GUIElement^ element)
+{
+	return m_GUIEnvironment->removeFocus(LIME_SAFEREF(element, m_GUIElement));
+}
+
+GUIImageList^ GUIEnvironment::CreateImageList(Video::Texture^ texture, Dimension2Di^ imageSize, bool useAlphaChannel)
+{
+	LIME_ASSERT(imageSize != nullptr);
+
+	gui::IGUIImageList* l = m_GUIEnvironment->createImageList(
+		LIME_SAFEREF(texture, m_Texture),
+		*imageSize->m_NativeValue,
+		useAlphaChannel);
+
+	return GUIImageList::Wrap(l);
+}
+
+GUISkin^ GUIEnvironment::CreateSkin(GUISkinType type)
+{
+	gui::IGUISkin* s = m_GUIEnvironment->createSkin((gui::EGUI_SKIN_TYPE)type);
+	return GUISkin::Wrap(s);
+}
+
 void GUIEnvironment::DrawAll()
 {
 	m_GUIEnvironment->drawAll();
+}
+
+bool GUIEnvironment::Focused(GUIElement^ element)
+{
+	return m_GUIEnvironment->hasFocus(LIME_SAFEREF(element, m_GUIElement));
 }
 
 GUIFont^ GUIEnvironment::GetFont(String^ filename)
@@ -948,9 +1166,38 @@ GUIFont^ GUIEnvironment::GetFont(String^ filename)
 	return GUIFont::Wrap(f);
 }
 
+GUISpriteBank^ GUIEnvironment::GetSpriteBank(String^ filename)
+{
+	gui::IGUISpriteBank* b = m_GUIEnvironment->getSpriteBank(Lime::StringToPath(filename));
+	return GUISpriteBank::Wrap(b);
+}
+
+bool GUIEnvironment::PostEvent(Event^ e)
+{
+	LIME_ASSERT(e != nullptr);
+	return m_GUIEnvironment->postEventFromUser(*e->m_NativeValue);
+}
+
 GUIFont^ GUIEnvironment::BuiltInFont::get()
 {
 	return GUIFont::Wrap(m_GUIEnvironment->getBuiltInFont());
+}
+
+IrrlichtLime::IO::FileSystem^ GUIEnvironment::FileSystem::get()
+{
+	io::IFileSystem* f = m_GUIEnvironment->getFileSystem();
+	return IrrlichtLime::IO::FileSystem::Wrap(f);
+}
+
+GUIElement^ GUIEnvironment::Focus::get()
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getFocus();
+	return GUIElement::Wrap(e);
+}
+
+void GUIEnvironment::Focus::set(GUIElement^ value)
+{
+	m_GUIEnvironment->setFocus(LIME_SAFEREF(value, m_GUIElement));
 }
 
 GUIElement^ GUIEnvironment::RootElement::get()
@@ -968,6 +1215,12 @@ GUISkin^ GUIEnvironment::Skin::get()
 void GUIEnvironment::Skin::set(GUISkin^ value)
 {
 	m_GUIEnvironment->setSkin(LIME_SAFEREF(value, m_GUISkin));
+}
+
+Video::VideoDriver^ GUIEnvironment::VideoDriver::get()
+{
+	video::IVideoDriver* v = m_GUIEnvironment->getVideoDriver();
+	return Video::VideoDriver::Wrap(v);
 }
 
 } // end namespace GUI

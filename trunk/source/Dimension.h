@@ -12,6 +12,16 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
+// this type currently used only in GUIImageList.ImageSize,
+// maybe remove it and use "u" version instead.
+#define _REFCLASS_ Dimension2Di
+#define _WRAPCLASS_ core::dimension2di
+#define _WRAPTYPE_ int
+#include "Dimension2D_template.h"
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
+
 #define _REFCLASS_ Dimension2Du
 #define _WRAPCLASS_ core::dimension2du
 #define _WRAPTYPE_ unsigned int

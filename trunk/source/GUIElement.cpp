@@ -13,9 +13,11 @@
 #include "GUIListBox.h"
 #include "GUIMeshViewer.h"
 #include "GUIScrollBar.h"
+#include "GUISpinBox.h"
 #include "GUIStaticText.h"
 #include "GUITab.h"
 #include "GUITabControl.h"
+#include "GUITable.h"
 #include "GUIToolBar.h"
 #include "GUIWindow.h"
 
@@ -72,12 +74,11 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 	case gui::EGUIET_MESSAGE_BOX:
 		return gcnew GUIWindow((gui::IGUIWindow*)ref);
 
-	//case gui::EGUIET_MODAL_SCREEN: return ...
-
 	case gui::EGUIET_SCROLL_BAR:
 		return gcnew GUIScrollBar((gui::IGUIScrollBar*)ref);
 
-	//case gui::EGUIET_SPIN_BOX: return ...
+	case gui::EGUIET_SPIN_BOX:
+		return gcnew GUISpinBox((gui::IGUISpinBox*)ref);
 
 	case gui::EGUIET_STATIC_TEXT:
 		return gcnew GUIStaticText((gui::IGUIStaticText*)ref);
@@ -88,7 +89,8 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 	case gui::EGUIET_TAB_CONTROL:
 		return gcnew GUITabControl((gui::IGUITabControl*)ref);
 
-	//case gui::EGUIET_TABLE: return ...
+	case gui::EGUIET_TABLE:
+		return gcnew GUITable((gui::IGUITable*)ref);
 
 	case gui::EGUIET_TOOL_BAR:
 		return gcnew GUIToolBar((gui::IGUIToolBar*)ref);
@@ -97,9 +99,11 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 
 	case gui::EGUIET_WINDOW:
 		return gcnew GUIWindow((gui::IGUIWindow*)ref);
-	}
 
-	return gcnew GUIElement(ref); // gui::EGUIET_ELEMENT and anything other
+	case gui::EGUIET_MODAL_SCREEN:
+	default:
+		return gcnew GUIElement(ref);
+	}
 }
 
 GUIElement::GUIElement(gui::IGUIElement* ref)

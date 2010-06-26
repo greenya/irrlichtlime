@@ -15,16 +15,16 @@ public ref class Material : Lime::NativeValue<video::SMaterial>
 {
 public:
 
-	static property const unsigned int TextureCount { const unsigned int get() { return video::MATERIAL_MAX_TEXTURES; } }
+	static property int TextureCount { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
 	Material();
 
 	bool GetFlag(MaterialFlag flag);
-	Texture^ GetTexture(unsigned int index);
-	Matrix4f^ GetTextureMatrix(unsigned int index);
+	Texture^ GetTexture(int index);
+	Matrix4f^ GetTextureMatrix(int index);
 	void SetFlag(MaterialFlag flag, bool value);
-	void SetTexture(unsigned int index, Texture^ tex);
-	void SetTextureMatrix(unsigned int index, Matrix4f^ mat);
+	void SetTexture(int index, Texture^ tex);
+	void SetTextureMatrix(int index, Matrix4f^ mat);
 
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
 	property Coloru^ AmbientColor { Coloru^ get(); void set(Coloru^ value); }

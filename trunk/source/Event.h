@@ -69,23 +69,26 @@ public:
 	value class JoystickEvent
 	{
 	public:
+		static property int ButtonCount { int get() { return SEvent::SJoystickEvent::NUMBER_OF_BUTTONS; } }
+		static property int AxisCount { int get() { return SEvent::SJoystickEvent::NUMBER_OF_AXES; } }
+
 		unsigned int ButtonStates;
 		array<__int16>^ Axis;
 		unsigned __int16 POV;
 		unsigned __int8 Joystick;
-		bool IsButtonPressed(unsigned int button)
+		bool IsButtonPressed(int button)
 		{
-			return button >= (unsigned int)SEvent::SJoystickEvent::NUMBER_OF_BUTTONS ? false
-				: ((ButtonStates & (1 << button)) ? true : false);
+			LIME_ASSERT(button >= 0 && button < ButtonCount);
+			return (ButtonStates & (1 << (unsigned int)button)) ? true : false;
 		}
 	internal:
 		JoystickEvent(const SEvent::SJoystickEvent& v)
 			: ButtonStates(v.ButtonStates)
-			, Axis(gcnew array<__int16>(SEvent::SJoystickEvent::NUMBER_OF_AXES))
+			, Axis(gcnew array<__int16>(AxisCount))
 			, POV(v.POV)
 			, Joystick(v.Joystick)
 		{
-			for (int i = 0; i < SEvent::SJoystickEvent::NUMBER_OF_AXES; i++)
+			for (int i = 0; i < AxisCount; i++)
 				Axis[i] = v.Axis[i];
 		}
 	};
@@ -111,6 +114,25 @@ public:
 			: UserData1(v.UserData1)
 			, UserData2(v.UserData2) {}
 	};
+
+	Event(IrrlichtLime::GUI::GUIEventType type, IrrlichtLime::GUI::GUIElement^ caller, IrrlichtLime::GUI::GUIElement^ element);
+	Event(IrrlichtLime::GUI::GUIEventType type, IrrlichtLime::GUI::GUIElement^ caller);
+
+	Event(MouseEventType type, int x, int y, float wheel, unsigned int buttonStates, bool shift, bool control);
+	Event(MouseEventType type, int x, int y, float wheel, unsigned int buttonStates);
+	Event(MouseEventType type, int x, int y, float wheel);
+	Event(MouseEventType type, int x, int y);
+
+	Event(System::Char ch, KeyCode key, bool pressedDown, bool shift, bool control);
+	Event(System::Char ch, KeyCode key, bool pressedDown);
+
+	Event(unsigned __int8 joystick, array<__int16>^ axis, unsigned __int16 pov, unsigned int buttonStates);
+	Event(unsigned __int8 joystick, array<__int16>^ axis, unsigned __int16 pov);
+
+	Event(String^ logText, LogLevel logLevel);
+	Event(String^ logText);
+
+	Event(int userData1, int userData2);
 
 	property GUIEvent GUI { GUIEvent get(); }
 	property JoystickEvent Joystick { JoystickEvent get(); }
