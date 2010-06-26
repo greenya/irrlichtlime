@@ -35,27 +35,36 @@ bool Material::GetFlag(MaterialFlag flag)
 	return m_NativeValue->getFlag((E_MATERIAL_FLAG)flag);
 }
 
-void Material::SetFlag(MaterialFlag flag, bool value)
+Texture^ Material::GetTexture(int index)
 {
-	m_NativeValue->setFlag((E_MATERIAL_FLAG)flag, value);
+	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+
+	video::ITexture* t = m_NativeValue->getTexture(index);
+	return Texture::Wrap(t);
 }
 
-Matrix4f^ Material::GetTextureMatrix(unsigned int index)
+Matrix4f^ Material::GetTextureMatrix(int index)
 {
 	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
 	return gcnew Matrix4f(m_NativeValue->getTextureMatrix(index));
 }
 
-void Material::SetTexture(unsigned int index, Texture^ tex)
+void Material::SetFlag(MaterialFlag flag, bool value)
+{
+	m_NativeValue->setFlag((E_MATERIAL_FLAG)flag, value);
+}
+
+void Material::SetTexture(int index, Texture^ tex)
 {
 	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
 	m_NativeValue->setTexture(index, LIME_SAFEREF(tex, m_Texture));
 }
 
-void Material::SetTextureMatrix(unsigned int index, Matrix4f^ mat)
+void Material::SetTextureMatrix(int index, Matrix4f^ mat)
 {
-	LIME_ASSERT(mat != nullptr);
 	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
+	LIME_ASSERT(mat != nullptr);
+
 	m_NativeValue->setTextureMatrix(index, *mat->m_NativeValue);
 }
 
@@ -63,17 +72,10 @@ List<MaterialLayer^>^ Material::Layer::get()
 {
 	List<MaterialLayer^>^ l = gcnew List<MaterialLayer^>();
 
-	for (unsigned int i = 0; i < Material::TextureCount; i++)
+	for (int i = 0; i < Material::TextureCount; i++)
 		l->Add(gcnew MaterialLayer(&m_NativeValue->TextureLayer[i]));
 
 	return l;
-}
-
-Texture^ Material::GetTexture(unsigned int index)
-{
-	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
-	video::ITexture* t = m_NativeValue->getTexture(index);
-	return Texture::Wrap(t);
 }
 
 Video::MaterialType Material::Type::get()

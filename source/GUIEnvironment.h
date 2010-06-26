@@ -7,8 +7,9 @@ using namespace irr;
 using namespace System;
 using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime {
-namespace Video { ref class Texture; }
+namespace IrrlichtLime { ref class Event;
+namespace IO { ref class FileSystem; }
+namespace Video { ref class Texture; ref class VideoDriver; }
 namespace GUI {
 
 ref class GUIButton;
@@ -21,14 +22,18 @@ ref class GUIElement;
 ref class GUIFileOpenDialog;
 ref class GUIFont;
 ref class GUIImage;
+ref class GUIImageList;
 ref class GUIInOutFader;
 ref class GUIListBox;
 ref class GUIMeshViewer;
 ref class GUIScrollBar;
 ref class GUISkin;
+ref class GUISpinBox;
+ref class GUISpriteBank;
 ref class GUIStaticText;
 ref class GUITab;
 ref class GUITabControl;
+ref class GUITable;
 ref class GUIToolBar;
 ref class GUIWindow;
 
@@ -66,12 +71,23 @@ public:
 	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border);
 	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle);
 
+	GUISpriteBank^ AddEmptySpriteBank(String^ name);
+
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title);
 	GUIFileOpenDialog^ AddFileOpenDialog();
 
+	GUIFont^ AddFont(String^ name, GUIFont^ font);
+
+	GUIElement^ AddGUIElement(String^ elementName, GUIElement^ parent);
+	GUIElement^ AddGUIElement(String^ elementName);
+
+	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
+	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent);
+	GUIImage^ AddImage(Recti^ rectangle);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent);
@@ -104,9 +120,16 @@ public:
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal);
 	GUIWindow^ AddMessageBox(String^ caption, String^ text);
 
+	GUIElement^ AddModalScreen(GUIElement^ parent);
+
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle);
+
+	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id);
+	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent);
+	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border);
+	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle);
 
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id, bool fillBackground);
 	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id);
@@ -125,6 +148,11 @@ public:
 	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent);
 	GUITabControl^ AddTabControl(Recti^ rectangle);
 
+	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent, int id);
+	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent);
+	GUITable^ AddTable(Recti^ rectangle);
+
 	GUIToolBar^ AddToolBar(GUIElement^ parent, int id);
 	GUIToolBar^ AddToolBar(GUIElement^ parent);
 	GUIToolBar^ AddToolBar();
@@ -135,13 +163,30 @@ public:
 	GUIWindow^ AddWindow(Recti^ rectangle, bool modal);
 	GUIWindow^ AddWindow(Recti^ rectangle);
 
+	void Clear();
+
+	bool ClearFocus(GUIElement^ element);
+
+	GUIImageList^ CreateImageList(Video::Texture^ texture, Dimension2Di^ imageSize, bool useAlphaChannel);
+
+	GUISkin^ CreateSkin(GUISkinType type);
+
 	void DrawAll();
+
+	bool Focused(GUIElement^ element);
 
 	GUIFont^ GetFont(String^ filename);
 
+	GUISpriteBank^ GetSpriteBank(String^ filename);
+
+	bool PostEvent(Event^ e);
+
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
+	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }
+	property GUIElement^ Focus { GUIElement^ get(); void set(GUIElement^ value); }
 	property GUIElement^ RootElement { GUIElement^ get(); }
 	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
+	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 
 internal:
 

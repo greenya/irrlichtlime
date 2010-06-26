@@ -752,6 +752,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIColumnOrdering.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIComboBox.cpp"
 				>
 			</File>
@@ -852,6 +856,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIImageList.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUIImageList.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIInOutFader.cpp"
 				>
 			</File>
@@ -884,6 +896,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUIOrderingMode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIScrollBar.cpp"
 				>
 			</File>
@@ -901,6 +917,14 @@
 			</File>
 			<File
 				RelativePath=".\GUISkinType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISpinBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUISpinBox.h"
 				>
 			</File>
 			<File
@@ -933,6 +957,18 @@
 			</File>
 			<File
 				RelativePath=".\GUITabControl.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITable.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITable.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITableDrawFlag.h"
 				>
 			</File>
 			<File
