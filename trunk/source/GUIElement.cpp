@@ -19,6 +19,7 @@
 #include "GUITabControl.h"
 #include "GUITable.h"
 #include "GUIToolBar.h"
+#include "GUITreeView.h"
 #include "GUIWindow.h"
 
 using namespace irr;
@@ -95,7 +96,8 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 	case gui::EGUIET_TOOL_BAR:
 		return gcnew GUIToolBar((gui::IGUIToolBar*)ref);
 
-	//case gui::EGUIET_TREE_VIEW: return ...
+	case gui::EGUIET_TREE_VIEW:
+		return gcnew GUITreeView((gui::IGUITreeView*)ref);
 
 	case gui::EGUIET_WINDOW:
 		return gcnew GUIWindow((gui::IGUIWindow*)ref);

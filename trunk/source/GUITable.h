@@ -21,7 +21,7 @@ public:
 	void Clear();
 	void ClearRows();
 
-	//void* getCellData (u32 rowIndex, u32 columnIndex);
+	int GetCellData(int rowIndex, int columnIndex);
 	String^ GetCellText(int rowIndex, int columnIndex);
 
 	void OrderRows(int columnIndex, GUIOrderingMode mode);
@@ -32,7 +32,7 @@ public:
 	void RemoveRow(int rowIndex);
 
 	void SetCellColor(int rowIndex, int columnIndex, Video::Coloru^ color);
-	//void setCellData (u32 rowIndex, u32 columnIndex, void *data);
+	void SetCellData(int rowIndex, int columnIndex, int data);
 	void SetCellText(int rowIndex, int columnIndex, String^ text);
 
 	void SetColumnOrdering(int columnIndex, GUIColumnOrdering mode);

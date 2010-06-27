@@ -50,6 +50,14 @@ void GUITable::ClearRows()
 	m_GUITable->clearRows();
 }
 
+int GUITable::GetCellData(int rowIndex, int columnIndex)
+{
+	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
+	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+
+	return (int)m_GUITable->getCellData(rowIndex, columnIndex);
+}
+
 String^ GUITable::GetCellText(int rowIndex, int columnIndex)
 {
 	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
@@ -97,6 +105,17 @@ void GUITable::SetCellColor(int rowIndex, int columnIndex, Video::Coloru^ color)
 		rowIndex,
 		columnIndex,
 		*color->m_NativeValue);
+}
+
+void GUITable::SetCellData(int rowIndex, int columnIndex, int data)
+{
+	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
+	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+
+	m_GUITable->setCellData(
+		rowIndex,
+		columnIndex,
+		(void*)data);
 }
 
 void GUITable::SetCellText(int rowIndex, int columnIndex, String^ text)

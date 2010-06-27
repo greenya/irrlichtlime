@@ -980,6 +980,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GUITreeView.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITreeView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITreeViewNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GUITreeViewNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GUIWindow.cpp"
 				>
 			</File>

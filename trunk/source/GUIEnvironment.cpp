@@ -25,6 +25,7 @@
 #include "GUITabControl.h"
 #include "GUITable.h"
 #include "GUIToolBar.h"
+#include "GUITreeView.h"
 #include "GUIWindow.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
@@ -1060,6 +1061,65 @@ GUIToolBar^ GUIEnvironment::AddToolBar()
 {
 	gui::IGUIToolBar* b = m_GUIEnvironment->addToolBar();
 	return GUIToolBar::Wrap(b);
+}
+
+GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		drawBackground,
+		scrollBarVertical,
+		scrollBarHorizontal);
+
+	return GUITreeView::Wrap(v);
+}
+
+GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		drawBackground);
+
+	return GUITreeView::Wrap(v);
+}
+
+GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUITreeView::Wrap(v);
+}
+
+GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUITreeView::Wrap(v);
+}
+
+GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(*rectangle->m_NativeValue);
+	return GUITreeView::Wrap(v);
 }
 
 GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id)
