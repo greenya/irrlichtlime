@@ -35,6 +35,7 @@ ref class GUITab;
 ref class GUITabControl;
 ref class GUITable;
 ref class GUIToolBar;
+ref class GUITreeView;
 ref class GUIWindow;
 
 public ref class GUIEnvironment : ReferenceCounted
@@ -156,6 +157,12 @@ public:
 	GUIToolBar^ AddToolBar(GUIElement^ parent, int id);
 	GUIToolBar^ AddToolBar(GUIElement^ parent);
 	GUIToolBar^ AddToolBar();
+
+	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal);
+	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id);
+	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent);
+	GUITreeView^ AddTreeView(Recti^ rectangle);
 
 	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id);
 	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent);
