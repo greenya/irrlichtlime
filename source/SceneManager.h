@@ -10,7 +10,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO { ref class FileSystem; }
 namespace GUI { ref class GUIEnvironment; }
-namespace Video { ref class Texture; ref class VideoDriver; }
+namespace Video { ref class Image; ref class Texture; ref class VideoDriver; }
 namespace Scene {
 
 ref class AnimatedMesh;
@@ -18,6 +18,7 @@ ref class AnimatedMeshSceneNode;
 ref class BillboardSceneNode;
 ref class CameraSceneNode;
 ref class CollisionResponseSceneNodeAnimator;
+ref class DummyTransformationSceneNode;
 ref class LightSceneNode;
 ref class Mesh;
 ref class MeshManipulator;
@@ -83,6 +84,14 @@ public:
 	MeshSceneNode^ AddCubeSceneNode(float size);
 	MeshSceneNode^ AddCubeSceneNode();
 
+	DummyTransformationSceneNode^ AddDummyTransformationSceneNode(SceneNode^ parent, int id);
+	DummyTransformationSceneNode^ AddDummyTransformationSceneNode(SceneNode^ parent);
+	DummyTransformationSceneNode^ AddDummyTransformationSceneNode();
+
+	SceneNode^ AddEmptySceneNode(SceneNode^ parent, int id);
+	SceneNode^ AddEmptySceneNode(SceneNode^ parent);
+	SceneNode^ AddEmptySceneNode();
+
 	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount);
 	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills);
 	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material, float hillHeight);
@@ -117,6 +126,17 @@ public:
 	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back, SceneNode^ parent);
 	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back);
 
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage, float radius, SceneNode^ parent, int id);
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage, float radius, SceneNode^ parent);
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage, float radius);
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage);
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes);
+	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture);
+
+	AnimatedMesh^ AddSphereMesh(String^ name, float radius, int polyCountX, int polyCountY);
+	AnimatedMesh^ AddSphereMesh(String^ name, float radius);
+	AnimatedMesh^ AddSphereMesh(String^ name);
+
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
 	MeshSceneNode^ AddSphereSceneNode(float radius, int polyCount, SceneNode^ parent, int id, Vector3Df^ position);
@@ -126,13 +146,24 @@ public:
 	MeshSceneNode^ AddSphereSceneNode(float radius);
 	MeshSceneNode^ AddSphereSceneNode();
 
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot, Video::Coloru^ tail);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV, Video::Coloru^ foot);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU, unsigned int subdivV);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, unsigned int subdivU);
+	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize, float maxHeight, Dimension2Du^ defaultVertexBlockSize);
+	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize, float maxHeight);
+	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize);
+	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap);
+
+	void AddToDeletionQueue(SceneNode^ node);
+
+	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor, Video::Coloru^ tailColor);
+	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor);
+	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV);
+	AnimatedMesh^ AddVolumeLightMesh(String^ name);
+
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode();
@@ -155,6 +186,8 @@ public:
 	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node, Vector3Df^ ellipsoidRadius);
 	CollisionResponseSceneNodeAnimator^ CreateCollisionResponseAnimator(TriangleSelector^ world, SceneNode^ node);
 
+	SceneNodeAnimator^ CreateDeleteAnimator(float time);
+
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition, float radiusEllipsoid);
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction, float startPosition);
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center, float radius, float speed, Vector3Df^ direction);
@@ -163,9 +196,19 @@ public:
 	SceneNodeAnimator^ CreateFlyCircleAnimator(Vector3Df^ center);
 	SceneNodeAnimator^ CreateFlyCircleAnimator();
 
-	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop, bool pingpong);
-	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay, bool loop);
-	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, unsigned int timeForWay);
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, float timeForWay, bool loop, bool pingpong);
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, float timeForWay, bool loop);
+	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df^ startPoint, Vector3Df^ endPoint, float timeForWay);
+
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime, float speed, float tightness, bool loop, bool pingpong);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime, float speed, float tightness, bool loop);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime, float speed, float tightness);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime, float speed);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points);
+
+	SceneManager^ CreateNewSceneManager(bool cloneContent);
+	SceneManager^ CreateNewSceneManager();
 
 	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node, int minimalPolysPerNode);
 	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node);

@@ -25,6 +25,13 @@ internal:
 	{
 		m_NativeValue = new core::matrix4(other);
 	}
+
+	Matrix4f(core::matrix4* ref)
+		: Lime::NativeValue<core::matrix4>(false)
+	{
+		LIME_ASSERT(ref != nullptr);
+		m_NativeValue = ref;
+	}
 };
 
 } // end namespace Core

@@ -129,6 +129,12 @@ void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node)
 	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
 }
 
+Image^ VideoDriver::CreateImageFromFile(String^ filename)
+{
+	video::IImage* i = m_VideoDriver->createImageFromFile(Lime::StringToPath(filename));
+	return Image::Wrap(i);
+}
+
 Image^ VideoDriver::CreateScreenShot()
 {
 	video::IImage* i = m_VideoDriver->createScreenShot();
