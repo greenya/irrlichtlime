@@ -460,6 +460,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DummyTransformationSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DummyTransformationSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\HardwareBufferType.h"
 				>
 			</File>

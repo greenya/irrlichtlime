@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BillboardSceneNode.h"
+#include "SceneNode.h"
 
 using namespace irr;
 using namespace System;

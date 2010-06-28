@@ -54,7 +54,7 @@ namespace _04.Movement
 			if (anms != null)
 			{
 				SceneNodeAnimator anim = smgr.CreateFlyStraightAnimator(
-					new Vector3Df(100, 0, 60), new Vector3Df(-100, 0, 60), 3500, true);
+					new Vector3Df(100, 0, 60), new Vector3Df(-100, 0, 60), 3.5f, true);
 				if (anim != null)
 				{
 					anms.AddAnimator(anim);

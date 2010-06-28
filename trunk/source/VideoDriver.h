@@ -41,6 +41,8 @@ public:
 	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void CreateOcclusionQuery(Scene::SceneNode^ node);
 
+	Image^ CreateImageFromFile(String^ filename);
+
 	Image^ CreateScreenShot();
 
 	void DeleteAllDynamicLights();

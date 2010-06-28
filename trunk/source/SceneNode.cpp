@@ -3,6 +3,7 @@
 #include "AttributeExchangingObject.h"
 #include "BillboardSceneNode.h"
 #include "CameraSceneNode.h"
+#include "DummyTransformationSceneNode.h"
 #include "LightSceneNode.h"
 #include "Material.h"
 #include "MeshSceneNode.h"
@@ -54,8 +55,8 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	case scene::ESNT_LIGHT:
 		return gcnew LightSceneNode((scene::ILightSceneNode*)ref);
 
-	//case scene::ESNT_DUMMY_TRANSFORMATION:
-	//	return gcnew DummyTransformationSceneNode((scene::IDummyTransformationSceneNode*)ref);
+	case scene::ESNT_DUMMY_TRANSFORMATION:
+		return gcnew DummyTransformationSceneNode((scene::IDummyTransformationSceneNode*)ref);
 	
 	case scene::ESNT_BILLBOARD:
 		return gcnew BillboardSceneNode((scene::IBillboardSceneNode*)ref);
