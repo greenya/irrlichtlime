@@ -12,6 +12,8 @@
 #include "SceneNodeAnimator.h"
 #include "SceneManager.h"
 #include "ShadowVolumeSceneNode.h"
+#include "TerrainSceneNode.h"
+#include "TextSceneNode.h"
 #include "Texture.h"
 #include "TriangleSelector.h"
 #include "VolumeLightSceneNode.h"
@@ -43,11 +45,11 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	case scene::ESNT_CAMERA_FPS:
 		return gcnew CameraSceneNode((scene::ICameraSceneNode*)ref);
 
-	//case scene::ESNT_TEXT:
-	//	return gcnew TextSceneNode((scene::ITextSceneNode*)ref);
+	case scene::ESNT_TEXT:
+		return gcnew TextSceneNode((scene::ITextSceneNode*)ref);
 
-	//case scene::ESNT_TERRAIN:
-	//	return gcnew TerrainSceneNode((scene::ITerrainSceneNode*)ref);
+	case scene::ESNT_TERRAIN:
+		return gcnew TerrainSceneNode((scene::ITerrainSceneNode*)ref);
 
 	case scene::ESNT_SHADOW_VOLUME:
 		return gcnew ShadowVolumeSceneNode((scene::IShadowVolumeSceneNode*)ref);

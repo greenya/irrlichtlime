@@ -468,11 +468,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DynamicMeshBuffer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DynamicMeshBuffer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\HardwareBufferType.h"
 				>
 			</File>
 			<File
 				RelativePath=".\HardwareMappingHint.h"
+				>
+			</File>
+			<File
+				RelativePath=".\IndexBuffer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IndexBuffer.h"
 				>
 			</File>
 			<File
@@ -517,6 +533,14 @@
 			</File>
 			<File
 				RelativePath=".\MeshSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MetaTriangleSelector.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MetaTriangleSelector.h"
 				>
 			</File>
 			<File
@@ -700,11 +724,35 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TerrainPatchSize.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TerrainSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TerrainSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TextSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TextSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriangleSelector.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\TriangleSelector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VertexBuffer.cpp"
 				>
 			</File>
 			<File
@@ -1142,6 +1190,10 @@
 		</File>
 		<File
 			RelativePath=".\Timer.h"
+			>
+		</File>
+		<File
+			RelativePath=".\VertexBuffer.h"
 			>
 		</File>
 	</Files>

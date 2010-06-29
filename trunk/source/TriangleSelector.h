@@ -16,16 +16,16 @@ public ref class TriangleSelector : ReferenceCounted
 {
 public:
 
-	SceneNode^ GetSceneNodeForTriangle(unsigned int triangleIndex);
+	SceneNode^ GetSceneNodeForTriangle(int triangleIndex);
 
-	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, unsigned int maxTriangleCount, Matrix4f^ transform);
-	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, unsigned int maxTriangleCount);
-	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, unsigned int maxTriangleCount, Matrix4f^ transform);
-	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, unsigned int maxTriangleCount);
-	List<Triangle3Df^>^ GetTriangles(unsigned int maxTriangleCount, Matrix4f^ transform);
-	List<Triangle3Df^>^ GetTriangles(unsigned int maxTriangleCount);
+	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, int maxTriangleCount, Matrix4f^ transform);
+	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, int maxTriangleCount);
+	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, int maxTriangleCount, Matrix4f^ transform);
+	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, int maxTriangleCount);
+	List<Triangle3Df^>^ GetTriangles(int maxTriangleCount, Matrix4f^ transform);
+	List<Triangle3Df^>^ GetTriangles(int maxTriangleCount);
 
-	property unsigned int TriangleCount { unsigned int get(); }
+	property int TriangleCount { int get(); }
 
 internal:
 
