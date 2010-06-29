@@ -86,7 +86,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\irrlicht\dll\Irrlicht.dll ..\bin &gt;nul"
+				CommandLine="copy /y ..\irrlicht\dll\Irrlicht_debug.dll ..\bin\Irrlicht.dll &gt;nul"
 			/>
 		</Configuration>
 		<Configuration
@@ -158,7 +158,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\irrlicht\dll\Irrlicht.dll ..\bin &gt;nul"
+				CommandLine="copy /y ..\irrlicht\dll\Irrlicht_release.dll ..\bin\Irrlicht.dll &gt;nul"
 			/>
 		</Configuration>
 	</Configurations>
@@ -764,6 +764,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\VertexBuffer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VolumeLightSceneNode.cpp"
 				>
 			</File>
@@ -1187,6 +1191,14 @@
 					UsePrecompiledHeader="1"
 				/>
 			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					UsePrecompiledHeader="1"
+				/>
+			</FileConfiguration>
 		</File>
 		<File
 			RelativePath=".\stdafx.h"
@@ -1198,10 +1210,6 @@
 		</File>
 		<File
 			RelativePath=".\Timer.h"
-			>
-		</File>
-		<File
-			RelativePath=".\VertexBuffer.h"
 			>
 		</File>
 	</Files>
