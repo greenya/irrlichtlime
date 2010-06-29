@@ -420,6 +420,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BillboardTextSceneNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BillboardTextSceneNode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\BoneAnimationMode.h"
 				>
 			</File>

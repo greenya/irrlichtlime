@@ -2,9 +2,11 @@
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
 #include "BillboardSceneNode.h"
+#include "BillboardTextSceneNode.h"
 #include "CameraSceneNode.h"
 #include "CollisionResponseSceneNodeAnimator.h"
 #include "DummyTransformationSceneNode.h"
+#include "Event.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "GUIFont.h"
@@ -143,6 +145,134 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return AnimatedMeshSceneNode::Wrap(n);
 }
 
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+	int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+	LIME_ASSERT(tesselationCylinder > 0);
+	LIME_ASSERT(tesselationCone > 0);
+	LIME_ASSERT(heightTotal > heightCylinder);
+	LIME_ASSERT(diameterCone > diameterCylinder);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue,
+		tesselationCylinder,
+		tesselationCone,
+		heightTotal,
+		heightCylinder,
+		diameterCylinder,
+		diameterCone);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+	int tesselationCone, float heightTotal, float heightCylinder)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+	LIME_ASSERT(tesselationCylinder > 0);
+	LIME_ASSERT(tesselationCone > 0);
+	LIME_ASSERT(heightTotal > heightCylinder);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue,
+		tesselationCylinder,
+		tesselationCone,
+		heightTotal,
+		heightCylinder);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+	int tesselationCone, float heightTotal)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+	LIME_ASSERT(tesselationCylinder > 0);
+	LIME_ASSERT(tesselationCone > 0);
+	LIME_ASSERT(heightTotal > 0.6f); // 0.6f is a default value for heightCylinder argument
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue,
+		tesselationCylinder,
+		tesselationCone,
+		heightTotal);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+	int tesselationCone)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+	LIME_ASSERT(tesselationCylinder > 0);
+	LIME_ASSERT(tesselationCone > 0);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue,
+		tesselationCylinder,
+		tesselationCone);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+	LIME_ASSERT(tesselationCylinder > 0);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue,
+		tesselationCylinder);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+	LIME_ASSERT(vtxColorCone != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue,
+		*vtxColorCone->m_NativeValue);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder)
+{
+	LIME_ASSERT(vtxColorCylinder != nullptr);
+
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
+		Lime::StringToPath(name),
+		*vtxColorCylinder->m_NativeValue);
+
+	return AnimatedMesh::Wrap(m);
+}
+
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name)
+{
+	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(Lime::StringToPath(name));
+	return AnimatedMesh::Wrap(m);
+}
+
 BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id,
 	Video::Coloru^ colorTop, Video::Coloru^ colorBottom)
 {
@@ -229,6 +359,101 @@ BillboardSceneNode^ SceneManager::AddBillboardSceneNode()
 {
 	scene::IBillboardSceneNode* n = m_SceneManager->addBillboardSceneNode();
 	return BillboardSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size,
+	Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(colorTop != nullptr);
+	LIME_ASSERT(colorBottom != nullptr);
+
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue,
+		id,
+		*colorTop->m_NativeValue,
+		*colorBottom->m_NativeValue);
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size,
+	Vector3Df^ position, int id)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue,
+		id);
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size,
+	Vector3Df^ position)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue,
+		*position->m_NativeValue);
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size)
+{
+	LIME_ASSERT(size != nullptr);
+
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode),
+		*size->m_NativeValue);
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent)
+{
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font)
+{
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str());
+
+	return BillboardTextSceneNode::Wrap(n);
+}
+
+BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text)
+{
+	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
+		nullptr,
+		Lime::StringToStringW(text).c_str());
+
+	return BillboardTextSceneNode::Wrap(n);
 }
 
 CameraSceneNode^ SceneManager::AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id, bool makeActive)
@@ -796,6 +1021,94 @@ LightSceneNode^ SceneManager::AddLightSceneNode()
 	return LightSceneNode::Wrap(l);
 }
 
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, bool alsoAddIfMeshIsNull)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		alsoAddIfMeshIsNull);
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return MeshSceneNode::Wrap(n);
+}
+
+MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh)
+{
+	scene::IMeshSceneNode* n = m_SceneManager->addMeshSceneNode(LIME_SAFEREF(mesh, m_Mesh));
+	return MeshSceneNode::Wrap(n);
+}
+
 MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
 {
 	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
@@ -923,6 +1236,23 @@ ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode()
 {
 	scene::IParticleSystemSceneNode* n = m_SceneManager->addParticleSystemSceneNode();
 	return ParticleSystemSceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName, SceneNode^ parent)
+{
+	scene::ISceneNode* n = m_SceneManager->addSceneNode(
+		Lime::StringToStringC(sceneNodeTypeName).c_str(),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName)
+{
+	scene::ISceneNode* n = m_SceneManager->addSceneNode(
+		Lime::StringToStringC(sceneNodeTypeName).c_str());
+
+	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
@@ -2228,8 +2558,28 @@ TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(Mesh^ mesh, SceneNo
 SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed)
 {
 	LIME_ASSERT(rotationSpeed != nullptr);
+
 	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(*rotationSpeed->m_NativeValue);
 	return SceneNodeAnimator::Wrap(a);
+}
+
+TriangleSelector^ SceneManager::CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel)
+{
+	LIME_ASSERT(lodLevel >= 0);
+
+	scene::ITriangleSelector* s = m_SceneManager->createTerrainTriangleSelector(
+		LIME_SAFEREF(node, m_TerrainSceneNode),
+		lodLevel);
+
+	return TriangleSelector::Wrap(s);
+}
+
+TriangleSelector^ SceneManager::CreateTerrainTriangleSelector(TerrainSceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTerrainTriangleSelector(
+		LIME_SAFEREF(node, m_TerrainSceneNode));
+
+	return TriangleSelector::Wrap(s);
 }
 
 SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop)
@@ -2288,9 +2638,22 @@ TriangleSelector^ SceneManager::CreateTriangleSelector(Mesh^ mesh, SceneNode^ no
 	return TriangleSelector::Wrap(s);
 }
 
+TriangleSelector^ SceneManager::CreateTriangleSelectorFromBoundingBox(SceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelectorFromBoundingBox(
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return TriangleSelector::Wrap(s);
+}
+
 void SceneManager::DrawAll()
 {
 	m_SceneManager->drawAll();
+}
+
+String^ SceneManager::GetAnimatorTypeName(SceneNodeAnimatorType type)
+{
+	return gcnew String(m_SceneManager->getAnimatorTypeName((scene::ESCENE_NODE_ANIMATOR_TYPE)type));
 }
 
 AnimatedMesh^ SceneManager::GetMesh(String^ filename)
@@ -2335,14 +2698,49 @@ SceneNode^ SceneManager::GetSceneNodeFromType(SceneNodeType type)
 	return SceneNode::Wrap(n);
 }
 
-String^ SceneManager::GetAnimatorTypeName(SceneNodeAnimatorType type)
+List<SceneNode^>^ SceneManager::GetSceneNodesFromType(SceneNodeType type, SceneNode^ start)
 {
-	return gcnew String(m_SceneManager->getAnimatorTypeName((scene::ESCENE_NODE_ANIMATOR_TYPE)type));
+	List<SceneNode^>^ l = gcnew List<SceneNode^>();
+
+	core::array<scene::ISceneNode*> n;
+	m_SceneManager->getSceneNodesFromType(
+		(scene::ESCENE_NODE_TYPE)type,
+		n,
+		LIME_SAFEREF(start, m_SceneNode));
+
+	for (unsigned int i = 0; i < n.size(); i++)
+		l->Add(SceneNode::Wrap(n[i]));
+
+	return l;
+}
+
+List<SceneNode^>^ SceneManager::GetSceneNodesFromType(SceneNodeType type)
+{
+	List<SceneNode^>^ l = gcnew List<SceneNode^>();
+
+	core::array<scene::ISceneNode*> n;
+	m_SceneManager->getSceneNodesFromType((scene::ESCENE_NODE_TYPE)type, n);
+
+	for (unsigned int i = 0; i < n.size(); i++)
+		l->Add(SceneNode::Wrap(n[i]));
+
+	return l;
 }
 
 String^ SceneManager::GetSceneNodeTypeName(SceneNodeType type)
 {
 	return gcnew String(m_SceneManager->getSceneNodeTypeName((scene::ESCENE_NODE_TYPE)type));
+}
+
+bool SceneManager::IsCulled(SceneNode^ node)
+{
+	return m_SceneManager->isCulled(LIME_SAFEREF(node, m_SceneNode));
+}
+
+bool SceneManager::PostEvent(Event^ e)
+{
+	LIME_ASSERT(e != nullptr);
+	return m_SceneManager->postEventFromUser(*e->m_NativeValue);
 }
 
 unsigned int SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRenderPass pass)
@@ -2387,12 +2785,6 @@ void SceneManager::AmbientLight::set(Video::Colorf^ value)
 	m_SceneManager->setAmbientLight(*value->m_NativeValue);
 }
 
-SceneNode^ SceneManager::RootNode::get()
-{
-	scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
-	return SceneNode::Wrap(n);
-}
-
 IO::FileSystem^ SceneManager::FileSystem::get()
 {
 	return IO::FileSystem::Wrap(m_SceneManager->getFileSystem());
@@ -2406,6 +2798,12 @@ GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 Scene::MeshManipulator^ SceneManager::MeshManipulator::get()
 {
 	return Scene::MeshManipulator::Wrap(m_SceneManager->getMeshManipulator());
+}
+
+SceneNode^ SceneManager::RootNode::get()
+{
+	scene::ISceneNode* n = m_SceneManager->getRootSceneNode();
+	return SceneNode::Wrap(n);
 }
 
 Scene::SceneCollisionManager^ SceneManager::SceneCollisionManager::get()

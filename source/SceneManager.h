@@ -7,7 +7,7 @@ using namespace irr;
 using namespace System;
 using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime {
+namespace IrrlichtLime { ref class Event;
 namespace IO { ref class FileSystem; }
 namespace GUI { ref class GUIEnvironment; ref class GUIFont; }
 namespace Video { ref class Image; ref class Texture; ref class VideoDriver; }
@@ -16,6 +16,7 @@ namespace Scene {
 ref class AnimatedMesh;
 ref class AnimatedMeshSceneNode;
 ref class BillboardSceneNode;
+ref class BillboardTextSceneNode;
 ref class CameraSceneNode;
 ref class CollisionResponseSceneNodeAnimator;
 ref class DummyTransformationSceneNode;
@@ -45,6 +46,15 @@ public:
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent);
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh);
 
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name);
+
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id);
@@ -52,6 +62,14 @@ public:
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent);
 	BillboardSceneNode^ AddBillboardSceneNode();
+
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text);
 
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id, bool makeActive);
 	CameraSceneNode^ AddCameraSceneNode(SceneNode^ parent, Vector3Df^ position, Vector3Df^ lookat, int id);
@@ -108,6 +126,14 @@ public:
 	LightSceneNode^ AddLightSceneNode(SceneNode^ parent);
 	LightSceneNode^ AddLightSceneNode();
 
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, bool alsoAddIfMeshIsNull);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id, Vector3Df^ position);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent);
+	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh);
+
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode);
 	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
@@ -121,6 +147,9 @@ public:
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent);
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter);
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode();
+
+	SceneNode^ AddSceneNode(String^ sceneNodeTypeName, SceneNode^ parent);
+	SceneNode^ AddSceneNode(String^ sceneNodeTypeName);
 
 	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent, int id);
 	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent);
@@ -238,13 +267,21 @@ public:
 
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
 
+	//ISkinnedMesh* createSkinnedMesh();
+
+	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel);
+	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node);
+
 	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop);
 	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame);
 
 	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node);
 	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node);
+	TriangleSelector^ CreateTriangleSelectorFromBoundingBox(SceneNode^ node);
 
 	void DrawAll();
+
+	String^ GetAnimatorTypeName(SceneNodeAnimatorType type);
 
 	AnimatedMesh^ GetMesh(String^ filename);
 
@@ -254,22 +291,29 @@ public:
 	SceneNode^ GetSceneNodeFromName(String^ name);
 	SceneNode^ GetSceneNodeFromType(SceneNodeType type, SceneNode^ start);
 	SceneNode^ GetSceneNodeFromType(SceneNodeType type);
+	List<SceneNode^>^ GetSceneNodesFromType(SceneNodeType type, SceneNode^ start);
+	List<SceneNode^>^ GetSceneNodesFromType(SceneNodeType type);
 
-	String^ GetAnimatorTypeName(SceneNodeAnimatorType type);
 	String^ GetSceneNodeTypeName(SceneNodeType type);
+
+	bool IsCulled(SceneNode^ node);
+
+	bool PostEvent(Event^ e);
 
 	unsigned int RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
 	unsigned int RegisterNodeForRendering(SceneNode^ node);
 
-	bool SaveScene(String^ filename); // 2nd argument ISceneUserDataSerializer* currently not supported
+	bool SaveScene(String^ filename); // 2nd argument ISceneUserDataSerializer* not supported
 	bool LoadScene(String^ filename); // *same here*
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }
-	property SceneNode^ RootNode { SceneNode^ get(); }
+	//property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	//property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
+	property SceneNode^ RootNode { SceneNode^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
 	property Scene::SceneNodeRenderPass SceneNodeRenderPass { Scene::SceneNodeRenderPass get(); }
 	property Video::Coloru^ ShadowColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
