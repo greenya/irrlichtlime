@@ -7,17 +7,21 @@
 #include "DummyTransformationSceneNode.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
+#include "GUIFont.h"
 #include "Image.h"
 #include "LightSceneNode.h"
 #include "Mesh.h"
 #include "MeshManipulator.h"
 #include "MeshSceneNode.h"
+#include "MetaTriangleSelector.h"
 #include "ParticleSystemSceneNode.h"
 #include "ReferenceCounted.h"
 #include "SceneCollisionManager.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
+#include "TerrainSceneNode.h"
+#include "TextSceneNode.h"
 #include "Texture.h"
 #include "TriangleSelector.h"
 #include "VideoDriver.h"
@@ -1304,6 +1308,266 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 	return AnimatedMesh::Wrap(m);
 }
 
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor,
+	bool addAlsoIfHeightmapEmpty)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+	LIME_ASSERT(vertexColor != nullptr);
+	LIME_ASSERT(maxLOD > 0);
+	LIME_ASSERT((int)pow((float)maxLOD - 1, 2) < (int)patchSize);
+	LIME_ASSERT(smoothFactor >= 0);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		*vertexColor->m_NativeValue,
+		maxLOD,
+		(scene::E_TERRAIN_PATCH_SIZE)patchSize,
+		smoothFactor,
+		addAlsoIfHeightmapEmpty);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+	LIME_ASSERT(vertexColor != nullptr);
+	LIME_ASSERT(maxLOD > 0);
+	LIME_ASSERT((int)pow((float)maxLOD - 1, 2) < (int)patchSize);
+	LIME_ASSERT(smoothFactor >= 0);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		*vertexColor->m_NativeValue,
+		maxLOD,
+		(scene::E_TERRAIN_PATCH_SIZE)patchSize,
+		smoothFactor);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+	LIME_ASSERT(vertexColor != nullptr);
+	LIME_ASSERT(maxLOD > 0);
+	LIME_ASSERT((int)pow((float)maxLOD - 1, 2) < (int)patchSize);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		*vertexColor->m_NativeValue,
+		maxLOD,
+		(scene::E_TERRAIN_PATCH_SIZE)patchSize);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+	LIME_ASSERT(vertexColor != nullptr);
+	LIME_ASSERT(maxLOD > 0);
+	LIME_ASSERT((int)pow((float)maxLOD - 1, 2) < (int)scene::ETPS_17); // scene::ETPS_17 is a default value for patchSize
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		*vertexColor->m_NativeValue,
+		maxLOD);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+	LIME_ASSERT(vertexColor != nullptr);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue,
+		*vertexColor->m_NativeValue);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation, Vector3Df^ scale)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+	LIME_ASSERT(scale != nullptr);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue,
+		*scale->m_NativeValue);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
+	Vector3Df^ rotation)
+{
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(rotation != nullptr);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue,
+		*rotation->m_NativeValue);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position)
+{
+	LIME_ASSERT(position != nullptr);
+
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id,
+		*position->m_NativeValue);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id)
+{
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode),
+		id);
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent)
+{
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName),
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName)
+{
+	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
+		Lime::StringToPath(heightMapFileName));
+
+	return TerrainSceneNode::Wrap(n);
+}
+
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position, int id)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		*color->m_NativeValue,
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue,
+		id);
+
+	return TextSceneNode::Wrap(n);
+}
+
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position)
+{
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(position != nullptr);
+
+	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		*color->m_NativeValue,
+		LIME_SAFEREF(parent, m_SceneNode),
+		*position->m_NativeValue);
+
+	return TextSceneNode::Wrap(n);
+}
+
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent)
+{
+	LIME_ASSERT(color != nullptr);
+
+	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		*color->m_NativeValue,
+		LIME_SAFEREF(parent, m_SceneNode));
+
+	return TextSceneNode::Wrap(n);
+}
+
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color)
+{
+	LIME_ASSERT(color != nullptr);
+
+	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str(),
+		*color->m_NativeValue);
+
+	return TextSceneNode::Wrap(n);
+}
+
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text)
+{
+	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
+		LIME_SAFEREF(font, m_GUIFont),
+		Lime::StringToStringW(text).c_str());
+
+	return TextSceneNode::Wrap(n);
+}
+
 void SceneManager::AddToDeletionQueue(SceneNode^ node)
 {
 	m_SceneManager->addToDeletionQueue(LIME_SAFEREF(node, m_SceneNode));
@@ -1922,6 +2186,12 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df^>^ po
 		p);
 
 	return SceneNodeAnimator::Wrap(a);
+}
+
+MetaTriangleSelector^ SceneManager::CreateMetaTriangleSelector()
+{
+	scene::IMetaTriangleSelector* s = m_SceneManager->createMetaTriangleSelector();
+	return MetaTriangleSelector::Wrap(s);
 }
 
 SceneManager^ SceneManager::CreateNewSceneManager(bool cloneContent)

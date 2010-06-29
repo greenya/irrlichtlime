@@ -96,7 +96,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("Position={0}; Type={1}", Position, Type);
+		return String::Format("Vertex3D: Type={0}; Position={1}", Type, Position);
 	}
 
 internal:

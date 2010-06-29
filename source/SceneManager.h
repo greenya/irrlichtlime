@@ -9,7 +9,7 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace IO { ref class FileSystem; }
-namespace GUI { ref class GUIEnvironment; }
+namespace GUI { ref class GUIEnvironment; ref class GUIFont; }
 namespace Video { ref class Image; ref class Texture; ref class VideoDriver; }
 namespace Scene {
 
@@ -23,10 +23,13 @@ ref class LightSceneNode;
 ref class Mesh;
 ref class MeshManipulator;
 ref class MeshSceneNode;
+ref class MetaTriangleSelector;
 ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
 ref class SceneNode;
 ref class SceneNodeAnimator;
+ref class TerrainSceneNode;
+ref class TextSceneNode;
 ref class TriangleSelector;
 ref class VolumeLightSceneNode;
 
@@ -151,6 +154,24 @@ public:
 	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize);
 	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap);
 
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor, bool addAlsoIfHeightmapEmpty);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName);
+
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position, int id);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text);
+
 	void AddToDeletionQueue(SceneNode^ node);
 
 	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor, Video::Coloru^ tailColor);
@@ -206,6 +227,8 @@ public:
 	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime, float speed);
 	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points, float startTime);
 	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df^>^ points);
+
+	MetaTriangleSelector^ CreateMetaTriangleSelector();
 
 	SceneManager^ CreateNewSceneManager(bool cloneContent);
 	SceneManager^ CreateNewSceneManager();
