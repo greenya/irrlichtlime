@@ -81,6 +81,7 @@
 #include "Rect.h"
 #include "KeyMap.h"
 #include "ExposedVideoData.h"
+#include "NamedPath.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"

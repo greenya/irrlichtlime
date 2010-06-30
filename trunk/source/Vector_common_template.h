@@ -122,10 +122,10 @@ public:
 		m_NativeValue = new _WRAPCLASS_(*copy->m_NativeValue);
 	}
 
-	_REFCLASS_(_WRAPTYPE_ value)
+	_REFCLASS_(_WRAPTYPE_ all)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-		m_NativeValue = new _WRAPCLASS_(value);
+		m_NativeValue = new _WRAPCLASS_(all);
 	}
 
 	_REFCLASS_()

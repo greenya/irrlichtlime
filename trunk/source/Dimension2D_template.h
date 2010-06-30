@@ -81,6 +81,11 @@ public:
 		m_NativeValue = new _WRAPCLASS_(width, height);
 	}
 
+	void Set(_REFCLASS_^ copy)
+	{
+		m_NativeValue->set(copy->m_NativeValue->Width, copy->m_NativeValue->Height);
+	}
+
 	void Set(_WRAPTYPE_ width, _WRAPTYPE_ height)
 	{
 		m_NativeValue->set(width, height);

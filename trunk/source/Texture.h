@@ -10,9 +10,27 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
+ref class TexturePainter;
+
 public ref class Texture : ReferenceCounted
 {
 public:
+
+	TexturePainter^ GetTexturePainter();
+
+	void RegenerateMipMapLevels(); // argument "void *mipmapData=0" not supported
+
+	property bool AlphaChannel { bool get(); }
+	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
+	property Video::DriverType DriverType { Video::DriverType get(); }
+	property bool MipMaps { bool get(); }
+	property IO::NamedPath^ Name { IO::NamedPath^ get(); }
+	property Dimension2Du^ OriginalSize { Dimension2Du^ get(); }
+	property unsigned int Pitch { unsigned int get(); }
+	property bool RenderTarget { bool get(); }
+	property Dimension2Du^ Size { Dimension2Du^ get(); }
+
+	virtual String^ ToString() override;
 
 internal:
 

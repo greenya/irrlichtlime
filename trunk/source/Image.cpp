@@ -114,7 +114,7 @@ unsigned int Image::Pitch::get()
 
 String^ Image::ToString()
 {
-	return String::Format("Image: Dimension={{{0}}}; ColorFormat={1}", Dimension, ColorFormat);
+	return String::Format("Image: Dimension={0}; ColorFormat={1}", Dimension, ColorFormat);
 }
 
 } // end namespace Video

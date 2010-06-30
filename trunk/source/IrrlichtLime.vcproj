@@ -288,6 +288,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TexturePainter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TexturePainter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TransformationState.h"
 				>
 			</File>
@@ -1113,6 +1121,10 @@
 			</File>
 			<File
 				RelativePath=".\FileSystemType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\NamedPath.h"
 				>
 			</File>
 		</Filter>
