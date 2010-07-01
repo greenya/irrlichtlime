@@ -258,19 +258,19 @@ void MeshManipulator::SetVertexColorAlpha(Mesh^ mesh, int alpha)
 	m_MeshManipulator->setVertexColorAlpha(LIME_SAFEREF(mesh, m_Mesh), alpha);
 }
 
-void MeshManipulator::SetVertexColors(Mesh^ mesh, Video::Coloru^ color)
+void MeshManipulator::SetVertexColors(Mesh^ mesh, Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_MeshManipulator->setVertexColors(LIME_SAFEREF(mesh, m_Mesh), *color->m_NativeValue);
 }
 
-void MeshManipulator::Transform(MeshBuffer^ buffer, Matrix4f^ m)
+void MeshManipulator::Transform(MeshBuffer^ buffer, Matrix^ m)
 {
 	LIME_ASSERT(m != nullptr);
 	m_MeshManipulator->transform(LIME_SAFEREF(buffer, m_MeshBuffer), *m->m_NativeValue);
 }
 
-void MeshManipulator::Transform(Mesh^ mesh, Matrix4f^ m)
+void MeshManipulator::Transform(Mesh^ mesh, Matrix^ m)
 {
 	LIME_ASSERT(m != nullptr);
 	m_MeshManipulator->transform(LIME_SAFEREF(mesh, m_Mesh), *m->m_NativeValue);

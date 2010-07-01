@@ -23,9 +23,9 @@ DummyTransformationSceneNode::DummyTransformationSceneNode(scene::IDummyTransfor
 	m_DummyTransformationSceneNode = ref;
 }
 
-Matrix4f^ DummyTransformationSceneNode::RelativeTransformationMatrix::get()
+Matrix^ DummyTransformationSceneNode::RelativeTransformationMatrix::get()
 {
-	return gcnew Matrix4f(&m_DummyTransformationSceneNode->getRelativeTransformationMatrix());
+	return gcnew Matrix(&m_DummyTransformationSceneNode->getRelativeTransformationMatrix());
 }
 
 } // end namespace Scene

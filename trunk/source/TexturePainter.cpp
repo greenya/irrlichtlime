@@ -26,15 +26,15 @@ TexturePainter::TexturePainter(Video::Texture^ texture)
 	m_mipmapLevel = -1;
 }
 
-Coloru^ TexturePainter::GetPixel(int x, int y)
+Color^ TexturePainter::GetPixel(int x, int y)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
 	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
 
-	Coloru^ c = gcnew Coloru();
+	Color^ c = gcnew Color();
 	c->m_NativeValue->setData(
-		(unsigned char*)m_pointer + y * (m_rowSize/(m_mipmapLevel+1)) + x * m_pixelSize,
+		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
 		m_format);
 
 	return c;
@@ -52,7 +52,7 @@ bool TexturePainter::Lock(bool readOnly, int mipmapLevel)
 	m_readOnly = readOnly;
 	m_mipmapLevel = mipmapLevel;
 
-	int f = mipmapLevel == 0 ? 1 : 2 >> (mipmapLevel - 1);
+	int f = 1 << m_mipmapLevel;
 	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width / f;
 	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height / f;
 
@@ -91,7 +91,7 @@ bool TexturePainter::Lock()
 	return true;
 }
 
-void TexturePainter::SetPixel(int x, int y, Coloru^ color)
+void TexturePainter::SetPixel(int x, int y, Color^ color)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(!ReadOnly);
@@ -100,7 +100,7 @@ void TexturePainter::SetPixel(int x, int y, Coloru^ color)
 	LIME_ASSERT(color != nullptr);
 
 	color->m_NativeValue->getData(
-		(unsigned char*)m_pointer + y * (m_rowSize/(m_mipmapLevel+1)) + x * m_pixelSize,
+		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
 		m_format);
 }
 

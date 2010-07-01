@@ -29,7 +29,7 @@ void GUIEditBox::SetDrawBorder(bool draw)
 	m_GUIEditBox->setDrawBorder(draw);
 }
 
-void GUIEditBox::SetOverrideColor(bool enable, Video::Coloru^ color)
+void GUIEditBox::SetOverrideColor(bool enable, Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 

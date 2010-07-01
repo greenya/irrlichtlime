@@ -18,11 +18,11 @@ public:
 
 	SceneNode^ GetSceneNodeForTriangle(int triangleIndex);
 
-	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, int maxTriangleCount, Matrix4f^ transform);
-	List<Triangle3Df^>^ GetTriangles(AABBox3Df^ box, int maxTriangleCount);
-	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, int maxTriangleCount, Matrix4f^ transform);
+	List<Triangle3Df^>^ GetTriangles(AABBox^ box, int maxTriangleCount, Matrix^ transform);
+	List<Triangle3Df^>^ GetTriangles(AABBox^ box, int maxTriangleCount);
+	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, int maxTriangleCount, Matrix^ transform);
 	List<Triangle3Df^>^ GetTriangles(Line3Df^ line, int maxTriangleCount);
-	List<Triangle3Df^>^ GetTriangles(int maxTriangleCount, Matrix4f^ transform);
+	List<Triangle3Df^>^ GetTriangles(int maxTriangleCount, Matrix^ transform);
 	List<Triangle3Df^>^ GetTriangles(int maxTriangleCount);
 
 	property int TriangleCount { int get(); }

@@ -21,8 +21,8 @@ public:
 	void ClearItemColors(int index);
 	void ClearItems();
 	String^ GetItem(int index);
-	Video::Coloru^ GetItemDefaultColor(GUIListBoxColor colorType);
-	Video::Coloru^ GetItemColor(int index, GUIListBoxColor colorType);
+	Video::Color^ GetItemDefaultColor(GUIListBoxColor colorType);
+	Video::Color^ GetItemColor(int index, GUIListBoxColor colorType);
 	int GetItemIcon(int index);
 	int InsertItem(int index, String^ text, int icon);
 	int InsertItem(int index, String^ text);
@@ -31,7 +31,7 @@ public:
 	void SetDrawBackground(bool draw);
 	void SetItem(int index, String^ text, int icon);
 	void SetItem(int index, String^ text);
-	void SetItemColor(int index, GUIListBoxColor colorType, Video::Coloru^ color);
+	void SetItemColor(int index, GUIListBoxColor colorType, Video::Color^ color);
 	void SetItemHeight(int height);
 	void SetSpriteBank(GUISpriteBank^ bank);
 	void SwapItems(int index1, int index2);

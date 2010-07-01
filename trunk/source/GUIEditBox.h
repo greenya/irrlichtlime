@@ -16,7 +16,7 @@ public ref class GUIEditBox : GUIElement
 public:
 
 	void SetDrawBorder(bool draw);
-	void SetOverrideColor(bool enable, Video::Coloru^ color);
+	void SetOverrideColor(bool enable, Video::Color^ color);
 	void SetOverrideColor(bool enable);
 	void SetOverrideFont(GUIFont^ font);
 	void SetPasswordChar(Char x);

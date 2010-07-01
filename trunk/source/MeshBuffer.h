@@ -29,7 +29,7 @@ public:
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 
-	property AABBox3Df^ BoundingBox { AABBox3Df^ get(); void set(AABBox3Df^ value); }
+	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property HardwareMappingHint HardwareMappingHintForIndex { HardwareMappingHint get(); }
 	property HardwareMappingHint HardwareMappingHintForVertex { HardwareMappingHint get(); }
 	property unsigned int IndexCount { unsigned int get(); }

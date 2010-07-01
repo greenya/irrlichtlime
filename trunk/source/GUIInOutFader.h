@@ -16,8 +16,8 @@ public:
 	void FadeIn(unsigned int time);
 	void FadeOut(unsigned int time);
 
-	void SetColor(Video::Coloru^ source, Video::Coloru^ dest);
-	void SetColor(Video::Coloru^ bothAplhaIgnored);
+	void SetColor(Video::Color^ source, Video::Color^ dest);
+	void SetColor(Video::Color^ bothAplhaIgnored);
 
 	property bool Ready { bool get(); }
 

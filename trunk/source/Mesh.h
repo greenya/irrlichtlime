@@ -22,7 +22,7 @@ public:
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
 
-	property AABBox3Df^ BoundingBox { AABBox3Df^ get(); void set(AABBox3Df^ value); }
+	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property unsigned int MeshBufferCount { unsigned int get(); }
 
 internal:

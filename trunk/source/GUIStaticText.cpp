@@ -24,7 +24,7 @@ GUIStaticText::GUIStaticText(gui::IGUIStaticText* ref)
 	m_GUIStaticText = ref;
 }
 
-void GUIStaticText::SetBackgroundColor(Video::Coloru^ color)
+void GUIStaticText::SetBackgroundColor(Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_GUIStaticText->setBackgroundColor(*color->m_NativeValue);
@@ -45,12 +45,12 @@ void GUIStaticText::SetTextAlignment(GUIAlignment horizontal, GUIAlignment verti
 	m_GUIStaticText->setTextAlignment((gui::EGUI_ALIGNMENT)horizontal, (gui::EGUI_ALIGNMENT)vertical);
 }
 
-Video::Coloru^ GUIStaticText::OverrideColor::get()
+Video::Color^ GUIStaticText::OverrideColor::get()
 {
-	return gcnew Video::Coloru(m_GUIStaticText->getOverrideColor());
+	return gcnew Video::Color(m_GUIStaticText->getOverrideColor());
 }
 
-void GUIStaticText::OverrideColor::set(Video::Coloru^ value)
+void GUIStaticText::OverrideColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_GUIStaticText->setOverrideColor(*value->m_NativeValue);

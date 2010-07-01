@@ -24,7 +24,7 @@ GUIFont::GUIFont(gui::IGUIFont* ref)
 	m_GUIFont = ref;
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter, bool vcenter, Recti^ clip)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter, Recti^ clip)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
@@ -39,7 +39,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hce
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter, bool vcenter)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
@@ -52,7 +52,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hce
 		vcenter);
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
@@ -64,7 +64,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hce
 		hcenter);
 }
 
-void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Coloru^ color, Recti^ clip)
+void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color, Recti^ clip)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
@@ -79,7 +79,7 @@ void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Coloru^ color, Rect
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Coloru^ color)
+void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
@@ -90,7 +90,7 @@ void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Coloru^ color)
 		*color->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, int x, int y, Video::Coloru^ color, Recti^ clip)
+void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color, Recti^ clip)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
@@ -104,7 +104,7 @@ void GUIFont::Draw(String^ text, int x, int y, Video::Coloru^ color, Recti^ clip
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, int x, int y, Video::Coloru^ color)
+void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 

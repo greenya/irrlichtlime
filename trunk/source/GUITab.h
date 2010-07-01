@@ -13,10 +13,10 @@ public ref class GUITab : GUIElement
 {
 public:
 
-	property Video::Coloru^ BackgroundColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ BackgroundColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property bool DrawBackground { bool get(); void set(bool value); }
 	property int Index { int get(); }
-	property Video::Coloru^ TextColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ TextColor { Video::Color^ get(); void set(Video::Color^ value); }
 
 internal:
 

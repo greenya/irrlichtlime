@@ -20,13 +20,13 @@ public:
 	property bool InputReceiverEnabled { bool get(); void set(bool value); }
 	property float NearValue { float get(); void set(float value); }
 	property bool Orthogonal { bool get(); }
-	property Matrix4f^ ProjectionMatrix { Matrix4f^ get(); }
+	property Matrix^ ProjectionMatrix { Matrix^ get(); }
 	property Vector3Df^ Rotation { virtual void set(Vector3Df^ value) override; }
 	property Vector3Df^ Target { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property bool TargetAndRotationBinding { bool get(); void set(bool value); }
 	property Vector3Df^ UpVector { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property Matrix4f^ ViewMatrix { Matrix4f^ get(); }
-	property Matrix4f^ ViewMatrixAffector { Matrix4f^ get(); void set(Matrix4f^ value); }
+	property Matrix^ ViewMatrix { Matrix^ get(); }
+	property Matrix^ ViewMatrixAffector { Matrix^ get(); void set(Matrix^ value); }
 
 internal:
 

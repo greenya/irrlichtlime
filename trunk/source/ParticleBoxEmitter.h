@@ -14,7 +14,7 @@ public ref class ParticleBoxEmitter : ParticleEmitter
 {
 public:
 
-	property AABBox3Df^ Box { AABBox3Df^ get(); void set(AABBox3Df^ value); }
+	property AABBox^ Box { AABBox^ get(); void set(AABBox^ value); }
 
 internal:
 

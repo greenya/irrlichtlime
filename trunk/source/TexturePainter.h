@@ -15,13 +15,13 @@ public ref class TexturePainter
 {
 public:
 
-	Coloru^ GetPixel(int x, int y);
+	Color^ GetPixel(int x, int y);
 	
 	bool Lock(bool readOnly, int mipmapLevel);
 	bool Lock(bool readOnly);
 	bool Lock();
 
-	void SetPixel(int x, int y, Coloru^ color);
+	void SetPixel(int x, int y, Color^ color);
 
 	void Unlock(bool alsoRegenerateMipMapLevels);
 	void Unlock();

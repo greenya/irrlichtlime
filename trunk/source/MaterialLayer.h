@@ -20,7 +20,7 @@ public:
 	property bool BilinearFilter { bool get(); void set(bool value); }
 	property __int8 LODBias { __int8 get(); void set(__int8 value); }
 	property Video::Texture^ Texture { Video::Texture^ get(); void set(Video::Texture^ value); }
-	property Matrix4f^ TextureMatrix { Matrix4f^ get(); void set(Matrix4f^ value); }
+	property Matrix^ TextureMatrix { Matrix^ get(); void set(Matrix^ value); }
 	property TextureClamp TextureWrapU { TextureClamp get(); void set(TextureClamp value); }
 	property TextureClamp TextureWrapV { TextureClamp get(); void set(TextureClamp value); }
 	property bool TrilinearFilter { bool get(); void set(bool value); }

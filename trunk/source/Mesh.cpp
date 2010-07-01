@@ -56,12 +56,12 @@ void Mesh::SetMaterialFlag(Video::MaterialFlag flag, bool newvalue)
 	m_Mesh->setMaterialFlag((video::E_MATERIAL_FLAG)flag, newvalue);
 }
 
-AABBox3Df^ Mesh::BoundingBox::get()
+AABBox^ Mesh::BoundingBox::get()
 {
-	return gcnew AABBox3Df(m_Mesh->getBoundingBox());
+	return gcnew AABBox(m_Mesh->getBoundingBox());
 }
 
-void Mesh::BoundingBox::set(AABBox3Df^ value)
+void Mesh::BoundingBox::set(AABBox^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_Mesh->setBoundingBox(*value->m_NativeValue);

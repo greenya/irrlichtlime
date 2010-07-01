@@ -14,7 +14,7 @@ public ref class GUIImage : GUIElement
 {
 public:
 
-	void SetColor(Video::Coloru^ color);
+	void SetColor(Video::Color^ color);
 	void SetImage(Video::Texture^ image);
 
 	property bool AlphaChannel { bool get(); void set(bool value); }

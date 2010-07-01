@@ -28,7 +28,7 @@ void TextSceneNode::SetText(String^ text)
 	m_TextSceneNode->setText(Lime::StringToStringW(text).c_str());
 }
 
-void TextSceneNode::SetTextColor(Video::Coloru^ color)
+void TextSceneNode::SetTextColor(Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_TextSceneNode->setTextColor(*color->m_NativeValue);

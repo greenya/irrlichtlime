@@ -21,16 +21,16 @@ public:
 
 	bool GetFlag(MaterialFlag flag);
 	Texture^ GetTexture(int index);
-	Matrix4f^ GetTextureMatrix(int index);
+	Matrix^ GetTextureMatrix(int index);
 	void SetFlag(MaterialFlag flag, bool value);
 	void SetTexture(int index, Texture^ tex);
-	void SetTextureMatrix(int index, Matrix4f^ mat);
+	void SetTextureMatrix(int index, Matrix^ mat);
 
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
-	property Coloru^ AmbientColor { Coloru^ get(); void set(Coloru^ value); }
-	property Coloru^ DiffuseColor { Coloru^ get(); void set(Coloru^ value); }
-	property Coloru^ EmissiveColor { Coloru^ get(); void set(Coloru^ value); }
-	property Coloru^ SpecularColor { Coloru^ get(); void set(Coloru^ value); }
+	property Color^ AmbientColor { Color^ get(); void set(Color^ value); }
+	property Color^ DiffuseColor { Color^ get(); void set(Color^ value); }
+	property Color^ EmissiveColor { Color^ get(); void set(Color^ value); }
+	property Color^ SpecularColor { Color^ get(); void set(Color^ value); }
 	property float Shininess { float get(); void set(float value); }
 	property float MaterialTypeParam { float get(); void set(float value); }
 	property float MaterialTypeParam2 { float get(); void set(float value); }

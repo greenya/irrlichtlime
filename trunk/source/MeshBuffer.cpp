@@ -62,12 +62,12 @@ void MeshBuffer::SetHardwareMappingHint(HardwareMappingHint mappingHint, Hardwar
 	m_MeshBuffer->setHardwareMappingHint((scene::E_HARDWARE_MAPPING)mappingHint, (scene::E_BUFFER_TYPE)buffer);
 }
 
-AABBox3Df^ MeshBuffer::BoundingBox::get()
+AABBox^ MeshBuffer::BoundingBox::get()
 {
-	return gcnew AABBox3Df(m_MeshBuffer->getBoundingBox());
+	return gcnew AABBox(m_MeshBuffer->getBoundingBox());
 }
 
-void MeshBuffer::BoundingBox::set(AABBox3Df^ value)
+void MeshBuffer::BoundingBox::set(AABBox^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_MeshBuffer->setBoundingBox(*value->m_NativeValue);

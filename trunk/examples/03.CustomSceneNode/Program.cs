@@ -39,7 +39,7 @@ namespace _03.CustomSceneNode
 			int frames = 0;
 			while (device.Run())
 			{
-				driver.BeginScene(true, true, new Coloru(100, 100, 100));
+				driver.BeginScene(true, true, new Color(100, 100, 100));
 				smgr.DrawAll();
 				driver.EndScene();
 
@@ -59,7 +59,7 @@ namespace _03.CustomSceneNode
 
 	class CSampleSceneNode : SceneNode
 	{
-		AABBox3Df bbox = new AABBox3Df();
+		AABBox bbox = new AABBox();
 		List<Vertex3D> vertices = new List<Vertex3D>();
 		Material material = new Material();
 
@@ -75,10 +75,10 @@ namespace _03.CustomSceneNode
 			material.Wireframe = false;
 			material.Lighting = false;
 
-			vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Coloru(0, 255, 255), 0, 1));
-			vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Coloru(255, 0, 255), 1, 1));
-			vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Coloru(255, 255, 0), 1, 0));
-			vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Coloru(0, 255, 0), 0, 0));
+			vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Color(0, 255, 255), 0, 1));
+			vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Color(255, 0, 255), 1, 1));
+			vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Color(255, 255, 0), 1, 0));
+			vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Color(0, 255, 0), 0, 0));
 
 			bbox.Reset(vertices[0].Position);
 			for (int i = 1; i < vertices.Count; i++)
@@ -101,7 +101,7 @@ namespace _03.CustomSceneNode
 			driver.DrawVertexPrimitiveList(vertices, indices);
 		}
 
-		AABBox3Df CSampleSceneNode_OnGetBoundingBox()
+		AABBox CSampleSceneNode_OnGetBoundingBox()
 		{
 			return bbox;
 		}

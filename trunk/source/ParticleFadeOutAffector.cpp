@@ -35,12 +35,12 @@ void ParticleFadeOutAffector::FadeOutTime::set(float value)
 	m_ParticleFadeOutAffector->setFadeOutTime(value);
 }
 
-Video::Coloru^ ParticleFadeOutAffector::TargetColor::get()
+Video::Color^ ParticleFadeOutAffector::TargetColor::get()
 {
-	return gcnew Video::Coloru(m_ParticleFadeOutAffector->getTargetColor());
+	return gcnew Video::Color(m_ParticleFadeOutAffector->getTargetColor());
 }
 
-void ParticleFadeOutAffector::TargetColor::set(Video::Coloru^ value)
+void ParticleFadeOutAffector::TargetColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_ParticleFadeOutAffector->setTargetColor(*value->m_NativeValue);

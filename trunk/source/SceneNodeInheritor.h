@@ -39,7 +39,7 @@ public:
 	gcroot<SceneNode::GetBoundingBoxEventHandler^> m_getBoundingBoxHandler;
 	virtual const core::aabbox3df& getBoundingBox() const
 	{
-		AABBox3Df^ b = m_getBoundingBoxHandler->Invoke();
+		AABBox^ b = m_getBoundingBoxHandler->Invoke();
 		if (b != nullptr)
 			return *b->m_NativeValue;
 		else

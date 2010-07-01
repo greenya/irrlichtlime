@@ -12,7 +12,7 @@ public ref class Fog
 {
 public:
 
-	Coloru^ Color;
+	Color^ Color;
 	FogType Type;
 	float Start;
 	float End;
@@ -20,7 +20,7 @@ public:
 	bool PixelFog;
 	bool RangeFog;
 
-	Fog(Coloru^ color, FogType type, float start, float end, float density, bool pixelFog, bool rangeFog)
+	Fog(Video::Color^ color, FogType type, float start, float end, float density, bool pixelFog, bool rangeFog)
 		: Color(color)
 		, Type(type)
 		, Start(start)
@@ -29,7 +29,7 @@ public:
 		, PixelFog(pixelFog)
 		, RangeFog(rangeFog) {}
 
-	Fog(Coloru^ color, FogType type, float start, float end, float density, bool pixelFog)
+	Fog(Video::Color^ color, FogType type, float start, float end, float density, bool pixelFog)
 		: Color(color)
 		, Type(type)
 		, Start(start)
@@ -38,7 +38,7 @@ public:
 		, PixelFog(pixelFog)
 		, RangeFog(false) {}
 
-	Fog(Coloru^ color, FogType type, float start, float end, float density)
+	Fog(Video::Color^ color, FogType type, float start, float end, float density)
 		: Color(color)
 		, Type(type)
 		, Start(start)
@@ -47,7 +47,7 @@ public:
 		, PixelFog(false)
 		, RangeFog(false) {}
 
-	Fog(Coloru^ color, FogType type, float start, float end)
+	Fog(Video::Color^ color, FogType type, float start, float end)
 		: Color(color)
 		, Type(type)
 		, Start(start)
@@ -56,7 +56,7 @@ public:
 		, PixelFog(false)
 		, RangeFog(false) {}
 
-	Fog(Coloru^ color, FogType type)
+	Fog(Video::Color^ color, FogType type)
 		: Color(color)
 		, Type(type)
 		, Start(50.0f)
@@ -65,7 +65,7 @@ public:
 		, PixelFog(false)
 		, RangeFog(false) {}
 
-	Fog(Coloru^ color)
+	Fog(Video::Color^ color)
 		: Color(color)
 		, Type(FogType::Linear)
 		, Start(50.0f)
@@ -75,7 +75,7 @@ public:
 		, RangeFog(false) {}
 
 	Fog()
-		: Color(gcnew Coloru(255, 255, 255, 0))
+		: Color(gcnew Video::Color(255, 255, 255, 0))
 		, Type(FogType::Linear)
 		, Start(50.0f)
 		, End(100.0f)

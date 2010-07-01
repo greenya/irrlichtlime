@@ -28,8 +28,8 @@ public:
 	void SetPressedImage(Video::Texture^ image);
 	void SetPressedImage();
 
-	void SetSprite(GUIButtonState state, int index, Video::Coloru^ color, bool loop);
-	void SetSprite(GUIButtonState state, int index, Video::Coloru^ color);
+	void SetSprite(GUIButtonState state, int index, Video::Color^ color, bool loop);
+	void SetSprite(GUIButtonState state, int index, Video::Color^ color);
 	void SetSprite(GUIButtonState state, int index);
 
 	void SetSpriteBank(GUISpriteBank^ bank);

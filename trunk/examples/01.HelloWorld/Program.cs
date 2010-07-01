@@ -41,7 +41,7 @@ namespace _01.HelloWorld
 
 			while (device.Run())
 			{
-				driver.BeginScene(true, true, new Coloru(100, 101, 140));
+				driver.BeginScene(true, true, new Color(100, 101, 140));
 				
 				smgr.DrawAll();
 				gui.DrawAll();

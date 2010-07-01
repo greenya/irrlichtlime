@@ -28,12 +28,12 @@ Particle::Particle()
 	m_NativeValue = new scene::SParticle();
 }
 
-Video::Coloru^ Particle::Color::get()
+Video::Color^ Particle::Color::get()
 {
-	return gcnew Video::Coloru(m_NativeValue->color);
+	return gcnew Video::Color(m_NativeValue->color);
 }
 
-void Particle::Color::set(Video::Coloru^ value)
+void Particle::Color::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->color = *value->m_NativeValue;
@@ -71,12 +71,12 @@ void Particle::Size::set(Dimension2Df^ value)
 	m_NativeValue->size = *value->m_NativeValue;
 }
 
-Video::Coloru^ Particle::StartColor::get()
+Video::Color^ Particle::StartColor::get()
 {
-	return gcnew Video::Coloru(m_NativeValue->startColor);
+	return gcnew Video::Color(m_NativeValue->startColor);
 }
 
-void Particle::StartColor::set(Video::Coloru^ value)
+void Particle::StartColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->startColor = *value->m_NativeValue;

@@ -145,7 +145,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 	return AnimatedMeshSceneNode::Wrap(n);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
@@ -169,7 +169,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal, float heightCylinder)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
@@ -190,7 +190,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
@@ -210,7 +210,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder,
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
@@ -228,7 +228,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder)
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
@@ -243,7 +243,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone)
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
@@ -256,7 +256,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCy
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder)
+AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder)
 {
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 
@@ -274,7 +274,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name)
 }
 
 BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id,
-	Video::Coloru^ colorTop, Video::Coloru^ colorBottom)
+	Video::Color^ colorTop, Video::Color^ colorBottom)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(position != nullptr);
@@ -293,7 +293,7 @@ BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimen
 }
 
 BillboardSceneNode^ SceneManager::AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id,
-	Video::Coloru^ colorTop)
+	Video::Color^ colorTop)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(position != nullptr);
@@ -362,7 +362,7 @@ BillboardSceneNode^ SceneManager::AddBillboardSceneNode()
 }
 
 BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size,
-	Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom)
+	Vector3Df^ position, int id, Video::Color^ colorTop, Video::Color^ colorBottom)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(position != nullptr);
@@ -1639,7 +1639,7 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 }
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
-	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor,
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor,
 	bool addAlsoIfHeightmapEmpty)
 {
 	LIME_ASSERT(position != nullptr);
@@ -1667,7 +1667,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 }
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
-	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor)
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -1693,7 +1693,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 }
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
-	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize)
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -1717,7 +1717,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 }
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
-	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD)
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -1740,7 +1740,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 }
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
-	Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor)
+	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -1833,7 +1833,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName)
 	return TerrainSceneNode::Wrap(n);
 }
 
-TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position, int id)
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position, int id)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(position != nullptr);
@@ -1849,7 +1849,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 	return TextSceneNode::Wrap(n);
 }
 
-TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position)
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(position != nullptr);
@@ -1864,7 +1864,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 	return TextSceneNode::Wrap(n);
 }
 
-TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent)
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent)
 {
 	LIME_ASSERT(color != nullptr);
 
@@ -1877,7 +1877,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 	return TextSceneNode::Wrap(n);
 }
 
-TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color)
+TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 
@@ -1903,7 +1903,7 @@ void SceneManager::AddToDeletionQueue(SceneNode^ node)
 	m_SceneManager->addToDeletionQueue(LIME_SAFEREF(node, m_SceneNode));
 }
 
-AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor, Video::Coloru^ tailColor)
+AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor, Video::Color^ tailColor)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -1920,7 +1920,7 @@ AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int su
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor)
+AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -1955,7 +1955,7 @@ AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name)
 }
 
 VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV,
-	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+	Video::Color^ foot, Video::Color^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -1980,7 +1980,7 @@ VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, i
 }
 
 VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV,
-	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation)
+	Video::Color^ foot, Video::Color^ tail, Vector3Df^ position, Vector3Df^ rotation)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -2003,7 +2003,7 @@ VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, i
 }
 
 VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV,
-	Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position)
+	Video::Color^ foot, Video::Color^ tail, Vector3Df^ position)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -2024,7 +2024,7 @@ VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, i
 }
 
 VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV,
-	Video::Coloru^ foot, Video::Coloru^ tail)
+	Video::Color^ foot, Video::Color^ tail)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -2042,7 +2042,7 @@ VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, i
 	return VolumeLightSceneNode::Wrap(n);
 }
 
-VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot)
+VolumeLightSceneNode^ SceneManager::AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot)
 {
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
@@ -2816,12 +2816,12 @@ Scene::SceneNodeRenderPass SceneManager::SceneNodeRenderPass::get()
 	return (Scene::SceneNodeRenderPass)m_SceneManager->getSceneNodeRenderPass();
 }
 
-Video::Coloru^ SceneManager::ShadowColor::get()
+Video::Color^ SceneManager::ShadowColor::get()
 {
-	return gcnew Video::Coloru(m_SceneManager->getShadowColor());
+	return gcnew Video::Color(m_SceneManager->getShadowColor());
 }
 
-void SceneManager::ShadowColor::set(Video::Coloru^ value)
+void SceneManager::ShadowColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_SceneManager->setShadowColor(*value->m_NativeValue);

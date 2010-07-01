@@ -23,7 +23,7 @@ public:
 	property BoneAnimationMode AnimationMode { BoneAnimationMode get(); void set(BoneAnimationMode value); }
 	property unsigned int BoneIndex { unsigned int get(); }
 	property String^ BoneName { String^ get(); }
-	property  AABBox3Df^ BoundingBox { AABBox3Df^ get(); }
+	property  AABBox^ BoundingBox { AABBox^ get(); }
 	property BoneSkinningSpace SkinningSpace { BoneSkinningSpace get(); void set(BoneSkinningSpace value); }
 
 	property int PositionHint { int get(); void set(int value); }

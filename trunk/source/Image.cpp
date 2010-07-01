@@ -24,7 +24,7 @@ Image::Image(video::IImage* ref)
 	m_Image = ref;
 }
 
-void Image::Fill(Coloru^ color)
+void Image::Fill(Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_Image->fill(*color->m_NativeValue);
@@ -35,9 +35,9 @@ unsigned int Image::GetBitsPerPixelFromFormat(Video::ColorFormat format)
 	return video::IImage::getBitsPerPixelFromFormat((ECOLOR_FORMAT)format);
 }
 
-Coloru^ Image::GetPixel(unsigned int x, unsigned int y)
+Color^ Image::GetPixel(unsigned int x, unsigned int y)
 {
-	return gcnew Coloru(m_Image->getPixel(x, y));
+	return gcnew Color(m_Image->getPixel(x, y));
 }
 
 bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
@@ -45,13 +45,13 @@ bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
 	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
 }
 
-void Image::SetPixel(unsigned int x, unsigned int y, Coloru^ color, bool blend)
+void Image::SetPixel(unsigned int x, unsigned int y, Color^ color, bool blend)
 {
 	LIME_ASSERT(color != nullptr);
 	m_Image->setPixel(x, y, *color->m_NativeValue, blend);
 }
 
-void Image::SetPixel(unsigned int x, unsigned int y, Coloru^ color)
+void Image::SetPixel(unsigned int x, unsigned int y, Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_Image->setPixel(x, y, *color->m_NativeValue);

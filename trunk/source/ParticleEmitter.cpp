@@ -59,12 +59,12 @@ void ParticleEmitter::MaxParticlesPerSecond::set(unsigned int value)
 	m_ParticleEmitter->setMaxParticlesPerSecond(value);
 }
 
-Video::Coloru^ ParticleEmitter::MaxStartColor::get()
+Video::Color^ ParticleEmitter::MaxStartColor::get()
 {
-	return gcnew Video::Coloru(m_ParticleEmitter->getMaxStartColor());
+	return gcnew Video::Color(m_ParticleEmitter->getMaxStartColor());
 }
 
-void ParticleEmitter::MaxStartColor::set(Video::Coloru^ value)
+void ParticleEmitter::MaxStartColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_ParticleEmitter->setMaxStartColor(*value->m_NativeValue);
@@ -91,12 +91,12 @@ void ParticleEmitter::MinParticlesPerSecond::set(unsigned int value)
 	m_ParticleEmitter->setMinParticlesPerSecond(value);
 }
 
-Video::Coloru^ ParticleEmitter::MinStartColor::get()
+Video::Color^ ParticleEmitter::MinStartColor::get()
 {
-	return gcnew Video::Coloru(m_ParticleEmitter->getMinStartColor());
+	return gcnew Video::Color(m_ParticleEmitter->getMinStartColor());
 }
 
-void ParticleEmitter::MinStartColor::set(Video::Coloru^ value)
+void ParticleEmitter::MinStartColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_ParticleEmitter->setMinStartColor(*value->m_NativeValue);

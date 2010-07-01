@@ -70,11 +70,11 @@ namespace _08.SpecialFX
 			ParticleSystemSceneNode ps = smgr.AddParticleSystemSceneNode(false);
 
 			ParticleEmitter em = ps.CreateBoxEmitter(
-				new AABBox3Df(-7, 0, -7, 7, 1, 7),	// emitter size
+				new AABBox(-7, 0, -7, 7, 1, 7),	// emitter size
 				new Vector3Df(0.0f, 0.06f, 0.0f),	// initial direction
 				80, 100,							// emit rate
-				new Coloru(255, 255, 255, 0),		// darkest color
-				new Coloru(255, 255, 255, 0),		// brightest color
+				new Color(255, 255, 255, 0),		// darkest color
+				new Color(255, 255, 255, 0),		// brightest color
 				800, 2000, 0,						// min and max age, angle
 				new Dimension2Df(10.0f),			// min size
 				new Dimension2Df(20.0f));			// max size
@@ -97,8 +97,8 @@ namespace _08.SpecialFX
 			VolumeLightSceneNode n = smgr.AddVolumeLightSceneNode(null, -1,
 				32,								// Subdivisions on U axis
 				32,								// Subdivisions on V axis
-				new Coloru(255, 255, 255, 0),	// foot color
-				new Coloru(0, 0, 0, 0));		// tail color
+				new Color(255, 255, 255, 0),	// foot color
+				new Color(0, 0, 0, 0));		// tail color
 
 			if (n != null)
 			{
@@ -133,7 +133,7 @@ namespace _08.SpecialFX
 
 			// add shadow
 			anode.AddShadowVolumeSceneNode();
-			smgr.ShadowColor = new Coloru(0, 0, 0, 150);
+			smgr.ShadowColor = new Color(0, 0, 0, 150);
 
 			// make the model a little bit bigger and normalize its normals
 			// because of the scaling, for correct lighting
@@ -151,7 +151,7 @@ namespace _08.SpecialFX
 			while (device.Run())
 			if (device.WindowActive)
 			{
-				driver.BeginScene(true, true, new Coloru(0));
+				driver.BeginScene(true, true, new Color(0));
 				smgr.DrawAll();
 				driver.EndScene();
 
