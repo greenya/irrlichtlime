@@ -219,13 +219,15 @@ void IrrlichtDevice::SetWindowResizable(bool resize)
 	m_IrrlichtDevice->setResizable(resize);
 }
 
-void IrrlichtDevice::Sleep(unsigned int timeMs, bool pauseTimer)
+void IrrlichtDevice::Sleep(int timeMs, bool pauseTimer)
 {
+	LIME_ASSERT(timeMs >= 0);
 	m_IrrlichtDevice->sleep(timeMs, pauseTimer);
 }
 
-void IrrlichtDevice::Sleep(unsigned int timeMs)
+void IrrlichtDevice::Sleep(int timeMs)
 {
+	LIME_ASSERT(timeMs >= 0);
 	m_IrrlichtDevice->sleep(timeMs);
 }
 

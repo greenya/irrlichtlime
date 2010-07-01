@@ -26,7 +26,7 @@ public:
 	property bool MipMaps { bool get(); }
 	property IO::NamedPath^ Name { IO::NamedPath^ get(); }
 	property Dimension2Di^ OriginalSize { Dimension2Di^ get(); }
-	property unsigned int Pitch { unsigned int get(); }
+	property int Pitch { int get(); }
 	property bool RenderTarget { bool get(); }
 	property Dimension2Di^ Size { Dimension2Di^ get(); }
 

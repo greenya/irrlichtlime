@@ -29,18 +29,18 @@ public:
 	FileList^ CreateFileListFromWorkingDirectory();
 
 	String^ GetFileAbsolutePath(String^ filename);
-	FileArchive^ GetFileArchive(unsigned int index);
+	FileArchive^ GetFileArchive(int index);
 	String^ GetFileBasename(String^ filename, bool keepExtension);
 	String^ GetFileBasename(String^ filename);
 	String^ GetFileDirectory(String^ filename);
 
-	bool MoveFileArchive(unsigned int index, int relative);
-	bool RemoveFileArchive(unsigned int index);
+	bool MoveFileArchive(int index, int relative);
+	bool RemoveFileArchive(int index);
 	bool RemoveFileArchive(String^ filename);
 
 	FileSystemType SetFileSystemType(FileSystemType newType);
 
-	property unsigned int FileArchiveCount { unsigned int get(); }
+	property int FileArchiveCount { int get(); }
 	property String^ WorkingDirectory { String^ get(); }
 
 	virtual String^ ToString() override;

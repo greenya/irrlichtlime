@@ -92,9 +92,9 @@ String^ FileSystem::GetFileAbsolutePath(String^ filename)
 	return gcnew String(m_FileSystem->getAbsolutePath(Lime::StringToPath(filename)).c_str());
 }
 
-FileArchive^ FileSystem::GetFileArchive(unsigned int index)
+FileArchive^ FileSystem::GetFileArchive(int index)
 {
-	LIME_ASSERT(index < FileArchiveCount);
+	LIME_ASSERT(index >= 0 && index < FileArchiveCount);
 
 	io::IFileArchive* a = m_FileSystem->getFileArchive(index);
 	return FileArchive::Wrap(a);
@@ -115,15 +115,15 @@ String^ FileSystem::GetFileDirectory(String^ filename)
 	return gcnew String(m_FileSystem->getFileDir(Lime::StringToPath(filename)).c_str());
 }
 
-bool FileSystem::MoveFileArchive(unsigned int index, int relative)
+bool FileSystem::MoveFileArchive(int index, int relative)
 {
-	LIME_ASSERT(index < FileArchiveCount);
+	LIME_ASSERT(index >= 0 && index < FileArchiveCount);
 	return m_FileSystem->moveFileArchive(index, relative);
 }
 
-bool FileSystem::RemoveFileArchive(unsigned int index)
+bool FileSystem::RemoveFileArchive(int index)
 {
-	LIME_ASSERT(index < FileArchiveCount);
+	LIME_ASSERT(index >= 0 && index < FileArchiveCount);
 	return m_FileSystem->removeFileArchive(index);
 }
 
@@ -137,7 +137,7 @@ FileSystemType FileSystem::SetFileSystemType(FileSystemType newType)
 	return (FileSystemType)m_FileSystem->setFileListSystem((io::EFileSystemType)newType);
 }
 
-unsigned int FileSystem::FileArchiveCount::get()
+int FileSystem::FileArchiveCount::get()
 {
 	return m_FileSystem->getFileArchiveCount();
 }

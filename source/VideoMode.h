@@ -42,7 +42,9 @@ public:
 
 internal:
 
-	VideoMode(const core::dimension2di& resolution, int depth) : Resolution(gcnew Dimension2Di(resolution)), Depth(depth) {}
+	VideoMode(const core::dimension2di& resolution, int depth)
+		: Resolution(gcnew Dimension2Di(resolution))
+		, Depth(depth) {}
 };
 
 } // end namespace Video

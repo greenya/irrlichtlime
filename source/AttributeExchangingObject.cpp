@@ -18,6 +18,7 @@ AttributeExchangingObject::AttributeExchangingObject(io::IAttributeExchangingObj
 void AttributeExchangingObject::setAttributeExchangingObject(io::IAttributeExchangingObject* ref)
 {
 	LIME_ASSERT(ref != nullptr);
+
 	m_ReferenceCounted = ref;
 	m_AttributeExchangingObject = ref;
 }

@@ -23,13 +23,17 @@ FileList::FileList(io::IFileList* ref)
 	m_FileList = ref;
 }
 
-unsigned int FileList::AddFile(String^ fullPath, unsigned int size, bool isDirectory, unsigned int id)
+int FileList::AddFile(String^ fullPath, int size, bool isDirectory, int id)
 {
+	LIME_ASSERT(size >= 0);
+	LIME_ASSERT(id >= 0);
+
 	return m_FileList->addItem(Lime::StringToPath(fullPath), size, isDirectory, id);
 }
 
-unsigned int FileList::AddFile(String^ fullPath, unsigned int size, bool isDirectory)
+int FileList::AddFile(String^ fullPath, int size, bool isDirectory)
 {
+	LIME_ASSERT(size >= 0);
 	return m_FileList->addItem(Lime::StringToPath(fullPath), size, isDirectory);
 }
 
@@ -43,33 +47,33 @@ int FileList::FindFile(String^ filename)
 	return m_FileList->findFile(Lime::StringToPath(filename));
 }
 
-unsigned int FileList::GetFileID(unsigned int index)
+int FileList::GetFileID(int index)
 {
-	LIME_ASSERT(index < Count);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return m_FileList->getID(index);
 }
 
-String^ FileList::GetFileName(unsigned int index)
+String^ FileList::GetFileName(int index)
 {
-	LIME_ASSERT(index < Count);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return gcnew String(m_FileList->getFileName(index).c_str());
 }
 
-unsigned int FileList::GetFileSize(unsigned int index)
+int FileList::GetFileSize(int index)
 {
-	LIME_ASSERT(index < Count);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return m_FileList->getFileSize(index);
 }
 
-String^ FileList::GetFullFileName(unsigned int index)
+String^ FileList::GetFullFileName(int index)
 {
-	LIME_ASSERT(index < Count);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return gcnew String(m_FileList->getFullFileName(index).c_str());
 }
 
-bool FileList::IsDirectory(unsigned int index)
+bool FileList::IsDirectory(int index)
 {
-	LIME_ASSERT(index < Count);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return m_FileList->isDirectory(index);
 }
 
@@ -78,7 +82,7 @@ void FileList::Sort()
 	m_FileList->sort();
 }
 
-unsigned int FileList::Count::get()
+int FileList::Count::get()
 {
 	return m_FileList->getFileCount();
 }

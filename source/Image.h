@@ -14,26 +14,26 @@ public ref class Image : ReferenceCounted
 {
 public:
 
-	static unsigned int GetBitsPerPixelFromFormat(Video::ColorFormat format);
+	static int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 
 	void Fill(Color^ color);
-	Color^ GetPixel(unsigned int x, unsigned int y);
-	void SetPixel(unsigned int x, unsigned int y, Color^ color, bool blend);
-	void SetPixel(unsigned int x, unsigned int y, Color^ color);
+	Color^ GetPixel(int x, int y);
+	void SetPixel(int x, int y, Color^ color, bool blend);
+	void SetPixel(int x, int y, Color^ color);
 
-	property unsigned int BitsPerPixel { unsigned int get(); }
-	property unsigned int BytesPerPixel { unsigned int get(); }
+	property int BitsPerPixel { int get(); }
+	property int BytesPerPixel { int get(); }
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
 	property Dimension2Di^ Dimension { Dimension2Di^ get(); }
-	property unsigned int ImageDataSizeInBytes { unsigned int get(); }
-	property unsigned int ImageDataSizeInPixels { unsigned int get(); }
+	property int ImageDataSizeInBytes { int get(); }
+	property int ImageDataSizeInPixels { int get(); }
 
-	property unsigned int RedMask { unsigned int get(); }
-	property unsigned int GreenMask { unsigned int get(); }
-	property unsigned int BlueMask { unsigned int get(); }
-	property unsigned int AlphaMask { unsigned int get(); }
-	property unsigned int Pitch { unsigned int get(); }
+	property int RedMask { int get(); }
+	property int GreenMask { int get(); }
+	property int BlueMask { int get(); }
+	property int AlphaMask { int get(); }
+	property int Pitch { int get(); }
 
 	virtual String^ ToString() override;
 
