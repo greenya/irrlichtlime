@@ -25,7 +25,7 @@ public:
 	property unsigned int BitsPerPixel { unsigned int get(); }
 	property unsigned int BytesPerPixel { unsigned int get(); }
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
-	property Dimension2Du^ Dimension { Dimension2Du^ get(); }
+	property Dimension2Di^ Dimension { Dimension2Di^ get(); }
 	property unsigned int ImageDataSizeInBytes { unsigned int get(); }
 	property unsigned int ImageDataSizeInPixels { unsigned int get(); }
 

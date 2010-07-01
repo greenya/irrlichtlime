@@ -89,7 +89,7 @@ namespace _09.Meshviewer
 			if (!AskUserForDriver(out driverType))
 				return;
 
-			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(800, 600), 16);
+			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(800, 600), 16);
 			if (device == null)
 				return;
 

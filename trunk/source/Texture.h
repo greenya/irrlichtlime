@@ -25,10 +25,10 @@ public:
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property bool MipMaps { bool get(); }
 	property IO::NamedPath^ Name { IO::NamedPath^ get(); }
-	property Dimension2Du^ OriginalSize { Dimension2Du^ get(); }
+	property Dimension2Di^ OriginalSize { Dimension2Di^ get(); }
 	property unsigned int Pitch { unsigned int get(); }
 	property bool RenderTarget { bool get(); }
-	property Dimension2Du^ Size { Dimension2Du^ get(); }
+	property Dimension2Di^ Size { Dimension2Di^ get(); }
 
 	virtual String^ ToString() override;
 

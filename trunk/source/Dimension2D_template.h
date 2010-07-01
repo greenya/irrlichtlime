@@ -2,8 +2,6 @@
 #error _REFCLASS_, _WRAPCLASS_ and _WRAPTYPE_ must be defined for this file to process.
 #endif
 
-public ref class _REFCLASS_ : Lime::NativeValue<_WRAPCLASS_>
-{
 public:
 
 	static bool operator == (_REFCLASS_^ v1, _REFCLASS_^ v2)
@@ -83,6 +81,7 @@ public:
 
 	void Set(_REFCLASS_^ copy)
 	{
+		LIME_ASSERT(copy != nullptr);
 		m_NativeValue->set(copy->m_NativeValue->Width, copy->m_NativeValue->Height);
 	}
 
@@ -151,4 +150,3 @@ internal:
 	{
 		m_NativeValue = new _WRAPCLASS_(value);
 	}
-};

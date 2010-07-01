@@ -14,7 +14,7 @@ public ref class VideoModeList : ReferenceCounted
 {
 public:
 
-	Dimension2Du^ GetResolution(Dimension2Du^ minSize, Dimension2Du^ maxSize);
+	Dimension2Di^ GetResolution(Dimension2Di^ minSize, Dimension2Di^ maxSize);
 
 	property VideoMode Desktop { VideoMode get(); }
 	property List<VideoMode>^ ModeList { List<VideoMode>^ get(); }

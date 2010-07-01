@@ -22,11 +22,11 @@ public ref class IrrlichtDevice : ReferenceCounted
 {
 public:
 
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen, bool stencilbuffer, bool vsync);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen, bool stencilbuffer);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits);
-	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen, bool stencilbuffer, bool vsync);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen, bool stencilbuffer);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits);
+	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize);
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType);
 	static IrrlichtDevice^ CreateDevice();
 

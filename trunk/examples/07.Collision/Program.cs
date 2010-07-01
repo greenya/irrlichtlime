@@ -22,7 +22,7 @@ namespace _07.Collision
 			if (!AskUserForDriver(out driverType))
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(640, 480));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
 				return;
 

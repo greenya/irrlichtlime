@@ -20,7 +20,7 @@ namespace _08.SpecialFX
 			if (!AskUserForDriver(out driverType))
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(640, 480), 16, false, shadows);
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480), 16, false, shadows);
 			if (device == null)
 				return;
 
@@ -39,7 +39,7 @@ namespace _08.SpecialFX
 
 			mesh = smgr.AddHillPlaneMesh("myHill",
 				new Dimension2Df(20, 20),
-				new Dimension2Du(40, 40), null, 0,
+				new Dimension2Di(40, 40), null, 0,
 				new Dimension2Df(0),
 				new Dimension2Df(10, 10));
 

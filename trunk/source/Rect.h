@@ -16,7 +16,7 @@ namespace Core {
 #define _WRAPCLASS_ core::recti
 #define _WRAPTYPE_ int
 #define _OTHERTYPE1_ Vector2Di
-#define _OTHERTYPE2_ Dimension2Du
+#define _OTHERTYPE2_ Dimension2Di
 #include "Rect_template.h"
 #undef _OTHERTYPE2_
 #undef _OTHERTYPE1_

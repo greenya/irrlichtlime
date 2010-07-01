@@ -60,9 +60,9 @@ IO::NamedPath^ Texture::Name::get()
 	return gcnew IO::NamedPath(m_Texture->getName());
 }
 
-Dimension2Du^ Texture::OriginalSize::get()
+Dimension2Di^ Texture::OriginalSize::get()
 {
-	return gcnew Dimension2Du(m_Texture->getOriginalSize());
+	return gcnew Dimension2Di(m_Texture->getOriginalSize());
 }
 
 unsigned int Texture::Pitch::get()
@@ -75,9 +75,9 @@ bool Texture::RenderTarget::get()
 	return m_Texture->isRenderTarget();
 }
 
-Dimension2Du^ Texture::Size::get()
+Dimension2Di^ Texture::Size::get()
 {
-	return gcnew Dimension2Du(m_Texture->getSize());
+	return gcnew Dimension2Di(m_Texture->getSize());
 }
 
 String^ Texture::ToString()

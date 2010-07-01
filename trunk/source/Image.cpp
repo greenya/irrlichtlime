@@ -72,9 +72,9 @@ Video::ColorFormat Image::ColorFormat::get()
 	return (Video::ColorFormat)m_Image->getColorFormat();
 }
 
-Dimension2Du^ Image::Dimension::get()
+Dimension2Di^ Image::Dimension::get()
 {
-	return gcnew Dimension2Du(m_Image->getDimension());
+	return gcnew Dimension2Di(m_Image->getDimension());
 }
 
 unsigned int Image::ImageDataSizeInBytes::get()

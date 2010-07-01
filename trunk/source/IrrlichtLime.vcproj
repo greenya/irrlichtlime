@@ -352,6 +352,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Dimension2Df.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Dimension2Di.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Line.h"
 				>
 			</File>

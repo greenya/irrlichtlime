@@ -58,6 +58,8 @@ public:
 	{
 		LIME_ASSERT(pos != nullptr);
 		LIME_ASSERT(size != nullptr);
+		LIME_ASSERT(size->Width >= 0);
+		LIME_ASSERT(size->Height >= 0);
 
 		m_NativeValue = new _WRAPCLASS_(*pos->m_NativeValue, *size->m_NativeValue);
 	}

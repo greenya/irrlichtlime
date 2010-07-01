@@ -16,7 +16,7 @@ namespace _01.HelloWorld
 		static void Main(string[] args)
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(
-				DriverType.Software, new Dimension2Du(640, 480), 16, false, false, false);
+				DriverType.Software, new Dimension2Di(640, 480), 16, false, false, false);
 
 			device.SetWindowCaption("Hello World! - Irrlicht Engine Demo");
 			
