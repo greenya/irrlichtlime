@@ -97,9 +97,9 @@ void GUIEditBox::PasswordBox::set(bool value)
 	m_GUIEditBox->setPasswordBox(value);
 }
 
-Dimension2Du^ GUIEditBox::TextDimension::get()
+Dimension2Di^ GUIEditBox::TextDimension::get()
 {
-	return gcnew Dimension2Du(m_GUIEditBox->getTextDimension());
+	return gcnew Dimension2Di(m_GUIEditBox->getTextDimension());
 }
 
 bool GUIEditBox::WordWrap::get()

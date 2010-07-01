@@ -26,7 +26,7 @@ public:
 	property unsigned int MaxLength { unsigned int get(); void set(unsigned int value); }
 	property bool MultiLine { bool get(); void set(bool value); }
 	property bool PasswordBox { bool get(); void set(bool value); }
-	property Dimension2Du^ TextDimension { Dimension2Du^ get(); }
+	property Dimension2Di^ TextDimension { Dimension2Di^ get(); }
 	property bool WordWrap { bool get(); void set(bool value); }
 
 internal:

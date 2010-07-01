@@ -27,7 +27,7 @@ namespace _05.UserInterface
 			if (!AskUserForDriver(out driverType))
 				return;
 
-			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(640, 480));
+			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
 				return;
 

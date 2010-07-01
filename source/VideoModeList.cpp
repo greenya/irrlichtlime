@@ -24,16 +24,25 @@ VideoModeList::VideoModeList(video::IVideoModeList* ref)
 	m_VideoModeList = ref;
 }
 
-Dimension2Du^ VideoModeList::GetResolution(Dimension2Du^ minSize, Dimension2Du^ maxSize)
+Dimension2Di^ VideoModeList::GetResolution(Dimension2Di^ minSize, Dimension2Di^ maxSize)
 {
 	LIME_ASSERT(minSize != nullptr);
+	LIME_ASSERT(minSize->Width >= 0);
+	LIME_ASSERT(minSize->Height >= 0);
 	LIME_ASSERT(maxSize != nullptr);
-	return gcnew Dimension2Du(m_VideoModeList->getVideoModeResolution(*minSize->m_NativeValue, *maxSize->m_NativeValue));
+	LIME_ASSERT(maxSize->Width >= 0);
+	LIME_ASSERT(maxSize->Height >= 0);
+
+	return gcnew Dimension2Di(m_VideoModeList->getVideoModeResolution(
+		(core::dimension2du&)*minSize->m_NativeValue,
+		(core::dimension2du&)*maxSize->m_NativeValue));
 }
 
 VideoMode VideoModeList::Desktop::get()
 {
-	return VideoMode(m_VideoModeList->getDesktopResolution(), m_VideoModeList->getDesktopDepth());
+	return VideoMode(
+		(core::dimension2di&)m_VideoModeList->getDesktopResolution(),
+		m_VideoModeList->getDesktopDepth());
 }
 
 List<VideoMode>^ VideoModeList::ModeList::get()
@@ -41,7 +50,9 @@ List<VideoMode>^ VideoModeList::ModeList::get()
 	List<VideoMode>^ l = gcnew List<VideoMode>();
 
 	for (int i = 0; i < m_VideoModeList->getVideoModeCount(); i++)
-		l->Add(VideoMode(m_VideoModeList->getVideoModeResolution(i), m_VideoModeList->getVideoModeDepth(i)));
+		l->Add(VideoMode(
+			(core::dimension2di&)m_VideoModeList->getVideoModeResolution(i),
+			m_VideoModeList->getVideoModeDepth(i)));
 
 	return l;
 }

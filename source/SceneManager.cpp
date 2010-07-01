@@ -873,18 +873,20 @@ SceneNode^ SceneManager::AddEmptySceneNode()
 	return SceneNode::Wrap(n);
 }
 
-AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount)
 {
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width >= 0);
+	LIME_ASSERT(tileCount->Height >= 0);
 	LIME_ASSERT(countHills != nullptr);
 	LIME_ASSERT(textureRepeatCount != nullptr);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
 		Lime::StringToPath(name),
 		*tileSize->m_NativeValue,
-		*tileCount->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue,
 		LIME_SAFEREF(material, m_NativeValue),
 		hillHeight,
 		*countHills->m_NativeValue,
@@ -893,17 +895,19 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight, Dimension2Df^ countHills)
 {
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width >= 0);
+	LIME_ASSERT(tileCount->Height >= 0);
 	LIME_ASSERT(countHills != nullptr);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
 		Lime::StringToPath(name),
 		*tileSize->m_NativeValue,
-		*tileCount->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue,
 		LIME_SAFEREF(material, m_NativeValue),
 		hillHeight,
 		*countHills->m_NativeValue);
@@ -911,45 +915,51 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material,
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight)
 {
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width >= 0);
+	LIME_ASSERT(tileCount->Height >= 0);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
 		Lime::StringToPath(name),
 		*tileSize->m_NativeValue,
-		*tileCount->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue,
 		LIME_SAFEREF(material, m_NativeValue),
 		hillHeight);
 
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount, Video::Material^ material)
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material)
 {
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width >= 0);
+	LIME_ASSERT(tileCount->Height >= 0);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
 		Lime::StringToPath(name),
 		*tileSize->m_NativeValue,
-		*tileCount->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue,
 		LIME_SAFEREF(material, m_NativeValue));
 
 	return AnimatedMesh::Wrap(m);
 }
 
-AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Du^ tileCount)
+AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount)
 {
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width >= 0);
+	LIME_ASSERT(tileCount->Height >= 0);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addHillPlaneMesh(
 		Lime::StringToPath(name),
 		*tileSize->m_NativeValue,
-		*tileCount->m_NativeValue);
+		(core::dimension2du&)*tileCount->m_NativeValue);
 
 	return AnimatedMesh::Wrap(m);
 }
@@ -1575,12 +1585,14 @@ MeshSceneNode^ SceneManager::AddSphereSceneNode()
 }
 
 AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize,
-	float maxHeight, Dimension2Du^ defaultVertexBlockSize)
+	float maxHeight, Dimension2Di^ defaultVertexBlockSize)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(heightmap != nullptr);
 	LIME_ASSERT(stretchSize != nullptr);
 	LIME_ASSERT(defaultVertexBlockSize != nullptr);
+	LIME_ASSERT(defaultVertexBlockSize->Width >= 0);
+	LIME_ASSERT(defaultVertexBlockSize->Height >= 0);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addTerrainMesh(
 		Lime::StringToPath(meshname),
@@ -1588,7 +1600,7 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 		LIME_SAFEREF(heightmap, m_Image),
 		*stretchSize->m_NativeValue,
 		maxHeight,
-		*defaultVertexBlockSize->m_NativeValue);
+		(core::dimension2du&)*defaultVertexBlockSize->m_NativeValue);
 
 	return AnimatedMesh::Wrap(m);
 }

@@ -61,63 +61,77 @@ IrrlichtDevice::!IrrlichtDevice()
 	}
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen,
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen,
 	bool stencilbuffer, bool vsync)
 {
 	LIME_ASSERT(windowSize != nullptr);
+	LIME_ASSERT(windowSize->Width > 0);
+	LIME_ASSERT(windowSize->Height > 0);
+	LIME_ASSERT(bits > 0);
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*windowSize->m_NativeValue,
+		(core::dimension2du&)*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer, vsync);
 
 	return Wrap(d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen,
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen,
 	bool stencilbuffer)
 {
 	LIME_ASSERT(windowSize != nullptr);
+	LIME_ASSERT(windowSize->Width > 0);
+	LIME_ASSERT(windowSize->Height > 0);
+	LIME_ASSERT(bits > 0);
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*windowSize->m_NativeValue,
+		(core::dimension2du&)*windowSize->m_NativeValue,
 		bits, fullscreen, stencilbuffer);
 
 	return Wrap(d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits, bool fullscreen)
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen)
 {
 	LIME_ASSERT(windowSize != nullptr);
+	LIME_ASSERT(windowSize->Width > 0);
+	LIME_ASSERT(windowSize->Height > 0);
+	LIME_ASSERT(bits > 0);
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*windowSize->m_NativeValue,
+		(core::dimension2du&)*windowSize->m_NativeValue,
 		bits, fullscreen);
 
 	return Wrap(d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize, unsigned int bits)
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits)
 {
 	LIME_ASSERT(windowSize != nullptr);
+	LIME_ASSERT(windowSize->Width > 0);
+	LIME_ASSERT(windowSize->Height > 0);
+	LIME_ASSERT(bits > 0);
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*windowSize->m_NativeValue,
+		(core::dimension2du&)*windowSize->m_NativeValue,
 		bits);
 
 	return Wrap(d);
 }
 
-IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Du^ windowSize)
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize)
 {
 	LIME_ASSERT(windowSize != nullptr);
+	LIME_ASSERT(windowSize->Width > 0);
+	LIME_ASSERT(windowSize->Height > 0);
 
 	irr::IrrlichtDevice* d = createDevice(
 		(video::E_DRIVER_TYPE)driverType,
-		*windowSize->m_NativeValue);
+		(core::dimension2du&)*windowSize->m_NativeValue);
 
 	return Wrap(d);
 }

@@ -217,16 +217,22 @@ void GUIElement::SetAlignment(GUIAlignment left, GUIAlignment right, GUIAlignmen
 		(gui::EGUI_ALIGNMENT)bottom);
 }
 
-void GUIElement::SetMaxSize(Dimension2Du^ size)
+void GUIElement::SetMaxSize(Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
-	m_GUIElement->setMaxSize(*size->m_NativeValue);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	m_GUIElement->setMaxSize((core::dimension2du&)*size->m_NativeValue);
 }
 
-void GUIElement::SetMinSize(Dimension2Du^ size)
+void GUIElement::SetMinSize(Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
-	m_GUIElement->setMinSize(*size->m_NativeValue);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	m_GUIElement->setMinSize((core::dimension2du&)*size->m_NativeValue);
 }
 
 void GUIElement::SetRelativePositionProportional(Rectf^ relativePosition)

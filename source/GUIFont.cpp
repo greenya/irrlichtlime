@@ -119,9 +119,9 @@ int GUIFont::GetCharacterFromPos(String^ text, int pixel_x)
 	return m_GUIFont->getCharacterFromPos(Lime::StringToStringW(text).c_str(), pixel_x);
 }
 
-Dimension2Du^ GUIFont::GetDimension(String^ text)
+Dimension2Di^ GUIFont::GetDimension(String^ text)
 {
-	return gcnew Dimension2Du(m_GUIFont->getDimension(Lime::StringToStringW(text).c_str()));
+	return gcnew Dimension2Di(m_GUIFont->getDimension(Lime::StringToStringW(text).c_str()));
 }
 
 int GUIFont::GetKerningWidth(Char thisLetter, Char previousLetter)

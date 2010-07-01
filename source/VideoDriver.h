@@ -19,12 +19,12 @@ public ref class VideoDriver : ReferenceCounted
 {
 public:
 
-	Texture^ AddRenderTargetTexture(Dimension2Du^ size, String^ name, ColorFormat format);
-	Texture^ AddRenderTargetTexture(Dimension2Du^ size, String^ name);
-	Texture^ AddRenderTargetTexture(Dimension2Du^ size);
+	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format);
+	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
+	Texture^ AddRenderTargetTexture(Dimension2Di^ size);
 
-	Texture^ AddTexture(Dimension2Du^ size, String^ name, ColorFormat format);
-	Texture^ AddTexture(Dimension2Du^ size, String^ name);
+	Texture^ AddTexture(Dimension2Di^ size, String^ name, ColorFormat format);
+	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
 	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
@@ -149,7 +149,7 @@ public:
 	bool WriteImageToFile(Image^ image, String^ filename, unsigned int param);
 	bool WriteImageToFile(Image^ image, String^ filename);
 
-	property Dimension2Du^ CurrentRenderTargetSize { Dimension2Du^ get(); }
+	property Dimension2Di^ CurrentRenderTargetSize { Dimension2Di^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property unsigned int DynamicLightCount { unsigned int get(); }
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
@@ -159,10 +159,10 @@ public:
 	property unsigned int MaterialRendererCount { unsigned int get(); }
 	property unsigned int MaximalDynamicLightAmount { unsigned int get(); }
 	property unsigned int MaximalPrimitiveCount { unsigned int get(); }
-	property Dimension2Du^ MaxTextureSize { Dimension2Du^ get(); }
+	property Dimension2Di^ MaxTextureSize { Dimension2Di^ get(); }
 	property String^ Name { String^ get(); }
 	property unsigned int PrimitiveCountDrawn { unsigned int get(); }
-	property Dimension2Du^ ScreenSize { Dimension2Du^ get(); }
+	property Dimension2Di^ ScreenSize { Dimension2Di^ get(); }
 	property unsigned int TextureCount { unsigned int get(); }
 	property String^ VendorInfo { String^ get(); }
 	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }

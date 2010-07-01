@@ -23,7 +23,7 @@ public:
 	void Draw(String^ text, int x, int y, Video::Color^ color);
 
 	int GetCharacterFromPos(String^ text, int pixel_x);
-	Dimension2Du^ GetDimension(String^ text);
+	Dimension2Di^ GetDimension(String^ text);
 	int GetKerningWidth(Char thisLetter, Char previousLetter);
 	int GetKerningWidth(Char thisLetter);
 	void SetInvisibleCharacters(String^ s);

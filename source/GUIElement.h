@@ -37,8 +37,8 @@ public:
 
 	void SetAlignment(GUIAlignment left, GUIAlignment right, GUIAlignment top, GUIAlignment bottom);
 
-	void SetMaxSize(Dimension2Du^ size);
-	void SetMinSize(Dimension2Du^ size);
+	void SetMaxSize(Dimension2Di^ size);
+	void SetMinSize(Dimension2Di^ size);
 
 	void SetRelativePositionProportional(Rectf^ relativePosition);
 

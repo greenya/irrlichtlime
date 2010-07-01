@@ -15,7 +15,7 @@ namespace _03.CustomSceneNode
 		static void Main(string[] args)
 		{
 			IrrlichtDevice device =
-				IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Du(640, 480), 16, false);
+				IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(640, 480), 16, false);
 
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;

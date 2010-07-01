@@ -18,7 +18,7 @@ namespace _06._2DGraphics
 			if (!AskUserForDriver(out driverType))
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Du(512, 384));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(512, 384));
 			if (device == null)
 				return;
 

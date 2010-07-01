@@ -30,38 +30,67 @@ VideoDriver::VideoDriver(video::IVideoDriver* ref)
 	m_VideoDriver = ref;
 }
 
-Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name, ColorFormat format)
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
-	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(
+		(core::dimension2du&)*size->m_NativeValue,
+		Lime::StringToPath(name),
+		(video::ECOLOR_FORMAT)format);
+
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size, String^ name)
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name)
 {
 	LIME_ASSERT(size != nullptr);
-	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue, Lime::StringToPath(name));
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(
+		(core::dimension2du&)*size->m_NativeValue,
+		Lime::StringToPath(name));
+
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Du^ size)
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
-	video::ITexture* t = m_VideoDriver->addRenderTargetTexture(*size->m_NativeValue);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	video::ITexture* t = m_VideoDriver->addRenderTargetTexture((core::dimension2du&)*size->m_NativeValue);
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name, ColorFormat format)
+Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name, ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
-	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name), (video::ECOLOR_FORMAT)format);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	video::ITexture* t = m_VideoDriver->addTexture(
+		(core::dimension2du&)*size->m_NativeValue,
+		Lime::StringToPath(name),
+		(video::ECOLOR_FORMAT)format);
+
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::AddTexture(Dimension2Du^ size, String^ name)
+Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name)
 {
 	LIME_ASSERT(size != nullptr);
-	video::ITexture* t = m_VideoDriver->addTexture(*size->m_NativeValue, Lime::StringToPath(name));
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	video::ITexture* t = m_VideoDriver->addTexture(
+		(core::dimension2du&)*size->m_NativeValue,
+		Lime::StringToPath(name));
+
 	return Texture::Wrap(t);
 }
 
@@ -779,19 +808,19 @@ void VideoDriver::ViewPort::set(Recti^ value)
 	m_VideoDriver->setViewPort(*value->m_NativeValue);
 }
 
-Dimension2Du^ VideoDriver::ScreenSize::get()
+Dimension2Di^ VideoDriver::ScreenSize::get()
 {
-	return gcnew Dimension2Du(m_VideoDriver->getScreenSize());
+	return gcnew Dimension2Di(m_VideoDriver->getScreenSize());
 }
 
-Dimension2Du^ VideoDriver::CurrentRenderTargetSize::get()
+Dimension2Di^ VideoDriver::CurrentRenderTargetSize::get()
 {
-	return gcnew Dimension2Du(m_VideoDriver->getCurrentRenderTargetSize());
+	return gcnew Dimension2Di(m_VideoDriver->getCurrentRenderTargetSize());
 }
 
-Dimension2Du^ VideoDriver::MaxTextureSize::get()
+Dimension2Di^ VideoDriver::MaxTextureSize::get()
 {
-	return gcnew Dimension2Du(m_VideoDriver->getMaxTextureSize());
+	return gcnew Dimension2Di(m_VideoDriver->getMaxTextureSize());
 }
 
 Video::Fog^ VideoDriver::Fog::get()
