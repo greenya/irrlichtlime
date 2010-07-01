@@ -19,14 +19,14 @@ public:
 		m_NativeValue = new video::S3DVertex();
 	}
 
-	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Coloru^ c, float tu, float tv)
+	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Color^ c, float tu, float tv)
 		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(c != nullptr);
 		m_NativeValue = new video::S3DVertex(x, y, z, nx, ny, nz, *c->m_NativeValue, tu, tv);
 	}
 
-	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Coloru^ color, Vector2Df^ tcoords)
+	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Color^ color, Vector2Df^ tcoords)
 		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(pos != nullptr);
@@ -63,13 +63,13 @@ public:
 		}
 	}
 
-	property Coloru^ Color
+	property Video::Color^ Color
 	{
-		Coloru^ get()
+		Video::Color^ get()
 		{
-			return gcnew Coloru(m_NativeValue->Color);
+			return gcnew Video::Color(m_NativeValue->Color);
 		}
-		void set(Coloru^ value)
+		void set(Video::Color^ value)
 		{
 			LIME_ASSERT(value != nullptr);
 			m_NativeValue->Color = *value->m_NativeValue;

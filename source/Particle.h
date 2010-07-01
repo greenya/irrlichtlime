@@ -14,11 +14,11 @@ public:
 
 	Particle();
 
-	property Video::Coloru^ Color { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ Color { Video::Color^ get(); void set(Video::Color^ value); }
 	property unsigned int EndTime { unsigned int get(); void set(unsigned int value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Dimension2Df^ Size { Dimension2Df^ get(); void set(Dimension2Df^ value); }
-	property Video::Coloru^ StartColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ StartColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property Dimension2Df^ StartSize { Dimension2Df^ get(); void set(Dimension2Df^ value); }
 	property unsigned int StartTime { unsigned int get(); void set(unsigned int value); }
 	property Vector3Df^ StartVector { Vector3Df^ get(); void set(Vector3Df^ value); }

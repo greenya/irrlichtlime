@@ -13,10 +13,10 @@ public ref class VolumeLightSceneNode : SceneNode
 {
 public:
 
-	property Video::Coloru^ FootColor { Video::Coloru^ get(); void set(Video::Coloru^ value);  }
+	property Video::Color^ FootColor { Video::Color^ get(); void set(Video::Color^ value);  }
 	property unsigned int SubDivideU { unsigned int get(); void set(unsigned int value); }
 	property unsigned int SubDivideV { unsigned int get(); void set(unsigned int value); }
-	property Video::Coloru^ TailColor { Video::Coloru^ get(); void set(Video::Coloru^ value);  }
+	property Video::Color^ TailColor { Video::Color^ get(); void set(Video::Color^ value);  }
 
 internal:
 

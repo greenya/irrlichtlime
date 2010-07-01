@@ -27,9 +27,9 @@ public:
 	Texture^ AddTexture(Dimension2Du^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
-	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
-	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color, ExposedVideoData^ videoData);
-	bool BeginScene(bool backBuffer, bool zBuffer, Coloru^ color);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color);
 	bool BeginScene(bool backBuffer, bool zBuffer);
 	bool BeginScene(bool backBuffer);
 	bool BeginScene();
@@ -50,36 +50,36 @@ public:
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
 
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Coloru^>^ colors_or_null, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Coloru^>^ colors_or_null);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Color^>^ colors_or_null, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Color^>^ colors_or_null);
 	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null);
 	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect);
-	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Coloru^ color, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Coloru^ color);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Color^ color);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos);
 	
-	void Draw2DLine(int x1, int y1, int x2, int y2, Coloru^ color);
-	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Coloru^ color);
-	void Draw2DLine(Line2Di^ line, Coloru^ color);
+	void Draw2DLine(int x1, int y1, int x2, int y2, Color^ color);
+	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color);
+	void Draw2DLine(Line2Di^ line, Color^ color);
 
-	void Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown, Recti^ clip);
-	void Draw2DRectangle(Recti^ pos, Coloru^ colorLeftUp, Coloru^ colorRightUp, Coloru^ colorLeftDown, Coloru^ colorRightDown);
-	void Draw2DRectangle(Recti^ pos, Coloru^ color, Recti^ clip);
-	void Draw2DRectangle(Recti^ pos, Coloru^ color);
+	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown, Recti^ clip);
+	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown);
+	void Draw2DRectangle(Recti^ pos, Color^ color, Recti^ clip);
+	void Draw2DRectangle(Recti^ pos, Color^ color);
 
-	void Draw3DBox(AABBox3Df^ box, Coloru^ color);
+	void Draw3DBox(AABBox^ box, Color^ color);
 
-	void Draw3DLine(Vector3Df^ start, Vector3Df^ end, Coloru^ color);
-	void Draw3DLine(Line3Df^ line, Coloru^ color);
+	void Draw3DLine(Vector3Df^ start, Vector3Df^ end, Color^ color);
+	void Draw3DLine(Line3Df^ line, Color^ color);
 
-	void Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Coloru^ color);
-	void Draw3DTriangle(Triangle3Df^ triangle, Coloru^ color);
+	void Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Color^ color);
+	void Draw3DTriangle(Triangle3Df^ triangle, Color^ color);
 
 	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
 
-	void DrawPixel(int x, int y, Coloru^ color);
+	void DrawPixel(int x, int y, Color^ color);
 
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices);
@@ -97,10 +97,10 @@ public:
 	unsigned int GetOcclusionQueryResult(Scene::SceneNode^ node);
 	Texture^ GetTexture(String^ filename);
 	Texture^ GetTextureByIndex(unsigned int index);
-	Matrix4f^ GetTransform(TransformationState state);
+	Matrix^ GetTransform(TransformationState state);
 
-	void MakeColorKeyTexture(Texture^ texture, Coloru^ color, bool zeroTexels);
-	void MakeColorKeyTexture(Texture^ texture, Coloru^ color);
+	void MakeColorKeyTexture(Texture^ texture, Color^ color, bool zeroTexels);
+	void MakeColorKeyTexture(Texture^ texture, Color^ color);
 	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos, bool zeroTexels);
 	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos);
 	void MakeNormalMapTexture(Texture^ texture, float amplitude);
@@ -126,18 +126,18 @@ public:
 
 	void SetMinHardwareBufferVertexCount(unsigned int count);
 
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Coloru^ color);
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
 	bool SetRenderTarget(Texture^ texture);
-	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Coloru^ color);
+	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color^ color);
 	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
 	bool SetRenderTarget(RenderTarget target, bool clearTarget);
 	bool SetRenderTarget(RenderTarget target);
 
 	void SetTextureCreationFlag(TextureCreationFlag flag, bool enabled);
 
-	void SetTransform(TransformationState state, Matrix4f^ mat);
+	void SetTransform(TransformationState state, Matrix^ mat);
 
 	void TurnLight(int lightIndex, bool turnOn);
 

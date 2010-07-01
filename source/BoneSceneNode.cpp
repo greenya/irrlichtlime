@@ -53,9 +53,9 @@ String^ BoneSceneNode::BoneName::get()
 	return gcnew String(m_BoneSceneNode->getBoneName());
 }
 
-AABBox3Df^ BoneSceneNode::BoundingBox::get()
+AABBox^ BoneSceneNode::BoundingBox::get()
 {
-	return gcnew AABBox3Df(m_BoneSceneNode->getBoundingBox());
+	return gcnew AABBox(m_BoneSceneNode->getBoundingBox());
 }
 
 BoneSkinningSpace BoneSceneNode::SkinningSpace::get()

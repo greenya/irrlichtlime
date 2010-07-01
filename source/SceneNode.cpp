@@ -268,12 +268,12 @@ Vector3Df^ SceneNode::AbsolutePosition::get()
 	return gcnew Vector3Df(m_SceneNode->getAbsolutePosition());
 }
 
-Matrix4f^ SceneNode::AbsoluteTransformation::get()
+Matrix^ SceneNode::AbsoluteTransformation::get()
 {
-	return gcnew Matrix4f(m_SceneNode->getAbsoluteTransformation());
+	return gcnew Matrix(m_SceneNode->getAbsoluteTransformation());
 }
 
-void SceneNode::AbsoluteTransformation::set(Matrix4f^ value)
+void SceneNode::AbsoluteTransformation::set(Matrix^ value)
 {
 	LIME_ASSERT(m_Inherited == true);
 	LIME_ASSERT(value != nullptr);
@@ -307,32 +307,32 @@ void SceneNode::AutomaticCulling::set(CullingType value)
 	m_SceneNode->setAutomaticCulling((scene::E_CULLING_TYPE)value);
 }
 
-AABBox3Df^ SceneNode::BoundingBox::get()
+AABBox^ SceneNode::BoundingBox::get()
 {
 	if (m_Inherited)
 	{
-		AABBox3Df^ b = OnGetBoundingBox();
-		LIME_ASSERT2(b != nullptr, "If you inherit SceneNode, you must handle OnGetBoundingBox event and return valid AABBox3Df value.");
+		AABBox^ b = OnGetBoundingBox();
+		LIME_ASSERT2(b != nullptr, "If you inherit SceneNode, you must handle OnGetBoundingBox event and return valid AABBox value.");
 		return b;
 	}
 	
 #if _DEBUG
 	// this allows to browse properties of the root scene node in debugger when you stop code execution (on breakpoint, etc.)
 	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
-		return gcnew AABBox3Df();
+		return gcnew AABBox();
 #endif
 
-	return gcnew AABBox3Df(m_SceneNode->getBoundingBox());
+	return gcnew AABBox(m_SceneNode->getBoundingBox());
 }
 
-AABBox3Df^ SceneNode::BoundingBoxTransformed::get()
+AABBox^ SceneNode::BoundingBoxTransformed::get()
 {
 #if _DEBUG
 	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
-		return gcnew AABBox3Df();
+		return gcnew AABBox();
 #endif
 
-	return gcnew AABBox3Df(m_SceneNode->getTransformedBoundingBox());
+	return gcnew AABBox(m_SceneNode->getTransformedBoundingBox());
 }
 
 List<SceneNode^>^ SceneNode::ChildList::get()
@@ -420,9 +420,9 @@ void SceneNode::Position::set(Vector3Df^ value)
 	m_SceneNode->setPosition(*value->m_NativeValue);
 }
 
-Matrix4f^ SceneNode::RelativeTransformation::get()
+Matrix^ SceneNode::RelativeTransformation::get()
 {
-	return gcnew Matrix4f(m_SceneNode->getRelativeTransformation());
+	return gcnew Matrix(m_SceneNode->getRelativeTransformation());
 }
 
 Vector3Df^ SceneNode::Rotation::get()

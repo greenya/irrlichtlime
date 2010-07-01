@@ -78,9 +78,9 @@ bool CameraSceneNode::Orthogonal::get()
 	return m_CameraSceneNode->isOrthogonal();
 }
 
-Matrix4f^ CameraSceneNode::ProjectionMatrix::get()
+Matrix^ CameraSceneNode::ProjectionMatrix::get()
 {
-	return gcnew Matrix4f(m_CameraSceneNode->getProjectionMatrix());
+	return gcnew Matrix(m_CameraSceneNode->getProjectionMatrix());
 }
 
 void CameraSceneNode::Rotation::set(Vector3Df^ value)
@@ -121,17 +121,17 @@ void CameraSceneNode::UpVector::set(Vector3Df^ value)
 	m_CameraSceneNode->setUpVector(*value->m_NativeValue);
 }
 
-Matrix4f^ CameraSceneNode::ViewMatrix::get()
+Matrix^ CameraSceneNode::ViewMatrix::get()
 {
-	return gcnew Matrix4f(m_CameraSceneNode->getViewMatrix());
+	return gcnew Matrix(m_CameraSceneNode->getViewMatrix());
 }
 
-Matrix4f^ CameraSceneNode::ViewMatrixAffector::get()
+Matrix^ CameraSceneNode::ViewMatrixAffector::get()
 {
-	return gcnew Matrix4f(m_CameraSceneNode->getViewMatrixAffector());
+	return gcnew Matrix(m_CameraSceneNode->getViewMatrixAffector());
 }
 
-void CameraSceneNode::ViewMatrixAffector::set(Matrix4f^ value)
+void CameraSceneNode::ViewMatrixAffector::set(Matrix^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_CameraSceneNode->setViewMatrixAffector(*value->m_NativeValue);

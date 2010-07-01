@@ -103,7 +103,7 @@ namespace _04.Movement
 
 				node.Position = nodePosition;
 
-				driver.BeginScene(true, true, new Coloru(113, 113, 113));
+				driver.BeginScene(true, true, new Color(113, 113, 113));
 				smgr.DrawAll();
 				device.GUIEnvironment.DrawAll();
 				driver.EndScene();

@@ -64,7 +64,7 @@ namespace _05.UserInterface
 			while (device.Run())
 			if (device.WindowActive)
 			{
-				driver.BeginScene(true, true, new Coloru(200, 200, 200));
+				driver.BeginScene(true, true, new Color(200, 200, 200));
 				env.DrawAll();
 				driver.EndScene();
 			}
@@ -87,8 +87,8 @@ namespace _05.UserInterface
 							int pos = ((GUIScrollBar)e.GUI.Caller).Position;
 							foreach (GUIDefaultColor which in Enum.GetValues(typeof(GUIDefaultColor)))
 							{
-								Coloru color = env.Skin.GetColor(which);
-								color.Alpha = (uint)pos;
+								Color color = env.Skin.GetColor(which);
+								color.Alpha = pos;
 								env.Skin.SetColor(color, which);
 							}
 						}

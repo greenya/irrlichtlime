@@ -61,12 +61,12 @@ void MaterialLayer::Texture::set(Video::Texture^ value)
 	m_NativeValue->Texture = LIME_SAFEREF(value, m_Texture);
 }
 
-Matrix4f^ MaterialLayer::TextureMatrix::get()
+Matrix^ MaterialLayer::TextureMatrix::get()
 {
-	return gcnew Matrix4f(m_NativeValue->getTextureMatrix());
+	return gcnew Matrix(m_NativeValue->getTextureMatrix());
 }
 
-void MaterialLayer::TextureMatrix::set(Matrix4f^ value)
+void MaterialLayer::TextureMatrix::set(Matrix^ value)
 {
 	m_NativeValue->setTextureMatrix(*value->m_NativeValue);
 }

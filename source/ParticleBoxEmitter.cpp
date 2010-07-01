@@ -24,12 +24,12 @@ ParticleBoxEmitter::ParticleBoxEmitter(scene::IParticleBoxEmitter* ref)
 	m_ParticleBoxEmitter = ref;
 }
 
-AABBox3Df^ ParticleBoxEmitter::Box::get()
+AABBox^ ParticleBoxEmitter::Box::get()
 {
-	return gcnew AABBox3Df(m_ParticleBoxEmitter->getBox());
+	return gcnew AABBox(m_ParticleBoxEmitter->getBox());
 }
 
-void ParticleBoxEmitter::Box::set(AABBox3Df^ value)
+void ParticleBoxEmitter::Box::set(AABBox^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_ParticleBoxEmitter->setBox(*value->m_NativeValue);

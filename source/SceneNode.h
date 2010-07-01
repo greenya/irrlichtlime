@@ -42,11 +42,11 @@ public:
 	void UpdateAbsolutePosition();
 
 	property Vector3Df^ AbsolutePosition { Vector3Df^ get(); }
-	property Matrix4f^ AbsoluteTransformation { Matrix4f^ get(); protected: void set(Matrix4f^ value); }
+	property Matrix^ AbsoluteTransformation { Matrix^ get(); protected: void set(Matrix^ value); }
 	property List<SceneNodeAnimator^>^ AnimatorList { List<SceneNodeAnimator^>^ get(); }
 	property CullingType AutomaticCulling { CullingType get(); void set(CullingType value); }
-	property AABBox3Df^ BoundingBox { AABBox3Df^ get(); }
-	property AABBox3Df^ BoundingBoxTransformed { AABBox3Df^ get(); }
+	property AABBox^ BoundingBox { AABBox^ get(); }
+	property AABBox^ BoundingBoxTransformed { AABBox^ get(); }
 	property List<SceneNode^>^ ChildList { List<SceneNode^>^ get(); }
 	property DebugSceneType DebugDataVisible { DebugSceneType get(); void set(DebugSceneType value); }
 	property bool DebugObject { bool get(); void set(bool value); }
@@ -55,7 +55,7 @@ public:
 	property String^ Name { String^ get(); void set(String^ value); }
 	property SceneNode^ Parent { SceneNode^ get(); void set(SceneNode^ value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property Matrix4f^ RelativeTransformation { Matrix4f^ get(); }
+	property Matrix^ RelativeTransformation { Matrix^ get(); }
 	property Vector3Df^ Rotation { Vector3Df^ get(); virtual void set(Vector3Df^ value); }
 	property Vector3Df^ Scale { Vector3Df^ get(); void set(Vector3Df^ value); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); protected: void set(Scene::SceneManager^ value); }
@@ -66,7 +66,7 @@ public:
 
 	virtual String^ ToString() override;
 
-	delegate AABBox3Df^ GetBoundingBoxEventHandler();
+	delegate AABBox^ GetBoundingBoxEventHandler();
 	delegate unsigned int GetMaterialCountEventHandler();
 	delegate Video::Material^ GetMaterialEventHandler(unsigned int index);
 	delegate void RegisterSceneNodeEventHandler();

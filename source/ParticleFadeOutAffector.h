@@ -15,7 +15,7 @@ public ref class ParticleFadeOutAffector : ParticleAffector
 public:
 
 	property float FadeOutTime { float get(); void set(float value); }
-	property Video::Coloru^ TargetColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ TargetColor { Video::Color^ get(); void set(Video::Color^ value); }
 
 internal:
 

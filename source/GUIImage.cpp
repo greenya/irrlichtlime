@@ -24,7 +24,7 @@ GUIImage::GUIImage(gui::IGUIImage* ref)
 	m_GUIImage = ref;
 }
 
-void GUIImage::SetColor(Video::Coloru^ color)
+void GUIImage::SetColor(Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_GUIImage->setColor(*color->m_NativeValue);

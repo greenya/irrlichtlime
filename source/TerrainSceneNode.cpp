@@ -26,12 +26,12 @@ TerrainSceneNode::TerrainSceneNode(scene::ITerrainSceneNode* ref)
 	m_TerrainSceneNode = ref;
 }
 
-AABBox3Df^ TerrainSceneNode::GetPatchBoundingBox(int patchX, int patchZ)
+AABBox^ TerrainSceneNode::GetPatchBoundingBox(int patchX, int patchZ)
 {
 	LIME_ASSERT(patchX >= 0);
 	LIME_ASSERT(patchZ >= 0);
 
-	return gcnew AABBox3Df(m_TerrainSceneNode->getBoundingBox(patchX, patchZ));
+	return gcnew AABBox(m_TerrainSceneNode->getBoundingBox(patchX, patchZ));
 }
 
 List<int>^ TerrainSceneNode::GetCurrentLODOfPatches()

@@ -27,7 +27,7 @@ GUISkin::GUISkin(gui::IGUISkin* ref)
 	m_GUISkin = ref;
 }
 
-void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Coloru^ color, Recti^ pos, Recti^ clip)
+void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color^ color, Recti^ pos, Recti^ clip)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(pos != nullptr);
@@ -40,7 +40,7 @@ void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Coloru^ color, Recti^ 
 		clip->m_NativeValue);
 }
 
-void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Coloru^ color, Recti^ pos)
+void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color^ color, Recti^ pos)
 {
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(pos != nullptr);
@@ -111,7 +111,7 @@ void GUISkin::Draw3DMenuPane(GUIElement^ element, Recti^ rect)
 		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Coloru^ bgcolor, bool flat, bool fillBackGround, Recti^ rect, Recti^ clip)
+void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color^ bgcolor, bool flat, bool fillBackGround, Recti^ rect, Recti^ clip)
 {
 	LIME_ASSERT(bgcolor != nullptr);
 	LIME_ASSERT(rect != nullptr);
@@ -126,7 +126,7 @@ void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Coloru^ bgcolor, bool
 		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Coloru^ bgcolor, bool flat, bool fillBackGround, Recti^ rect)
+void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color^ bgcolor, bool flat, bool fillBackGround, Recti^ rect)
 {
 	LIME_ASSERT(bgcolor != nullptr);
 	LIME_ASSERT(rect != nullptr);
@@ -247,7 +247,7 @@ void GUISkin::Draw3DToolBar(GUIElement^ element, Recti^ rect)
 		*rect->m_NativeValue);
 }
 
-Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Coloru^ titleBarColor, Recti^ rect, Recti^ clip, [Out] Recti^ checkClientArea)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect, Recti^ clip, [Out] Recti^ checkClientArea)
 {
 	LIME_ASSERT(titleBarColor != nullptr);
 	LIME_ASSERT(rect != nullptr);
@@ -266,7 +266,7 @@ Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, V
 	return gcnew Recti(rtitle);
 }
 
-Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Coloru^ titleBarColor, Recti^ rect, Recti^ clip)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect, Recti^ clip)
 {
 	LIME_ASSERT(titleBarColor != nullptr);
 	LIME_ASSERT(rect != nullptr);
@@ -282,7 +282,7 @@ Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, V
 	return gcnew Recti(rtitle);
 }
 
-Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Coloru^ titleBarColor, Recti^ rect)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect)
 {
 	LIME_ASSERT(titleBarColor != nullptr);
 	LIME_ASSERT(rect != nullptr);
@@ -357,9 +357,9 @@ void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ posi
 		*position->m_NativeValue);
 }
 
-Video::Coloru^ GUISkin::GetColor(GUIDefaultColor color)
+Video::Color^ GUISkin::GetColor(GUIDefaultColor color)
 {
-	return gcnew Video::Coloru(m_GUISkin->getColor((gui::EGUI_DEFAULT_COLOR)color));
+	return gcnew Video::Color(m_GUISkin->getColor((gui::EGUI_DEFAULT_COLOR)color));
 }
 
 String^ GUISkin::GetText(GUIDefaultText text)
@@ -382,7 +382,7 @@ int GUISkin::GetSize(GUIDefaultSize size)
 	return m_GUISkin->getSize((gui::EGUI_DEFAULT_SIZE)size);
 }
 
-void GUISkin::SetColor(Video::Coloru^ newColor, GUIDefaultColor which)
+void GUISkin::SetColor(Video::Color^ newColor, GUIDefaultColor which)
 {
 	LIME_ASSERT(newColor != nullptr);
 	m_GUISkin->setColor((gui::EGUI_DEFAULT_COLOR)which, *newColor->m_NativeValue);

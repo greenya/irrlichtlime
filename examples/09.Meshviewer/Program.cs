@@ -251,7 +251,7 @@ namespace _09.Meshviewer
 			{
 				if (device.WindowActive)
 				{
-					driver.BeginScene(true, true, new Coloru(50, 50, 50));
+					driver.BeginScene(true, true, new Color(50, 50, 50));
 					smgr.DrawAll();
 					env.DrawAll();
 					driver.EndScene();
@@ -298,7 +298,7 @@ namespace _09.Meshviewer
 						{
 							// control skin transparency
 							int p = (e.GUI.Caller as GUIScrollBar).Position;
-							setSkinTransparency((uint)p, env.Skin);
+							setSkinTransparency(p, env.Skin);
 						}
 						else if (id == guiID.SkinAnimationFPS)
 						{
@@ -584,11 +584,11 @@ namespace _09.Meshviewer
 			device.SceneManager.ActiveCamera = newActive;
 		}
 
-		static void setSkinTransparency(uint alpha, GUISkin skin)
+		static void setSkinTransparency(int alpha, GUISkin skin)
 		{
 			foreach (GUIDefaultColor i in Enum.GetValues(typeof(GUIDefaultColor)))
 			{
-				Coloru c = skin.GetColor(i);
+				Color c = skin.GetColor(i);
 				c.Alpha = alpha;
 				skin.SetColor(c, i);
 			}

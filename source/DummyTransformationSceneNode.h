@@ -13,7 +13,7 @@ public ref class DummyTransformationSceneNode : SceneNode
 {
 public:
 
-	property Matrix4f^ RelativeTransformationMatrix { Matrix4f^ get(); }
+	property Matrix^ RelativeTransformationMatrix { Matrix^ get(); }
 
 internal:
 

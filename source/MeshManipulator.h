@@ -71,10 +71,10 @@ public:
 
 	void SetVertexColorAlpha(Mesh^ mesh, int alpha);
 
-	void SetVertexColors(Mesh^ mesh, Video::Coloru^ color);
+	void SetVertexColors(Mesh^ mesh, Video::Color^ color);
 
-	void Transform(MeshBuffer^ buffer, Matrix4f^ m);
-	void Transform(Mesh^ mesh, Matrix4f^ m);
+	void Transform(MeshBuffer^ buffer, Matrix^ m);
+	void Transform(Mesh^ mesh, Matrix^ m);
 
 internal:
 

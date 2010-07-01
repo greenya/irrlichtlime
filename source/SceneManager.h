@@ -46,24 +46,24 @@ public:
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh, SceneNode^ parent);
 	AnimatedMeshSceneNode^ AddAnimatedMeshSceneNode(AnimatedMesh^ mesh);
 
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder, int tesselationCone);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone, int tesselationCylinder);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder, Video::Coloru^ vtxColorCone);
-	AnimatedMesh^ AddArrowMesh(String^ name, Video::Coloru^ vtxColorCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal, float heightCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder, int tesselationCone, float heightTotal);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder, int tesselationCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone);
+	AnimatedMesh^ AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder);
 	AnimatedMesh^ AddArrowMesh(String^ name);
 
-	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom);
-	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Color^ colorTop, Video::Color^ colorBottom);
+	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Color^ colorTop);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent, Dimension2Df^ size);
 	BillboardSceneNode^ AddBillboardSceneNode(SceneNode^ parent);
 	BillboardSceneNode^ AddBillboardSceneNode();
 
-	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Coloru^ colorTop, Video::Coloru^ colorBottom);
+	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id, Video::Color^ colorTop, Video::Color^ colorBottom);
 	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position, int id);
 	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size, Vector3Df^ position);
 	BillboardTextSceneNode^ AddBillboardTextSceneNode(String^ text, GUI::GUIFont^ font, SceneNode^ parent, Dimension2Df^ size);
@@ -183,11 +183,11 @@ public:
 	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize);
 	AnimatedMesh^ AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap);
 
-	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor, bool addAlsoIfHeightmapEmpty);
-	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor);
-	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD, TerrainPatchSize patchSize);
-	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor, int maxLOD);
-	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Coloru^ vertexColor);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor, bool addAlsoIfHeightmapEmpty);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD);
+	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor);
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position);
@@ -195,24 +195,24 @@ public:
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent);
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName);
 
-	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position, int id);
-	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent, Vector3Df^ position);
-	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color, SceneNode^ parent);
-	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Coloru^ color);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position, int id);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent);
+	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color);
 	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text);
 
 	void AddToDeletionQueue(SceneNode^ node);
 
-	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor, Video::Coloru^ tailColor);
-	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Coloru^ footColor);
+	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor, Video::Color^ tailColor);
+	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor);
 	AnimatedMesh^ AddVolumeLightMesh(String^ name, int subdivU, int subdivV);
 	AnimatedMesh^ AddVolumeLightMesh(String^ name);
 
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position, Vector3Df^ rotation);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail, Vector3Df^ position);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot, Video::Coloru^ tail);
-	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Coloru^ foot);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot, Video::Color^ tail, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot, Video::Color^ tail, Vector3Df^ position, Vector3Df^ rotation);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot, Video::Color^ tail, Vector3Df^ position);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot, Video::Color^ tail);
+	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV, Video::Color^ foot);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id, int subdivU, int subdivV);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent, int id);
 	VolumeLightSceneNode^ AddVolumeLightSceneNode(SceneNode^ parent);
@@ -316,7 +316,7 @@ public:
 	property SceneNode^ RootNode { SceneNode^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
 	property Scene::SceneNodeRenderPass SceneNodeRenderPass { Scene::SceneNodeRenderPass get(); }
-	property Video::Coloru^ ShadowColor { Video::Coloru^ get(); void set(Video::Coloru^ value); }
+	property Video::Color^ ShadowColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 
 internal:

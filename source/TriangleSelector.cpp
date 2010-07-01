@@ -32,7 +32,7 @@ SceneNode^ TriangleSelector::GetSceneNodeForTriangle(int triangleIndex)
 	return SceneNode::Wrap(n);
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox3Df^ box, int maxTriangleCount, Matrix4f^ transform)
+List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(box != nullptr);
 	LIME_ASSERT(maxTriangleCount > 0);
@@ -50,7 +50,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox3Df^ box, int maxTriang
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox3Df^ box, int maxTriangleCount)
+List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount)
 {
 	LIME_ASSERT(box != nullptr);
 	LIME_ASSERT(maxTriangleCount > 0);
@@ -67,7 +67,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox3Df^ box, int maxTriang
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df^ line, int maxTriangleCount, Matrix4f^ transform)
+List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df^ line, int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(line != nullptr);
 	LIME_ASSERT(maxTriangleCount > 0);
@@ -102,7 +102,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df^ line, int maxTriangl
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount, Matrix4f^ transform)
+List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(maxTriangleCount > 0);
 	LIME_ASSERT(transform != nullptr);

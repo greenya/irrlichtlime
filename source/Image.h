@@ -17,10 +17,10 @@ public:
 	static unsigned int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 
-	void Fill(Coloru^ color);
-	Coloru^ GetPixel(unsigned int x, unsigned int y);
-	void SetPixel(unsigned int x, unsigned int y, Coloru^ color, bool blend);
-	void SetPixel(unsigned int x, unsigned int y, Coloru^ color);
+	void Fill(Color^ color);
+	Color^ GetPixel(unsigned int x, unsigned int y);
+	void SetPixel(unsigned int x, unsigned int y, Color^ color, bool blend);
+	void SetPixel(unsigned int x, unsigned int y, Color^ color);
 
 	property unsigned int BitsPerPixel { unsigned int get(); }
 	property unsigned int BytesPerPixel { unsigned int get(); }

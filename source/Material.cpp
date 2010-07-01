@@ -43,10 +43,10 @@ Texture^ Material::GetTexture(int index)
 	return Texture::Wrap(t);
 }
 
-Matrix4f^ Material::GetTextureMatrix(int index)
+Matrix^ Material::GetTextureMatrix(int index)
 {
 	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
-	return gcnew Matrix4f(m_NativeValue->getTextureMatrix(index));
+	return gcnew Matrix(m_NativeValue->getTextureMatrix(index));
 }
 
 void Material::SetFlag(MaterialFlag flag, bool value)
@@ -60,7 +60,7 @@ void Material::SetTexture(int index, Texture^ tex)
 	m_NativeValue->setTexture(index, LIME_SAFEREF(tex, m_Texture));
 }
 
-void Material::SetTextureMatrix(int index, Matrix4f^ mat)
+void Material::SetTextureMatrix(int index, Matrix^ mat)
 {
 	LIME_ASSERT(index >= 0 && index < Material::TextureCount);
 	LIME_ASSERT(mat != nullptr);
@@ -88,43 +88,43 @@ void Material::Type::set(Video::MaterialType value)
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;
 }
 
-Coloru^ Material::AmbientColor::get()
+Color^ Material::AmbientColor::get()
 {
-	return gcnew Coloru(m_NativeValue->AmbientColor);
+	return gcnew Color(m_NativeValue->AmbientColor);
 }
 
-void Material::AmbientColor::set(Coloru^ value)
+void Material::AmbientColor::set(Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->AmbientColor = *value->m_NativeValue;
 }
 
-Coloru^ Material::DiffuseColor::get()
+Color^ Material::DiffuseColor::get()
 {
-	return gcnew Coloru(m_NativeValue->DiffuseColor);
+	return gcnew Color(m_NativeValue->DiffuseColor);
 }
-void Material::DiffuseColor::set(Coloru^ value)
+void Material::DiffuseColor::set(Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->DiffuseColor = *value->m_NativeValue;
 }
 
-Coloru^ Material::EmissiveColor::get()
+Color^ Material::EmissiveColor::get()
 {
-	return gcnew Coloru(m_NativeValue->EmissiveColor);
+	return gcnew Color(m_NativeValue->EmissiveColor);
 }
-void Material::EmissiveColor::set(Coloru^ value)
+void Material::EmissiveColor::set(Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->EmissiveColor = *value->m_NativeValue;
 }
 
-Coloru^ Material::SpecularColor::get()
+Color^ Material::SpecularColor::get()
 {
-	return gcnew Coloru(m_NativeValue->SpecularColor);
+	return gcnew Color(m_NativeValue->SpecularColor);
 }
 
-void Material::SpecularColor::set(Coloru^ value)
+void Material::SpecularColor::set(Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_NativeValue->SpecularColor = *value->m_NativeValue;

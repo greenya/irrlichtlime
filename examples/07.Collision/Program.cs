@@ -138,7 +138,7 @@ namespace _07.Collision
 			while (device.Run())
 			if (device.WindowActive)
 			{
-				driver.BeginScene(true, true, new Coloru(0));
+				driver.BeginScene(true, true, new Color(0));
 				smgr.DrawAll();
 
 				// Unlight any currently highlighted scene node
@@ -181,9 +181,9 @@ namespace _07.Collision
 					bill.Position = new Vector3Df(intersection);
 
 					// We need to reset the transform before doing our own rendering.
-					driver.SetTransform(TransformationState.World, new Matrix4f());
+					driver.SetTransform(TransformationState.World, new Matrix());
 					driver.SetMaterial(material);
-					driver.Draw3DTriangle(hitTriangle, new Coloru(255, 0, 0));
+					driver.Draw3DTriangle(hitTriangle, new Color(255, 0, 0));
 
 					// We can check the flags for the scene node that was hit to see if it should be
 					// highlighted. The animated nodes can be highlighted, but not the Quake level mesh

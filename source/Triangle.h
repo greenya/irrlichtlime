@@ -43,13 +43,13 @@ public:
 		return gcnew Vector3Df(m_NativeValue->closestPointOnTriangle(*point->m_NativeValue));
 	}
 
-	bool IsTotalInsideBox(AABBox3Df^ box)
+	bool IsTotalInsideBox(AABBox^ box)
 	{
 		LIME_ASSERT(box != nullptr);
 		return m_NativeValue->isTotalInsideBox(*box->m_NativeValue);
 	}
 
-	bool IsTotalOutsideBox(AABBox3Df^ box)
+	bool IsTotalOutsideBox(AABBox^ box)
 	{
 		LIME_ASSERT(box != nullptr);
 		return m_NativeValue->isTotalOutsideBox(*box->m_NativeValue);

@@ -14,13 +14,13 @@ public ref class GUIFont : ReferenceCounted
 {
 public:
 
-	void Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter, bool vcenter, Recti^ clip);
-	void Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter, bool vcenter);
-	void Draw(String^ text, Recti^ position, Video::Coloru^ color, bool hcenter);
-	void Draw(String^ text, Vector2Di^ position, Video::Coloru^ color, Recti^ clip);
-	void Draw(String^ text, Vector2Di^ position, Video::Coloru^ color);
-	void Draw(String^ text, int x, int y, Video::Coloru^ color, Recti^ clip);
-	void Draw(String^ text, int x, int y, Video::Coloru^ color);
+	void Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter, Recti^ clip);
+	void Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter);
+	void Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter);
+	void Draw(String^ text, Vector2Di^ position, Video::Color^ color, Recti^ clip);
+	void Draw(String^ text, Vector2Di^ position, Video::Color^ color);
+	void Draw(String^ text, int x, int y, Video::Color^ color, Recti^ clip);
+	void Draw(String^ text, int x, int y, Video::Color^ color);
 
 	int GetCharacterFromPos(String^ text, int pixel_x);
 	Dimension2Du^ GetDimension(String^ text);
