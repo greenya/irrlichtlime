@@ -9,6 +9,16 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
+int Image::GetBitsPerPixelFromFormat(Video::ColorFormat format)
+{
+	return video::IImage::getBitsPerPixelFromFormat((ECOLOR_FORMAT)format);
+}
+
+bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
+{
+	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
+}
+
 Image^ Image::Wrap(video::IImage* ref)
 {
 	if (ref == nullptr)
@@ -30,39 +40,38 @@ void Image::Fill(Color^ color)
 	m_Image->fill(*color->m_NativeValue);
 }
 
-unsigned int Image::GetBitsPerPixelFromFormat(Video::ColorFormat format)
+Color^ Image::GetPixel(int x, int y)
 {
-	return video::IImage::getBitsPerPixelFromFormat((ECOLOR_FORMAT)format);
-}
+	LIME_ASSERT(x >= 0 && x < Dimension->Width);
+	LIME_ASSERT(y >= 0 && y < Dimension->Height);
 
-Color^ Image::GetPixel(unsigned int x, unsigned int y)
-{
 	return gcnew Color(m_Image->getPixel(x, y));
 }
 
-bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
+void Image::SetPixel(int x, int y, Color^ color, bool blend)
 {
-	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
-}
-
-void Image::SetPixel(unsigned int x, unsigned int y, Color^ color, bool blend)
-{
+	LIME_ASSERT(x >= 0 && x < Dimension->Width);
+	LIME_ASSERT(y >= 0 && y < Dimension->Height);
 	LIME_ASSERT(color != nullptr);
+
 	m_Image->setPixel(x, y, *color->m_NativeValue, blend);
 }
 
-void Image::SetPixel(unsigned int x, unsigned int y, Color^ color)
+void Image::SetPixel(int x, int y, Color^ color)
 {
+	LIME_ASSERT(x >= 0 && x < Dimension->Width);
+	LIME_ASSERT(y >= 0 && y < Dimension->Height);
 	LIME_ASSERT(color != nullptr);
+
 	m_Image->setPixel(x, y, *color->m_NativeValue);
 }
 
-unsigned int Image::BitsPerPixel::get()
+int Image::BitsPerPixel::get()
 {
 	return m_Image->getBitsPerPixel();
 }
 
-unsigned int Image::BytesPerPixel::get()
+int Image::BytesPerPixel::get()
 {
 	return m_Image->getBytesPerPixel();
 }
@@ -77,37 +86,37 @@ Dimension2Di^ Image::Dimension::get()
 	return gcnew Dimension2Di(m_Image->getDimension());
 }
 
-unsigned int Image::ImageDataSizeInBytes::get()
+int Image::ImageDataSizeInBytes::get()
 {
 	return m_Image->getImageDataSizeInBytes();
 }
 
-unsigned int Image::ImageDataSizeInPixels::get()
+int Image::ImageDataSizeInPixels::get()
 {
 	return m_Image->getImageDataSizeInPixels();
 }
 
-unsigned int Image::RedMask::get()
+int Image::RedMask::get()
 {
 	return m_Image->getRedMask();
 }
 
-unsigned int Image::GreenMask::get()
+int Image::GreenMask::get()
 {
 	return m_Image->getGreenMask();
 }
 
-unsigned int Image::BlueMask::get()
+int Image::BlueMask::get()
 {
 	return m_Image->getBlueMask();
 }
 
-unsigned int Image::AlphaMask::get()
+int Image::AlphaMask::get()
 {
 	return m_Image->getAlphaMask();
 }
 
-unsigned int Image::Pitch::get()
+int Image::Pitch::get()
 {
 	return m_Image->getPitch();
 }

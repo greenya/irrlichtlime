@@ -65,7 +65,7 @@ Dimension2Di^ Texture::OriginalSize::get()
 	return gcnew Dimension2Di(m_Texture->getOriginalSize());
 }
 
-unsigned int Texture::Pitch::get()
+int Texture::Pitch::get()
 {
 	return m_Texture->getPitch();
 }

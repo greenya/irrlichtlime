@@ -46,8 +46,8 @@ public:
 	void SetInputReceivingSceneManager(Scene::SceneManager^ sceneManager);
 	void SetWindowCaption(String^ text);
 	void SetWindowResizable(bool resize);
-	void Sleep(unsigned int timeMs, bool pauseTimer);
-	void Sleep(unsigned int timeMs);
+	void Sleep(int timeMs, bool pauseTimer);
+	void Sleep(int timeMs);
 	void Yield();
 
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }

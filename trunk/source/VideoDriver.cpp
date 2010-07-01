@@ -546,15 +546,15 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::EnableClipPlane(unsigned int index, bool enable)
+void VideoDriver::EnableClipPlane(int index, bool enable)
 {
-	LIME_ASSERT(index < 6);
+	LIME_ASSERT(index >= 0 && index < 6);
 	m_VideoDriver->enableClipPlane(index, enable);
 }
 
-void VideoDriver::EnableClipPlane(unsigned int index)
+void VideoDriver::EnableClipPlane(int index)
 {
-	LIME_ASSERT(index < 6);
+	LIME_ASSERT(index >= 0 && index < 6);
 	m_VideoDriver->enableClipPlane(index, true);
 }
 
@@ -573,7 +573,7 @@ bool VideoDriver::EndScene()
 	return m_VideoDriver->endScene();
 }
 
-unsigned int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
+int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
 {
 	return m_VideoDriver->getOcclusionQueryResult(LIME_SAFEREF(node, m_SceneNode));
 }
@@ -584,8 +584,10 @@ Texture^ VideoDriver::GetTexture(String^ filename)
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::GetTextureByIndex(unsigned int index)
+Texture^ VideoDriver::GetTexture(int index)
 {
+	LIME_ASSERT(index >= 0 && index < TextureCount);
+
 	video::ITexture* t = m_VideoDriver->getTextureByIndex(index);
 	return Texture::Wrap(t);
 }
@@ -695,8 +697,9 @@ void VideoDriver::SetMaterial(Material^ material)
 	m_VideoDriver->setMaterial(*material->m_NativeValue);
 }
 
-void VideoDriver::SetMinHardwareBufferVertexCount(unsigned int count)
+void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 {
+	LIME_ASSERT(count >= 0);
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
@@ -753,9 +756,10 @@ void VideoDriver::SetTransform(TransformationState state, Matrix^ mat)
 	m_VideoDriver->setTransform((video::E_TRANSFORMATION_STATE)state, *mat->m_NativeValue);
 }
 
-void VideoDriver::TurnLight(int lightIndex, bool turnOn)
+void VideoDriver::TurnLight(int index, bool turnOn)
 {
-	m_VideoDriver->turnLightOn(lightIndex, turnOn);
+	LIME_ASSERT(index >= 0 && index < DynamicLightCount);
+	m_VideoDriver->turnLightOn(index, turnOn);
 }
 
 void VideoDriver::UpdateAllOcclusionQueries(bool block)
@@ -863,17 +867,17 @@ Material^ VideoDriver::Material2D::get()
 	return Material::Wrap(&m_VideoDriver->getMaterial2D());
 }
 
-unsigned int VideoDriver::PrimitiveCountDrawn::get()
+int VideoDriver::PrimitiveCountDrawn::get()
 {
 	return m_VideoDriver->getPrimitiveCountDrawn();
 }
 
-unsigned int VideoDriver::MaximalDynamicLightAmount::get()
+int VideoDriver::MaximalDynamicLightAmount::get()
 {
 	return m_VideoDriver->getMaximalDynamicLightAmount();
 }
 
-unsigned int VideoDriver::DynamicLightCount::get()
+int VideoDriver::DynamicLightCount::get()
 {
 	return m_VideoDriver->getDynamicLightCount();
 }
@@ -883,12 +887,12 @@ Video::ExposedVideoData^ VideoDriver::ExposedVideoData::get()
 	return gcnew Video::ExposedVideoData(m_VideoDriver->getExposedVideoData());
 }
 
-unsigned int VideoDriver::MaximalPrimitiveCount::get()
+int VideoDriver::MaximalPrimitiveCount::get()
 {
 	return m_VideoDriver->getMaximalPrimitiveCount();
 }
 
-unsigned int VideoDriver::MaterialRendererCount::get()
+int VideoDriver::MaterialRendererCount::get()
 {
 	return m_VideoDriver->getMaterialRendererCount();
 }
@@ -898,7 +902,7 @@ String^ VideoDriver::Name::get()
 	return gcnew String(m_VideoDriver->getName());
 }
 
-unsigned int VideoDriver::TextureCount::get()
+int VideoDriver::TextureCount::get()
 {
 	return m_VideoDriver->getTextureCount();
 }

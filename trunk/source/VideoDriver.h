@@ -86,17 +86,17 @@ public:
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices);
 
-	void EnableClipPlane(unsigned int index, bool enable);
-	void EnableClipPlane(unsigned int index);
+	void EnableClipPlane(int index, bool enable);
+	void EnableClipPlane(int index);
 
 	void EnableMaterial2D(bool enable);
 	void EnableMaterial2D();
 
 	bool EndScene();
 
-	unsigned int GetOcclusionQueryResult(Scene::SceneNode^ node);
+	int GetOcclusionQueryResult(Scene::SceneNode^ node);
 	Texture^ GetTexture(String^ filename);
-	Texture^ GetTextureByIndex(unsigned int index);
+	Texture^ GetTexture(int index);
 	Matrix^ GetTransform(TransformationState state);
 
 	void MakeColorKeyTexture(Texture^ texture, Color^ color, bool zeroTexels);
@@ -124,7 +124,7 @@ public:
 
 	void SetMaterial(Material^ material);
 
-	void SetMinHardwareBufferVertexCount(unsigned int count);
+	void SetMinHardwareBufferVertexCount(int count);
 
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
@@ -139,7 +139,7 @@ public:
 
 	void SetTransform(TransformationState state, Matrix^ mat);
 
-	void TurnLight(int lightIndex, bool turnOn);
+	void TurnLight(int index, bool turnOn);
 
 	void UpdateAllOcclusionQueries(bool block);
 	void UpdateAllOcclusionQueries();
@@ -151,19 +151,19 @@ public:
 
 	property Dimension2Di^ CurrentRenderTargetSize { Dimension2Di^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
-	property unsigned int DynamicLightCount { unsigned int get(); }
+	property int DynamicLightCount { int get(); }
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
 	property Video::Fog^ Fog { Video::Fog^ get(); void set(Video::Fog^ value); }
 	property int FPS { int get(); }
 	property Material^ Material2D { Material^ get(); }
-	property unsigned int MaterialRendererCount { unsigned int get(); }
-	property unsigned int MaximalDynamicLightAmount { unsigned int get(); }
-	property unsigned int MaximalPrimitiveCount { unsigned int get(); }
+	property int MaterialRendererCount { int get(); }
+	property int MaximalDynamicLightAmount { int get(); }
+	property int MaximalPrimitiveCount { int get(); }
 	property Dimension2Di^ MaxTextureSize { Dimension2Di^ get(); }
 	property String^ Name { String^ get(); }
-	property unsigned int PrimitiveCountDrawn { unsigned int get(); }
+	property int PrimitiveCountDrawn { int get(); }
 	property Dimension2Di^ ScreenSize { Dimension2Di^ get(); }
-	property unsigned int TextureCount { unsigned int get(); }
+	property int TextureCount { int get(); }
 	property String^ VendorInfo { String^ get(); }
 	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }
 
