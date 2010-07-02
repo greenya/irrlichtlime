@@ -78,5 +78,10 @@ int VertexBuffer::VertexCount::get()
 	return m_VertexBuffer->size();
 }
 
+String^ VertexBuffer::ToString()
+{
+	return String::Format("VertexBuffer: VertexCount={0}", VertexCount);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime

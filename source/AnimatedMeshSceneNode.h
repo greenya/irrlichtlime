@@ -33,7 +33,7 @@ public:
 	SceneNode^ Clone(SceneNode^ newParent);
 	SceneNode^ Clone();
 
-	BoneSceneNode^ GetJointNode(unsigned int jointIndex);
+	BoneSceneNode^ GetJointNode(int jointIndex);
 	BoneSceneNode^ GetJointNode(String^ jointName);
 
 	//SMD3QuaternionTag* getMD3TagTransformation(const core::stringc &tagname);
@@ -53,7 +53,7 @@ public:
 	property float AnimationSpeed { float get(); void set(float value); }
 	property float CurrentFrame { float get(); void set(float value); }
 	property int EndFrame { int get(); }
-	property unsigned int JointCount { unsigned int get(); }
+	property int JointCount { int get(); }
 	property AnimatedMesh^ Mesh { AnimatedMesh^ get(); void set(AnimatedMesh^ value); }
 	property int StartFrame { int get(); }
 	property bool ReadOnlyMaterials { bool get(); void set(bool value); }

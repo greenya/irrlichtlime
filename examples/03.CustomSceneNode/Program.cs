@@ -106,12 +106,12 @@ namespace _03.CustomSceneNode
 			return bbox;
 		}
 
-		uint CSampleSceneNode_OnGetMaterialCount()
+		int CSampleSceneNode_OnGetMaterialCount()
 		{
 			return 1;
 		}
 
-		Material CSampleSceneNode_OnGetMaterial(uint index)
+		Material CSampleSceneNode_OnGetMaterial(int index)
 		{
 			return material;
 		}

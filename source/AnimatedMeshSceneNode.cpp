@@ -105,9 +105,9 @@ SceneNode^ AnimatedMeshSceneNode::Clone()
 	return SceneNode::Wrap(n);
 }
 
-BoneSceneNode^ AnimatedMeshSceneNode::GetJointNode(unsigned int jointIndex)
+BoneSceneNode^ AnimatedMeshSceneNode::GetJointNode(int jointIndex)
 {
-	LIME_ASSERT(jointIndex < JointCount);
+	LIME_ASSERT(jointIndex >= 0 && jointIndex < JointCount);
 
 	scene::IBoneSceneNode* n = m_AnimatedMeshSceneNode->getJointNode(jointIndex);
 	return BoneSceneNode::Wrap(n);
@@ -179,7 +179,7 @@ int AnimatedMeshSceneNode::EndFrame::get()
 	return m_AnimatedMeshSceneNode->getEndFrame();
 }
 
-unsigned int AnimatedMeshSceneNode::JointCount::get()
+int AnimatedMeshSceneNode::JointCount::get()
 {
 	return m_AnimatedMeshSceneNode->getJointCount();
 }

@@ -23,7 +23,7 @@ GUIComboBox::GUIComboBox(gui::IGUIComboBox* ref)
 	m_GUIComboBox = ref;
 }
 
-int GUIComboBox::AddItem(String^ text, unsigned int data)
+int GUIComboBox::AddItem(String^ text, int data)
 {
 	return m_GUIComboBox->addItem(Lime::StringToStringW(text).c_str(), data);
 }
@@ -38,7 +38,7 @@ void GUIComboBox::Clear()
 	m_GUIComboBox->clear();
 }
 
-int GUIComboBox::GetIndexForItemData(unsigned int data)
+int GUIComboBox::GetIndexForItemData(int data)
 {
 	return m_GUIComboBox->getIndexForItemData(data);
 }
@@ -49,7 +49,7 @@ String^ GUIComboBox::GetItem(int index)
 	return gcnew String(m_GUIComboBox->getItem(index));
 }
 
-unsigned int GUIComboBox::GetItemData(int index)
+int GUIComboBox::GetItemData(int index)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
 	return m_GUIComboBox->getItemData(index);

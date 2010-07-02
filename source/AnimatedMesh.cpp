@@ -46,7 +46,7 @@ Mesh^ AnimatedMesh::GetMesh(int frame)
 	return Mesh::Wrap(m);
 }
 
-unsigned int AnimatedMesh::FrameCount::get()
+int AnimatedMesh::FrameCount::get()
 {
 	return m_AnimatedMesh->getFrameCount();
 }

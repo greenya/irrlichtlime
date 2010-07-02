@@ -33,23 +33,25 @@ void VolumeLightSceneNode::FootColor::set(Video::Color^ value)
 	m_VolumeLightSceneNode->setFootColor(*value->m_NativeValue);
 }
 
-unsigned int VolumeLightSceneNode::SubDivideU::get()
+int VolumeLightSceneNode::SubDivideU::get()
 {
 	return m_VolumeLightSceneNode->getSubDivideU();
 }
 
-void VolumeLightSceneNode::SubDivideU::set(unsigned int value)
+void VolumeLightSceneNode::SubDivideU::set(int value)
 {
+	LIME_ASSERT(value >= 0);
 	m_VolumeLightSceneNode->setSubDivideU(value);
 }
 
-unsigned int VolumeLightSceneNode::SubDivideV::get()
+int VolumeLightSceneNode::SubDivideV::get()
 {
 	return m_VolumeLightSceneNode->getSubDivideV();
 }
 
-void VolumeLightSceneNode::SubDivideV::set(unsigned int value)
+void VolumeLightSceneNode::SubDivideV::set(int value)
 {
+	LIME_ASSERT(value >= 0);
 	m_VolumeLightSceneNode->setSubDivideV(value);
 }
 

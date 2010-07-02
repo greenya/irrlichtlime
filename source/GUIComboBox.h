@@ -13,14 +13,14 @@ public ref class GUIComboBox : GUIElement
 {
 public:
 
-	int AddItem(String^ text, unsigned int data);
+	int AddItem(String^ text, int data);
 	int AddItem(String^ text);
 
 	void Clear();
 
-	int GetIndexForItemData(unsigned int data);
+	int GetIndexForItemData(int data);
 	String^ GetItem(int index);
-	unsigned int GetItemData(int index);
+	int GetItemData(int index);
 
 	void RemoveItem(int index);
 

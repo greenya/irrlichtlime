@@ -64,9 +64,9 @@ public:
 	void Scale(MeshBuffer^ buffer, Vector3Df^ factor);
 	void Scale(Mesh^ mesh, Vector3Df^ factor);
 
-	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, unsigned int level);
+	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, int level);
 	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor);
-	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, unsigned int level);
+	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, int level);
 	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor);
 
 	void SetVertexColorAlpha(Mesh^ mesh, int alpha);

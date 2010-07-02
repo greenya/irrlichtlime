@@ -228,9 +228,11 @@ void MeshManipulator::Scale(Mesh^ mesh, Vector3Df^ factor)
 	m_MeshManipulator->scale(LIME_SAFEREF(mesh, m_Mesh), *factor->m_NativeValue);
 }
 
-void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, unsigned int level)
+void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, int level)
 {
 	LIME_ASSERT(factor != nullptr);
+	LIME_ASSERT(level >= 1);
+
 	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), *factor->m_NativeValue, level);
 }
 
@@ -240,9 +242,11 @@ void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor)
 	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), *factor->m_NativeValue);
 }
 
-void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, unsigned int level)
+void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, int level)
 {
 	LIME_ASSERT(factor != nullptr);
+	LIME_ASSERT(level >= 1);
+
 	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(mesh, m_Mesh), *factor->m_NativeValue, level);
 }
 

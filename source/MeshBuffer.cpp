@@ -29,21 +29,21 @@ void MeshBuffer::Append(MeshBuffer^ other)
 	m_MeshBuffer->append(LIME_SAFEREF(other, m_MeshBuffer));
 }
 
-Vector3Df^ MeshBuffer::GetNormal(unsigned int vertexIndex)
+Vector3Df^ MeshBuffer::GetNormal(int vertexIndex)
 {
-	LIME_ASSERT(vertexIndex < VertexCount);
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
 	return gcnew Vector3Df(m_MeshBuffer->getNormal(vertexIndex));
 }
 
-Vector3Df^ MeshBuffer::GetPosition(unsigned int vertexIndex)
+Vector3Df^ MeshBuffer::GetPosition(int vertexIndex)
 {
-	LIME_ASSERT(vertexIndex < VertexCount);
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
 	return gcnew Vector3Df(m_MeshBuffer->getPosition(vertexIndex));
 }
 
-Vector2Df^ MeshBuffer::GetTCoords(unsigned int vertexIndex)
+Vector2Df^ MeshBuffer::GetTCoords(int vertexIndex)
 {
-	LIME_ASSERT(vertexIndex < VertexCount);
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
 	return gcnew Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
 }
 
@@ -83,7 +83,7 @@ HardwareMappingHint MeshBuffer::HardwareMappingHintForVertex::get()
 	return (HardwareMappingHint)m_MeshBuffer->getHardwareMappingHint_Vertex();
 }
 
-unsigned int MeshBuffer::IndexCount::get()
+int MeshBuffer::IndexCount::get()
 {
 	return m_MeshBuffer->getIndexCount();
 }
@@ -98,7 +98,7 @@ Video::Material^ MeshBuffer::Material::get()
 	return Video::Material::Wrap(&m_MeshBuffer->getMaterial());
 }
 
-unsigned int MeshBuffer::VertexCount::get()
+int MeshBuffer::VertexCount::get()
 {
 	return m_MeshBuffer->getVertexCount();
 }

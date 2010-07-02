@@ -140,5 +140,10 @@ int TriangleSelector::TriangleCount::get()
 	return m_TriangleSelector->getTriangleCount();
 }
 
+String^ TriangleSelector::ToString()
+{
+	return String::Format("TriangleSelector: TriangleCount={0}", TriangleCount);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime

@@ -138,9 +138,10 @@ void GUITable::SetColumnOrdering(int columnIndex, GUIColumnOrdering mode)
 		(gui::EGUI_COLUMN_ORDERING)mode);
 }
 
-void GUITable::SetColumnWidth(int columnIndex, unsigned int width)
+void GUITable::SetColumnWidth(int columnIndex, int width)
 {
 	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+	LIME_ASSERT(width >= 0);
 
 	m_GUITable->setColumnWidth(
 		columnIndex,

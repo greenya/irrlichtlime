@@ -2755,14 +2755,17 @@ bool SceneManager::PostEvent(Event^ e)
 	return m_SceneManager->postEventFromUser(*e->m_NativeValue);
 }
 
-unsigned int SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRenderPass pass)
+bool SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRenderPass pass)
 {
-	return m_SceneManager->registerNodeForRendering(LIME_SAFEREF(node, m_SceneNode), (E_SCENE_NODE_RENDER_PASS)pass);
+	return m_SceneManager->registerNodeForRendering(
+		LIME_SAFEREF(node, m_SceneNode),
+		(E_SCENE_NODE_RENDER_PASS)pass) != 0;
 }
 
-unsigned int SceneManager::RegisterNodeForRendering(SceneNode^ node)
+bool SceneManager::RegisterNodeForRendering(SceneNode^ node)
 {
-	return m_SceneManager->registerNodeForRendering(LIME_SAFEREF(node, m_SceneNode));
+	return m_SceneManager->registerNodeForRendering(
+		LIME_SAFEREF(node, m_SceneNode)) != 0;
 }
 
 bool SceneManager::SaveScene(String^ filename)
