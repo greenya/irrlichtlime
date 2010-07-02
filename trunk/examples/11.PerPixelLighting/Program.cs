@@ -261,9 +261,9 @@ namespace _11.PerPixelLighting
 			this.problemText.OverrideColor = new Color(255, 255, 255, 100);
 
 			// set start material (prefer parallax mapping if available)
-			//video::IMaterialRenderer* renderer = Driver->getMaterialRenderer(video::EMT_PARALLAX_MAP_SOLID);
-			//if (renderer && renderer->getRenderCapability() == 0)
-			//	ListBox->setSelected(2);
+			MaterialRenderer renderer = this.driver.GetMaterialRenderer(MaterialType.ParallaxMapSolid);
+			if (renderer != null && renderer.Capability == 0)
+				this.listBox.SelectedIndex = 2;
 
 			// set the material which is selected in the listbox
 			setMaterial();
@@ -318,12 +318,11 @@ namespace _11.PerPixelLighting
 
 			this.room.SetMaterialType(type);
 
-			//video::IMaterialRenderer* renderer = Driver->getMaterialRenderer(type);
 			// display some problem text when problem
-			//if (!renderer || renderer->getRenderCapability() != 0)
-			//	ProblemText->setVisible(true);
-			//else
-			//	ProblemText->setVisible(false);
+			MaterialRenderer renderer = this.driver.GetMaterialRenderer(type);
+			this.problemText.Visible =
+				renderer == null ||
+				renderer.Capability != 0;
 		}
 
 		private GUIStaticText problemText;
