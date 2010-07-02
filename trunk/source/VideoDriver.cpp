@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Image.h"
+#include "Light.h"
 #include "Material.h"
+#include "MaterialRenderer.h"
 #include "Mesh.h"
 #include "MeshBuffer.h"
 #include "ReferenceCounted.h"
@@ -28,6 +30,25 @@ VideoDriver::VideoDriver(video::IVideoDriver* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_VideoDriver = ref;
+}
+
+int VideoDriver::AddDynamicLight(Light^ light)
+{
+	LIME_ASSERT(light != nullptr);
+	return m_VideoDriver->addDynamicLight(*light->m_NativeValue);
+}
+
+int VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer, String^ name)
+{
+	return m_VideoDriver->addMaterialRenderer(
+		LIME_SAFEREF(renderer, m_MaterialRenderer),
+		name == nullptr ? nullptr : Lime::StringToStringC(name).c_str());
+}
+
+int VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer)
+{
+	return m_VideoDriver->addMaterialRenderer(
+		LIME_SAFEREF(renderer, m_MaterialRenderer));
 }
 
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format)
@@ -573,6 +594,40 @@ bool VideoDriver::EndScene()
 	return m_VideoDriver->endScene();
 }
 
+Light^ VideoDriver::GetDynamicLight(int index)
+{
+	LIME_ASSERT(index >= 0 && index < DynamicLightCount);
+	return gcnew Light((video::SLight*)&m_VideoDriver->getDynamicLight(index)); // !!! cast to non-const
+}
+
+MaterialRenderer^ VideoDriver::GetMaterialRenderer(int index)
+{
+	LIME_ASSERT(index >= 0 && index < MaterialRendererCount);
+	
+	video::IMaterialRenderer* r = m_VideoDriver->getMaterialRenderer(index);
+	return MaterialRenderer::Wrap(r);
+}
+
+MaterialRenderer^ VideoDriver::GetMaterialRenderer(MaterialType material)
+{
+	video::IMaterialRenderer* r = m_VideoDriver->getMaterialRenderer((unsigned int)material);
+	return MaterialRenderer::Wrap(r);
+}
+
+String^ VideoDriver::GetMaterialRendererName(int index)
+{
+	LIME_ASSERT(index >= 0 && index < MaterialRendererCount);
+
+	const char* n = m_VideoDriver->getMaterialRendererName(index);
+	return n == nullptr ? nullptr : gcnew String(n);
+}
+
+String^ VideoDriver::GetMaterialRendererName(MaterialType material)
+{
+	const char* n = m_VideoDriver->getMaterialRendererName((unsigned int)material);
+	return n == nullptr ? nullptr : gcnew String(n);
+}
+
 int VideoDriver::GetOcclusionQueryResult(Scene::SceneNode^ node)
 {
 	return m_VideoDriver->getOcclusionQueryResult(LIME_SAFEREF(node, m_SceneNode));
@@ -695,6 +750,12 @@ void VideoDriver::SetMaterial(Material^ material)
 {
 	LIME_ASSERT(material != nullptr);
 	m_VideoDriver->setMaterial(*material->m_NativeValue);
+}
+
+void VideoDriver::SetMaterialRendererName(int index, String^ name)
+{
+	LIME_ASSERT(index >= 0 && index < MaterialRendererCount);
+	m_VideoDriver->setMaterialRendererName(index, Lime::StringToStringC(name).c_str());
 }
 
 void VideoDriver::SetMinHardwareBufferVertexCount(int count)
@@ -872,7 +933,7 @@ int VideoDriver::PrimitiveCountDrawn::get()
 	return m_VideoDriver->getPrimitiveCountDrawn();
 }
 
-int VideoDriver::MaximalDynamicLightAmount::get()
+int VideoDriver::MaximalDynamicLightCount::get()
 {
 	return m_VideoDriver->getMaximalDynamicLightAmount();
 }

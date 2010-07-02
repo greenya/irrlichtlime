@@ -264,6 +264,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MaterialRenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MaterialRenderer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MaterialType.h"
 				>
 			</File>
