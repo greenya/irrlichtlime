@@ -12,12 +12,19 @@ namespace Scene { ref class Mesh; ref class MeshBuffer; ref class SceneNode; }
 namespace Video {
 
 ref class Image;
+ref class Light;
 ref class Material;
+ref class MaterialRenderer;
 ref class Texture;
 
 public ref class VideoDriver : ReferenceCounted
 {
 public:
+
+	int AddDynamicLight(Light^ light);
+
+	int AddMaterialRenderer(MaterialRenderer^ renderer, String^ name);
+	int AddMaterialRenderer(MaterialRenderer^ renderer);
 
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
@@ -94,9 +101,18 @@ public:
 
 	bool EndScene();
 
+	Light^ GetDynamicLight(int index);
+
+	MaterialRenderer^ GetMaterialRenderer(int index);
+	MaterialRenderer^ GetMaterialRenderer(MaterialType material);
+	String^ GetMaterialRendererName(int index);
+	String^ GetMaterialRendererName(MaterialType material);
+
 	int GetOcclusionQueryResult(Scene::SceneNode^ node);
+
 	Texture^ GetTexture(String^ filename);
 	Texture^ GetTexture(int index);
+
 	Matrix^ GetTransform(TransformationState state);
 
 	void MakeColorKeyTexture(Texture^ texture, Color^ color, bool zeroTexels);
@@ -123,6 +139,8 @@ public:
 	void RunOcclusionQuery(Scene::SceneNode^ node);
 
 	void SetMaterial(Material^ material);
+
+	void SetMaterialRendererName(int index, String^ name);
 
 	void SetMinHardwareBufferVertexCount(int count);
 
@@ -157,7 +175,7 @@ public:
 	property int FPS { int get(); }
 	property Material^ Material2D { Material^ get(); }
 	property int MaterialRendererCount { int get(); }
-	property int MaximalDynamicLightAmount { int get(); }
+	property int MaximalDynamicLightCount { int get(); }
 	property int MaximalPrimitiveCount { int get(); }
 	property Dimension2Di^ MaxTextureSize { Dimension2Di^ get(); }
 	property String^ Name { String^ get(); }
