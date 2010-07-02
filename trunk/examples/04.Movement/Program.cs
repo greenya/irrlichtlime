@@ -112,8 +112,8 @@ namespace _04.Movement
 				if (lastFPS != fps)
 				{
 					device.SetWindowCaption(String.Format(
-						"Movement Example - Irrlicht Engine [{0}] fps: {1}",
-						driver.Name, driver.FPS));
+						"Movement example - Irrlicht Engine [{0}] fps: {1}",
+						driver.Name, fps));
 
 					lastFPS = fps;
 				}
