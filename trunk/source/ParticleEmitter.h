@@ -19,10 +19,10 @@ public:
 	List<Particle^>^ Emitt(unsigned int now, unsigned int timeSinceLastCall);
 
 	property Vector3Df^ Direction { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property unsigned int MaxParticlesPerSecond { unsigned int get(); void set(unsigned int value); }
+	property int MaxParticlesPerSecond { int get(); void set(int value); }
 	property Video::Color^ MaxStartColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property Dimension2Df^ MaxStartSize { Dimension2Df^ get(); void set(Dimension2Df^ value); }
-	property unsigned int MinParticlesPerSecond { unsigned int get(); void set(unsigned int value); }
+	property int MinParticlesPerSecond { int get(); void set(int value); }
 	property Video::Color^ MinStartColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property Dimension2Df^ MinStartSize { Dimension2Df^ get(); void set(Dimension2Df^ value); }
 	property ParticleEmitterType Type { ParticleEmitterType get(); }

@@ -183,7 +183,7 @@ void SceneNode::AddChild(SceneNode^ child)
 	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
-Video::Material^ SceneNode::GetMaterial(unsigned int num)
+Video::Material^ SceneNode::GetMaterial(int num)
 {
 	if (m_Inherited)
 	{
@@ -248,8 +248,9 @@ void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
 	m_SceneNode->setMaterialFlag((video::E_MATERIAL_FLAG)flag, value);
 }
 
-void SceneNode::SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture)
+void SceneNode::SetMaterialTexture(int textureLayer, Video::Texture^ texture)
 {
+	LIME_ASSERT(textureLayer >= 0 && textureLayer < Video::Material::MaxTextures);
 	m_SceneNode->setMaterialTexture(textureLayer, LIME_SAFEREF(texture, m_Texture));
 }
 
@@ -380,7 +381,7 @@ void SceneNode::ID::set(int value)
 	m_SceneNode->setID(value);
 }
 
-unsigned int SceneNode::MaterialCount::get()
+int SceneNode::MaterialCount::get()
 {
 	if (m_Inherited)
 		return OnGetMaterialCount();

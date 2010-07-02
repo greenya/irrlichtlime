@@ -17,13 +17,13 @@ public ref class Mesh : ReferenceCounted
 public:
 
 	MeshBuffer^ GetMeshBuffer(Video::Material^ material);
-	MeshBuffer^ GetMeshBuffer(unsigned int index);
+	MeshBuffer^ GetMeshBuffer(int index);
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
 
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
-	property unsigned int MeshBufferCount { unsigned int get(); }
+	property int MeshBufferCount { int get(); }
 
 internal:
 

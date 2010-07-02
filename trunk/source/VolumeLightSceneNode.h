@@ -14,8 +14,8 @@ public ref class VolumeLightSceneNode : SceneNode
 public:
 
 	property Video::Color^ FootColor { Video::Color^ get(); void set(Video::Color^ value);  }
-	property unsigned int SubDivideU { unsigned int get(); void set(unsigned int value); }
-	property unsigned int SubDivideV { unsigned int get(); void set(unsigned int value); }
+	property int SubDivideU { int get(); void set(int value); }
+	property int SubDivideV { int get(); void set(int value); }
 	property Video::Color^ TailColor { Video::Color^ get(); void set(Video::Color^ value);  }
 
 internal:

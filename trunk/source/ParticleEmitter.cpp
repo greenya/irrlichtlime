@@ -49,13 +49,14 @@ void ParticleEmitter::Direction::set(Vector3Df^ value)
 	m_ParticleEmitter->setDirection(*value->m_NativeValue);
 }
 
-unsigned int ParticleEmitter::MaxParticlesPerSecond::get()
+int ParticleEmitter::MaxParticlesPerSecond::get()
 {
 	return m_ParticleEmitter->getMaxParticlesPerSecond();
 }
 
-void ParticleEmitter::MaxParticlesPerSecond::set(unsigned int value)
+void ParticleEmitter::MaxParticlesPerSecond::set(int value)
 {
+	LIME_ASSERT(value >= 0);
 	m_ParticleEmitter->setMaxParticlesPerSecond(value);
 }
 
@@ -81,13 +82,14 @@ void ParticleEmitter::MaxStartSize::set(Dimension2Df^ value)
 	m_ParticleEmitter->setMaxStartSize(*value->m_NativeValue);
 }
 
-unsigned int ParticleEmitter::MinParticlesPerSecond::get()
+int ParticleEmitter::MinParticlesPerSecond::get()
 {
 	return m_ParticleEmitter->getMinParticlesPerSecond();
 }
 
-void ParticleEmitter::MinParticlesPerSecond::set(unsigned int value)
+void ParticleEmitter::MinParticlesPerSecond::set(int value)
 {
+	LIME_ASSERT(value >= 0);
 	m_ParticleEmitter->setMinParticlesPerSecond(value);
 }
 

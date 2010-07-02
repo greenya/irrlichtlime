@@ -36,7 +36,7 @@ public:
 	void SetCellText(int rowIndex, int columnIndex, String^ text);
 
 	void SetColumnOrdering(int columnIndex, GUIColumnOrdering mode);
-	void SetColumnWidth(int columnIndex, unsigned int width);
+	void SetColumnWidth(int columnIndex, int width);
 
 	void SwapRows(int rowIndexA, int rowIndexB);
 

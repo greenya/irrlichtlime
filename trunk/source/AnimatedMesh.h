@@ -18,7 +18,7 @@ public:
 	Mesh^ GetMesh(int frame, int detailLevel);
 	Mesh^ GetMesh(int frame);
 
-	property unsigned int FrameCount { unsigned int get(); }
+	property int FrameCount { int get(); }
 	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 
 internal:

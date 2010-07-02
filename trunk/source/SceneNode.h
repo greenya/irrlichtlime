@@ -23,7 +23,7 @@ public:
 	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
 
-	Video::Material^ GetMaterial(unsigned int num);
+	Video::Material^ GetMaterial(int num);
 
 	void RegisterSceneNode();
 
@@ -36,7 +36,7 @@ public:
 	virtual void Render();
 
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
-	void SetMaterialTexture(unsigned int textureLayer, Video::Texture^ texture);
+	void SetMaterialTexture(int textureLayer, Video::Texture^ texture);
 	void SetMaterialType(Video::MaterialType newType);
 
 	void UpdateAbsolutePosition();
@@ -51,7 +51,7 @@ public:
 	property DebugSceneType DebugDataVisible { DebugSceneType get(); void set(DebugSceneType value); }
 	property bool DebugObject { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
-	property unsigned int MaterialCount { unsigned int get(); }
+	property int MaterialCount { int get(); }
 	property String^ Name { String^ get(); void set(String^ value); }
 	property SceneNode^ Parent { SceneNode^ get(); void set(SceneNode^ value); }
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }
@@ -67,8 +67,8 @@ public:
 	virtual String^ ToString() override;
 
 	delegate AABBox^ GetBoundingBoxEventHandler();
-	delegate unsigned int GetMaterialCountEventHandler();
-	delegate Video::Material^ GetMaterialEventHandler(unsigned int index);
+	delegate int GetMaterialCountEventHandler();
+	delegate Video::Material^ GetMaterialEventHandler(int index);
 	delegate void RegisterSceneNodeEventHandler();
 	delegate void RenderEventHandler();
 

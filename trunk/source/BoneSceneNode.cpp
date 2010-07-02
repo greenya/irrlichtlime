@@ -43,7 +43,7 @@ void BoneSceneNode::AnimationMode::set(BoneAnimationMode value)
 	m_BoneSceneNode->setAnimationMode((scene::E_BONE_ANIMATION_MODE)value);
 }
 
-unsigned int BoneSceneNode::BoneIndex::get()
+int BoneSceneNode::BoneIndex::get()
 {
 	return m_BoneSceneNode->getBoneIndex();
 }

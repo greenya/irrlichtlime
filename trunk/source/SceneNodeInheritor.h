@@ -47,13 +47,13 @@ public:
 	}
 
 	gcroot<SceneNode::GetMaterialCountEventHandler^> m_getMaterialCountHandler;
-	virtual u32 getMaterialCount() const
+	virtual unsigned int getMaterialCount() const
 	{
 		return m_getMaterialCountHandler->Invoke();
 	}
 
 	gcroot<SceneNode::GetMaterialEventHandler^> m_getMaterialHandler;
-	virtual video::SMaterial& getMaterial(u32 i)
+	virtual video::SMaterial& getMaterial(int i)
 	{
 		Video::Material^ m = m_getMaterialHandler->Invoke(i);
 		if (m != nullptr)

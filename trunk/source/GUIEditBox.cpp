@@ -67,13 +67,14 @@ void GUIEditBox::AutoScroll::set(bool value)
 	m_GUIEditBox->setAutoScroll(value);
 }
 
-unsigned int GUIEditBox::MaxLength::get()
+int GUIEditBox::MaxLength::get()
 {
 	return m_GUIEditBox->getMax();
 }
 
-void GUIEditBox::MaxLength::set(unsigned int value)
+void GUIEditBox::MaxLength::set(int value)
 {
+	LIME_ASSERT(value >= 0);
 	m_GUIEditBox->setMax(value);
 }
 

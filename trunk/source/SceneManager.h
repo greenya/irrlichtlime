@@ -300,8 +300,8 @@ public:
 
 	bool PostEvent(Event^ e);
 
-	unsigned int RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
-	unsigned int RegisterNodeForRendering(SceneNode^ node);
+	bool RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
+	bool RegisterNodeForRendering(SceneNode^ node);
 
 	bool SaveScene(String^ filename); // 2nd argument ISceneUserDataSerializer* not supported
 	bool LoadScene(String^ filename); // *same here*

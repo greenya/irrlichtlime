@@ -33,9 +33,9 @@ MeshBuffer^ Mesh::GetMeshBuffer(Video::Material^ material)
 	return MeshBuffer::Wrap(b);
 }
 
-MeshBuffer^ Mesh::GetMeshBuffer(unsigned int index)
+MeshBuffer^ Mesh::GetMeshBuffer(int index)
 {
-	LIME_ASSERT(index < MeshBufferCount);
+	LIME_ASSERT(index >= 0 && index < MeshBufferCount);
 	
 	scene::IMeshBuffer* b = m_Mesh->getMeshBuffer(index);
 	return MeshBuffer::Wrap(b);
@@ -67,7 +67,7 @@ void Mesh::BoundingBox::set(AABBox^ value)
 	m_Mesh->setBoundingBox(*value->m_NativeValue);
 }
 
-unsigned int Mesh::MeshBufferCount::get()
+int Mesh::MeshBufferCount::get()
 {
 	return m_Mesh->getMeshBufferCount();
 }

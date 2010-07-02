@@ -23,7 +23,7 @@ public:
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
 	property bool AutoScroll { bool get(); void set(bool value); }
-	property unsigned int MaxLength { unsigned int get(); void set(unsigned int value); }
+	property int MaxLength { int get(); void set(int value); }
 	property bool MultiLine { bool get(); void set(bool value); }
 	property bool PasswordBox { bool get(); void set(bool value); }
 	property Dimension2Di^ TextDimension { Dimension2Di^ get(); }

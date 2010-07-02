@@ -24,6 +24,8 @@ public:
 	property Video::VertexType Type { Video::VertexType get(); void set(Video::VertexType value); }
 	property int VertexCount { int get(); }
 
+	virtual String^ ToString() override;
+
 internal:
 
 	static VertexBuffer^ Wrap(scene::IVertexBuffer* ref);

@@ -15,7 +15,7 @@ public ref class Material : Lime::NativeValue<video::SMaterial>
 {
 public:
 
-	static property int TextureCount { int get() { return video::MATERIAL_MAX_TEXTURES; } }
+	static property int MaxTextures { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
 	Material();
 

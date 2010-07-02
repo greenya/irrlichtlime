@@ -20,9 +20,9 @@ public:
 	//u16* getIndices();
 	//void* getVertices();
 
-	Vector3Df^ GetNormal(unsigned int vertexIndex);
-	Vector3Df^ GetPosition(unsigned int vertexIndex);
-	Vector2Df^ GetTCoords(unsigned int vertexIndex);
+	Vector3Df^ GetNormal(int vertexIndex);
+	Vector3Df^ GetPosition(int vertexIndex);
+	Vector2Df^ GetTCoords(int vertexIndex);
 
 	void RecalculateBoundingBox();
 
@@ -32,10 +32,10 @@ public:
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property HardwareMappingHint HardwareMappingHintForIndex { HardwareMappingHint get(); }
 	property HardwareMappingHint HardwareMappingHintForVertex { HardwareMappingHint get(); }
-	property unsigned int IndexCount { unsigned int get(); }
+	property int IndexCount { int get(); }
 	property Video::IndexType IndexType { Video::IndexType get(); }
 	property Video::Material^ Material { Video::Material^ get(); }
-	property unsigned int VertexCount { unsigned int get(); }
+	property int VertexCount { int get(); }
 	property Video::VertexType VertexType { Video::VertexType get(); }
 
 internal:

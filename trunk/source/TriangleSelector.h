@@ -27,6 +27,8 @@ public:
 
 	property int TriangleCount { int get(); }
 
+	virtual String^ ToString() override;
+
 internal:
 
 	static TriangleSelector^ Wrap(scene::ITriangleSelector* ref);

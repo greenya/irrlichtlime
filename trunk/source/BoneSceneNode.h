@@ -21,7 +21,7 @@ public:
 	void UpdateAbsolutePositionOfAllChildren();
 
 	property BoneAnimationMode AnimationMode { BoneAnimationMode get(); void set(BoneAnimationMode value); }
-	property unsigned int BoneIndex { unsigned int get(); }
+	property int BoneIndex { int get(); }
 	property String^ BoneName { String^ get(); }
 	property  AABBox^ BoundingBox { AABBox^ get(); }
 	property BoneSkinningSpace SkinningSpace { BoneSkinningSpace get(); void set(BoneSkinningSpace value); }
