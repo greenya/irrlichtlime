@@ -12,6 +12,25 @@ public ref class AABBox : Lime::NativeValue<core::aabbox3df>
 {
 public:
 
+	static bool operator == (AABBox^ v1, AABBox^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (AABBox^ v1, AABBox^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	AABBox(float minx, float miny, float minz, float maxx, float maxy, float maxz)
 		: Lime::NativeValue<core::aabbox3df>(true)
 	{
