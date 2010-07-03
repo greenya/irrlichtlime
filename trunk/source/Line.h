@@ -12,6 +12,25 @@ public ref class Line2Di : Lime::NativeValue<core::line2di>
 {
 public:
 
+	static bool operator == (Line2Di^ v1, Line2Di^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Line2Di^ v1, Line2Di^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	Line2Di()
 		: Lime::NativeValue<core::line2di>(true)
 	{
@@ -32,6 +51,25 @@ internal:
 public ref class Line3Df : Lime::NativeValue<core::line3df>
 {
 public:
+
+	static bool operator == (Line3Df^ v1, Line3Df^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Line3Df^ v1, Line3Df^ v2)
+	{
+		return !(v1 == v2);
+	}
 
 	Line3Df()
 		: Lime::NativeValue<core::line3df>(true)

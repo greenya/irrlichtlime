@@ -12,6 +12,25 @@ public ref class Plane3Df : Lime::NativeValue<core::plane3df>
 {
 public:
 
+	static bool operator == (Plane3Df^ v1, Plane3Df^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Plane3Df^ v1, Plane3Df^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	Plane3Df()
 		: Lime::NativeValue<core::plane3df>(true)
 	{

@@ -12,6 +12,25 @@ public ref class Matrix : Lime::NativeValue<core::matrix4>
 {
 public:
 
+	static bool operator == (Matrix^ v1, Matrix^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Matrix^ v1, Matrix^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	Matrix()
 		: Lime::NativeValue<core::matrix4>(true)
 	{

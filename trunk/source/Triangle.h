@@ -12,6 +12,25 @@ public ref class Triangle3Df : Lime::NativeValue<core::triangle3df>
 {
 public:
 
+	static bool operator == (Triangle3Df^ v1, Triangle3Df^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Triangle3Df^ v1, Triangle3Df^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	Triangle3Df()
 		: Lime::NativeValue<core::triangle3df>(true)
 	{
