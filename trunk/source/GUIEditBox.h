@@ -16,8 +16,6 @@ public ref class GUIEditBox : GUIElement
 public:
 
 	void SetDrawBorder(bool draw);
-	void SetOverrideColor(bool enable, Video::Color^ color);
-	void SetOverrideColor(bool enable);
 	void SetOverrideFont(GUIFont^ font);
 	void SetPasswordChar(Char x);
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
@@ -25,6 +23,8 @@ public:
 	property bool AutoScroll { bool get(); void set(bool value); }
 	property int MaxLength { int get(); void set(int value); }
 	property bool MultiLine { bool get(); void set(bool value); }
+	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }
+	property bool OverrideColorEnabled { bool get(); void set(bool value); }
 	property bool PasswordBox { bool get(); void set(bool value); }
 	property Dimension2Di^ TextDimension { Dimension2Di^ get(); }
 	property bool WordWrap { bool get(); void set(bool value); }

@@ -36,10 +36,7 @@ public:
 		LIME_ASSERT(v1 != nullptr);
 		LIME_ASSERT(v2 != nullptr);
 
-		// !!! this operator not implemented in Irrlicht' core::dimension2d<T>, so we implement it here
-		return gcnew _REFCLASS_(
-			v1->m_NativeValue->Width - v2->m_NativeValue->Width,
-			v1->m_NativeValue->Height - v2->m_NativeValue->Height);
+		return gcnew _REFCLASS_((*v1->m_NativeValue) - (*v2->m_NativeValue));
 	}
 
 	static _REFCLASS_^ operator * (_REFCLASS_^ v1, _WRAPTYPE_ v2)

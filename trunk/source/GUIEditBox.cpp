@@ -29,19 +29,6 @@ void GUIEditBox::SetDrawBorder(bool draw)
 	m_GUIEditBox->setDrawBorder(draw);
 }
 
-void GUIEditBox::SetOverrideColor(bool enable, Video::Color^ color)
-{
-	LIME_ASSERT(color != nullptr);
-
-	m_GUIEditBox->enableOverrideColor(enable);
-	m_GUIEditBox->setOverrideColor(*color->m_NativeValue);
-}
-
-void GUIEditBox::SetOverrideColor(bool enable)
-{
-	m_GUIEditBox->enableOverrideColor(enable);
-}
-
 void GUIEditBox::SetOverrideFont(GUIFont^ font)
 {
 	m_GUIEditBox->setOverrideFont(LIME_SAFEREF(font, m_GUIFont));
@@ -86,6 +73,27 @@ bool GUIEditBox::MultiLine::get()
 void GUIEditBox::MultiLine::set(bool value)
 {
 	m_GUIEditBox->setMultiLine(value);
+}
+
+Video::Color^ GUIEditBox::OverrideColor::get()
+{
+	return gcnew Video::Color(m_GUIEditBox->getOverrideColor());
+}
+
+void GUIEditBox::OverrideColor::set(Video::Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_GUIEditBox->setOverrideColor(*value->m_NativeValue);
+}
+
+bool GUIEditBox::OverrideColorEnabled::get()
+{
+	return m_GUIEditBox->isOverrideColorEnabled();
+}
+
+void GUIEditBox::OverrideColorEnabled::set(bool value)
+{
+	m_GUIEditBox->enableOverrideColor(value);
 }
 
 bool GUIEditBox::PasswordBox::get()

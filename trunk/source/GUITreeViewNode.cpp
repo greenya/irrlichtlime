@@ -317,7 +317,7 @@ void GUITreeViewNode::RemoveChild(GUITreeViewNode^ child)
 
 void GUITreeViewNode::RemoveChildren()
 {
-	m_GUITreeViewNode->clearChilds();
+	m_GUITreeViewNode->clearChildren();
 }
 
 int GUITreeViewNode::ChildCount::get()
@@ -353,7 +353,7 @@ GUITreeViewNode^ GUITreeViewNode::FirstChild::get()
 
 bool GUITreeViewNode::HasChildren::get()
 {
-	return m_GUITreeViewNode->hasChilds();
+	return m_GUITreeViewNode->hasChildren();
 }
 
 String^ GUITreeViewNode::Icon::get()

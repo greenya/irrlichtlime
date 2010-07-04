@@ -9,6 +9,7 @@ namespace IrrlichtLime {
 
 public enum class LogLevel
 {
+	Debug = ELL_DEBUG,
 	Information = ELL_INFORMATION,
 	Warning = ELL_WARNING,
 	Error = ELL_ERROR,
