@@ -1,4 +1,54 @@
 ============================
+Changes in 0.5 (04-Jul-2010)
+============================
+
+- Added examples 09.Meshviewer and 11.PerPixelLighting.
+
+- Updated Irrlicht SDK to trunk rev. 3330. Added LogLevel.Debug; GUIEditBox changes: removed method SetOverrideColor; added props OverrideColor, OverrideColorEnabled.
+
+- Added comparison operators ("== " and "!=") to AABBox, Line2Di, Line3Df, Matrix, Plane3Df and Triangle3Df.
+
+- Added class MaterialRenderer. Class VideoDriver extended with methods AddDynamicLight, AddMaterialRenderer, GetDynamicLight, GetMaterialRenderer, GetMaterialRendererName and SetMaterialRendererName.
+
+- Changed usage of "unsigned int" to "int" in classes FileList, FileSystem, Image, IrrlichtDevice, Texture, VideoDriver, AnimatedMesh, AnimatedMeshSceneNode, BoneSceneNode, GUIComboBox, GUIEditBox, GUITable, Mesh, MeshBuffer, MeshManipulator, ParticleEmitter, ParticleSystemSceneNode, SceneNode and VolumeLightSceneNode. Renamed method "GetTextureByIndex" to "GetTexture" in VideoDriver. Changed return type of SceneManager.RegisterNodeForRendering from "uint" to "bool".
+
+- Removed class Dimension2Du; made changes to use Dimension2Di instead.
+
+- Renamed classes Coloru => Color, Matrix4f => Matrix and AABBox3Df => AABBox. Also renamed prop Color.Color => Color.ARGB, method Colorf.ToColoru => Colorf.ToColor.
+
+- Added classes NamedPath and TexturePainter. Class Texture extended with methods GetTexturePainter, RegenerateMipMapLevels; props AlphaChannel, ColorFormat, DriverType, MipMaps, Name, OriginalSize, Pitch, RenderTarget and Size.
+
+- Added ability to compile Lime in Release mode. Added release version of Irrlicht.dll. Made proper changes to proj files. Updated AssemblyInfo' AssemblyDescriptionAttribute to indicate debug build.
+
+- Added class BillboardTextSceneNode. Class SceneManager extended with methods AddArrowMesh, AddBillboardTextSceneNode, AddMeshSceneNode, AddSceneNode, CreateTerrainTriangleSelector, CreateTriangleSelectorFromBoundingBox, GetSceneNodesFromType, IsCulled and PostEvent.
+
+- Added classes DynamicMeshBuffer, IndexBuffer, MetaTriangleSelector, TerrainSceneNode, TextSceneNode, VertexBuffer; enum TerrainPatchSize. Class SceneManager extended with methods AddTerrainSceneNode, AddTextSceneNode and CreateMetaTriangleSelector. Changed type of index-related arguments from "unsigned int" to "int" in TriangleSelector.
+
+- Added class DummyTransformationSceneNode. Added method CreateImageFromFile to VideoDriver. Class SceneManager extended methods AddDummyTransformationSceneNode, AddEmptySceneNode, AddSkyDomeSceneNode, AddSphereMesh, AddTerrainMesh, AddToDeletionQueue, AddVolumeLightMesh, CreateDeleteAnimator, CreateFollowSplineAnimator and CreateNewSceneManager.
+
+- Added classes GUITreeView, GUITreeViewNode. Added methods GUIEnvironment.AddTreeView, GUITable.Get/SetCellData.
+
+- Added enums GUIColumnOrdering, GUIOrderingMode, GUITableDrawFlag; classes GUIImageList, GUISpinBox and GUITable. Class GUIEnvironment extended with methods AddEmptySpriteBank, AddFont, AddGUIElement, AddModalScreen, AddSpinBox, AddTable, Clear, ClearFocus, CreateImageList, CreateSkin, Focused, GetSpriteBank, PostEvent; props FileSystem, Focus, VideoDriver. Added constructors to class Event. Added static props ButtonCount and AxisCount to Event.JoystickEvent. Added class Dimension2Di (currently it is used in GUIImageList.ImageSize only).
+
+- Added classes GUICheckBox, GUIColorSelectDialog, GUIInOutFader and GUIMeshViewer. Added methods AddCheckBox, AddColorSelectDialog, AddInOutFader and AddMeshViewer to GUIEnvironment.
+
+- Added proper class wrapping to SceneNode, now it wraps correct type and can be type-casted safely to more specific XXXSceneNode type.
+
+- Changed type of index values from "unsigned int" to "int" in GUIComboBox, GUIContextMenu, GUIListBox and GUISkin.
+
+- Added classes GUITab, GUITabControl. Added methods AddTab, AddTabControl to GUIEnvironment.
+
+- Added classes GUIComboBox, GUIContextMenu, GUIToolBar; enum GUIContextMenuClose. Class GUIEnvironment extended with methods AddComboBox, AddContextMenu, AddMenu and AddToolBar.
+
+- Added enum FileSystemType. Added classes FileArchive and FileList. Class FileSystem extended with methods CreateEmptyFileList, CreateFileListFromWorkingDirectory, GetFileArchive and SetFileSystemType. Class SceneManager extended with methods AddCameraSceneNodeMaya and AddSkyBoxSceneNode.
+
+- Added enums FogType, GUIMessageBoxFlag and TextureCreationFlag. Added class Fog for holding fog data. Class VideoDriver extended with methods SetMinHardwareBufferVertexCount, SetTextureCreationFlag, TurnLight and WriteImageToFile; prop Fog.
+
+- Added enum GUIMessageBoxFlag, method GUIEnvironment.AddMessageBox. Class GUIElement extended with methods AddChild, BringToFront, Draw, GetNextElement, Move, Remove, RemoveChild, SetAlignment, SetMaxSize, SetMinSize, SetRelativePositionProportional and UpdateAbsolutePosition; props ChildList, Parent, SubElement, TabGroup, TabGroupElement and TypeName.
+
+- Added prop GUIEnvironment.RootElement. Renamed prop SceneManager.RootSceneNode to RootNode. Changed argument order in GUISkin class for methods SetColor, SetText, SetFont, SetIcon, SetSize; added overloading for SetFont with only 1 argument - a font. Updated examples to this changes.
+
+============================
 Changes in 0.4 (19-Jun-2010)
 ============================
 
