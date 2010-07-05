@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
-namespace Scene { ref class Mesh; ref class MeshBuffer; ref class SceneNode; }
+namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; }
 namespace Video {
 
 ref class Image;
@@ -21,16 +21,20 @@ public ref class VideoDriver : ReferenceCounted
 {
 public:
 
+	static property int MaxClipPlanes { int get() { return 6; } } // "6", because i don't know how detect real number of available clip planes
+	// and doc says: "There are at least 6 clipping planes available for the user to set at will. The plane index must be between 0
+	// and MaxUserClipPlanes" (MaxUserClipPlanes is a private variable and calculates from device caps internally).
+
 	int AddDynamicLight(Light^ light);
 
 	int AddMaterialRenderer(MaterialRenderer^ renderer, String^ name);
 	int AddMaterialRenderer(MaterialRenderer^ renderer);
 
-	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format);
+	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size);
 
-	Texture^ AddTexture(Dimension2Di^ size, String^ name, ColorFormat format);
+	Texture^ AddTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
@@ -47,8 +51,8 @@ public:
 
 	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
 	Image^ CreateImage(Image^ imageToCopy, Vector2Di^ pos, Dimension2Di^ size);
-	Image^ CreateImage(Image^ imageToConvert, ColorFormat format);
-	Image^ CreateImage(ColorFormat format, Dimension2Di^ size);
+	Image^ CreateImage(Image^ imageToConvert, Video::ColorFormat format);
+	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 
 	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
@@ -121,6 +125,8 @@ public:
 
 	bool EndScene();
 
+	Texture^ FindTexture(String^ filename);
+
 	Light^ GetDynamicLight(int index);
 
 	MaterialRenderer^ GetMaterialRenderer(int index);
@@ -132,6 +138,8 @@ public:
 
 	Texture^ GetTexture(String^ filename);
 	Texture^ GetTexture(int index);
+
+	bool GetTextureCreationFlag(TextureCreationFlag flag);
 
 	Matrix^ GetTransform(TransformationState state);
 
@@ -158,12 +166,16 @@ public:
 	void RunOcclusionQuery(Scene::SceneNode^ node, bool visible);
 	void RunOcclusionQuery(Scene::SceneNode^ node);
 
+	bool SetClipPlane(int index, Plane3Df^ plane, bool enable);
+	bool SetClipPlane(int index, Plane3Df^ plane);
+
 	void SetMaterial(Material^ material);
 
 	void SetMaterialRendererName(int index, String^ name);
 
 	void SetMinHardwareBufferVertexCount(int count);
 
+	//bool setRenderTarget (const core::array< video::IRenderTarget > &texture, bool clearBackBuffer=true, bool clearZBuffer=true, SColor color=video::SColor(0, 0, 0, 0));
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
@@ -187,6 +199,7 @@ public:
 	bool WriteImageToFile(Image^ image, String^ filename, unsigned int param);
 	bool WriteImageToFile(Image^ image, String^ filename);
 
+	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
 	property Dimension2Di^ CurrentRenderTargetSize { Dimension2Di^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property int DynamicLightCount { int get(); }
@@ -198,6 +211,7 @@ public:
 	property int MaximalDynamicLightCount { int get(); }
 	property int MaximalPrimitiveCount { int get(); }
 	property Dimension2Di^ MaxTextureSize { Dimension2Di^ get(); }
+	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property String^ Name { String^ get(); }
 	property int PrimitiveCountDrawn { int get(); }
 	property Dimension2Di^ ScreenSize { Dimension2Di^ get(); }
