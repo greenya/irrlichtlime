@@ -78,5 +78,10 @@ void IndexBuffer::Type::set(Video::IndexType value)
 	m_IndexBuffer->setType((video::E_INDEX_TYPE)value);
 }
 
+String^ IndexBuffer::ToString()
+{
+	return String::Format("IndexBuffer: IndexCount={0}", IndexCount);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime

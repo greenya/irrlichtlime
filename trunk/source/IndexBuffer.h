@@ -24,6 +24,8 @@ public:
 	property int IndexCount { int get(); }
 	property Video::IndexType Type { Video::IndexType get(); void set(Video::IndexType value); }
 
+	virtual String^ ToString() override;
+
 internal:
 
 	static IndexBuffer^ Wrap(scene::IIndexBuffer* ref);

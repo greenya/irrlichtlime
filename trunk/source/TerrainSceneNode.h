@@ -18,7 +18,6 @@ public ref class TerrainSceneNode : SceneNode
 public:
 
 	AABBox^ GetPatchBoundingBox(int patchX, int patchZ);
-	//virtual const core::aabbox3d<f32>& getBoundingBox() const =0 // TODO: check in 12.TerrainRendering example if SceneNode.BoundingBox returns the same, if yes - remove comment, otherwise reimplement it here as prop-get and make SceneNode' one virtual.
 	List<int>^ GetCurrentLODOfPatches();
 	float GetHeight(float x, float z);
 	List<int>^ GetIndicesForPatch(int patchX, int patchZ, int lodLevel);
