@@ -45,10 +45,14 @@ public:
 
 	void ClearZBuffer();
 
+	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
+	Image^ CreateImage(Image^ imageToCopy, Vector2Di^ pos, Dimension2Di^ size);
+	Image^ CreateImage(Image^ imageToConvert, ColorFormat format);
+	Image^ CreateImage(ColorFormat format, Dimension2Di^ size);
+	Image^ CreateImage(String^ filename);
+
 	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void CreateOcclusionQuery(Scene::SceneNode^ node);
-
-	Image^ CreateImageFromFile(String^ filename);
 
 	Image^ CreateScreenShot();
 
@@ -71,10 +75,19 @@ public:
 	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color);
 	void Draw2DLine(Line2Di^ line, Color^ color);
 
+	void Draw2DPolygon(Vector2Di^ center, float radius, Color^ color, int vertexCount);
+
 	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown, Recti^ clip);
 	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown);
 	void Draw2DRectangle(Recti^ pos, Color^ color, Recti^ clip);
 	void Draw2DRectangle(Recti^ pos, Color^ color);
+
+	void Draw2DRectangleOutline(Recti^ pos, Color^ color);
+
+	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices);
+	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices);
 
 	void Draw3DBox(AABBox^ box, Color^ color);
 
@@ -87,6 +100,13 @@ public:
 	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
 
 	void DrawPixel(int x, int y, Color^ color);
+
+	void DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, Color^ rightUpEdge, Color^ leftDownEdge, Color^ rightDownEdge);
+	void DrawStencilShadow(bool clearStencilBuffer);
+	void DrawStencilShadow();
+
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail);
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles);
 
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices);
