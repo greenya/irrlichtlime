@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.Meshviewer", "examples\0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11.PerPixelLighting", "examples\11.PerPixelLighting\11.PerPixelLighting.csproj", "{5DB10DC3-9CBC-4521-879D-6FBAF76A478F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12.TerrainRendering", "examples\12.TerrainRendering\12.TerrainRendering.csproj", "{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,18 @@ Global
 		{5DB10DC3-9CBC-4521-879D-6FBAF76A478F}.Release|Win32.ActiveCfg = Release|x86
 		{5DB10DC3-9CBC-4521-879D-6FBAF76A478F}.Release|x86.ActiveCfg = Release|x86
 		{5DB10DC3-9CBC-4521-879D-6FBAF76A478F}.Release|x86.Build.0 = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|Win32.ActiveCfg = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|x86.ActiveCfg = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Debug|x86.Build.0 = Debug|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|Any CPU.ActiveCfg = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|Mixed Platforms.Build.0 = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|Win32.ActiveCfg = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|x86.ActiveCfg = Release|x86
+		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
