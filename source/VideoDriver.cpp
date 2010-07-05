@@ -5,6 +5,7 @@
 #include "MaterialRenderer.h"
 #include "Mesh.h"
 #include "MeshBuffer.h"
+#include "MeshManipulator.h"
 #include "ReferenceCounted.h"
 #include "SceneNode.h"
 #include "Texture.h"
@@ -51,7 +52,7 @@ int VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer)
 		LIME_SAFEREF(renderer, m_MaterialRenderer));
 }
 
-Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, ColorFormat format)
+Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width >= 0);
@@ -88,7 +89,7 @@ Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size)
 	return Texture::Wrap(t);
 }
 
-Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name, ColorFormat format)
+Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width >= 0);
@@ -199,7 +200,7 @@ Image^ VideoDriver::CreateImage(Image^ imageToCopy, Vector2Di^ pos, Dimension2Di
 	return Image::Wrap(i);
 }
 
-Image^ VideoDriver::CreateImage(Image^ imageToConvert, ColorFormat format)
+Image^ VideoDriver::CreateImage(Image^ imageToConvert, Video::ColorFormat format)
 {
 	video::IImage* i = m_VideoDriver->createImage(
 		(video::ECOLOR_FORMAT)format,
@@ -208,7 +209,7 @@ Image^ VideoDriver::CreateImage(Image^ imageToConvert, ColorFormat format)
 	return Image::Wrap(i);
 }
 
-Image^ VideoDriver::CreateImage(ColorFormat format, Dimension2Di^ size)
+Image^ VideoDriver::CreateImage(Video::ColorFormat format, Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width > 0);
@@ -781,13 +782,13 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 
 void VideoDriver::EnableClipPlane(int index, bool enable)
 {
-	LIME_ASSERT(index >= 0 && index < 6);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
 	m_VideoDriver->enableClipPlane(index, enable);
 }
 
 void VideoDriver::EnableClipPlane(int index)
 {
-	LIME_ASSERT(index >= 0 && index < 6);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
 	m_VideoDriver->enableClipPlane(index, true);
 }
 
@@ -804,6 +805,12 @@ void VideoDriver::EnableMaterial2D()
 bool VideoDriver::EndScene()
 {
 	return m_VideoDriver->endScene();
+}
+
+Texture^ VideoDriver::FindTexture(String^ filename)
+{
+	video::ITexture* t = m_VideoDriver->findTexture(Lime::StringToPath(filename));
+	return Texture::Wrap(t);
 }
 
 Light^ VideoDriver::GetDynamicLight(int index)
@@ -857,6 +864,11 @@ Texture^ VideoDriver::GetTexture(int index)
 
 	video::ITexture* t = m_VideoDriver->getTextureByIndex(index);
 	return Texture::Wrap(t);
+}
+
+bool VideoDriver::GetTextureCreationFlag(TextureCreationFlag flag)
+{
+	return m_VideoDriver->getTextureCreationFlag((video::E_TEXTURE_CREATION_FLAG)flag);
 }
 
 Matrix^ VideoDriver::GetTransform(TransformationState state)
@@ -956,6 +968,27 @@ void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node, bool visible)
 void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node)
 {
 	m_VideoDriver->runOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane, bool enable)
+{
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(plane != nullptr);
+
+	return m_VideoDriver->setClipPlane(
+		index,
+		*plane->m_NativeValue,
+		enable);
+}
+
+bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane)
+{
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(plane != nullptr);
+
+	return m_VideoDriver->setClipPlane(
+		index,
+		*plane->m_NativeValue);
 }
 
 void VideoDriver::SetMaterial(Material^ material)
@@ -1070,6 +1103,11 @@ bool VideoDriver::WriteImageToFile(Image^ image, String^ filename)
 		Lime::StringToPath(filename));
 }
 
+Video::ColorFormat VideoDriver::ColorFormat::get()
+{
+	return (Video::ColorFormat)m_VideoDriver->getColorFormat();
+}
+
 Video::DriverType VideoDriver::DriverType::get()
 {
 	return (Video::DriverType)m_VideoDriver->getDriverType();
@@ -1168,6 +1206,12 @@ int VideoDriver::MaximalPrimitiveCount::get()
 int VideoDriver::MaterialRendererCount::get()
 {
 	return m_VideoDriver->getMaterialRendererCount();
+}
+
+Scene::MeshManipulator^ VideoDriver::MeshManipulator::get()
+{
+	scene::IMeshManipulator* m = m_VideoDriver->getMeshManipulator();
+	return Scene::MeshManipulator::Wrap(m);
 }
 
 String^ VideoDriver::Name::get()
