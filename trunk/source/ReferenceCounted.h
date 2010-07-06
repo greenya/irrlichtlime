@@ -12,6 +12,9 @@ public ref class ReferenceCounted
 {
 public:
 
+	static bool operator == (ReferenceCounted^ v1, ReferenceCounted^ v2);
+	static bool operator != (ReferenceCounted^ v1, ReferenceCounted^ v2);
+
 	bool Drop();
 	void Grab();
 
