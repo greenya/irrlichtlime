@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11.PerPixelLighting", "exam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12.TerrainRendering", "examples\12.TerrainRendering\12.TerrainRendering.csproj", "{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L01.TexturePainting", "examples\L01.TexturePainting\L01.TexturePainting.csproj", "{17B6AF95-48FC-4529-8451-4AF0E0F39567}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,18 @@ Global
 		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|Win32.ActiveCfg = Release|x86
 		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|x86.ActiveCfg = Release|x86
 		{EFC801FE-4FCD-4283-9CBC-1ED06DAE1C11}.Release|x86.Build.0 = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|Win32.ActiveCfg = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|x86.ActiveCfg = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Debug|x86.Build.0 = Debug|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|Any CPU.ActiveCfg = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|Mixed Platforms.Build.0 = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|Win32.ActiveCfg = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|x86.ActiveCfg = Release|x86
+		{17B6AF95-48FC-4529-8451-4AF0E0F39567}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

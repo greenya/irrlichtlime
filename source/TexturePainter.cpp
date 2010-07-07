@@ -91,6 +91,58 @@ bool TexturePainter::Lock()
 	return true;
 }
 
+void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
+{
+	LIME_ASSERT(Locked);
+	LIME_ASSERT(!ReadOnly);
+	LIME_ASSERT(x1 >= 0 && x1 < MipMapLevelWidth);
+	LIME_ASSERT(y1 >= 0 && y1 < MipMapLevelHeight);
+	LIME_ASSERT(x2 >= 0 && x2 < MipMapLevelWidth);
+	LIME_ASSERT(y2 >= 0 && y2 < MipMapLevelHeight);
+	LIME_ASSERT(color != nullptr);
+
+	bool t = abs(y2 - y1) > abs(x2 - x1);
+
+	if (t)
+	{
+		x1 ^= y1; y1 ^= x1; x1 ^= y1; // swap x1, y1
+		x2 ^= y2; y2 ^= x2; x2 ^= y2; // swap x2, y2
+	}
+
+	if (x1 > x2)
+	{
+		x1 ^= x2; x2 ^= x1; x1 ^= x2; // swap x1, x2
+		y1 ^= y2; y2 ^= y1; y1 ^= y2; // swap y1, y2
+	}
+
+	int dx = x2 - x1;
+	int dy = abs(y2 - y1);
+	int sy = y1 < y2 ? 1 : -1;
+	int e = dx / 2;
+	int y = y1;
+
+	int rs = m_rowSize / (1 << m_mipmapLevel);
+
+	for (int x = x1; x <= x2; x++)
+	{
+		if (t)
+			color->m_NativeValue->getData(
+				(unsigned char*)m_pointer + x * rs + y * m_pixelSize, // set pixel to y,x
+				m_format);
+		else
+			color->m_NativeValue->getData(
+				(unsigned char*)m_pointer + y * rs + x * m_pixelSize, // set pixel to x,y
+				m_format);
+
+		e -= dy;
+		if (e < 0)
+		{
+			y += sy;
+			e += dx;
+		}
+	}
+}
+
 void TexturePainter::SetPixel(int x, int y, Color^ color)
 {
 	LIME_ASSERT(Locked);

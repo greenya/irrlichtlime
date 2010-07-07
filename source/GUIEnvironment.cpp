@@ -113,12 +113,12 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
 	return GUIButton::Wrap(b);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent, int id)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent, int id)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
-		checked,
+		checkedState,
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
@@ -127,12 +127,12 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
-		checked,
+		checkedState,
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		-1,
@@ -141,12 +141,12 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^ text)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
-		checked,
+		checkedState,
 		*rectangle->m_NativeValue,
 		nullptr,
 		-1,
@@ -155,12 +155,12 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle, String^
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checked, Recti^ rectangle)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
-		checked,
+		checkedState,
 		*rectangle->m_NativeValue);
 
 	return GUICheckBox::Wrap(c);

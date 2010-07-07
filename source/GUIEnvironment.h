@@ -48,10 +48,10 @@ public:
 	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
 	GUIButton^ AddButton(Recti^ rectangle);
 
-	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent, int id);
-	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text, GUIElement^ parent);
-	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle, String^ text);
-	GUICheckBox^ AddCheckBox(bool checked, Recti^ rectangle);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent, int id);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle);
 
 	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent, int id);
 	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent);

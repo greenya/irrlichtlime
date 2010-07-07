@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("08.SpecialFX")]
+[assembly: AssemblyTitle("L01.TexturePainting")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("08.SpecialFX")]
+[assembly: AssemblyProduct("L01.TexturePainting")]
 [assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1b8aed88-6742-4827-915e-b5ab0de76766")]
+[assembly: Guid("ad0a2556-6328-44a0-b214-58b30ebd6fcc")]
 
 // Version information for an assembly consists of the following four values:
 //
