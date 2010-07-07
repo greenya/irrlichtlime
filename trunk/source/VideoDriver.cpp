@@ -94,6 +94,8 @@ Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name, Video::ColorF
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width >= 0);
 	LIME_ASSERT(size->Height >= 0);
+	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(name->Length > 0);
 
 	video::ITexture* t = m_VideoDriver->addTexture(
 		(core::dimension2du&)*size->m_NativeValue,
@@ -108,6 +110,8 @@ Texture^ VideoDriver::AddTexture(Dimension2Di^ size, String^ name)
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width >= 0);
 	LIME_ASSERT(size->Height >= 0);
+	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(name->Length > 0);
 
 	video::ITexture* t = m_VideoDriver->addTexture(
 		(core::dimension2du&)*size->m_NativeValue,

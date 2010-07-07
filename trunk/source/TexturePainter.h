@@ -21,6 +21,7 @@ public:
 	bool Lock(bool readOnly);
 	bool Lock();
 
+	void SetLine(int x1, int y1, int x2, int y2, Color^ color);
 	void SetPixel(int x, int y, Color^ color);
 
 	void Unlock(bool alsoRegenerateMipMapLevels);
