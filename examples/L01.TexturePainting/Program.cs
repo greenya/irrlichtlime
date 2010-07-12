@@ -29,6 +29,13 @@ namespace L01.TexturePainting
 				driverSettings.VideoMode.Depth,
 				driverSettings.Fullscreen);
 
+			if (device == null)
+			{
+				Console.WriteLine("\nDevice creation failed!\n<Press any key to exit>");
+				Console.ReadKey();
+				return;
+			}
+
 			Application app = new Application(device);
 
 			int lastFPS = -1;

@@ -33,7 +33,7 @@ namespace L01.TexturePainting
 
 			while (device.Run())
 			{
-				device.VideoDriver.BeginScene(true, true, new Color(40, 180, 80));
+				device.VideoDriver.BeginScene(true, false, new Color(40, 180, 80));
 				device.GUIEnvironment.DrawAll();
 				device.VideoDriver.EndScene();
 			}
@@ -54,12 +54,14 @@ namespace L01.TexturePainting
 				gui.Skin.SetColor(l, c);
 			}
 
-			GUITabControl tc = gui.AddTabControl(new Recti(20, 20, 300, 250));
+			Recti v = device.VideoDriver.ViewPort;
+
+			GUITabControl tc = gui.AddTabControl(new Recti(20, 20, v.Width - 20, v.Height - 70));
 
 			GUITab t1 = tc.AddTab("Setup");
 
-			gui.AddStaticText("Driver", new Recti(20, 20, 260, 40), false, false, t1);
-			guiDriverType = gui.AddComboBox(new Recti(20, 40, 260, 60), t1);
+			gui.AddStaticText("Driver", new Recti(20, 20, v.Width - 60, 40), false, false, t1);
+			guiDriverType = gui.AddComboBox(new Recti(20, 40, v.Width - 60, 60), t1);
 			foreach (DriverType t in Enum.GetValues(typeof(DriverType)))
 			{
 				if (t == DriverType.Null)
@@ -71,8 +73,8 @@ namespace L01.TexturePainting
 					guiDriverType.SelectedIndex = i;
 			}
 
-			gui.AddStaticText("Resolution", new Recti(20, 70, 260, 90), false, false, t1);
-			guiResolution = gui.AddComboBox(new Recti(20, 90, 260, 110), t1);
+			gui.AddStaticText("Resolution", new Recti(20, 70, v.Width - 60, 90), false, false, t1);
+			guiResolution = gui.AddComboBox(new Recti(20, 90, v.Width - 60, 110), t1);
 			foreach (VideoMode m in device.VideoModeList.ModeList)
 			{
 				int i = guiResolution.AddItem(m.ToString());
@@ -81,14 +83,14 @@ namespace L01.TexturePainting
 					guiResolution.SelectedIndex = i;
 			}
 
-			guiFullscreen = gui.AddCheckBox(fullscreen, new Recti(20, 130, 260, 150), "Fullscreen", t1);
+			guiFullscreen = gui.AddCheckBox(fullscreen, new Recti(20, 130, v.Width - 60, 150), "Fullscreen", t1);
 
 			GUITab t2 = tc.AddTab("About");
 
-			gui.AddStaticText(aboutText, new Recti(20, 20, 260, 180), false, true, t2);
+			gui.AddStaticText(aboutText, new Recti(20, 20, v.Width - 60, 180), false, true, t2);
 
-			guiButtonRun = gui.AddButton(new Recti(130, 270, 210, 300), null, -1, "Run");
-			guiButtonExit = gui.AddButton(new Recti(220, 270, 300, 300), null, -1, "Exit");
+			guiButtonRun = gui.AddButton(new Recti(v.Width - 190, v.Height - 50, v.Width - 110, v.Height - 20), null, -1, "Run");
+			guiButtonExit = gui.AddButton(new Recti(v.Width - 100, v.Height - 50, v.Width - 20, v.Height - 20), null, -1, "Exit");
 		}
 
 		bool device_OnEvent(Event e)
@@ -120,11 +122,11 @@ namespace L01.TexturePainting
 			return false;
 		}
 
-		// default settings <
+		// default settings {
 		DriverType driverType = DriverType.Direct3D8;
 		VideoMode videoMode = new VideoMode(800, 600, 32);
 		bool fullscreen = false;
-		// >
+		// }
 
 		bool run = false;
 		string windowCaption;

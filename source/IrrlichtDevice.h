@@ -15,12 +15,15 @@ namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; ref class VideoModeList; }
 
 ref class Event;
+ref class IrrlichtCreationParameters;
 ref class Timer;
 class EventReceiverInheritor;
 
 public ref class IrrlichtDevice : ReferenceCounted
 {
 public:
+
+	static IrrlichtDevice^ CreateDevice(IrrlichtCreationParameters^ parameters);
 
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen, bool stencilbuffer, bool vsync);
 	static IrrlichtDevice^ CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen, bool stencilbuffer);
