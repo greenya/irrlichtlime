@@ -3,6 +3,7 @@
 #include "EventReceiverInheritor.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
+#include "IrrlichtCreationParameters.h"
 #include "IrrlichtDevice.h"
 #include "ReferenceCounted.h"
 #include "SceneManager.h"
@@ -24,12 +25,9 @@ IrrlichtDevice^ IrrlichtDevice::Wrap(irr::IrrlichtDevice* ref)
 	IrrlichtDevice^ device = gcnew IrrlichtDevice(ref);
 	
 	if (device == nullptr)
-	{
-		Console::WriteLine("Device creation failed.");
 		return nullptr;
-	}
 
-	core::stringw s = "Irrlicht Lime version ";
+	core::stringw s = L"Irrlicht Lime version ";
 	s += Lime::StringToStringW(Lime::Version);
 	device->m_IrrlichtDevice->getLogger()->log(s.c_str());
 
@@ -59,6 +57,14 @@ IrrlichtDevice::!IrrlichtDevice()
 		delete m_EventReceiverInheritor;
 		m_EventReceiverInheritor = nullptr;
 	}
+}
+
+IrrlichtDevice^ IrrlichtDevice::CreateDevice(IrrlichtCreationParameters^ parameters)
+{
+	LIME_ASSERT(parameters != nullptr);
+
+	irr::IrrlichtDevice* d = createDeviceEx(*parameters->m_NativeValue);
+	return Wrap(d);
 }
 
 IrrlichtDevice^ IrrlichtDevice::CreateDevice(Video::DriverType driverType, Dimension2Di^ windowSize, int bits, bool fullscreen,

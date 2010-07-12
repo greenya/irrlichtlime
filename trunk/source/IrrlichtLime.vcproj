@@ -1169,6 +1169,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\IrrlichtCreationParameters.h"
+			>
+		</File>
+		<File
 			RelativePath=".\IrrlichtDevice.cpp"
 			>
 		</File>
