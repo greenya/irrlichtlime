@@ -7,7 +7,7 @@ The Irrlicht Lime SDK
   Contents:
 
   1. Directory Structure Overview
-  2. How To Start
+  2. How to Start
   3. Release Notes
   4. License
   5. Contact
@@ -33,7 +33,7 @@ The Irrlicht Lime SDK
 
 
 ==========================================================================
-2. How to start
+2. How to Start
 ==========================================================================
 
   To see wrapper in action, go to \bin folder and run couple examples.
