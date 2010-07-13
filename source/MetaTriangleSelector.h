@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-#include "ReferenceCounted.h"
+#include "TriangleSelector.h"
 
 using namespace irr;
 using namespace System;
@@ -10,9 +10,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Scene {
 
-ref class TriangleSelector;
-
-public ref class MetaTriangleSelector : ReferenceCounted
+public ref class MetaTriangleSelector : TriangleSelector
 {
 public:
 

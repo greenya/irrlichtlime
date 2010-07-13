@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "MetaTriangleSelector.h"
-#include "ReferenceCounted.h"
 #include "TriangleSelector.h"
 
 using namespace irr;
@@ -18,7 +17,7 @@ MetaTriangleSelector^ MetaTriangleSelector::Wrap(scene::IMetaTriangleSelector* r
 }
 
 MetaTriangleSelector::MetaTriangleSelector(scene::IMetaTriangleSelector* ref)
-	: ReferenceCounted(ref)
+	: TriangleSelector(ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_MetaTriangleSelector = ref;
