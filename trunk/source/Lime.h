@@ -11,8 +11,8 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
 #define LIME_ASSERT2(condition, details) System::Diagnostics::Debug::Assert(condition, #condition, details);
 #else
-#define LIME_ASSERT(condition)
-#define LIME_ASSERT2(condition, details)
+#define LIME_ASSERT(condition) ;
+#define LIME_ASSERT2(condition, details) ;
 #endif
 
 #define LIME_SAFEREF(object, member) (object == nullptr ? nullptr : object->member)
