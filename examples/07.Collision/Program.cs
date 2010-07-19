@@ -181,7 +181,7 @@ namespace _07.Collision
 					bill.Position = new Vector3Df(intersection);
 
 					// We need to reset the transform before doing our own rendering.
-					driver.SetTransform(TransformationState.World, new Matrix());
+					driver.SetTransform(TransformationState.World, Matrix.Identity);
 					driver.SetMaterial(material);
 					driver.Draw3DTriangle(hitTriangle, new Color(255, 0, 0));
 
