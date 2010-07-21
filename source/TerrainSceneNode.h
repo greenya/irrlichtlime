@@ -7,6 +7,7 @@ using namespace irr;
 using namespace System;
 
 namespace IrrlichtLime {
+namespace IO { ref class ReadFile; }
 namespace Scene {
 
 ref class DynamicMeshBuffer;
@@ -25,8 +26,17 @@ public:
 	DynamicMeshBuffer^ GetMeshBufferForLOD(int lodLevel);
 	DynamicMeshBuffer^ GetMeshBufferForLOD();
 
-	//bool loadHeightMap(io::IReadFile *file, video::SColor vertexColor=video::SColor(255, 255, 255, 255), s32 smoothFactor=0);
-	//bool loadHeightMapRAW(io::IReadFile *file, s32 bitsPerPixel=16, bool signedData=false, bool floatVals=false, s32 width=0, video::SColor vertexColor=video::SColor(255, 255, 255, 255), s32 smoothFactor=0);
+	bool LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor, int smoothFactor);
+	bool LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor);
+	bool LoadHeightMap(IO::ReadFile^ file);
+
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color^ vertexColor, int smoothFactor);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color^ vertexColor);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel);
+	bool LoadHeightMapRAW(IO::ReadFile^ file);
 
 	bool OverrideLODDistance(int lodLevel, double newDistance);
 	void ScaleTexture(float scale, float scale2);

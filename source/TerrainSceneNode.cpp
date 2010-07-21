@@ -2,6 +2,7 @@
 #include "DynamicMeshBuffer.h"
 #include "Mesh.h"
 #include "MeshBuffer.h"
+#include "ReadFile.h"
 #include "SceneNode.h"
 #include "TerrainSceneNode.h"
 
@@ -103,6 +104,104 @@ DynamicMeshBuffer^ TerrainSceneNode::GetMeshBufferForLOD()
 	scene::CDynamicMeshBuffer* b = new scene::CDynamicMeshBuffer(video::EVT_2TCOORDS, video::EIT_16BIT);
 	m_TerrainSceneNode->getMeshBufferForLOD(*b);
 	return DynamicMeshBuffer::Wrap(b);
+}
+
+bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor, int smoothFactor)
+{
+	LIME_ASSERT(vertexColor != nullptr);
+
+	return m_TerrainSceneNode->loadHeightMap(
+		LIME_SAFEREF(file, m_ReadFile),
+		*vertexColor->m_NativeValue,
+		smoothFactor);
+}
+
+bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor)
+{
+	LIME_ASSERT(vertexColor != nullptr);
+
+	return m_TerrainSceneNode->loadHeightMap(
+		LIME_SAFEREF(file, m_ReadFile),
+		*vertexColor->m_NativeValue);
+}
+
+bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file)
+{
+	return m_TerrainSceneNode->loadHeightMap(
+		LIME_SAFEREF(file, m_ReadFile));
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight,
+	Video::Color^ vertexColor, int smoothFactor)
+{
+	LIME_ASSERT(widthAndHeight >= 0);
+	LIME_ASSERT(vertexColor != nullptr);
+
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel,
+		signedData,
+		floatVals,
+		widthAndHeight,
+		*vertexColor->m_NativeValue,
+		smoothFactor);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight,
+	Video::Color^ vertexColor)
+{
+	LIME_ASSERT(widthAndHeight >= 0);
+	LIME_ASSERT(vertexColor != nullptr);
+
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel,
+		signedData,
+		floatVals,
+		widthAndHeight,
+		*vertexColor->m_NativeValue);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight)
+{
+	LIME_ASSERT(widthAndHeight >= 0);
+
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel,
+		signedData,
+		floatVals,
+		widthAndHeight);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals)
+{
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel,
+		signedData,
+		floatVals);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData)
+{
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel,
+		signedData);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel)
+{
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile),
+		bitsPerPixel);
+}
+
+bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file)
+{
+	return m_TerrainSceneNode->loadHeightMapRAW(
+		LIME_SAFEREF(file, m_ReadFile));
 }
 
 bool TerrainSceneNode::OverrideLODDistance(int lodLevel, double newDistance)
