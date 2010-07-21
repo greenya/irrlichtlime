@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FileArchive.h"
 #include "FileList.h"
+#include "ReadFile.h"
 #include "ReferenceCounted.h"
 
 using namespace irr;
@@ -22,6 +23,22 @@ FileArchive::FileArchive(io::IFileArchive* ref)
 	: ReferenceCounted(ref)
 {
 	m_FileArchive = ref;
+}
+
+ReadFile^ FileArchive::CreateAndOpenFile(int index)
+{
+	LIME_ASSERT(index >= 0 && index < FileList->Count);
+
+	io::IReadFile* f = m_FileArchive->createAndOpenFile(index);
+	return ReadFile::Wrap(f);
+}
+
+ReadFile^ FileArchive::CreateAndOpenFile(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	io::IReadFile* f = m_FileArchive->createAndOpenFile(Lime::StringToPath(filename));
+	return ReadFile::Wrap(f);
 }
 
 IrrlichtLime::IO::FileList^ FileArchive::FileList::get()

@@ -11,13 +11,14 @@ namespace IrrlichtLime {
 namespace IO {
 
 ref class FileList;
+ref class ReadFile;
 
 public ref class FileArchive : ReferenceCounted
 {
 public:
 
-	//virtual IReadFile * createAndOpenFile (u32 index)=0
-	//virtual IReadFile * createAndOpenFile (const path &filename)=0
+	ReadFile^ CreateAndOpenFile(int index);
+	ReadFile^ CreateAndOpenFile(String^ filename);
 
 	property IrrlichtLime::IO::FileList^ FileList { IrrlichtLime::IO::FileList^ get(); }
 	property String^ Password { String^ get(); void set(String^ value); }
