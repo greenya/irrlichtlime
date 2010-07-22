@@ -22,6 +22,7 @@ ref class CollisionResponseSceneNodeAnimator;
 ref class DummyTransformationSceneNode;
 ref class LightSceneNode;
 ref class Mesh;
+ref class MeshCache;
 ref class MeshManipulator;
 ref class MeshSceneNode;
 ref class MetaTriangleSelector;
@@ -311,7 +312,7 @@ public:
 	//property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
-	//property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
+	property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property SceneNode^ RootNode { SceneNode^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
