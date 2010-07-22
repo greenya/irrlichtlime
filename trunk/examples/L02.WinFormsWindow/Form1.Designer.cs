@@ -32,6 +32,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.checkBoxUseSeparateWindow = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -67,13 +68,25 @@
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(133, 21);
 			this.comboBox1.TabIndex = 2;
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
+			// 
+			// checkBoxUseSeparateWindow
+			// 
+			this.checkBoxUseSeparateWindow.AutoSize = true;
+			this.checkBoxUseSeparateWindow.Location = new System.Drawing.Point(160, 16);
+			this.checkBoxUseSeparateWindow.Name = "checkBoxUseSeparateWindow";
+			this.checkBoxUseSeparateWindow.Size = new System.Drawing.Size(128, 17);
+			this.checkBoxUseSeparateWindow.TabIndex = 3;
+			this.checkBoxUseSeparateWindow.Text = "Use separate window";
+			this.checkBoxUseSeparateWindow.UseVisualStyleBackColor = true;
+			this.checkBoxUseSeparateWindow.CheckedChanged += new System.EventHandler(this.initializeIrrlichtDevice);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(564, 474);
+			this.Controls.Add(this.checkBoxUseSeparateWindow);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.panel1);
@@ -94,6 +107,7 @@
 		private System.Windows.Forms.Label label1;
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.CheckBox checkBoxUseSeparateWindow;
 	}
 }
 

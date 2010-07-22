@@ -43,19 +43,28 @@ namespace L02.WinFormsWindow
 					comboBox1.Items.Add(v);
 		}
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		private void initializeIrrlichtDevice(object sender, EventArgs e)
 		{
+			if (comboBox1.SelectedItem == null)
+				return;
+
 			// if rending in progress, we sneding cancel request and waiting for its finish
 			if (backgroundWorker1.IsBusy)
 			{
 				backgroundWorker1.CancelAsync();
 				while (backgroundWorker1.IsBusy)
 					Application.DoEvents();
+
+				panel1.Invalidate();
 			}
 
+			// we start background worker and send parameters to create Irrlicht device
 			backgroundWorker1.RunWorkerAsync(
 				new DeviceSettings(
-					panel1.Handle, (DriverType)comboBox1.SelectedItem));
+					checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panel1.Handle,
+					(DriverType)comboBox1.SelectedItem));
+
+			label1.Text = "Starting rendering...";
 		}
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -158,6 +167,8 @@ namespace L02.WinFormsWindow
 			// so background worker not running)
 			if (userWantExit)
 				Close();
+
+			label1.Text = "No rendering";
 		}
 	}
 }
