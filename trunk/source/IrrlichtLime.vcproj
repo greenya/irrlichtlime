@@ -552,6 +552,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MeshCache.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MeshCache.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MeshManipulator.cpp"
 				>
 			</File>

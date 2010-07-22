@@ -13,6 +13,7 @@
 #include "Image.h"
 #include "LightSceneNode.h"
 #include "Mesh.h"
+#include "MeshCache.h"
 #include "MeshManipulator.h"
 #include "MeshSceneNode.h"
 #include "MetaTriangleSelector.h"
@@ -2808,6 +2809,11 @@ IO::FileSystem^ SceneManager::FileSystem::get()
 GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 {
 	return GUI::GUIEnvironment::Wrap(m_SceneManager->getGUIEnvironment());
+}
+
+Scene::MeshCache^ SceneManager::MeshCache::get()
+{
+	return Scene::MeshCache::Wrap(m_SceneManager->getMeshCache());
 }
 
 Scene::MeshManipulator^ SceneManager::MeshManipulator::get()
