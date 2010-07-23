@@ -20,6 +20,7 @@ ref class BillboardTextSceneNode;
 ref class CameraSceneNode;
 ref class CollisionResponseSceneNodeAnimator;
 ref class DummyTransformationSceneNode;
+ref class GeometryCreator;
 ref class LightSceneNode;
 ref class Mesh;
 ref class MeshCache;
@@ -309,8 +310,8 @@ public:
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }
-	//property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
+	property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }

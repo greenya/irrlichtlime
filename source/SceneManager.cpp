@@ -8,6 +8,7 @@
 #include "DummyTransformationSceneNode.h"
 #include "Event.h"
 #include "FileSystem.h"
+#include "GeometryCreator.h"
 #include "GUIEnvironment.h"
 #include "GUIFont.h"
 #include "Image.h"
@@ -2803,22 +2804,32 @@ void SceneManager::AmbientLight::set(Video::Colorf^ value)
 
 IO::FileSystem^ SceneManager::FileSystem::get()
 {
-	return IO::FileSystem::Wrap(m_SceneManager->getFileSystem());
+	io::IFileSystem* s = m_SceneManager->getFileSystem();
+	return IO::FileSystem::Wrap(s);
+}
+
+Scene::GeometryCreator^ SceneManager::GeometryCreator::get()
+{
+	scene::IGeometryCreator* g = (scene::IGeometryCreator*)m_SceneManager->getGeometryCreator(); // !!! cast to non-const
+	return Scene::GeometryCreator::Wrap(g);
 }
 
 GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 {
-	return GUI::GUIEnvironment::Wrap(m_SceneManager->getGUIEnvironment());
+	gui::IGUIEnvironment* g = m_SceneManager->getGUIEnvironment();
+	return GUI::GUIEnvironment::Wrap(g);
 }
 
 Scene::MeshCache^ SceneManager::MeshCache::get()
 {
-	return Scene::MeshCache::Wrap(m_SceneManager->getMeshCache());
+	scene::IMeshCache* c = m_SceneManager->getMeshCache();
+	return Scene::MeshCache::Wrap(c);
 }
 
 Scene::MeshManipulator^ SceneManager::MeshManipulator::get()
 {
-	return Scene::MeshManipulator::Wrap(m_SceneManager->getMeshManipulator());
+	scene::IMeshManipulator* m = m_SceneManager->getMeshManipulator();
+	return Scene::MeshManipulator::Wrap(m);
 }
 
 SceneNode^ SceneManager::RootNode::get()
@@ -2829,7 +2840,8 @@ SceneNode^ SceneManager::RootNode::get()
 
 Scene::SceneCollisionManager^ SceneManager::SceneCollisionManager::get()
 {
-	return Scene::SceneCollisionManager::Wrap(m_SceneManager->getSceneCollisionManager());
+	scene::ISceneCollisionManager* m = m_SceneManager->getSceneCollisionManager();
+	return Scene::SceneCollisionManager::Wrap(m);
 }
 
 Scene::SceneNodeRenderPass SceneManager::SceneNodeRenderPass::get()
@@ -2850,7 +2862,8 @@ void SceneManager::ShadowColor::set(Video::Color^ value)
 
 Video::VideoDriver^ SceneManager::VideoDriver::get()
 {
-	return Video::VideoDriver::Wrap(m_SceneManager->getVideoDriver());
+	video::IVideoDriver* d = m_SceneManager->getVideoDriver();
+	return Video::VideoDriver::Wrap(d);
 }
 
 } // end namespace Scene
