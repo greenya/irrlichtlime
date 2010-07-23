@@ -508,6 +508,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GeometryCreator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GeometryCreator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\HardwareBufferType.h"
 				>
 			</File>
