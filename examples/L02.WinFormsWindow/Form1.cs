@@ -16,15 +16,19 @@ namespace L02.WinFormsWindow
 {
 	public partial class Form1 : Form
 	{
+		// this class will hold all settings that we need to pass to background worker,
+		// which will create Irrlicht device, do all rendering and drop it when needed
 		class DeviceSettings
 		{
 			public IntPtr HostHandle;
 			public DriverType DriverType;
+			public byte AntiAliasing;
 
-			public DeviceSettings(IntPtr hh, DriverType dt)
+			public DeviceSettings(IntPtr hh, DriverType dt, byte aa)
 			{
 				HostHandle = hh;
 				DriverType = dt;
+				AntiAliasing = aa;
 			}
 		}
 
@@ -37,6 +41,9 @@ namespace L02.WinFormsWindow
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			// select "No AntiAliasing"
+			comboBox2.SelectedIndex = 0;
+
 			// fill combobox with all available video drivers, except Null
 			foreach (DriverType v in Enum.GetValues(typeof(DriverType)))
 				if (v != DriverType.Null)
@@ -48,21 +55,25 @@ namespace L02.WinFormsWindow
 			if (comboBox1.SelectedItem == null)
 				return;
 
-			// if rending in progress, we sneding cancel request and waiting for its finish
+			// if rendering in progress, we sending cancel request and waiting for its finish
 			if (backgroundWorker1.IsBusy)
 			{
 				backgroundWorker1.CancelAsync();
 				while (backgroundWorker1.IsBusy)
 					Application.DoEvents();
 
+				// redraw the panel, otherwise last rendered frame will stay there as garbage
 				panel1.Invalidate();
 			}
 
-			// we start background worker and send parameters to create Irrlicht device
+			// start background worker and send parameters
 			backgroundWorker1.RunWorkerAsync(
 				new DeviceSettings(
 					checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panel1.Handle,
-					(DriverType)comboBox1.SelectedItem));
+					(DriverType)comboBox1.SelectedItem,
+					(byte)(comboBox2.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBox2.SelectedIndex))
+				)
+			);
 
 			label1.Text = "Starting rendering...";
 		}
@@ -72,11 +83,12 @@ namespace L02.WinFormsWindow
 			BackgroundWorker worker = sender as BackgroundWorker;
 			DeviceSettings settings = e.Argument as DeviceSettings;
 
-			// create irrlicht device in the button window
+			// create irrlicht device using settings
 
 			IrrlichtCreationParameters p = new IrrlichtCreationParameters();
 			p.DriverType = settings.DriverType;
 			p.WindowID = settings.HostHandle;
+			p.AntiAliasing = settings.AntiAliasing;
 			IrrlichtDevice dev = IrrlichtDevice.CreateDevice(p);
 
 			if (dev == null)
@@ -120,7 +132,7 @@ namespace L02.WinFormsWindow
 				int fps = drv.FPS;
 				if (lastFPS != fps)
 				{
-					// we reporting progress using BackgroundWorker' ReportProgress method
+					// report progress using common BackgroundWorker' method
 					// note: we cannot do just label1.Text = "...", because its another thread
 					worker.ReportProgress(fps, drv.Name);
 					lastFPS = fps;
@@ -138,7 +150,7 @@ namespace L02.WinFormsWindow
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			// if background worker still running, we sending request to finish rendering
-			// and cancel closing request of the main form
+			// and cancel form closing
 			if (backgroundWorker1.IsBusy)
 			{
 				backgroundWorker1.CancelAsync();
@@ -149,6 +161,8 @@ namespace L02.WinFormsWindow
 
 		private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
+			// process reported progress
+
 			int f = e.ProgressPercentage;
 			string d = e.UserState as string;
 
@@ -159,12 +173,13 @@ namespace L02.WinFormsWindow
 
 		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
+			// if exception occured in rendering thread -- we display the message
 			if (e.Error != null)
 				MessageBox.Show(e.Error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-			// as background worker finished, and user want exit - we close main form
-			// (it is the only way to close form correctly -- only when device dropped,
-			// so background worker not running)
+			// if user want exit - we close main form
+			// note: it is the only way to close form correctly -- only when device dropped,
+			// so background worker not running
 			if (userWantExit)
 				Close();
 
