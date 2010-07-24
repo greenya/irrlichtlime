@@ -108,5 +108,10 @@ Video::VertexType MeshBuffer::VertexType::get()
 	return (Video::VertexType)m_MeshBuffer->getVertexType();
 }
 
+String^ MeshBuffer::ToString()
+{
+	return String::Format("MeshBuffer: VertexCount={0}; IndexCount={1}", VertexCount, IndexCount);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime
