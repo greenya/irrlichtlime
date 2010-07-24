@@ -127,6 +127,15 @@ namespace _09.Meshviewer
 			if (font != null)
 				env.Skin.SetFont(font);
 
+			// load the irrlicht engine logo
+			GUIImage img = env.AddImage(
+				driver.GetTexture("irrlichtlogoalpha2.tga"),
+				new Vector2Di(10, (int)driver.ScreenSize.Height - 128));
+			img.ID = (int)guiID.Logo;
+
+			// lock the logo's edges to the bottom left corner of the screen
+			img.SetAlignment(GUIAlignment.UpperLeft, GUIAlignment.UpperLeft, GUIAlignment.LowerRight, GUIAlignment.LowerRight);
+
 			// create menu
 			GUIContextMenu menu = env.AddMenu();
 			menu.AddItem("File", -1, true, true);
@@ -232,15 +241,6 @@ namespace _09.Meshviewer
 			camera[1].Target = new Vector3Df(0, 30, 0);
 
 			setActiveCamera(camera[0]);
-
-			// load the irrlicht engine logo
-			GUIImage img = env.AddImage(
-				driver.GetTexture("irrlichtlogoalpha2.tga"),
-				new Vector2Di(10, (int)driver.ScreenSize.Height - 128));
-			img.ID = (int)guiID.Logo;
-
-			// lock the logo's edges to the bottom left corner of the screen
-			img.SetAlignment(GUIAlignment.UpperLeft, GUIAlignment.UpperLeft, GUIAlignment.LowerRight, GUIAlignment.LowerRight);
 
 			// set window caption
 			caption = string.Format("{0} - [{1}]", caption, driver.Name);

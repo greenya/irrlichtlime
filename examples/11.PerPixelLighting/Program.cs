@@ -43,9 +43,12 @@ namespace _11.PerPixelLighting
 
 			AnimatedMesh roomMesh = smgr.GetMesh("../media/room.3ds");
 			SceneNode room = null;
+			SceneNode earth = null;
 
 			if (roomMesh != null)
 			{
+				// the room mesh doesn't have proper texture mapping on the floor,
+				// so we can recreate them on runtime
 				smgr.MeshManipulator.MakePlanarTextureMapping(roomMesh.GetMesh(0), 0.003f);
 
 				Texture normalMap = driver.GetTexture("../media/rockwall_height.bmp");
@@ -57,9 +60,10 @@ namespace _11.PerPixelLighting
 				room.SetMaterialTexture(0, driver.GetTexture("../media/rockwall.jpg"));
 				room.SetMaterialTexture(1, normalMap);
 				room.GetMaterial(0).SpecularColor = new Color(0);
+				room.GetMaterial(0).Shininess = 0.0f;
 				room.SetMaterialFlag(MaterialFlag.Fog, true);
 				room.SetMaterialType(MaterialType.ParallaxMapSolid);
-				room.GetMaterial(0).MaterialTypeParam = 0.035f; // adjust height for parallax effect
+				room.GetMaterial(0).MaterialTypeParam = 1.0f / 64.0f; // adjust height for parallax effect
 
 				tangentMesh.Drop(); // drop mesh because we created it with a "create" call
 			}
@@ -82,31 +86,31 @@ namespace _11.PerPixelLighting
 				m.Scale = new Vector3Df(50);
 				manipulator.Transform(tangentSphereMesh, m);
 
-				SceneNode sphere = smgr.AddMeshSceneNode(tangentSphereMesh);
-				sphere.Position = new Vector3Df(-70, 130, 45);
+				earth = smgr.AddMeshSceneNode(tangentSphereMesh);
+				earth.Position = new Vector3Df(-70, 130, 45);
 
 				// load heightmap, create normal map from it and set it
 				Texture earthNormalMap = driver.GetTexture("../media/earthbump.jpg");
 				if (earthNormalMap != null)
 				{
 					driver.MakeNormalMapTexture(earthNormalMap, 20);
-					sphere.SetMaterialTexture(1, earthNormalMap);
-					sphere.SetMaterialType(MaterialType.NormalMapTransparentVertexAlpha);
+					earth.SetMaterialTexture(1, earthNormalMap);
+					earth.SetMaterialType(MaterialType.NormalMapTransparentVertexAlpha);
 				}
 
 				// adjust material settings
-				sphere.SetMaterialFlag(MaterialFlag.Fog, true);
+				earth.SetMaterialFlag(MaterialFlag.Fog, true);
 
 				// add rotation animator
 				SceneNodeAnimator anim = smgr.CreateRotationAnimator(new Vector3Df(0, 0.1f, 0));
-				sphere.AddAnimator(anim);
+				earth.AddAnimator(anim);
 				anim.Drop();
 
 				// drop mesh because we created it with a "create" call.
 				tangentSphereMesh.Drop();
 			}
 
-			// add light 1
+			// add light 1 (more green)
 			LightSceneNode light1 = smgr.AddLightSceneNode(null, new Vector3Df(), new Colorf(0.5f, 1.0f, 0.5f, 0.0f), 800);
 			if (light1 != null)
 			{
@@ -122,10 +126,10 @@ namespace _11.PerPixelLighting
 				bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 				bill.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				bill.SetMaterialType(MaterialType.TransparentAddColor);
-				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlered.bmp"));
+				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlegreen.jpg"));
 			}
 
-			// add light 2
+			// add light 2 (red)
 			SceneNode light2 = smgr.AddLightSceneNode(null, new Vector3Df(), new Colorf(1.0f, 0.2f, 0.2f, 0.0f), 800.0f);
 			if (light2 != null)
 			{
@@ -139,7 +143,7 @@ namespace _11.PerPixelLighting
 				bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 				bill.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				bill.SetMaterialType(MaterialType.TransparentAddColor);
-				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlewhite.bmp"));
+				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlered.bmp"));
 
 				// add particle system
 				ParticleSystemSceneNode ps = smgr.AddParticleSystemSceneNode(false, light2);
@@ -170,7 +174,7 @@ namespace _11.PerPixelLighting
 				ps.SetMaterialType(MaterialType.TransparentVertexAlpha);
 			}
 
-			MyEventReceiver receiver = new MyEventReceiver(device, room);
+			MyEventReceiver receiver = new MyEventReceiver(device, room, earth);
 
 			int lastFPS = -1;
 
@@ -229,13 +233,14 @@ namespace _11.PerPixelLighting
 
 	class MyEventReceiver
 	{
-		public MyEventReceiver(IrrlichtDevice device, SceneNode room)
+		public MyEventReceiver(IrrlichtDevice device, SceneNode room, SceneNode earth)
 		{
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 
 			// store pointer to room so we can change its drawing mode
 			this.driver = device.VideoDriver;
 			this.room = room;
+			this.earth = earth;
 
 			GUIEnvironment env = device.GUIEnvironment;
 
@@ -298,36 +303,45 @@ namespace _11.PerPixelLighting
 
 		private void setMaterial()
 		{
-			MaterialType type = MaterialType.Solid;
+			MaterialType roomMat = MaterialType.Solid;
+			MaterialType earthMat = MaterialType.Solid;
 
 			// change material setting
 			switch (this.listBox.SelectedIndex)
 			{
 				case 0:
-					type = MaterialType.Solid;
+					roomMat = MaterialType.Solid;
+					earthMat = MaterialType.TransparentVertexAlpha;
 					break;
 
 				case 1:
-					type = MaterialType.NormalMapSolid;
+					roomMat = MaterialType.NormalMapSolid;
+					earthMat = MaterialType.NormalMapTransparentVertexAlpha;
 					break;
 
 				case 2:
-					type = MaterialType.ParallaxMapSolid;
+					roomMat = MaterialType.ParallaxMapSolid;
+					earthMat = MaterialType.ParallaxMapTransparentVertexAlpha;
 					break;
 			}
 
-			this.room.SetMaterialType(type);
+			this.room.SetMaterialType(roomMat);
+			this.earth.SetMaterialType(earthMat);
 
 			// display some problem text when problem
-			MaterialRenderer renderer = this.driver.GetMaterialRenderer(type);
+			MaterialRenderer roomRenderer = this.driver.GetMaterialRenderer(roomMat);
+			MaterialRenderer earthRenderer = this.driver.GetMaterialRenderer(earthMat);
 			this.problemText.Visible =
-				renderer == null ||
-				renderer.Capability != 0;
+				roomRenderer == null ||
+				roomRenderer.Capability != 0 ||
+				earthRenderer == null ||
+				earthRenderer.Capability != 0;
 		}
 
 		private GUIStaticText problemText;
 		private GUIListBox listBox;
 		private SceneNode room;
+		private SceneNode earth;
 		private VideoDriver driver;
 	}
 }

@@ -23,18 +23,21 @@ FileList::FileList(io::IFileList* ref)
 	m_FileList = ref;
 }
 
-int FileList::AddFile(String^ fullPath, int size, bool isDirectory, int id)
+int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory, int id)
 {
+	LIME_ASSERT(offset >= 0);
 	LIME_ASSERT(size >= 0);
 	LIME_ASSERT(id >= 0);
 
-	return m_FileList->addItem(Lime::StringToPath(fullPath), size, isDirectory, id);
+	return m_FileList->addItem(Lime::StringToPath(fullPath), offset, size, isDirectory, id);
 }
 
-int FileList::AddFile(String^ fullPath, int size, bool isDirectory)
+int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory)
 {
+	LIME_ASSERT(offset >= 0);
 	LIME_ASSERT(size >= 0);
-	return m_FileList->addItem(Lime::StringToPath(fullPath), size, isDirectory);
+
+	return m_FileList->addItem(Lime::StringToPath(fullPath), offset, size, isDirectory);
 }
 
 int FileList::FindFile(String^ filename, bool isDirectory)
@@ -57,6 +60,12 @@ String^ FileList::GetFileName(int index)
 {
 	LIME_ASSERT(index >= 0 && index < Count);
 	return gcnew String(m_FileList->getFileName(index).c_str());
+}
+
+int FileList::GetFileOffset(int index)
+{
+	LIME_ASSERT(index >= 0 && index < Count);
+	return m_FileList->getFileOffset(index);
 }
 
 int FileList::GetFileSize(int index)
