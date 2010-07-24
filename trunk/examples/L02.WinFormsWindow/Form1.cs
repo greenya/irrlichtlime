@@ -128,6 +128,10 @@ namespace L02.WinFormsWindow
 					"../media/irrlicht2_bk.jpg");
 			}
 
+			dev.GUIEnvironment.AddImage(
+				drv.GetTexture("../media/lime_logo_alpha.png"),
+				new Vector2Di(30, 0));
+
 			// draw all
 
 			int lastFPS = -1;
@@ -140,6 +144,7 @@ namespace L02.WinFormsWindow
 					drv.BeginScene(true, true, settings.BackColor);
 
 				smgr.DrawAll();
+				dev.GUIEnvironment.DrawAll();
 				drv.EndScene();
 
 				int fps = drv.FPS;
