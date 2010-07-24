@@ -38,6 +38,8 @@ public:
 	property int VertexCount { int get(); }
 	property Video::VertexType VertexType { Video::VertexType get(); }
 
+	virtual String^ ToString() override;
+
 internal:
 
 	static MeshBuffer^ Wrap(scene::IMeshBuffer* ref);

@@ -28,55 +28,57 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
-			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.panelRenderingWindow = new System.Windows.Forms.Panel();
+			this.labelRenderingStatus = new System.Windows.Forms.Label();
+			this.backgroundRendering = new System.ComponentModel.BackgroundWorker();
+			this.comboBoxVideoDriver = new System.Windows.Forms.ComboBox();
 			this.checkBoxUseSeparateWindow = new System.Windows.Forms.CheckBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.comboBoxAntiAliasing = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
+			this.comboBoxBackground = new System.Windows.Forms.ComboBox();
+			this.label4 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panelRenderingWindow
 			// 
-			this.panel1.Location = new System.Drawing.Point(12, 85);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(540, 400);
-			this.panel1.TabIndex = 0;
+			this.panelRenderingWindow.Location = new System.Drawing.Point(12, 85);
+			this.panelRenderingWindow.Name = "panelRenderingWindow";
+			this.panelRenderingWindow.Size = new System.Drawing.Size(540, 400);
+			this.panelRenderingWindow.TabIndex = 0;
 			// 
-			// label1
+			// labelRenderingStatus
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label1.Location = new System.Drawing.Point(12, 64);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(187, 18);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Select video driver to use...";
+			this.labelRenderingStatus.AutoSize = true;
+			this.labelRenderingStatus.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelRenderingStatus.Location = new System.Drawing.Point(12, 64);
+			this.labelRenderingStatus.Name = "labelRenderingStatus";
+			this.labelRenderingStatus.Size = new System.Drawing.Size(187, 18);
+			this.labelRenderingStatus.TabIndex = 1;
+			this.labelRenderingStatus.Text = "Select video driver to use...";
 			// 
-			// backgroundWorker1
+			// backgroundRendering
 			// 
-			this.backgroundWorker1.WorkerReportsProgress = true;
-			this.backgroundWorker1.WorkerSupportsCancellation = true;
-			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-			this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-			this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+			this.backgroundRendering.WorkerReportsProgress = true;
+			this.backgroundRendering.WorkerSupportsCancellation = true;
+			this.backgroundRendering.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundRendering_DoWork);
+			this.backgroundRendering.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundRendering_RunWorkerCompleted);
+			this.backgroundRendering.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundRendering_ProgressChanged);
 			// 
-			// comboBox1
+			// comboBoxVideoDriver
 			// 
-			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(12, 32);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(130, 21);
-			this.comboBox1.TabIndex = 2;
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
+			this.comboBoxVideoDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxVideoDriver.FormattingEnabled = true;
+			this.comboBoxVideoDriver.Location = new System.Drawing.Point(12, 32);
+			this.comboBoxVideoDriver.Name = "comboBoxVideoDriver";
+			this.comboBoxVideoDriver.Size = new System.Drawing.Size(130, 21);
+			this.comboBoxVideoDriver.TabIndex = 2;
+			this.comboBoxVideoDriver.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
 			// 
 			// checkBoxUseSeparateWindow
 			// 
 			this.checkBoxUseSeparateWindow.AutoSize = true;
-			this.checkBoxUseSeparateWindow.Location = new System.Drawing.Point(254, 34);
+			this.checkBoxUseSeparateWindow.Location = new System.Drawing.Point(349, 34);
 			this.checkBoxUseSeparateWindow.Name = "checkBoxUseSeparateWindow";
 			this.checkBoxUseSeparateWindow.Size = new System.Drawing.Size(128, 17);
 			this.checkBoxUseSeparateWindow.TabIndex = 3;
@@ -84,21 +86,21 @@
 			this.checkBoxUseSeparateWindow.UseVisualStyleBackColor = true;
 			this.checkBoxUseSeparateWindow.CheckedChanged += new System.EventHandler(this.initializeIrrlichtDevice);
 			// 
-			// comboBox2
+			// comboBoxAntiAliasing
 			// 
-			this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Items.AddRange(new object[] {
+			this.comboBoxAntiAliasing.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxAntiAliasing.FormattingEnabled = true;
+			this.comboBoxAntiAliasing.Items.AddRange(new object[] {
             "No",
             "2x",
             "4x",
             "8x",
             "16x"});
-			this.comboBox2.Location = new System.Drawing.Point(158, 32);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(80, 21);
-			this.comboBox2.TabIndex = 4;
-			this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
+			this.comboBoxAntiAliasing.Location = new System.Drawing.Point(158, 32);
+			this.comboBoxAntiAliasing.Name = "comboBoxAntiAliasing";
+			this.comboBoxAntiAliasing.Size = new System.Drawing.Size(80, 21);
+			this.comboBoxAntiAliasing.TabIndex = 4;
+			this.comboBoxAntiAliasing.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
 			// 
 			// label2
 			// 
@@ -118,18 +120,43 @@
 			this.label3.TabIndex = 6;
 			this.label3.Text = "AntiAliasing";
 			// 
+			// comboBoxBackground
+			// 
+			this.comboBoxBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxBackground.FormattingEnabled = true;
+			this.comboBoxBackground.Items.AddRange(new object[] {
+            "Skybox",
+            "Black",
+            "White"});
+			this.comboBoxBackground.Location = new System.Drawing.Point(253, 32);
+			this.comboBoxBackground.Name = "comboBoxBackground";
+			this.comboBoxBackground.Size = new System.Drawing.Size(80, 21);
+			this.comboBoxBackground.TabIndex = 7;
+			this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.initializeIrrlichtDevice);
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(250, 16);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(65, 13);
+			this.label4.TabIndex = 6;
+			this.label4.Text = "Background";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(564, 497);
+			this.Controls.Add(this.comboBoxBackground);
+			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.comboBox2);
+			this.Controls.Add(this.comboBoxAntiAliasing);
 			this.Controls.Add(this.checkBoxUseSeparateWindow);
-			this.Controls.Add(this.comboBox1);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.comboBoxVideoDriver);
+			this.Controls.Add(this.labelRenderingStatus);
+			this.Controls.Add(this.panelRenderingWindow);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.Name = "Form1";
@@ -143,14 +170,16 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Label label1;
-		private System.ComponentModel.BackgroundWorker backgroundWorker1;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Panel panelRenderingWindow;
+		private System.Windows.Forms.Label labelRenderingStatus;
+		private System.ComponentModel.BackgroundWorker backgroundRendering;
+		private System.Windows.Forms.ComboBox comboBoxVideoDriver;
 		private System.Windows.Forms.CheckBox checkBoxUseSeparateWindow;
-		private System.Windows.Forms.ComboBox comboBox2;
+		private System.Windows.Forms.ComboBox comboBoxAntiAliasing;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox comboBoxBackground;
+		private System.Windows.Forms.Label label4;
 	}
 }
 

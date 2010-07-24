@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -23,16 +22,18 @@ namespace L02.WinFormsWindow
 			public IntPtr HostHandle;
 			public DriverType DriverType;
 			public byte AntiAliasing;
-
-			public DeviceSettings(IntPtr hh, DriverType dt, byte aa)
+			public Color BackColor; // "null" for skybox
+			
+			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color bc)
 			{
 				HostHandle = hh;
 				DriverType = dt;
 				AntiAliasing = aa;
+				BackColor = bc;
 			}
 		}
 
-		private bool userWantExit = false;
+		private bool userWantExit = false; // if "true", we shut down rendering thread and then exit app
 
 		public Form1()
 		{
@@ -42,43 +43,47 @@ namespace L02.WinFormsWindow
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			// select "No AntiAliasing"
-			comboBox2.SelectedIndex = 0;
+			comboBoxAntiAliasing.SelectedIndex = 0;
+
+			// select "Skybox"
+			comboBoxBackground.SelectedIndex = 0;
 
 			// fill combobox with all available video drivers, except Null
 			foreach (DriverType v in Enum.GetValues(typeof(DriverType)))
 				if (v != DriverType.Null)
-					comboBox1.Items.Add(v);
+					comboBoxVideoDriver.Items.Add(v);
 		}
 
 		private void initializeIrrlichtDevice(object sender, EventArgs e)
 		{
-			if (comboBox1.SelectedItem == null)
+			if (comboBoxVideoDriver.SelectedItem == null)
 				return;
 
-			// if rendering in progress, we sending cancel request and waiting for its finish
-			if (backgroundWorker1.IsBusy)
+			// if rendering in progress, we sending cancel request and waiting for its finishing
+			if (backgroundRendering.IsBusy)
 			{
-				backgroundWorker1.CancelAsync();
-				while (backgroundWorker1.IsBusy)
-					Application.DoEvents();
+				backgroundRendering.CancelAsync();
+				while (backgroundRendering.IsBusy)
+					Application.DoEvents(); // this is not very correct way, but its very short, so we use it
 
-				// redraw the panel, otherwise last rendered frame will stay there as garbage
-				panel1.Invalidate();
+				// redraw the panel, otherwise last rendered frame will stay as garbage
+				panelRenderingWindow.Invalidate();
 			}
 
 			// start background worker and send parameters
-			backgroundWorker1.RunWorkerAsync(
+			backgroundRendering.RunWorkerAsync(
 				new DeviceSettings(
-					checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panel1.Handle,
-					(DriverType)comboBox1.SelectedItem,
-					(byte)(comboBox2.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBox2.SelectedIndex))
+					checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panelRenderingWindow.Handle,
+					(DriverType)comboBoxVideoDriver.SelectedItem,
+					(byte)(comboBoxAntiAliasing.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBoxAntiAliasing.SelectedIndex)),
+					comboBoxBackground.SelectedIndex == 0 ? null : new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF)
 				)
 			);
 
-			label1.Text = "Starting rendering...";
+			labelRenderingStatus.Text = "Starting rendering...";
 		}
 
-		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+		private void backgroundRendering_DoWork(object sender, DoWorkEventArgs e)
 		{
 			BackgroundWorker worker = sender as BackgroundWorker;
 			DeviceSettings settings = e.Argument as DeviceSettings;
@@ -112,20 +117,28 @@ namespace L02.WinFormsWindow
 			cube.SetMaterialFlag(MaterialFlag.Lighting, false);
 			cube.SetMaterialType(MaterialType.Reflection2Layer);
 
-			smgr.AddSkyBoxSceneNode(
-				"../media/irrlicht2_up.jpg",
-				"../media/irrlicht2_dn.jpg",
-				"../media/irrlicht2_lf.jpg",
-				"../media/irrlicht2_rt.jpg",
-				"../media/irrlicht2_ft.jpg",
-				"../media/irrlicht2_bk.jpg");
+			if (settings.BackColor == null)
+			{
+				smgr.AddSkyBoxSceneNode(
+					"../media/irrlicht2_up.jpg",
+					"../media/irrlicht2_dn.jpg",
+					"../media/irrlicht2_lf.jpg",
+					"../media/irrlicht2_rt.jpg",
+					"../media/irrlicht2_ft.jpg",
+					"../media/irrlicht2_bk.jpg");
+			}
 
 			// draw all
 
 			int lastFPS = -1;
 			while (dev.Run())
 			{
-				drv.BeginScene();
+				if (settings.BackColor == null)
+					// indeed, we do not need to spend time on cleaning color buffer if we use skybox
+					drv.BeginScene(false);
+				else
+					drv.BeginScene(true, true, settings.BackColor);
+
 				smgr.DrawAll();
 				drv.EndScene();
 
@@ -133,7 +146,8 @@ namespace L02.WinFormsWindow
 				if (lastFPS != fps)
 				{
 					// report progress using common BackgroundWorker' method
-					// note: we cannot do just label1.Text = "...", because its another thread
+					// note: we cannot do just labelRenderingStatus.Text = "...",
+					// because we are running another thread
 					worker.ReportProgress(fps, drv.Name);
 					lastFPS = fps;
 				}
@@ -149,29 +163,28 @@ namespace L02.WinFormsWindow
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// if background worker still running, we sending request to finish rendering
-			// and cancel form closing
-			if (backgroundWorker1.IsBusy)
+			// if background worker still running, we send request to stop
+			if (backgroundRendering.IsBusy)
 			{
-				backgroundWorker1.CancelAsync();
+				backgroundRendering.CancelAsync();
 				e.Cancel = true;
 				userWantExit = true;
 			}
 		}
 
-		private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		private void backgroundRendering_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
 			// process reported progress
 
 			int f = e.ProgressPercentage;
 			string d = e.UserState as string;
 
-			label1.Text = string.Format(
-				"Using {0} driver and rendering {1} fps",
+			labelRenderingStatus.Text = string.Format(
+				"Rendering {1} fps using {0} driver",
 				d, f);
 		}
 
-		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		private void backgroundRendering_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			// if exception occured in rendering thread -- we display the message
 			if (e.Error != null)
@@ -183,7 +196,7 @@ namespace L02.WinFormsWindow
 			if (userWantExit)
 				Close();
 
-			label1.Text = "No rendering";
+			labelRenderingStatus.Text = "No rendering";
 		}
 	}
 }
