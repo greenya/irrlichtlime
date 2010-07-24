@@ -14,14 +14,15 @@ public ref class FileList : ReferenceCounted
 {
 public:
 
-	int AddFile(String^ fullPath, int size, bool isDirectory, int id);
-	int AddFile(String^ fullPath, int size, bool isDirectory);
+	int AddFile(String^ fullPath, int offset, int size, bool isDirectory, int id);
+	int AddFile(String^ fullPath, int offset, int size, bool isDirectory);
 
 	int FindFile(String^ filename, bool isDirectory);
 	int FindFile(String^ filename);
 
 	int GetFileID(int index);
 	String^ GetFileName(int index);
+	int GetFileOffset(int index);
 	int GetFileSize(int index);
 	String^ GetFullFileName(int index);
 

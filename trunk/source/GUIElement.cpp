@@ -117,11 +117,19 @@ GUIElement::GUIElement(gui::IGUIElement* ref)
 
 void GUIElement::AddChild(GUIElement^ child)
 {
+	LIME_ASSERT(child != nullptr);
 	m_GUIElement->addChild(LIME_SAFEREF(child, m_GUIElement));
+}
+
+bool GUIElement::BringToBack(GUIElement^ child)
+{
+	LIME_ASSERT(child != nullptr);
+	return m_GUIElement->bringToBack(LIME_SAFEREF(child, m_GUIElement));
 }
 
 bool GUIElement::BringToFront(GUIElement^ child)
 {
+	LIME_ASSERT(child != nullptr);
 	return m_GUIElement->bringToFront(LIME_SAFEREF(child, m_GUIElement));
 }
 
@@ -183,6 +191,7 @@ bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] 
 
 bool GUIElement::IsMyChild(GUIElement^ child)
 {
+	LIME_ASSERT(child != nullptr);
 	return m_GUIElement->isMyChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
@@ -205,6 +214,7 @@ void GUIElement::Remove()
 
 void GUIElement::RemoveChild(GUIElement^ child)
 {
+	LIME_ASSERT(child != nullptr);
 	m_GUIElement->removeChild(LIME_SAFEREF(child, m_GUIElement));
 }
 

@@ -20,6 +20,7 @@ public enum class AnimatedMeshType
 	MY3D = EAMT_MY3D,
 	CSM = EAMT_CSM,
 	OCT = EAMT_OCT,
+	MDL_HalfLife = EAMT_MDL_HALFLIFE,
 	Skinned = EAMT_SKINNED
 };
 

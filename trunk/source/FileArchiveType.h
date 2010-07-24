@@ -17,6 +17,7 @@ public enum class FileArchiveType
 	PAK = EFAT_PAK,
 	NPK = EFAT_NPK,
 	TAR = EFAT_TAR,
+	WAD = EFAT_WAD,
 	Unknown = EFAT_UNKNOWN
 };
 
