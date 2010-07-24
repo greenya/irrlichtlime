@@ -21,7 +21,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
-[assembly:AssemblyVersionAttribute("0.5.*")];
+[assembly:AssemblyVersionAttribute("0.6.*")];
 
 [assembly:ComVisible(false)];
 [assembly:CLSCompliantAttribute(true)];

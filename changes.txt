@@ -1,4 +1,32 @@
 ============================
+Changes in 0.6 (25-Jul-2010)
+============================
+
+- Added examples 12.TerrainRendering, 13.RenderToTexture, 15.LoadIrrFile, 18.SplitScreen, L01.TexturePainting and L02.WinFormsWindow.
+
+- Updated Irrlicht SDK to trunk rev. 3368. Added AnimatedMeshType.MDL_HalfLife, FileArchiveType.WAD, FileList.GetFileOffset() and GUIElement.BringToBack().
+
+- Added class GeometryCreator. Added prop SceneManager.GeometryCreator.
+
+- Added class MeshCache and prop SceneManager.MeshCache.
+
+- Added methods LoadHeightMap and LoadHeightMapRAW to TerrainSceneNode.
+
+- Added class ReadFile, method FileArchive.CreateAndOpenFile.
+
+- Added class IrrlichtCreationParameters and proper overloading for method IrrlichtDevice.CreateDevice.
+
+- Class VideoDriver extended with methods Draw2DPolygon, Draw2DRectangleOutline, Draw2DVertexPrimitiveList, DrawStencilShadow, DrawStencilShadowVolume, FindTexture, GetTextureCreationFlag, SetClipPlane; props MaxClipPlanes (static), ColorFormat, MeshManipulator; CreateImageFromFile renamed into CreateImage (additional overloading to CreateImage).
+
+- Added method SetLine to class TexturePainter.
+
+- Added comparison operators ("==" and "!=") to ReferenceCounted.
+
+- Class Matrix improved: added most of methods and operators; added static property Identity.
+
+- Removed class Line2Di.
+
+============================
 Changes in 0.5 (04-Jul-2010)
 ============================
 
