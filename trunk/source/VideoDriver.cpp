@@ -420,17 +420,6 @@ void VideoDriver::Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color)
 		*color->m_NativeValue);
 }
 
-void VideoDriver::Draw2DLine(Line2Di^ line, Color^ color)
-{
-	LIME_ASSERT(line != nullptr);
-	LIME_ASSERT(color != nullptr);
-
-	m_VideoDriver->draw2DLine(
-		line->m_NativeValue->start,
-		line->m_NativeValue->end,
-		*color->m_NativeValue);
-}
-
 void VideoDriver::Draw2DPolygon(Vector2Di^ center, float radius, Color^ color, int vertexCount)
 {
 	LIME_ASSERT(center != nullptr);

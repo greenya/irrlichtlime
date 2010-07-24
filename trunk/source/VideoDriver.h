@@ -77,7 +77,6 @@ public:
 	
 	void Draw2DLine(int x1, int y1, int x2, int y2, Color^ color);
 	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color);
-	void Draw2DLine(Line2Di^ line, Color^ color);
 
 	void Draw2DPolygon(Vector2Di^ center, float radius, Color^ color, int vertexCount);
 
