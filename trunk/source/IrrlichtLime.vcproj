@@ -540,6 +540,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\InterpolationMode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\JointUpdateOnRender.h"
 				>
 			</File>
@@ -777,6 +781,14 @@
 			</File>
 			<File
 				RelativePath=".\ShadowVolumeSceneNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SkinnedMesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SkinnedMesh.h"
 				>
 			</File>
 			<File

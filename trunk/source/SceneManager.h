@@ -31,6 +31,7 @@ ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
 ref class SceneNode;
 ref class SceneNodeAnimator;
+ref class SkinnedMesh;
 ref class TerrainSceneNode;
 ref class TextSceneNode;
 ref class TriangleSelector;
@@ -269,7 +270,7 @@ public:
 
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
 
-	//ISkinnedMesh* createSkinnedMesh();
+	SkinnedMesh^ CreateSkinnedMesh();
 
 	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel);
 	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node);

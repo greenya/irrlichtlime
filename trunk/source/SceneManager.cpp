@@ -24,6 +24,7 @@
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
+#include "SkinnedMesh.h"
 #include "TerrainSceneNode.h"
 #include "TextSceneNode.h"
 #include "Texture.h"
@@ -2575,6 +2576,12 @@ SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(*rotationSpeed->m_NativeValue);
 	return SceneNodeAnimator::Wrap(a);
+}
+
+SkinnedMesh^ SceneManager::CreateSkinnedMesh()
+{
+	scene::ISkinnedMesh* m = m_SceneManager->createSkinnedMesh();
+	return SkinnedMesh::Wrap(m);
 }
 
 TriangleSelector^ SceneManager::CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel)
