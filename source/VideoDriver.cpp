@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Image.h"
+#include "ImageLoader.h"
 #include "Light.h"
 #include "Material.h"
 #include "MaterialRenderer.h"
@@ -812,6 +813,14 @@ Light^ VideoDriver::GetDynamicLight(int index)
 	return gcnew Light((video::SLight*)&m_VideoDriver->getDynamicLight(index)); // !!! cast to non-const
 }
 
+ImageLoader^ VideoDriver::GetImageLoader(int index)
+{
+	LIME_ASSERT(index >= 0 && index < ImageLoaderCount);
+
+	video::IImageLoader* l = m_VideoDriver->getImageLoader(index);
+	return ImageLoader::Wrap(l);
+}
+
 MaterialRenderer^ VideoDriver::GetMaterialRenderer(int index)
 {
 	LIME_ASSERT(index >= 0 && index < MaterialRendererCount);
@@ -1164,6 +1173,11 @@ void VideoDriver::Fog::set(Video::Fog^ value)
 int VideoDriver::FPS::get()
 {
 	return m_VideoDriver->getFPS();
+}
+
+int VideoDriver::ImageLoaderCount::get()
+{
+	return m_VideoDriver->getImageLoaderCount();
 }
 
 Material^ VideoDriver::Material2D::get()

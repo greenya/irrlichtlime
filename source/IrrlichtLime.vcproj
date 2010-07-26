@@ -228,6 +228,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImageLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ImageLoader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\IndexType.h"
 				>
 			</File>

@@ -12,6 +12,7 @@ namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulato
 namespace Video {
 
 ref class Image;
+ref class ImageLoader;
 ref class Light;
 ref class Material;
 ref class MaterialRenderer;
@@ -128,6 +129,8 @@ public:
 
 	Light^ GetDynamicLight(int index);
 
+	ImageLoader^ GetImageLoader(int index);
+
 	MaterialRenderer^ GetMaterialRenderer(int index);
 	MaterialRenderer^ GetMaterialRenderer(MaterialType material);
 	String^ GetMaterialRendererName(int index);
@@ -205,6 +208,7 @@ public:
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
 	property Video::Fog^ Fog { Video::Fog^ get(); void set(Video::Fog^ value); }
 	property int FPS { int get(); }
+	property int ImageLoaderCount { int get(); }
 	property Material^ Material2D { Material^ get(); }
 	property int MaterialRendererCount { int get(); }
 	property int MaximalDynamicLightCount { int get(); }
