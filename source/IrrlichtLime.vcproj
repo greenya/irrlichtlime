@@ -280,6 +280,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MaterialRendererServices.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MaterialRendererServices.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MaterialType.h"
 				>
 			</File>
