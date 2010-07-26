@@ -43,6 +43,7 @@
 #include "HardwareBufferType.h"
 #include "HardwareMappingHint.h"
 #include "IndexType.h"
+#include "InterpolationMode.h"
 #include "JointUpdateOnRender.h"
 #include "KeyAction.h"
 #include "KeyCode.h"
