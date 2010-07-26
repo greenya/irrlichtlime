@@ -5,6 +5,7 @@
 #include "GUIEnvironment.h"
 #include "IrrlichtCreationParameters.h"
 #include "IrrlichtDevice.h"
+#include "Logger.h"
 #include "ReferenceCounted.h"
 #include "SceneManager.h"
 #include "Timer.h"
@@ -249,12 +250,14 @@ Video::ColorFormat IrrlichtDevice::ColorFormat::get()
 
 GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
 {
-	return GUI::CursorControl::Wrap(m_IrrlichtDevice->getCursorControl());
+	gui::ICursorControl* c = m_IrrlichtDevice->getCursorControl();
+	return GUI::CursorControl::Wrap(c);
 }
 
 IO::FileSystem^ IrrlichtDevice::FileSystem::get()
 {
-	return IO::FileSystem::Wrap(m_IrrlichtDevice->getFileSystem());
+	io::IFileSystem* s = m_IrrlichtDevice->getFileSystem();
+	return IO::FileSystem::Wrap(s);
 }
 
 bool IrrlichtDevice::Fullscreen::get()
@@ -264,17 +267,26 @@ bool IrrlichtDevice::Fullscreen::get()
 
 GUI::GUIEnvironment^ IrrlichtDevice::GUIEnvironment::get()
 {
-	return GUI::GUIEnvironment::Wrap(m_IrrlichtDevice->getGUIEnvironment());
+	gui::IGUIEnvironment* g = m_IrrlichtDevice->getGUIEnvironment();
+	return GUI::GUIEnvironment::Wrap(g);
+}
+
+IrrlichtLime::Logger^ IrrlichtDevice::Logger::get()
+{
+	irr::ILogger* l = m_IrrlichtDevice->getLogger();
+	return IrrlichtLime::Logger::Wrap(l);
 }
 
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
 {
-	return Scene::SceneManager::Wrap(m_IrrlichtDevice->getSceneManager());
+	scene::ISceneManager* m = m_IrrlichtDevice->getSceneManager();
+	return Scene::SceneManager::Wrap(m);
 }
 
 IrrlichtLime::Timer^ IrrlichtDevice::Timer::get()
 {
-	return IrrlichtLime::Timer::Wrap(m_IrrlichtDevice->getTimer());
+	irr::ITimer* t = m_IrrlichtDevice->getTimer();
+	return IrrlichtLime::Timer::Wrap(t);
 }
 
 DeviceType IrrlichtDevice::Type::get()
@@ -289,12 +301,14 @@ String^ IrrlichtDevice::Version::get()
 
 Video::VideoDriver^ IrrlichtDevice::VideoDriver::get()
 {
-	return Video::VideoDriver::Wrap(m_IrrlichtDevice->getVideoDriver());
+	video::IVideoDriver* d = m_IrrlichtDevice->getVideoDriver();
+	return Video::VideoDriver::Wrap(d);
 }
 
 Video::VideoModeList^ IrrlichtDevice::VideoModeList::get()
 {
-	return Video::VideoModeList::Wrap(m_IrrlichtDevice->getVideoModeList());
+	video::IVideoModeList* l = m_IrrlichtDevice->getVideoModeList();
+	return Video::VideoModeList::Wrap(l);
 }
 
 bool IrrlichtDevice::WindowActive::get()
@@ -315,7 +329,7 @@ bool IrrlichtDevice::WindowMinimized::get()
 String^ IrrlichtDevice::ToString()
 {
 	return String::Format("Irrlicht {0}{1}", Version,
-		m_IrrlichtDevice->getDebugName() == nullptr ? "" : " DEBUG");
+		m_IrrlichtDevice->getDebugName() == nullptr ? "" : " (DEBUG)");
 }
 
 bool IrrlichtDevice::Event(IrrlichtLime::Event^ e)

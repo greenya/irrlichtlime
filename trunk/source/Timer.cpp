@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "ReferenceCounted.h"
 #include "Timer.h"
 
 using namespace irr;
