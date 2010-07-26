@@ -149,20 +149,22 @@ namespace _08.SpecialFX
 			int lastFPS = -1;
 
 			while (device.Run())
-			if (device.WindowActive)
 			{
-				driver.BeginScene(true, true, new Color(0));
-				smgr.DrawAll();
-				driver.EndScene();
-
-				int fps = driver.FPS;
-				if (lastFPS != fps)
+				if (device.WindowActive)
 				{
-					device.SetWindowCaption(String.Format(
-						"SpecialFX example - Irrlicht Engine [{0}] fps: {1}",
-						driver.Name, fps));
+					driver.BeginScene(true, true, new Color(0));
+					smgr.DrawAll();
+					driver.EndScene();
 
-					lastFPS = fps;
+					int fps = driver.FPS;
+					if (lastFPS != fps)
+					{
+						device.SetWindowCaption(String.Format(
+							"SpecialFX example - Irrlicht Engine [{0}] fps: {1}",
+							driver.Name, fps));
+
+						lastFPS = fps;
+					}
 				}
 			}
 
