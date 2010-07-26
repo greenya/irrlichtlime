@@ -71,14 +71,14 @@ namespace _10.Shaders
 			if (!driver.QueryFeature(VideoDriverFeature.PixelShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_FragmentProgram_1))
 			{
-				//device.Logger.Log("WARNING: Pixel shaders disabled because of missing driver/hardware support.");
+				device.Logger.Log("WARNING: Pixel shaders disabled because of missing driver/hardware support.");
 				psFileName = "";
 			}
 
 			if (!driver.QueryFeature(VideoDriverFeature.VertexShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_VertexProgram_1))
 			{
-				//device.Logger.Log("WARNING: Vertex shaders disabled because of missing driver/hardware support.");
+				device.Logger.Log("WARNING: Vertex shaders disabled because of missing driver/hardware support.");
 				vsFileName = "";
 			}
 

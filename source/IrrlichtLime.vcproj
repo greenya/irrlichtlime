@@ -1249,6 +1249,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\Logger.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Logger.h"
+			>
+		</File>
+		<File
 			RelativePath=".\LogLevel.h"
 			>
 		</File>

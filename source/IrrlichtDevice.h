@@ -16,6 +16,7 @@ namespace Video { ref class VideoDriver; ref class VideoModeList; }
 
 ref class Event;
 ref class IrrlichtCreationParameters;
+ref class Logger;
 ref class Timer;
 class EventReceiverInheritor;
 
@@ -58,6 +59,7 @@ public:
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property bool Fullscreen { bool get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	property IrrlichtLime::Logger^ Logger { IrrlichtLime::Logger^ get(); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
 	property IrrlichtLime::Timer^ Timer { IrrlichtLime::Timer^ get(); }
 	property DeviceType Type { DeviceType get(); }
