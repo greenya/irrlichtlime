@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class MaterialType : unsigned int
+public enum class MaterialType
 {
 	Solid = EMT_SOLID,
 	Solid2Layer = EMT_SOLID_2_LAYER,

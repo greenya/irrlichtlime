@@ -18,6 +18,7 @@ public:
 	static property int MaxTextures { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
 	Material();
+	Material(Material^ other);
 
 	bool GetFlag(MaterialFlag flag);
 	Texture^ GetTexture(int index);

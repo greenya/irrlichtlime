@@ -256,6 +256,10 @@ void SceneNode::SetMaterialTexture(int textureLayer, Video::Texture^ texture)
 
 void SceneNode::SetMaterialType(Video::MaterialType newType)
 {
+	LIME_ASSERT((int)newType != -1); // this assert specially for
+	// VideoDriver::AddMaterialRenderer() and GPUProgrammingServices::Add*()
+	// as they all return "-1" on error
+
 	m_SceneNode->setMaterialType((video::E_MATERIAL_TYPE)newType);
 }
 

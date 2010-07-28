@@ -30,6 +30,13 @@ Material::Material()
 	m_NativeValue = new video::SMaterial();
 }
 
+Material::Material(Material^ other)
+	: Lime::NativeValue<video::SMaterial>(true)
+{
+	LIME_ASSERT(other != nullptr);
+	m_NativeValue = new video::SMaterial(*other->m_NativeValue);
+}
+
 bool Material::GetFlag(MaterialFlag flag)
 {
 	return m_NativeValue->getFlag((E_MATERIAL_FLAG)flag);
@@ -85,6 +92,10 @@ Video::MaterialType Material::Type::get()
 
 void Material::Type::set(Video::MaterialType value)
 {
+	LIME_ASSERT((int)value != -1); // this assert specially for
+	// VideoDriver::AddMaterialRenderer() and GPUProgrammingServices::Add*()
+	// as they all return "-1" on error
+
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;
 }
 
