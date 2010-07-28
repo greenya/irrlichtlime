@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class SceneNodeType : unsigned int
+public enum class SceneNodeType
 {
 	Cube = ESNT_CUBE,
 	Sphere = ESNT_SPHERE,
