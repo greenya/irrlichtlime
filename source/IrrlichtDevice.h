@@ -15,10 +15,10 @@ namespace Scene { ref class SceneManager; }
 namespace Video { ref class VideoDriver; ref class VideoModeList; }
 
 ref class Event;
+class EventReceiverInheritor;
 ref class IrrlichtCreationParameters;
 ref class Logger;
 ref class Timer;
-class EventReceiverInheritor;
 
 public ref class IrrlichtDevice : ReferenceCounted
 {
@@ -79,6 +79,7 @@ internal:
 
 	static IrrlichtDevice^ Wrap(irr::IrrlichtDevice* ref);
 	IrrlichtDevice(irr::IrrlichtDevice* ref);
+
 	bool Event(IrrlichtLime::Event^ e);
 
 	irr::IrrlichtDevice* m_IrrlichtDevice;

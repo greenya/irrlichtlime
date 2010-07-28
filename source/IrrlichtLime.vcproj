@@ -220,6 +220,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GeometryShaderType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GPUProgrammingServices.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GPUProgrammingServices.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Image.cpp"
 				>
 			</File>
@@ -292,7 +304,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PixelShaderType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RenderTarget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ShaderCallBackInheritor.h"
 				>
 			</File>
 			<File
@@ -325,6 +345,10 @@
 			</File>
 			<File
 				RelativePath=".\Vertex.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VertexShaderType.h"
 				>
 			</File>
 			<File

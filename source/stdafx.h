@@ -23,6 +23,7 @@
 #include "FileArchiveType.h"
 #include "FileSystemType.h"
 #include "FogType.h"
+#include "GeometryShaderType.h"
 #include "GUIAlignment.h"
 #include "GUIButtonState.h"
 #include "GUIColumnOrdering.h"
@@ -54,6 +55,7 @@
 #include "MouseEventType.h"
 #include "ParticleAffectorType.h"
 #include "ParticleEmitterType.h"
+#include "PixelShaderType.h"
 #include "PrimitiveType.h"
 #include "RenderTarget.h"
 #include "SceneNodeAnimatorType.h"
@@ -63,6 +65,7 @@
 #include "TextureClamp.h"
 #include "TextureCreationFlag.h"
 #include "TransformationState.h"
+#include "VertexShaderType.h"
 #include "VertexType.h"
 #include "VideoDriverFeature.h"
 #include "ZBufferCompFunc.h"
@@ -87,3 +90,4 @@
 // inheritors
 #include "EventReceiverInheritor.h"
 #include "SceneNodeInheritor.h"
+#include "ShaderCallBackInheritor.h"

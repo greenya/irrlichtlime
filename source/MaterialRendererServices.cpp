@@ -35,19 +35,6 @@ void MaterialRendererServices::SetBasicRenderStates(Material^ newMaterial, Mater
 		resetAllRenderStates);
 }
 
-void MaterialRendererServices::SetPixelShaderRegister(int registerIndex, array<float>^ value)
-{
-	LIME_ASSERT(registerIndex >= 0);
-	LIME_ASSERT(value != nullptr);
-	LIME_ASSERT(value->Length == 4);
-
-	float f[4] = { value[0], value[1], value[2], value[3] };
-
-	m_MaterialRendererServices->setPixelShaderConstant(
-		f,
-		registerIndex);
-}
-
 void MaterialRendererServices::SetPixelShaderRegisters(int startRegisterIndex, array<float>^ values)
 {
 	LIME_ASSERT(startRegisterIndex >= 0);
@@ -86,19 +73,6 @@ bool MaterialRendererServices::SetPixelShaderVariable(String^ name, array<float>
 
 	delete f;
 	return b;
-}
-
-void MaterialRendererServices::SetVertexShaderRegister(int registerIndex, array<float>^ value)
-{
-	LIME_ASSERT(registerIndex >= 0);
-	LIME_ASSERT(value != nullptr);
-	LIME_ASSERT(value->Length == 4);
-
-	float f[4] = { value[0], value[1], value[2], value[3] };
-
-	m_MaterialRendererServices->setVertexShaderConstant(
-		f,
-		registerIndex);
 }
 
 void MaterialRendererServices::SetVertexShaderRegisters(int startRegisterIndex, array<float>^ values)

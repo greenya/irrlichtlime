@@ -18,11 +18,9 @@ public:
 
 	void SetBasicRenderStates(Material^ newMaterial, Material^ lastMaterial, bool resetAllRenderStates);
 
-	void SetPixelShaderRegister(int registerIndex, array<float>^ value);
 	void SetPixelShaderRegisters(int startRegisterIndex, array<float>^ values);
 	bool SetPixelShaderVariable(String^ name, array<float>^ values);
 
-	void SetVertexShaderRegister(int registerIndex, array<float>^ value);
 	void SetVertexShaderRegisters(int startRegisterIndex, array<float>^ values);
 	bool SetVertexShaderVariable(String^ name, array<float>^ values);
 
