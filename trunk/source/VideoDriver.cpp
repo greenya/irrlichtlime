@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "GPUProgrammingServices.h"
 #include "Image.h"
 #include "ImageLoader.h"
 #include "Light.h"
@@ -40,16 +41,16 @@ int VideoDriver::AddDynamicLight(Light^ light)
 	return m_VideoDriver->addDynamicLight(*light->m_NativeValue);
 }
 
-int VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer, String^ name)
+MaterialType VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer, String^ name)
 {
-	return m_VideoDriver->addMaterialRenderer(
+	return (MaterialType)m_VideoDriver->addMaterialRenderer(
 		LIME_SAFEREF(renderer, m_MaterialRenderer),
 		name == nullptr ? nullptr : Lime::StringToStringC(name).c_str());
 }
 
-int VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer)
+MaterialType VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer)
 {
-	return m_VideoDriver->addMaterialRenderer(
+	return (MaterialType)m_VideoDriver->addMaterialRenderer(
 		LIME_SAFEREF(renderer, m_MaterialRenderer));
 }
 
@@ -1173,6 +1174,12 @@ void VideoDriver::Fog::set(Video::Fog^ value)
 int VideoDriver::FPS::get()
 {
 	return m_VideoDriver->getFPS();
+}
+
+Video::GPUProgrammingServices^ VideoDriver::GPUProgrammingServices::get()
+{
+	video::IGPUProgrammingServices* s = m_VideoDriver->getGPUProgrammingServices();
+	return Video::GPUProgrammingServices::Wrap(s);
 }
 
 int VideoDriver::ImageLoaderCount::get()

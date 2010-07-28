@@ -11,6 +11,7 @@ namespace IrrlichtLime {
 namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; }
 namespace Video {
 
+ref class GPUProgrammingServices;
 ref class Image;
 ref class ImageLoader;
 ref class Light;
@@ -28,8 +29,8 @@ public:
 
 	int AddDynamicLight(Light^ light);
 
-	int AddMaterialRenderer(MaterialRenderer^ renderer, String^ name);
-	int AddMaterialRenderer(MaterialRenderer^ renderer);
+	MaterialType AddMaterialRenderer(MaterialRenderer^ renderer, String^ name);
+	MaterialType AddMaterialRenderer(MaterialRenderer^ renderer);
 
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
@@ -208,6 +209,7 @@ public:
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
 	property Video::Fog^ Fog { Video::Fog^ get(); void set(Video::Fog^ value); }
 	property int FPS { int get(); }
+	property Video::GPUProgrammingServices^ GPUProgrammingServices { Video::GPUProgrammingServices^ get(); }
 	property int ImageLoaderCount { int get(); }
 	property Material^ Material2D { Material^ get(); }
 	property int MaterialRendererCount { int get(); }

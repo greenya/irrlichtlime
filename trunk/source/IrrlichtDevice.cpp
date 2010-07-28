@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CursorControl.h"
-#include "EventReceiverInheritor.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "IrrlichtCreationParameters.h"
