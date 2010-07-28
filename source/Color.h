@@ -234,6 +234,17 @@ public:
 		m_NativeValue->set(r, g, b);
 	}
 
+	array<float>^ ToArray()
+	{
+		array<float>^ a = gcnew array<float>(4);
+		float* c = (float*)m_NativeValue;
+
+		for (int i = 0; i < 4; i++)
+			a[i] = c[i];
+
+		return a;
+	}
+
 	Color^ ToColor()
 	{
 		return gcnew Color(m_NativeValue->toSColor());

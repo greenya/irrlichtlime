@@ -213,17 +213,6 @@ public:
 		return (*m_NativeValue)[index];
 	}
 
-	array<float>^ GetElementArray()
-	{
-		array<float>^ m = gcnew array<float>(16);
-		float* p = m_NativeValue->pointer();
-
-		for (int i = 0; i < 16; i++)
-			m[i] = p[i];
-
-		return m;
-	}
-
 	Matrix^ GetInterpolated(Matrix^ other, float time)
 	{
 		LIME_ASSERT(other != nullptr);
@@ -415,6 +404,17 @@ public:
 	{
 		m_NativeValue->setTextureTranslateTransposed(x, y);
 		return this;
+	}
+
+	array<float>^ ToArray()
+	{
+		array<float>^ m = gcnew array<float>(16);
+		float* p = m_NativeValue->pointer();
+
+		for (int i = 0; i < 16; i++)
+			m[i] = p[i];
+
+		return m;
 	}
 
 	void TransformBox(AABBox^% box)
