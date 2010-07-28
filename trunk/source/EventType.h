@@ -7,7 +7,7 @@ using namespace System;
 
 namespace IrrlichtLime {
 
-public enum class EventType : unsigned int
+public enum class EventType
 {
 	GUI = EET_GUI_EVENT,
 	Mouse = EET_MOUSE_INPUT_EVENT,

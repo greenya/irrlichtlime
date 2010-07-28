@@ -10,7 +10,7 @@ namespace IrrlichtLime {
 namespace GUI {
 
 [Flags]
-public enum class GUIMessageBoxFlag : unsigned int
+public enum class GUIMessageBoxFlag
 {
 	OK = EMBF_OK,
 	Cancel = EMBF_CANCEL,

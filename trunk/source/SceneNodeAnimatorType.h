@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class SceneNodeAnimatorType : unsigned int
+public enum class SceneNodeAnimatorType
 {
 	FlyCircle = ESNAT_FLY_CIRCLE,
 	FlyStraight = ESNAT_FLY_STRAIGHT,

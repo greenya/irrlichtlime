@@ -9,7 +9,7 @@ namespace IrrlichtLime {
 namespace Video {
 
 [Flags]
-public enum class TextureCreationFlag : unsigned int
+public enum class TextureCreationFlag
 {
 	Always16Bit = ETCF_ALWAYS_16_BIT,
 	Always32Bit = ETCF_ALWAYS_32_BIT,
