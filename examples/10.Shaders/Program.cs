@@ -18,11 +18,11 @@ namespace _10.Shaders
 
 		static void Main(string[] args)
 		{
-			useHighLevelShaders = AskUserForHighLevelShaders();
-
 			DriverType driverType;
 			if (!AskUserForDriver(out driverType))
 				return;
+
+			useHighLevelShaders = AskUserForHighLevelShaders(driverType);
 
 			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
@@ -31,8 +31,8 @@ namespace _10.Shaders
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
-			string vsFileName; // filename for the vertex shader
-			string psFileName; // filename for the pixel shader
+			string vsFileName = null; // filename for the vertex shader
+			string psFileName = null; // filename for the pixel shader
 
 			switch (driverType)
 			{
@@ -70,37 +70,53 @@ namespace _10.Shaders
 
 			if (!driver.QueryFeature(VideoDriverFeature.PixelShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_FragmentProgram_1))
-			{
 				device.Logger.Log("WARNING: Pixel shaders disabled because of missing driver/hardware support.");
-				psFileName = "";
-			}
 
 			if (!driver.QueryFeature(VideoDriverFeature.VertexShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_VertexProgram_1))
-			{
 				device.Logger.Log("WARNING: Vertex shaders disabled because of missing driver/hardware support.");
-				vsFileName = "";
-			}
 
 			// create materials
+			
+			GPUProgrammingServices gpu = driver.GPUProgrammingServices;
+			MaterialType newMaterialType1 = MaterialType.Solid;
+			MaterialType newMaterialType2 = MaterialType.TransparentAddColor;
 
-			//GPUProgrammingServices gpu = driver.GPUProgrammingServices;
-			int newMaterialType1 = 0;
-			int newMaterialType2 = 0;
-
-			//if (gpu != null)
+			if (gpu != null)
 			{
+				gpu.OnSetConstants += new GPUProgrammingServices.SetConstantsHandler(gpu_OnSetConstants);
+
 				// create the shaders depending on if the user wanted high level or low level shaders
 
 				if (useHighLevelShaders)
 				{
-					// ...
+					newMaterialType1 = gpu.AddHighLevelShaderMaterialFromFiles(
+						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
+						psFileName, "pixelMain", PixelShaderType.PS_1_1,
+						MaterialType.Solid);
+
+					newMaterialType2 = gpu.AddHighLevelShaderMaterialFromFiles(
+						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
+						psFileName, "pixelMain", PixelShaderType.PS_1_1,
+						MaterialType.TransparentAddColor);
 				}
 				else
 				{
-					// ...
+					// create material from low level shaders (asm or arb_asm)
+
+					newMaterialType1 = gpu.AddShaderMaterialFromFiles(vsFileName,
+						psFileName, MaterialType.Solid);
+
+					newMaterialType2 = gpu.AddShaderMaterialFromFiles(vsFileName,
+						psFileName, MaterialType.TransparentAddColor);
 				}
 			}
+
+			if ((int)newMaterialType1 == -1)
+				newMaterialType1 = MaterialType.Solid;
+
+			if ((int)newMaterialType2 == -1)
+				newMaterialType2 = MaterialType.TransparentAddColor;
 
 			// create test scene node 1, with the new created material type 1
 
@@ -108,7 +124,7 @@ namespace _10.Shaders
 			node.Position = new Vector3Df(0);
 			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
-			node.SetMaterialType((MaterialType)newMaterialType1);
+			node.SetMaterialType(newMaterialType1);
 
 			smgr.AddTextSceneNode(device.GUIEnvironment.BuiltInFont, "PS & VS & EMT_SOLID", new Color(255, 255, 255), node);
 
@@ -122,7 +138,7 @@ namespace _10.Shaders
 			node.Position = new Vector3Df(0, -10, 50);
 			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
-			node.SetMaterialType((MaterialType)newMaterialType2);
+			node.SetMaterialType(newMaterialType2);
 
 			smgr.AddTextSceneNode(device.GUIEnvironment.BuiltInFont, "PS & VS & EMT_TRANSPARENT", new Color(255, 255, 255), node);
 
@@ -188,9 +204,68 @@ namespace _10.Shaders
 			device.Drop();
 		}
 
-		static bool AskUserForHighLevelShaders()
+		static void gpu_OnSetConstants(MaterialRendererServices services, int userData)
 		{
-			Console.WriteLine("Please press 'y' if you want to use high level shaders.");
+			VideoDriver driver = services.VideoDriver;
+
+			// set inverted world matrix
+			// if we are using highlevel shaders (the user can select this when
+			// starting the program), we must set the constants by name
+
+			Matrix invWorld = driver.GetTransform(TransformationState.World);
+			invWorld.MakeInverse();
+
+			if (useHighLevelShaders)
+				services.SetVertexShaderVariable("mInvWorld", invWorld.ToArray());
+			else
+				services.SetVertexShaderRegisters(0, invWorld.ToArray());
+
+			// set clip matrix
+
+			Matrix worldViewProj = driver.GetTransform(TransformationState.Projection);
+			worldViewProj *= driver.GetTransform(TransformationState.View);
+			worldViewProj *= driver.GetTransform(TransformationState.World);
+
+			if (useHighLevelShaders)
+				services.SetVertexShaderVariable("mWorldViewProj", worldViewProj.ToArray());
+			else
+				services.SetVertexShaderRegisters(4, worldViewProj.ToArray());
+
+			// set camera position
+
+			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
+
+			if (useHighLevelShaders)
+				services.SetVertexShaderVariable("mLightPos", pos.ToArray());
+			else
+				services.SetVertexShaderRegisters(8, pos.ToArray());
+
+			// set light color
+
+			Colorf col = new Colorf(0, 1, 1, 0);
+
+			if (useHighLevelShaders)
+				services.SetVertexShaderVariable("mLightColor", col.ToArray());
+			else
+				services.SetVertexShaderRegisters(9, col.ToArray());
+
+			// set transposed world matrix
+
+			Matrix transpWorld = driver.GetTransform(TransformationState.World).Transposed;
+
+			if (useHighLevelShaders)
+				services.SetVertexShaderVariable("mTransWorld", transpWorld.ToArray());
+			else
+				services.SetVertexShaderRegisters(10, transpWorld.ToArray());
+		}
+
+		static bool AskUserForHighLevelShaders(DriverType driverType)
+		{
+			if (driverType != DriverType.Direct3D9 &&
+				driverType != DriverType.OpenGL)
+				return false;
+
+			Console.WriteLine("\nPlease press 'y' if you want to use high level shaders.");
 			return Console.ReadKey().Key == ConsoleKey.Y;
 		}
 
