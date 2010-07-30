@@ -124,7 +124,7 @@ ReadFile^ FileSystem::CreateMemoryReadFile(String^ filename, array<unsigned char
 	LIME_ASSERT(content != nullptr);
 
 	int c = content->Length;
-	char* m = new char[c];
+	unsigned char* m = new unsigned char[c];
 
 	for (int i = 0; i < c; i++)
 		m[i] = content[i];

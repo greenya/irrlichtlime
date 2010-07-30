@@ -27,7 +27,8 @@ array<unsigned char>^ ReadFile::Read(int bytesToRead)
 {
 	LIME_ASSERT(bytesToRead > 0);
 
-	char* b = new char(bytesToRead);
+	unsigned char* b = new unsigned char[bytesToRead];
+
 	int s = m_ReadFile->read(b, bytesToRead);
 	LIME_ASSERT(s >= 0);
 
@@ -72,7 +73,7 @@ long ReadFile::Size::get()
 
 String^ ReadFile::ToString()
 {
-	return String::Format("ReadFile: {0}", FileName);
+	return String::Format("ReadFile: FileName={0}; Position={1}", FileName, Position);
 }
 
 } // end namespace IO

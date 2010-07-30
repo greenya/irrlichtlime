@@ -1219,6 +1219,14 @@
 				RelativePath=".\ReadFile.h"
 				>
 			</File>
+			<File
+				RelativePath=".\WriteFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\WriteFile.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\AssemblyInfo.cpp"
