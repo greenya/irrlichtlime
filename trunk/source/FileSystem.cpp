@@ -4,6 +4,7 @@
 #include "FileSystem.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
+#include "WriteFile.h"
 
 using namespace irr;
 using namespace System;
@@ -85,6 +86,25 @@ ReadFile^ FileSystem::CreateReadFile(String^ filename)
 	return ReadFile::Wrap(f);
 }
 
+WriteFile^ FileSystem::CreateWriteFile(String^ filename, bool append)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	io::IWriteFile* f = m_FileSystem->createAndWriteFile(
+		Lime::StringToPath(filename),
+		append);
+
+	return WriteFile::Wrap(f);
+}
+
+WriteFile^ FileSystem::CreateWriteFile(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	io::IWriteFile* f = m_FileSystem->createAndWriteFile(Lime::StringToPath(filename));
+	return WriteFile::Wrap(f);
+}
+
 FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths)
 {
 	LIME_ASSERT(path != nullptr);
@@ -136,6 +156,22 @@ ReadFile^ FileSystem::CreateMemoryReadFile(String^ filename, array<unsigned char
 		true /* allocated m will be deleted automatically on drop() */);
 
 	return ReadFile::Wrap(f);
+}
+
+WriteFile^ FileSystem::CreateMemoryWriteFile(String^ filename, int length)
+{
+	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(length > 0);
+
+	unsigned char* m = new unsigned char[length];
+
+	io::IWriteFile* f = m_FileSystem->createMemoryWriteFile(
+		m,
+		length,
+		Lime::StringToPath(filename),
+		true /* allocated m will be deleted automatically on drop() */);
+
+	return WriteFile::Wrap(f);
 }
 
 String^ FileSystem::GetFileAbsolutePath(String^ filename)

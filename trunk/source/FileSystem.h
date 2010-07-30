@@ -13,6 +13,7 @@ namespace IO {
 ref class FileArchive;
 ref class FileList;
 ref class ReadFile;
+ref class WriteFile;
 
 public ref class FileSystem : ReferenceCounted
 {
@@ -25,12 +26,15 @@ public:
 	bool AddFileArchive(String^ filename);
 
 	ReadFile^ CreateReadFile(String^ filename);
+	WriteFile^ CreateWriteFile(String^ filename, bool append);
+	WriteFile^ CreateWriteFile(String^ filename);
 
 	FileList^ CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths);
 	FileList^ CreateFileList();
 
 	ReadFile^ CreateLimitReadFile(String^ filename, ReadFile^ alreadyOpenedFile, long areaPosition, long areaSize);
 	ReadFile^ CreateMemoryReadFile(String^ filename, array<unsigned char>^ content);
+	WriteFile^ CreateMemoryWriteFile(String^ filename, int length);
 
 	String^ GetFileAbsolutePath(String^ filename);
 	FileArchive^ GetFileArchive(int index);
