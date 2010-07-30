@@ -12,6 +12,7 @@ namespace IO {
 
 ref class FileArchive;
 ref class FileList;
+ref class ReadFile;
 
 public ref class FileSystem : ReferenceCounted
 {
@@ -26,7 +27,10 @@ public:
 	bool ChangeWorkingDirectory(String^ newDirectory);
 
 	FileList^ CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths);
-	FileList^ CreateFileListFromWorkingDirectory();
+	FileList^ CreateFileList();
+
+	ReadFile^ CreateLimitReadFile(String^ filename, ReadFile^ alreadyOpenedFile, long areaPosition, long areaSize);
+	ReadFile^ CreateMemoryReadFile(String^ filename, array<unsigned char>^ content);
 
 	String^ GetFileAbsolutePath(String^ filename);
 	FileArchive^ GetFileArchive(int index);
