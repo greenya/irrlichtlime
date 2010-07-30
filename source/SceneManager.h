@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime { ref class Event;
-namespace IO { ref class FileSystem; }
+namespace IO { ref class FileSystem; ref class ReadFile; ref class WriteFile; }
 namespace GUI { ref class GUIEnvironment; ref class GUIFont; }
 namespace Video { ref class Image; ref class Texture; ref class VideoDriver; }
 namespace Scene {
@@ -301,13 +301,16 @@ public:
 
 	bool IsCulled(SceneNode^ node);
 
+	bool LoadScene(String^ filename);
+	bool LoadScene(IO::ReadFile^ file);
+
 	bool PostEvent(Event^ e);
 
 	bool RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
 	bool RegisterNodeForRendering(SceneNode^ node);
 
-	bool SaveScene(String^ filename); // 2nd argument ISceneUserDataSerializer* not supported
-	bool LoadScene(String^ filename); // *same here*
+	bool SaveScene(String^ filename);
+	bool SaveScene(IO::WriteFile^ file);
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }

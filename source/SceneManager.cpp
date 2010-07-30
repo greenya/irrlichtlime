@@ -19,6 +19,7 @@
 #include "MeshSceneNode.h"
 #include "MetaTriangleSelector.h"
 #include "ParticleSystemSceneNode.h"
+#include "ReadFile.h"
 #include "ReferenceCounted.h"
 #include "SceneCollisionManager.h"
 #include "SceneManager.h"
@@ -31,6 +32,7 @@
 #include "TriangleSelector.h"
 #include "VideoDriver.h"
 #include "VolumeLightSceneNode.h"
+#include "WriteFile.h"
 
 using namespace irr;
 using namespace System;
@@ -2755,7 +2757,20 @@ String^ SceneManager::GetSceneNodeTypeName(SceneNodeType type)
 
 bool SceneManager::IsCulled(SceneNode^ node)
 {
+	LIME_ASSERT(node != nullptr);
 	return m_SceneManager->isCulled(LIME_SAFEREF(node, m_SceneNode));
+}
+
+bool SceneManager::LoadScene(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+	return m_SceneManager->loadScene(Lime::StringToPath(filename));
+}
+
+bool SceneManager::LoadScene(IO::ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+	return m_SceneManager->loadScene(LIME_SAFEREF(file, m_ReadFile));
 }
 
 bool SceneManager::PostEvent(Event^ e)
@@ -2766,6 +2781,8 @@ bool SceneManager::PostEvent(Event^ e)
 
 bool SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRenderPass pass)
 {
+	LIME_ASSERT(node != nullptr);
+
 	return m_SceneManager->registerNodeForRendering(
 		LIME_SAFEREF(node, m_SceneNode),
 		(E_SCENE_NODE_RENDER_PASS)pass) != 0;
@@ -2773,18 +2790,22 @@ bool SceneManager::RegisterNodeForRendering(SceneNode^ node, Scene::SceneNodeRen
 
 bool SceneManager::RegisterNodeForRendering(SceneNode^ node)
 {
+	LIME_ASSERT(node != nullptr);
+
 	return m_SceneManager->registerNodeForRendering(
 		LIME_SAFEREF(node, m_SceneNode)) != 0;
 }
 
 bool SceneManager::SaveScene(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return m_SceneManager->saveScene(Lime::StringToPath(filename));
 }
 
-bool SceneManager::LoadScene(String^ filename)
+bool SceneManager::SaveScene(IO::WriteFile^ file)
 {
-	return m_SceneManager->loadScene(Lime::StringToPath(filename));
+	LIME_ASSERT(file != nullptr);
+	return m_SceneManager->saveScene(LIME_SAFEREF(file, m_WriteFile));
 }
 
 CameraSceneNode^ SceneManager::ActiveCamera::get()
