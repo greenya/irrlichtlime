@@ -8,10 +8,12 @@
 #include "Mesh.h"
 #include "MeshBuffer.h"
 #include "MeshManipulator.h"
+#include "ReadFile.h"
 #include "ReferenceCounted.h"
 #include "SceneNode.h"
 #include "Texture.h"
 #include "VideoDriver.h"
+#include "WriteFile.h"
 
 using namespace irr;
 using namespace System;
@@ -230,7 +232,17 @@ Image^ VideoDriver::CreateImage(Video::ColorFormat format, Dimension2Di^ size)
 
 Image^ VideoDriver::CreateImage(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	video::IImage* i = m_VideoDriver->createImageFromFile(Lime::StringToPath(filename));
+	return Image::Wrap(i);
+}
+
+Image^ VideoDriver::CreateImage(IO::ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+
+	video::IImage* i = m_VideoDriver->createImageFromFile(LIME_SAFEREF(file, m_ReadFile));
 	return Image::Wrap(i);
 }
 
@@ -1091,19 +1103,46 @@ void VideoDriver::UpdateOcclusionQuery(Scene::SceneNode^ node)
 	m_VideoDriver->updateOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
 }
 
-bool VideoDriver::WriteImageToFile(Image^ image, String^ filename, unsigned int param)
+bool VideoDriver::WriteImage(Image^ image, String^ filename, unsigned int param)
 {
+	LIME_ASSERT(image != nullptr);
+	LIME_ASSERT(filename != nullptr);
+
 	return m_VideoDriver->writeImageToFile(
 		LIME_SAFEREF(image, m_Image),
 		Lime::StringToPath(filename),
 		param);
 }
 
-bool VideoDriver::WriteImageToFile(Image^ image, String^ filename)
+bool VideoDriver::WriteImage(Image^ image, String^ filename)
 {
+	LIME_ASSERT(image != nullptr);
+	LIME_ASSERT(filename != nullptr);
+
 	return m_VideoDriver->writeImageToFile(
 		LIME_SAFEREF(image, m_Image),
 		Lime::StringToPath(filename));
+}
+
+bool VideoDriver::WriteImage(Image^ image, IO::WriteFile^ file, unsigned int param)
+{
+	LIME_ASSERT(image != nullptr);
+	LIME_ASSERT(file != nullptr);
+
+	return m_VideoDriver->writeImageToFile(
+		LIME_SAFEREF(image, m_Image),
+		LIME_SAFEREF(file, m_WriteFile),
+		param);
+}
+
+bool VideoDriver::WriteImage(Image^ image, IO::WriteFile^ file)
+{
+	LIME_ASSERT(image != nullptr);
+	LIME_ASSERT(file != nullptr);
+
+	return m_VideoDriver->writeImageToFile(
+		LIME_SAFEREF(image, m_Image),
+		LIME_SAFEREF(file, m_WriteFile));
 }
 
 Video::ColorFormat VideoDriver::ColorFormat::get()

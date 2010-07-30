@@ -27,9 +27,11 @@
 #include "GUIToolBar.h"
 #include "GUITreeView.h"
 #include "GUIWindow.h"
+#include "ReadFile.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
 #include "VideoDriver.h"
+#include "WriteFile.h"
 
 using namespace irr;
 using namespace System;
@@ -1232,10 +1234,70 @@ GUISpriteBank^ GUIEnvironment::GetSpriteBank(String^ filename)
 	return GUISpriteBank::Wrap(b);
 }
 
+bool GUIEnvironment::LoadGUI(String^ filename, GUIElement^ parent)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	return m_GUIEnvironment->loadGUI(
+		Lime::StringToPath(filename),
+		LIME_SAFEREF(parent, m_GUIElement));
+}
+
+bool GUIEnvironment::LoadGUI(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+	return m_GUIEnvironment->loadGUI(Lime::StringToPath(filename));
+}
+
+bool GUIEnvironment::LoadGUI(IO::ReadFile^ file, GUIElement^ parent)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_GUIEnvironment->loadGUI(
+		LIME_SAFEREF(file, m_ReadFile),
+		LIME_SAFEREF(parent, m_GUIElement));
+}
+
+bool GUIEnvironment::LoadGUI(IO::ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+	return m_GUIEnvironment->loadGUI(LIME_SAFEREF(file, m_ReadFile));
+}
+
 bool GUIEnvironment::PostEvent(Event^ e)
 {
 	LIME_ASSERT(e != nullptr);
 	return m_GUIEnvironment->postEventFromUser(*e->m_NativeValue);
+}
+
+bool GUIEnvironment::SaveGUI(String^ filename, GUIElement^ start)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	return m_GUIEnvironment->saveGUI(
+		Lime::StringToPath(filename),
+		LIME_SAFEREF(start, m_GUIElement));
+}
+
+bool GUIEnvironment::SaveGUI(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+	return m_GUIEnvironment->saveGUI(Lime::StringToPath(filename));
+}
+
+bool GUIEnvironment::SaveGUI(IO::WriteFile^ file, GUIElement^ start)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_GUIEnvironment->saveGUI(
+		LIME_SAFEREF(file, m_WriteFile),
+		LIME_SAFEREF(start, m_GUIElement));
+}
+
+bool GUIEnvironment::SaveGUI(IO::WriteFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+	return m_GUIEnvironment->saveGUI(LIME_SAFEREF(file, m_WriteFile));
 }
 
 GUIFont^ GUIEnvironment::BuiltInFont::get()

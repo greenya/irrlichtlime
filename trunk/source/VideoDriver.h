@@ -9,6 +9,7 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; }
+namespace IO { ref class ReadFile; ref class WriteFile; }
 namespace Video {
 
 ref class GPUProgrammingServices;
@@ -56,6 +57,7 @@ public:
 	Image^ CreateImage(Image^ imageToConvert, Video::ColorFormat format);
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
+	Image^ CreateImage(IO::ReadFile^ file);
 
 	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void CreateOcclusionQuery(Scene::SceneNode^ node);
@@ -199,8 +201,10 @@ public:
 	void UpdateOcclusionQuery(Scene::SceneNode^ node, bool block);
 	void UpdateOcclusionQuery(Scene::SceneNode^ node);
 
-	bool WriteImageToFile(Image^ image, String^ filename, unsigned int param);
-	bool WriteImageToFile(Image^ image, String^ filename);
+	bool WriteImage(Image^ image, String^ filename, unsigned int param);
+	bool WriteImage(Image^ image, String^ filename);
+	bool WriteImage(Image^ image, IO::WriteFile^ file, unsigned int param);
+	bool WriteImage(Image^ image, IO::WriteFile^ file);
 
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
 	property Dimension2Di^ CurrentRenderTargetSize { Dimension2Di^ get(); }

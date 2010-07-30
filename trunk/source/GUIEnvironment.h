@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime { ref class Event;
-namespace IO { ref class FileSystem; }
+namespace IO { ref class FileSystem; ref class ReadFile; ref class WriteFile; }
 namespace Video { ref class Texture; ref class VideoDriver; }
 namespace GUI {
 
@@ -186,7 +186,17 @@ public:
 
 	GUISpriteBank^ GetSpriteBank(String^ filename);
 
+	bool LoadGUI(String^ filename, GUIElement^ start);
+	bool LoadGUI(String^ filename);
+	bool LoadGUI(IO::ReadFile^ file, GUIElement^ start);
+	bool LoadGUI(IO::ReadFile^ file);
+
 	bool PostEvent(Event^ e);
+
+	bool SaveGUI(String^ filename, GUIElement^ start);
+	bool SaveGUI(String^ filename);
+	bool SaveGUI(IO::WriteFile^ file, GUIElement^ start);
+	bool SaveGUI(IO::WriteFile^ file);
 
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
 	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }
