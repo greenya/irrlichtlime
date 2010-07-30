@@ -2,6 +2,7 @@
 #include "FileArchive.h"
 #include "FileList.h"
 #include "FileSystem.h"
+#include "ReadFile.h"
 #include "ReferenceCounted.h"
 
 using namespace irr;
@@ -28,6 +29,8 @@ FileSystem::FileSystem(io::IFileSystem* ref)
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename),
 		ignoreCase,
@@ -38,6 +41,8 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename),
 		ignoreCase,
@@ -47,6 +52,8 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename),
 		ignoreCase,
@@ -55,6 +62,8 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename),
 		ignoreCase);
@@ -62,17 +71,22 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase)
 
 bool FileSystem::AddFileArchive(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename));
 }
 
 bool FileSystem::ChangeWorkingDirectory(String^ newDirectory)
 {
+	LIME_ASSERT(newDirectory != nullptr);
 	return m_FileSystem->changeWorkingDirectoryTo(Lime::StringToPath(newDirectory));
 }
 
 FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths)
 {
+	LIME_ASSERT(path != nullptr);
+
 	io::IFileList* l = m_FileSystem->createEmptyFileList(
 		Lime::StringToPath(path),
 		ignoreCase,
@@ -81,14 +95,50 @@ FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ig
 	return FileList::Wrap(l);
 }
 
-FileList^ FileSystem::CreateFileListFromWorkingDirectory()
+FileList^ FileSystem::CreateFileList()
 {
 	io::IFileList* l = m_FileSystem->createFileList();
 	return FileList::Wrap(l);
 }
 
+ReadFile^ FileSystem::CreateLimitReadFile(String^ filename, ReadFile^ alreadyOpenedFile, long areaPosition, long areaSize)
+{
+	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(alreadyOpenedFile != nullptr);
+	LIME_ASSERT(areaSize >= 0);
+
+	io::IReadFile* f = m_FileSystem->createLimitReadFile(
+		Lime::StringToPath(filename),
+		LIME_SAFEREF(alreadyOpenedFile, m_ReadFile),
+		areaPosition,
+		areaSize);
+
+	return ReadFile::Wrap(f);
+}
+
+ReadFile^ FileSystem::CreateMemoryReadFile(String^ filename, array<unsigned char>^ content)
+{
+	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(content != nullptr);
+
+	int c = content->Length;
+	char* m = new char[c];
+
+	for (int i = 0; i < c; i++)
+		m[i] = content[i];
+
+	io::IReadFile* f = m_FileSystem->createMemoryReadFile(
+		m,
+		c,
+		Lime::StringToPath(filename),
+		true /* allocated m will be deleted automatically on drop() */);
+
+	return ReadFile::Wrap(f);
+}
+
 String^ FileSystem::GetFileAbsolutePath(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return gcnew String(m_FileSystem->getAbsolutePath(Lime::StringToPath(filename)).c_str());
 }
 
@@ -102,16 +152,19 @@ FileArchive^ FileSystem::GetFileArchive(int index)
 
 String^ FileSystem::GetFileBasename(String^ filename, bool keepExtension)
 {
+	LIME_ASSERT(filename != nullptr);
 	return gcnew String(m_FileSystem->getFileBasename(Lime::StringToPath(filename), keepExtension).c_str());
 }
 
 String^ FileSystem::GetFileBasename(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return gcnew String(m_FileSystem->getFileBasename(Lime::StringToPath(filename)).c_str());
 }
 
 String^ FileSystem::GetFileDirectory(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return gcnew String(m_FileSystem->getFileDir(Lime::StringToPath(filename)).c_str());
 }
 
@@ -129,6 +182,7 @@ bool FileSystem::RemoveFileArchive(int index)
 
 bool FileSystem::RemoveFileArchive(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return m_FileSystem->removeFileArchive(Lime::StringToPath(filename));
 }
 
@@ -149,7 +203,7 @@ String^ FileSystem::WorkingDirectory::get()
 
 String^ FileSystem::ToString()
 {
-	return String::Format("FileSystem: {0}", WorkingDirectory);
+	return String::Format("FileSystem: WorkingDirectory={0}; FileArchiveCount={1}", WorkingDirectory, FileArchiveCount);
 }
 
 } // end namespace IO
