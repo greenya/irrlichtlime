@@ -77,10 +77,12 @@ bool FileSystem::AddFileArchive(String^ filename)
 		Lime::StringToPath(filename));
 }
 
-bool FileSystem::ChangeWorkingDirectory(String^ newDirectory)
+ReadFile^ FileSystem::CreateReadFile(String^ filename)
 {
-	LIME_ASSERT(newDirectory != nullptr);
-	return m_FileSystem->changeWorkingDirectoryTo(Lime::StringToPath(newDirectory));
+	LIME_ASSERT(filename != nullptr);
+
+	io::IReadFile* f = m_FileSystem->createAndOpenFile(Lime::StringToPath(filename));
+	return ReadFile::Wrap(f);
 }
 
 FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths)
@@ -199,6 +201,15 @@ int FileSystem::FileArchiveCount::get()
 String^ FileSystem::WorkingDirectory::get()
 {
 	return gcnew String(m_FileSystem->getWorkingDirectory().c_str());
+}
+
+void FileSystem::WorkingDirectory::set(String^ value)
+{
+	LIME_ASSERT(value != nullptr);
+
+	m_FileSystem->changeWorkingDirectoryTo(Lime::StringToPath(value));
+	// we do not report bool result here; if this in future will be completly necessary --
+	// we will provide separate "bool ChangeWorkingDirectory(String^)" method
 }
 
 String^ FileSystem::ToString()

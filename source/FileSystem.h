@@ -24,7 +24,7 @@ public:
 	bool AddFileArchive(String^ filename, bool ignoreCase);
 	bool AddFileArchive(String^ filename);
 
-	bool ChangeWorkingDirectory(String^ newDirectory);
+	ReadFile^ CreateReadFile(String^ filename);
 
 	FileList^ CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths);
 	FileList^ CreateFileList();
@@ -45,7 +45,7 @@ public:
 	FileSystemType SetFileSystemType(FileSystemType newType);
 
 	property int FileArchiveCount { int get(); }
-	property String^ WorkingDirectory { String^ get(); }
+	property String^ WorkingDirectory { String^ get(); void set(String^ value); }
 
 	virtual String^ ToString() override;
 
