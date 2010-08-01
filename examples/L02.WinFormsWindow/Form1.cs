@@ -16,20 +16,19 @@ namespace L02.WinFormsWindow
 	public partial class Form1 : Form
 	{
 		// this class will hold all settings that we need to pass to background worker,
-		// which will create Irrlicht device, do all rendering and drop it when needed
-		class DeviceSettings
+		// which will create Irrlicht device, do all rendering and drop it when needed;
+		// we are extending IrrlichtCreationParameters with our custom settings
+		class DeviceSettings : IrrlichtCreationParameters
 		{
-			public IntPtr HostHandle;
-			public DriverType DriverType;
-			public byte AntiAliasing;
 			public Color BackColor; // "null" for skybox
 			
-			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color bc)
+			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color bc, bool vs)
 			{
-				HostHandle = hh;
+				WindowID = hh;
 				DriverType = dt;
 				AntiAliasing = aa;
 				BackColor = bc;
+				VSync = vs;
 			}
 		}
 
@@ -59,7 +58,7 @@ namespace L02.WinFormsWindow
 			if (comboBoxVideoDriver.SelectedItem == null)
 				return;
 
-			// if rendering in progress, we sending cancel request and waiting for its finishing
+			// if rendering in progress, we are sending cancel request and waiting for its finishing
 			if (backgroundRendering.IsBusy)
 			{
 				backgroundRendering.CancelAsync();
@@ -70,15 +69,17 @@ namespace L02.WinFormsWindow
 				panelRenderingWindow.Invalidate();
 			}
 
-			// start background worker and send parameters
-			backgroundRendering.RunWorkerAsync(
-				new DeviceSettings(
-					checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panelRenderingWindow.Handle,
-					(DriverType)comboBoxVideoDriver.SelectedItem,
-					(byte)(comboBoxAntiAliasing.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBoxAntiAliasing.SelectedIndex)),
-					comboBoxBackground.SelectedIndex == 0 ? null : new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF)
-				)
+			// collect settings and start background worker with these settings
+
+			DeviceSettings s = new DeviceSettings(
+				checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panelRenderingWindow.Handle,
+				(DriverType)comboBoxVideoDriver.SelectedItem,
+				(byte)(comboBoxAntiAliasing.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBoxAntiAliasing.SelectedIndex)),
+				comboBoxBackground.SelectedIndex == 0 ? null : new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF),
+				checkBoxUseVSync.Checked
 			);
+
+			backgroundRendering.RunWorkerAsync(s);
 
 			labelRenderingStatus.Text = "Starting rendering...";
 		}
@@ -88,13 +89,9 @@ namespace L02.WinFormsWindow
 			BackgroundWorker worker = sender as BackgroundWorker;
 			DeviceSettings settings = e.Argument as DeviceSettings;
 
-			// create irrlicht device using settings
+			// create irrlicht device using provided settings
 
-			IrrlichtCreationParameters p = new IrrlichtCreationParameters();
-			p.DriverType = settings.DriverType;
-			p.WindowID = settings.HostHandle;
-			p.AntiAliasing = settings.AntiAliasing;
-			IrrlichtDevice dev = IrrlichtDevice.CreateDevice(p);
+			IrrlichtDevice dev = IrrlichtDevice.CreateDevice(settings);
 
 			if (dev == null)
 				throw new Exception("Failed to create Irrlicht device.");
