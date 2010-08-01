@@ -38,6 +38,7 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.comboBoxBackground = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
+			this.checkBoxUseVSync = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// panelRenderingWindow
@@ -78,7 +79,7 @@
 			// checkBoxUseSeparateWindow
 			// 
 			this.checkBoxUseSeparateWindow.AutoSize = true;
-			this.checkBoxUseSeparateWindow.Location = new System.Drawing.Point(349, 34);
+			this.checkBoxUseSeparateWindow.Location = new System.Drawing.Point(349, 38);
 			this.checkBoxUseSeparateWindow.Name = "checkBoxUseSeparateWindow";
 			this.checkBoxUseSeparateWindow.Size = new System.Drawing.Size(128, 17);
 			this.checkBoxUseSeparateWindow.TabIndex = 3;
@@ -143,11 +144,23 @@
 			this.label4.TabIndex = 6;
 			this.label4.Text = "Background";
 			// 
+			// checkBoxUseVSync
+			// 
+			this.checkBoxUseVSync.AutoSize = true;
+			this.checkBoxUseVSync.Location = new System.Drawing.Point(349, 15);
+			this.checkBoxUseVSync.Name = "checkBoxUseVSync";
+			this.checkBoxUseVSync.Size = new System.Drawing.Size(79, 17);
+			this.checkBoxUseVSync.TabIndex = 8;
+			this.checkBoxUseVSync.Text = "Use VSync";
+			this.checkBoxUseVSync.UseVisualStyleBackColor = true;
+			this.checkBoxUseVSync.CheckedChanged += new System.EventHandler(this.initializeIrrlichtDevice);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(564, 497);
+			this.Controls.Add(this.checkBoxUseVSync);
 			this.Controls.Add(this.comboBoxBackground);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
@@ -180,6 +193,7 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.ComboBox comboBoxBackground;
 		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.CheckBox checkBoxUseVSync;
 	}
 }
 
