@@ -5,6 +5,7 @@
 #include "IrrlichtCreationParameters.h"
 #include "IrrlichtDevice.h"
 #include "Logger.h"
+#include "OSOperator.h"
 #include "ReferenceCounted.h"
 #include "SceneManager.h"
 #include "Timer.h"
@@ -274,6 +275,12 @@ IrrlichtLime::Logger^ IrrlichtDevice::Logger::get()
 {
 	irr::ILogger* l = m_IrrlichtDevice->getLogger();
 	return IrrlichtLime::Logger::Wrap(l);
+}
+
+IrrlichtLime::OSOperator^ IrrlichtDevice::OSOperator::get()
+{
+	irr::IOSOperator* o = m_IrrlichtDevice->getOSOperator();
+	return IrrlichtLime::OSOperator::Wrap(o);
 }
 
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()

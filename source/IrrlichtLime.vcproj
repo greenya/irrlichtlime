@@ -1297,6 +1297,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\OSOperator.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\OSOperator.h"
+			>
+		</File>
+		<File
 			RelativePath=".\ReferenceCounted.cpp"
 			>
 		</File>
