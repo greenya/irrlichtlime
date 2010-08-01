@@ -1284,7 +1284,7 @@ String^ VideoDriver::VendorInfo::get()
 
 String^ VideoDriver::ToString()
 {
-	return String::Format("VideoDriver: {0}; ScreenSize={1}", Name, ScreenSize);
+	return String::Format("VideoDriver: Name={0}; ScreenSize={1}", Name, ScreenSize);
 }
 
 unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType)

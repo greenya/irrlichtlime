@@ -18,6 +18,7 @@ ref class Event;
 class EventReceiverInheritor;
 ref class IrrlichtCreationParameters;
 ref class Logger;
+ref class OSOperator;
 ref class Timer;
 
 public ref class IrrlichtDevice : ReferenceCounted
@@ -60,6 +61,7 @@ public:
 	property bool Fullscreen { bool get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property IrrlichtLime::Logger^ Logger { IrrlichtLime::Logger^ get(); }
+	property IrrlichtLime::OSOperator^ OSOperator { IrrlichtLime::OSOperator^ get(); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
 	property IrrlichtLime::Timer^ Timer { IrrlichtLime::Timer^ get(); }
 	property DeviceType Type { DeviceType get(); }
