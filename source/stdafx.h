@@ -68,6 +68,7 @@
 #include "VertexShaderType.h"
 #include "VertexType.h"
 #include "VideoDriverFeature.h"
+#include "VideoModeAspectRatio.h"
 #include "ZBufferCompFunc.h"
 
 // basic types

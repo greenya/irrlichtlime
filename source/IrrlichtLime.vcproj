@@ -372,6 +372,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\VideoModeAspectRatio.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VideoModeList.cpp"
 				>
 			</File>
