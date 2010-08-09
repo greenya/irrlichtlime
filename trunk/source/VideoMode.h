@@ -12,8 +12,34 @@ namespace Video {
 public value class VideoMode
 {
 public:
+
+	static VideoModeAspectRatio GetAspectRatio(int width, int height)
+	{
+		float r = (float)width / (float)height;
+
+		if (r == 3.0f/2.0f)
+			return VideoModeAspectRatio::_3x2;
+		else if (r == 4.0f/3.0f)
+			return VideoModeAspectRatio::_4x3;
+		else if (r == 5.0f/3.0f)
+			return VideoModeAspectRatio::_5x3;
+		else if (r == 5.0f/4.0f)
+			return VideoModeAspectRatio::_5x4;
+		else if (r == 16.0f/9.0f)
+			return VideoModeAspectRatio::_16x9;
+		else if (r == 16.0f/10.0f)
+			return VideoModeAspectRatio::_16x10;
+		
+		if (width == 848 && height == 480 || // 848/480 == 1.7(6) (almost 1.(7) == 16:9)
+			width == 1360 && height == 768) // 1360/768 == 1.7708(3) (almost 1.(7) == 16:9)
+			return VideoModeAspectRatio::_16x9;
+
+		return VideoModeAspectRatio::Other;
+	}
+
 	int Depth;
 	Dimension2Di^ Resolution;
+	VideoModeAspectRatio AspectRatio;
 
 	VideoMode(Dimension2Di^ resolution, int depth)
 	{
@@ -23,6 +49,7 @@ public:
 
 		Resolution = resolution;
 		Depth = depth;
+		AspectRatio = GetAspectRatio(resolution->Width, resolution->Height);
 	}
 
 	VideoMode(int width, int height, int depth)
@@ -33,6 +60,15 @@ public:
 
 		Resolution = gcnew Dimension2Di(width, height);
 		Depth = depth;
+		AspectRatio = GetAspectRatio(width, height);
+	}
+
+	property bool Wide
+	{
+		bool get()
+		{
+			return ((float)Resolution->Width / (float)Resolution->Height) >= 1.5f;
+		}
 	}
 
 	virtual String^ ToString() override
@@ -44,7 +80,8 @@ internal:
 
 	VideoMode(const core::dimension2di& resolution, int depth)
 		: Resolution(gcnew Dimension2Di(resolution))
-		, Depth(depth) {}
+		, Depth(depth)
+		, AspectRatio(GetAspectRatio(resolution.Width, resolution.Height)) {}
 };
 
 } // end namespace Video
