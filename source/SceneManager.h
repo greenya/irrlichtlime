@@ -154,12 +154,12 @@ public:
 	SceneNode^ AddSceneNode(String^ sceneNodeTypeName, SceneNode^ parent);
 	SceneNode^ AddSceneNode(String^ sceneNodeTypeName);
 
-	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent, int id);
-	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back, SceneNode^ parent);
-	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right, Video::Texture^ front, Video::Texture^ back);
-	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back, SceneNode^ parent, int id);
-	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back, SceneNode^ parent);
-	SceneNode^ AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back);
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture, Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture, SceneNode^ parent, int id);
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture, Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture, SceneNode^ parent);
+	SceneNode^ AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture, Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture);
+	SceneNode^ AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile, String^ backFile, SceneNode^ parent, int id);
+	SceneNode^ AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile, String^ backFile, SceneNode^ parent);
+	SceneNode^ AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile, String^ backFile);
 
 	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage, float radius, SceneNode^ parent, int id);
 	SceneNode^ AddSkyDomeSceneNode(Video::Texture^ texture, int horiRes, int vertRes, float texturePercentage, float spherePercentage, float radius, SceneNode^ parent);

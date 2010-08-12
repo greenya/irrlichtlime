@@ -283,12 +283,6 @@ public:
 		return gcnew Vector3Df(v);
 	}
 
-	void RotateVector(Vector3Df^% vect)
-	{
-		LIME_ASSERT(vect != nullptr);
-		m_NativeValue->rotateVect(*vect->m_NativeValue);
-	}
-
 	Matrix^ SetByProduct(Matrix^ otherA, Matrix^ otherB)
 	{
 		LIME_ASSERT(otherA != nullptr);

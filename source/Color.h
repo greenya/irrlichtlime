@@ -156,22 +156,22 @@ public:
 		m_NativeValue = new video::SColorf();
 	}
 
-	Colorf(Colorf^ copy)
+	Colorf(Colorf^ copyColorf)
 		: Lime::NativeValue<video::SColorf>(true)
 	{
-		LIME_ASSERT(copy != nullptr);
+		LIME_ASSERT(copyColorf != nullptr);
 		m_NativeValue = new video::SColorf(
-			copy->m_NativeValue->r,
-			copy->m_NativeValue->g,
-			copy->m_NativeValue->b,
-			copy->m_NativeValue->a);
+			copyColorf->m_NativeValue->r,
+			copyColorf->m_NativeValue->g,
+			copyColorf->m_NativeValue->b,
+			copyColorf->m_NativeValue->a);
 	}
 
-	Colorf(Color^ copy)
+	Colorf(Color^ copyColor)
 		: Lime::NativeValue<video::SColorf>(true)
 	{
-		LIME_ASSERT(copy != nullptr);
-		m_NativeValue = new video::SColorf(*copy->m_NativeValue);
+		LIME_ASSERT(copyColor != nullptr);
+		m_NativeValue = new video::SColorf(*copyColor->m_NativeValue);
 	}
 
 	Colorf(float r, float g, float b, float a)
@@ -195,24 +195,24 @@ public:
 		m_NativeValue = new video::SColorf(r, g, b);
 	}
 
-	void Set(Colorf^ copy)
+	void Set(Colorf^ copyColorf)
 	{
-		LIME_ASSERT(copy != nullptr);
+		LIME_ASSERT(copyColorf != nullptr);
 		m_NativeValue->set(
-			copy->m_NativeValue->a,
-			copy->m_NativeValue->r,
-			copy->m_NativeValue->g,
-			copy->m_NativeValue->b);
+			copyColorf->m_NativeValue->a,
+			copyColorf->m_NativeValue->r,
+			copyColorf->m_NativeValue->g,
+			copyColorf->m_NativeValue->b);
 	}
 
-	void Set(Color^ copy)
+	void Set(Color^ copyColor)
 	{
-		LIME_ASSERT(copy != nullptr);
+		LIME_ASSERT(copyColor != nullptr);
 		m_NativeValue->set(
-			copy->m_NativeValue->getAlpha() / 255.0f,
-			copy->m_NativeValue->getRed() / 255.0f,
-			copy->m_NativeValue->getGreen() / 255.0f,
-			copy->m_NativeValue->getBlue() / 255.0f);
+			copyColor->m_NativeValue->getAlpha() / 255.0f,
+			copyColor->m_NativeValue->getRed() / 255.0f,
+			copyColor->m_NativeValue->getGreen() / 255.0f,
+			copyColor->m_NativeValue->getBlue() / 255.0f);
 	}
 
 	void Set(float r, float g, float b, float a)

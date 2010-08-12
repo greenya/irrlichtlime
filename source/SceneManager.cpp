@@ -1270,92 +1270,95 @@ SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName)
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
-	Video::Texture^ front, Video::Texture^ back, SceneNode^ parent, int id)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture,
+	Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture, SceneNode^ parent, int id)
 {
 	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
-		LIME_SAFEREF(top, m_Texture),
-		LIME_SAFEREF(bottom, m_Texture),
-		LIME_SAFEREF(left, m_Texture),
-		LIME_SAFEREF(right, m_Texture),
-		LIME_SAFEREF(front, m_Texture),
-		LIME_SAFEREF(back, m_Texture),
+		LIME_SAFEREF(topTexture, m_Texture),
+		LIME_SAFEREF(bottomTexture, m_Texture),
+		LIME_SAFEREF(leftTexture, m_Texture),
+		LIME_SAFEREF(rightTexture, m_Texture),
+		LIME_SAFEREF(frontTexture, m_Texture),
+		LIME_SAFEREF(backTexture, m_Texture),
 		LIME_SAFEREF(parent, m_SceneNode),
 		id);
 
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
-	Video::Texture^ front, Video::Texture^ back, SceneNode^ parent)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture,
+	Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture, SceneNode^ parent)
 {
 	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
-		LIME_SAFEREF(top, m_Texture),
-		LIME_SAFEREF(bottom, m_Texture),
-		LIME_SAFEREF(left, m_Texture),
-		LIME_SAFEREF(right, m_Texture),
-		LIME_SAFEREF(front, m_Texture),
-		LIME_SAFEREF(back, m_Texture),
+		LIME_SAFEREF(topTexture, m_Texture),
+		LIME_SAFEREF(bottomTexture, m_Texture),
+		LIME_SAFEREF(leftTexture, m_Texture),
+		LIME_SAFEREF(rightTexture, m_Texture),
+		LIME_SAFEREF(frontTexture, m_Texture),
+		LIME_SAFEREF(backTexture, m_Texture),
 		LIME_SAFEREF(parent, m_SceneNode));
 
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ top, Video::Texture^ bottom, Video::Texture^ left, Video::Texture^ right,
-	Video::Texture^ front, Video::Texture^ back)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::Texture^ bottomTexture, Video::Texture^ leftTexture,
+	Video::Texture^ rightTexture, Video::Texture^ frontTexture, Video::Texture^ backTexture)
 {
 	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
-		LIME_SAFEREF(top, m_Texture),
-		LIME_SAFEREF(bottom, m_Texture),
-		LIME_SAFEREF(left, m_Texture),
-		LIME_SAFEREF(right, m_Texture),
-		LIME_SAFEREF(front, m_Texture),
-		LIME_SAFEREF(back, m_Texture));
+		LIME_SAFEREF(topTexture, m_Texture),
+		LIME_SAFEREF(bottomTexture, m_Texture),
+		LIME_SAFEREF(leftTexture, m_Texture),
+		LIME_SAFEREF(rightTexture, m_Texture),
+		LIME_SAFEREF(frontTexture, m_Texture),
+		LIME_SAFEREF(backTexture, m_Texture));
 
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back,
-	SceneNode^ parent, int id)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
+	String^ backFile, SceneNode^ parent, int id)
 {
-	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
-	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
-	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
-	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
-	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
-	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(rightFile));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(frontFile));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(backFile));
 
-	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k,
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
+		t, b, l, r, f, k,
 		LIME_SAFEREF(parent, m_SceneNode),
 		id);
 
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back,
-	SceneNode^ parent)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
+	String^ backFile, SceneNode^ parent)
 {
-	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
-	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
-	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
-	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
-	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
-	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(rightFile));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(frontFile));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(backFile));
 
-	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k,
+	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(
+		t, b, l, r, f, k,
 		LIME_SAFEREF(parent, m_SceneNode));
 
 	return SceneNode::Wrap(n);
 }
 
-SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ top, String^ bottom, String^ left, String^ right, String^ front, String^ back)
+SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
+	String^ backFile)
 {
-	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(top));
-	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottom));
-	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(left));
-	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(right));
-	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(front));
-	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(back));
+	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
+	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
+	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
+	video::ITexture* r = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(rightFile));
+	video::ITexture* f = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(frontFile));
+	video::ITexture* k = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(backFile));
 
 	scene::ISceneNode* n = m_SceneManager->addSkyBoxSceneNode(t, b, l, r, f, k);
 

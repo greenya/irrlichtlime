@@ -40,7 +40,7 @@ public:
 
 	void FlipSurfaces(Mesh^ mesh);
 
-	int GetPolyCount(AnimatedMesh^ mesh);
+	int GetPolyCount(AnimatedMesh^ animatedMesh);
 	int GetPolyCount(Mesh^ mesh);
 
 	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
