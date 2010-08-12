@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CursorControl.h"
+#include "Event.h"
 #include "FileSystem.h"
 #include "GUIEnvironment.h"
 #include "IrrlichtCreationParameters.h"
@@ -194,6 +195,12 @@ void IrrlichtDevice::MaximizeWindow()
 void IrrlichtDevice::MinimizeWindow()
 {
 	m_IrrlichtDevice->minimizeWindow();
+}
+
+bool IrrlichtDevice::PostEvent(IrrlichtLime::Event^ e)
+{
+	LIME_ASSERT(e != nullptr);
+	return m_IrrlichtDevice->postEventFromUser(*e->m_NativeValue);
 }
 
 void IrrlichtDevice::RestoreWindow()

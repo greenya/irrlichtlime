@@ -43,14 +43,21 @@ public:
 	void ClearSystemMessages();
 	void Close();
 	bool GetGammaRamp([Out] float% red, [Out] float% green, [Out] float% blue, [Out] float% relativebrightness, [Out] float% relativecontrast);
+
 	void MaximizeWindow();
 	void MinimizeWindow();
+
+	bool PostEvent(IrrlichtLime::Event^ e);
+
 	void RestoreWindow();
+	
 	bool Run();
+
 	bool SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast);
 	void SetInputReceivingSceneManager(Scene::SceneManager^ sceneManager);
 	void SetWindowCaption(String^ text);
 	void SetWindowResizable(bool resize);
+
 	void Sleep(int timeMs, bool pauseTimer);
 	void Sleep(int timeMs);
 	void Yield();
@@ -74,7 +81,7 @@ public:
 
 	virtual String^ ToString() override;
 
-	delegate bool EventHandler(IrrlichtLime::Event^ e);
+	delegate bool EventHandler(IrrlichtLime::Event^ evnt);
 	event EventHandler^ OnEvent;
 
 internal:
