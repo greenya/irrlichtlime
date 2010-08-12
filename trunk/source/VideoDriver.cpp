@@ -513,15 +513,15 @@ void VideoDriver::Draw2DRectangleOutline(Recti^ pos, Color^ color)
 		*color->m_NativeValue);
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType)
+void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Count > 0);
 	LIME_ASSERT(vertices->Count <= 0xFFFF);
-	LIME_ASSERT(indices != nullptr);
-	LIME_ASSERT(indices->Count > 0);
+	LIME_ASSERT(indices16bit != nullptr);
+	LIME_ASSERT(indices16bit->Count > 0);
 
-	unsigned int primCount = calculatePrimitiveCount(indices->Count, pType);
+	unsigned int primCount = calculatePrimitiveCount(indices16bit->Count, pType);
 
 	S3DVertex* vertexList = new S3DVertex[vertices->Count];
 	for (int i = 0; i < vertices->Count; i++)
@@ -530,11 +530,11 @@ void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsi
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u16* indexList = new u16[indices->Count];
-	for (int i = 0; i < indices->Count; i++)
+	u16* indexList = new u16[indices16bit->Count];
+	for (int i = 0; i < indices16bit->Count; i++)
 	{
-		LIME_ASSERT(indices[i] >= 0);
-		indexList[i] = indices[i];
+		LIME_ASSERT(indices16bit[i] >= 0);
+		indexList[i] = indices16bit[i];
 	}
 
 	m_VideoDriver->draw2DVertexPrimitiveList(vertexList, vertices->Count, indexList, primCount,
@@ -544,19 +544,19 @@ void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsi
 	delete vertexList;
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices)
+void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit)
 {
-	Draw2DVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+	Draw2DVertexPrimitiveList(vertices, indices16bit, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType)
+void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Count > 0);
-	LIME_ASSERT(indices != nullptr);
-	LIME_ASSERT(indices->Count > 0);
+	LIME_ASSERT(indices32bit != nullptr);
+	LIME_ASSERT(indices32bit->Count > 0);
 
-	unsigned int primCount = calculatePrimitiveCount(indices->Count, pType);
+	unsigned int primCount = calculatePrimitiveCount(indices32bit->Count, pType);
 
 	S3DVertex* vertexList = new S3DVertex[vertices->Count];
 	for (int i = 0; i < vertices->Count; i++)
@@ -565,11 +565,11 @@ void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsi
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u32* indexList = new u32[indices->Count];
-	for (int i = 0; i < indices->Count; i++)
+	u32* indexList = new u32[indices32bit->Count];
+	for (int i = 0; i < indices32bit->Count; i++)
 	{
-		LIME_ASSERT(indices[i] >= 0);
-		indexList[i] = indices[i];
+		LIME_ASSERT(indices32bit[i] >= 0);
+		indexList[i] = indices32bit[i];
 	}
 
 	m_VideoDriver->draw2DVertexPrimitiveList(vertexList, vertices->Count, indexList, primCount,
@@ -579,9 +579,9 @@ void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsi
 	delete vertexList;
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices)
+void VideoDriver::Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit)
 {
-	Draw2DVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+	Draw2DVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
 }
 
 void VideoDriver::Draw3DBox(AABBox^ box, Color^ color)
@@ -716,15 +716,15 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
 	delete t;
 }
 
-void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices, Scene::PrimitiveType pType)
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Count > 0);
 	LIME_ASSERT(vertices->Count <= 0xFFFF);
-	LIME_ASSERT(indices != nullptr);
-	LIME_ASSERT(indices->Count > 0);
+	LIME_ASSERT(indices16bit != nullptr);
+	LIME_ASSERT(indices16bit->Count > 0);
 
-	unsigned int primCount = calculatePrimitiveCount(indices->Count, pType);
+	unsigned int primCount = calculatePrimitiveCount(indices16bit->Count, pType);
 
 	video::S3DVertex* vertexList = new S3DVertex[vertices->Count];
 	for (int i = 0; i < vertices->Count; i++)
@@ -733,11 +733,11 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u16* indexList = new u16[indices->Count];
-	for (int i = 0; i < indices->Count; i++)
+	u16* indexList = new u16[indices16bit->Count];
+	for (int i = 0; i < indices16bit->Count; i++)
 	{
-		LIME_ASSERT(indices[i] >= 0);
-		indexList[i] = indices[i];
+		LIME_ASSERT(indices16bit[i] >= 0);
+		indexList[i] = indices16bit[i];
 	}
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Count, indexList, primCount,
@@ -747,19 +747,19 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 	delete vertexList;
 }
 
-void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices)
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit)
 {
-	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+	DrawVertexPrimitiveList(vertices, indices16bit, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices, Scene::PrimitiveType pType)
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Count > 0);
-	LIME_ASSERT(indices != nullptr);
-	LIME_ASSERT(indices->Count > 0);
+	LIME_ASSERT(indices32bit != nullptr);
+	LIME_ASSERT(indices32bit->Count > 0);
 
-	unsigned int primCount = calculatePrimitiveCount(indices->Count, pType);
+	unsigned int primCount = calculatePrimitiveCount(indices32bit->Count, pType);
 
 	video::S3DVertex* vertexList = new S3DVertex[vertices->Count];
 	for (int i = 0; i < vertices->Count; i++)
@@ -768,11 +768,11 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u32* indexList = new u32[indices->Count];
-	for (int i = 0; i < indices->Count; i++)
+	u32* indexList = new u32[indices32bit->Count];
+	for (int i = 0; i < indices32bit->Count; i++)
 	{
-		LIME_ASSERT(indices[i] >= 0);
-		indexList[i] = indices[i];
+		LIME_ASSERT(indices32bit[i] >= 0);
+		indexList[i] = indices32bit[i];
 	}
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Count, indexList, primCount,
@@ -782,9 +782,9 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 	delete vertexList;
 }
 
-void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices)
+void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit)
 {
-	DrawVertexPrimitiveList(vertices, indices, Scene::PrimitiveType::Triangles);
+	DrawVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
 }
 
 void VideoDriver::EnableClipPlane(int index, bool enable)

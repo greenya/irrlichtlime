@@ -123,9 +123,9 @@ void MeshManipulator::FlipSurfaces(Mesh^ mesh)
 	m_MeshManipulator->flipSurfaces(LIME_SAFEREF(mesh, m_Mesh));
 }
 
-int MeshManipulator::GetPolyCount(AnimatedMesh^ mesh)
+int MeshManipulator::GetPolyCount(AnimatedMesh^ animatedMesh)
 {
-	return m_MeshManipulator->getPolyCount(LIME_SAFEREF(mesh, m_AnimatedMesh));
+	return m_MeshManipulator->getPolyCount(LIME_SAFEREF(animatedMesh, m_AnimatedMesh));
 }
 
 int MeshManipulator::GetPolyCount(Mesh^ mesh)

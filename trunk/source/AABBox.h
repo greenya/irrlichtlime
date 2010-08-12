@@ -64,16 +64,16 @@ public:
 		m_NativeValue->reset(x, y, z);
 	}
 
-	void Set(AABBox^ initValue)
+	void Set(AABBox^ newBox)
 	{
-		LIME_ASSERT(initValue != nullptr);
-		m_NativeValue->reset(*initValue->m_NativeValue);
+		LIME_ASSERT(newBox != nullptr);
+		m_NativeValue->reset(*newBox->m_NativeValue);
 	}
 
-	void Set(Vector3Df^ initValue)
+	void Set(Vector3Df^ newPoint)
 	{
-		LIME_ASSERT(initValue != nullptr);
-		m_NativeValue->reset(*initValue->m_NativeValue);
+		LIME_ASSERT(newPoint != nullptr);
+		m_NativeValue->reset(*newPoint->m_NativeValue);
 	}
 
 	void AddInternalPoint(float x, float y, float z)
