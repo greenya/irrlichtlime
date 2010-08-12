@@ -59,18 +59,18 @@ public:
 		m_NativeValue = new core::aabbox3df();
 	}
 
-	void Reset(float x, float y, float z)
+	void Set(float x, float y, float z)
 	{
 		m_NativeValue->reset(x, y, z);
 	}
 
-	void Reset(AABBox^ initValue)
+	void Set(AABBox^ initValue)
 	{
 		LIME_ASSERT(initValue != nullptr);
 		m_NativeValue->reset(*initValue->m_NativeValue);
 	}
 
-	void Reset(Vector3Df^ initValue)
+	void Set(Vector3Df^ initValue)
 	{
 		LIME_ASSERT(initValue != nullptr);
 		m_NativeValue->reset(*initValue->m_NativeValue);

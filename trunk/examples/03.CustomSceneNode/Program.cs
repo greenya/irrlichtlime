@@ -80,7 +80,7 @@ namespace _03.CustomSceneNode
 			vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Color(255, 255, 0), 1, 0));
 			vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Color(0, 255, 0), 0, 0));
 
-			bbox.Reset(vertices[0].Position);
+			bbox.Set(vertices[0].Position);
 			for (int i = 1; i < vertices.Count; i++)
 				bbox.AddInternalPoint(vertices[i].Position);
 		}
