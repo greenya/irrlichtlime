@@ -20,6 +20,7 @@ The Irrlicht Lime SDK
 
   \bin         This is the output directory. When you compile Lime and
                its examples, it fills with binaries.
+  \doc         Contain documentation related files.
   \examples    Directory with examples of usage. This examples are ports
                from real Irrlicht Engine SDK examples written on C++.
   \irrlicht    Contains Irrlicht Engine SDK used for compiling Lime.

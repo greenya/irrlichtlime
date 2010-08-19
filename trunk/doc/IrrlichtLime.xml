@@ -1,0 +1,1309 @@
+<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>IrrlichtLime</name>
+	</assembly>
+	<members>
+		<member name="T:IrrlichtLime.DeviceType">
+			<summary>An enum for the different device types supported by the Irrlicht Engine.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.Best">
+			<summary>This selection allows Irrlicht to choose the best device from the ones available.
+
+If this selection is chosen then Irrlicht will try to use the IrrlichtDevice native to your operating system. If this is unavailable then the X11, SDL and then console device will be tried. This ensures that Irrlicht will run even if your platform is unsupported, although it may not be able to render anything.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.Console">
+			<summary>A simple text only device supported by all platforms.
+
+This device allows applications to run from the command line without opening a window. It can render the output of the software drivers to the console as ASCII. It only supports mouse and keyboard in Windows operating systems.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.FrameBuffer">
+			<summary>A device for raw framebuffer access.
+
+Best used with embedded devices and mobile systems. Does not need X11 or other graphical subsystems. May support hw-acceleration via OpenGL-ES for FBDirect.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.OSX">
+			<summary>A device native to Mac OSX.
+
+This device uses Apple's Cocoa API and works in Mac OSX 10.2 and above.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.SDL">
+			<summary>A device which uses Simple DirectMedia Layer.
+
+The SDL device works under all platforms supported by SDL.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.Win32">
+			<summary>A device native to Microsoft Windows.
+
+This device uses the Win32 API and works in all versions of Windows.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.WinCE">
+			<summary>A device native to Windows CE devices.
+
+This device works on Windows Mobile, Pocket PC and Microsoft SmartPhone devices.</summary>
+		</member>
+		<member name="F:IrrlichtLime.DeviceType.X11">
+			<summary>A device native to Unix style operating systems.
+
+This device uses the X11 windowing system and works in Linux, Solaris, FreeBSD, OSX and other operating systems which support X11.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event">
+			<summary>Holds information about an event.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.Char,IrrlichtLime.KeyCode,System.Boolean)">
+			<summary>Constructs keyboard event.</summary>
+			<param name="ch">Character corresponding to the key (0, if not a character).</param>
+			<param name="key">Key which has been pressed or released.</param>
+			<param name="pressedDown">If not true, then the key was left up.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.Char,IrrlichtLime.KeyCode,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Constructs keyboard event.</summary>
+			<param name="ch">Character corresponding to the key (0, if not a character).</param>
+			<param name="key">Key which has been pressed or released.</param>
+			<param name="pressedDown">If not true, then the key was left up.</param>
+			<param name="shift">True if shift was also pressed.</param>
+			<param name="control">True if ctrl was also pressed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.Byte,System.Int16[],System.UInt16)">
+			<summary>Constructs joystick event.</summary>
+			<param name="joystick">The ID of the joystick which generated this event.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.Byte,System.Int16[],System.UInt16,System.UInt32)">
+			<summary>Constructs joystick event.</summary>
+			<param name="joystick">The ID of the joystick which generated this event.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.String)">
+			<summary>Constructs log event.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.String,IrrlichtLime.LogLevel)">
+			<summary>Constructs log event.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.GUI.GUIEventType,IrrlichtLime.GUI.GUIElement)">
+			<summary>Constructs GUI event.</summary>
+			<param name="type">Type of GUI Event.</param>
+			<param name="caller">Who called the event.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.GUI.GUIEventType,IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIElement)">
+			<summary>Constructs GUI event.</summary>
+			<param name="type">Type of GUI Event.</param>
+			<param name="caller">Who called the event.</param>
+			<param name="element">If the event has something to do with another element, it will be held here.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.MouseEventType,System.Int32,System.Int32)">
+			<summary>Constructs mouse event.</summary>
+			<param name="type">Type of mouse event.</param>
+			<param name="x">X position of mouse cursor.</param>
+			<param name="y">Y position of mouse cursor.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.MouseEventType,System.Int32,System.Int32,System.Single)">
+			<summary>Constructs mouse event.</summary>
+			<param name="type">Type of mouse event.</param>
+			<param name="x">X position of mouse cursor.</param>
+			<param name="y">Y position of mouse cursor.</param>
+			<param name="wheel">Mouse wheel delta, usually 1.0 or -1.0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.MouseEventType,System.Int32,System.Int32,System.Single,System.UInt32)">
+			<summary>Constructs mouse event.</summary>
+			<param name="type">Type of mouse event.</param>
+			<param name="x">X position of mouse cursor.</param>
+			<param name="y">Y position of mouse cursor.</param>
+			<param name="wheel">Mouse wheel delta, usually 1.0 or -1.0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(IrrlichtLime.MouseEventType,System.Int32,System.Int32,System.Single,System.UInt32,System.Boolean,System.Boolean)">
+			<summary>Constructs mouse event.</summary>
+			<param name="type">Type of mouse event.</param>
+			<param name="x">X position of mouse cursor.</param>
+			<param name="y">Y position of mouse cursor.</param>
+			<param name="wheel">Mouse wheel delta, usually 1.0 or -1.0.</param>
+			<param name="shift">True if shift was also pressed.</param>
+			<param name="control">True if ctrl was also pressed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Event.#ctor(System.Int32,System.Int32)">
+			<summary>Constructs user event.</summary>
+			<param name="userData1">Some user specified data as int.</param>
+			<param name="userData2">Another user specified data as int.</param>
+		</member>
+		<member name="P:IrrlichtLime.Event.GUI">
+			<summary>GUI event.
+Can be used only when Type == EventType.GUI.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.GUIEvent">
+			<summary>Any kind of GUI event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.GUIEvent.Caller">
+			<summary>Who called the event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.GUIEvent.Element">
+			<summary>If the event has something to do with another element, it will be held here.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.GUIEvent.Type">
+			<summary>Type of GUI Event.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.Joystick">
+			<summary>Joystick event.
+Can be used only when Type == EventType.Joystick.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.JoystickEvent">
+			<summary>Any kind of joystick event.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.JoystickEvent.IsButtonPressed(System.Int32)">
+			<summary>A helper function to check if a button is pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.JoystickEvent.Joystick">
+			<summary>The ID of the joystick which generated this event.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.Key">
+			<summary>Keyboard event.
+Can be used only when Type == EventType.Key.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.KeyEvent">
+			<summary>Any kind of keyboard event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.KeyEvent.Char">
+			<summary>Character corresponding to the key (0, if not a character).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.KeyEvent.Control">
+			<summary>True if ctrl was also pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.KeyEvent.Key">
+			<summary>Key which has been pressed or released.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.KeyEvent.PressedDown">
+			<summary>If not true, then the key was left up.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.KeyEvent.Shift">
+			<summary>True if shift was also pressed.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.Log">
+			<summary>Log event.
+Can be used only when Type == EventType.Log.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.LogEvent">
+			<summary>Any kind of log event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.LogEvent.Level">
+			<summary>Log level in which the text has been logged.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.LogEvent.Text">
+			<summary>Text which has been logged.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.Mouse">
+			<summary>Mouse event.
+Can be used only when Type == EventType.Mouse.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.MouseEvent">
+			<summary>Any kind of mouse event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.ButtonStates">
+			<summary>State of mouse buttons.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.Control">
+			<summary>True if ctrl was also pressed.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.MouseEvent.IsLeftPressed">
+			<summary>Is the left button pressed down?</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.MouseEvent.IsMiddlePressed">
+			<summary>Is the middle button pressed down?</summary>
+		</member>
+		<member name="M:IrrlichtLime.Event.MouseEvent.IsRightPressed">
+			<summary>Is the right button pressed down?</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.Shift">
+			<summary>True if shift was also pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.Type">
+			<summary>Type of mouse event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.Wheel">
+			<summary>Mouse wheel delta, usually 1.0 or -1.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.X">
+			<summary>X position of mouse cursor.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.MouseEvent.Y">
+			<summary>Y position of mouse cursor.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.Type">
+			<summary>Type of the event.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.User">
+			<summary>User event.
+Can be used only when Type == EventType.User.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Event.UserEvent">
+			<summary>Any kind of user event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.UserEvent.UserData1">
+			<summary>Some user specified data as int.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.UserEvent.UserData2">
+			<summary>Another user specified data as int.</summary>
+		</member>
+		<member name="T:IrrlichtLime.EventType">
+			<summary>Enumeration for all event types there are.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.GUI">
+			<summary>An event of the graphical user interface.
+
+GUI events are created by the GUI environment or the GUI elements in response to mouse or keyboard events. When a GUI element receives an event it will either process it and return true, or pass the event to its parent. If an event is not absorbed before it reaches the root element then it will then be passed to the user receiver.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.Joystick">
+			<summary>A joystick (joypad, gamepad) input event.
+
+Joystick events are created by polling all connected joysticks once per device Run() and then passing the events to IrrlichtDevice.PostEvent(). They take the same path as mouse events.
+
+Windows, SDL: Implemented.
+Linux: Implemented, with POV hat issues.
+MacOS / Other: Not yet implemented.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.Key">
+			<summary>A key input event.
+
+Like mouse events, keyboard events are created by the device and passed to IrrlichtDevice.PostEvent(). They take the same path as mouse events.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.Log">
+			<summary>A log event.
+
+Log events are only passed to the user receiver if there is one. If they are absorbed by the user receiver then no text will be sent to the console.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.Mouse">
+			<summary>A mouse input event.
+
+Mouse events are created by the device and passed to IrrlichtDevice.PostEvent() in response to mouse input received from the operating system. Mouse events are first passed to the user receiver, then to the GUI environment and its elements, then finally the input receiving scene manager where it is passed to the active camera.</summary>
+		</member>
+		<member name="F:IrrlichtLime.EventType.User">
+			<summary>A user event with user data.
+
+This is not used by Irrlicht and can be used to send user specific data though the system.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IrrlichtCreationParameters">
+			<summary>Advanced Irrlicht Device creation parameters. Used as argument for IrrlichtDevice.CreateDevice() method.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.AlphaChannel">
+			<summary>Whether the main framebuffer uses an alpha channel.
+
+In some situations it might be desireable to get a color buffer with an alpha channel, e.g. when rendering into a transparent window or overlay. If this flag is set the device tries to create a framebuffer with alpha channel. If this flag is set, only color buffers with alpha channel are considered. Otherwise, it depends on the actual hardware if the colorbuffer has an alpha channel or not.
+
+Default value: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.AntiAliasing">
+			<summary>Specifies if the device should use fullscreen anti aliasing.
+
+Makes sharp/pixelated edges softer, but requires more performance. Also, 2D elements might look blurred with this switched on. The resulting rendering quality also depends on the hardware and driver you are using, your program might look different on different hardware with this. So if you are writing a game/application with AntiAlias switched on, it would be a good idea to make it possible to switch this option off again by the user. The value is the maximal antialiasing factor requested for the device. The cretion method will automatically try smaller values if no window can be created with the given value. Value one is usually the same as 0 (disabled), but might be a special value on some platforms. On D3D devices it maps to NONMASKABLE.
+
+Default value: 0 - disabled.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.BitsPerPixel">
+			<summary>Minimum Bits per pixel of the color buffer in fullscreen mode. Ignored if windowed mode.
+
+Default value: 16.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DeviceType">
+			<summary>Type of the device.
+
+This setting decides the windowing system used by the device, most device types are native to a specific operating system and so may not be available. DeviceType.Win32 is only available on Windows desktops, DeviceType.WinCE is only available on Windows mobile devices, DeviceType.COCOA is only available on Mac OSX, DeviceType.X11 is available on Linux, Solaris, BSD and other operating systems which use X11, DeviceType.SDL is available on most systems if compiled in, DeviceType.Console is usually available but can only render to text, DeviceType.Best will select the best available device for your operating system. 
+Default value: DeviceType.Best.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DoubleBuffer">
+			<summary>Whether the main framebuffer uses doublebuffering.
+
+This should be usually enabled, in order to avoid render artifacts on the visible framebuffer. However, it might be useful to use only one buffer on very small devices. If no doublebuffering is available, the drivers will fall back to single buffers.
+
+Default value: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DriverType">
+			<summary>Type of video driver used to render graphics.
+
+Default value: DriverType.Software.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.Fullscreen">
+			<summary>Should be set to true if the device should run in fullscreen.
+
+Otherwise the device runs in windowed mode.
+
+Default: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.HighPrecisionFPU">
+			<summary>Specifies if the device should use high precision FPU setting.
+
+This is only relevant for DirectX devices, which switch to low FPU precision by default for performance reasons. However, this may lead to problems with the other computations of the application. In this case setting this flag to true should help on the expense of performance loss, though.
+
+Default value: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.IgnoreInput">
+			<summary>Specifies if the device should ignore input events.
+
+This is only relevant when using external I/O handlers. External windows need to take care of this themselves. Currently only supported by X11.
+
+Default value: false.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtCreationParameters.#ctor">
+			<summary>Constructs a IrrlichtCreationParameters instance with default values.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.LoggingLevel">
+			<summary>Specifies the logging level used in the logging interface.
+
+You can access the ILogger interface later on from the IrrlichtDevice with getLogger() and set another level. But if you need more or less logging information already from device creation, then you have to change it here.
+
+Default value: LogLevel.Information.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.StencilBuffer">
+			<summary>Specifies if the stencil buffer should be enabled.
+
+Set this to true, if you want the engine be able to draw stencil buffer shadows. Note that not all drivers are able to use the stencil buffer, hence it can be ignored during device creation. Without the stencil buffer no shadows will be drawn.
+
+Default value: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.StereoBuffer">
+			<summary>Specifies if the device should use stereo buffers.
+
+Some high-end gfx cards support two framebuffers for direct support of stereoscopic output devices. If this flag is set the device tries to create a stereo context. Currently only supported by OpenGL.
+
+Default value: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.VSync">
+			<summary>Specifies vertical syncronisation.
+
+If set to true, the driver will wait for the vertical retrace period, otherwise not. May be silently ignored.
+
+Default value: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.WindowID">
+			<summary>Window ID.
+
+If this is set to a value other than 0, the Irrlicht Engine will be created in an already existing window. For windows, set this to the HWND of the window you want. The windowSize and FullScreen options will be ignored when using the WindowID parameter. To make Irrlicht run inside the custom window, you still will have to draw Irrlicht on your own.
+
+Default value: 0 - use own window.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.WindowSize">
+			<summary>Size of the window or the video mode in fullscreen mode.
+
+Default value: 800 x 600.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.ZBufferBits">
+			<summary>Minimum bits per pixel of the depth buffer.
+
+Default value: 16.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IrrlichtDevice">
+			<summary>The Irrlicht device. You can create it with CreateDevice().
+
+This is the most important class of the Irrlicht Engine. You can access everything in the engine if you have a pointer to an instance of this class. There should be only one instance of this class at any time.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.ClearSystemMessages">
+			<summary>Remove messages pending in the system message loop.
+
+This function is usually used after messages have been buffered for a longer time, for example when loading a large scene. Clearing the message loop prevents that mouse- or buttonclicks which users have pressed in the meantime will now trigger unexpected actions in the gui.
+
+So far the following messages are cleared:
+Win32: All keyboard and mouse messages;
+Linux: All keyboard and mouse messages;
+All other devices are not yet supported here.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Close">
+			<summary>Notifies the device that it should close itself.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.ColorFormat">
+			<summary>Current color format of the window.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<param name="windowSize">Size of the window or the video mode in fullscreen mode.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType,IrrlichtLime.Core.Dimension2Di,System.Int32)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<param name="windowSize">Size of the window or the video mode in fullscreen mode.</param>
+			<param name="bits">Bits per pixel in fullscreen mode. Ignored if windowed mode.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType,IrrlichtLime.Core.Dimension2Di,System.Int32,System.Boolean)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<param name="windowSize">Size of the window or the video mode in fullscreen mode.</param>
+			<param name="bits">Bits per pixel in fullscreen mode. Ignored if windowed mode.</param>
+			<param name="fullscreen">Should be set to true if the device should run in fullscreen. Otherwise the device runs in windowed mode.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType,IrrlichtLime.Core.Dimension2Di,System.Int32,System.Boolean,System.Boolean)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<param name="windowSize">Size of the window or the video mode in fullscreen mode.</param>
+			<param name="bits">Bits per pixel in fullscreen mode. Ignored if windowed mode.</param>
+			<param name="fullscreen">Should be set to true if the device should run in fullscreen. Otherwise the device runs in windowed mode.</param>
+			<param name="stencilbuffer">Specifies if the stencil buffer should be enabled. Set this to true, if you want the engine be able to draw stencil buffer shadows. Note that not all devices are able to use the stencil buffer. If they don't - no shadows will be drawn.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.Video.DriverType,IrrlichtLime.Core.Dimension2Di,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="driverType">Type of the device.</param>
+			<param name="windowSize">Size of the window or the video mode in fullscreen mode.</param>
+			<param name="bits">Bits per pixel in fullscreen mode. Ignored if windowed mode.</param>
+			<param name="fullscreen">Should be set to true if the device should run in fullscreen. Otherwise the device runs in windowed mode.</param>
+			<param name="stencilbuffer">Specifies if the stencil buffer should be enabled. Set this to true, if you want the engine be able to draw stencil buffer shadows. Note that not all devices are able to use the stencil buffer. If they don't - no shadows will be drawn.</param>
+			<param name="vsync">Specifies vertical syncronisation: If set to true, the driver will wait for the vertical retrace period, otherwise not.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice(IrrlichtLime.IrrlichtCreationParameters)">
+			<summary>Creates an Irrlicht device with the option to specify advanced parameters. The Irrlicht device is the root object for using the engine.</summary>
+			<param name="parameters">Advanced parameters for the creation of the device. See IrrlichtCreationParameters for details.</param>
+			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.CursorControl">
+			<summary>Provides access to the mouse cursor.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IrrlichtDevice.EventHandler">
+			<summary>Called if an event happened.
+
+Please take care that you should only return 'true' when you want to _prevent_ Irrlicht from processing the event any further. So 'true' does mean that an event is completely done. Therefore your return value for all unprocessed events should be 'false'.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.FileSystem">
+			<summary>Provides access to the virtual file system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.Fullscreen">
+			<summary>Checks if the Irrlicht window is running in fullscreen mode.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.GetGammaRamp(System.Single@,System.Single@,System.Single@,System.Single@,System.Single@)">
+			<summary>Get the current gamma value for the display.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.GUIEnvironment">
+			<summary>Provides access to the 2d user interface environment.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.IsDriverSupported(IrrlichtLime.Video.DriverType)">
+			<summary>Check if a driver type is supported by the engine.
+
+Even if true is returned the driver may not be available for a configuration requested when creating the device.</summary>
+			<param name="driver">Driver type to check.</param>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.Logger">
+			<summary>Provides access to the message logger.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.MaximizeWindow">
+			<summary>Maximizes the window if possible.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.MinimizeWindow">
+			<summary>Minimizes the window if possible.</summary>
+		</member>
+		<member name="E:IrrlichtLime.IrrlichtDevice.OnEvent">
+			<summary>Called if an event happened. Raises for each event from the engine.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.OSOperator">
+			<summary>Provides access to the operation system functionality.
+
+The OS operator provides methods for getting system specific informations and doing system specific operations, such as exchanging data with the clipboard or reading the operation system version.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.PostEvent(IrrlichtLime.Event)">
+			<summary>Sends a user created event to the engine.
+
+Is is usually not necessary to use this. However, if you are using an own input library for example for doing joystick input, you can use this to post key or mouse input events to the engine. Internally, this method only delegates the events further to the scene manager and the GUI environment.</summary>
+			<param name="e">Event to post.</param>
+			<returns>True if event has been handled.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.RestoreWindow">
+			<summary>Restore the window to normal size if possible.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Run">
+			<summary>Runs the device.
+
+Also increments the virtual timer by calling Timer.Tick(). You can prevent this by calling Timer.Stop() before and Timer.Start() after calling IrrlichtDevice.Run(). Returns false if device wants to be deleted.
+
+Note if you are running Irrlicht inside an external, custom created window calling device.Run() will cause Irrlicht to dispatch windows messages internally. If you are running Irrlicht in your own custom window, you can also simply use your own message loop using GetMessage, DispatchMessage and whatever and simply don't use this method. But note that Irrlicht will not be able to fetch user input then. See IrrlichtCreationParameters.WindowID for more information.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.SceneManager">
+			<summary>Provides access to the scene manager.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.SetGammaRamp(System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Set the current gamma value for the display.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.SetInputReceivingSceneManager(IrrlichtLime.Scene.SceneManager)">
+			<summary>Sets the input receiving scene manager. If set to null, the main scene manager (returned by SceneManager property) will receive the input.</summary>
+			<param name="sceneManager">New scene manager to be used.</param>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.SetWindowCaption(System.String)">
+			<summary>Sets the caption of the window.</summary>
+			<param name="text">New text of the window caption.</param>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.SetWindowResizable(System.Boolean)">
+			<summary>Sets if the window should be resizable in windowed mode. This method only works in windowed mode.
+
+Default value: false.</summary>
+			<param name="resize">Flag whether the window should be resizable.</param>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Sleep(System.Int32)">
+			<summary>Pause execution and let other processes to run for a specified amount of time. It may not wait the full given time, as sleep may be interrupted.</summary>
+			<param name="timeMs">Time to sleep for in milisecs.</param>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Sleep(System.Int32,System.Boolean)">
+			<summary>Pause execution and let other processes to run for a specified amount of time. It may not wait the full given time, as sleep may be interrupted.</summary>
+			<param name="timeMs">Time to sleep for in milisecs.</param>
+			<param name="pauseTimer">If true, pauses the device timer while sleeping.</param>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.Timer">
+			<summary>Provides access to the engine's timer. The system time can be retrieved by it as well as the virtual time, which also can be manipulated.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.Type">
+			<summary>Get the type of the device. This allows the user to check which windowing system is currently being used.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.Version">
+			<summary>Version of the Irrlicht Engine. The returned string will look like: "1.2.3" or "1.2".</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.VideoDriver">
+			<summary>Provides access to the video driver for drawing 3d and 2d geometry.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.VideoModeList">
+			<summary>List with all video modes available.
+
+There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Software driver: you can use Null device for this property to use.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.WindowActive">
+			<summary>Checks if the Irrlicht window is active.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.WindowFocused">
+			<summary>Checks if the Irrlicht window has focus.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.WindowMinimized">
+			<summary>Checks if the Irrlicht window is minimized.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Yield">
+			<summary>Cause the device to temporarily pause execution and let other processes run. This should bring down processor usage without major performance loss for Irrlicht.</summary>
+		</member>
+		<member name="T:IrrlichtLime.KeyAction">
+			<summary>Key actions. Used for example in the FPS Camera.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.Crouch">
+			<summary>Crouch action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.Jump">
+			<summary>Jump action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.MoveBackward">
+			<summary>Move backward action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.MoveForward">
+			<summary>Move forward action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.StrafeLeft">
+			<summary>Strafe left action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.StrafeRight">
+			<summary>Strafe right action.</summary>
+		</member>
+		<member name="T:IrrlichtLime.KeyCode">
+			<summary>Key codes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Add">
+			<summary>Add key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Alt">
+			<summary>ALT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Apps">
+			<summary>Applications key (Natural keyboard)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Attn">
+			<summary>Attn key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Backspace">
+			<summary>BACKSPACE key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.CapsLock">
+			<summary>CAPS LOCK key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Clear">
+			<summary>CLEAR key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Comma">
+			<summary>Comma Key (,)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.CrSel">
+			<summary>CrSel key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Ctrl">
+			<summary>CTRL key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Decimal">
+			<summary>Decimal key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Delete">
+			<summary>DEL key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Devide">
+			<summary>Divide key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Down">
+			<summary>DOWN ARROW key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.End">
+			<summary>END key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.ErEOF">
+			<summary>Erase EOF key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Esc">
+			<summary>ESC key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Execute">
+			<summary>EXECUTE key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.ExSel">
+			<summary>ExSel key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F1">
+			<summary>F1 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F10">
+			<summary>F10 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F11">
+			<summary>F11 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F12">
+			<summary>F12 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F13">
+			<summary>F13 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F14">
+			<summary>F14 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F15">
+			<summary>F15 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F16">
+			<summary>F16 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F17">
+			<summary>F17 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F18">
+			<summary>F18 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F19">
+			<summary>F19 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F2">
+			<summary>F2 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F20">
+			<summary>F20 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F21">
+			<summary>F21 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F22">
+			<summary>F22 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F23">
+			<summary>F23 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F24">
+			<summary>F24 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F3">
+			<summary>F3 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F4">
+			<summary>F4 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F5">
+			<summary>F5 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F6">
+			<summary>F6 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F7">
+			<summary>F7 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F8">
+			<summary>F8 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.F9">
+			<summary>F9 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Help">
+			<summary>HELP key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Home">
+			<summary>HOME key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Accept">
+			<summary>IME accept</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Convert">
+			<summary>IME convert</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Final">
+			<summary>IME final mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Hangul">
+			<summary>IME Hangul mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Hanja">
+			<summary>IME Hanja mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Junja">
+			<summary>IME Junja mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Kana">
+			<summary>IME Kana mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_Kanji">
+			<summary>IME Kanji mode</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_ModeChange">
+			<summary>IME mode change request</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.IME_NonConvert">
+			<summary>IME nonconvert</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Insert">
+			<summary>INS key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key0">
+			<summary>0 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key1">
+			<summary>1 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key2">
+			<summary>2 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key3">
+			<summary>3 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key4">
+			<summary>4 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key5">
+			<summary>5 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key6">
+			<summary>6 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key7">
+			<summary>7 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key8">
+			<summary>8 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Key9">
+			<summary>9 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyA">
+			<summary>A key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyB">
+			<summary>B key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyC">
+			<summary>C key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyD">
+			<summary>D key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyE">
+			<summary>E key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyF">
+			<summary>F key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyG">
+			<summary>G key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyH">
+			<summary>H key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyI">
+			<summary>I key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyJ">
+			<summary>J key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyK">
+			<summary>K key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyL">
+			<summary>L key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyM">
+			<summary>M key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyN">
+			<summary>N key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyO">
+			<summary>O key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyP">
+			<summary>P key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyQ">
+			<summary>Q key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyR">
+			<summary>R key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyS">
+			<summary>S key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyT">
+			<summary>T key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyU">
+			<summary>U key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyV">
+			<summary>V key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyW">
+			<summary>W key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyX">
+			<summary>X key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyY">
+			<summary>Y key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.KeyZ">
+			<summary>Z key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.LControl">
+			<summary>Left CONTROL key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Left">
+			<summary>LEFT ARROW key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.LMenu">
+			<summary>Left MENU key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.LShift">
+			<summary>Left SHIFT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.LWin">
+			<summary>Left Windows key (Microsoft® Natural® keyboard)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Minus">
+			<summary>Minus Key (-)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.MouseLButton">
+			<summary>Left mouse button</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.MouseMButton">
+			<summary>Middle mouse button (three-button mouse)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.MouseRButton">
+			<summary>Right mouse button</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.MouseXButton1">
+			<summary>Windows 2000/XP: X1 mouse button</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.MouseXButton2">
+			<summary>Windows 2000/XP: X2 mouse button</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Multiply">
+			<summary>Multiply key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num0">
+			<summary>Numeric keypad 0 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num1">
+			<summary>Numeric keypad 1 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num2">
+			<summary>Numeric keypad 2 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num3">
+			<summary>Numeric keypad 3 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num4">
+			<summary>Numeric keypad 4 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num5">
+			<summary>Numeric keypad 5 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num6">
+			<summary>Numeric keypad 6 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num7">
+			<summary>Numeric keypad 7 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num8">
+			<summary>Numeric keypad 8 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Num9">
+			<summary>Numeric keypad 9 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.NumLock">
+			<summary>NUM LOCK key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.OEM_Clear">
+			<summary>Clear key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.PA1">
+			<summary>PA1 key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.PageDown">
+			<summary>PAGE DOWN key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.PageUp">
+			<summary>PAGE UP key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Pause">
+			<summary>PAUSE key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Period">
+			<summary>Period Key (.)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Play">
+			<summary>Play key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Plus">
+			<summary>Plus Key (+)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Print">
+			<summary>PRINT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.PrintScreen">
+			<summary>PRINT SCREEN key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.RControl">
+			<summary>Right CONTROL key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Return">
+			<summary>ENTER key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Right">
+			<summary>RIGHT ARROW key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.RMenu">
+			<summary>Right MENU key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.RShift">
+			<summary>Right SHIFT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.RWin">
+			<summary>Right Windows key (Natural keyboard)</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.ScrollLock">
+			<summary>SCROLL LOCK key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Select">
+			<summary>SELECT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Separator">
+			<summary>Separator key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Shift">
+			<summary>SHIFT key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Sleep">
+			<summary>Computer Sleep key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Space">
+			<summary>SPACEBAR key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Subtract">
+			<summary>Subtract key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Tab">
+			<summary>TAB key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Up">
+			<summary>UP ARROW key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Zoom">
+			<summary>Zoom key</summary>
+		</member>
+		<member name="T:IrrlichtLime.KeyMap">
+			<summary>Key map. Used when creating FPS camera to specify key mapping.</summary>
+		</member>
+		<member name="M:IrrlichtLime.KeyMap.Add(IrrlichtLime.KeyAction,IrrlichtLime.KeyCode)">
+			<summary>Add key mapping.</summary>
+		</member>
+		<member name="M:IrrlichtLime.KeyMap.#ctor">
+			<summary>Constructs empty key map.</summary>
+		</member>
+		<member name="P:IrrlichtLime.KeyMap.Map">
+			<summary>Key map dictionary.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Lime">
+			<summary>IrrlichtLime core class. Provides wrapper common functionality.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Lime.Version">
+			<summary>IrrlichtLime version.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Logger">
+			<summary>Class for logging messages, warnings and errors.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Logger.Log(System.String)">
+			<summary>Prints out a text into the log.</summary>
+			<param name="text">Text to print out.</param>
+		</member>
+		<member name="M:IrrlichtLime.Logger.Log(System.String,System.String,IrrlichtLime.LogLevel)">
+			<summary>Prints out a text into the log.</summary>
+			<param name="text">Text to print out.</param>
+			<param name="hint">Additional info. This string is added after a " :" to the string.</param>
+			<param name="level">Log level of the text. Texts are filtered using this level. If you want to be a text displayed, independent on what level filter is set, use LogLovel.None.</param>
+		</member>
+		<member name="M:IrrlichtLime.Logger.Log(System.String,IrrlichtLime.LogLevel)">
+			<summary>Prints out a text into the log.</summary>
+			<param name="text">Text to print out.</param>
+			<param name="level">Log level of the text. Texts are filtered using this level. If you want to be a text displayed, independent on what level filter is set, use LogLovel.None.</param>
+		</member>
+		<member name="P:IrrlichtLime.Logger.LogLevel">
+			<summary>Current log level. With this value, texts which are sent to the logger are filtered out.
+
+Default value: LogLevel.Warning.</summary>
+		</member>
+		<member name="T:IrrlichtLime.LogLevel">
+			<summary>Possible log levels.</summary>
+		</member>
+		<member name="F:IrrlichtLime.LogLevel.Debug">
+			<summary>Used for printing information helpful in debugging.</summary>
+		</member>
+		<member name="F:IrrlichtLime.LogLevel.Error">
+			<summary>Low log level, only errors are printed into the log.</summary>
+		</member>
+		<member name="F:IrrlichtLime.LogLevel.Information">
+			<summary>High log level, warnings, errors and important information texts are printed out.</summary>
+		</member>
+		<member name="F:IrrlichtLime.LogLevel.None">
+			<summary>Nothing is printed out to the log.</summary>
+		</member>
+		<member name="F:IrrlichtLime.LogLevel.Warning">
+			<summary>Default log level, warnings and errors are printed out.</summary>
+		</member>
+		<member name="T:IrrlichtLime.MouseEventType">
+			<summary>All mouse input events.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.LeftDoubleClick">
+			<summary>Left mouse button double click. This event is generated after the second LeftDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.LeftDown">
+			<summary>Left mouse button was pressed down.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.LeftTripleClick">
+			<summary>Left mouse button triple click. This event is generated after the third LeftDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.LeftUp">
+			<summary>Left mouse button was left up.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.MiddleDoubleClick">
+			<summary>Middle mouse button double click. This event is generated after the second MiddleDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.MiddleDown">
+			<summary>Middle mouse button was pressed down.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.MiddleTripleClick">
+			<summary>Middle mouse button triple click. This event is generated after the third MiddleDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.MiddleUp">
+			<summary>Middle mouse button was left up.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.Move">
+			<summary>The mouse cursor changed its position.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.RightDoubleClick">
+			<summary>Right mouse button double click. This event is generated after the second RightDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.RightDown">
+			<summary>Right mouse button was pressed down.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.RightTripleClick">
+			<summary>Right mouse button triple click. This event is generated after the third RightDown event.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.RightUp">
+			<summary>Right mouse button was left up.</summary>
+		</member>
+		<member name="F:IrrlichtLime.MouseEventType.Wheel">
+			<summary>The mouse wheel was moved. Use Wheel value in event data to find out in what direction and how fast.</summary>
+		</member>
+		<member name="T:IrrlichtLime.OSOperator">
+			<summary>The Operating system operator provides operation system specific methods and informations.</summary>
+		</member>
+		<member name="P:IrrlichtLime.OSOperator.ClipboardText">
+			<summary>Text in the clipboard.</summary>
+		</member>
+		<member name="P:IrrlichtLime.OSOperator.MemoryFreeKb">
+			<summary>Total system RAM in kilobytes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.OSOperator.MemoryTotalKb">
+			<summary>Available system RAM in kilobytes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.OSOperator.OSVersion">
+			<summary>Operation system version.</summary>
+		</member>
+		<member name="P:IrrlichtLime.OSOperator.ProcessorSpeedMHz">
+			<summary>Processor speed in megahertz.</summary>
+		</member>
+		<member name="T:IrrlichtLime.ReferenceCounted">
+			<summary>Base class of most objects of the Irrlicht Engine.
+
+This class provides reference counting through the methods Grab() and Drop(). It also is able to store a debug string for every instance of an object. Most objects of the Irrlicht Engine are derived from ReferenceCounted, and so they are reference counted.
+
+When you create an object in the Irrlicht Engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call Drop(). This will destroy the object, if Grab() was not called in another part of you program, because this part still needs the object. Note, that you only need to call Drop() to the object, if you created it, and the method name starts with 'create'.</summary>
+		</member>
+		<member name="P:IrrlichtLime.ReferenceCounted.DebugName">
+			<summary>The debug name of the object. This value may only be set and changed by the object itself. This property has value only when used in Debug mode.</summary>
+		</member>
+		<member name="M:IrrlichtLime.ReferenceCounted.Drop">
+			<summary>Drops the object. Decrements the reference counter by one.
+
+The ReferenceCounted class provides a basic reference counting mechanism with its methods Grab() and Drop(). Most objects of the Irrlicht Engine are derived from ReferenceCounted, and so they are reference counted.
+
+When you create an object in the Irrlicht Engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call Drop(). This will destroy the object, if Grab() was not called in another part of you program, because this part still needs the object. Note, that you only need to call Drop() to the object, if you created it, and the method name starts with 'create'.</summary>
+			<returns>True, if the object was deleted.</returns>
+		</member>
+		<member name="M:IrrlichtLime.ReferenceCounted.Grab">
+			<summary>Grabs the object. Increments the reference counter by one.
+
+Someone who calls Grab() to an object, should later also call Drop() to it. If an object never gets as much Drop() as Grab() calls, it will never be destroyed.
+
+The ReferenceCounted class provides a basic reference counting mechanism with its methods Grab() and Drop(). Most objects of the Irrlicht Engine are derived from ReferenceCounted, and so they are reference counted.
+
+When you create an object in the Irrlicht Engine, calling a method which starts with 'create', an object is created, and you get a pointer to the new object. If you no longer need the object, you have to call Drop(). This will destroy the object, if Grab() was not called in another part of you program, because this part still needs the object. Note, that you only need to call Drop() to the object, if you created it, and the method name starts with 'create'.</summary>
+		</member>
+		<member name="P:IrrlichtLime.ReferenceCounted.ReferenceCount">
+			<summary>Current value of the reference counter.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Timer">
+			<summary>Class for getting and manipulating the virtual time.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.IsStopped">
+			<summary>Returns if the virtual timer is currently stopped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTime">
+			<summary>Current real time in milliseconds of the system.
+
+This value does not start with 0 when the application starts. For example in one implementation the value returned could be the amount of milliseconds which have elapsed since the system was started.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.Speed">
+			<summary>Speed of the timer.
+
+The speed is the factor with which the time is running faster or slower then the real system time.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Timer.Start">
+			<summary>Starts the virtual timer.
+
+The timer is reference counted, which means everything which calls Stop() will also have to call Start(), otherwise the timer may not start/stop correctly again.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Timer.Stop">
+			<summary>Stops the virtual timer.
+
+The timer is reference counted, which means everything which calls Stop() will also have to call Start(), otherwise the timer may not start/stop correctly again.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Timer.Tick">
+			<summary>Advances the virtual time.
+
+Makes the virtual timer update the time value based on the real time. This is called automatically when calling IrrlichtDevice.Run(), but you can call it manually if you don't use this method.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.Time">
+			<summary>Current virtual time in milliseconds.
+
+This value starts with 0 and can be manipulated: value can be set, you can call Start() or Stop() or change Speed. If you need the system time, use RealTime.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.AABBox">
+			<summary>Axis aligned bounding box in 3d dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor">
+			<summary>Default Constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Constructor with min edge and max edge.</summary>
+			<param name="min">Min edge.</param>
+			<param name="max">Max edge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Constructor with min edge and max edge as single values, not vectors.</summary>
+			<param name="minx">X coordinate of min edge.</param>
+			<param name="miny">Y coordinate of min edge.</param>
+			<param name="minz">Z coordinate of min edge.</param>
+			<param name="maxx">X coordinate of max edge.</param>
+			<param name="maxy">Y coordinate of max edge.</param>
+			<param name="maxz">Z coordinate of max edge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor(IrrlichtLime.Core.Vector3Df)">
+			<summary>Constructor with only one point.</summary>
+			<param name="point">Min and max edge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.AddInternalBox(IrrlichtLime.Core.AABBox)">
+			<summary>Adds another bounding box.</summary>
+			<param name="b">Other bounding box to add into this box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.AddInternalPoint(IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a point to the bounding box. The box grows bigger, if point is outside of the box.</summary>
+			<param name="p">Point to add into the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.AddInternalPoint(System.Single,System.Single,System.Single)">
+			<summary>Adds a point to the bounding box. The box grows bigger, if point is outside of the box.</summary>
+			<param name="x">X coordinate of the point to add to this box.</param>
+			<param name="y">Y coordinate of the point to add to this box.</param>
+			<param name="z">Z coordinate of the point to add to this box.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Area">
+			<summary>The surface area of the box in squared units.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Center">
+			<summary>Center of the bounding box.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Empty">
+			<summary>Check if the box is empty. This means that there is no space between the min and max edge.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Extent">
+			<summary>Extent of the box (maximal distance of two points in the box).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.IsInside(IrrlichtLime.Core.AABBox)">
+			<summary>Check if this box is completely inside the 'other' box.</summary>
+			<param name="b">Other box to check against.</param>
+			<returns>True if this box is completly inside the other box, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.IsInside(IrrlichtLime.Core.Vector3Df)">
+			<summary>Determines if a point is within this box. Border is included (is part of the box)!</summary>
+			<param name="p">Point to check.</param>
+			<returns>True if the point is within the box and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.IsInsideFully(IrrlichtLime.Core.Vector3Df)">
+			<summary>Determines if a point is within this box and not its borders. Border is excluded (not part of the box)!</summary>
+			<param name="p">Point to check.</param>
+			<returns>True if the point is within the box and false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.MaxEdge">
+			<summary>The far edge.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.MinEdge">
+			<summary>The near edge.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Repair">
+			<summary>Repairs the box. Necessary if for example MinEdge and MaxEdge are swapped.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Set(IrrlichtLime.Core.AABBox)">
+			<summary>Sets the bounding box.</summary>
+			<param name="newBox">New box to set this one to.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Set(IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets the bounding box to a one-point box.</summary>
+			<param name="newPoint">New point.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Set(System.Single,System.Single,System.Single)">
+			<summary>Sets the bounding box to a one-point box.</summary>
+			<param name="x">X coordinate of the point.</param>
+			<param name="y">Y coordinate of the point.</param>
+			<param name="z">Z coordinate of the point.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Volume">
+			<summary>The volume enclosed by the box in cubed units.</summary>
+		</member>
+	</members>
+</doc>
