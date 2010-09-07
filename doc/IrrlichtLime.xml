@@ -1305,5 +1305,246 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="P:IrrlichtLime.Core.AABBox.Volume">
 			<summary>The volume enclosed by the box in cubed units.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Dimension2Df">
+			<summary>Specifies a 2 dimensional float size.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Df.Area">
+			<summary>Area of the dimension: Width x Height.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.#ctor">
+			<summary>Default constructor for empty dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.#ctor(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.#ctor(System.Single,System.Single)">
+			<summary>Creates dimension using Width and Height.</summary>
+			<param name="width">Width.</param>
+			<param name="height">Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.#ctor(System.Single)">
+			<summary>Creates dimension using same width and height (a square).</summary>
+			<param name="widthAndHeight">One value for both Width and Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetInterpolated(IrrlichtLime.Core.Dimension2Df,System.Single)">
+			<summary>Get the interpolated dimension.</summary>
+			<param name="other">Other dimension to interpolate with.</param>
+			<param name="d">Value between 0.0f and 1.0f.</param>
+			<returns>Interpolated dimension.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetOptimalSize">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetOptimalSize(System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetOptimalSize(System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean,System.UInt32)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<param name="maxValue">Maximum texturesize. if value &gt; 0 size is clamped to maxValue. Default: 0.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Df.Height">
+			<summary>Height of the dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.Set(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Set to new value using another dimension.</summary>
+			<param name="copy">Another dimension.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.Set(System.Single,System.Single)">
+			<summary>Set to new value using new Width and Height.</summary>
+			<param name="width">New Width.</param>
+			<param name="height">New Height.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Df.Width">
+			<summary>Width of the dimension.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Dimension2Di">
+			<summary>Specifies a 2 dimensional integer size.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Di.Area">
+			<summary>Area of the dimension: Width x Height.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.#ctor">
+			<summary>Default constructor for empty dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.#ctor(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.#ctor(System.Int32,System.Int32)">
+			<summary>Creates dimension using Width and Height.</summary>
+			<param name="width">Width.</param>
+			<param name="height">Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.#ctor(System.Int32)">
+			<summary>Creates dimension using same width and height (a square).</summary>
+			<param name="widthAndHeight">One value for both Width and Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetInterpolated(IrrlichtLime.Core.Dimension2Di,System.Single)">
+			<summary>Get the interpolated dimension.</summary>
+			<param name="other">Other dimension to interpolate with.</param>
+			<param name="d">Value between 0.0f and 1.0f.</param>
+			<returns>Interpolated dimension.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetOptimalSize">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetOptimalSize(System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetOptimalSize(System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean,System.UInt32)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<param name="maxValue">Maximum texturesize. if value &gt; 0 size is clamped to maxValue. Default: 0.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Di.Height">
+			<summary>Height of the dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.Set(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Set to new value using another dimension.</summary>
+			<param name="copy">Another dimension.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.Set(System.Int32,System.Int32)">
+			<summary>Set to new value using new Width and Height.</summary>
+			<param name="width">New Width.</param>
+			<param name="height">New Height.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Di.Width">
+			<summary>Width of the dimension.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Line3Df">
+			<summary>3D line between two points with intersection methods.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.End">
+			<summary>End point of line.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.GetClosestPoint(IrrlichtLime.Core.Vector3Df)">
+			<summary>Get the closest point on this line to a point.</summary>
+			<param name="point">The point to compare to.</param>
+			<returns>The nearest point which is part of the line.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.GetIntersectionWithSphere(IrrlichtLime.Core.Vector3Df,System.Single,System.Double@)">
+			<summary>Check if the line intersects with a shpere.</summary>
+			<param name="sphereOrigin">Origin of the shpere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="distance">The distance to the first intersection point.</param>
+			<returns>True if there is an intersection. If there is one, the distance to the first intersection point is stored in outdistance.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.IsPointBetweenStartAndEnd(IrrlichtLime.Core.Vector3Df)">
+			<summary>Check if the given point is between start and end of the line.
+
+Assumes that the point is already somewhere on the line.</summary>
+			<param name="point">The point to test.</param>
+			<returns>True if point is on the line between start and end, else false.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.Length">
+			<summary>Length of line.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.LengthSQ">
+			<summary>Squared length of line: Length^2.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.#ctor">
+			<summary>Default constructor. Line from (0,0,0) to (1,1,1).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Constructor with two points as vectors.</summary>
+			<param name="start">Start point.</param>
+			<param name="end">End point.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Constructor with two points.</summary>
+			<param name="startX">Start point X coord.</param>
+			<param name="startY">Start point Y coord.</param>
+			<param name="startZ">Start point Z coord.</param>
+			<param name="endX">End point X coord.</param>
+			<param name="endY">End point Y coord.</param>
+			<param name="endZ">End point Z coord.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.Middle">
+			<summary>Center of line.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.Set(IrrlichtLime.Core.Line3Df)">
+			<summary>Set this line to new line given as parameter.</summary>
+			<param name="newLine">Line to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Set this line to a new line going through the two points as vectors.</summary>
+			<param name="newStart">Start point.</param>
+			<param name="newEnd">End point.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.Set(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Set this line to a new line going through the two points.</summary>
+			<param name="newStartX">New start point X coord.</param>
+			<param name="newStartY">New start point Y coord.</param>
+			<param name="newStartZ">New start point Z coord.</param>
+			<param name="newEndX">New end point X coord.</param>
+			<param name="newEndY">New end point Y coord.</param>
+			<param name="newEndZ">New end point Z coord.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.Start">
+			<summary>Start point of line.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Line3Df.Vector">
+			<summary>Vector of line.</summary>
+		</member>
 	</members>
 </doc>
