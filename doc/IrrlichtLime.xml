@@ -1546,5 +1546,253 @@ Assumes that the point is already somewhere on the line.</summary>
 		<member name="P:IrrlichtLime.Core.Line3Df.Vector">
 			<summary>Vector of line.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Matrix">
+			<summary>4x4 matrix. Mostly used as transformation matrix for 3d calculations.
+
+The matrix is a D3D style matrix, row major with translations in the 4th row.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildAxisAlignedBillboard(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a matrix which rotates a source vector to a look vector over an arbitrary axis.</summary>
+			<param name="camPos">Viewer position in world coords.</param>
+			<param name="center">Object position in world coords and rotation pivot.</param>
+			<param name="translation">Object final translation from center.</param>
+			<param name="axis">Axis to rotate about.</param>
+			<param name="from">Source vector to rotate from.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildCameraLookAtMatrixLH(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a left-handed look-at matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildCameraLookAtMatrixRH(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a right-handed look-at matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildNDCToDCMatrix(IrrlichtLime.Core.Recti,System.Single)">
+			<summary>Builds a matrix which transforms a normalized Device Coordinate to Device Coordinates.
+
+Used to scale (-1,-1)-(1,1) to viewport size, for example to (0,0)-(639,479).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixOrthoLH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a left-handed orthogonal projection matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixOrthoRH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a right-handed orthogonal projection matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixPerspectiveFovLH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a left-handed perspective projection matrix based on a field of view.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixPerspectiveFovRH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a right-handed perspective projection matrix based on a field of view.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixPerspectiveLH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a left-handed perspective projection matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixPerspectiveRH(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Builds a right-handed perspective projection matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildRotateFromTo(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a matrix that rotates from one vector to another.</summary>
+			<param name="from">Vector to rotate from.</param>
+			<param name="to">Vector to rotate to.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildShadowMatrix(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Plane3Df)">
+			<summary>Builds a matrix that flattens geometry into a plane.</summary>
+			<param name="light">Light source.</param>
+			<param name="plane">Plane into which the geometry if flattened into.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildShadowMatrix(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Plane3Df,System.Single)">
+			<summary>Builds a matrix that flattens geometry into a plane.</summary>
+			<param name="light">Light source.</param>
+			<param name="plane">Plane into which the geometry if flattened into.</param>
+			<param name="point">Value between 0 and 1, describing the light source. If this is 1, it is a point light, if it is 0, it is a directional light. Default: 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.BuildTextureTransform(System.Single,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Set to a texture transformation matrix with the given parameters.
+
+Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z + Uw v = Vx*x + Vy*y + Vz*z + Vw The matrix M for this case is: Ux Vx 0 0 Uy Vy 0 0 Uz Vz 0 0 Uw Vw 0 0.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.DefinitelyIdentity">
+			<summary>Gets/sets if the matrix is definitely identity matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetElement(System.Int32)">
+			<summary>Gets separate element of the matrix by its index.</summary>
+			<param name="index">Index of matrix element from 0 to 15.</param>
+			<returns>Value of matrix element.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetElement(System.Int32,System.Int32)">
+			<summary>Gets separate element of the matrix by its coord.</summary>
+			<param name="row">Row index of matrix element from 0 to 3.</param>
+			<param name="column">Column index of matrix element from 0 to 3.</param>
+			<returns>Value of matrix element.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetInterpolated(IrrlichtLime.Core.Matrix,System.Single)">
+			<summary>Creates a new matrix as interpolated matrix from two other ones.</summary>
+			<param name="other">Other matrix to interpolate with.</param>
+			<param name="time">Must be a value between 0 and 1.</param>
+			<returns>Interpolated matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetInverse">
+			<summary>Gets the inversed matrix of this one. Calculates the inverse of this matrix. The inverse is calculated using Cramers rule. Note: if no inverse exists then null is returned.</summary>
+			<returns>Inverse matrix or null if not applicable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetInversePrimitive">
+			<summary>Inverts a primitive matrix which only contains a translation and a rotation. Note: if no inverse exists then null is returned.</summary>
+			<returns>Inverse matrix or null if not applicable.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Identity">
+			<summary>Identity matrix.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.IdentityIntegerBase">
+			<summary>True if the matrix is the identity matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.InverseRotateVector(IrrlichtLime.Core.Vector3Df@)">
+			<summary>Rotate a vector by the inverse of the rotation part of this matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.InverseTranslateVector(IrrlichtLime.Core.Vector3Df@)">
+			<summary>Translate a vector by the inverse of the translation part of this matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.MakeIdentity">
+			<summary>Set matrix to identity.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.MakeInverse">
+			<summary>Calculates inverse of matrix. Slow.</summary>
+			<returns>False if there is no inverse matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor">
+			<summary>Default constructor. Creates identity matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.MultiplyWith1x4Matrix(System.Single[])">
+			<summary>Multiplies this matrix by a 1x4 matrix.</summary>
+			<param name="m1x4">1x4 matrix. This array must contain 4 elements.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Orthogonal">
+			<summary>True if the matrix is orthogonal.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.RotateVector(IrrlichtLime.Core.Vector3Df)">
+			<summary>Rotate a vector by the rotation part of this matrix.</summary>
+			<param name="vect">Vector to rotate.</param>
+			<returns>Rotated vector.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Rotation">
+			<summary>Matrix rotation in degrees. Note that it does not necessarily return the *same* Euler angles as those previously set, but the rotation will be equivalent, i.e. will have the same result when used to rotate a vector or node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Scale">
+			<summary>Absolute values of the scales of the matrix. Note that this always returns the absolute (positive) values.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetByProduct(IrrlichtLime.Core.Matrix,IrrlichtLime.Core.Matrix)">
+			<summary>Set this matrix to the product of two matrices. Multiply by another matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetByProductNoCheck(IrrlichtLime.Core.Matrix,IrrlichtLime.Core.Matrix)">
+			<summary>Set this matrix to the product of two matrices. Multiply by another matrix. No optimization used, use it if you know you never have an identity matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetElement(System.Int32,System.Single)">
+			<summary>Sets separate element of the matrix by its index.</summary>
+			<param name="index">Index of matrix element from 0 to 15.</param>
+			<param name="value">Value of matrix element.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetElement(System.Int32,System.Int32,System.Single)">
+			<summary>Sets separate element of the matrix by its coord.</summary>
+			<param name="row">Row index of matrix element from 0 to 3.</param>
+			<param name="column">Column index of matrix element from 0 to 3.</param>
+			<param name="value">Value of matrix element.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetElementArray(System.Single[])">
+			<summary>Sets all matrix elements at once.</summary>
+			<param name="values">Array of new matrix elements. Must contain 16 elements.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetInverseRotationDegrees(IrrlichtLime.Core.Vector3Df)">
+			<summary>Make an inverted rotation matrix from Euler angles in degrees.
+
+The 4th row and column are unmodified.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetInverseRotationRadians(IrrlichtLime.Core.Vector3Df)">
+			<summary>Make an inverted rotation matrix from Euler angles in radians.
+
+The 4th row and column are unmodified.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetInverseTranslation(IrrlichtLime.Core.Vector3Df)">
+			<summary>Set the inverse translation of the current matrix. Will erase any previous values.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetRotationCenter(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a combined matrix which translates to a center before rotation and translates from origin afterwards.</summary>
+			<param name="center">Position to rotate around.</param>
+			<param name="translate">Translation applied after the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetRotationRadians(IrrlichtLime.Core.Vector3Df)">
+			<summary>Make a rotation matrix from Euler angles. The 4th row and column are unmodified.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetTextureRotationCenter(System.Single)">
+			<summary>Set texture transformation rotation.
+
+Rotate about z axis, recenter at (0.5,0.5). Doesn't clear other elements than those affected.</summary>
+			<param name="radAngle">Angle in radians.</param>
+			<returns>Altered matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetTextureScale(System.Single,System.Single)">
+			<summary>Set texture transformation scale.
+
+Doesn't clear other elements than those affected.</summary>
+			<param name="sx">Scale factor on x axis.</param>
+			<param name="sy">Scale factor on y axis.</param>
+			<returns>Altered matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetTextureScaleCenter(System.Single,System.Single)">
+			<summary>Set texture transformation scale, and recenter at (0.5,0.5).
+
+Doesn't clear other elements than those affected.</summary>
+			<param name="sx">Scale factor on x axis.</param>
+			<param name="sy">Scale factor on y axis.</param>
+			<returns>Altered matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetTextureTranslate(System.Single,System.Single)">
+			<summary>Set texture transformation translation.
+
+Doesn't clear other elements than those affected.</summary>
+			<param name="x">Offset on x axis.</param>
+			<param name="y">Offset on y axis.</param>
+			<returns>Altered matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetTextureTranslateTransposed(System.Single,System.Single)">
+			<summary>Set texture transformation translation, using a transposed representation.
+
+Doesn't clear other elements than those affected.</summary>
+			<param name="x">Offset on x axis.</param>
+			<param name="y">Offset on y axis.</param>
+			<returns>Altered matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.ToArray">
+			<summary>Returns matrix as array.</summary>
+			<returns>Array containing 16 elements of matrix.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.TransformBox(IrrlichtLime.Core.AABBox@)">
+			<summary>Transforms a axis aligned bounding box.
+
+The result box of this operation may not be accurate at all. For correct results, use TransformBoxEx().</summary>
+			<param name="box">Box to transform.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.TransformBoxEx(IrrlichtLime.Core.AABBox@)">
+			<summary>Transforms a axis aligned bounding box.
+
+Transforms a axis aligned bounding box more accurately than TtransformBox().
+
+The result box of this operation should by accurate, but this operation is slower than TransformBox().</summary>
+			<param name="box">Box to transform.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.TransformPlane(IrrlichtLime.Core.Plane3Df@)">
+			<summary>Transforms a plane by this matrix.</summary>
+			<param name="plane">Plane to transform.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.TransformVector(IrrlichtLime.Core.Vector3Df@)">
+			<summary>Transforms a vector by this matrix.</summary>
+			<param name="vect">Vector to transform.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.TranslateVector(IrrlichtLime.Core.Vector3Df@)">
+			<summary>Translates a vector by the translation part of this matrix.</summary>
+			<param name="vect">Vector to translate.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Translation">
+			<summary>Matrix translation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Transposed">
+			<summary>Transposed matrix.</summary>
+		</member>
 	</members>
 </doc>
