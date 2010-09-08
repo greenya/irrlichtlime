@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18.SplitScreen", "examples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10.Shaders", "examples\10.Shaders\10.Shaders.csproj", "{C71AE6E3-6DAC-454B-9DF7-D021E972C0E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L03.RGBSwirl", "examples\L03.RGBSwirl\L03.RGBSwirl.csproj", "{022AE243-A652-46BC-AA51-401C4CA8023E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -265,6 +267,18 @@ Global
 		{C71AE6E3-6DAC-454B-9DF7-D021E972C0E8}.Release|Win32.ActiveCfg = Release|x86
 		{C71AE6E3-6DAC-454B-9DF7-D021E972C0E8}.Release|x86.ActiveCfg = Release|x86
 		{C71AE6E3-6DAC-454B-9DF7-D021E972C0E8}.Release|x86.Build.0 = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|Win32.ActiveCfg = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|x86.ActiveCfg = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Debug|x86.Build.0 = Debug|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|Any CPU.ActiveCfg = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|Win32.ActiveCfg = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|x86.ActiveCfg = Release|x86
+		{022AE243-A652-46BC-AA51-401C4CA8023E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
