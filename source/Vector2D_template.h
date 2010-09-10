@@ -46,6 +46,11 @@ public:
 		double get() { return m_NativeValue->getAngleTrig(); }
 	}
 
+	property _WRAPTYPE_ Length
+	{
+		_WRAPTYPE_ get() { return m_NativeValue->getLength(); }
+	}
+
 	virtual String^ ToString() override
 	{
 		return String::Format("{0}, {1}", X, Y);
