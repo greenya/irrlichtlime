@@ -1794,5 +1794,337 @@ The result box of this operation should by accurate, but this operation is slowe
 		<member name="P:IrrlichtLime.Core.Matrix.Transposed">
 			<summary>Transposed matrix.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Plane3Df">
+			<summary>Plane class with some intersection testing methods.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Plane3Df.D">
+			<summary>Distance from origin.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetDistanceTo(IrrlichtLime.Core.Vector3Df)">
+			<summary>Get the distance to a point.
+
+Note that this only works if the normal is normalized.</summary>
+			<param name="point">Target point.</param>
+			<returns>The distnace from point to this plane.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetIntersectionWithLimitedLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Get an intersection with a 3d line, limited between two 3d points.</summary>
+			<param name="linePoint1">Point 1 of the line.</param>
+			<param name="linePoint2">Point 2 of the line.</param>
+			<param name="intersection">Place to store the intersection point, if there is one. Note: this output value has meaning only if this method returns true.</param>
+			<returns>True if there was an intersection, false if there was not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetIntersectionWithLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Get an intersection with a 3d line (line defined by start point and direction, so actually this is a ray).</summary>
+			<param name="linePoint">Point of the line to intersect with.</param>
+			<param name="lineVect">Vector of the line to intersect with.</param>
+			<param name="intersection">Place to store the intersection point, if there is one. Note: this output value has meaning only if this method returns true.</param>
+			<returns>True if there was an intersection, false if there was not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetIntersectionWithPlane(IrrlichtLime.Core.Plane3Df,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Intersects this plane with another.</summary>
+			<param name="other">Other plane to intersect with.</param>
+			<param name="intersectionLinePoint">Base point of intersection line.</param>
+			<param name="intersectionLineVector">Vector of intersection.</param>
+			<returns>True if there is a intersection, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetIntersectionWithPlanes(IrrlichtLime.Core.Plane3Df,IrrlichtLime.Core.Plane3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Get the intersection point with two other planes if there is one.</summary>
+			<param name="other1">Other plane 1 to intersect with.</param>
+			<param name="other2">Other plane 2 to intersect with.</param>
+			<param name="intersectionPoint">Intersection result.</param>
+			<returns>True if there is a intersection, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.GetKnownIntersectionWithLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Get percentage (value from 0.0 to 1.0) of line between two points where an intersection with this plane happens.
+
+Only useful if known that there is an intersection.</summary>
+			<param name="linePoint1">Point1 of the line to intersect with.</param>
+			<param name="linePoint2">Point2 of the line to intersect with.</param>
+			<returns>Where on a line between two points an intersection with this plane happened. For example, 0.5 is returned if the intersection happened exactly in the middle of the two points.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.Intersects(IrrlichtLime.Core.Plane3Df)">
+			<summary>Tests if there is an intersection with the other plane.</summary>
+			<param name="other">Other plane.</param>
+			<returns>True if there is an intersection.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.IsFrontFacing(IrrlichtLime.Core.Vector3Df)">
+			<summary>Test if the triangle would be front or backfacing from any point.
+
+Thus, this method assumes a camera position from which the triangle is definitely visible when looking into the given direction. Note that this only works if the normal is Normalized. Do not use this method with points as it will give wrong results!</summary>
+			<param name="lookDirection">Look direction.</param>
+			<returns>True if the plane is front facing and false if it is backfacing.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Plane3Df.MemberPoint">
+			<summary>Member point of the plane.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Plane3Df.Normal">
+			<summary>Normal vector of the plane.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets plane by its member point and normal vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Sets plane by its normal vector and the distance from origin.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets plane by three points.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Rectf">
+			<summary>Rectangular area.
+
+Mostly used by 2D GUI elements and for 2D drawing methods. It has 2 positions instead of position and dimension and a fast method for collision detection with other rectangles and points.
+
+Coordinates are (0,0) for top-left corner, and increasing to the right and to the bottom.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.AddInternalPoint(IrrlichtLime.Core.Vector2Df)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="point">Point to add to the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.AddInternalPoint(System.Single,System.Single)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="x">X-Coordinate of the point to add to this box.</param>
+			<param name="y">Y-Coordinate of the point to add to this box.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.Area">
+			<summary>Area of the rectangle: Width x Height.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.Center">
+			<summary>Center of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.ClipAgainst(IrrlichtLime.Core.Rectf)">
+			<summary>Clips this rectangle with another one.</summary>
+			<param name="other">Rectangle to clip with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.ConstrainTo(IrrlichtLime.Core.Rectf)">
+			<summary>Moves this rectangle to fit inside another one.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True on success, false if not possible.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.Height">
+			<summary>Height of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.IsPointInside(IrrlichtLime.Core.Vector2Df)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="pos">Position to test.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.IsRectCollided(IrrlichtLime.Core.Rectf)">
+			<summary>Checks if the rectangle collides with another rectangle.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True if the rectangles collide.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.LowerRightCorner">
+			<summary>Lower right corner of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.#ctor">
+			<summary>Default constructor creating empty rectangle at (0,0).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Constructor with upper left corner and dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Constructor with two corners.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.#ctor(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Constructor with two corners.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.Repair">
+			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.UpperLeftCorner">
+			<summary>Upper left corner of the rectangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.Valid">
+			<summary>Checks if the rectangle is valid to draw.
+
+It would be invalid if the UpperLeftCorner is lower or more right than the LowerRightCorner.
+
+Note: use Repair() to make it valid.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectf.Width">
+			<summary>Width of the rectangle.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Recti">
+			<summary>Rectangular area.
+
+Mostly used by 2D GUI elements and for 2D drawing methods. It has 2 positions instead of position and dimension and a fast method for collision detection with other rectangles and points.
+
+Coordinates are (0,0) for top-left corner, and increasing to the right and to the bottom.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.AddInternalPoint(IrrlichtLime.Core.Vector2Di)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="point">Point to add to the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.AddInternalPoint(System.Int32,System.Int32)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="x">X-Coordinate of the point to add to this box.</param>
+			<param name="y">Y-Coordinate of the point to add to this box.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.Area">
+			<summary>Area of the rectangle: Width x Height.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.Center">
+			<summary>Center of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.ClipAgainst(IrrlichtLime.Core.Recti)">
+			<summary>Clips this rectangle with another one.</summary>
+			<param name="other">Rectangle to clip with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.ConstrainTo(IrrlichtLime.Core.Recti)">
+			<summary>Moves this rectangle to fit inside another one.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True on success, false if not possible.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.Height">
+			<summary>Height of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.IsPointInside(IrrlichtLime.Core.Vector2Di)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="pos">Position to test.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.IsRectCollided(IrrlichtLime.Core.Recti)">
+			<summary>Checks if the rectangle collides with another rectangle.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True if the rectangles collide.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.LowerRightCorner">
+			<summary>Lower right corner of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.#ctor">
+			<summary>Default constructor creating empty rectangle at (0,0).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Constructor with upper left corner and dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Constructor with two corners.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+			<summary>Constructor with two corners.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.Repair">
+			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.UpperLeftCorner">
+			<summary>Upper left corner of the rectangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.Valid">
+			<summary>Checks if the rectangle is valid to draw.
+
+It would be invalid if the UpperLeftCorner is lower or more right than the LowerRightCorner.
+
+Note: use Repair() to make it valid.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Recti.Width">
+			<summary>Width of the rectangle.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Triangle3Df">
+			<summary>3d triangle class for doing collision detection and other things.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.A">
+			<summary>Point A of the triangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.Area">
+			<summary>Get the area of the triangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.B">
+			<summary>Point B of the triangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.C">
+			<summary>Point C of the triangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.GetClosestPointOnTriangle(IrrlichtLime.Core.Vector3Df)">
+			<summary>Get the closest point on a triangle to a point on the same plane.</summary>
+			<param name="point">Point which must be on the same plane as the triangle.</param>
+			<returns>The closest point of the triangle.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.GetIntersectionOfPlaneWithLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Calculates the intersection between a 3d line (line defined by start point and direction, so actually this is a ray) and the plane the triangle is on.</summary>
+			<param name="linePoint">Point of the line to intersect with.</param>
+			<param name="lineVect">Vector of the line to intersect with.</param>
+			<param name="intersection">Place to store the intersection point, if there is one.</param>
+			<returns>True if there was an intersection, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.GetIntersectionWithLimitedLine(IrrlichtLime.Core.Line3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Get an intersection with a 3d line.</summary>
+			<param name="line">Line to intersect with.</param>
+			<param name="intersection">Place to store the intersection point, if there is one.</param>
+			<returns>True if there was an intersection, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.GetIntersectionWithLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Get an intersection with a 3d line.
+
+Please note that also points are returned as intersection which are on the line, but not between the start and end point of the line. If you want the returned point be between start and end use GetIntersectionWithLimitedLine().</summary>
+			<param name="linePoint">Point of the line to intersect with.</param>
+			<param name="lineVect">Vector of the line to intersect with.</param>
+			<param name="intersection">Place to store the intersection point, if there is one.</param>
+			<returns>True if there was an intersection, false if there was not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.IsFrontFacing(IrrlichtLime.Core.Vector3Df)">
+			<summary>Test if the triangle would be front or backfacing from any point.
+
+Thus, this method assumes a camera position from which the triangle is definitely visible when looking at the given direction. Do not use this method with points as it will give wrong results!</summary>
+			<param name="lookDirection">Look direction.</param>
+			<returns>True if the plane is front facing and false if it is backfacing.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.IsPointInside(IrrlichtLime.Core.Vector3Df)">
+			<summary>Check if a point is inside the triangle. Assumes that this point is already on the plane of the triangle.</summary>
+			<param name="point">Point to test.</param>
+			<returns>True if the point is inside the triangle, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.IsPointInsideFast(IrrlichtLime.Core.Vector3Df)">
+			<summary>Check if a point is inside the triangle. Assumes that this point is already on the plane of the triangle.
+
+This method is an implementation of the example used in a paper by Kasper Fauerby original written by Keidy from Mr-Gamemaker.</summary>
+			<param name="point">Point to test.</param>
+			<returns>True if point is inside the triangle, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.IsTotalInsideBox(IrrlichtLime.Core.AABBox)">
+			<summary>Determines if the triangle is totally inside a bounding box.</summary>
+			<param name="box">Box to check.</param>
+			<returns>True if triangle is within the box, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.IsTotalOutsideBox(IrrlichtLime.Core.AABBox)">
+			<summary>Determines if the triangle is totally outside a bounding box.</summary>
+			<param name="box">Box to check.</param>
+			<returns>True if triangle is outside the box, otherwise false.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.Normal">
+			<summary>Normal vector of the triangle. Note: The normal vector is not always normalized.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Triangle3Df.Plane">
+			<summary>Plane of the triangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets the triangle's points.</summary>
+			<param name="point1">Point A.</param>
+			<param name="point2">Point B.</param>
+			<param name="point3">Point C.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor">
+			<summary>Constructor for an all 0 triangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Constructor for triangle with given three points.</summary>
+			<param name="point1">Point A.</param>
+			<param name="point2">Point B.</param>
+			<param name="point3">Point C.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<param name="startPosition">0.0f ... 1.0f</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
+			<param name="startPosition">0.0f ... 1.0f</param>
+		</member>
 	</members>
 </doc>
