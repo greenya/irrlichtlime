@@ -2120,6 +2120,567 @@ This method is an implementation of the example used in a paper by Kasper Fauerb
 			<param name="point2">Point B.</param>
 			<param name="point3">Point C.</param>
 		</member>
+		<member name="T:IrrlichtLime.Core.Vector2Df">
+			<summary>2d vector class with lots of operators and methods.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.Angle">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.AngleTrig">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.DotProduct(IrrlichtLime.Core.Vector2Df)">
+			<summary>Get the dot product of this vector with another.</summary>
+			<param name="other">Other vector to take dot product with.</param>
+			<returns>The dot product of the two vectors.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.EqualsTo(IrrlichtLime.Core.Vector2Df)">
+			<summary>Checks if this vector equals the other one.
+
+Takes floating point rounding errors into account.</summary>
+			<param name="other">Vector to compare with.</param>
+			<returns>True if the two vector are (almost) equal, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetAngleWith(IrrlichtLime.Core.Vector2Df)">
+			<summary>Calculates the angle between this vector and another one in degree.</summary>
+			<param name="other">Other vector to test with.</param>
+			<returns>Returns a value between 0 and 90.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetDistanceFrom(IrrlichtLime.Core.Vector2Df)">
+			<summary>Gets distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetDistanceFromSQ(IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Squared distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetInterpolated(IrrlichtLime.Core.Vector2Df,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.Interpolate(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other vectors.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector b) and 1.0f (all vector a). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector, after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.IsBetweenPoints(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.LengthSQ">
+			<summary>The squared length of the vector.
+
+This is useful because it is faster than: Length x Length.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.Normalize">
+			<summary>Normalizes the vector.
+
+The null vector is left untouched.</summary>
+			<returns>Reference to this vector, after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.RotateBy(System.Double)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.RotateBy(System.Double,IrrlichtLime.Core.Vector2Df)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<param name="center">Rotation center. Default: (0,0,0).</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.Set(IrrlichtLime.Core.Vector2Df)">
+			<summary>Set value of this vector using provided vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.Set(System.Single,System.Single)">
+			<summary>Set value of this vector using provided coordinates.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single)">
+			<summary>Constructor with the same value for both members.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(IrrlichtLime.Core.Vector2Df)">
+			<summary>Copy constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single,System.Single)">
+			<summary>Constructor with two different values.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Df.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Vector2Di">
+			<summary>2d vector class with lots of operators and methods.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.Angle">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.AngleTrig">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.DotProduct(IrrlichtLime.Core.Vector2Di)">
+			<summary>Get the dot product of this vector with another.</summary>
+			<param name="other">Other vector to take dot product with.</param>
+			<returns>The dot product of the two vectors.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.EqualsTo(IrrlichtLime.Core.Vector2Di)">
+			<summary>Checks if this vector equals the other one.
+
+Takes floating point rounding errors into account.</summary>
+			<param name="other">Vector to compare with.</param>
+			<returns>True if the two vector are (almost) equal, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetAngleWith(IrrlichtLime.Core.Vector2Di)">
+			<summary>Calculates the angle between this vector and another one in degree.</summary>
+			<param name="other">Other vector to test with.</param>
+			<returns>Returns a value between 0 and 90.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetDistanceFrom(IrrlichtLime.Core.Vector2Di)">
+			<summary>Gets distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetDistanceFromSQ(IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Squared distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetInterpolated(IrrlichtLime.Core.Vector2Di,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.Interpolate(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other vectors.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector b) and 1.0f (all vector a). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector, after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.IsBetweenPoints(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.LengthSQ">
+			<summary>The squared length of the vector.
+
+This is useful because it is faster than: Length x Length.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.Normalize">
+			<summary>Normalizes the vector.
+
+The null vector is left untouched.</summary>
+			<returns>Reference to this vector, after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.RotateBy(System.Double)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.RotateBy(System.Double,IrrlichtLime.Core.Vector2Di)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<param name="center">Rotation center. Default: (0,0,0).</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.Set(IrrlichtLime.Core.Vector2Di)">
+			<summary>Set value of this vector using provided vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.Set(System.Int32,System.Int32)">
+			<summary>Set value of this vector using provided coordinates.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32)">
+			<summary>Constructor with the same value for both members.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(IrrlichtLime.Core.Vector2Di)">
+			<summary>Copy constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32,System.Int32)">
+			<summary>Constructor with two different values.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Di.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Vector3Df">
+			<summary>3d vector class with lots of operators and methods.
+
+The Vector3d class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.CrossProduct(IrrlichtLime.Core.Vector3Df)">
+			<summary>Calculates the cross product with another vector.</summary>
+			<param name="other">Vector to multiply with.</param>
+			<returns>Cross product of this vector with other.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.DotProduct(IrrlichtLime.Core.Vector3Df)">
+			<summary>Get the dot product with another vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.EqualsTo(IrrlichtLime.Core.Vector3Df)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<returns>True if vectors are equals.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.EqualsTo(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<param name="tolerance">Tolerance of comparision. Default: 0.000001f.</param>
+			<returns>True if vectors are equals.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.GetDistanceFrom(IrrlichtLime.Core.Vector3Df)">
+			<summary>Get distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Df)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.GetInterpolated(IrrlichtLime.Core.Vector3Df,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.HorizontalAngle">
+			<summary>The rotations that would make a (0,0,1) direction vector point in the same direction as this direction vector.
+
+This property contains a rotation vector containing the X (pitch) and Y (raw) rotations (in degrees) that when applied to a +Z (e.g. 0, 0, 1) direction vector would make it point in the same direction as this vector. The Z (roll) rotation is always 0, since two Euler rotations are sufficient to point in any given direction.
+
+Thanks to Arras on the Irrlicht forums for this method.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.Interpolate(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector other2) and 1.0f (all vector other1). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.Invert">
+			<summary>Inverts the vector.</summary>
+			<returns>Reference to this vector after inversion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.IsBetweenPoints(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Checks if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.LengthSQ">
+			<summary>The squared length of the vector.
+
+This is useful because it is faster than: Length x Length.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.Normalize">
+			<summary>Normalizes the vector.
+
+In case of the 0 vector the result is still 0, otherwise the length of the vector will be 1.</summary>
+			<returns>Reference to this vector after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateXYby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateXYby(System.Double,IrrlichtLime.Core.Vector3Df)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateXZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateXZby(System.Double,IrrlichtLime.Core.Vector3Df)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateYZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotateYZby(System.Double,IrrlichtLime.Core.Vector3Df)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotationToDirection">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.RotationToDirection(IrrlichtLime.Core.Vector3Df)">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<param name="forwards">The direction representing "forwards" which will be rotated by this vector. If you do not provide a direction, then the +Z axis (0, 0, 1) will be assumed to be forwards.</param>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.Set(IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets new value of this vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.Set(System.Single,System.Single,System.Single)">
+			<summary>Sets new value of this vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.SphericalCoordinateAngles">
+			<summary>The spherical coordinate angles.
+
+This returns Euler degrees for the point represented by this vector. The calculation assumes the pole at (0,1,0) and returns the angles in X and Y.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.ToArray">
+			<summary>Fills an array of 4 values with the vector data.
+
+Useful for setting in shader constants for example. The fourth value will always be 0.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single)">
+			<summary>Constructor with the same value for all three elements.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(IrrlichtLime.Core.Vector3Df)">
+			<summary>Copy constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Constructor with three different values.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Df.Z">
+			<summary>Z coordinate of the vector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Core.Vector3Di">
+			<summary>3d vector class with lots of operators and methods.
+
+The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.CrossProduct(IrrlichtLime.Core.Vector3Di)">
+			<summary>Calculates the cross product with another vector.</summary>
+			<param name="other">Vector to multiply with.</param>
+			<returns>Cross product of this vector with other.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.DotProduct(IrrlichtLime.Core.Vector3Di)">
+			<summary>Get the dot product with another vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.EqualsTo(IrrlichtLime.Core.Vector3Di)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<returns>True if vectors are equals.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.EqualsTo(IrrlichtLime.Core.Vector3Di,System.Int32)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<param name="tolerance">Tolerance of comparision. Default: 0.000001f. NOTE: this argument is integer, so for integer version of Vector3D there is no sense to use this method with tolerance argument. DO NOT USE THIS OVERLOADING, USE only EqualsTo(other) INSTEAD.</param>
+			<returns>True if vectors are equals.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.GetDistanceFrom(IrrlichtLime.Core.Vector3Di)">
+			<summary>Get distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Di)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.GetInterpolated(IrrlichtLime.Core.Vector3Di,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.HorizontalAngle">
+			<summary>The rotations that would make a (0,0,1) direction vector point in the same direction as this direction vector.
+
+This property contains a rotation vector containing the X (pitch) and Y (raw) rotations (in degrees) that when applied to a +Z (e.g. 0, 0, 1) direction vector would make it point in the same direction as this vector. The Z (roll) rotation is always 0, since two Euler rotations are sufficient to point in any given direction.
+
+Thanks to Arras on the Irrlicht forums for this method.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.Interpolate(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector other2) and 1.0f (all vector other1). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.Invert">
+			<summary>Inverts the vector.</summary>
+			<returns>Reference to this vector after inversion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.IsBetweenPoints(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di)">
+			<summary>Checks if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.LengthSQ">
+			<summary>The squared length of the vector.
+
+This is useful because it is faster than: Length x Length.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.Normalize">
+			<summary>Normalizes the vector.
+
+In case of the 0 vector the result is still 0, otherwise the length of the vector will be 1.</summary>
+			<returns>Reference to this vector after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXYby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXYby(System.Double,IrrlichtLime.Core.Vector3Di)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXZby(System.Double,IrrlichtLime.Core.Vector3Di)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateYZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotateYZby(System.Double,IrrlichtLime.Core.Vector3Di)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotationToDirection">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.RotationToDirection(IrrlichtLime.Core.Vector3Di)">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<param name="forwards">The direction representing "forwards" which will be rotated by this vector. If you do not provide a direction, then the +Z axis (0, 0, 1) will be assumed to be forwards.</param>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.Set(IrrlichtLime.Core.Vector3Di)">
+			<summary>Sets new value of this vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.Set(System.Int32,System.Int32,System.Int32)">
+			<summary>Sets new value of this vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.SphericalCoordinateAngles">
+			<summary>The spherical coordinate angles.
+
+This returns Euler degrees for the point represented by this vector. The calculation assumes the pole at (0,1,0) and returns the angles in X and Y.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.ToArray">
+			<summary>Fills an array of 4 values with the vector data.
+
+Useful for setting in shader constants for example. The fourth value will always be 0.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32)">
+			<summary>Constructor with the same value for all three elements.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(IrrlichtLime.Core.Vector3Di)">
+			<summary>Copy constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32,System.Int32,System.Int32)">
+			<summary>Constructor with three different values.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Di.Z">
+			<summary>Z coordinate of the vector.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">0.0f ... 1.0f</param>
 		</member>
