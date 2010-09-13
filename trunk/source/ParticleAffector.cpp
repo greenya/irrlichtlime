@@ -2,6 +2,10 @@
 #include "AttributeExchangingObject.h"
 #include "Particle.h"
 #include "ParticleAffector.h"
+#include "ParticleAttractionAffector.h"
+#include "ParticleFadeOutAffector.h"
+#include "ParticleGravityAffector.h"
+#include "ParticleRotationAffector.h"
 
 using namespace irr;
 using namespace System;
@@ -15,7 +19,22 @@ ParticleAffector^ ParticleAffector::Wrap(scene::IParticleAffector* ref)
 	if (ref == nullptr)
 		return nullptr;
 
-	return gcnew ParticleAffector(ref);
+	switch (ref->getType())
+	{
+	case scene::EPAT_ATTRACT:
+		return gcnew ParticleAttractionAffector((scene::IParticleAttractionAffector*)ref);
+	case scene::EPAT_FADE_OUT:
+		return gcnew ParticleFadeOutAffector((scene::IParticleFadeOutAffector*)ref);
+	case scene::EPAT_GRAVITY:
+		return gcnew ParticleGravityAffector((scene::IParticleGravityAffector*)ref);
+	case scene::EPAT_ROTATE:
+		return gcnew ParticleRotationAffector((scene::IParticleRotationAffector*)ref);
+
+	case scene::EPAT_SCALE:
+	case scene::EPAT_NONE:
+	default:
+		return gcnew ParticleAffector(ref);
+	}
 }
 
 ParticleAffector::ParticleAffector(scene::IParticleAffector* ref)
