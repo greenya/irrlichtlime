@@ -1,7 +1,13 @@
 #include "stdafx.h"
 #include "AttributeExchangingObject.h"
 #include "Particle.h"
+#include "ParticleAnimatedMeshSceneNodeEmitter.h"
+#include "ParticleBoxEmitter.h"
+#include "ParticleCylinderEmitter.h"
 #include "ParticleEmitter.h"
+#include "ParticleMeshEmitter.h"
+#include "ParticleRingEmitter.h"
+#include "ParticleSphereEmitter.h"
 
 using namespace irr;
 using namespace System;
@@ -15,7 +21,25 @@ ParticleEmitter^ ParticleEmitter::Wrap(scene::IParticleEmitter* ref)
 	if (ref == nullptr)
 		return nullptr;
 
-	return gcnew ParticleEmitter(ref);
+	switch (ref->getType())
+	{
+	case scene::EPET_ANIMATED_MESH:
+		return gcnew ParticleAnimatedMeshSceneNodeEmitter((scene::IParticleAnimatedMeshSceneNodeEmitter*)ref);
+	case scene::EPET_BOX:
+		return gcnew ParticleBoxEmitter((scene::IParticleBoxEmitter*)ref);
+	case scene::EPET_CYLINDER:
+		return gcnew ParticleCylinderEmitter((scene::IParticleCylinderEmitter*)ref);
+	case scene::EPET_MESH:
+		return gcnew ParticleMeshEmitter((scene::IParticleMeshEmitter*)ref);
+	case scene::EPET_RING:
+		return gcnew ParticleRingEmitter((scene::IParticleRingEmitter*)ref);
+	case scene::EPET_SPHERE:
+		return gcnew ParticleSphereEmitter((scene::IParticleSphereEmitter*)ref);
+
+	case scene::EPET_POINT:
+	default:
+		return gcnew ParticleEmitter(ref);
+	}
 }
 
 ParticleEmitter::ParticleEmitter(scene::IParticleEmitter* ref)
