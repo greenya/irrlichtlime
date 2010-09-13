@@ -166,6 +166,8 @@ public:
 
 	void RenameTexture(Texture^ texture, String^ newName);
 
+	void ResizeNotify(Dimension2Di^ size);
+
 	void RunAllOcclusionQueries(bool visible);
 	void RunAllOcclusionQueries();
 	void RunOcclusionQuery(Scene::SceneNode^ node, bool visible);

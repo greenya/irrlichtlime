@@ -965,6 +965,15 @@ void VideoDriver::RenameTexture(Texture^ texture, String^ newName)
 	m_VideoDriver->renameTexture(LIME_SAFEREF(texture, m_Texture), Lime::StringToPath(newName));
 }
 
+void VideoDriver::ResizeNotify(Dimension2Di^ size)
+{
+	LIME_ASSERT(size != nullptr);
+	LIME_ASSERT(size->Width >= 0);
+	LIME_ASSERT(size->Height >= 0);
+
+	m_VideoDriver->OnResize((core::dimension2du&)*size->m_NativeValue);
+}
+
 void VideoDriver::RunAllOcclusionQueries(bool visible)
 {
 	m_VideoDriver->runAllOcclusionQueries(visible);
