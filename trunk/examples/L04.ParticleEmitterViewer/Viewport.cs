@@ -11,6 +11,10 @@ using IrrlichtLime.Core;
 
 namespace L04.ParticleEmitterViewer
 {
+	/// <summary>
+	/// This class do all the rendering work.
+	/// This class is the only place where we actually use IrrlichtLime.
+	/// </summary>
 	class Viewport
 	{
 		Thread irrThread;
@@ -29,7 +33,7 @@ namespace L04.ParticleEmitterViewer
 
 			IrrlichtCreationParameters p = new IrrlichtCreationParameters();
 			//p.AntiAliasing = 4;
-			p.DriverType = DriverType.OpenGL;
+			p.DriverType = DriverType.Direct3D8;
 			p.WindowID = windowHandle;
 
 			irrThread.Start(p);
@@ -37,7 +41,7 @@ namespace L04.ParticleEmitterViewer
 
 		public void Stop()
 		{
-			EnqueueCommand(CommandType.Abort);
+			EnqueueCommand(CommandType.Abort, null);
 			irrThread.Join(200);
 
 			if (irrThread.IsAlive)
@@ -52,19 +56,42 @@ namespace L04.ParticleEmitterViewer
 			c.Type = type;
 			c.Param = param;
 
+			// If this is Abort command -- we clean up all the queue (all old commands that still waiting
+			// for processing) and add this Abort command, since it is a top priority command.
+			if (c.Type == CommandType.Abort)
+			{
+				lock (commandQueue)
+				{
+					commandQueue.Clear();
+					commandQueue.Enqueue(c);
+				}
+				return;
+			}
+
+			// We check for old same command and use it instead of adding new one -- for optimization.
+			// This way we make not more than only one command of same type to be in the queue.
+			lock (commandQueue)
+			{
+				foreach (Command n in commandQueue)
+				{
+					if (n.Type == c.Type)
+					{
+						n.Param = c.Param;
+						return;
+					}
+				}
+			}
+
+			// We add new command to queue.
 			lock (commandQueue)
 			{
 				commandQueue.Enqueue(c);
 			}
 		}
 
-		public void EnqueueCommand(CommandType type)
-		{
-			EnqueueCommand(type, null);
-		}
-
 		enum SceneNodeID
 		{
+			Camera,
 			AxisX,
 			AxisY,
 			AxisZ,
@@ -72,13 +99,17 @@ namespace L04.ParticleEmitterViewer
 			ParticleSystem
 		}
 
+		ParticleFadeOutAffector affFadeOut; // We store these pointers because when affector once added
+		ParticleGravityAffector affGravity; // to particle system, there is no any method to retrieve
+		ParticleRotationAffector affRotation; // its pointer back later :(
+
 		void irrThreadMain(object args)
 		{
 			irrDevice = IrrlichtDevice.CreateDevice(args as IrrlichtCreationParameters);
 
 			// Camera
 
-			CameraSceneNode camera = irrDevice.SceneManager.AddCameraSceneNode(null, new Vector3Df(0), new Vector3Df(0, 80, 0));
+			CameraSceneNode camera = irrDevice.SceneManager.AddCameraSceneNode(null, new Vector3Df(0), new Vector3Df(0, 80, 0), (int)SceneNodeID.Camera);
 			SceneNodeAnimator anim = irrDevice.SceneManager.CreateFlyCircleAnimator(new Vector3Df(0, 100, 0), 200.0f, 0.0002f);
 			camera.AddAnimator(anim);
 			anim.Drop();
@@ -86,13 +117,6 @@ namespace L04.ParticleEmitterViewer
 			// Skydome
 
 			irrDevice.SceneManager.AddSkyDomeSceneNode(irrDevice.VideoDriver.GetTexture("../media/skydome.jpg"), 16, 8, 0.95f, 2.0f);
-
-			// Cube
-
-			//var rr = irrDevice.SceneManager.AddCubeSceneNode(150);
-			////rr.GetMaterial(0).Lighting = false;
-			//rr.GetMaterial(0).EmissiveColor = new Color(0, 40, 0, 120);
-			//rr.SetMaterialType(MaterialType.TransparentAddColor);
 
 			// Plane
 
@@ -129,30 +153,57 @@ namespace L04.ParticleEmitterViewer
 			ps.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture("../media/particle.bmp"));
 			ps.SetMaterialType(MaterialType.TransparentAddColor);
 
-			ParticleEmitter em = ps.CreateBoxEmitter(
-				new AABBox(-20, 0, -20, 20, 4, 20),	// emitter size
+			ParticleEmitter em = ps.CreateSphereEmitter(
+				new Vector3Df(), 20,				// position and radius
 				new Vector3Df(0.0f, 0.1f, 0.0f),	// initial direction
-				80, 250,							// emit rate
+				150, 300,							// emit rate
 				new Color(255, 255, 255, 0),		// darkest color
 				new Color(255, 255, 255, 0),		// brightest color
-				800, 1500, 0,						// min and max age, angle
+				750, 1500, 0,						// min and max age, angle
 				new Dimension2Df(20.0f),			// min size
 				new Dimension2Df(40.0f));			// max size
 
 			ps.Emitter = em;
 			em.Drop();
 
+			// Particle affectors
+
+			affFadeOut = ps.CreateFadeOutParticleAffector();
+			ps.AddAffector(affFadeOut);
+			affFadeOut.Drop();
+
+			affGravity = ps.CreateGravityAffector(new Vector3Df(0, -1, 0), 3);
+			affGravity.Enabled = false;
+			ps.AddAffector(affGravity);
+			affGravity.Drop();
+
+			affRotation = ps.CreateRotationAffector(new Vector3Df(-90, 240, -120), new Vector3Df(0, 100, 0));
+			ps.AddAffector(affRotation);
+			affRotation.Drop();
+
 			// Rendering loop
 
+			uint rs = 0, re = 0; // render frame time
 			while (irrDevice.Run())
 			{
-				irrDevice.VideoDriver.BeginScene();
-				irrDevice.SceneManager.DrawAll();
+				if (irrDevice.VideoDriver.ScreenSize.Area != 0)
+				{
+					irrDevice.VideoDriver.BeginScene();
+					irrDevice.SceneManager.DrawAll();
+					re = irrDevice.Timer.Time;
 
-				irrThreadDrawText(new Vector2Di(8, 8), irrDevice.VideoDriver.FPS.ToString() + " fps");
-				irrDevice.VideoDriver.EndScene();
+					irrThreadDrawText(new Vector2Di(8, 8),
+						"Frame time: " + (irrDevice.VideoDriver.FPS > 1000 ? "< 1" : (re - rs).ToString()) + " ms");
+
+					irrDevice.VideoDriver.EndScene();
+				}
+				else
+				{
+					Thread.Sleep(50);
+				}
 
 				irrThreadProcessCommandQueue();
+				rs = irrDevice.Timer.Time;
 			}
 
 			irrDevice.Drop();
@@ -188,26 +239,109 @@ namespace L04.ParticleEmitterViewer
 			switch (c.Type)
 			{
 				case CommandType.Abort:
-					irrDevice.Close();
-					break;
+					{
+						irrDevice.Close();
+						break;
+					}
 
 				case CommandType.Axes:
-					irrThreadShowAxes((bool)c.Param);
-					break;
+					{
+						irrThreadShowAxes((bool)c.Param);
+						break;
+					}
 
 				case CommandType.Plane:
-					irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.Plane).Visible = (bool)c.Param;
-					break;
+					{
+						var n = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.Plane);
+						n.Visible = (bool)c.Param;
+						break;
+					}
 
 				case CommandType.Particle:
-					irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem).SetMaterialTexture(0,
-					    irrDevice.VideoDriver.GetTexture(((ParticleInfo)c.Param).FileName));
-					break;
+					{
+						var n = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem);
+						n.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture(((ParticleInfo)c.Param).FileName));
+						break;
+					}
 
-				case CommandType.Emmit:
-					var ps = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
-					ps.Emitter.MaxParticlesPerSecond = (bool)c.Param ? 250 : 0;
-					break;
+				case CommandType.Resize:
+					{
+						int[] i = (int[])c.Param;
+						Dimension2Di d = new Dimension2Di(i[0], i[1]);
+						irrDevice.VideoDriver.ResizeNotify(d);
+						(irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.Camera) as CameraSceneNode).AspectRatio =
+							i[2] == 1 ? (float)i[0] / i[1] : 1.333333f;
+						break;
+					}
+
+				case CommandType.Position:
+					{
+						float[] f = (float[])c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
+						(p.Emitter as ParticleSphereEmitter).Center = new Vector3Df(f[0], f[1], f[2]);
+						break;
+					}
+
+				case CommandType.Radius:
+					{
+						float f = (float)c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
+						(p.Emitter as ParticleSphereEmitter).Radius = f;
+						break;
+					}
+
+				case CommandType.CameraView:
+					{
+						float f = (float)c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.Camera) as CameraSceneNode;
+						p.Target = new Vector3Df(p.Target.X, f, p.Target.Z);
+						//p.FOV = 1.25f + (f - 80) / 100.0f;
+						break;
+					}
+
+				case CommandType.Rate:
+					{
+						int v = (int)c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
+						p.Emitter.MaxParticlesPerSecond = v;
+						p.Emitter.MinParticlesPerSecond = v/2;
+						break;
+					}
+
+				case CommandType.Size:
+					{
+						int v = (int)c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
+						p.Emitter.MaxStartSize = new Dimension2Df(v);
+						p.Emitter.MinStartSize = new Dimension2Df(v/2);
+						break;
+					}
+
+				case CommandType.Direction:
+					{
+						float[] f = (float[])c.Param;
+						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.ParticleSystem) as ParticleSystemSceneNode;
+						p.Emitter.Direction = new Vector3Df(f[0], f[1], f[2]);
+						break;
+					}
+
+				case CommandType.FadeOut:
+					{
+						affFadeOut.Enabled = (bool)c.Param;
+						break;
+					}
+
+				case CommandType.Rotation:
+					{
+						affRotation.Enabled = (bool)c.Param;
+						break;
+					}
+
+				case CommandType.Gravity:
+					{
+						affGravity.Enabled = (bool)c.Param;
+						break;
+					}
 
 				default:
 					throw new InvalidOperationException("Unexpected command type: " + c.Type.ToString());
