@@ -348,6 +348,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Vertex_template.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VertexShaderType.h"
 				>
 			</File>
