@@ -29,6 +29,30 @@ void MeshBuffer::Append(MeshBuffer^ other)
 	m_MeshBuffer->append(LIME_SAFEREF(other, m_MeshBuffer));
 }
 
+void MeshBuffer::Append(array<Video::Vertex3D^>^ vertices, array<unsigned short>^ indices)
+{
+	LIME_ASSERT(this->VertexType == Video::VertexType::Standard);
+	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);
+	LIME_ASSERT(vertices != nullptr);
+	LIME_ASSERT(indices != nullptr);
+
+	int vc = vertices->Length;
+	int ic = indices->Length;
+
+	video::S3DVertex* va = new video::S3DVertex[vc];
+	for (int i = 0; i < vc; i++)
+		va[i] = *vertices[i]->m_NativeValue;
+
+	unsigned short* ia = new unsigned short[ic];
+	for (int i = 0; i < ic; i++)
+		ia[i] = indices[i];
+
+	m_MeshBuffer->append(va, vc, ia, ic);
+
+	delete ia;
+	delete va;
+}
+
 Vector3Df^ MeshBuffer::GetNormal(int vertexIndex)
 {
 	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
