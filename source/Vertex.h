@@ -37,6 +37,14 @@ public:
 		m_NativeValue = new video::S3DVertex(*pos->m_NativeValue, *normal->m_NativeValue, *color->m_NativeValue, *tcoords->m_NativeValue);
 	}
 
+	Vertex3D^ GetInterpolated(Vertex3D^ other, float d)
+	{
+		LIME_ASSERT(other != nullptr);
+		LIME_ASSERT(d >= 0.0f && d <= 1.0f);
+
+		return gcnew Vertex3D(m_NativeValue->getInterpolated(*other->m_NativeValue, d));
+	}
+
 	property Vector3Df^ Position
 	{
 		Vector3Df^ get()
