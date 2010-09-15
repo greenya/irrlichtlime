@@ -11,22 +11,28 @@ namespace Video {
 
 public ref class Vertex3D : Lime::NativeValue<video::S3DVertex>
 {
+
+#define _REFCLASS_ Vertex3D
+#define _WRAPCLASS_ video::S3DVertex
+#include "Vertex_template.h"
+#undef _WRAPCLASS_
+#undef _REFCLASS_
+
 public:
 
-	Vertex3D()
-		: Lime::NativeValue<video::S3DVertex>(true)
-	{
-		m_NativeValue = new video::S3DVertex();
-	}
-
-	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Color^ c, float tu, float tv)
+	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Video::Color^ c, float tu, float tv)
 		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(c != nullptr);
-		m_NativeValue = new video::S3DVertex(x, y, z, nx, ny, nz, *c->m_NativeValue, tu, tv);
+
+		m_NativeValue = new video::S3DVertex(
+			x, y, z,
+			nx, ny, nz,
+			*c->m_NativeValue,
+			tu, tv);
 	}
 
-	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Color^ color, Vector2Df^ tcoords)
+	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Video::Color^ color, Vector2Df^ tcoords)
 		: Lime::NativeValue<video::S3DVertex>(true)
 	{
 		LIME_ASSERT(pos != nullptr);
@@ -34,86 +40,65 @@ public:
 		LIME_ASSERT(color != nullptr);
 		LIME_ASSERT(tcoords != nullptr);
 
-		m_NativeValue = new video::S3DVertex(*pos->m_NativeValue, *normal->m_NativeValue, *color->m_NativeValue, *tcoords->m_NativeValue);
+		m_NativeValue = new video::S3DVertex(
+			*pos->m_NativeValue,
+			*normal->m_NativeValue,
+			*color->m_NativeValue,
+			*tcoords->m_NativeValue);
 	}
+};
 
-	Vertex3D^ GetInterpolated(Vertex3D^ other, float d)
+public ref class Vertex3DTTCoords : Lime::NativeValue<video::S3DVertex2TCoords>
+{
+
+#define _REFCLASS_ Vertex3DTTCoords
+#define _WRAPCLASS_ video::S3DVertex2TCoords
+#include "Vertex_template.h"
+#undef _WRAPCLASS_
+#undef _REFCLASS_
+
+public:
+
+	Vertex3DTTCoords(float x, float y, float z, Video::Color^ c, float tu, float tv, float tu2, float tv2)
+		: Lime::NativeValue<video::S3DVertex2TCoords>(true)
 	{
-		LIME_ASSERT(other != nullptr);
-		LIME_ASSERT(d >= 0.0f && d <= 1.0f);
+		LIME_ASSERT(c != nullptr);
 
-		return gcnew Vertex3D(m_NativeValue->getInterpolated(*other->m_NativeValue, d));
+		m_NativeValue = new video::S3DVertex2TCoords(
+			x, y, z,
+			*c->m_NativeValue,
+			tu, tv,
+			tu2, tv2);
 	}
 
-	property Vector3Df^ Position
+	Vertex3DTTCoords(Vector3Df^ pos, Video::Color^ color, Vector2Df^ tcoords, Vector2Df^ tcoords2)
+		: Lime::NativeValue<video::S3DVertex2TCoords>(true)
 	{
-		Vector3Df^ get()
-		{
-			return gcnew Vector3Df(m_NativeValue->Pos);
-		}
-		void set(Vector3Df^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->Pos = *value->m_NativeValue;
-		}
-	}
+		LIME_ASSERT(pos != nullptr);
+		LIME_ASSERT(color != nullptr);
+		LIME_ASSERT(tcoords != nullptr);
+		LIME_ASSERT(tcoords2 != nullptr);
 
-	property Vector3Df^ Normal
-	{
-		Vector3Df^ get()
-		{
-			return gcnew Vector3Df(m_NativeValue->Normal);
-		}
-		void set(Vector3Df^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->Normal = *value->m_NativeValue;
-		}
+		m_NativeValue = new video::S3DVertex2TCoords(
+			*pos->m_NativeValue,
+			*color->m_NativeValue,
+			*tcoords->m_NativeValue,
+			*tcoords2->m_NativeValue);
 	}
+};
 
-	property Video::Color^ Color
-	{
-		Video::Color^ get()
-		{
-			return gcnew Video::Color(m_NativeValue->Color);
-		}
-		void set(Video::Color^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->Color = *value->m_NativeValue;
-		}
-	}
+public ref class Vertex3DTangents : Lime::NativeValue<video::S3DVertexTangents>
+{
 
-	property Vector2Df^ TCoords
-	{
-		Vector2Df^ get()
-		{
-			return gcnew Vector2Df(m_NativeValue->TCoords);
-		}
-		void set(Vector2Df^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->TCoords = *value->m_NativeValue;
-		}
-	}
+#define _REFCLASS_ Vertex3DTangents
+#define _WRAPCLASS_ video::S3DVertexTangents
+#include "Vertex_template.h"
+#undef _WRAPCLASS_
+#undef _REFCLASS_
 
-	property VertexType Type
-	{
-		VertexType get() { return (VertexType)m_NativeValue->getType(); }
-	}
+public:
 
-	virtual String^ ToString() override
-	{
-		return String::Format("Vertex3D: Type={0}; Position={1}", Type, Position);
-	}
-
-internal:
-
-	Vertex3D(const video::S3DVertex& other)
-		: Lime::NativeValue<video::S3DVertex>(true)
-	{
-		m_NativeValue = new video::S3DVertex(other);
-	}
+	// ...
 };
 
 } // end namespace Video
