@@ -89,6 +89,7 @@ The Irrlicht Lime SDK
   3. This notice may not be removed or altered from any source distribution.
 
 
+
 ==========================================================================
 5. Contact
 ==========================================================================
@@ -98,6 +99,9 @@ The Irrlicht Lime SDK
 
   The official homepage:
   http://irrlichtlime.sourceforge.net
+
+  Additional information (discussion thread):
+  http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38512
 
   If you found bug, please sumbit it at:
   http://sourceforge.net/tracker/?atid=1355121&group_id=322499&func=browse
