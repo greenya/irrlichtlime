@@ -10,6 +10,13 @@ public:
 		m_NativeValue = new _WRAPCLASS_();
 	}
 
+	_REFCLASS_(_REFCLASS_^ copy)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new _WRAPCLASS_(*copy->m_NativeValue);
+	}
+
 	_REFCLASS_^ GetInterpolated(_REFCLASS_^ other, float d)
 	{
 		LIME_ASSERT(other != nullptr);
@@ -77,7 +84,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("Vertex: Type={0}; Position={1}", Type, Position);
+		return String::Format("Vertex3D: Type={0}; Position={1}", Type, Position);
 	}
 
 internal:
