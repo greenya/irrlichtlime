@@ -16,8 +16,8 @@ public:
 
 	void Append(MeshBuffer^ other);
 	void Append(array<Video::Vertex3D^>^ vertices, array<unsigned short>^ indices);
-	//void Append(array<Video::Vertex3DTTCoords^>^ vertices, array<unsigned short>^ indices);
-	//void Append(array<Video::Vertex3DTangents^>^ vertices, array<unsigned short>^ indices);
+	void Append(array<Video::Vertex3DTTCoords^>^ vertices, array<unsigned short>^ indices);
+	void Append(array<Video::Vertex3DTangents^>^ vertices, array<unsigned short>^ indices);
 
 	//u16* getIndices();
 	//void* getVertices();
@@ -31,10 +31,10 @@ public:
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 
-	//void UpdateIndices(array<unsigned short>^ indices, int startIndexIndex);
-	//void UpdateVertices(array<Video::Vertex3D^>^ vertices, int startVertexIndex);
-	//void UpdateVertices(array<Video::Vertex3DTTCoords^>^ vertices, int startVertexIndex);
-	//void UpdateVertices(array<Video::Vertex3DTangents^>^ vertices, int startVertexIndex);
+	void UpdateIndices(array<unsigned short>^ indices, int startIndex);
+	void UpdateVertices(array<Video::Vertex3D^>^ vertices, int startIndex);
+	void UpdateVertices(array<Video::Vertex3DTTCoords^>^ vertices, int startIndex);
+	void UpdateVertices(array<Video::Vertex3DTangents^>^ vertices, int startIndex);
 
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property HardwareMappingHint HardwareMappingHintForIndex { HardwareMappingHint get(); }

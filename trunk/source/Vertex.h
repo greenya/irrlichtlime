@@ -32,6 +32,38 @@ public:
 			tu, tv);
 	}
 
+	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Video::Color^ c)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		LIME_ASSERT(c != nullptr);
+
+		m_NativeValue = new video::S3DVertex(
+			x, y, z,
+			nx, ny, nz,
+			*c->m_NativeValue,
+			0, 0);
+	}
+
+	Vertex3D(float x, float y, float z, float nx, float ny, float nz)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		m_NativeValue = new video::S3DVertex(
+			x, y, z,
+			nx, ny, nz,
+			video::SColor(),
+			0, 0);
+	}
+
+	Vertex3D(float x, float y, float z)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		m_NativeValue = new video::S3DVertex(
+			x, y, z,
+			0, 0, 0,
+			video::SColor(),
+			0, 0);
+	}
+
 	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Video::Color^ color, Vector2Df^ tcoords)
 		: Lime::NativeValue<video::S3DVertex>(true)
 	{
@@ -45,6 +77,45 @@ public:
 			*normal->m_NativeValue,
 			*color->m_NativeValue,
 			*tcoords->m_NativeValue);
+	}
+
+	Vertex3D(Vector3Df^ pos, Vector3Df^ normal, Video::Color^ color)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		LIME_ASSERT(pos != nullptr);
+		LIME_ASSERT(normal != nullptr);
+		LIME_ASSERT(color != nullptr);
+
+		m_NativeValue = new video::S3DVertex(
+			*pos->m_NativeValue,
+			*normal->m_NativeValue,
+			*color->m_NativeValue,
+			core::vector2df());
+	}
+
+	Vertex3D(Vector3Df^ pos, Vector3Df^ normal)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		LIME_ASSERT(pos != nullptr);
+		LIME_ASSERT(normal != nullptr);
+
+		m_NativeValue = new video::S3DVertex(
+			*pos->m_NativeValue,
+			*normal->m_NativeValue,
+			video::SColor(),
+			core::vector2df());
+	}
+
+	Vertex3D(Vector3Df^ pos)
+		: Lime::NativeValue<video::S3DVertex>(true)
+	{
+		LIME_ASSERT(pos != nullptr);
+
+		m_NativeValue = new video::S3DVertex(
+			*pos->m_NativeValue,
+			core::vector3df(),
+			video::SColor(),
+			core::vector2df());
 	}
 };
 
