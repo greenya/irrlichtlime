@@ -210,6 +210,36 @@ Video::IndexType MeshBuffer::IndexType::get()
 	return (Video::IndexType)m_MeshBuffer->getIndexType();
 }
 
+Object^ MeshBuffer::Indices::get()
+{
+	int ic = m_MeshBuffer->getIndexCount();
+	void* ia = m_MeshBuffer->getIndices();
+
+	switch (m_MeshBuffer->getIndexType())
+	{
+	case video::EIT_16BIT:
+		{
+			array<unsigned short>^ a = gcnew array<unsigned short>(ic);
+			for (int i = 0; i < ic; i++)
+				a[i] = ((unsigned short*)ia)[i];
+
+			return a;
+		}
+
+	case video::EIT_32BIT:
+		{
+			array<unsigned int>^ a = gcnew array<unsigned int>(ic);
+			for (int i = 0; i < ic; i++)
+				a[i] = ((unsigned int*)ia)[i];
+
+			return a;
+		}
+	}
+
+	LIME_ASSERT2(false, "Unexpected IndexType: " + this->IndexType.ToString());
+	return nullptr;
+}
+
 Video::Material^ MeshBuffer::Material::get()
 {
 	return Video::Material::Wrap(&m_MeshBuffer->getMaterial());
@@ -223,6 +253,45 @@ int MeshBuffer::VertexCount::get()
 Video::VertexType MeshBuffer::VertexType::get()
 {
 	return (Video::VertexType)m_MeshBuffer->getVertexType();
+}
+
+Object^ MeshBuffer::Vertices::get()
+{
+	int vc = m_MeshBuffer->getVertexCount();
+	void* va = m_MeshBuffer->getVertices();
+
+	switch (m_MeshBuffer->getVertexType())
+	{
+	case video::EVT_STANDARD:
+		{
+			array<Video::Vertex3D^>^ a = gcnew array<Video::Vertex3D^>(vc);
+			for (int i = 0; i < vc; i++)
+				a[i] = gcnew Video::Vertex3D(((video::S3DVertex*)va)[i]);
+
+			return a;
+		}
+
+	case video::EVT_2TCOORDS:
+		{
+			array<Video::Vertex3DTTCoords^>^ a = gcnew array<Video::Vertex3DTTCoords^>(vc);
+			for (int i = 0; i < vc; i++)
+				a[i] = gcnew Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[i]);
+
+			return a;
+		}
+
+	case video::EVT_TANGENTS:
+		{
+			array<Video::Vertex3DTangents^>^ a = gcnew array<Video::Vertex3DTangents^>(vc);
+			for (int i = 0; i < vc; i++)
+				a[i] = gcnew Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[i]);
+
+			return a;
+		}
+	}
+
+	LIME_ASSERT2(false, "Unexpected VertexType: " + this->VertexType.ToString());
+	return nullptr;
 }
 
 String^ MeshBuffer::ToString()

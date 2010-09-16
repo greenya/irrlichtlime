@@ -19,9 +19,6 @@ public:
 	void Append(array<Video::Vertex3DTTCoords^>^ vertices, array<unsigned short>^ indices);
 	void Append(array<Video::Vertex3DTangents^>^ vertices, array<unsigned short>^ indices);
 
-	//u16* getIndices();
-	//void* getVertices();
-
 	Vector3Df^ GetNormal(int vertexIndex);
 	Vector3Df^ GetPosition(int vertexIndex);
 	Vector2Df^ GetTCoords(int vertexIndex);
@@ -41,9 +38,11 @@ public:
 	property HardwareMappingHint HardwareMappingHintForVertex { HardwareMappingHint get(); }
 	property int IndexCount { int get(); }
 	property Video::IndexType IndexType { Video::IndexType get(); }
+	property Object^ Indices { Object^ get(); }
 	property Video::Material^ Material { Video::Material^ get(); }
 	property int VertexCount { int get(); }
 	property Video::VertexType VertexType { Video::VertexType get(); }
+	property Object^ Vertices { Object^ get(); }
 
 	virtual String^ ToString() override;
 
