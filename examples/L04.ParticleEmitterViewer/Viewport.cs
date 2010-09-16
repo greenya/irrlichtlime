@@ -295,7 +295,6 @@ namespace L04.ParticleEmitterViewer
 						float f = (float)c.Param;
 						var p = irrDevice.SceneManager.GetSceneNodeFromID((int)SceneNodeID.Camera) as CameraSceneNode;
 						p.Target = new Vector3Df(p.Target.X, f, p.Target.Z);
-						//p.FOV = 1.25f + (f - 80) / 100.0f;
 						break;
 					}
 
