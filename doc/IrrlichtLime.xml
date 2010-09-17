@@ -3053,5 +3053,319 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
 			<param name="startPosition">0.0f ... 1.0f</param>
 		</member>
+		<member name="T:IrrlichtLime.Video.AntiAliasingMode">
+			<summary>These flags are used to specify the anti-aliasing and smoothing modes.
+
+Techniques supported are multisampling, geometry smoothing, and alpha to coverage. Some drivers don't support a per-material setting of the anti-aliasing modes. In those cases, FSAA/multisampling is defined by the device mode chosen upon creation via IrrlichtCreationParameters.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.AlphaToCoverage">
+			<summary>Enhanced anti-aliasing for transparent materials.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.FullBasic">
+			<summary>All typical anti-alias and smooth modes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.LineSmooth">
+			<summary>Line smoothing.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.Off">
+			<summary>Use to turn off anti-aliasing for this material.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.PointSmooth">
+			<summary>point smoothing, often in software and slow, only with OpenGL.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.Quality">
+			<summary>High-quality anti-aliasing, not always supported, automatically enables Simple mode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AntiAliasingMode.Simple">
+			<summary>Default anti-aliasing mode.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.Color">
+			<summary>Class representing a 32 bit ARGB color.
+
+The color values for alpha, red, green, and blue are stored in a single unsigned int. So all four values may be between 0 and 255. Alpha in Irrlicht is opacity, so 0 is fully transparent, 255 is fully opaque (solid). This class is used by most parts of the Irrlicht Engine to specify a color.
+
+Another way is using the class Colorf, which stores the color values in 4 floats.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.A1R5G5B5">
+			<summary>Color in A1R5G5B5 format.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Alpha">
+			<summary>Alpha component of the color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.ARGB">
+			<summary>Color in A8R8G8B8 Format.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Average">
+			<summary>Average intensity of the color in range [0, 255].</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Blue">
+			<summary>Blue component of the color.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.#ctor">
+			<summary>Creates a color without initialization. Value of the color will be random.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.#ctor(System.UInt32)">
+			<summary>Creates a color using ARGB value.</summary>
+			<param name="argb">Value from 0 to 0xffffffff.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.#ctor(IrrlichtLime.Video.Color)">
+			<summary>Creates a copy of color.</summary>
+			<param name="copy">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.#ctor(System.Int32,System.Int32,System.Int32)">
+			<summary>Creates a color using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0 and 255.</param>
+			<param name="g">Green component. Must be value between 0 and 255.</param>
+			<param name="b">Blue component. Must be value between 0 and 255.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+			<summary>Creates a color using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0 and 255.</param>
+			<param name="g">Green component. Must be value between 0 and 255.</param>
+			<param name="b">Blue component. Must be value between 0 and 255.</param>
+			<param name="a">Alpha component. Must be value between 0 and 255. Default: 255 (fully opaque).</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Green">
+			<summary>Green component of the color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Lightness">
+			<summary>Lightness of the color in the range [0, 255].</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Luminance">
+			<summary>Luminance of the color in range [0, 255].</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.Red">
+			<summary>Red component of the color.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.Set(System.UInt32)">
+			<summary>Sets a color value using ARGB value.</summary>
+			<param name="argb">Value from 0 to 0xffffffff.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.Set(IrrlichtLime.Video.Color)">
+			<summary>Sets value of the color to provided copy.</summary>
+			<param name="copy">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32)">
+			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0 and 255.</param>
+			<param name="g">Green component. Must be value between 0 and 255.</param>
+			<param name="b">Blue component. Must be value between 0 and 255.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32,System.Int32)">
+			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0 and 255.</param>
+			<param name="g">Green component. Must be value between 0 and 255.</param>
+			<param name="b">Blue component. Must be value between 0 and 255.</param>
+			<param name="a">Alpha component. Must be value between 0 and 255. Default: 255 (fully opaque).</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.Colorf">
+			<summary>Class representing a 128 bit color (using 4 floats).
+
+The color values for red, green, blue and alpha are each stored in a 32 bit floating point variable. So all four values may be between 0.0f and 1.0f. Another, faster way to define colors is using the class Color, which stores the color values in a single 32 bit integer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Colorf.Alpha">
+			<summary>Alpha component of the color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Colorf.Blue">
+			<summary>Blue component of the color.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.#ctor">
+			<summary>Creates a default color. Sets red, green and blue to 0.0f and alpha to 1.0f.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.#ctor(IrrlichtLime.Video.Color)">
+			<summary>Creates a copy of 32 bit color.</summary>
+			<param name="copyColor">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.#ctor(IrrlichtLime.Video.Colorf)">
+			<summary>Creates a copy of 128 bit color.</summary>
+			<param name="copyColorf">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Creates a color using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
+			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
+			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.#ctor(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates a color using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
+			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
+			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
+			<param name="a">Alpha component. Must be value between 0.0f and 1.0f. Default: 1.0f (fully opaque).</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Colorf.Green">
+			<summary>Green component of the color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Colorf.Red">
+			<summary>Red component of the color.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.Set(IrrlichtLime.Video.Color)">
+			<summary>Sets value of the color to provided 32 bit copy.</summary>
+			<param name="copyColor">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.Set(IrrlichtLime.Video.Colorf)">
+			<summary>Sets value of the color to provided 128 bit copy.</summary>
+			<param name="copyColorf">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single)">
+			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
+			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
+			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
+			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
+			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
+			<param name="a">Alpha component. Must be value between 0.0f and 1.0f. Default: 1.0f (fully opaque).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.ToArray">
+			<summary>Returns array of 4 floats, which contains red, green, blue and alpha components.</summary>
+			<returns>Array of 4 floats.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.ToColor">
+			<summary>Creates 32 bit color.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ColorFormat">
+			<summary>Enumeration of all color formats.
+A color format specifies how color information is stored.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.A16B16G16R16F">
+			<summary>64 bit floating point format. 16 bits are used for the red, green, blue and alpha channels.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.A1R5G5B5">
+			<summary>16 bit color format used by the software driver. There are 5 bits for every color component, and a single bit is left for alpha information.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.A32B32G32R32F">
+			<summary>128 bit floating point format. 32 bits are used for the red, green, blue and alpha channels.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.A8R8G8B8">
+			<summary>Default 32 bit color format. 8 bits are used for every component: red, green, blue and alpha.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.G16R16F">
+			<summary>32 bit floating point format using 16 bits for the red channel and 16 bits for the green channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.G32R32F">
+			<summary>64 bit floating point format using 32 bits for the red channel and 32 bits for the green channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R16F">
+			<summary>16 bit floating point format using 16 bits for the red channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R32F">
+			<summary>32 bit floating point format using 32 bits for the red channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R5G6B5">
+			<summary>Standard 16 bit color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R8G8B8">
+			<summary>24 bit color, no alpha channel, but 8 bit for red, green and blue.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.Unknown">
+			<summary>Unknown color format.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ColorMaterial">
+			<summary>These flags allow to define the interpretation of vertex color when lighting is enabled.
+
+Without lighting being enabled the vertex color is the only value defining the fragment color. Once lighting is enabled, the four values for diffuse, ambient, emissive, and specular take over. With these flags it is possible to define which lighting factor shall be defined by the vertex color instead of the lighting factor which is the same for all faces of that material. The default is to use vertex color for the diffuse value, another pretty common value is to use vertex color for both diffuse and ambient factor.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.Ambient">
+			<summary>Use vertex color for ambient light.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.Diffuse">
+			<summary>Use vertex color for diffuse light, this is default.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.DiffuseAndAmbient">
+			<summary>Use vertex color for both diffuse and ambient light.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.Emissive">
+			<summary>Use vertex color for emissive light.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.None">
+			<summary>Don't use vertex color for lighting.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorMaterial.Specular">
+			<summary>Use vertex color for specular light.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ColorPlane">
+			<summary>Enumerates values for enabling/disabling color planes for rendering.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.All">
+			<summary>All planes enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.Alpha">
+			<summary>Alpha enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.Blue">
+			<summary>Blue enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.Green">
+			<summary>Green enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.None">
+			<summary>No color enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.Red">
+			<summary>Red enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorPlane.RGB">
+			<summary>All colors, no alpha.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.DriverType">
+			<summary>Enumerates all supported driver types.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.BurningsVideo">
+			<summary>The Burning's Software Renderer, an alternative software renderer.
+
+Basically it can be described as the Irrlicht Software renderer on steroids. It rasterizes 3D geometry perfectly: It is able to perform correct 3d clipping, perspective correct texture mapping, perspective correct color mapping, and renders sub pixel correct, sub texel correct primitives. In addition, it does bilinear texel filtering and supports more materials than the Software driver. 
+This renderer has been written entirely by Thomas Alten, thanks a lot for this huge contribution.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.Direct3D8">
+			<summary>Direct3D8 device, only available on Win32 platforms.
+
+Performs hardware accelerated rendering of 3D and 2D primitives.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.Direct3D9">
+			<summary>Direct3D 9 device, only available on Win32 platforms.
+
+Performs hardware accelerated rendering of 3D and 2D primitives.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.Null">
+			<summary>Null driver, useful for applications to run the engine without visualisation.
+
+The null device is able to load textures, but does not render and display any graphics.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.OpenGL">
+			<summary>OpenGL device, available on most platforms.
+
+Performs hardware accelerated rendering of 3D and 2D primitives.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.DriverType.Software">
+			<summary>The Irrlicht Engine Software renderer.
+
+Runs on all platforms, with every hardware. It should only be used for 2d graphics, but it can also perform some primitive 3d functions. These 3d drawing functions are quite fast, but very inaccurate, and don't even support clipping in 3D mode.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ExposedVideoData">
+			<summary>Holds data describing a driver and operating system specific data.
+
+This data can be retrived by VideoDriver.ExposedVideoData. Use this with caution. This only should be used to make it possible to extend the engine easily without modification of its source. Note: this class does not contain any valid data, if you are using the software or the null device.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.Fog">
+			<summary>Holds fog data.
+
+Object of this class returned by VideoDriver.Fog.</summary>
+		</member>
 	</members>
 </doc>
