@@ -2681,6 +2681,372 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="P:IrrlichtLime.Core.Vector3Di.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
+		<member name="T:IrrlichtLime.IO.AttributeExchangingObject">
+			<summary>An object which is able to serialize and deserialize its attributes into an attributes object.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.FileArchive">
+			<summary>The FileArchive manages archives and provides access to files inside them.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileArchive.CreateAndOpenFile(System.String)">
+			<summary>Opens a file based on its name.</summary>
+			<param name="filename">The file to open.</param>
+			<returns>Returns A pointer to the created file on success, or null on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileArchive.CreateAndOpenFile(System.Int32)">
+			<summary>Opens a file based on its position in the file list.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>Returns a pointer to the created file on success, or null on failure.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileArchive.FileList">
+			<summary>The complete directory tree for the archive, including all files and folders.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileArchive.Password">
+			<summary>An optionally used password string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileArchive.Type">
+			<summary>The archive type.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.FileArchiveType">
+			<summary>The different types of archives.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.Folder">
+			<summary>A virtual directory.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.GZIP">
+			<summary>A GZIP archive.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.NPK">
+			<summary>A Nebula Device archive.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.PAK">
+			<summary>An ID Software PAK archive.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.TAR">
+			<summary>A Tape ARchive.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.Unknown">
+			<summary>The type of this archive is unknown.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.WAD">
+			<summary>A WAD archive, Quake2, Halflife.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileArchiveType.ZIP">
+			<summary>A PKZIP archive.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.FileList">
+			<summary>Provides a list of files and folders.
+
+File lists usually contain a list of all files in a given folder, but can also contain a complete directory structure.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.AddFile(System.String,System.Int32,System.Int32,System.Boolean)">
+			<summary>Add as a file or folder to the list.</summary>
+			<param name="fullPath">The file name including path, from the root of the file list.</param>
+			<param name="offset">The file offset inside an archive.</param>
+			<param name="size">The size of the file in bytes.</param>
+			<param name="isDirectory">True if this is a directory rather than a file.</param>
+			<returns>Returns index of added file in this FileList.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.AddFile(System.String,System.Int32,System.Int32,System.Boolean,System.Int32)">
+			<summary>Add as a file or folder to the list.</summary>
+			<param name="fullPath">The file name including path, from the root of the file list.</param>
+			<param name="offset">The file offset inside an archive.</param>
+			<param name="size">The size of the file in bytes.</param>
+			<param name="isDirectory">True if this is a directory rather than a file.</param>
+			<param name="id">The ID of the file in the archive which owns it. Default: 0.</param>
+			<returns>Returns index of added file in this FileList.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileList.Count">
+			<summary>Amount of files and directories in the file list.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.FindFile(System.String)">
+			<summary>Searches for a file or folder in the list.</summary>
+			<param name="filename">The name of the file to search for.</param>
+			<returns>Returns the index of the file in this FileList, or -1 if no matching name name was found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.FindFile(System.String,System.Boolean)">
+			<summary>Searches for a file or folder in the list.</summary>
+			<param name="filename">The name of the file to search for.</param>
+			<param name="isDirectory">True if you are searching for a directory, false if you want a file. Default: false.</param>
+			<returns>Returns the index of the file in this FileList, or -1 if no matching name name was found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.GetFileID(System.Int32)">
+			<summary>Returns the ID of a file in the file list, based on an index.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>ID of the file.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.GetFileName(System.Int32)">
+			<summary>Gets the name of a file in the list, based on an index.
+
+The path is not included in this name. Use GetFullFileName() for this.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>File name of the file. Returns null, if an error occured.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.GetFileOffset(System.Int32)">
+			<summary>Returns the file offset of a file in the file list, based on an index.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>The offset of the file.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.GetFileSize(System.Int32)">
+			<summary>Returns the size of a file in the file list, based on an index.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>The size of the file in bytes.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.GetFullFileName(System.Int32)">
+			<summary>Gets the full name of a file in the list including the path, based on an index.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>Full file name of the file. Returns null if an error occured.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.IsDirectory(System.Int32)">
+			<summary>Checks if the file is a directory.</summary>
+			<param name="index">The zero based index of the file.</param>
+			<returns>True if the file is a directory, else false.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileList.Path">
+			<summary>The base path of the file list.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileList.Sort">
+			<summary>Sorts the file list. You should call this after adding any items to the file list.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.FileSystem">
+			<summary>Manages files and archives and provides access to them.
+
+This class manages where files are, so that modules which use the the IO do not need to know where every file is located. A file could be in a ZIP archive or as file on disk, using the FileSystem makes no difference to this.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="filename">Filename of the archive to add to the file system.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="filename">Filename of the archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="filename">Filename of the archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="filename">Filename of the archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<param name="archiveType">If no specific FileArchiveType is selected then the type of archive will depend on the extension of the file name. If you use a different extension then you can use this parameter to force a specific type of archive. Default: FileArchiveType.Unknown.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType,System.String)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="filename">Filename of the archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<param name="archiveType">If no specific FileArchiveType is selected then the type of archive will depend on the extension of the file name. If you use a different extension then you can use this parameter to force a specific type of archive. Default: FileArchiveType.Unknown.</param>
+			<param name="password">An optional password, which is used in case of encrypted archives. Default: emptry string (which means - no password).</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateEmptyFileList(System.String,System.Boolean,System.Boolean)">
+			<summary>Creates an empty filelist.</summary>
+			<param name="path">Virtual path to use.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path.</param>
+			<returns>Created FileList is returned. After the list has been used it has to be deleted using Drop() method.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateFileList">
+			<summary>Creates a list of files and directories in the current working directory and returns it.</summary>
+			<returns>Created FileList is returned. After the list has been used it has to be deleted using Drop() method.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateLimitReadFile(System.String,IrrlichtLime.IO.ReadFile,System.Int32,System.Int32)">
+			<summary>Creates a ReadFile object for accessing data inside a file.
+
+This is useful  for archives.</summary>
+			<param name="filename">The name given to this file.</param>
+			<param name="alreadyOpenedFile">Already opened file.</param>
+			<param name="areaPosition">Start of the file inside alreadyOpenedFile.</param>
+			<param name="areaSize">The length of the file to open.</param>
+			<returns>Created ReadFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateMemoryReadFile(System.String,System.Byte[])">
+			<summary>Creates a ReadFile object for accessing memory like a file.
+
+This allows you to use a memory where a ReadFile is requested.</summary>
+			<param name="filename">The name given to this file.</param>
+			<param name="content">Content of the file.</param>
+			<returns>Created ReadFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateMemoryWriteFile(System.String,System.Int32)">
+			<summary>Creates a WriteFile object for accessing memory like a file.
+
+This allows you to use a memory where a WriteFile is requested. You are responsible for specifing big enought length parameter.</summary>
+			<param name="filename">The name given to this file.</param>
+			<param name="length">Length of the file.</param>
+			<returns>Created WriteFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateReadFile(System.String)">
+			<summary>Opens a file for read access.</summary>
+			<param name="filename">Name of file to open.</param>
+			<returns>Created ReadFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateWriteFile(System.String)">
+			<summary>Opens a file for write access.</summary>
+			<param name="filename">Name of file to open.</param>
+			<returns>Created WriteFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateWriteFile(System.String,System.Boolean)">
+			<summary>Opens a file for write access.</summary>
+			<param name="filename">Name of file to open.</param>
+			<param name="append">If the file already exist, all write operations are appended to the file. Default: false.</param>
+			<returns>Created WriteFile object. The returned pointer should be dropped using Drop() method when no longer needed.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileSystem.FileArchiveCount">
+			<summary>The number of archives currently attached to the file system.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetFileAbsolutePath(System.String)">
+			<summary>Converts a relative path to an absolute (unique) path, resolving symbolic links if required.</summary>
+			<param name="filename">Possibly relative file or directory name to query.</param>
+			<returns>Absolute filename which points to the same file.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetFileArchive(System.Int32)">
+			<summary>Get the archive at a given index.</summary>
+			<param name="index">Index of the archive.</param>
+			<returns>Returns FileArchive object.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetFileBasename(System.String)">
+			<summary>Get the base part of a filename, i.e. the name without the directory part. If no directory is prefixed, the full name is returned.</summary>
+			<param name="filename">The file to get the basename from.</param>
+			<returns>Base part of a filename.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetFileBasename(System.String,System.Boolean)">
+			<summary>Get the base part of a filename, i.e. the name without the directory part. If no directory is prefixed, the full name is returned.</summary>
+			<param name="filename">The file to get the basename from.</param>
+			<param name="keepExtension">True if filename with extension is returned otherwise everything after the final '.' is removed as well. Default: true.</param>
+			<returns>Base part of a filename.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetFileDirectory(System.String)">
+			<summary>Get the directory a file is located in.</summary>
+			<param name="filename">The file to get the directory from.</param>
+			<returns>String containing the directory of the file.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.MoveFileArchive(System.Int32,System.Int32)">
+			<summary>Changes the search order of attached archives.</summary>
+			<param name="index">The index of the archive to change.</param>
+			<param name="relative">The relative change in position, archives with a lower index are searched first.</param>
+			<returns>True if move operation is made.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.RemoveFileArchive(System.String)">
+			<summary>Removes an archive from the file system.
+
+This will close the archive and free any file handles, but will not close resources which have already been loaded and are now cached, for example textures and meshes.</summary>
+			<param name="filename">The archive of the given name will be removed.</param>
+			<returns>True on success, false on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.RemoveFileArchive(System.Int32)">
+			<summary>Removes an archive from the file system.
+
+This will close the archive and free any file handles, but will not close resources which have already been loaded and are now cached, for example textures and meshes.</summary>
+			<param name="index">The index of the archive to remove.</param>
+			<returns>True on success, false on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.SetFileSystemType(IrrlichtLime.IO.FileSystemType)">
+			<summary>Set the active type of file system.</summary>
+			<param name="newType">New type of file system to set.</param>
+			<returns>Returns previous file system type.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.FileSystem.WorkingDirectory">
+			<summary>Current working directory.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.FileSystemType">
+			<summary>File system types, which can be used for browsing.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileSystemType.Native">
+			<summary>Native OS' file system.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.FileSystemType.Virtual">
+			<summary>Virtual file system.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.NamedPath">
+			<summary>Used in places where we identify objects by a filename, but don't actually work with the real filename.
+
+Irrlicht is internally not case-sensitive when it comes to names.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.NamedPath.InternalName">
+			<summary>The name which is used to identify the file.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.NamedPath.#ctor">
+			<summary>Empty constructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.NamedPath.#ctor(System.String)">
+			<summary>Constructor with given file path.</summary>
+			<param name="path">Path to a file (including file' name and extension).</param>
+		</member>
+		<member name="P:IrrlichtLime.IO.NamedPath.Path">
+			<summary>Path to the file.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.ReadFile">
+			<summary>Provides read acess to a file.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFile.FileName">
+			<summary>Name of the file.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFile.Position">
+			<summary>Current position in the file in bytes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFile.Read(System.Int32)">
+			<summary>Reads an amount of bytes from the file.</summary>
+			<param name="bytesToRead">Amount of bytes to read from the file.</param>
+			<returns>Array of bytes.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFile.Seek(System.Int32)">
+			<summary>Changes position in file.</summary>
+			<param name="position">Destination position in the file.</param>
+			<returns>True if successful, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFile.Seek(System.Int32,System.Boolean)">
+			<summary>Changes position in file.</summary>
+			<param name="position">Destination position in the file.</param>
+			<param name="relativeMovement">If set to true, the position in the file is changed relative to current position. Otherwise the position is changed from beginning of file. Default: false.</param>
+			<returns>True if successful, otherwise false.</returns>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFile.Size">
+			<summary>Size of the file in bytes.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.WriteFile">
+			<summary>Provides write acess to a file.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.WriteFile.FileName">
+			<summary>Name of the file.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.WriteFile.Position">
+			<summary>Current position in the file in bytes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.WriteFile.Seek(System.Int32)">
+			<summary>Changes position in file.</summary>
+			<param name="position">Destination position in the file.</param>
+			<returns>True if successful, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.WriteFile.Seek(System.Int32,System.Boolean)">
+			<summary>Changes position in file.</summary>
+			<param name="position">Destination position in the file.</param>
+			<param name="relativeMovement">If set to true, the position in the file is changed relative to current position. Otherwise the position is changed from beginning of file. Default: false.</param>
+			<returns>True if successful, otherwise false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.WriteFile.Write(System.Byte[])">
+			<summary>Writes an amount of bytes to the file.</summary>
+			<param name="buffer">Array of bytes to write.</param>
+			<returns>How much bytes actually were written.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">0.0f ... 1.0f</param>
 		</member>
