@@ -3358,14 +3358,390 @@ Performs hardware accelerated rendering of 3D and 2D primitives.</summary>
 Runs on all platforms, with every hardware. It should only be used for 2d graphics, but it can also perform some primitive 3d functions. These 3d drawing functions are quite fast, but very inaccurate, and don't even support clipping in 3D mode.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.ExposedVideoData">
-			<summary>Holds data describing a driver and operating system specific data.
+			<summary>Data describing a driver and operating system specific data.
 
 This data can be retrived by VideoDriver.ExposedVideoData. Use this with caution. This only should be used to make it possible to extend the engine easily without modification of its source. Note: this class does not contain any valid data, if you are using the software or the null device.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.Fog">
-			<summary>Holds fog data.
+			<summary>Fog data.
 
 Object of this class returned by VideoDriver.Fog.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.Color">
+			<summary>Color of the fog.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.Density">
+			<summary>Fog density, value between 0 and 1. Only used in exponential fog mode (not linear).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.End">
+			<summary>Specifies where fog ends. Only used in linear fog mode (not exponential).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor">
+			<summary>Creates new fog.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color,IrrlichtLime.Video.FogType)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+			<param name="type">Type of fog. Default: FogType.Linear.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color,IrrlichtLime.Video.FogType,System.Single,System.Single)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+			<param name="type">Type of fog. Default: FogType.Linear.</param>
+			<param name="start">Specifies where fog starts. Only used in linear fog mode (not exponential). Default: 50.0f.</param>
+			<param name="end">Specifies where fog ends. Only used in linear fog mode (not exponential). Default: 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color,IrrlichtLime.Video.FogType,System.Single,System.Single,System.Single)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+			<param name="type">Type of fog. Default: FogType.Linear.</param>
+			<param name="start">Specifies where fog starts. Only used in linear fog mode (not exponential). Default: 50.0f.</param>
+			<param name="end">Specifies where fog ends. Only used in linear fog mode (not exponential). Default: 100.0f.</param>
+			<param name="density">Fog density, value between 0 and 1. Only used in exponential fog mode (not linear). Default: 0.01f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color,IrrlichtLime.Video.FogType,System.Single,System.Single,System.Single,System.Boolean)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+			<param name="type">Type of fog. Default: FogType.Linear.</param>
+			<param name="start">Specifies where fog starts. Only used in linear fog mode (not exponential). Default: 50.0f.</param>
+			<param name="end">Specifies where fog ends. Only used in linear fog mode (not exponential). Default: 100.0f.</param>
+			<param name="density">Fog density, value between 0 and 1. Only used in exponential fog mode (not linear). Default: 0.01f.</param>
+			<param name="pixelFog">False for vertex fog, and true for per-pixel fog.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Fog.#ctor(IrrlichtLime.Video.Color,IrrlichtLime.Video.FogType,System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">
+			<summary>Creates new fog.</summary>
+			<param name="color">Color of the fog. Default: new Color(255, 255, 255, 0).</param>
+			<param name="type">Type of fog. Default: FogType.Linear.</param>
+			<param name="start">Specifies where fog starts. Only used in linear fog mode (not exponential). Default: 50.0f.</param>
+			<param name="end">Specifies where fog ends. Only used in linear fog mode (not exponential). Default: 100.0f.</param>
+			<param name="density">Fog density, value between 0 and 1. Only used in exponential fog mode (not linear). Default: 0.01f.</param>
+			<param name="pixelFog">False for vertex fog, and true for per-pixel fog.</param>
+			<param name="rangeFog">True to enable range-based vertex fog. The distance from the viewer is used to compute the fog, not the z-coordinate. This is better, but slower. This might not be available with all drivers and fog settings.</param>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.PixelFog">
+			<summary>False for vertex fog, and true for per-pixel fog.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.RangeFog">
+			<summary>True to enable range-based vertex fog. The distance from the viewer is used to compute the fog, not the z-coordinate. This is better, but slower. This might not be available with all drivers and fog settings.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.Start">
+			<summary>Specifies where fog starts. Only used in linear fog mode (not exponential).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.Fog.Type">
+			<summary>Type of fog.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.FogType">
+			<summary>Enumeration for the types of fog distribution.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.FogType.Exp">
+			<summary>Exponential fog.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.FogType.Exp2">
+			<summary>Exponential^2 fog.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.FogType.Linear">
+			<summary>Linear fog.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.GeometryShaderType">
+			<summary>Supported geometry shader types.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.GeometryShaderType.GS_4_0">
+			<summary>Version 4.0.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.GPUProgrammingServices">
+			<summary>Creation and using programs running on the GPU.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new high-level shading material renderer to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
+
+Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
+			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
+			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
+			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
+			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
+			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
+			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
+			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
+			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
+			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 	</members>
 </doc>
