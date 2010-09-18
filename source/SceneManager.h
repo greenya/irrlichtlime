@@ -198,6 +198,18 @@ public:
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent);
 	TerrainSceneNode^ AddTerrainSceneNode(String^ heightMapFileName);
 
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor, bool addAlsoIfHeightmapEmpty);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position, Vector3Df^ rotation);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id, Vector3Df^ position);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent, int id);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile, SceneNode^ parent);
+	TerrainSceneNode^ AddTerrainSceneNode(IO::ReadFile^ heightMapFile);
+
 	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position, int id);
 	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent, Vector3Df^ position);
 	TextSceneNode^ AddTextSceneNode(GUI::GUIFont^ font, String^ text, Video::Color^ color, SceneNode^ parent);
@@ -287,6 +299,7 @@ public:
 	String^ GetAnimatorTypeName(SceneNodeAnimatorType type);
 
 	AnimatedMesh^ GetMesh(String^ filename);
+	AnimatedMesh^ GetMesh(IO::ReadFile^ file);
 
 	SceneNode^ GetSceneNodeFromID(int id, SceneNode^ start);
 	SceneNode^ GetSceneNodeFromID(int id);
