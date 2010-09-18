@@ -873,6 +873,14 @@ Texture^ VideoDriver::GetTexture(String^ filename)
 	return Texture::Wrap(t);
 }
 
+Texture^ VideoDriver::GetTexture(IO::ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+
+	video::ITexture* t = m_VideoDriver->getTexture(file->m_ReadFile);
+	return Texture::Wrap(t);
+}
+
 Texture^ VideoDriver::GetTexture(int index)
 {
 	LIME_ASSERT(index >= 0 && index < TextureCount);
