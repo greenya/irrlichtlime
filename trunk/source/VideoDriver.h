@@ -142,6 +142,7 @@ public:
 	int GetOcclusionQueryResult(Scene::SceneNode^ node);
 
 	Texture^ GetTexture(String^ filename);
+	Texture^ GetTexture(IO::ReadFile^ file);
 	Texture^ GetTexture(int index);
 
 	bool GetTextureCreationFlag(TextureCreationFlag flag);
