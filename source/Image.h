@@ -17,6 +17,23 @@ public:
 	static int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 
+	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect);
+	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect);
+	void CopyTo(Image^ target, Vector2Di^ targetPos);
+	void CopyTo(Image^ target);
+
+	void CopyToScaling(Image^ target);
+	void CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format, int pitch);
+	void CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format);
+	void CopyToScaling(array<unsigned char>^ target, int width, int height);
+
+	void CopyToScalingBoxFilter(Image^ target, int bias, bool blend);
+	void CopyToScalingBoxFilter(Image^ target, int bias);
+	void CopyToScalingBoxFilter(Image^ target);
+
+	void CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color, Recti^ clipRect);
+	void CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color);
+
 	void Fill(Color^ color);
 	Color^ GetPixel(int x, int y);
 	void SetPixel(int x, int y, Color^ color, bool blend);

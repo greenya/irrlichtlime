@@ -34,6 +34,158 @@ Image::Image(video::IImage* ref)
 	m_Image = ref;
 }
 
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_Image->copyTo(
+		target->m_Image,
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect, m_NativeValue));
+}
+
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+
+	m_Image->copyTo(
+		target->m_Image,
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue);
+}
+
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+
+	m_Image->copyTo(
+		target->m_Image,
+		*targetPos->m_NativeValue);
+}
+
+void Image::CopyTo(Image^ target)
+{
+	LIME_ASSERT(target != nullptr);
+	m_Image->copyTo(target->m_Image);
+}
+
+void Image::CopyToScaling(Image^ target)
+{
+	LIME_ASSERT(target != nullptr);
+	m_Image->copyToScaling(target->m_Image);
+}
+
+void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format, int pitch)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(width > 0);
+	LIME_ASSERT(height > 0);
+	LIME_ASSERT(pitch >= 0);
+
+	unsigned char* a = new unsigned char[target->Length];
+	for (int i = 0; i < target->Length; i++)
+		a[i] = target[i];
+
+	m_Image->copyToScaling(
+		a,
+		width,
+		height,
+		(video::ECOLOR_FORMAT)format,
+		pitch);
+
+	delete a;
+}
+
+void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(width > 0);
+	LIME_ASSERT(height > 0);
+
+	unsigned char* a = new unsigned char[target->Length];
+	for (int i = 0; i < target->Length; i++)
+		a[i] = target[i];
+
+	m_Image->copyToScaling(
+		a,
+		width,
+		height,
+		(video::ECOLOR_FORMAT)format);
+
+	delete a;
+}
+
+void Image::CopyToScaling(array<unsigned char>^ target, int width, int height)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(width > 0);
+	LIME_ASSERT(height > 0);
+
+	unsigned char* a = new unsigned char[target->Length];
+	for (int i = 0; i < target->Length; i++)
+		a[i] = target[i];
+
+	m_Image->copyToScaling(
+		a,
+		width,
+		height);
+
+	delete a;
+}
+
+void Image::CopyToScalingBoxFilter(Image^ target, int bias, bool blend)
+{
+	LIME_ASSERT(target != nullptr);
+	m_Image->copyToScalingBoxFilter(target->m_Image, bias, blend);
+}
+
+void Image::CopyToScalingBoxFilter(Image^ target, int bias)
+{
+	LIME_ASSERT(target != nullptr);
+	m_Image->copyToScalingBoxFilter(target->m_Image, bias);
+}
+
+void Image::CopyToScalingBoxFilter(Image^ target)
+{
+	LIME_ASSERT(target != nullptr);
+	m_Image->copyToScalingBoxFilter(target->m_Image);
+}
+
+void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color, Recti^ clipRect)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_Image->copyToWithAlpha(
+		target->m_Image,
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		*color->m_NativeValue,
+		LIME_SAFEREF(clipRect, m_NativeValue));
+}
+
+void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color)
+{
+	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
+
+	m_Image->copyToWithAlpha(
+		target->m_Image,
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		*color->m_NativeValue);
+}
+
 void Image::Fill(Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
