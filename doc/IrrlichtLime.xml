@@ -468,6 +468,7 @@ All other devices are not yet supported here.</summary>
 			<summary>Called if an event happened.
 
 Please take care that you should only return 'true' when you want to _prevent_ Irrlicht from processing the event any further. So 'true' does mean that an event is completely done. Therefore your return value for all unprocessed events should be 'false'.</summary>
+			<param name="evnt">Event details.</param>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.FileSystem">
 			<summary>Provides access to the virtual file system.</summary>
@@ -497,7 +498,11 @@ Even if true is returned the driver may not be available for a configuration req
 			<summary>Minimizes the window if possible.</summary>
 		</member>
 		<member name="E:IrrlichtLime.IrrlichtDevice.OnEvent">
-			<summary>Called if an event happened. Raises for each event from the engine.</summary>
+			<summary>Called if an event happened.
+
+Raises for each event from the engine.
+
+If you handle this event, you should return true if you have handled the event, and false -- if not (in this case Irrlicht Engine will process it).</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.OSOperator">
 			<summary>Provides access to the operation system functionality.
@@ -3742,6 +3747,337 @@ Currently only HLSL/D3D9 and GLSL/OpenGL are supported.</summary>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
 			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String)">
+			<summary>Adds a new ASM shader material renderer to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String)">
+			<summary>Adds a new ASM shader material renderer to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
+			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new ASM shader material renderer to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
+			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new ASM shader material renderer to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
+			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String)">
+			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String)">
+			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType)">
+			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
+			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
+
+Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
+			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
+			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
+			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
+			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+		</member>
+		<member name="E:IrrlichtLime.Video.GPUProgrammingServices.OnSetConstants">
+			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Video.GPUProgrammingServices.OnSetMaterial">
+			<summary>Event raises after OnSetConstants.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.GPUProgrammingServices.SetConstantsHandler">
+			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
+			<param name="services">Provides methods to set the constants for the shader.</param>
+			<param name="userData">User data which you have specified when creating the shader.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.GPUProgrammingServices.SetMaterialHandler">
+			<summary>Event raises after OnSetConstants.</summary>
+			<param name="material">Shader material.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.Image">
+			<summary>Software image data.
+
+Image loaders create these images from files. VideoDriver convert these images into their (hardware) textures.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.AlphaMask">
+			<summary>Mask for alpha value of a pixel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.BitsPerPixel">
+			<summary>Bits per one pixel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.BlueMask">
+			<summary>Mask for blue value of a pixel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.BytesPerPixel">
+			<summary>Bytes per one pixel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.ColorFormat">
+			<summary>Color format of the image.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image)">
+			<summary>Copies this image to the target.</summary>
+			<param name="target">Target image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di)">
+			<summary>Copies this image to the target.</summary>
+			<param name="target">Target image.</param>
+			<param name="targetPos">Target position. Default: (0, 0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti)">
+			<summary>Copies this image to the target.</summary>
+			<param name="target">Target image.</param>
+			<param name="targetPos">Target position.</param>
+			<param name="sourceRect">Source rectangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Copies this image to the target.</summary>
+			<param name="target">Target image.</param>
+			<param name="targetPos">Target position.</param>
+			<param name="sourceRect">Source rectangle.</param>
+			<param name="clipRect">Clipping rectangle. Use null if you do not want to specify it. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(IrrlichtLime.Video.Image)">
+			<summary>Copies this image to the target, scaling the image to fit.</summary>
+			<param name="target">Target image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32)">
+			<summary>Copies this image to the target, scaling the image to fit.</summary>
+			<param name="target">Target image.</param>
+			<param name="width">Target width.</param>
+			<param name="height">Target height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat)">
+			<summary>Copies this image to the target, scaling the image to fit.</summary>
+			<param name="target">Target image.</param>
+			<param name="width">Target width.</param>
+			<param name="height">Target height.</param>
+			<param name="format">Target color format. Default: ColorFormat.A8R8G8B8.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat,System.Int32)">
+			<summary>Copies this image to the target, scaling the image to fit.</summary>
+			<param name="target">Target image.</param>
+			<param name="width">Target width.</param>
+			<param name="height">Target height.</param>
+			<param name="format">Target color format. Default: ColorFormat.A8R8G8B8.</param>
+			<param name="pitch">Targe pitch size. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScalingBoxFilter(IrrlichtLime.Video.Image)">
+			<summary>Copies this image to the target, scaling it to fit, appyling a box filter.</summary>
+			<param name="target">Target image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScalingBoxFilter(IrrlichtLime.Video.Image,System.Int32)">
+			<summary>Copies this image to the target, scaling it to fit, appyling a box filter.</summary>
+			<param name="target">Target image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScalingBoxFilter(IrrlichtLime.Video.Image,System.Int32,System.Boolean)">
+			<summary>Copies this image to the target, scaling it to fit, appyling a box filter.</summary>
+			<param name="target">Target image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToWithAlpha(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Copies this image to the target, using the alpha mask, and clipping rectangle and a color to add with.</summary>
+			<param name="target">Target image.</param>
+			<param name="targetPos">Target position.</param>
+			<param name="sourceRect">Source rectangle.</param>
+			<param name="color">Color to add with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToWithAlpha(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+			<summary>Copies this image to the target, using the alpha mask, and clipping rectangle and a color to add with.</summary>
+			<param name="target">Target image.</param>
+			<param name="targetPos">Target position.</param>
+			<param name="sourceRect">Source rectangle.</param>
+			<param name="color">Color to add with.</param>
+			<param name="clipRect">Clipping rectangle. Use null if you do not want to specify it. Default: null.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.Dimension">
+			<summary>Width and height of the image.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.Fill(IrrlichtLime.Video.Color)">
+			<summary>Fills the image data with specified color.</summary>
+			<param name="color">Color to fill with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.GetBitsPerPixelFromFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Gets the amount of bits per one pixel for the given color format.</summary>
+			<param name="format">Color format.</param>
+			<returns>Amount of bits.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.GetPixel(System.Int32,System.Int32)">
+			<summary>Gets color of the pixel in specified coordinates.</summary>
+			<param name="x">X coord.</param>
+			<param name="y">Y coord.</param>
+			<returns>Color of the pixel.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.GreenMask">
+			<summary>Mask for green value of a pixel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.ImageDataSizeInBytes">
+			<summary>Image data size in bytes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.ImageDataSizeInPixels">
+			<summary>Image data size in pixels.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.IsRenderTargetOnlyFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Tests if the color format is only viable for RTT (render target textures).</summary>
+			<param name="format">Color format to test.</param>
+			<returns>True if color format is only for RTT.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.Pitch">
+			<summary>Pitch size of the image.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.RedMask">
+			<summary>Mask for red value of a pixel.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.SetPixel(System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Sets pixel's color at specified coordinates.</summary>
+			<param name="x">X coord.</param>
+			<param name="y">Y coord.</param>
+			<param name="color">Color to set.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.SetPixel(System.Int32,System.Int32,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Sets pixel's color at specified coordinates.</summary>
+			<param name="x">X coord.</param>
+			<param name="y">Y coord.</param>
+			<param name="color">Color to set.</param>
+			<param name="blend">Shoud color be blended (true) or replaced (false) ? Default: false.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.ImageLoader">
+			<summary>Class which is able to create a image from a file.
+
+If you want the Irrlicht Engine be able to load textures of currently unsupported file formats (e.g .gif), then implement this and add your new image loader with VideoDriver.AddExternalImageLoader() to the engine.
+
+NOTE: currently Irrlicht Lime does not support extending engine with your own image loaders.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ImageLoader.IsLoadableFileExtension(System.String)">
+			<summary>Checks if the file might be loaded by this image loader.
+
+Check is based on the file extension (e.g. ".tga").</summary>
+			<param name="filename">Name of file to check.</param>
+			<returns>True if file seems to be loadable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.ImageLoader.IsLoadableFileFormat(IrrlichtLime.IO.ReadFile)">
+			<summary>Checks if the file might be loaded by this image loader.
+
+Check might look into the file.</summary>
+			<param name="file">File to check.</param>
+			<returns>True if file seems to be loadable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.ImageLoader.LoadImage(IrrlichtLime.IO.ReadFile)">
+			<summary>Loads an image from the file.</summary>
+			<param name="file">File to load from.</param>
+			<returns>Newly created image or null if error occured.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Video.IndexType">
+			<summary>Enumeration for available index types.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.IndexType._16Bit">
+			<summary>16 bit indexes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.IndexType._32Bit">
+			<summary>32 bit indexes.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.Light">
+			<summary>Describes a dynamic point light.
+
+Irrlicht Engine supports point lights, spot lights, and directional lights.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.AmbientColor">
+			<summary>Ambient color emitted by the light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Attenuation">
+			<summary>Attenuation factors (constant, linear, quadratic).
+
+Changes the light strength fading over distance. Can also be altered by setting the radius, Attenuation will change to (0,1.f/radius,0). Can be overridden after radius was set.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.CastShadows">
+			<summary>Indicate that the light casts shadows.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.DiffuseColor">
+			<summary>Diffuse color emitted by the light.
+
+This is the primary color you want to set.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Direction">
+			<summary>Direction of the light.
+
+If Type == LightType.Point, it is ignored.
+Changed via light scene node's rotation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Falloff">
+			<summary>The light strength's decrease between Outer and Inner cone.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.InnerCone">
+			<summary>The angle of the spot's inner cone. Ignored for other types of light.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Light.#ctor">
+			<summary>Constructs default light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.OuterCone">
+			<summary>The angle of the spot's outer cone. Ignored for other types of light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Position">
+			<summary>Position of the light.
+
+If Type == LightType.Directional, it is ignored.
+Changed via light scene node's position.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Radius">
+			<summary>Radius of light. Everything within this radius will be lighted.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.SpecularColor">
+			<summary>Specular color emitted by the light.
+
+For details how to use specular highlights, see Material.Shininess.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Light.Type">
+			<summary>Type of the light.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.LightType">
+			<summary>Enumeration for different types of lights.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.LightType.Directional">
+			<summary>Directional light, coming from a direction from an infinite distance.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.LightType.Point">
+			<summary>Point light, it has a position in space and radiates light in all directions.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.LightType.Spot">
+			<summary>Spot light, it has a position in space, a direction, and a limited cone of influence.</summary>
 		</member>
 	</members>
 </doc>
