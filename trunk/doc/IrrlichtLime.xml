@@ -4079,5 +4079,283 @@ For details how to use specular highlights, see Material.Shininess.</summary>
 		<member name="F:IrrlichtLime.Video.LightType.Spot">
 			<summary>Spot light, it has a position in space, a direction, and a limited cone of influence.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.Material">
+			<summary>Holds parameters for a material renderer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.AmbientColor">
+			<summary>How much ambient light (a global light) is reflected by this material.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.AntiAliasing">
+			<summary>Antialiasing mode.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.BackfaceCulling">
+			<summary>Is backface culling enabled? Default: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.ColorMask">
+			<summary>Defines the enabled color planes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.ColorMaterial">
+			<summary>Defines the interpretation of vertex color in the lighting equation. When lighting is enabled, vertex color can be used instead of the material values for light modulation. This allows to easily change e.g. the diffuse light behavior of each face. Default: ColorMaterial.Diffuse.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.DiffuseColor">
+			<summary>How much diffuse light coming from a light source is reflected by this material.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.EmissiveColor">
+			<summary>Light emitted by this material. Default is to emit no light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Fog">
+			<summary>Is fog enabled? Default: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.FrontfaceCulling">
+			<summary>Is frontface culling enabled? Default: false.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.GetFlag(IrrlichtLime.Video.MaterialFlag)">
+			<summary>Gets the value of material flag.</summary>
+			<param name="flag">The flag to query.</param>
+			<returns>The current value of the flag.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.GetTexture(System.Int32)">
+			<summary>Gets the texture from specified texture level.</summary>
+			<param name="index">The desired texture level. Must be less than Material.MaxTextures.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.GetTextureMatrix(System.Int32)">
+			<summary>Gets the texture transformation matrix.</summary>
+			<param name="index">The desired texture level. Must be less than Material.MaxTextures.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.GouraudShading">
+			<summary>Flat or Gouraud shading? Default: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Layer">
+			<summary>Material layers.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Lighting">
+			<summary>Will this material be lighted? Default: true.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.#ctor">
+			<summary>Default constructor. Creates a solid, lit material with white colors.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.#ctor(IrrlichtLime.Video.Material)">
+			<summary>Copy constructor.</summary>
+			<param name="other">Material to copy from.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.MaterialTypeParam">
+			<summary>Free parameter, dependent on the material type.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.MaterialTypeParam2">
+			<summary>Second free parameter, dependent on the material type.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.MaxTextures">
+			<summary>Maximum number of textures a Material can have.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Mipmaps">
+			<summary>Shall mipmaps be used if available? Default: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.NormalizeNormals">
+			<summary>Should normals be normalized? Always use this if the mesh lit and scaled. Default: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.PointCloud">
+			<summary>Draw as point cloud or filled triangles? Default: false.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.SetFlag(IrrlichtLime.Video.MaterialFlag,System.Boolean)">
+			<summary>Sets the value of material flag.</summary>
+			<param name="flag">The flag to set.</param>
+			<param name="value">The new value to set.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.SetTexture(System.Int32,IrrlichtLime.Video.Texture)">
+			<summary>Sets the texture of specified texture level.</summary>
+			<param name="index">The desired texture level. Must be less than Material.MaxTextures.</param>
+			<param name="tex">Texture to set.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.SetTextureMatrix(System.Int32,IrrlichtLime.Core.Matrix)">
+			<summary>Sets the texture transformation matrix.</summary>
+			<param name="index">The desired texture level. Must be less than Material.MaxTextures.</param>
+			<param name="mat">Texture matrix for texture level.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Shininess">
+			<summary>Value affecting the size of specular highlights.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.SpecularColor">
+			<summary>How much specular light (highlights from a light) is reflected.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Thickness">
+			<summary>Thickness of non-3dimensional elements such as lines and points.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Transparent">
+			<summary>Is this material transparent.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Type">
+			<summary>Type of the material. Specifies how everything is blended together.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Wireframe">
+			<summary>Draw as wireframe or filled triangles? Default: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.ZBuffer">
+			<summary>Is the ZBuffer enabled? Default: ZBufferCompFunc.LessEqual.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.ZWrite">
+			<summary>Is the z-buffer writeable or is it read-only. Default: true.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.MaterialFlag">
+			<summary>Material flags.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.AnisotropicFilter">
+			<summary>Is anisotropic filtering? Default: false.
+
+In Irrlicht you can use anisotropic texture filtering in conjunction with bilinear or trilinear texture filtering to improve rendering results. Primitives will look less blurry with this flag switched on.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.AntiAliasing">
+			<summary>AntiAliasing mode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.BackFaceCulling">
+			<summary>Is backface culling enabled? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.BilinearFilter">
+			<summary>Is bilinear filtering enabled? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.ColorMask">
+			<summary>ColorMask bits, for enabling the color planes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.ColorMaterial">
+			<summary>ColorMaterial enum for vertex color interpretation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.Fog">
+			<summary>Is fog enabled? Default: false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.FrontFaceCulling">
+			<summary>Is frontface culling enabled? Default: false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.GouraudShading">
+			<summary>Flat or Gouraud shading? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.Lighting">
+			<summary>Will this material be lighted? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.Mipmaps">
+			<summary>Enable/disable mipmaps usage.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.NormalizeNormals">
+			<summary>Normalizes normals. Default: false.
+
+You can enable this if you need to scale a dynamic lighted model. Usually, its normals will get scaled too then and it will get darker. If you enable the this flag, the normals will be normalized again, and the model will look as bright as it should.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.PointCloud">
+			<summary>Draw as point cloud or filled triangles? Default: false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.TextureWrap">
+			<summary>Access to all layers texture wrap settings. Overwrites separate layer settings.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.TrilinearFilter">
+			<summary>Is trilinear filtering enabled? Default: false.
+
+If the trilinear filter flag is enabled, the bilinear filtering flag is ignored.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.Wireframe">
+			<summary>Draw as wireframe or filled triangles? Default: false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.ZBuffer">
+			<summary>Is the ZBuffer enabled? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.ZWrite">
+			<summary>May be written to the zbuffer or is it readonly. Default: true.
+
+This flag is ignored, if the material type is a transparent type.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.MaterialLayer">
+			<summary>Holds material parameters which exist per texture layer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.AnisotropicFilter">
+			<summary>Is anisotropic filtering enabled? Default: 0 (disabled).
+
+In Irrlicht you can use anisotropic texture filtering in conjunction with bilinear or trilinear texture filtering to improve rendering results. Primitives will look less blurry with this flag switched on. The number gives the maximal anisotropy degree, and is often in the range 2-16. Value 1 is equivalent to 0, but should be avoided.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.BilinearFilter">
+			<summary>Is bilinear filtering enabled? Default: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.LODBias">
+			<summary>Bias for the mipmap choosing decision.
+
+This value can make the textures more or less blurry than with the default value of 0. The value (divided by 8.0f) is added to the mipmap level chosen initially, and thus takes a smaller mipmap for a region if the value is positive.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialLayer.#ctor">
+			<summary>Constructs default material layer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.Texture">
+			<summary>The texture.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.TextureMatrix">
+			<summary>The texture transformation matrix.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.TextureWrapU">
+			<summary>Texture Clamp mode by U axis.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.TextureWrapV">
+			<summary>Texture Clamp mode by V axis.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialLayer.TrilinearFilter">
+			<summary>Is trilinear filtering enabled? Default: false.
+
+If this flag is enabled, the bilinear filtering flag is ignored.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.MaterialRenderer">
+			<summary>Material renderer info.
+
+Can be used to extend the engine with new materials. Refer to VideoDriver.AddMaterialRenderer() and GPUProgrammingServices.Add*() for more information on how to extend the engine with new materials.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialRenderer.Capability">
+			<summary>The render capability of the material.
+
+Because some more complex materials are implemented in multiple ways and need special hardware capabilities, it is possible to query how the current material renderer is performing on the current hardware.
+
+0 if everything is running fine. Any other value is material renderer specific and means for example that the renderer switched back to a fall back material because it cannot use the latest shaders. More specific examples: Fixed function pipeline materials should return 0 in most cases, parallax mapped material will only return 0 when at least pixel shader 1.4 is available on that machine.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialRenderer.Transparent">
+			<summary>True is the material is transparent.
+
+The scene managment needs to know this for being able to sort the materials by opaque and transparent.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.MaterialRendererServices">
+			<summary>Provides some methods for changing advanced, internal states of a VideoDriver.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetBasicRenderStates(IrrlichtLime.Video.Material,IrrlichtLime.Video.Material,System.Boolean)">
+			<summary>Can be called by a MaterialRenderer to make its work easier.
+
+Sets all basic render states if needed. Basic render states are diffuse, ambient, specular, and emissive color, specular power, bilinear and trilinear filtering, wireframe mode, grouraudshading, lighting, zbuffer, zwriteenable, backfaceculling and fog enabling.</summary>
+			<param name="newMaterial">The new material to be used.</param>
+			<param name="lastMaterial">The material used until now.</param>
+			<param name="resetAllRenderStates">Set to true if all renderstates should be set, regardless of their current state.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderRegisters(System.Int32,System.Single[])">
+			<summary>Sets a pixel shader register (s).
+
+Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
+			<param name="startRegisterIndex">First register to be set.</param>
+			<param name="values">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderVariable(System.String,System.Single[])">
+			<summary>Sets a variable for the pixel shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="values">Array of floats (the value of the variable).</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderRegisters(System.Int32,System.Single[])">
+			<summary>Sets a vertex shader register(s).
+
+Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
+			<param name="startRegisterIndex">First register to be set.</param>
+			<param name="values">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderVariable(System.String,System.Single[])">
+			<summary>Sets a variable for the vertex shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="values">Array of floats (the value of the variable).</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.MaterialRendererServices.VideoDriver">
+			<summary>Pointer to the VideoDriver.</summary>
+		</member>
 	</members>
 </doc>
