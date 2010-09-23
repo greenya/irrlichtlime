@@ -188,7 +188,6 @@ int TexturePainter::MipMapLevel::get()
 
 int TexturePainter::MipMapLevelCount::get()
 {
-	LIME_ASSERT(Locked);
 	return m_mipmapLevelCount;
 }
 
