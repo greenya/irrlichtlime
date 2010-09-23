@@ -3334,7 +3334,8 @@ Without lighting being enabled the vertex color is the only value defining the f
 		<member name="F:IrrlichtLime.Video.DriverType.BurningsVideo">
 			<summary>The Burning's Software Renderer, an alternative software renderer.
 
-Basically it can be described as the Irrlicht Software renderer on steroids. It rasterizes 3D geometry perfectly: It is able to perform correct 3d clipping, perspective correct texture mapping, perspective correct color mapping, and renders sub pixel correct, sub texel correct primitives. In addition, it does bilinear texel filtering and supports more materials than the Software driver. 
+Basically it can be described as the Irrlicht Software renderer on steroids. It rasterizes 3D geometry perfectly: It is able to perform correct 3d clipping, perspective correct texture mapping, perspective correct color mapping, and renders sub pixel correct, sub texel correct primitives. In addition, it does bilinear texel filtering and supports more materials than the Software driver.
+
 This renderer has been written entirely by Thomas Alten, thanks a lot for this huge contribution.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.DriverType.Direct3D8">
@@ -3452,7 +3453,7 @@ Object of this class returned by VideoDriver.Fog.</summary>
 			<summary>Linear fog.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.GeometryShaderType">
-			<summary>Supported geometry shader types.</summary>
+			<summary>Enumeration for geometry shader versions.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.GeometryShaderType.GS_4_0">
 			<summary>Version 4.0.</summary>
@@ -4356,6 +4357,545 @@ This can be used if you used a high level shader language like GLSL or HLSL to c
 		</member>
 		<member name="P:IrrlichtLime.Video.MaterialRendererServices.VideoDriver">
 			<summary>Pointer to the VideoDriver.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.MaterialType">
+			<summary>Abstracted and easy to use fixed function/programmable pipeline material modes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.DetailMap">
+			<summary>Detail mapped material.
+
+The first texture is diffuse color map, the second is added to this and usually displayed with a bigger scale value so that it adds more detail. The detail map is added to the diffuse map using ADD_SIGNED, so that it is possible to add and substract color from the diffuse map. For example a value of (127,127,127) will not change the appearance of the diffuse map at all. Often used for terrain rendering.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMap">
+			<summary>Material type with standard lightmap technique.
+
+There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Dynamic light is ignored.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapAdd">
+			<summary>Material type with lightmap technique like MaterialType.LightMap.
+
+But lightmap and diffuse texture are added instead of modulated.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapLighting">
+			<summary>Like MaterialType.LightMap, but also supports dynamic lighting.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapLightingM2">
+			<summary>Like MaterialType.LightMapM2, but also supports dynamic lighting.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapLightingM4">
+			<summary>Like MaterialType.LightMapM4, but also supports dynamic lighting.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapM2">
+			<summary>Material type with standard lightmap technique.
+
+There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Dynamic light is ignored. The texture colors are effectively multiplied by 2 for brightening. Like known in DirectX as D3DTOP_MODULATE2X.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.LightMapM4">
+			<summary>Material type with standard lightmap technique.
+
+There should be 2 textures: The first texture layer is a diffuse map, the second is a light map. Dynamic light is ignored. The texture colors are effectively multiplied by 4 for brightening. Like known in DirectX as D3DTOP_MODULATE4X.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.NormalMapSolid">
+			<summary>A solid normal map renderer.
+
+First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type Vertex3DTangents (VertexType.Tangents). You can convert any mesh into this format using MeshManipulator.CreateMeshWithTangents(). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back to a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.NormalMapTransparentAddColor">
+			<summary>A transparent normal map renderer.
+
+First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type Vertex3DTangents (VertexType.Tangents). You can convert any mesh into this format using MeshManipulator.CreateMeshWithTangents(). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back to a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.NormalMapTransparentVertexAlpha">
+			<summary>A transparent (based on the vertex alpha value) normal map renderer.
+
+First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type Vertex3DTangents (VertexType.Tangents). You can convert any mesh into this format using MeshManipulator.CreateMeshWithTangents(). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back to a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.OneTextureBlend">
+			<summary>BlendFunc = source * sourceFactor + dest * destFactor (E_BLEND_FUNC).
+
+Using only first texture. Generic blending method.
+
+&lt;&lt;&lt; incompleted !!! what is E_BLEND_FUNC ??? &gt;&gt;&gt;</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.ParallaxMapSolid">
+			<summary>Just like MaterialType.NormalMapSolid, but uses parallax mapping.
+
+Looks a lot more realistic. This only works when the hardware supports at least vertex shader 1.1 and pixel shader 1.4. First texture is the color map, the second should be the normal map. The normal map texture should contain the height value in the alpha component. The VideoDriver.MakeNormalMapTexture() method writes this value automatically when creating normal maps from a heightmap when using a 32 bit texture. The height scale of the material (affecting the bumpiness) is being controlled by the Material.MaterialTypeParam member. If set to zero, the default value (0.02f) will be applied. This value depends on with which scale the texture is mapped on the material. Too high or low values of Material.MaterialTypeParam can result in strange artifacts.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.ParallaxMapTransparentAddColor">
+			<summary>A material like MaterialType.ParallaxMapSolid, but transparent.
+
+Using MaterialType.TransparentAddColor as base material.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.ParallaxMapTransparentVertexAlpha">
+			<summary>A material like MaterialType.ParallaxMapSolid, but transparent.
+
+Using MaterialType.TransparentVertexAlpha as base material.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.Reflection2Layer">
+			<summary>A reflecting material with an optional non reflecting texture layer.
+
+The reflection map should be set as first texture.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.Solid">
+			<summary>Standard solid material.
+
+Only first texture is used, which is supposed to be the diffuse material.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.Solid2Layer">
+			<summary>Solid material with 2 texture layers.
+
+The second is blended onto the first using the alpha value of the vertex colors. This material is currently not implemented in OpenGL.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.SphereMap">
+			<summary>Look like a reflection of the environment around it.
+
+To make this possible, a texture called 'sphere map' is used, which must be set as the first texture.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.TransparentAddColor">
+			<summary>A transparent material.
+
+Only the first texture is used. The new color is calculated by simply adding the source color and the dest color. This means if for example a billboard using a texture with black background and a red circle on it is drawn with this material, the result is that only the red circle will be drawn a little bit transparent, and everything which was black is 100% transparent and not visible. This material type is useful for particle effects.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.TransparentAlphaChannel">
+			<summary>Makes the material transparent based on the texture alpha channel.
+
+The final color is blended together from the destination color and the texture color, using the alpha channel value as blend factor. Only first texture is used. If you are using this material with small textures, it is a good idea to load the texture in 32 bit mode (VideoDriver.SetTextureCreationFlag()). Also, an alpha ref is used, which can be manipulated using Material.MaterialTypeParam. This value controls how sharp the edges become when going from a transparent to a solid spot on the texture.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.TransparentAlphaChannelRef">
+			<summary>Makes the material transparent based on the texture alpha channel.
+
+If the alpha channel value is greater than 127, a pixel is written to the target, otherwise not. This material does not use alpha blending and is a lot faster than MaterialType.TransparentAlphaChannel. It is ideal for drawing stuff like leafes of plants, because the borders are not blurry but sharp. Only first texture is used. If you are using this material with small textures and 3d object, it is a good idea to load the texture in 32 bit mode (VideoDriver.SetTextureCreationFlag()).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.TransparentReflection2Layer">
+			<summary>A transparent reflecting material with an optional additional non reflecting texture layer.
+
+The reflection map should be set as first texture. The transparency depends on the alpha value in the vertex colors. A texture which will not reflect can be set as second texture. Please note that this material type is currently not completely implemented in OpenGL.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialType.TransparentVertexAlpha">
+			<summary>Makes the material transparent based on the vertex alpha value.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.PixelShaderType">
+			<summary>Enumeration for pixel shader versions.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_1_1">
+			<summary>Version 1.1.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_1_2">
+			<summary>Version 1.2.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_1_3">
+			<summary>Version 1.3.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_1_4">
+			<summary>Version 1.4.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_2_0">
+			<summary>Version 2.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_2_a">
+			<summary>Version 2.a.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_2_b">
+			<summary>Version 2.b.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_3_0">
+			<summary>Version 3.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_4_0">
+			<summary>Version 4.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_4_1">
+			<summary>Version 4.1.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_5_0">
+			<summary>Version 5.0.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.RenderTarget">
+			<summary>Special render targets, which usually map to dedicated hardware.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer0">
+			<summary>Auxiliary buffer 0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer1">
+			<summary>Auxiliary buffer 1.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer2">
+			<summary>Auxiliary buffer 2.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer3">
+			<summary>Auxiliary buffer 3.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer4">
+			<summary>Auxiliary buffer 4.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.FrameBuffer">
+			<summary>Render target is the main color frame buffer.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.MultiRenderTexture">
+			<summary>Multi-Render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.RenderTexture">
+			<summary>Render target is a render texture.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.StereoBothBuffers">
+			<summary>Render to both stereo buffers at once.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.StereoLeftBuffer">
+			<summary>Render target is the main color frame buffer.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.RenderTarget.StereoRightBuffer">
+			<summary>Render target is the right color buffer (left is the main buffer).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.Texture">
+			<summary>Video driver dependent texture.
+
+Texture can be created using VideoDriver.AddTexture() or VideoDriver.GetTexture(). After that, the texture may only be used by this VideoDriver. As you can imagine, textures of the DirectX and the OpenGL device will, e.g., not be compatible. An exception is the Software device and the NULL device, their textures are compatible. If you try to use a texture created by one device with an other device, the device will refuse to do that and write a warning or an error message to the log.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.AlphaChannel">
+			<summary>Texture has an alpha channel.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.ColorFormat">
+			<summary>Color format of the texture.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.DriverType">
+			<summary>Gets driver type of the texture.
+
+This is the driver, which created the texture. This method is used internally by the video devices, to check, if they may use a texture because textures may be incompatible between different devices.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Texture.GetTexturePainter">
+			<summary>Gets texture painter for this texture.
+
+Note: you can use returned TexturePainter pointer as long as you sure that texture not dropped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.MipMaps">
+			<summary>Texture has mip map levels.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.Name">
+			<summary>Name of the texture (in most cases this is the filename).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.OriginalSize">
+			<summary>Original size of the texture.
+
+The texture is usually scaled, if it was created with an unoptimal size. For example if the size was not a power of two. This method returns the size of the texture it had before it was scaled. Can be useful when drawing 2d images on the screen, which should have the exact size of the original texture. Use Texture.Size if you want to know the real size it has now stored in the system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.Pitch">
+			<summary>Pitch of the texture (in bytes).
+
+The pitch is the amount of bytes used for a row of pixels in a texture.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Texture.RegenerateMipMapLevels">
+			<summary>Regenerates the mip map levels of the texture.
+
+Required in most cases after modifying the texture using the object returned by GetTexturePainter(). Regeneration of mip map levels done in next way: the main level (most detailed level: level 0) is left untoched, all other levels will get automatic regeneration. This means that if you use TexturePainter and draw on different mip map levels, propbably you should not call this method, since only level 0 will contain your unique changes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.RenderTarget">
+			<summary>Texture is a render target.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Texture.Size">
+			<summary>Size of the texture.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.TextureClamp">
+			<summary>Texture coord clamp mode outside [0.0, 1.0].</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.Clamp">
+			<summary>Texture is clamped to the last pixel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.ClampToBorder">
+			<summary>Texture is clamped to the border pixel (if exists).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.ClampToEdge">
+			<summary>Texture is clamped to the edge pixel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.Mirror">
+			<summary>Texture is alternately mirrored (0...1...0...1..0...).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.MirrorClamp">
+			<summary>Texture is mirrored once and then clamped (0...1...0).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.MirrorClampToBorder">
+			<summary>Texture is mirrored once and then clamped to border.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.MirrorClampToEdge">
+			<summary>Texture is mirrored once and then clamped to edge.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureClamp.Repeat">
+			<summary>Texture repeats.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.TextureCreationFlag">
+			<summary>Enumeration of flags telling the video driver in which format textures should be created.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.AllowNonPower2">
+			<summary>Allow the driver to use non power of 2 textures (non-POT).
+
+Note: BurningsVideo can handle non-POT in 2D (GUI), but not in 3D.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.Always16Bit">
+			<summary>Forces the driver to create 16 bit textures always, independent of which format the file on disk has. When choosing this you may loose some color detail, but gain much speed and less memory usage.
+
+When using this flag, it does not make sense to use the flags Always32Bit, OptimizedForQuality or OptimizedForSpeed at the same time.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.Always32Bit">
+			<summary>Forces the driver to create 32 bit textures always, independent of which format the file on disk has. Please note that some drivers (like the software device) will ignore this, because they are only able to create and use 16 bit textures.
+
+When using this flag, it does not make sense to use the flags Always16Bit, OptimizedForQuality or OptimizedForSpeed at the same time.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.CreateMipMaps">
+			<summary>Automatically creates mip map levels for the textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.NoAlphaChannel">
+			<summary>Discard any alpha layer and use non-alpha color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.OptimizedForQuality">
+			<summary>Lets the driver decide in which format the textures are created and tries to make the textures look as good as possible. Usually it simply chooses the format in which the texture was stored on disk.
+
+When using this flag, it does not make sense to use the flags Always16Bit, Always32Bit, or OptimizedForSpeed at the same time.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureCreationFlag.OptimizedForSpeed">
+			<summary>Lets the driver decide in which format the textures are created and tries to create them maximizing render speed.
+
+When using this flag, it does not make sense to use the flags Always16Bit, Always32Bit or OptimizedForQuality at the same time.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.TexturePainter">
+			<summary>Provides ability to paint on texture's different mip map levels. Object of TexturePainter can be obtained using Texture.GetTexturePainter().
+
+Order of usage: 1) get a Texture object; call its GetTexturePainter() and save the pointer. You can use this pointer until texture not dropped; 2) when you need access texture pixels, use Lock(), then read/write pixels, then Unlock().
+
+Note: all the members in this class requires texture to be locked using Lock() before using them (except actually: Lock(), Texture, Locked and MipMapLevelCount).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.GetPixel(System.Int32,System.Int32)">
+			<summary>Gets a single pixel from currently locked mip map level.</summary>
+			<param name="x">X coord. Must be less than MipMapLevelWidth.</param>
+			<param name="y">Y coord. Must be less than MipMapLevelHeight.</param>
+			<returns>Color of the pixel.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Lock">
+			<summary>Locks mip map level 0 (main level) for reading and writing.</summary>
+			<returns>True on success.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(System.Boolean)">
+			<summary>Locks mip map level 0 (main level) for reading and writing (if needed).</summary>
+			<param name="readOnly">True if read-only access needed. Default: false.</param>
+			<returns>True on success.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(System.Boolean,System.Int32)">
+			<summary>Locks certain mip map level for reading and writing (if needed).</summary>
+			<param name="readOnly">True if read-only access needed. Default: false.</param>
+			<param name="mipmapLevel">Mip map level to lock. Value from 0 (most detailed level) and MipMapLevelCount-1. Default: 0.</param>
+			<returns>True on success.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.Locked">
+			<summary>True if Texture is locked and you can access pixels of currently locked mip map level.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevel">
+			<summary>Currently locked mip map level.
+
+Note: can be from 0 to MipMapLevelCount-1.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelCount">
+			<summary>Total number of mip map levels in the texture. This value depends on the size of the texture: larger textures has more mip map levels.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelHeight">
+			<summary>Height of currently locked mip map level.
+
+Note: if MipMapLevel == 0, then real height of the texture is stored here.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelWidth">
+			<summary>Width of currently locked mip map level.
+
+Note: if MipMapLevel == 0, then real width of the texture is stored here.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.ReadOnly">
+			<summary>Indicates read-only access mode.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.SetLine(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Draws a line on the currently locked mip map level.</summary>
+			<param name="x1">X1 coord. Must be less than MipMapLevelWidth.</param>
+			<param name="y1">Y1 coord. Must be less than MipMapLevelHeight.</param>
+			<param name="x2">X2 coord. Must be less than MipMapLevelWidth.</param>
+			<param name="y2">Y2 coord. Must be less than MipMapLevelHeight.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.SetPixel(System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Sets a single pixel on currently locked mip map level.</summary>
+			<param name="x">X coord. Must be less than MipMapLevelWidth.</param>
+			<param name="y">Y coord. Must be less than MipMapLevelHeight.</param>
+			<param name="color">Color of the pixel.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.Texture">
+			<summary>Texture which is used for accessing pixels by this TexturePainter.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Unlock">
+			<summary>Unlocks texture previously locked by Lock().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Unlock(System.Boolean)">
+			<summary>Unlocks texture previously locked by Lock().</summary>
+			<param name="alsoRegenerateMipMapLevels">Should Texture.RegenerateMipMapLevels() be called after unlocking? Default: false.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.TransformationState">
+			<summary>Enumeration for geometry transformation states.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.Projection">
+			<summary>Projection transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.Texture0">
+			<summary>Texture 0 transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.Texture1">
+			<summary>Texture 1 transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.Texture2">
+			<summary>Texture 2 transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.Texture3">
+			<summary>Texture 3 transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.View">
+			<summary>View transformation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TransformationState.World">
+			<summary>World transformation.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VertexShaderType">
+			<summary>Enumeration for vertex shader versions.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_1_1">
+			<summary>Version 1.1.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_2_0">
+			<summary>Version 2.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_2_a">
+			<summary>Version 2.a.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_3_0">
+			<summary>Version 3.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_4_0">
+			<summary>Version 4.0.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_4_1">
+			<summary>Version 4.1.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexShaderType.VS_5_0">
+			<summary>Version 5.0.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VertexType">
+			<summary>Enumeration for vertex types.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexType.Standard">
+			<summary>Standard vertex type.
+
+Vertices of this type is described by Vertex3D class.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexType.Tangents">
+			<summary>Vertex with a tangent and binormal vector. Usually used for tangent space normal mapping.
+
+Vertices of this type is described by Vertex3DTangents class.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VertexType.TTCoords">
+			<summary>Vertex with two texture coordinates. Usually used for geometry with lightmaps or other special materials.
+
+Vertices of this type is described by Vertex3DTTCoords class.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VideoDriverFeature">
+			<summary>Enumeration for querying features of the video driver.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.AlphaToCoverage">
+			<summary>Alpha To Coverage supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_FragmentProgram_1">
+			<summary>ARB fragment programs v1.0 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_GLSL">
+			<summary>GLSL supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_VertexProgram_1">
+			<summary>ARB vertex programs v1.0 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.BilinearFilter">
+			<summary>Driver able to render with a bilinear filter applied.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ColorMask">
+			<summary>Color masks (disabling color planes in output) supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.FrameBufferObject">
+			<summary>Framebuffer objects supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.GeomertyShader">
+			<summary>Geometry shaders supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.HardwareTL">
+			<summary>Hardeware transform and lighting supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.HLSL">
+			<summary>HLSL supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.Mipmap">
+			<summary>Driver able to handle mip maps.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MipmapAutoUpdate">
+			<summary>Driver able to update mip maps automatically.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_Blend">
+			<summary>Separate blend settings for multiple render targets supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_BlendFunc">
+			<summary>Separate blend functions for multiple render targets supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_ColorMask">
+			<summary>Separate color masks for multiple render targets supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MultipleRenderTargets">
+			<summary>Multiple render targets supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.Multitexture">
+			<summary>Multiple textures per material are possible.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.OcclusionQuery">
+			<summary>Occlusion queries supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_1">
+			<summary>Pixel shader version 1.1 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_2">
+			<summary>Pixel shader version 1.2 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_3">
+			<summary>Pixel shader version 1.3 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_4">
+			<summary>Pixel shader version 1.4 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_2_0">
+			<summary>Pixel shader version 2.0 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_3_0">
+			<summary>Pixel shader version 3.0 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.RenderToTarget">
+			<summary>Driver able to render to a surface.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.StencilBuffer">
+			<summary>Stencil buffers switched on and the device supports stencil buffers.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureNonPOT">
+			<summary>Non-power-of-two (Non-POT) textures supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureNonSquare">
+			<summary>Non-square textures supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexBufferObject">
+			<summary>Vertex buffer objects supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_1_1">
+			<summary>Vertex shader version 1.1 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_2_0">
+			<summary>Vertex shader version 2.0 supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_3_0">
+			<summary>Vertex shader version 3.0 supported.</summary>
 		</member>
 	</members>
 </doc>
