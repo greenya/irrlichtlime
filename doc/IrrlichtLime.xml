@@ -4756,6 +4756,330 @@ Note: if MipMapLevel == 0, then real width of the texture is stored here.</summa
 		<member name="F:IrrlichtLime.Video.TransformationState.World">
 			<summary>World transformation.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.Vertex3D">
+			<summary>Standard vertex with a position, normal, color and texture coordinates.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3D.Color">
+			<summary>Color of the vertex.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.GetInterpolated(IrrlichtLime.Video.Vertex3D,System.Single)">
+			<summary>Gets interpolated vertex from other to this one.</summary>
+			<param name="other">Other vertex to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
+			<returns>Interpolated vertex. This vertex is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3D.Normal">
+			<summary>Normal vector of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3D.Position">
+			<summary>Position of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3D.TCoords">
+			<summary>Texture coordinates (U, V) of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3D.Type">
+			<summary>Type of the vertex.
+
+Note: for this class, this property always equals to VertexType.Standard.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor">
+			<summary>Creates default vertex (with uninitialized values).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Video.Vertex3D)">
+			<summary>Creates a copy of provided vertex.</summary>
+			<param name="copy">Vertex to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">Texture coords. Default: 0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">Texture U coord. Default: 0.</param>
+			<param name="tv">Texture V coord. Default: 0.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.Vertex3DTangents">
+			<summary>Tangent vertex with a position, normal, color, texture coordinates, tangent and binormal vectors.
+
+Usually used for tangent space normal mapping.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Binormal">
+			<summary>Binormal vector of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Color">
+			<summary>Color of the vertex.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.GetInterpolated(IrrlichtLime.Video.Vertex3DTangents,System.Single)">
+			<summary>Gets interpolated vertex from other to this one.</summary>
+			<param name="other">Other vertex to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
+			<returns>Interpolated vertex. This vertex is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Normal">
+			<summary>Normal vector of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Position">
+			<summary>Position of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Tangent">
+			<summary>Tangent vector of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.TCoords">
+			<summary>Texture coordinates (U, V) of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Type">
+			<summary>Type of the vertex.
+
+Note: for this class, this property always equals to VertexType.Tangents.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor">
+			<summary>Creates default vertex (with uninitialized values).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Video.Vertex3DTangents)">
+			<summary>Creates a copy of provided vertex.</summary>
+			<param name="copy">Vertex to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">Texture coords. Default: 0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">Texture coords. Default: 0,0.</param>
+			<param name="tangent">Tangent vector. Default: 0,0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">Texture coords. Default: 0,0.</param>
+			<param name="tangent">Tangent vector. Default: 0,0,0.</param>
+			<param name="binormal">Binormal vector. Default: 0,0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">Texture U coord. Default: 0.</param>
+			<param name="tv">Texture V coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">Texture U coord. Default: 0.</param>
+			<param name="tv">Texture V coord. Default: 0.</param>
+			<param name="tanx">Tangent vector X coord. Default: 0.</param>
+			<param name="tany">Tangent vector Y coord. Default: 0.</param>
+			<param name="tanz">Tangent vector Z coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">Texture U coord. Default: 0.</param>
+			<param name="tv">Texture V coord. Default: 0.</param>
+			<param name="tanx">Tangent vector X coord. Default: 0.</param>
+			<param name="tany">Tangent vector Y coord. Default: 0.</param>
+			<param name="tanz">Tangent vector Z coord. Default: 0.</param>
+			<param name="binx">Binormal vector X coord. Default: 0.</param>
+			<param name="biny">Binormal vector Y coord. Default: 0.</param>
+			<param name="binz">Binormal vector Z coord. Default: 0.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.Vertex3DTTCoords">
+			<summary>Double texture coordinate vertex with a position, normal, color and two texture coordinates.
+
+Usually used for geometry with lightmaps or other special materials.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Color">
+			<summary>Color of the vertex.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.GetInterpolated(IrrlichtLime.Video.Vertex3DTTCoords,System.Single)">
+			<summary>Gets interpolated vertex from other to this one.</summary>
+			<param name="other">Other vertex to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
+			<returns>Interpolated vertex. This vertex is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Normal">
+			<summary>Normal vector of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Position">
+			<summary>Position of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.TCoords">
+			<summary>Fisrt texture coordinates (U, V) of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.TCoords2">
+			<summary>Second texture coordinates (U, V) of the vertex.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Type">
+			<summary>Type of the vertex.
+
+Note: for this class, this property always equals to VertexType.TTCoords.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor">
+			<summary>Creates default vertex (with uninitialized values).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Video.Vertex3DTTCoords)">
+			<summary>Creates a copy of provided vertex.</summary>
+			<param name="copy">Vertex to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">First texture coords. Default: 0,0.</param>
+			<param name="tcoords2">Second texture coords. Default: 0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">Both texture coords. Default: 0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="pos">Position.</param>
+			<param name="normal">Normal vector. Default: 0,0,0.</param>
+			<param name="color">Color. Default: uninitialized (garbage).</param>
+			<param name="tcoords">First texture coords. Default: 0,0.</param>
+			<param name="tcoords2">Second texture coords. Default: 0,0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">First texture U coord. Default: 0.</param>
+			<param name="tv">First texture V coord. Default: 0.</param>
+			<param name="tu2">Second texture U coord. Default: 0.</param>
+			<param name="tv2">Second texture V coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">Both textures U coord. Default: 0.</param>
+			<param name="tv">Both textures V coord. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates vertex using provided values.</summary>
+			<param name="x">Position X coord.</param>
+			<param name="y">Position Y coord.</param>
+			<param name="z">Position Z coord.</param>
+			<param name="nx">Normal vector X coord. Default: 0.</param>
+			<param name="ny">Normal vector Y coord. Default: 0.</param>
+			<param name="nz">Normal vector Z coord. Default: 0.</param>
+			<param name="c">Color. Default: uninitialized (garbage).</param>
+			<param name="tu">First texture U coord. Default: 0.</param>
+			<param name="tv">First texture V coord. Default: 0.</param>
+			<param name="tu2">Second texture U coord. Default: 0.</param>
+			<param name="tv2">Second texture V coord. Default: 0.</param>
+		</member>
 		<member name="T:IrrlichtLime.Video.VertexShaderType">
 			<summary>Enumeration for vertex shader versions.</summary>
 		</member>
@@ -4896,6 +5220,128 @@ Vertices of this type is described by Vertex3DTTCoords class.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_3_0">
 			<summary>Vertex shader version 3.0 supported.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VideoMode">
+			<summary>Holds information about single video mode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoMode.AspectRatio">
+			<summary>Aspect ratio.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoMode.Depth">
+			<summary>Bits per pixel.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoMode.GetAspectRatio(System.Int32,System.Int32)">
+			<summary>Returns aspect ratio using provided resolution.
+
+Please note, next screen resolutions considered to be 16:9 (1.777): 848x480 (1.766), 854x480 (1.779), 1360x768 (1.771), 1366x768 (1.779).</summary>
+			<param name="width">Video mode width.</param>
+			<param name="height">Video mode height.</param>
+			<returns>Video mode aspect ratio.</returns>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoMode.Resolution">
+			<summary>Width and height.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoMode.#ctor(IrrlichtLime.Core.Dimension2Di,System.Int32)">
+			<summary>Constructs VideoMode object using provied resolution and depth.</summary>
+			<param name="resolution">Video mode resolution.</param>
+			<param name="depth">Video mode depth.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoMode.#ctor(System.Int32,System.Int32,System.Int32)">
+			<summary>Constructs VideoMode object using provied resolution and depth.</summary>
+			<param name="width">Video mode width.</param>
+			<param name="height">Video mode height.</param>
+			<param name="depth">Video mode depth.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoMode.Wide">
+			<summary>Widescreen resolution.
+
+Please note: widescreen resolution is a resolution which aspect ratio greater than 1.37.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VideoModeAspectRatio">
+			<summary>Enumeration for video mode aspect ratios.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._16x10">
+			<summary>16:10 (or 8:5) aspect ratio.
+Ratio: 16/10 == 1.6.
+
+Common screen resolutions: 768x480, 1024x640, 1280x800, 1440x900, 1680x1050, 1920x1200, 2560x1600.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._16x9">
+			<summary>16:9 aspect ratio.
+Ratio: 16/9 == 1.(7) ~ 1.778.
+
+Common screen resolutions: 1024x576, 1280x720, 1600x900, 1920x1080, 2560x1440.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._3x2">
+			<summary>3:2 aspect ratio.
+Ratio: 3/2 == 1.5.
+
+Common screen resolutions: 960x640, 1152x768, 1440x960.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._4x3">
+			<summary>4:3 aspect ratio.
+Ratio: 4/3 == 1.(3) ~ 1.333.
+
+Common screen resolutions: 640x480, 800x600, 1024x768, 1280x960, 1400x1050, 1440x1080, 1600x1200, 1920x1440, 2048x1536, 2560x1920.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._5x3">
+			<summary>5:3 aspect ratio.
+Ratio: 5/3 == 1.(6) ~ 1.667.
+
+Common screen resolutions: 400x240, 800x480, 1280x768.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio._5x4">
+			<summary>5:4 aspect ratio.
+Ratio: 5/4 == 1.25.
+
+Common screen resolutions: 600x480, 640x512, 1280x1024, 1800x1440, 2560x2048.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoModeAspectRatio.Other">
+			<summary>Other aspect ratio which not listed in this enumeration.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.VideoModeList">
+			<summary>List of all available video modes.
+
+You can get a list via IrrlichtDevice.VideoModeList. There is no need to start up an Irrlicht Device with Direct3D8, OpenGL or even Software renderer: for this (and for lots of other reasons) the Null device exists.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoModeList.Desktop">
+			<summary>Current desktop video mode.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoModeList.GetResolution(IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Gets a supported screen size with certain constraints.</summary>
+			<param name="minSize">Minimum dimensions required.</param>
+			<param name="maxSize">Maximum dimensions allowed.</param>
+			<returns>Size of screen in pixels which matches the requirements, as good as possible.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoModeList.ModeList">
+			<summary>List of all available video modes.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ZBufferCompFunc">
+			<summary>Enumeration for comparison functions, e.g. for depth buffer test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Always">
+			<summary>Test succeeds always.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Equal">
+			<summary>Exact equality.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Greater">
+			<summary>Inverse of LessEqual.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.GreaterEqual">
+			<summary>Greater or equal test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Less">
+			<summary>Exclusive less comparison.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.LessEqual">
+			<summary>Less or equal test, default for e.g. depth test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Never">
+			<summary>Test never succeeds, this equals disable.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.NotEqual">
+			<summary>Succeeds almost always, except for exact equality.</summary>
 		</member>
 	</members>
 </doc>
