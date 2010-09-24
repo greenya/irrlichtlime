@@ -30,8 +30,11 @@ public:
 		else if (r == 16.0f/10.0f)
 			return VideoModeAspectRatio::_16x10;
 		
-		if (width == 848 && height == 480 || // 848/480 == 1.7(6) (almost 1.(7) == 16:9)
-			width == 1360 && height == 768) // 1360/768 == 1.7708(3) (almost 1.(7) == 16:9)
+		// check for "almost 16:9" == 1.778
+		if (width == 848 && height == 480 || // ratio is 1.766
+			width == 854 && height == 480 || // ratio is 1.779
+			width == 1360 && height == 768 || // ratio is 1.771
+			width == 1366 && height == 768) // ratio is 1.779
 			return VideoModeAspectRatio::_16x9;
 
 		return VideoModeAspectRatio::Other;
@@ -67,7 +70,7 @@ public:
 	{
 		bool get()
 		{
-			return ((float)Resolution->Width / (float)Resolution->Height) >= 1.5f;
+			return ((float)Resolution->Width / (float)Resolution->Height) > 1.37f; // magic value taken from http://en.wikipedia.org/wiki/Widescreen
 		}
 	}
 
