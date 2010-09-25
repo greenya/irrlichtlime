@@ -193,30 +193,6 @@ Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ 
 	return Image::Wrap(i);
 }
 
-Image^ VideoDriver::CreateImage(Image^ imageToCopy, Vector2Di^ pos, Dimension2Di^ size)
-{
-	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(size != nullptr);
-	LIME_ASSERT(size->Width > 0);
-	LIME_ASSERT(size->Height > 0);
-
-	video::IImage* i = m_VideoDriver->createImage(
-		LIME_SAFEREF(imageToCopy, m_Image),
-		*pos->m_NativeValue,
-		(core::dimension2du&)*size->m_NativeValue);
-
-	return Image::Wrap(i);
-}
-
-Image^ VideoDriver::CreateImage(Image^ imageToConvert, Video::ColorFormat format)
-{
-	video::IImage* i = m_VideoDriver->createImage(
-		(video::ECOLOR_FORMAT)format,
-		LIME_SAFEREF(imageToConvert, m_Image));
-
-	return Image::Wrap(i);
-}
-
 Image^ VideoDriver::CreateImage(Video::ColorFormat format, Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
