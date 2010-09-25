@@ -53,8 +53,6 @@ public:
 	void ClearZBuffer();
 
 	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
-	Image^ CreateImage(Image^ imageToCopy, Vector2Di^ pos, Dimension2Di^ size);
-	Image^ CreateImage(Image^ imageToConvert, Video::ColorFormat format);
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 	Image^ CreateImage(IO::ReadFile^ file);
