@@ -5122,6 +5122,484 @@ Vertices of this type is described by Vertex3DTangents class.</summary>
 
 Vertices of this type is described by Vertex3DTTCoords class.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.VideoDriver">
+			<summary>Provides functionality to perform 2d and 3d graphics functions.
+
+This class is one of the most important classes of the Irrlicht Lime: all rendering and texture manipulation is done with this class. You are able to use the Irrlicht Lime by only using methods of this class if you like to, although the SceneManager class provides a lot of powerful classes and methods to make the programmer's life easier.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddDynamicLight(IrrlichtLime.Video.Light)">
+			<summary>Adds a dynamic light, returning an index of the light.</summary>
+			<param name="light">The light data to use to create the light.</param>
+			<returns>An index of the light, or -1 if an error occurs.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddMaterialRenderer(IrrlichtLime.Video.MaterialRenderer)">
+			<summary>Adds a new material renderer to the video device.</summary>
+			<param name="renderer">A pointer to the new renderer.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddMaterialRenderer(IrrlichtLime.Video.MaterialRenderer,System.String)">
+			<summary>Adds a new material renderer to the video device.</summary>
+			<param name="renderer">A pointer to the new renderer.</param>
+			<param name="name">Optional name for the material renderer entry. Default: null.</param>
+			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Adds a new render target texture to the texture cache.</summary>
+			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
+			<returns>Pointer to the created texture or null if the texture could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di,System.String)">
+			<summary>Adds a new render target texture to the texture cache.</summary>
+			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
+			<param name="name">An optional name for the RTT. Default: "rt".</param>
+			<returns>Pointer to the created texture or null if the texture could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di,System.String,IrrlichtLime.Video.ColorFormat)">
+			<summary>Adds a new render target texture to the texture cache.</summary>
+			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
+			<param name="name">An optional name for the RTT. Default: "rt".</param>
+			<param name="format">The color format of the render target. Floating point formats are supported. Default: ColorFormat.Unknown.</param>
+			<returns>Pointer to the created texture or null if the texture could not be created.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(System.String,IrrlichtLime.Video.Image)">
+			<summary>Creates a texture from an Image object.</summary>
+			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="image">Image the texture is created from.</param>
+			<returns>Pointer to the newly created texture.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(IrrlichtLime.Core.Dimension2Di,System.String)">
+			<summary>Creates an empty texture of specified size.</summary>
+			<param name="size">Size of the texture.</param>
+			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<returns>Pointer to the newly created texture.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(IrrlichtLime.Core.Dimension2Di,System.String,IrrlichtLime.Video.ColorFormat)">
+			<summary>Creates an empty texture of specified size.</summary>
+			<param name="size">Size of the texture.</param>
+			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="format">Desired color format of the texture. Please note that the driver may choose to create the texture in another color format. Default: ColorFormat.A8R8G8B8.</param>
+			<returns>Pointer to the newly created texture.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean)">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<param name="backBuffer">Specifies if the back buffer should be cleared, which means that the screen is filled with the color specified. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. Default: true.</param>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean)">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<param name="backBuffer">Specifies if the back buffer should be cleared, which means that the screen is filled with the color specified. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. Default: true.</param>
+			<param name="zBuffer">Specifies if the depth buffer (z-buffer) should be cleared. It is not nesesarry to do so if only 2d drawing is used. Default: true.</param>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<param name="backBuffer">Specifies if the back buffer should be cleared, which means that the screen is filled with the color specified. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. Default: true.</param>
+			<param name="zBuffer">Specifies if the depth buffer (z-buffer) should be cleared. It is not nesesarry to do so if only 2d drawing is used. Default: true.</param>
+			<param name="color">The color used for back buffer clearing. Default: 0xff000000 (black opaque color).</param>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.ExposedVideoData)">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<param name="backBuffer">Specifies if the back buffer should be cleared, which means that the screen is filled with the color specified. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. Default: true.</param>
+			<param name="zBuffer">Specifies if the depth buffer (z-buffer) should be cleared. It is not nesesarry to do so if only 2d drawing is used. Default: true.</param>
+			<param name="color">The color used for back buffer clearing. Default: 0xff000000 (black opaque color).</param>
+			<param name="videoData">Handle of another window, if you want the bitmap to be displayed on another window. If this is an empty element, everything will be displayed in the default window. Note: This feature is not fully implemented for all devices. Default: new ExposedVideoData().</param>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.ExposedVideoData,IrrlichtLime.Core.Recti)">
+			<summary>Applications must call this method before performing any rendering.
+
+This method can clear the back- and the z-buffer.</summary>
+			<param name="backBuffer">Specifies if the back buffer should be cleared, which means that the screen is filled with the color specified. If this parameter is false, the back buffer will not be cleared and the color parameter is ignored. Default: true.</param>
+			<param name="zBuffer">Specifies if the depth buffer (z-buffer) should be cleared. It is not nesesarry to do so if only 2d drawing is used. Default: true.</param>
+			<param name="color">The color used for back buffer clearing. Default: 0xff000000 (black opaque color).</param>
+			<param name="videoData">Handle of another window, if you want the bitmap to be displayed on another window. If this is an empty element, everything will be displayed in the default window. Note: this feature is not fully implemented for all devices.</param>
+			<param name="sourceRect">Rectangle defining the source rectangle of the area to be presented. Note: not implemented for all devices.</param>
+			<returns>False if failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CheckDriverReset">
+			<summary>Check if the driver was recently reset.
+
+For D3D devices you will need to recreate the RTTs if the driver was reset. Should be queried right after BeginScene().</summary>
+			<returns>True if driver was recently reset.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.ClearZBuffer">
+			<summary>Clears the z-buffer.
+
+Note that you usually need not to call this method, as it is automatically done in BeginScene() or SetRenderTarget() if you enable z-buffer. But if you have to render some special things, you can clear the zbuffer during the rendering process with this method any time.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.ColorFormat">
+			<summary>Color format of the color buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.IO.ReadFile)">
+			<summary>Creates a software image from a file.
+
+No hardware texture will be created for this image. This method is useful for example if you want to read a heightmap for a terrain renderer.</summary>
+			<param name="file">File from which the image is created.</param>
+			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(System.String)">
+			<summary>Creates a software image from a file.
+
+No hardware texture will be created for this image. This method is useful for example if you want to read a heightmap for a terrain renderer.</summary>
+			<param name="filename">Name of the file from which the image is created.</param>
+			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.Video.ColorFormat,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates an empty software image.</summary>
+			<param name="format">Desired color format of the image.</param>
+			<param name="size">Size of the image to create.</param>
+			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates a software image from a part of a texture.</summary>
+			<param name="texture">Texture to copy to the new image in part.</param>
+			<param name="pos">Position of rectangle to copy.</param>
+			<param name="size">Extents of rectangle to copy.</param>
+			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
+			<summary>Create occlusion query.
+
+Use node for identification and mesh for occlusion test.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateOcclusionQuery(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.Mesh)">
+			<summary>Create occlusion query.
+
+Use node for identification and mesh for occlusion test.</summary>
+			<param name="node">Node.</param>
+			<param name="mesh">Mesh. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot">
+			<summary>Make a screenshot of the last rendered frame.</summary>
+			<returns>Created image.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.CurrentRenderTargetSize">
+			<summary>Size of the current render target.
+
+Contains the screen size if the driver doesn't support render to texture, or if the current render target is the screen.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DeleteAllDynamicLights">
+			<summary>Deletes all dynamic lights which were previously added with AddDynamicLight().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DisableFeature(IrrlichtLime.Video.VideoDriverFeature)">
+			<summary>Disable a feature of the driver.
+
+Can also be used to enable the features again. It is not possible to enable unsupported features this way, though.</summary>
+			<param name="feature">Feature to disable.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DisableFeature(IrrlichtLime.Video.VideoDriverFeature,System.Boolean)">
+			<summary>Disable a feature of the driver.
+
+Can also be used to enable the features again. It is not possible to enable unsupported features this way, though.</summary>
+			<param name="feature">Feature to disable.</param>
+			<param name="flag">When true the feature is disabled, otherwise it is enabled. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di)">
+			<summary>Draws a 2d image using a color.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d image using a color.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRect">Source rectangle in the image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d image using a color.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRect">Source rectangle in the image.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d image using a color.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRect">Source rectangle in the image.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+			<param name="color">Color with which the image is drawn. If the color equals 0xffffffff it is ignored. Note that the alpha component is used: if alpha is other than 255, the image will be transparent. Default: 0xffffffff (white opaque color).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Draws a 2d image using a color.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRect">Source rectangle in the image.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+			<param name="color">Color with which the image is drawn. If the color equals 0xffffffff it is ignored. Note that the alpha component is used: if alpha is other than 255, the image will be transparent. Default: 0xffffffff (white opaque color).</param>
+			<param name="useAlphaChannelOfTexture">If true, the alpha channel of the texture is used to draw the image. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a part of the texture into the rectangle.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destRect">Rectangle to draw into.</param>
+			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a part of the texture into the rectangle.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destRect">Rectangle to draw into.</param>
+			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Collections.Generic.List{IrrlichtLime.Video.Color})">
+			<summary>Draws a part of the texture into the rectangle.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destRect">Rectangle to draw into.</param>
+			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+			<param name="colors">List of four colors denoting the color values of the corners of the destRect. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Collections.Generic.List{IrrlichtLime.Video.Color},System.Boolean)">
+			<summary>Draws a part of the texture into the rectangle.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="destRect">Rectangle to draw into.</param>
+			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
+			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
+			<param name="colors">List of four colors denoting the color values of the corners of the destRect. Default: null.</param>
+			<param name="useAlphaChannelOfTexture">True if alpha channel will be blended. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DLine(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d line.</summary>
+			<param name="start">Start point of the line.</param>
+			<param name="end">End point of the line.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DLine(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d line.</summary>
+			<param name="x1">X coord of start point of the line.</param>
+			<param name="y1">Y coord of start point of the line.</param>
+			<param name="x2">X coord of end point of the line.</param>
+			<param name="y2">Y coord of end point of the line.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DPolygon(IrrlichtLime.Core.Vector2Di,System.Single,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Draws a non filled concyclic regular 2d polygon.
+
+This method can be used to draw circles, but also triangles, tetragons, pentagons, hexagons, heptagons, octagons, enneagons, decagons, hendecagons, dodecagon, triskaidecagons, etc. I think you'll got it now. And all this by simply specifying the vertex count. Welcome to the wonders of geometry.</summary>
+			<param name="center">Position of center of the polygon.</param>
+			<param name="radius">Radius of the polygon.</param>
+			<param name="color">Color of the polygon.</param>
+			<param name="vertexCount">Amount of vertices of the polygon. Specify 2 to draw a line, 3 to draw a triangle, 4 for tetragons and a lot (&gt;10) for nearly a circle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d rectangle.</summary>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d rectangle.</summary>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="clip">Clipping rectangle. If the pointer is null, no clipping will be performed. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d rectangle with a gradient.</summary>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="colorLeftUp">Color of the upper left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorRightUp">Color of the upper right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorLeftDown">Color of the lower left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorRightDown">Color of the lower right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d rectangle with a gradient.</summary>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="colorLeftUp">Color of the upper left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorRightUp">Color of the upper right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorLeftDown">Color of the lower left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="colorRightDown">Color of the lower right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+			<param name="clip">Clipping rectangle. If the pointer is null, no clipping will be performed. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangleOutline(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Draws the outline of a 2D rectangle.</summary>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle outline will be.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt16})">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices16bit">List of 16-bit indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt16},IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices16bit">List of 16-bit indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt32})">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices32bit">List of 32-bit indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt32},IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices32bit">List of 32-bit indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DBox(IrrlichtLime.Core.AABBox,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d axis aligned box.
+
+This method simply calls Draw3DLine for the edges of the box. Note that the box is drawn using the current transformation matrix and material.</summary>
+			<param name="box">The axis aligned box to draw.</param>
+			<param name="color">Color to use while drawing the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DLine(IrrlichtLime.Core.Line3Df,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d line.
+
+For some implementations, this method simply calls DrawVertexPrimitiveList for some triangles. Note that the line is drawn using the current transformation matrix and material.</summary>
+			<param name="line">Line to draw.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DLine(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d line.
+
+For some implementations, this method simply calls DrawVertexPrimitiveList for some triangles. Note that the line is drawn using the current transformation matrix and material.</summary>
+			<param name="start">Start of the 3d line.</param>
+			<param name="end">End of the 3d line.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DTriangle(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d triangle.
+
+This method works with all drivers because it simply calls DrawVertexPrimitiveList, but it is hence not very fast. Note that the triangle is drawn using the current transformation matrix and material.</summary>
+			<param name="pointA">1st point of the triangle.</param>
+			<param name="pointB">2nd point of the triangle.</param>
+			<param name="pointC">3rd point of the triangle.</param>
+			<param name="color">Color of the triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DTriangle(IrrlichtLime.Core.Triangle3Df,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d triangle.
+
+This method works with all drivers because it simply calls DrawVertexPrimitiveList, but it is hence not very fast. Note that the triangle is drawn using the current transformation matrix and material.</summary>
+			<param name="triangle">Triangle to draw.</param>
+			<param name="color">Color of the triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawMeshBuffer(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Draws a mesh buffer.</summary>
+			<param name="mb">Buffer to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawPixel(System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Draws 2d pixel.</summary>
+			<param name="x">The X-position of the pixel.</param>
+			<param name="y">The Y-position of the pixel.</param>
+			<param name="color">Color of the pixel.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadow">
+			<summary>Fills the stencil shadow with a color.
+
+After the shadow volume has been drawn into the stencil buffer using DrawStencilShadowVolume(), use this to draw the color of the shadow.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadow(System.Boolean)">
+			<summary>Fills the stencil shadow with a color.
+
+After the shadow volume has been drawn into the stencil buffer using DrawStencilShadowVolume(), use this to draw the color of the shadow.</summary>
+			<param name="clearStencilBuffer">True, if you want to paint every shadow with its own color. False, if you want to draw every shadow with the same color, and only want to call DrawStencilShadow() once after all shadow volumes have been drawn. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadow(System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Fills the stencil shadow with a color.
+
+After the shadow volume has been drawn into the stencil buffer using DrawStencilShadowVolume(), use this to draw the color of the shadow.</summary>
+			<param name="clearStencilBuffer">True, if you want to paint every shadow with its own color. False, if you want to draw every shadow with the same color, and only want to call DrawStencilShadow() once after all shadow volumes have been drawn. Default: false.</param>
+			<param name="leftUpEdge">Color of the shadow in the upper left corner of screen. Default: opaque black.</param>
+			<param name="rightUpEdge">Color of the shadow in the upper right corner of screen. Default: opaque black.</param>
+			<param name="leftDownEdge">Color of the shadow in the lower left corner of screen. Default: opaque black.</param>
+			<param name="rightDownEdge">Color of the shadow in the lower right corner of screen. Default: opaque black.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadowVolume(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df})">
+			<summary>Draws a shadow volume into the stencil buffer.
+
+To draw a stencil shadow, do next: draw all geometry, then use this method, to draw the shadow volume, then, use DrawStencilShadow() to visualize the shadow.</summary>
+			<param name="triangles">List of triangles specifying the shadow volume. Note: count of vectors in this list must be multiple to 3.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadowVolume(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Boolean)">
+			<summary>Draws a shadow volume into the stencil buffer.
+
+To draw a stencil shadow, do next: draw all geometry, then use this method, to draw the shadow volume, then, use DrawStencilShadow() to visualize the shadow.</summary>
+			<param name="triangles">List of triangles specifying the shadow volume. Note: count of vectors in this list must be multiple to 3.</param>
+			<param name="zfail">True to use Z-fail method, otherwise Z-pass will be used. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt16})">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices16bit">List of 16-bit indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt16},IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices16bit">List of 16-bit indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt32})">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices32bit">List of 32-bit indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(System.Collections.Generic.List{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.List{System.UInt32},IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertices">List of vertices.</param>
+			<param name="indices32bit">List of 32-bit indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.DriverType">
+			<summary>Type of the video driver.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.DynamicLightCount">
+			<summary>Amount of dynamic lights currently set.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllHardwareBuffers">
+			<summary>Removes all hardware buffers.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllOcclusionQueries">
+			<summary>Removes all occlusion queries.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveHardwareBuffer(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Removes hardware buffer.</summary>
+			<param name="mb">MeshBuffer to remove.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
+			<summary>Removes occlusion query.</summary>
+			<param name="node">Node.</param>
+		</member>
 		<member name="T:IrrlichtLime.Video.VideoDriverFeature">
 			<summary>Enumeration for querying features of the video driver.</summary>
 		</member>
