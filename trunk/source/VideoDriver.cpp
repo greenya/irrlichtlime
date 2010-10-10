@@ -253,25 +253,25 @@ void VideoDriver::DisableFeature(VideoDriverFeature feature)
 	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Color^>^ colors_or_null, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(destRect != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	video::SColor* colorList = nullptr;
-	if (colors_or_null != nullptr)
+	if (colors != nullptr)
 	{
-		LIME_ASSERT(colors_or_null->Count == 4);
+		LIME_ASSERT(colors->Count == 4);
 		colorList = new video::SColor[4];
 		for (int i = 0; i < 4; i++)
-			colorList[i] = *colors_or_null[i]->m_NativeValue;
+			colorList[i] = *colors[i]->m_NativeValue;
 	}
 
 	m_VideoDriver->draw2DImage(
 		LIME_SAFEREF(texture, m_Texture),
 		*destRect->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		LIME_SAFEREF(clipRect, m_NativeValue),
 		colorList,
 		useAlphaChannelOfTexture);
 
@@ -279,32 +279,32 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		delete colorList;
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null, List<Color^>^ colors_or_null)
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors)
 {
 	LIME_ASSERT(destRect != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	video::SColor* colorList = nullptr;
-	if (colors_or_null != nullptr)
+	if (colors != nullptr)
 	{
-		LIME_ASSERT(colors_or_null->Count == 4);
+		LIME_ASSERT(colors->Count == 4);
 		colorList = new video::SColor[4];
 		for (int i = 0; i < 4; i++)
-			colorList[i] = *colors_or_null[i]->m_NativeValue;
+			colorList[i] = *colors[i]->m_NativeValue;
 	}
 
 	m_VideoDriver->draw2DImage(
 		LIME_SAFEREF(texture, m_Texture),
 		*destRect->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		LIME_SAFEREF(clipRect, m_NativeValue),
 		colorList);
 
 	if (colorList != nullptr)
 		delete colorList;
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect_or_null)
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect)
 {
 	LIME_ASSERT(destRect != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
@@ -313,7 +313,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		LIME_SAFEREF(texture, m_Texture),
 		*destRect->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue));
+		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
 void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect)
@@ -327,7 +327,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		*sourceRect->m_NativeValue);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Color^ color, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
@@ -337,12 +337,12 @@ void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourc
 		LIME_SAFEREF(texture, m_Texture),
 		*destPos->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		LIME_SAFEREF(clipRect, m_NativeValue),
 		*color->m_NativeValue,
 		useAlphaChannelOfTexture);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null, Color^ color)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color)
 {
 	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
@@ -352,11 +352,11 @@ void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourc
 		LIME_SAFEREF(texture, m_Texture),
 		*destPos->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue),
+		LIME_SAFEREF(clipRect, m_NativeValue),
 		*color->m_NativeValue);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect_or_null)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect)
 {
 	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
@@ -365,7 +365,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourc
 		LIME_SAFEREF(texture, m_Texture),
 		*destPos->m_NativeValue,
 		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect_or_null, m_NativeValue));
+		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
 void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect)
