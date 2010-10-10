@@ -227,12 +227,13 @@ namespace L04.ParticleEmitterViewer
 
 		private void irrThreadProcessCommandQueue()
 		{
-			if (commandQueue.Count == 0)
-				return;
-
 			Command c;
+
 			lock (commandQueue)
 			{
+				if (commandQueue.Count == 0)
+					return;
+
 				c = commandQueue.Dequeue();
 			}
 
