@@ -89,6 +89,12 @@ public:
 		void set(bool value) { m_NativeValue->Stereobuffer = value; }
 	}
 
+	property bool UsePerformanceTimer
+	{
+		bool get() { return m_NativeValue->UsePerformanceTimer; }
+		void set(bool value) { m_NativeValue->UsePerformanceTimer = value; }
+	}
+
 	property bool VSync
 	{
 		bool get() { return m_NativeValue->Vsync; }

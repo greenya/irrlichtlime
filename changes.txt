@@ -1,4 +1,14 @@
 ============================
+Changes in 0.7 (XX-Oct-2010)
+============================
+
+- Added examples 10.Shaders, L03.RGBSwirl and L04.ParticleEmitterViewer.
+
+- Updated Irrlicht SDK to trunk rev. 3427: added Timer.RealTimeAndDate prop, Timer.RealTimeDate class, Timer.WeekDay enum, IrrlichtCreationParameters.UsePerformanceTimer prop. Also some bugs were fixed (see Irrlicht Engine svn trunk logs for details).
+
+- ........
+
+============================
 Changes in 0.6 (25-Jul-2010)
 ============================
 
