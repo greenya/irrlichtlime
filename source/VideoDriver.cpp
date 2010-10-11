@@ -995,10 +995,9 @@ void VideoDriver::SetMaterial(Material^ material)
 	m_VideoDriver->setMaterial(*material->m_NativeValue);
 }
 
-void VideoDriver::SetMaterialRendererName(int index, String^ name)
+void VideoDriver::SetMaterialRendererName(MaterialType materialType, String^ name)
 {
-	LIME_ASSERT(index >= 0 && index < MaterialRendererCount);
-	m_VideoDriver->setMaterialRendererName(index, Lime::StringToStringC(name).c_str());
+	m_VideoDriver->setMaterialRendererName((video::E_MATERIAL_TYPE)materialType, Lime::StringToStringC(name).c_str());
 }
 
 void VideoDriver::SetMinHardwareBufferVertexCount(int count)

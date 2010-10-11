@@ -5586,11 +5586,202 @@ Please note that currently not all primitives are available for all drivers, and
 		<member name="P:IrrlichtLime.Video.VideoDriver.DynamicLightCount">
 			<summary>Amount of dynamic lights currently set.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.EnableClipPlane(System.Int32)">
+			<summary>Enable or disable a clipping plane.</summary>
+			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.EnableClipPlane(System.Int32,System.Boolean)">
+			<summary>Enable or disable a clipping plane.</summary>
+			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="enable">True to enable clip plane, otherwise disable it. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.EnableMaterial2D">
+			<summary>Enable the 2d override material.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.EnableMaterial2D(System.Boolean)">
+			<summary>Enable the 2d override material.</summary>
+			<param name="enable">Flag which tells whether the material shall be enabled or disabled. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.EndScene">
+			<summary>Presents the rendered image to the screen.
+
+Applications must call this method after performing any rendering.</summary>
+			<returns>False if failed and true if succeeded.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.ExposedVideoData">
+			<summary>Driver and operating system specific data about the this video driver.
+
+This method should only be used if the engine should be extended without having to modify the source of the engine.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.FindTexture(System.String)">
+			<summary>Check if the texture is already loaded.
+
+Works similar to GetTexture(), but does not load the texture if it is not currently loaded.</summary>
+			<param name="filename">Name of the texture.</param>
+			<returns>Pointer to loaded texture, or null if not found.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.Fog">
+			<summary>Current fog mode.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.FPS">
+			<summary>Current frames per second value.
+
+This value is updated approximately every 1.5 seconds and is only intended to provide a rough guide to the average frame rate. It is not suitable for use in performing timing calculations or framerate independent movement.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetDynamicLight(System.Int32)">
+			<summary>Returns light data which was previously set by AddDynamicLight().</summary>
+			<param name="index">Index of the light. Must be in range from 0 to MaxDynamicLightCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetImageLoader(System.Int32)">
+			<summary>Retrieve the given image loader.</summary>
+			<param name="index">Index of the loader. Must be from 0 to ImageLoaderCount-1.</param>
+			<returns>Pointer to the specified loader.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialRenderer(System.Int32)">
+			<summary>Get access to a material.</summary>
+			<param name="index">Index of the material. Must be from 0 to MaterialRendererCount-1.</param>
+			<returns>Pointer to material renderer.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialRenderer(IrrlichtLime.Video.MaterialType)">
+			<summary>Get access to a material.</summary>
+			<param name="material">Type of the material.</param>
+			<returns>Pointer to material renderer.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialRendererName(System.Int32)">
+			<summary>Gets name of a material renderer.
+
+This string can be used to test if a specific renderer already has been registered/created, or use this string to store data about materials. This returned name also used internally when serializing materials.</summary>
+			<param name="index">Index of the material. Must be from 0 to MaterialRendererCount-1.</param>
+			<returns>Name of the material renderer or null if not found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialRendererName(IrrlichtLime.Video.MaterialType)">
+			<summary>Gets name of a material renderer.
+
+This string can be used to test if a specific renderer already has been registered/created, or use this string to store data about materials. This returned name also used internally when serializing materials.</summary>
+			<param name="material">Type of the material.</param>
+			<returns>Name of the material renderer or null if not found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetOcclusionQueryResult(IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets occlusion query result.
+
+Returns value which is the number of visible pixels/fragments. The value is a safe approximation, i.e. can be larger than the actual value of pixels.</summary>
+			<param name="node">Scene node.</param>
+			<returns>Number of visible pixels/fragments of the node.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetTexture(IrrlichtLime.IO.ReadFile)">
+			<summary>Gets access to a named texture.
+
+Loads the texture from disk if it is not already loaded and generates mipmap levels if desired. Texture loading can be influenced using the SetTextureCreationFlag() method. The texture can be in several imageformats, such as BMP, JPG, TGA, PCX, PNG, and PSD.</summary>
+			<param name="file">Pointer to an already opened file.</param>
+			<returns>Pointer to the texture, or null if the texture could not be loaded.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetTexture(System.String)">
+			<summary>Gets access to a named texture.
+
+Loads the texture from disk if it is not already loaded and generates mipmap levels if desired. Texture loading can be influenced using the SetTextureCreationFlag() method. The texture can be in several imageformats, such as BMP, JPG, TGA, PCX, PNG, and PSD.</summary>
+			<param name="filename">Filename of the texture to be loaded.</param>
+			<returns>Pointer to the texture, or null if the texture could not be loaded.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetTexture(System.Int32)">
+			<summary>Gets access to a named texture.
+
+Loads the texture from disk if it is not already loaded and generates mipmap levels if desired. Texture loading can be influenced using the SetTextureCreationFlag() method. The texture can be in several imageformats, such as BMP, JPG, TGA, PCX, PNG, and PSD.</summary>
+			<param name="index">Index of the texture. Must be from 0 to TextureCount-1. Please note that this index might change when adding or removing textures.</param>
+			<returns>Pointer to the texture.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetTextureCreationFlag(IrrlichtLime.Video.TextureCreationFlag)">
+			<summary>Returns if a texture creation flag is enabled or disabled.
+
+You can change this value using SetTextureCreationFlag().</summary>
+			<param name="flag">Texture creation flag.</param>
+			<returns>The current texture creation flag value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetTransform(IrrlichtLime.Video.TransformationState)">
+			<summary>Returns the transformation set by SetTransform().</summary>
+			<param name="state">Transformation type to query.</param>
+			<returns>Matrix describing the transformation.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.GPUProgrammingServices">
+			<summary>Gets access to video shader processing.
+
+May hold null if the video driver does not support this. For example the Software driver and the Null driver will always hold null.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.ImageLoaderCount">
+			<summary>The number of image loaders.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.MakeColorKeyTexture(IrrlichtLime.Video.Texture,IrrlichtLime.Video.Color)">
+			<summary>Sets a boolean alpha channel on the texture based on the color at a position.
+
+This makes the texture fully transparent at the texels where the color key can be found when using for example Draw2DImage with enabled useAlphaChannel parameter. The alpha of other texels is not modified.</summary>
+			<param name="texture">Texture whose alpha channel is modified.</param>
+			<param name="color">Key color. Every texel with this color will become fully transparent. Please note that the colors of a texture may be converted when loading it, so the color values may not be exactly the same in the engine and for example in picture edit programs. To avoid this problem, you could use the MakeColorKeyTexture method, which takes the position of a pixel instead a color value.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.MakeColorKeyTexture(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di)">
+			<summary>Sets a boolean alpha channel on the texture based on the color at a position.
+
+This makes the texture fully transparent at the texels where the color key can be found when using for example Draw2DImage with enabled useAlphaChannel parameter. The alpha of other texels is not modified.</summary>
+			<param name="texture">Texture whose alpha channel is modified.</param>
+			<param name="colorKeyPixelPos">Position of a pixel with the key color.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.MakeNormalMapTexture(IrrlichtLime.Video.Texture)">
+			<summary>Creates a normal map from a height map texture.
+
+If the target texture has 32 bit, the height value is stored in the alpha component of the texture as addition. This value is used by the MaterialType.ParallaxMapSolid material and similar materials.</summary>
+			<param name="texture">Texture whose alpha channel is modified</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.MakeNormalMapTexture(IrrlichtLime.Video.Texture,System.Single)">
+			<summary>Creates a normal map from a height map texture.
+
+If the target texture has 32 bit, the height value is stored in the alpha component of the texture as addition. This value is used by the MaterialType.ParallaxMapSolid material and similar materials.</summary>
+			<param name="texture">Texture whose alpha channel is modified</param>
+			<param name="amplitude">Constant value by which the height information is multiplied. Default: 1.0f.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.Material2D">
+			<summary>Current 2d material override.
+
+This material allows to alter certain render states of the 2d methods. Not all members of Material are honored, especially not MaterialType and Textures. Moreover, the zbuffer is always ignored, and lighting is always off. All other flags can be changed, though some might have to effect in most cases. Please note that you have to enable/disable this effect with EnableMaterial2D(). This effect is costly, as it increases the number of state changes considerably. Always reset the values when done.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MaterialRendererCount">
+			<summary>Amount of currently available material renderers.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MaxClipPlaneCount">
+			<summary>Maximum number of user clipping planes available.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MaxDynamicLightCount">
+			<summary>Maximum number of dynamic lights the device can handle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MaxPrimitiveCount">
+			<summary>Maximum number of primitives (mostly vertices) which the device is able to render with single DrawVertexPrimitiveList() call.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MaxTextureSize">
+			<summary>Maximum texture size supported.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.MeshManipulator">
+			<summary>Mesh manipulator.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.Name">
+			<summary>The name of the video driver, e.g. in case of the Direct3D8 driver, it would hold "Direct3D 8.1".</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.PrimitiveCountDrawn">
+			<summary>Amount of primitives (mostly triangles) which were drawn during the last frame.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.QueryFeature(IrrlichtLime.Video.VideoDriverFeature)">
+			<summary>Queries the features of the driver.
+
+Returns true if the feature is available.</summary>
+			<param name="feature">Feature to query.</param>
+			<returns>True if the feature is available, false if not.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllHardwareBuffers">
 			<summary>Removes all hardware buffers.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllOcclusionQueries">
 			<summary>Removes all occlusion queries.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllTextures">
+			<summary>Removes all textures from the texture cache and deletes them.
+
+This method can free a lot of memory! Please note that after calling this, the pointer to the Texture may no longer be valid, if it was not grabbed before by other parts of the engine for storing it longer. So it is a good idea to set all materials which are using this texture to null or another texture first.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveHardwareBuffer(IrrlichtLime.Scene.MeshBuffer)">
 			<summary>Removes hardware buffer.</summary>
@@ -5598,7 +5789,227 @@ Please note that currently not all primitives are available for all drivers, and
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
 			<summary>Removes occlusion query.</summary>
-			<param name="node">Node.</param>
+			<param name="node">Scene node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveTexture(IrrlichtLime.Video.Texture)">
+			<summary>Removes a texture from the texture cache and deletes it.
+
+This method can free a lot of memory! Please note that after calling this, the pointer to the Texture may no longer be valid, if it was not grabbed before by other parts of the engine for storing it longer. So it is a good idea to set all materials which are using this texture to null or another texture first.</summary>
+			<param name="texture">Texture to delete from the engine cache.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RenameTexture(IrrlichtLime.Video.Texture,System.String)">
+			<summary>Renames a texture.</summary>
+			<param name="texture">Texture to rename.</param>
+			<param name="newName">New name for the texture. This should be a unique name.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.ResizeNotify(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Notifies engine that window has been resized.
+
+In most cases you do not have to call this method. You have to call this method only when you have created device with non-zero IrrlichtCreationParameters.WindowID and rendering window can be resized externally.</summary>
+			<param name="size">New size of the rendering window.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RunAllOcclusionQueries">
+			<summary>Runs all occlusion queries. Draws all meshes stored in queries.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RunAllOcclusionQueries(System.Boolean)">
+			<summary>Runs all occlusion queries. Draws all meshes stored in queries.</summary>
+			<param name="visible">Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RunOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
+			<summary>Runs occlusion query. Draws mesh stored in query.</summary>
+			<param name="node">Scene node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RunOcclusionQuery(IrrlichtLime.Scene.SceneNode,System.Boolean)">
+			<summary>Runs occlusion query. Draws mesh stored in query.</summary>
+			<param name="node">Scene node.</param>
+			<param name="visible">Default: false.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.ScreenSize">
+			<summary>The size of the render window.
+
+In fullscreen mode it is also a screen size.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetClipPlane(System.Int32,IrrlichtLime.Core.Plane3Df)">
+			<summary>Sets or unsets a clipping plane.</summary>
+			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="plane">The plane itself.</param>
+			<returns>True if the clipping plane is usable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetClipPlane(System.Int32,IrrlichtLime.Core.Plane3Df,System.Boolean)">
+			<summary>Sets or unsets a clipping plane.</summary>
+			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="plane">The plane itself.</param>
+			<param name="enable">If true, enable the clipping plane else disable it. Default: true.</param>
+			<returns>True if the clipping plane is usable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetMaterial(IrrlichtLime.Video.Material)">
+			<summary>Sets a material.
+
+All 3d drawing functions will draw geometry using this material thereafter.</summary>
+			<param name="material">Material to be used from now on.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetMaterialRendererName(IrrlichtLime.Video.MaterialType,System.String)">
+			<summary>Sets the name of a material renderer.
+
+Will have no effect on built-in material renderers.</summary>
+			<param name="materialType">Material type. Value which was returned by AddMaterialRenderer() or GPUProgrammingServices.Add*().</param>
+			<param name="name">New name of the material renderer.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetMinHardwareBufferVertexCount(System.Int32)">
+			<summary>Sets the minimum number of vertices for which a hardware buffer will be created.</summary>
+			<param name="count">Number of vertices to set as minimum.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget)">
+			<summary>Sets or resets special render targets.
+
+This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
+			<param name="target">Render target.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean)">
+			<summary>Sets or resets special render targets.
+
+This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
+			<param name="target">Render target.</param>
+			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean,System.Boolean)">
+			<summary>Sets or resets special render targets.
+
+This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
+			<param name="target">Render target.</param>
+			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
+			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Sets or resets special render targets.
+
+This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
+			<param name="target">Render target.</param>
+			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
+			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
+			<param name="color">The color for the render target. Default: black.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture)">
+			<summary>Sets a new render target.
+
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean)">
+			<summary>Sets a new render target.
+
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
+			<param name="clearBackBuffer">True for clearing the back buffer with the color parameter. Default: true.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean)">
+			<summary>Sets a new render target.
+
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
+			<param name="clearBackBuffer">True for clearing the back buffer with the color parameter. Default: true.</param>
+			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Sets a new render target.
+
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
+			<param name="clearBackBuffer">True for clearing the back buffer with the color parameter. Default: true.</param>
+			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
+			<param name="color">The color for the render target. Default: black.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetTextureCreationFlag(IrrlichtLime.Video.TextureCreationFlag,System.Boolean)">
+			<summary>Enables or disables a texture creation flag.
+
+These flags define how textures should be created. By changing this value, you can influence for example the speed of rendering a lot. But please note that the video drivers take this value only as recommendation. It could happen that you enable the TextureCreationFlag.Always16Bit mode, but the driver still creates 32-bit textures.</summary>
+			<param name="flag">Texture creation flag to set.</param>
+			<param name="enabled">Specifies if the given flag should be enabled or disabled.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetTransform(IrrlichtLime.Video.TransformationState,IrrlichtLime.Core.Matrix)">
+			<summary>Sets transformation matrices.</summary>
+			<param name="state">Transformation type to be set.</param>
+			<param name="mat">Matrix describing the transformation.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.TextureCount">
+			<summary>Amount of textures currently loaded.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.TurnLight(System.Int32,System.Boolean)">
+			<summary>Turns a dynamic light on or off.</summary>
+			<param name="index">Index of the dynamic light. Value returned by AddDynamicLight().</param>
+			<param name="turnOn">True to turn the light on, false to turn it off.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.UpdateAllOcclusionQueries">
+			<summary>Update all occlusion queries. Retrieves results from GPU. If the query shall not block, set the flag to false. Update might not occur in this case, though.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.UpdateAllOcclusionQueries(System.Boolean)">
+			<summary>Update all occlusion queries. Retrieves results from GPU. If the query shall not block, set the flag to false. Update might not occur in this case, though.</summary>
+			<param name="block">Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.UpdateOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
+			<summary>Update all occlusion queries. Retrieves results from GPU. If the query shall not block, set the flag to false. Update might not occur in this case, though.</summary>
+			<param name="node">Scene node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.UpdateOcclusionQuery(IrrlichtLime.Scene.SceneNode,System.Boolean)">
+			<summary>Update all occlusion queries. Retrieves results from GPU. If the query shall not block, set the flag to false. Update might not occur in this case, though.</summary>
+			<param name="node">Scene node.</param>
+			<param name="block">Default: true.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.VendorInfo">
+			<summary>The graphics card vendor name.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.ViewPort">
+			<summary>The area of the current viewport.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.WriteImage(IrrlichtLime.Video.Image,IrrlichtLime.IO.WriteFile)">
+			<summary>Writes image to a file.
+
+Requires that there is a suitable image writer registered for writing the image.</summary>
+			<param name="image">Image to write.</param>
+			<param name="file">An already open WriteFile object. The name will be used to determine the appropriate image writer to use.</param>
+			<returns>True on successful write.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.WriteImage(IrrlichtLime.Video.Image,IrrlichtLime.IO.WriteFile,System.UInt32)">
+			<summary>Writes image to a file.
+
+Requires that there is a suitable image writer registered for writing the image.</summary>
+			<param name="image">Image to write.</param>
+			<param name="file">An already open WriteFile object. The name will be used to determine the appropriate image writer to use.</param>
+			<param name="param">Control parameter for the backend (e.g. compression level). Default: 0.</param>
+			<returns>True on successful write.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.WriteImage(IrrlichtLime.Video.Image,System.String)">
+			<summary>Writes image to a file.
+
+Requires that there is a suitable image writer registered for writing the image.</summary>
+			<param name="image">Image to write.</param>
+			<param name="filename">Name of the file to write.</param>
+			<returns>True on successful write.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.WriteImage(IrrlichtLime.Video.Image,System.String,System.UInt32)">
+			<summary>Writes image to a file.
+
+Requires that there is a suitable image writer registered for writing the image.</summary>
+			<param name="image">Image to write.</param>
+			<param name="filename">Name of the file to write.</param>
+			<param name="param">Control parameter for the backend (e.g. compression level). Default: 0.</param>
+			<returns>True on successful write.</returns>
 		</member>
 		<member name="T:IrrlichtLime.Video.VideoDriverFeature">
 			<summary>Enumeration for querying features of the video driver.</summary>
