@@ -8,6 +8,19 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 
+Timer::RealTimeDate::RealTimeDate(const ITimer::RealTimeDate& other)
+	: Lime::NativeValue<ITimer::RealTimeDate>(true)
+{
+	m_NativeValue = new ITimer::RealTimeDate(other);
+}
+
+String^ Timer::RealTimeDate::ToString()
+{
+	return String::Format(
+		"{0} {1:0000}-{2:00}-{3:00} {4:00}:{5:00}:{6:00}", // "Monday 2010-10-11 17:04:39"
+		DayOfWeek, Year, Month, Day, Hour, Minute, Second);
+}
+
 Timer^ Timer::Wrap(irr::ITimer* ref)
 {
 	if (ref == nullptr)
@@ -46,6 +59,12 @@ bool Timer::IsStopped::get()
 unsigned int Timer::RealTime::get()
 {
 	return m_Timer->getRealTime();
+}
+
+Timer::RealTimeDate^ Timer::RealTimeAndDate::get()
+{
+	ITimer::RealTimeDate t = m_Timer->getRealTimeAndDate();
+	return gcnew Timer::RealTimeDate(t);
 }
 
 float Timer::Speed::get()

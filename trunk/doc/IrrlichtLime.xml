@@ -292,7 +292,7 @@ Default value: false.</summary>
 
 Makes sharp/pixelated edges softer, but requires more performance. Also, 2D elements might look blurred with this switched on. The resulting rendering quality also depends on the hardware and driver you are using, your program might look different on different hardware with this. So if you are writing a game/application with AntiAlias switched on, it would be a good idea to make it possible to switch this option off again by the user. The value is the maximal antialiasing factor requested for the device. The cretion method will automatically try smaller values if no window can be created with the given value. Value one is usually the same as 0 (disabled), but might be a special value on some platforms. On D3D devices it maps to NONMASKABLE.
 
-Default value: 0 - disabled.</summary>
+Default value: 0 (disabled).</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.BitsPerPixel">
 			<summary>Minimum Bits per pixel of the color buffer in fullscreen mode. Ignored if windowed mode.
@@ -303,6 +303,7 @@ Default value: 16.</summary>
 			<summary>Type of the device.
 
 This setting decides the windowing system used by the device, most device types are native to a specific operating system and so may not be available. DeviceType.Win32 is only available on Windows desktops, DeviceType.WinCE is only available on Windows mobile devices, DeviceType.COCOA is only available on Mac OSX, DeviceType.X11 is available on Linux, Solaris, BSD and other operating systems which use X11, DeviceType.SDL is available on most systems if compiled in, DeviceType.Console is usually available but can only render to text, DeviceType.Best will select the best available device for your operating system. 
+
 Default value: DeviceType.Best.</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DoubleBuffer">
@@ -362,6 +363,11 @@ Some high-end gfx cards support two framebuffers for direct support of stereosco
 
 Default value: false.</summary>
 		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.UsePerformanceTimer">
+			<summary>Enables use of high performance timers on Windows platform. When performance timers are not used, standard GetTickCount() is used instead which usually has worse resolution, but also less problems with speed stepping and other techniques.
+
+Default value: true.</summary>
+		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.VSync">
 			<summary>Specifies vertical syncronisation.
 
@@ -374,7 +380,7 @@ Default value: false.</summary>
 
 If this is set to a value other than 0, the Irrlicht Engine will be created in an already existing window. For windows, set this to the HWND of the window you want. The windowSize and FullScreen options will be ignored when using the WindowID parameter. To make Irrlicht run inside the custom window, you still will have to draw Irrlicht on your own.
 
-Default value: 0 - use own window.</summary>
+Default value: IntPtr.Zero (use own window).</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.WindowSize">
 			<summary>Size of the window or the video mode in fullscreen mode.
@@ -1194,6 +1200,39 @@ When you create an object in the Irrlicht Engine, calling a method which starts 
 
 This value does not start with 0 when the application starts. For example in one implementation the value returned could be the amount of milliseconds which have elapsed since the system was started.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeAndDate">
+			<summary>Current real date and time.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Timer.RealTimeDate">
+			<summary>Date and time.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Day">
+			<summary>Day of the month, from 1 to 31.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.DayOfWeek">
+			<summary>Day of the week for the current day.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.DayOfYear">
+			<summary>Day of the year, from 1 to 366.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Hour">
+			<summary>Hour of the day, from 0 to 23.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.IsDST">
+			<summary>Whether daylight saving is on.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Minute">
+			<summary>Minute of the hour, from 0 to 59.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Month">
+			<summary>Month of the year, from 1 to 12.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Second">
+			<summary>Second of the minute, due to extra seconds from 0 to 61.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Timer.RealTimeDate.Year">
+			<summary>Year of the gregorian calender.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Timer.Speed">
 			<summary>Speed of the timer.
 
@@ -1218,6 +1257,30 @@ Makes the virtual timer update the time value based on the real time. This is ca
 			<summary>Current virtual time in milliseconds.
 
 This value starts with 0 and can be manipulated: value can be set, you can call Start() or Stop() or change Speed. If you need the system time, use RealTime.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Timer.WeekDay">
+			<summary>Enumeration for days of week.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Friday">
+			<summary>Friday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Monday">
+			<summary>Monday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Saturday">
+			<summary>Saturday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Sunday">
+			<summary>Sunday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Thursday">
+			<summary>Thursday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Tuesday">
+			<summary>Tuesday.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Timer.WeekDay.Wednesday">
+			<summary>Wednesday.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.AABBox">
 			<summary>Axis aligned bounding box in 3d dimensional space.</summary>
@@ -1573,7 +1636,7 @@ The matrix is a D3D style matrix, row major with translations in the 4th row.</s
 		<member name="M:IrrlichtLime.Core.Matrix.BuildNDCToDCMatrix(IrrlichtLime.Core.Recti,System.Single)">
 			<summary>Builds a matrix which transforms a normalized Device Coordinate to Device Coordinates.
 
-Used to scale (-1,-1)-(1,1) to viewport size, for example to (0,0)-(639,479).</summary>
+Used to scale (-1,-1)-(1,1) to viewport size, for example from (-1,-1)-(1,1) to (0,0)-(640,480).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.BuildProjectionMatrixOrthoLH(System.Single,System.Single,System.Single,System.Single)">
 			<summary>Builds a left-handed orthogonal projection matrix.</summary>
@@ -1680,7 +1743,7 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 			<summary>Matrix rotation in degrees. Note that it does not necessarily return the *same* Euler angles as those previously set, but the rotation will be equivalent, i.e. will have the same result when used to rotate a vector or node.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Matrix.Scale">
-			<summary>Absolute values of the scales of the matrix. Note that this always returns the absolute (positive) values.</summary>
+			<summary>Absolute values of the scales of the matrix. Note that this returns the absolute (positive) values unless only scale is set.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.SetByProduct(IrrlichtLime.Core.Matrix,IrrlichtLime.Core.Matrix)">
 			<summary>Set this matrix to the product of two matrices. Multiply by another matrix.</summary>
