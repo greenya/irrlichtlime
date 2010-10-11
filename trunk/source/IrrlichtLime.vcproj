@@ -23,6 +23,7 @@
 			ConfigurationType="2"
 			CharacterSet="1"
 			ManagedExtensions="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;$(TargetPath)"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -96,6 +97,7 @@
 			ConfigurationType="2"
 			CharacterSet="1"
 			ManagedExtensions="1"
+			DeleteExtensionsOnClean="*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;$(TargetPath)"
 			WholeProgramOptimization="1"
 			>
 			<Tool

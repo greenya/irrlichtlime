@@ -39,7 +39,9 @@ VideoDriver::VideoDriver(video::IVideoDriver* ref)
 
 int VideoDriver::AddDynamicLight(Light^ light)
 {
+	LIME_ASSERT(DynamicLightCount + 1 < MaxDynamicLightCount);
 	LIME_ASSERT(light != nullptr);
+
 	return m_VideoDriver->addDynamicLight(*light->m_NativeValue);
 }
 
@@ -765,13 +767,13 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 
 void VideoDriver::EnableClipPlane(int index, bool enable)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
 	m_VideoDriver->enableClipPlane(index, enable);
 }
 
 void VideoDriver::EnableClipPlane(int index)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
 	m_VideoDriver->enableClipPlane(index, true);
 }
 
@@ -980,7 +982,7 @@ void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node)
 
 bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane, bool enable)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
 	LIME_ASSERT(plane != nullptr);
 
 	return m_VideoDriver->setClipPlane(
@@ -991,7 +993,7 @@ bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane, bool enable)
 
 bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlanes);
+	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
 	LIME_ASSERT(plane != nullptr);
 
 	return m_VideoDriver->setClipPlane(
@@ -1229,7 +1231,7 @@ int VideoDriver::PrimitiveCountDrawn::get()
 	return m_VideoDriver->getPrimitiveCountDrawn();
 }
 
-int VideoDriver::MaximalDynamicLightCount::get()
+int VideoDriver::MaxDynamicLightCount::get()
 {
 	return m_VideoDriver->getMaximalDynamicLightAmount();
 }
@@ -1244,7 +1246,7 @@ Video::ExposedVideoData^ VideoDriver::ExposedVideoData::get()
 	return gcnew Video::ExposedVideoData(m_VideoDriver->getExposedVideoData());
 }
 
-int VideoDriver::MaximalPrimitiveCount::get()
+int VideoDriver::MaxPrimitiveCount::get()
 {
 	return m_VideoDriver->getMaximalPrimitiveCount();
 }
