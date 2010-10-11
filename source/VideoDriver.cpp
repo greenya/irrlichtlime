@@ -877,22 +877,10 @@ Matrix^ VideoDriver::GetTransform(TransformationState state)
 	return gcnew Matrix(m_VideoDriver->getTransform((video::E_TRANSFORMATION_STATE)state));
 }
 
-void VideoDriver::MakeColorKeyTexture(Texture^ texture, Color^ color, bool zeroTexels)
-{
-	LIME_ASSERT(color != nullptr);
-	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *color->m_NativeValue, zeroTexels);
-}
-
 void VideoDriver::MakeColorKeyTexture(Texture^ texture, Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *color->m_NativeValue);
-}
-
-void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos, bool zeroTexels)
-{
-	LIME_ASSERT(colorKeyPixelPos != nullptr);
-	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *colorKeyPixelPos->m_NativeValue, zeroTexels);
 }
 
 void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos)

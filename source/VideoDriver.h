@@ -147,9 +147,7 @@ public:
 
 	Matrix^ GetTransform(TransformationState state);
 
-	void MakeColorKeyTexture(Texture^ texture, Color^ color, bool zeroTexels);
 	void MakeColorKeyTexture(Texture^ texture, Color^ color);
-	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos, bool zeroTexels);
 	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos);
 	void MakeNormalMapTexture(Texture^ texture, float amplitude);
 	void MakeNormalMapTexture(Texture^ texture);
