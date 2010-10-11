@@ -1,12 +1,42 @@
 ============================
-Changes in 0.7 (XX-Oct-2010)
+Changes in 0.7 (12-Oct-2010)
 ============================
 
 - Added examples 10.Shaders, L03.RGBSwirl and L04.ParticleEmitterViewer.
 
 - Updated Irrlicht SDK to trunk rev. 3427: added Timer.RealTimeAndDate prop, Timer.RealTimeDate class, Timer.WeekDay enum, IrrlichtCreationParameters.UsePerformanceTimer prop. Also some bugs were fixed (see Irrlicht Engine svn trunk logs for details).
 
-- ........
+- Added Visual Studio' IntelliSense xml doc file for IrrlichtLime.dll. Currently fully documented next namespaces: IrrlichtLime (root), Core, IO and Video.
+
+- Added methods CopyTo(), CopyToScaling(), CopyToScalingBoxFilter() and CopyToWithAlpha() to Image.
+
+- Added methods UpdateIndices, UpdateVertices, overloading of Append method (operates with arrays of vertices and indices), added get-only props Indicies and Vertices to MeshBuffer.
+
+- Added classes Vertex3DTTCoords and Vertex3DTangents.
+
+- Added correct type solving for all derived classes from ParticleAffector and ParticleEmitter.
+
+- Added method IrrlichtDevice.PostEvent. Added method ResizeNotify to VideoDriver.
+
+- Added enum VideoModeAspectRatio. Added static method GetAspectRatio, property Wide, field AspectRatio to VideoMode.
+
+- Added class OSOperator and prop IrrlichtDevice.OSOperator.
+
+- Added methods LoadGUI and SaveGUI to GUIEnvironment; additional overloading of SaveScene and LoadScene to SceneManager; additional overloading of CreateImage and WriteImage to VideoDriver.
+
+- Added methods CreateLimitReadFile, CreateMemoryReadFile, CreateReadFile, CreateWriteFile and CreateMemoryWriteFile to FileSystem. Added class WriteFile.
+
+- Added class GPUProgrammingServices, enums GeometryShaderType, PixelShaderType and VertexShaderType. Added prop VideoDriver.GPUProgrammingServices. Changed return type of Video.AddMaterialRenderer() to MaterialType (was int).
+
+- Added method ToArray to class Colorf. Method GetElementArray renamed to ToArray in class Matrix. Added copy-constructor to Material.
+
+- Added class Logger. Added prop IrrlichtDevice.Logger.
+
+- Added class MaterialRendererServices.
+
+- Added class SkinnedMesh, enum InterpolationMode. Added method SceneManager.CreateSkinnedMesh.
+
+- Added class ImageLoader. Added prop ImageLoaderCount and method GetImageLoader to VideoDriver.
 
 ============================
 Changes in 0.6 (25-Jul-2010)
