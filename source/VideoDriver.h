@@ -24,7 +24,7 @@ public ref class VideoDriver : ReferenceCounted
 {
 public:
 
-	static property int MaxClipPlanes { int get() { return 6; } } // "6", because i don't know how detect real number of available clip planes
+	static property int MaxClipPlaneCount { int get() { return 6; } } // "6", because i don't know how detect real number of available clip planes
 	// and doc says: "There are at least 6 clipping planes available for the user to set at will. The plane index must be between 0
 	// and MaxUserClipPlanes" (MaxUserClipPlanes is a private variable and calculates from device caps internally).
 
@@ -218,8 +218,8 @@ public:
 	property int ImageLoaderCount { int get(); }
 	property Material^ Material2D { Material^ get(); }
 	property int MaterialRendererCount { int get(); }
-	property int MaximalDynamicLightCount { int get(); }
-	property int MaximalPrimitiveCount { int get(); }
+	property int MaxDynamicLightCount { int get(); }
+	property int MaxPrimitiveCount { int get(); }
 	property Dimension2Di^ MaxTextureSize { Dimension2Di^ get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property String^ Name { String^ get(); }
