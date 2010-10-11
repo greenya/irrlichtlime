@@ -175,7 +175,7 @@ public:
 
 	void SetMaterial(Material^ material);
 
-	void SetMaterialRendererName(int index, String^ name);
+	void SetMaterialRendererName(MaterialType materialType, String^ name);
 
 	void SetMinHardwareBufferVertexCount(int count);
 

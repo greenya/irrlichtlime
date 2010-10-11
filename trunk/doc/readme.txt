@@ -1,4 +1,4 @@
-This folder contain documentation related files.
+This folder contains documentation related files.
 
 IrrlichtLime.xml
 ----------------
