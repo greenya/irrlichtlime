@@ -526,6 +526,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CameraMayaSceneNodeAnimator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CameraMayaSceneNodeAnimator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\CameraSceneNode.cpp"
 				>
 			</File>
