@@ -518,6 +518,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CameraFPSSceneNodeAnimator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CameraFPSSceneNodeAnimator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\CameraSceneNode.cpp"
 				>
 			</File>
