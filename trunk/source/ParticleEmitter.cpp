@@ -73,6 +73,27 @@ void ParticleEmitter::Direction::set(Vector3Df^ value)
 	m_ParticleEmitter->setDirection(*value->m_NativeValue);
 }
 
+int ParticleEmitter::MaxAngleDegrees::get()
+{
+	return m_ParticleEmitter->getMaxAngleDegrees();
+}
+
+void ParticleEmitter::MaxAngleDegrees::set(int value)
+{
+	m_ParticleEmitter->setMaxAngleDegrees(value);
+}
+
+int ParticleEmitter::MaxLifeTime::get()
+{
+	return m_ParticleEmitter->getMaxLifeTime();
+}
+
+void ParticleEmitter::MaxLifeTime::set(int value)
+{
+	LIME_ASSERT(value >= 0);
+	m_ParticleEmitter->setMaxLifeTime(value);
+}
+
 int ParticleEmitter::MaxParticlesPerSecond::get()
 {
 	return m_ParticleEmitter->getMaxParticlesPerSecond();
@@ -104,6 +125,17 @@ void ParticleEmitter::MaxStartSize::set(Dimension2Df^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_ParticleEmitter->setMaxStartSize(*value->m_NativeValue);
+}
+
+int ParticleEmitter::MinLifeTime::get()
+{
+	return m_ParticleEmitter->getMinLifeTime();
+}
+
+void ParticleEmitter::MinLifeTime::set(int value)
+{
+	LIME_ASSERT(value >= 0);
+	m_ParticleEmitter->setMinLifeTime(value);
 }
 
 int ParticleEmitter::MinParticlesPerSecond::get()

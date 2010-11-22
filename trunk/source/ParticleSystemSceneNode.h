@@ -124,6 +124,7 @@ public:
 	void SetParticleSize(Dimension2Df^ size);
 	void SetParticleSize();
 
+	property List<ParticleAffector^>^ AffectorList { List<ParticleAffector^>^ get(); }
 	property ParticleEmitter^ Emitter { ParticleEmitter^ get(); void set(ParticleEmitter^ value); }
 
 internal:

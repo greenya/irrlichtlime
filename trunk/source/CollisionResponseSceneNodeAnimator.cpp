@@ -41,7 +41,7 @@ void CollisionResponseSceneNodeAnimator::AnimateTarget::set(bool value)
 
 SceneNode^ CollisionResponseSceneNodeAnimator::CollisionNode::get()
 {
-	scene::ISceneNode* n = (scene::ISceneNode*)m_CollisionResponseSceneNodeAnimator->getCollisionNode(); // !!! cast to non-const pointer
+	scene::ISceneNode* n = m_CollisionResponseSceneNodeAnimator->getCollisionNode();
 	return SceneNode::Wrap(n);
 }
 
