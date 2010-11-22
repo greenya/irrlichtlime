@@ -24,14 +24,14 @@ ParticleFadeOutAffector::ParticleFadeOutAffector(scene::IParticleFadeOutAffector
 	m_ParticleFadeOutAffector = ref;
 }
 
-float ParticleFadeOutAffector::FadeOutTime::get()
+int ParticleFadeOutAffector::FadeOutTime::get()
 {
 	return m_ParticleFadeOutAffector->getFadeOutTime();
 }
 
-void ParticleFadeOutAffector::FadeOutTime::set(float value)
+void ParticleFadeOutAffector::FadeOutTime::set(int value)
 {
-	LIME_ASSERT(value >= 0.0f);
+	LIME_ASSERT(value >= 0);
 	m_ParticleFadeOutAffector->setFadeOutTime(value);
 }
 

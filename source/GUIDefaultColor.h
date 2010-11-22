@@ -31,7 +31,11 @@ public enum class GUIDefaultColor
 	WindowBackground = EGDC_WINDOW,
 	WindowSymbol = EGDC_WINDOW_SYMBOL,
 	Icon = EGDC_ICON,
-	IconHighLight = EGDC_ICON_HIGH_LIGHT
+	IconHighLight = EGDC_ICON_HIGH_LIGHT,
+	GrayWindowSymbol = EGDC_GRAY_WINDOW_SYMBOL,
+	Editable = EGDC_EDITABLE,
+	GrayEditable = EGDC_GRAY_EDITABLE,
+	FocusedEditable = EGDC_FOCUSED_EDITABLE
 };
 
 } // end namespace GUI

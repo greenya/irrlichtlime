@@ -32,7 +32,7 @@ bool SceneCollisionManager::GetCollisionPoint(Line3Df^ ray, TriangleSelector^ se
 
 	core::vector3df cp;
 	core::triangle3df ct;
-	const scene::ISceneNode* cn;
+	scene::ISceneNode* cn;
 
 	bool b = m_SceneCollisionManager->getCollisionPoint(
 		*ray->m_NativeValue,
@@ -43,7 +43,7 @@ bool SceneCollisionManager::GetCollisionPoint(Line3Df^ ray, TriangleSelector^ se
 	{
 		collisionPoint = gcnew Vector3Df(cp);
 		collisionTriangle = gcnew Triangle3Df(ct);
-		collisionNode = SceneNode::Wrap((scene::ISceneNode*)cn); // !!! cast to non-const pointer
+		collisionNode = SceneNode::Wrap(cn);
 	}
 
 	return b;
@@ -61,7 +61,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	core::triangle3df ct;
 	core::vector3df cp;
 	bool f;
-	const scene::ISceneNode* cn;
+	scene::ISceneNode* cn;
 
 	core::vector3df v = m_SceneCollisionManager->getCollisionResultPosition(
 		LIME_SAFEREF(selector, m_TriangleSelector),
@@ -75,7 +75,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	collisionTriangle = gcnew Triangle3Df(ct);
 	collisionPosition = gcnew Vector3Df(cp);
 	falling = f;
-	collisionNode = SceneNode::Wrap((scene::ISceneNode*)cn); // !!! cast to non-const pointer
+	collisionNode = SceneNode::Wrap(cn);
 
 	return gcnew Vector3Df(v);
 }
@@ -91,7 +91,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	core::triangle3df ct;
 	core::vector3df cp;
 	bool f;
-	const scene::ISceneNode* cn;
+	scene::ISceneNode* cn;
 
 	core::vector3df v = m_SceneCollisionManager->getCollisionResultPosition(
 		LIME_SAFEREF(selector, m_TriangleSelector),
@@ -104,7 +104,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	collisionTriangle = gcnew Triangle3Df(ct);
 	collisionPosition = gcnew Vector3Df(cp);
 	falling = f;
-	collisionNode = SceneNode::Wrap((scene::ISceneNode*)cn); // !!! cast to non-const pointer
+	collisionNode = SceneNode::Wrap(cn);
 
 	return gcnew Vector3Df(v);
 }
@@ -120,7 +120,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	core::triangle3df ct;
 	core::vector3df cp;
 	bool f;
-	const scene::ISceneNode* cn;
+	scene::ISceneNode* cn;
 
 	core::vector3df v = m_SceneCollisionManager->getCollisionResultPosition(
 		LIME_SAFEREF(selector, m_TriangleSelector),
@@ -132,7 +132,7 @@ Vector3Df^ SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ s
 	collisionTriangle = gcnew Triangle3Df(ct);
 	collisionPosition = gcnew Vector3Df(cp);
 	falling = f;
-	collisionNode = SceneNode::Wrap((scene::ISceneNode*)cn); // !!! cast to non-const pointer
+	collisionNode = SceneNode::Wrap(cn);
 
 	return gcnew Vector3Df(v);
 }

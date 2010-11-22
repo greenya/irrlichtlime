@@ -1,11 +1,12 @@
 SRC: https://irrlicht.svn.sourceforge.net/svnroot/irrlicht/trunk
-REV: 3427
+REV: 3442
 
 IrrCompileConfig.h
 	+ _IRR_COMPILE_WITH_DIRECT3D_8_
 	+ _IRR_WCHAR_FILESYSTEM
 
 Irrlicht9.0.vcproj
-	Character Set = "Use Unicode Character Set"
-	Additional Include Directories += ";..\..\..\DX89SDK\Include"
-	Additional Library Directories = "..\..\..\DX89SDK\Lib\x86"
+	General -> Character Set = "Use Unicode Character Set"
+	C/C++ -> General -> Additional Include Directories += ";..\..\..\DX89SDK\Include"
+	C/C++ -> Code Generation -> Runtime Library = "Multi-threaded Debug DLL" / "Multi-threaded DLL"
+	Linker -> General -> Additional Library Directories = "..\..\..\DX89SDK\Lib\x86"

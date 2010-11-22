@@ -1440,6 +1440,17 @@ void ParticleSystemSceneNode::SetParticleSize()
 	m_ParticleSystemSceneNode->setParticleSize();
 }
 
+List<ParticleAffector^>^ ParticleSystemSceneNode::AffectorList::get()
+{
+	List<ParticleAffector^>^ l = gcnew List<ParticleAffector^>();
+
+	core::list<scene::IParticleAffector*> a = m_ParticleSystemSceneNode->getAffectors();
+	for (core::list<scene::IParticleAffector*>::ConstIterator i = a.begin(); i != a.end(); ++i)
+		l->Add(ParticleAffector::Wrap(*i));
+
+	return l;
+}
+
 ParticleEmitter^ ParticleSystemSceneNode::Emitter::get()
 {
 	scene::IParticleEmitter* e = m_ParticleSystemSceneNode->getEmitter();

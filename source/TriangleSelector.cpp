@@ -28,7 +28,7 @@ SceneNode^ TriangleSelector::GetSceneNodeForTriangle(int triangleIndex)
 {
 	LIME_ASSERT(triangleIndex >= 0 && triangleIndex < TriangleCount);
 
-	scene::ISceneNode* n = (scene::ISceneNode*)m_TriangleSelector->getSceneNodeForTriangle(triangleIndex); // !!! cast to non-const pointer
+	scene::ISceneNode* n = m_TriangleSelector->getSceneNodeForTriangle(triangleIndex);
 	return SceneNode::Wrap(n);
 }
 
