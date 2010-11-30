@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L03.RGBSwirl", "examples\L0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L04.ParticleEmitterViewer", "examples\L04.ParticleEmitterViewer\L04.ParticleEmitterViewer.csproj", "{6D323ACF-9D32-4BCE-815E-36D37A5EED03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L05.ScreenshotToTexture", "examples\L05.ScreenshotToTexture\L05.ScreenshotToTexture.csproj", "{7F70EF65-9800-4618-84FF-7CE8661E6C39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -293,6 +295,18 @@ Global
 		{6D323ACF-9D32-4BCE-815E-36D37A5EED03}.Release|Win32.ActiveCfg = Release|x86
 		{6D323ACF-9D32-4BCE-815E-36D37A5EED03}.Release|x86.ActiveCfg = Release|x86
 		{6D323ACF-9D32-4BCE-815E-36D37A5EED03}.Release|x86.Build.0 = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|Win32.ActiveCfg = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|x86.ActiveCfg = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Debug|x86.Build.0 = Debug|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|Any CPU.ActiveCfg = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|Mixed Platforms.Build.0 = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|Win32.ActiveCfg = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|x86.ActiveCfg = Release|x86
+		{7F70EF65-9800-4618-84FF-7CE8661E6C39}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
