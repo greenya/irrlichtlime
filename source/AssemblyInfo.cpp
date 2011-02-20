@@ -9,7 +9,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTitleAttribute("Irrlicht Lime")];
 
 #if _DEBUG
-[assembly:AssemblyDescriptionAttribute("The Irrlicht Lime is a .NET wrapper for the Irrlicht Engine. (DEBUG)")];
+[assembly:AssemblyDescriptionAttribute("The Irrlicht Lime is a .NET wrapper for the Irrlicht Engine. (This is Debug build.)")];
 #else
 [assembly:AssemblyDescriptionAttribute("The Irrlicht Lime is a .NET wrapper for the Irrlicht Engine.")];
 #endif
@@ -17,11 +17,11 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("Irrlicht Lime")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Yuriy Grinevich 2010")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Yuriy Grinevich 2010-2011")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
-[assembly:AssemblyVersionAttribute("0.7.*")];
+[assembly:AssemblyVersionAttribute("0.7")];
 
 [assembly:ComVisible(false)];
 [assembly:CLSCompliantAttribute(true)];
