@@ -345,9 +345,9 @@ Default value: false.</summary>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.LoggingLevel">
 			<summary>Specifies the logging level used in the logging interface.
 
-You can access the ILogger interface later on from the IrrlichtDevice with getLogger() and set another level. But if you need more or less logging information already from device creation, then you have to change it here.
+You can access the Logger later on from the IrrlichtDevice.Logger property and set another level. But if you need more or less logging information already from device creation, then you have to change it here.
 
-Default value: LogLevel.Information.</summary>
+Default value: LogLevel.Information for Release buid and LogLevel.Debug for Debug build.</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.StencilBuffer">
 			<summary>Specifies if the stencil buffer should be enabled.
