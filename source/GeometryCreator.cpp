@@ -331,6 +331,51 @@ Mesh^ GeometryCreator::CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ til
 	return Mesh::Wrap(m);
 }
 
+Mesh^ GeometryCreator::CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileSize->Width > 0.0f);
+	LIME_ASSERT(tileSize->Height > 0.0f);
+	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width > 0);
+	LIME_ASSERT(tileCount->Height > 0);
+
+	scene::IMesh* m = m_GeometryCreator->createPlaneMesh(
+		*tileSize->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue,
+		LIME_SAFEREF(material, m_NativeValue));
+
+	return Mesh::Wrap(m);
+}
+
+Mesh^ GeometryCreator::CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileSize->Width > 0.0f);
+	LIME_ASSERT(tileSize->Height > 0.0f);
+	LIME_ASSERT(tileCount != nullptr);
+	LIME_ASSERT(tileCount->Width > 0);
+	LIME_ASSERT(tileCount->Height > 0);
+
+	scene::IMesh* m = m_GeometryCreator->createPlaneMesh(
+		*tileSize->m_NativeValue,
+		(core::dimension2du&)*tileCount->m_NativeValue);
+
+	return Mesh::Wrap(m);
+}
+
+Mesh^ GeometryCreator::CreatePlaneMesh(Dimension2Df^ tileSize)
+{
+	LIME_ASSERT(tileSize != nullptr);
+	LIME_ASSERT(tileSize->Width > 0.0f);
+	LIME_ASSERT(tileSize->Height > 0.0f);
+
+	scene::IMesh* m = m_GeometryCreator->createPlaneMesh(
+		*tileSize->m_NativeValue);
+
+	return Mesh::Wrap(m);
+}
+
 Mesh^ GeometryCreator::CreateSphereMesh(float radius, int polyCountX, int polyCountY)
 {
 	LIME_ASSERT(radius > 0.0f);
