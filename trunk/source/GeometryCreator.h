@@ -40,6 +40,9 @@ public:
 	Mesh^ CreateHillPlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount);
 
 	Mesh^ CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, Dimension2Df^ textureRepeatCount);
+	Mesh^ CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material);
+	Mesh^ CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount);
+	Mesh^ CreatePlaneMesh(Dimension2Df^ tileSize);
 
 	Mesh^ CreateSphereMesh(float radius, int polyCountX, int polyCountY);
 	Mesh^ CreateSphereMesh(float radius);
