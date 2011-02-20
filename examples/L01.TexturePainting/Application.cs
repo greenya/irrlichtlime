@@ -93,7 +93,7 @@ namespace L01.TexturePainting
 			Texture o = texture;
 
 			texture = drv.AddTexture(new Dimension2Di(size), "tex");
-			guiImage.SetImage(texture);
+			guiImage.Image = texture;
 			sceneNodePainter.SetMaterialTexture(0, texture);
 
 			if (o != null)

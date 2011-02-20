@@ -24,17 +24,6 @@ GUIImage::GUIImage(gui::IGUIImage* ref)
 	m_GUIImage = ref;
 }
 
-void GUIImage::SetColor(Video::Color^ color)
-{
-	LIME_ASSERT(color != nullptr);
-	m_GUIImage->setColor(*color->m_NativeValue);
-}
-
-void GUIImage::SetImage(Video::Texture^ image)
-{
-	m_GUIImage->setImage(LIME_SAFEREF(image, m_Texture));
-}
-
 bool GUIImage::AlphaChannel::get()
 {
 	return m_GUIImage->isAlphaChannelUsed();
@@ -43,6 +32,28 @@ bool GUIImage::AlphaChannel::get()
 void GUIImage::AlphaChannel::set(bool value)
 {
 	m_GUIImage->setUseAlphaChannel(value);
+}
+
+Video::Color^ GUIImage::Color::get()
+{
+	return gcnew Video::Color(m_GUIImage->getColor());
+}
+
+void GUIImage::Color::set(Video::Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_GUIImage->setColor(*value->m_NativeValue);
+}
+
+Video::Texture^ GUIImage::Image::get()
+{
+	video::ITexture* i = m_GUIImage->getImage();
+	return Video::Texture::Wrap(i);
+}
+
+void GUIImage::Image::set(Video::Texture^ value)
+{
+	m_GUIImage->setImage(LIME_SAFEREF(value, m_Texture));
 }
 
 bool GUIImage::ScaleImage::get()
