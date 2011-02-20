@@ -23,7 +23,9 @@ public:
 	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property bool OverrideColorEnabled { bool get(); void set(bool value); }
 	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
+	property bool RightToLeft { bool get(); void set(bool value); }
 	property int TextHeight { int get(); }
+	property bool TextRestrainedInside { bool get(); void set(bool value); }
 	property int TextWidth { int get(); }
 	property bool WordWrap { bool get(); void set(bool value); }
 
