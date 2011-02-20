@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2009 Nikolaus Gebhardt
+// Copyright (C) 2002-2011 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -36,7 +36,11 @@ namespace irr
 			HighPrecisionFPU(false),
 			EventReceiver(0),
 			WindowId(0),
+#ifdef _DEBUG
+			LoggingLevel(ELL_DEBUG),
+#else
 			LoggingLevel(ELL_INFORMATION),
+#endif
 			DisplayAdapter(0),
 			UsePerformanceTimer(true),
 			SDK_version_do_not_use(IRRLICHT_SDK_VERSION)

@@ -29,6 +29,7 @@ TexturePainter::TexturePainter(Video::Texture^ texture)
 Color^ TexturePainter::GetPixel(int x, int y)
 {
 	LIME_ASSERT(Locked);
+	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::ReadOnly);
 	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
 	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
 
@@ -40,16 +41,16 @@ Color^ TexturePainter::GetPixel(int x, int y)
 	return c;
 }
 
-bool TexturePainter::Lock(bool readOnly, int mipmapLevel)
+bool TexturePainter::Lock(TextureLockMode lockMode, int mipmapLevel)
 {
 	LIME_ASSERT(!Locked);
 	LIME_ASSERT(mipmapLevel >= 0 && mipmapLevel < m_mipmapLevelCount);
 
-	m_pointer = m_texture->m_Texture->lock(readOnly, mipmapLevel);
+	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode, mipmapLevel);
 	if (m_pointer == nullptr)
 		return false;
 
-	m_readOnly = readOnly;
+	m_lockMode = lockMode;
 	m_mipmapLevel = mipmapLevel;
 
 	int f = 1 << m_mipmapLevel;
@@ -59,15 +60,15 @@ bool TexturePainter::Lock(bool readOnly, int mipmapLevel)
 	return true;
 }
 
-bool TexturePainter::Lock(bool readOnly)
+bool TexturePainter::Lock(TextureLockMode lockMode)
 {
 	LIME_ASSERT(!Locked);
 
-	m_pointer = m_texture->m_Texture->lock(readOnly);
+	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode);
 	if (m_pointer == nullptr)
 		return false;
 
-	m_readOnly = readOnly;
+	m_lockMode = lockMode;
 	m_mipmapLevel = 0;
 	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width;
 	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height;
@@ -83,7 +84,7 @@ bool TexturePainter::Lock()
 	if (m_pointer == nullptr)
 		return false;
 
-	m_readOnly = false;
+	m_lockMode = TextureLockMode::ReadWrite;
 	m_mipmapLevel = 0;
 	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width;
 	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height;
@@ -94,7 +95,7 @@ bool TexturePainter::Lock()
 void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
 {
 	LIME_ASSERT(Locked);
-	LIME_ASSERT(!ReadOnly);
+	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
 	LIME_ASSERT(x1 >= 0 && x1 < MipMapLevelWidth);
 	LIME_ASSERT(y1 >= 0 && y1 < MipMapLevelHeight);
 	LIME_ASSERT(x2 >= 0 && x2 < MipMapLevelWidth);
@@ -146,7 +147,7 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
 void TexturePainter::SetPixel(int x, int y, Color^ color)
 {
 	LIME_ASSERT(Locked);
-	LIME_ASSERT(!ReadOnly);
+	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
 	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
 	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
 	LIME_ASSERT(color != nullptr);
@@ -161,6 +162,7 @@ void TexturePainter::Unlock(bool alsoRegenerateMipMapLevels)
 	LIME_ASSERT(Locked);
 
 	m_texture->m_Texture->unlock();
+
 	if (alsoRegenerateMipMapLevels)
 		m_texture->m_Texture->regenerateMipMapLevels();
 
@@ -178,6 +180,12 @@ void TexturePainter::Unlock()
 bool TexturePainter::Locked::get()
 {
 	return m_mipmapLevel != -1;
+}
+
+TextureLockMode TexturePainter::LockMode::get()
+{
+	LIME_ASSERT(Locked);
+	return m_lockMode;
 }
 
 int TexturePainter::MipMapLevel::get()
@@ -203,12 +211,6 @@ int TexturePainter::MipMapLevelWidth::get()
 	return m_mipmapLevelWidth;
 }
 
-bool TexturePainter::ReadOnly::get()
-{
-	LIME_ASSERT(Locked);
-	return m_readOnly;
-}
-
 Video::Texture^ TexturePainter::Texture::get()
 {
 	return m_texture;
@@ -218,7 +220,8 @@ String^ TexturePainter::ToString()
 {
 	if (Locked)
 	{
-		return String::Format("TexturePainter: [Locked MipMap#{0}: {1}x{2}] {3}",
+		return String::Format("TexturePainter: [Locked <{0}> MipMap#{1}: {2}x{3}] {4}",
+			m_lockMode,
 			m_mipmapLevel,
 			m_mipmapLevelWidth,
 			m_mipmapLevelHeight,

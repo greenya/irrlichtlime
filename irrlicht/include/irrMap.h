@@ -1,4 +1,4 @@
-// Copyright (C) 2006-2009 by Kat'Oun
+// Copyright (C) 2006-2011 by Kat'Oun
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -737,7 +737,7 @@ class map
 		return Root == 0;
 	}
 
-	//! \deprecated Use empty() instead.
+	//! \deprecated Use empty() instead. This method may be removed by Irrlicht 1.9 
 	_IRR_DEPRECATED_ bool isEmpty() const
 	{
 		return empty();

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2009 Nikolaus Gebhardt
+// Copyright (C) 2002-2011 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -547,7 +547,7 @@ public:
 
 	//! Moves a child to the back, so it's siblings are drawn on top of it
 	/** \return True if successful, false if not. */
-	virtual bool bringToBack(IGUIElement* child)
+	virtual bool sendToBack(IGUIElement* child)
 	{
 		core::list<IGUIElement*>::Iterator it = Children.begin();
 		if (child == (*it))	// already there

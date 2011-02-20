@@ -4719,6 +4719,18 @@ When using this flag, it does not make sense to use the flags Always16Bit, Alway
 
 When using this flag, it does not make sense to use the flags Always16Bit, Always32Bit or OptimizedForQuality at the same time.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.TextureLockMode">
+			<summary>Texture locking modes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureLockMode.ReadOnly">
+			<summary>Read only. The texture is downloaded, but not uploaded again.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureLockMode.ReadWrite">
+			<summary>The default mode. Texture can be read and written to.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.TextureLockMode.WriteOnly">
+			<summary>Write only. The texture is not downloaded and might be uninitialized.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.TexturePainter">
 			<summary>Provides ability to paint on texture's different mip map levels. Object of TexturePainter can be obtained using Texture.GetTexturePainter().
 
@@ -4736,19 +4748,22 @@ Note: all the members in this class requires texture to be locked using Lock() b
 			<summary>Locks mip map level 0 (main level) for reading and writing.</summary>
 			<returns>True on success.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(System.Boolean)">
-			<summary>Locks mip map level 0 (main level) for reading and writing (if needed).</summary>
-			<param name="readOnly">True if read-only access needed. Default: false.</param>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(IrrlichtLime.Video.TextureLockMode)">
+			<summary>Locks mip map level 0 (main level) in specified mode.</summary>
+			<param name="lockMode">Lock mode. Default: ReadWrite.</param>
 			<returns>True on success.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(System.Boolean,System.Int32)">
-			<summary>Locks certain mip map level for reading and writing (if needed).</summary>
-			<param name="readOnly">True if read-only access needed. Default: false.</param>
-			<param name="mipmapLevel">Mip map level to lock. Value from 0 (most detailed level) and MipMapLevelCount-1. Default: 0.</param>
+		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(IrrlichtLime.Video.TextureLockMode,System.Int32)">
+			<summary>Locks specified mip map level in specified mode.</summary>
+			<param name="lockMode">Lock mode. Default: ReadWrite.</param>
+			<param name="mipmapLevel">Mip map level to lock. Must be less than MipMapLevelCount. Default: 0.</param>
 			<returns>True on success.</returns>
 		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.Locked">
-			<summary>True if Texture is locked and you can access pixels of currently locked mip map level.</summary>
+			<summary>True if Texture is locked and you can access the content of currently locked mip map level.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.LockMode">
+			<summary>Lock mode currently used.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevel">
 			<summary>Currently locked mip map level.
@@ -4767,9 +4782,6 @@ Note: if MipMapLevel == 0, then real height of the texture is stored here.</summ
 			<summary>Width of currently locked mip map level.
 
 Note: if MipMapLevel == 0, then real width of the texture is stored here.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.TexturePainter.ReadOnly">
-			<summary>Indicates read-only access mode.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.TexturePainter.SetLine(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
 			<summary>Draws a line on the currently locked mip map level.</summary>

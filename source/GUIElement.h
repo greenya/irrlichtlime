@@ -16,7 +16,7 @@ public:
 
 	void AddChild(GUIElement^ child);
 
-	bool BringToBack(GUIElement^ child);
+	bool SendToBack(GUIElement^ child);
 	bool BringToFront(GUIElement^ child);
 
 	void Draw();

@@ -334,6 +334,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TextureLockMode.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TexturePainter.cpp"
 				>
 			</File>
