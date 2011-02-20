@@ -121,10 +121,10 @@ void GUIElement::AddChild(GUIElement^ child)
 	m_GUIElement->addChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
-bool GUIElement::BringToBack(GUIElement^ child)
+bool GUIElement::SendToBack(GUIElement^ child)
 {
 	LIME_ASSERT(child != nullptr);
-	return m_GUIElement->bringToBack(LIME_SAFEREF(child, m_GUIElement));
+	return m_GUIElement->sendToBack(LIME_SAFEREF(child, m_GUIElement));
 }
 
 bool GUIElement::BringToFront(GUIElement^ child)

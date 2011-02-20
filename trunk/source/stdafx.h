@@ -64,6 +64,7 @@
 #include "TerrainPatchSize.h"
 #include "TextureClamp.h"
 #include "TextureCreationFlag.h"
+#include "TextureLockMode.h"
 #include "TransformationState.h"
 #include "VertexShaderType.h"
 #include "VertexType.h"

@@ -48,9 +48,9 @@ int BoneSceneNode::BoneIndex::get()
 	return m_BoneSceneNode->getBoneIndex();
 }
 
-String^ BoneSceneNode::BoneName::get()
+String^ BoneSceneNode::Name::get()
 {
-	return gcnew String(m_BoneSceneNode->getBoneName());
+	return gcnew String(m_BoneSceneNode->getName());
 }
 
 AABBox^ BoneSceneNode::BoundingBox::get()

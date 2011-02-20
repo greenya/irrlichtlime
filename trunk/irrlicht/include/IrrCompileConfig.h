@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2009 Nikolaus Gebhardt
+// Copyright (C) 2002-2011 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -313,6 +313,13 @@ tool <http://developer.nvidia.com/object/nvperfhud_home.html>. */
 //! Uncomment the following line if you want to ignore the deprecated warnings
 //#define IGNORE_DEPRECATED_WARNING
 
+//! Define _IRR_COMPILE_WITH_IRR_SCENE_LOADER_ if you want to be able to load
+/** .irr scenes using ISceneManager::loadScene */
+#define _IRR_COMPILE_WITH_IRR_SCENE_LOADER_
+#ifdef NO_IRR_COMPILE_WITH_IRR_SCENE_LOADER_
+#undef _IRR_COMPILE_WITH_IRR_SCENE_LOADER_
+#endif
+
 //! Define _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_ if you want to use bone based
 /** animated meshes. If you compile without this, you will be unable to load
 B3D, MS3D or X meshes */
@@ -423,6 +430,11 @@ B3D, MS3D or X meshes */
 #define _IRR_COMPILE_WITH_PLY_LOADER_
 #ifdef NO_IRR_COMPILE_WITH_PLY_LOADER_
 #undef _IRR_COMPILE_WITH_PLY_LOADER_
+#endif
+//! Define _IRR_COMPILE_WITH_SMF_LOADER_ if you want to load 3D World Studio mesh files
+#define _IRR_COMPILE_WITH_SMF_LOADER_
+#ifdef NO_IRR_COMPILE_WITH_SMF_LOADER_
+#undef _IRR_COMPILE_WITH_SMF_LOADER_
 #endif
 
 //! Define _IRR_COMPILE_WITH_IRR_WRITER_ if you want to write static .irrMesh files

@@ -118,7 +118,7 @@ namespace L01.TexturePainting
 
 						if (p.X < texture.Size.Width &&
 							p.Y < texture.Size.Height &&
-							t.Lock())
+							t.Lock(TextureLockMode.WriteOnly))
 						{
 							t.SetLine(oldMouseX, oldMouseY, p.X, p.Y, new Color(255, 0, 0));
 							t.Unlock(true);

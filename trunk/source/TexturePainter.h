@@ -17,8 +17,8 @@ public:
 
 	Color^ GetPixel(int x, int y);
 	
-	bool Lock(bool readOnly, int mipmapLevel);
-	bool Lock(bool readOnly);
+	bool Lock(TextureLockMode lockMode, int mipmapLevel);
+	bool Lock(TextureLockMode lockMode);
 	bool Lock();
 
 	void SetLine(int x1, int y1, int x2, int y2, Color^ color);
@@ -28,11 +28,11 @@ public:
 	void Unlock();
 
 	property bool Locked { bool get(); }
+	property TextureLockMode LockMode { TextureLockMode get(); }
 	property int MipMapLevel { int get(); }
 	property int MipMapLevelCount { int get(); }
 	property int MipMapLevelHeight { int get(); }
 	property int MipMapLevelWidth { int get(); }
-	property bool ReadOnly { bool get(); }
 	property Video::Texture^ Texture { Video::Texture^ get(); }
 
 	virtual String^ ToString() override;
@@ -44,7 +44,7 @@ internal:
 private:
 
 	Video::Texture^ m_texture;
-	bool m_readOnly;
+	TextureLockMode m_lockMode;
 	void* m_pointer;
 	video::ECOLOR_FORMAT m_format;
 	int m_rowSize;
