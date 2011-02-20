@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "ArchiveLoader.h"
 #include "FileArchive.h"
 #include "FileList.h"
 #include "FileSystem.h"
@@ -26,6 +27,12 @@ FileSystem::FileSystem(io::IFileSystem* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_FileSystem = ref;
+}
+
+void FileSystem::AddArchiveLoader(ArchiveLoader^ loader)
+{
+	LIME_ASSERT(loader != nullptr);
+	m_FileSystem->addArchiveLoader(loader->m_ArchiveLoader);
 }
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
@@ -224,6 +231,14 @@ WriteFile^ FileSystem::CreateMemoryWriteFile(String^ filename, int length)
 	return WriteFile::Wrap(f);
 }
 
+ArchiveLoader^ FileSystem::GetArchiveLoader(int index)
+{
+	LIME_ASSERT(index >= 0 && index < ArchiveLoaderCount);
+
+	io::IArchiveLoader* l = m_FileSystem->getArchiveLoader(index);
+	return ArchiveLoader::Wrap(l);
+}
+
 String^ FileSystem::GetFileAbsolutePath(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
@@ -277,6 +292,11 @@ bool FileSystem::RemoveFileArchive(String^ filename)
 FileSystemType FileSystem::SetFileSystemType(FileSystemType newType)
 {
 	return (FileSystemType)m_FileSystem->setFileListSystem((io::EFileSystemType)newType);
+}
+
+int FileSystem::ArchiveLoaderCount::get()
+{
+	return m_FileSystem->getArchiveLoaderCount();
 }
 
 int FileSystem::FileArchiveCount::get()

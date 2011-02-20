@@ -1198,6 +1198,14 @@
 			Name="IO"
 			>
 			<File
+				RelativePath=".\ArchiveLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ArchiveLoader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\AttributeExchangingObject.cpp"
 				>
 			</File>
