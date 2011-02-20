@@ -2880,6 +2880,51 @@ The path is not included in this name. Use GetFullFileName() for this.</summary>
 
 This class manages where files are, so that modules which use the the IO do not need to know where every file is located. A file could be in a ZIP archive or as file on disk, using the FileSystem makes no difference to this.</summary>
 		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="file">Archive to add to the file system.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile,System.Boolean)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="file">Archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile,System.Boolean,System.Boolean)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="file">Archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="file">Archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<param name="archiveType">If no specific FileArchiveType is selected then the type of archive will depend on the extension of the file name. If you use a different extension then you can use this parameter to force a specific type of archive. Default: FileArchiveType.Unknown.</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType,System.String)">
+			<summary>Adds an archive to the file system.
+
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+			<param name="file">Archive to add to the file system.</param>
+			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
+			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
+			<param name="archiveType">If no specific FileArchiveType is selected then the type of archive will depend on the extension of the file name. If you use a different extension then you can use this parameter to force a specific type of archive. Default: FileArchiveType.Unknown.</param>
+			<param name="password">An optional password, which is used in case of encrypted archives. Default: emptry string (which means - no password).</param>
+			<returns>True if the archive was added successfully, false if not.</returns>
+		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String)">
 			<summary>Adds an archive to the file system.
 

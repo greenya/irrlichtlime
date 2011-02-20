@@ -25,6 +25,12 @@ public:
 	bool AddFileArchive(String^ filename, bool ignoreCase);
 	bool AddFileArchive(String^ filename);
 
+	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password);
+	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType);
+	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths);
+	bool AddFileArchive(ReadFile^ file, bool ignoreCase);
+	bool AddFileArchive(ReadFile^ file);
+
 	ReadFile^ CreateReadFile(String^ filename);
 	WriteFile^ CreateWriteFile(String^ filename, bool append);
 	WriteFile^ CreateWriteFile(String^ filename);
