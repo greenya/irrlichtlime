@@ -76,9 +76,29 @@ void GUIStaticText::OverrideFont::set(GUIFont^ value)
 	m_GUIStaticText->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
+bool GUIStaticText::RightToLeft::get()
+{
+	return m_GUIStaticText->isRightToLeft();
+}
+
+void GUIStaticText::RightToLeft::set(bool value)
+{
+	m_GUIStaticText->setRightToLeft(value);
+}
+
 int GUIStaticText::TextHeight::get()
 {
 	return m_GUIStaticText->getTextHeight();
+}
+
+bool GUIStaticText::TextRestrainedInside::get()
+{
+	return m_GUIStaticText->isTextRestrainedInside();
+}
+
+void GUIStaticText::TextRestrainedInside::set(bool value)
+{
+	m_GUIStaticText->setTextRestrainedInside(value);
 }
 
 int GUIStaticText::TextWidth::get()
