@@ -10,6 +10,7 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO {
 
+ref class ArchiveLoader;
 ref class FileArchive;
 ref class FileList;
 ref class ReadFile;
@@ -18,6 +19,8 @@ ref class WriteFile;
 public ref class FileSystem : ReferenceCounted
 {
 public:
+
+	void AddArchiveLoader(ArchiveLoader^ loader);
 
 	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password);
 	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType);
@@ -42,6 +45,7 @@ public:
 	ReadFile^ CreateMemoryReadFile(String^ filename, array<unsigned char>^ content);
 	WriteFile^ CreateMemoryWriteFile(String^ filename, int length);
 
+	ArchiveLoader^ GetArchiveLoader(int index);
 	String^ GetFileAbsolutePath(String^ filename);
 	FileArchive^ GetFileArchive(int index);
 	String^ GetFileBasename(String^ filename, bool keepExtension);
@@ -54,6 +58,7 @@ public:
 
 	FileSystemType SetFileSystemType(FileSystemType newType);
 
+	property int ArchiveLoaderCount { int get(); }
 	property int FileArchiveCount { int get(); }
 	property String^ WorkingDirectory { String^ get(); void set(String^ value); }
 

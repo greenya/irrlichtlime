@@ -2749,6 +2749,40 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="P:IrrlichtLime.Core.Vector3Di.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
+		<member name="T:IrrlichtLime.IO.ArchiveLoader">
+			<summary>Class which is able to create an archive from a file.
+
+If you want the Irrlicht Engine be able to load archives of currently unsupported file formats (e.g. ".wad"), then implement this and add your new archive loader with FileSystem.AddArchiveLoader() to the engine.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ArchiveLoader.CreateArchive(IrrlichtLime.IO.ReadFile,System.Boolean,System.Boolean)">
+			<summary>Creates an archive from given file.</summary>
+			<param name="file">File to use.</param>
+			<param name="ignoreCase">Searching is performed without regarding the case.</param>
+			<param name="ignorePaths">Files are searched without checking for the directories.</param>
+			<returns>Pointer to newly created archive, or null upon error.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ArchiveLoader.CreateArchive(System.String,System.Boolean,System.Boolean)">
+			<summary>Creates an archive from given filename.</summary>
+			<param name="filename">File to use.</param>
+			<param name="ignoreCase">Searching is performed without regarding the case.</param>
+			<param name="ignorePaths">Files are searched without checking for the directories.</param>
+			<returns>Pointer to newly created archive, or null upon error.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ArchiveLoader.IsALoadableFileFormat(IrrlichtLime.IO.ReadFile)">
+			<summary>Checks if the file might be loaded by this loader. Check may look into the file content.</summary>
+			<param name="file">File to check.</param>
+			<returns>True if file seems to be loadable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ArchiveLoader.IsALoadableFileFormat(System.String)">
+			<summary>Checks if the file might be loaded by this loader. Check based on the file extension (e.g. ".zip").</summary>
+			<param name="filename">Name of file to check.</param>
+			<returns>True if file seems to be loadable.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ArchiveLoader.IsALoadableFileFormat(IrrlichtLime.IO.FileArchiveType)">
+			<summary>Checks if the loader can create archives of given type.</summary>
+			<param name="fileType">Archive type to check.</param>
+			<returns>True if the archive loader supports this type, false if not.</returns>
+		</member>
 		<member name="T:IrrlichtLime.IO.AttributeExchangingObject">
 			<summary>An object which is able to serialize and deserialize its attributes into an attributes object.</summary>
 		</member>
@@ -2880,6 +2914,12 @@ The path is not included in this name. Use GetFullFileName() for this.</summary>
 
 This class manages where files are, so that modules which use the the IO do not need to know where every file is located. A file could be in a ZIP archive or as file on disk, using the FileSystem makes no difference to this.</summary>
 		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.AddArchiveLoader(IrrlichtLime.IO.ArchiveLoader)">
+			<summary>Adds an external archive loader to the engine.
+
+Use this function to add support for new archive types to the engine, for example proprietary or encrypted file storage.</summary>
+			<param name="loader">Archive loader to add.</param>
+		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(IrrlichtLime.IO.ReadFile)">
 			<summary>Adds an archive to the file system.
 
@@ -2970,6 +3010,9 @@ After calling this, the Irrlicht Engine will also search and open files directly
 			<param name="password">An optional password, which is used in case of encrypted archives. Default: emptry string (which means - no password).</param>
 			<returns>True if the archive was added successfully, false if not.</returns>
 		</member>
+		<member name="P:IrrlichtLime.IO.FileSystem.ArchiveLoaderCount">
+			<summary>The number of archive loaders currently added.</summary>
+		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.CreateEmptyFileList(System.String,System.Boolean,System.Boolean)">
 			<summary>Creates an empty filelist.</summary>
 			<param name="path">Virtual path to use.</param>
@@ -3025,6 +3068,11 @@ This allows you to use a memory where a WriteFile is requested. You are responsi
 		</member>
 		<member name="P:IrrlichtLime.IO.FileSystem.FileArchiveCount">
 			<summary>The number of archives currently attached to the file system.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetArchiveLoader(System.Int32)">
+			<summary>Gets archive loader.</summary>
+			<param name="index">Index of the archive loader. Must be less than ArchiveLoaderCount.</param>
+			<returns>Pointer on requested archive loader or null in case of error.</returns>
 		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.GetFileAbsolutePath(System.String)">
 			<summary>Converts a relative path to an absolute (unique) path, resolving symbolic links if required.</summary>
