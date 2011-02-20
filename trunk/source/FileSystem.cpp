@@ -78,6 +78,56 @@ bool FileSystem::AddFileArchive(String^ filename)
 		Lime::StringToPath(filename));
 }
 
+bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_FileSystem->addFileArchive(
+		file->m_ReadFile,
+		ignoreCase,
+		ignorePaths,
+		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		Lime::StringToStringC(password));
+}
+
+bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_FileSystem->addFileArchive(
+		file->m_ReadFile,
+		ignoreCase,
+		ignorePaths,
+		(io::E_FILE_ARCHIVE_TYPE)archiveType);
+}
+
+bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_FileSystem->addFileArchive(
+		file->m_ReadFile,
+		ignoreCase,
+		ignorePaths);
+}
+
+bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_FileSystem->addFileArchive(
+		file->m_ReadFile,
+		ignoreCase);
+}
+
+bool FileSystem::AddFileArchive(ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+
+	return m_FileSystem->addFileArchive(
+		file->m_ReadFile);
+}
+
 ReadFile^ FileSystem::CreateReadFile(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
