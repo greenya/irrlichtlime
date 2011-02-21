@@ -626,6 +626,9 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		<member name="F:IrrlichtLime.KeyCode.Attn">
 			<summary>Attn key</summary>
 		</member>
+		<member name="F:IrrlichtLime.KeyCode.Backquote">
+			<summary>Back quote key (`)</summary>
+		</member>
 		<member name="F:IrrlichtLime.KeyCode.Backspace">
 			<summary>BACKSPACE key</summary>
 		</member>
@@ -1033,9 +1036,6 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Tab">
 			<summary>TAB key</summary>
-		</member>
-		<member name="F:IrrlichtLime.KeyCode.Tilde">
-			<summary>Tilde key (~)</summary>
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Up">
 			<summary>UP ARROW key</summary>

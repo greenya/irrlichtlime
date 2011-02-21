@@ -24,6 +24,7 @@ ref class GeometryCreator;
 ref class LightSceneNode;
 ref class Mesh;
 ref class MeshCache;
+ref class MeshLoader;
 ref class MeshManipulator;
 ref class MeshSceneNode;
 ref class MetaTriangleSelector;
@@ -304,6 +305,8 @@ public:
 	AnimatedMesh^ GetMesh(String^ filename);
 	AnimatedMesh^ GetMesh(IO::ReadFile^ file);
 
+	MeshLoader^ GetMeshLoader(int index);
+
 	SceneNode^ GetSceneNodeFromID(int id, SceneNode^ start);
 	SceneNode^ GetSceneNodeFromID(int id);
 	SceneNode^ GetSceneNodeFromName(String^ name, SceneNode^ start);
@@ -338,6 +341,7 @@ public:
 	property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
+	property int MeshLoaderCount { int get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property SceneNode^ RootNode { SceneNode^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
