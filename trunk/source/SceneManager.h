@@ -317,7 +317,9 @@ public:
 
 	bool IsCulled(SceneNode^ node);
 
+	bool LoadScene(String^ filename, SceneNode^ node);
 	bool LoadScene(String^ filename);
+	bool LoadScene(IO::ReadFile^ file, SceneNode^ node);
 	bool LoadScene(IO::ReadFile^ file);
 
 	bool PostEvent(Event^ e);
@@ -325,7 +327,9 @@ public:
 	bool RegisterNodeForRendering(SceneNode^ node, SceneNodeRenderPass pass);
 	bool RegisterNodeForRendering(SceneNode^ node);
 
+	bool SaveScene(String^ filename, SceneNode^ node);
 	bool SaveScene(String^ filename);
+	bool SaveScene(IO::WriteFile^ file, SceneNode^ node);
 	bool SaveScene(IO::WriteFile^ file);
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
