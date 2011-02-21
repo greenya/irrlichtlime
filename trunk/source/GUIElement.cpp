@@ -103,6 +103,8 @@ GUIElement^ GUIElement::Wrap(gui::IGUIElement* ref)
 		return gcnew GUIWindow((gui::IGUIWindow*)ref);
 
 	case gui::EGUIET_MODAL_SCREEN:
+	case gui::EGUIET_ELEMENT:
+	case gui::EGUIET_ROOT:
 	default:
 		return gcnew GUIElement(ref);
 	}

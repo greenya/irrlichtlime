@@ -34,7 +34,8 @@ public enum class GUIElementType
 	ToolBar = EGUIET_TOOL_BAR,
 	TreeView = EGUIET_TREE_VIEW,
 	Window = EGUIET_WINDOW,
-	Unknown = EGUIET_ELEMENT
+	Unknown = EGUIET_ELEMENT,
+	Root = EGUIET_ROOT
 };
 
 } // end namespace GUI
