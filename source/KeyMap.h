@@ -33,7 +33,7 @@ public:
 
 internal:
 
-	// Allocates and fills SKeyMap array, returning poiter on it and count of elements in it.
+	// Allocates and fills SKeyMap array, returns poiter to it and count of elements it has.
 	// Note: you should delete keyMapArray pointer manually.
 	int GetSKeyMapArray(SKeyMap*& keyMapArray)
 	{

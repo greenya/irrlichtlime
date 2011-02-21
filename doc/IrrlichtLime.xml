@@ -629,6 +629,9 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		<member name="F:IrrlichtLime.KeyCode.Backspace">
 			<summary>BACKSPACE key</summary>
 		</member>
+		<member name="F:IrrlichtLime.KeyCode.Cancel">
+			<summary>Cancel key</summary>
+		</member>
 		<member name="F:IrrlichtLime.KeyCode.CapsLock">
 			<summary>CAPS LOCK key</summary>
 		</member>
@@ -636,7 +639,7 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 			<summary>CLEAR key</summary>
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Comma">
-			<summary>Comma Key (,)</summary>
+			<summary>Comma key (,)</summary>
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.CrSel">
 			<summary>CrSel key</summary>
@@ -1030,6 +1033,9 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Tab">
 			<summary>TAB key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.Tilde">
+			<summary>Tilde key (~)</summary>
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Up">
 			<summary>UP ARROW key</summary>
