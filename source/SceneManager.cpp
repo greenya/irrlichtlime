@@ -2778,6 +2778,27 @@ SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df^ rotationSpeed
 	return SceneNodeAnimator::Wrap(a);
 }
 
+SceneNodeAnimator^ SceneManager::CreateSceneNodeAnimator(String^ typeName, SceneNode^ targetNode)
+{
+	LIME_ASSERT(typeName != nullptr);
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createSceneNodeAnimator(
+		Lime::StringToStringC(typeName).c_str(),
+		LIME_SAFEREF(targetNode, m_SceneNode));
+
+	return SceneNodeAnimator::Wrap(a);
+}
+
+SceneNodeAnimator^ SceneManager::CreateSceneNodeAnimator(String^ typeName)
+{
+	LIME_ASSERT(typeName != nullptr);
+
+	scene::ISceneNodeAnimator* a = m_SceneManager->createSceneNodeAnimator(
+		Lime::StringToStringC(typeName).c_str());
+
+	return SceneNodeAnimator::Wrap(a);
+}
+
 SkinnedMesh^ SceneManager::CreateSkinnedMesh()
 {
 	scene::ISkinnedMesh* m = m_SceneManager->createSkinnedMesh();
