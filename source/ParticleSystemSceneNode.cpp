@@ -41,6 +41,11 @@ void ParticleSystemSceneNode::AddAffector(ParticleAffector^ affector)
 	m_ParticleSystemSceneNode->addAffector(LIME_SAFEREF(affector, m_ParticleAffector));
 }
 
+void ParticleSystemSceneNode::ClearParticles()
+{
+	m_ParticleSystemSceneNode->clearParticles();
+}
+
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
 	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
 	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
