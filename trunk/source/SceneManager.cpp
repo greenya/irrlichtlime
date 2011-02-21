@@ -15,6 +15,7 @@
 #include "LightSceneNode.h"
 #include "Mesh.h"
 #include "MeshCache.h"
+#include "MeshLoader.h"
 #include "MeshManipulator.h"
 #include "MeshSceneNode.h"
 #include "MetaTriangleSelector.h"
@@ -2912,6 +2913,14 @@ AnimatedMesh^ SceneManager::GetMesh(IO::ReadFile^ file)
 	return AnimatedMesh::Wrap(m);
 }
 
+MeshLoader^ SceneManager::GetMeshLoader(int index)
+{
+	LIME_ASSERT(index >= 0 && index < MeshLoaderCount);
+
+	scene::IMeshLoader* l = m_SceneManager->getMeshLoader(index);
+	return MeshLoader::Wrap(l);
+}
+
 SceneNode^ SceneManager::GetSceneNodeFromID(int id, SceneNode^ start)
 {
 	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromId(id, LIME_SAFEREF(start, m_SceneNode));
@@ -3103,6 +3112,11 @@ Scene::MeshCache^ SceneManager::MeshCache::get()
 {
 	scene::IMeshCache* c = m_SceneManager->getMeshCache();
 	return Scene::MeshCache::Wrap(c);
+}
+
+int SceneManager::MeshLoaderCount::get()
+{
+	return m_SceneManager->getMeshLoaderCount();
 }
 
 Scene::MeshManipulator^ SceneManager::MeshManipulator::get()
