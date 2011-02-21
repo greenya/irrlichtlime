@@ -23,6 +23,7 @@
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
 #include "SceneCollisionManager.h"
+#include "SceneLoader.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
@@ -877,6 +878,18 @@ SceneNode^ SceneManager::AddEmptySceneNode()
 {
 	scene::ISceneNode* n = m_SceneManager->addEmptySceneNode();
 	return SceneNode::Wrap(n);
+}
+
+void SceneManager::AddExternalMeshLoader(MeshLoader^ externalLoader)
+{
+	LIME_ASSERT(externalLoader != nullptr);
+	m_SceneManager->addExternalMeshLoader(LIME_SAFEREF(externalLoader, m_MeshLoader));
+}
+
+void SceneManager::AddExternalSceneLoader(SceneLoader^ externalLoader)
+{
+	LIME_ASSERT(externalLoader != nullptr);
+	m_SceneManager->addExternalSceneLoader(LIME_SAFEREF(externalLoader, m_SceneLoader));
 }
 
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
@@ -2921,6 +2934,14 @@ MeshLoader^ SceneManager::GetMeshLoader(int index)
 	return MeshLoader::Wrap(l);
 }
 
+SceneLoader^ SceneManager::GetSceneLoader(int index)
+{
+	LIME_ASSERT(index >= 0 && index < SceneLoaderCount);
+
+	scene::ISceneLoader* l = m_SceneManager->getSceneLoader(index);
+	return SceneLoader::Wrap(l);
+}
+
 SceneNode^ SceneManager::GetSceneNodeFromID(int id, SceneNode^ start)
 {
 	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromId(id, LIME_SAFEREF(start, m_SceneNode));
@@ -3135,6 +3156,11 @@ Scene::SceneCollisionManager^ SceneManager::SceneCollisionManager::get()
 {
 	scene::ISceneCollisionManager* m = m_SceneManager->getSceneCollisionManager();
 	return Scene::SceneCollisionManager::Wrap(m);
+}
+
+int SceneManager::SceneLoaderCount::get()
+{
+	return m_SceneManager->getSceneLoaderCount();
 }
 
 Scene::SceneNodeRenderPass SceneManager::SceneNodeRenderPass::get()
