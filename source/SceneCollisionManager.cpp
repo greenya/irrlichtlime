@@ -342,6 +342,15 @@ SceneNode^ SceneCollisionManager::GetSceneNodeFromScreenCoordinatesBB(Vector2Di^
 	return SceneNode::Wrap(n);
 }
 
+Vector2Di^ SceneCollisionManager::GetScreenCoordinatesFrom3DPosition(Vector3Df^ pos, CameraSceneNode^ camera, bool useViewPort)
+{
+	LIME_ASSERT(pos != nullptr);
+
+	return gcnew Vector2Di(
+		m_SceneCollisionManager->getScreenCoordinatesFrom3DPosition(
+			*pos->m_NativeValue, LIME_SAFEREF(camera, m_CameraSceneNode), useViewPort));
+}
+
 Vector2Di^ SceneCollisionManager::GetScreenCoordinatesFrom3DPosition(Vector3Df^ pos, CameraSceneNode^ camera)
 {
 	LIME_ASSERT(pos != nullptr);

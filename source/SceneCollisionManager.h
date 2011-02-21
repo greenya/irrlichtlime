@@ -46,6 +46,7 @@ public:
 	SceneNode^ GetSceneNodeFromScreenCoordinatesBB(Vector2Di^ pos, int idBitMask);
 	SceneNode^ GetSceneNodeFromScreenCoordinatesBB(Vector2Di^ pos);
 
+	Vector2Di^ GetScreenCoordinatesFrom3DPosition(Vector3Df^ pos, CameraSceneNode^ camera, bool useViewPort);
 	Vector2Di^ GetScreenCoordinatesFrom3DPosition(Vector3Df^ pos, CameraSceneNode^ camera);
 	Vector2Di^ GetScreenCoordinatesFrom3DPosition(Vector3Df^ pos);
 
