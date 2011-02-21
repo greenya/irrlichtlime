@@ -1189,11 +1189,6 @@ void GUIEnvironment::Clear()
 	m_GUIEnvironment->clear();
 }
 
-bool GUIEnvironment::ClearFocus(GUIElement^ element)
-{
-	return m_GUIEnvironment->removeFocus(LIME_SAFEREF(element, m_GUIElement));
-}
-
 GUIImageList^ GUIEnvironment::CreateImageList(Video::Texture^ texture, Dimension2Di^ imageSize, bool useAlphaChannel)
 {
 	LIME_ASSERT(imageSize != nullptr);
@@ -1268,6 +1263,18 @@ bool GUIEnvironment::PostEvent(Event^ e)
 {
 	LIME_ASSERT(e != nullptr);
 	return m_GUIEnvironment->postEventFromUser(*e->m_NativeValue);
+}
+
+bool GUIEnvironment::RemoveFocus(GUIElement^ element)
+{
+	LIME_ASSERT(element != nullptr);
+	return m_GUIEnvironment->removeFocus(LIME_SAFEREF(element, m_GUIElement));
+}
+
+void GUIEnvironment::RemoveFont(GUIFont^ font)
+{
+	LIME_ASSERT(font != nullptr);
+	m_GUIEnvironment->removeFont(LIME_SAFEREF(font, m_GUIFont));
 }
 
 bool GUIEnvironment::SaveGUI(String^ filename, GUIElement^ start)

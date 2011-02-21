@@ -172,8 +172,6 @@ public:
 
 	void Clear();
 
-	bool ClearFocus(GUIElement^ element);
-
 	GUIImageList^ CreateImageList(Video::Texture^ texture, Dimension2Di^ imageSize, bool useAlphaChannel);
 
 	GUISkin^ CreateSkin(GUISkinType type);
@@ -192,6 +190,10 @@ public:
 	bool LoadGUI(IO::ReadFile^ file);
 
 	bool PostEvent(Event^ e);
+
+	bool RemoveFocus(GUIElement^ element);
+
+	void RemoveFont(GUIFont^ font);
 
 	bool SaveGUI(String^ filename, GUIElement^ start);
 	bool SaveGUI(String^ filename);
