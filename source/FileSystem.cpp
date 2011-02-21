@@ -271,6 +271,16 @@ String^ FileSystem::GetFileDirectory(String^ filename)
 	return gcnew String(m_FileSystem->getFileDir(Lime::StringToPath(filename)).c_str());
 }
 
+String^ FileSystem::GetRelativeFilename(String^ filename, String^ directory)
+{
+	return gcnew String(
+		m_FileSystem->getRelativeFilename(
+			Lime::StringToPath(filename),
+			Lime::StringToPath(directory)
+		).c_str()
+	);
+}
+
 bool FileSystem::MoveFileArchive(int index, int relative)
 {
 	LIME_ASSERT(index >= 0 && index < FileArchiveCount);

@@ -3100,6 +3100,12 @@ This allows you to use a memory where a WriteFile is requested. You are responsi
 			<param name="filename">The file to get the directory from.</param>
 			<returns>String containing the directory of the file.</returns>
 		</member>
+		<member name="M:IrrlichtLime.IO.FileSystem.GetRelativeFilename(System.String,System.String)">
+			<summary>Gets the relative filename, relative to the given directory.</summary>
+			<param name="filename">Absolute file name.</param>
+			<param name="directory">Absolute directory path.</param>
+			<returns>Relative file name.</returns>
+		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.MoveFileArchive(System.Int32,System.Int32)">
 			<summary>Changes the search order of attached archives.</summary>
 			<param name="index">The index of the archive to change.</param>
