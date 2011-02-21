@@ -395,11 +395,13 @@ void GUISkin::SetText(String^ newText, GUIDefaultText which)
 
 void GUISkin::SetFont(GUIFont^ font, GUIDefaultFont which)
 {
+	LIME_ASSERT(font != nullptr);
 	m_GUISkin->setFont(LIME_SAFEREF(font, m_GUIFont), (gui::EGUI_DEFAULT_FONT)which);
 }
 
 void GUISkin::SetFont(GUIFont^ font)
 {
+	LIME_ASSERT(font != nullptr);
 	m_GUISkin->setFont(LIME_SAFEREF(font, m_GUIFont));
 }
 
