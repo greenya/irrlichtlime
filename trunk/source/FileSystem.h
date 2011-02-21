@@ -51,6 +51,7 @@ public:
 	String^ GetFileBasename(String^ filename, bool keepExtension);
 	String^ GetFileBasename(String^ filename);
 	String^ GetFileDirectory(String^ filename);
+	String^ GetRelativeFilename(String^ filename, String^ directory);
 
 	bool MoveFileArchive(int index, int relative);
 	bool RemoveFileArchive(int index);
