@@ -282,6 +282,9 @@ public:
 
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df^ rotationSpeed);
 
+	SceneNodeAnimator^ CreateSceneNodeAnimator(String^ typeName, SceneNode^ targetNode);
+	SceneNodeAnimator^ CreateSceneNodeAnimator(String^ typeName);
+
 	SkinnedMesh^ CreateSkinnedMesh();
 
 	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel);
