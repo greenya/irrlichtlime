@@ -30,6 +30,7 @@ ref class MeshSceneNode;
 ref class MetaTriangleSelector;
 ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
+ref class SceneLoader;
 ref class SceneNode;
 ref class SceneNodeAnimator;
 ref class SkinnedMesh;
@@ -116,6 +117,9 @@ public:
 	SceneNode^ AddEmptySceneNode(SceneNode^ parent, int id);
 	SceneNode^ AddEmptySceneNode(SceneNode^ parent);
 	SceneNode^ AddEmptySceneNode();
+
+	void AddExternalMeshLoader(MeshLoader^ externalLoader);
+	void AddExternalSceneLoader(SceneLoader^ externalLoader);
 
 	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount);
 	AnimatedMesh^ AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills);
@@ -306,6 +310,7 @@ public:
 	AnimatedMesh^ GetMesh(IO::ReadFile^ file);
 
 	MeshLoader^ GetMeshLoader(int index);
+	SceneLoader^ GetSceneLoader(int index);
 
 	SceneNode^ GetSceneNodeFromID(int id, SceneNode^ start);
 	SceneNode^ GetSceneNodeFromID(int id);
@@ -345,6 +350,7 @@ public:
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }
 	property SceneNode^ RootNode { SceneNode^ get(); }
 	property Scene::SceneCollisionManager^ SceneCollisionManager { Scene::SceneCollisionManager^ get(); }
+	property int SceneLoaderCount { int get(); }
 	property Scene::SceneNodeRenderPass SceneNodeRenderPass { Scene::SceneNodeRenderPass get(); }
 	property Video::Color^ ShadowColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
