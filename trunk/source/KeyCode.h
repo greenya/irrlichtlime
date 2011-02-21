@@ -143,7 +143,7 @@ public enum class KeyCode
 	Comma = KEY_COMMA,
 	Minus = KEY_MINUS,
 	Period = KEY_PERIOD,
-	Tilde = 0xC0, // Native KeyCode.h has no "~" key defined
+	Backquote = 0xC0, // Native KeyCode.h has no "`" key defined
 	Attn = KEY_ATTN,
 	CrSel = KEY_CRSEL,
 	ExSel = KEY_EXSEL,
