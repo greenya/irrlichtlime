@@ -30,6 +30,8 @@ public:
 
 	void AddAffector(ParticleAffector^ affector);
 
+	void ClearParticles();
+
 	ParticleAnimatedMeshSceneNodeEmitter^ CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize);
 	ParticleAnimatedMeshSceneNodeEmitter^ CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees);
 	ParticleAnimatedMeshSceneNodeEmitter^ CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode, bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax);
