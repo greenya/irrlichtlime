@@ -2988,10 +2988,22 @@ bool SceneManager::IsCulled(SceneNode^ node)
 	return m_SceneManager->isCulled(LIME_SAFEREF(node, m_SceneNode));
 }
 
+bool SceneManager::LoadScene(String^ filename, SceneNode^ node)
+{
+	LIME_ASSERT(filename != nullptr);
+	return m_SceneManager->loadScene(Lime::StringToPath(filename), nullptr, LIME_SAFEREF(node, m_SceneNode));
+}
+
 bool SceneManager::LoadScene(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
 	return m_SceneManager->loadScene(Lime::StringToPath(filename));
+}
+
+bool SceneManager::LoadScene(IO::ReadFile^ file, SceneNode^ node)
+{
+	LIME_ASSERT(file != nullptr);
+	return m_SceneManager->loadScene(LIME_SAFEREF(file, m_ReadFile), nullptr, LIME_SAFEREF(node, m_SceneNode));
 }
 
 bool SceneManager::LoadScene(IO::ReadFile^ file)
@@ -3023,10 +3035,22 @@ bool SceneManager::RegisterNodeForRendering(SceneNode^ node)
 		LIME_SAFEREF(node, m_SceneNode)) != 0;
 }
 
+bool SceneManager::SaveScene(String^ filename, SceneNode^ node)
+{
+	LIME_ASSERT(filename != nullptr);
+	return m_SceneManager->saveScene(Lime::StringToPath(filename), nullptr, LIME_SAFEREF(node, m_SceneNode));
+}
+
 bool SceneManager::SaveScene(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
 	return m_SceneManager->saveScene(Lime::StringToPath(filename));
+}
+
+bool SceneManager::SaveScene(IO::WriteFile^ file, SceneNode^ node)
+{
+	LIME_ASSERT(file != nullptr);
+	return m_SceneManager->saveScene(LIME_SAFEREF(file, m_WriteFile), nullptr, LIME_SAFEREF(node, m_SceneNode));
 }
 
 bool SceneManager::SaveScene(IO::WriteFile^ file)
