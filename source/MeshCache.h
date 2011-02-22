@@ -12,8 +12,6 @@ namespace Scene {
 
 ref class AnimatedMesh;
 
-//!!! [*] This overloadings not implemented; see details at http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=39261
-
 public ref class MeshCache : ReferenceCounted
 {
 public:
@@ -26,19 +24,15 @@ public:
 	AnimatedMesh^ GetMesh(String^ name);
 
 	int GetMeshIndex(Mesh^ mesh);
-	//!!! [*] int GetMeshIndex(AnimatedMesh^ mesh);
 
 	IO::NamedPath^ GetMeshName(Mesh^ mesh);
-	//!!! [*] IO::NamedPath^ GetMeshName(AnimatedMesh^ mesh);
 	IO::NamedPath^ GetMeshName(int index);
 
 	bool IsMeshLoaded(String^ name);
 
 	void RemoveMesh(Mesh^ mesh);
-	//!!! [*] void RemoveMesh(AnimatedMesh^ mesh);
 
 	bool RenameMesh(Mesh^ mesh, String^ name);
-	//!!! [*] bool RenameMesh(AnimatedMesh^ mesh, String^ name);
 	bool RenameMesh(int index, String^ name);
 
 	property int MeshCount { int get(); }
