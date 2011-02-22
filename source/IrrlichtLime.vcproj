@@ -906,6 +906,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ViewFrustum.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VolumeLightSceneNode.cpp"
 				>
 			</File>

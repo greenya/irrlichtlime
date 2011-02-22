@@ -121,6 +121,12 @@ void CameraSceneNode::UpVector::set(Vector3Df^ value)
 	m_CameraSceneNode->setUpVector(*value->m_NativeValue);
 }
 
+Scene::ViewFrustum^ CameraSceneNode::ViewFrustum::get()
+{
+	const scene::SViewFrustum* f = m_CameraSceneNode->getViewFrustum();
+	return gcnew Scene::ViewFrustum((scene::SViewFrustum*)f); // !!! cast to non-const pointer
+}
+
 Matrix^ CameraSceneNode::ViewMatrix::get()
 {
 	return gcnew Matrix(m_CameraSceneNode->getViewMatrix());
