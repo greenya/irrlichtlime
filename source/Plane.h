@@ -208,7 +208,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("({0}) | {1}", Normal, D);
+		return String::Format("({0}) D={1}", Normal, D);
 	}
 
 internal:

@@ -1944,6 +1944,138 @@ Thus, this method assumes a camera position from which the triangle is definitel
 		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Sets plane by three points.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Quaternion">
+			<summary>Quaternion class for representing rotations.
+It provides cheap combinations and avoids gimbal locks.
+Also useful for interpolations.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.DotProduct(IrrlichtLime.Core.Quaternion)">
+			<summary>Calculates the dot product.</summary>
+			<param name="other">Other quaternion.</param>
+			<returns>Dot product result.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.EqualsTo(IrrlichtLime.Core.Quaternion)">
+			<summary>Checks if this quaternion equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other quaternion.</param>
+			<returns>True if quaternions are equal.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrix">
+			<summary>Gets matrix from this quatertion.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrix(IrrlichtLime.Core.Vector3Df)">
+			<summary>Gets matrix from this quatertion.</summary>
+			<param name="translation">Translation vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrixCenter(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Gets matrix from this quatertion.</summary>
+			<param name="center">Rotation vector.</param>
+			<param name="translation">Translation vector.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.Identity">
+			<summary>Identity quaternion.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.MakeIdentity">
+			<summary>Sets this quaternion to identity.</summary>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.MakeInverse">
+			<summary>Inverts this quaternion.</summary>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.MakeRotation(System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets this quaternion from rotation angle and rotation axis.
+The rotation is q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k).</summary>
+			<param name="angle">Rotation angle (in radians).</param>
+			<param name="axis">Rotation axis (in radians). Must be unit length.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.MakeRotation(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets this quaternion to represent a rotation from one vector to another.</summary>
+			<param name="from">Rotation start .</param>
+			<param name="to">Rotation finish.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Normalize">
+			<summary>Normalizes this quaternion.</summary>
+			<returns>Reference to this quatertion after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor">
+			<summary>Creates identity quaternion.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor(IrrlichtLime.Core.Quaternion)">
+			<summary>Copy constructor.</summary>
+			<param name="copy">Quaternion to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates quaternion by converting given Euler angles (in radians).</summary>
+			<param name="eulerAngles">Euler angles (in radians).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Creates quaternion by converting given Euler angles (in radians).</summary>
+			<param name="eulerAngleX">X angle (in radians).</param>
+			<param name="eulerAngleY">Y angle (in radians).</param>
+			<param name="eulerAngleZ">Z angle (in radians).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor(IrrlichtLime.Core.Matrix)">
+			<summary>Creates quaternion by converting given matrix.</summary>
+			<param name="mat">Matrix.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates quaternion from given direct values.</summary>
+			<param name="x">X value of vectorial (imaginary) part.</param>
+			<param name="y">Y value of vectorial (imaginary) part.</param>
+			<param name="z">Z value of vectorial (imaginary) part.</param>
+			<param name="w">W value (real part).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Set(IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets this quaternion by converting given Euler angles (in radians).</summary>
+			<param name="eulerAngles">Euler angles (in radians).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Set(System.Single,System.Single,System.Single)">
+			<summary>Sets this quaternion by converting given Euler angles (in radians).</summary>
+			<param name="eulerAngleX">X angle (in radians).</param>
+			<param name="eulerAngleY">Y angle (in radians).</param>
+			<param name="eulerAngleZ">Z angle (in radians).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Set(IrrlichtLime.Core.Quaternion)">
+			<summary>Sets this quaternion from other quaternion.</summary>
+			<param name="newQuat">Quaternion to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Set(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Sets this quaternion from given direct values.</summary>
+			<param name="newX">X value of vectorial (imaginary) part.</param>
+			<param name="newY">Y value of vectorial (imaginary) part.</param>
+			<param name="newZ">Z value of vectorial (imaginary) part.</param>
+			<param name="newW">W value (real part).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Sets this quaternion to the result of the spherical linear interpolation (slerp) between two quaternions.</summary>
+			<param name="q1">First quaternion.</param>
+			<param name="q2">Second quaternion.</param>
+			<param name="time">Interpolation value.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.ToAngleAxis(System.Single@,IrrlichtLime.Core.Vector3Df@)">
+			<summary>Calculaters an angle (in radians) and around axis (unit vector).</summary>
+			<param name="angle">Angle (in radians).</param>
+			<param name="axis">Axis vector (unit vector).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.ToEuler">
+			<summary>Calculates an Euler angles (in radians).</summary>
+			<returns>Vector with Euler angles (in radians).</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.W">
+			<summary>W value (real part).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.X">
+			<summary>X value of vectorial (imaginary) part.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.Y">
+			<summary>Y value of vectorial (imaginary) part.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.Z">
+			<summary>Z value of vectorial (imaginary) part.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Core.Rectf">
 			<summary>Rectangular area.
 
@@ -2440,11 +2572,12 @@ The Vector3d class is used in Irrlicht for three main purposes: 1) As a directio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.DotProduct(IrrlichtLime.Core.Vector3Df)">
 			<summary>Get the dot product with another vector.</summary>
+			<returns>Dot product result.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.EqualsTo(IrrlichtLime.Core.Vector3Df)">
 			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
 			<param name="other">Other vector for comparision.</param>
-			<returns>True if vectors are equals.</returns>
+			<returns>True if vectors are equal.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.EqualsTo(IrrlichtLime.Core.Vector3Df,System.Single)">
 			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
@@ -2456,6 +2589,7 @@ The Vector3d class is used in Irrlicht for three main purposes: 1) As a directio
 			<summary>Get distance from another point.
 
 Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<returns>Distance from the point.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Df)">
 			<summary>Returns squared distance from another point.
