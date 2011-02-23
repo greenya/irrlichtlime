@@ -83,6 +83,7 @@
 #include "Rect.h"
 #include "AABBox.h"
 #include "Matrix.h"
+#include "Quaternion.h"
 #include "ViewFrustum.h"
 #include "Triangle.h"
 #include "VideoMode.h"

@@ -12,6 +12,8 @@ public ref class Matrix : Lime::NativeValue<core::matrix4>
 {
 public:
 
+	static property Matrix^ Identity { Matrix^ get() { return gcnew Matrix(core::matrix4(core::matrix4::EM4CONST_IDENTITY)); } }
+
 	static bool operator == (Matrix^ v1, Matrix^ v2)
 	{
 		bool v1n = Object::ReferenceEquals(v1, nullptr);
@@ -60,8 +62,6 @@ public:
 
 		return gcnew Matrix((*v1->m_NativeValue) * (*v2->m_NativeValue));
 	}
-
-	static property Matrix^ Identity { Matrix^ get() { return gcnew Matrix(core::matrix4(core::matrix4::EM4CONST_IDENTITY)); } }
 
 	Matrix()
 		: Lime::NativeValue<core::matrix4>(true)
