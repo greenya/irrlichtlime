@@ -10,6 +10,7 @@
 #include "AnimatedMeshType.h"
 #include "AnimationTypeMD2.h"
 #include "AntiAliasingMode.h"
+#include "AttributeType.h"
 #include "BoneAnimationMode.h"
 #include "BoneSkinningSpace.h"
 #include "ColorFormat.h"

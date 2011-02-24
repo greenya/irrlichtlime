@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Attributes.h"
 #include "GPUProgrammingServices.h"
 #include "Image.h"
 #include "ImageLoader.h"
@@ -767,13 +768,13 @@ void VideoDriver::DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsign
 
 void VideoDriver::EnableClipPlane(int index, bool enable)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
+	LIME_ASSERT(index >= 0 && index < (int)Attributes->GetValue("MaxUserClipPlanes"));
 	m_VideoDriver->enableClipPlane(index, enable);
 }
 
 void VideoDriver::EnableClipPlane(int index)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
+	LIME_ASSERT(index >= 0 && index < (int)Attributes->GetValue("MaxUserClipPlanes"));
 	m_VideoDriver->enableClipPlane(index, true);
 }
 
@@ -970,7 +971,7 @@ void VideoDriver::RunOcclusionQuery(Scene::SceneNode^ node)
 
 bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane, bool enable)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
+	LIME_ASSERT(index >= 0 && index < (int)Attributes->GetValue("MaxUserClipPlanes"));
 	LIME_ASSERT(plane != nullptr);
 
 	return m_VideoDriver->setClipPlane(
@@ -981,7 +982,7 @@ bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane, bool enable)
 
 bool VideoDriver::SetClipPlane(int index, Plane3Df^ plane)
 {
-	LIME_ASSERT(index >= 0 && index < VideoDriver::MaxClipPlaneCount);
+	LIME_ASSERT(index >= 0 && index < (int)Attributes->GetValue("MaxUserClipPlanes"));
 	LIME_ASSERT(plane != nullptr);
 
 	return m_VideoDriver->setClipPlane(
@@ -1125,6 +1126,12 @@ bool VideoDriver::WriteImage(Image^ image, IO::WriteFile^ file)
 	return m_VideoDriver->writeImageToFile(
 		LIME_SAFEREF(image, m_Image),
 		LIME_SAFEREF(file, m_WriteFile));
+}
+
+IO::Attributes^ VideoDriver::Attributes::get()
+{
+	const io::IAttributes& a = m_VideoDriver->getDriverAttributes();
+	return IO::Attributes::Wrap((io::IAttributes*)&a); // !!! cast to non-const pointer
 }
 
 Video::ColorFormat VideoDriver::ColorFormat::get()
@@ -1320,7 +1327,7 @@ unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene
 		c = 0;
 	}
 
-	LIME_ASSERT2(c > 0, "Failed to calculate count of primitives: unexpected value of PrimitiveType or number of indices invalid.");
+	LIME_ASSERT2(c > 0, "Failed to calculate count of primitives: unexpected value of PrimitiveType or number of indices is invalid.");
 
 	return c;
 }

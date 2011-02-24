@@ -1238,6 +1238,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Attributes.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Attributes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AttributeType.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FileArchive.cpp"
 				>
 			</File>
