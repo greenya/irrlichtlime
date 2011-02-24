@@ -9,7 +9,7 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; }
-namespace IO { ref class ReadFile; ref class WriteFile; }
+namespace IO { ref class Attributes; ref class ReadFile; ref class WriteFile; }
 namespace Video {
 
 ref class GPUProgrammingServices;
@@ -23,10 +23,6 @@ ref class Texture;
 public ref class VideoDriver : ReferenceCounted
 {
 public:
-
-	static property int MaxClipPlaneCount { int get() { return 6; } } // "6", because i don't know how detect real number of available clip planes
-	// and doc says: "There are at least 6 clipping planes available for the user to set at will. The plane index must be between 0
-	// and MaxUserClipPlanes" (MaxUserClipPlanes is a private variable and calculates from device caps internally).
 
 	int AddDynamicLight(Light^ light);
 
@@ -205,6 +201,7 @@ public:
 	bool WriteImage(Image^ image, IO::WriteFile^ file, unsigned int param);
 	bool WriteImage(Image^ image, IO::WriteFile^ file);
 
+	property IO::Attributes^ Attributes { IO::Attributes^ get(); }
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
 	property Dimension2Di^ CurrentRenderTargetSize { Dimension2Di^ get(); }
 	property Video::DriverType DriverType { Video::DriverType get(); }

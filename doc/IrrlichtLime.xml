@@ -5902,11 +5902,11 @@ Please note that currently not all primitives are available for all drivers, and
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.EnableClipPlane(System.Int32)">
 			<summary>Enable or disable a clipping plane.</summary>
-			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="index">The plane index. Must be less than "MaxUserClipPlanes" attribute value.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.EnableClipPlane(System.Int32,System.Boolean)">
 			<summary>Enable or disable a clipping plane.</summary>
-			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="index">The plane index. Must be less than "MaxUserClipPlanes" attribute value.</param>
 			<param name="enable">True to enable clip plane, otherwise disable it. Default: true.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.EnableMaterial2D">
@@ -6145,13 +6145,13 @@ In fullscreen mode it is also a screen size.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.SetClipPlane(System.Int32,IrrlichtLime.Core.Plane3Df)">
 			<summary>Sets or unsets a clipping plane.</summary>
-			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="index">The plane index. Must be less than "MaxUserClipPlanes" attribute value.</param>
 			<param name="plane">The plane itself.</param>
 			<returns>True if the clipping plane is usable.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.SetClipPlane(System.Int32,IrrlichtLime.Core.Plane3Df,System.Boolean)">
 			<summary>Sets or unsets a clipping plane.</summary>
-			<param name="index">The plane index. Must be between 0 and MaxClipPlaneCount-1.</param>
+			<param name="index">The plane index. Must be less than "MaxUserClipPlanes" attribute value.</param>
 			<param name="plane">The plane itself.</param>
 			<param name="enable">If true, enable the clipping plane else disable it. Default: true.</param>
 			<returns>True if the clipping plane is usable.</returns>
