@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime { ref class Event;
-namespace IO { ref class FileSystem; ref class ReadFile; ref class WriteFile; }
+namespace IO { ref class Attributes; ref class FileSystem; ref class ReadFile; ref class WriteFile; }
 namespace GUI { ref class GUIEnvironment; ref class GUIFont; }
 namespace Video { ref class Image; ref class Texture; ref class VideoDriver; }
 namespace Scene {
@@ -342,6 +342,7 @@ public:
 
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }
+	property IO::Attributes^ Attributes { IO::Attributes^ get(); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
