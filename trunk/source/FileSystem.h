@@ -43,8 +43,8 @@ public:
 	WriteFile^ CreateWriteFile(String^ filename, bool append);
 	WriteFile^ CreateWriteFile(String^ filename);
 
-	FileList^ CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths);
-	FileList^ CreateFileList();
+	FileList^ CreateFileList(String^ path, bool ignoreCase, bool ignorePaths);
+	FileList^ CreateFileListFromWorkingDirectory();
 
 	ReadFile^ CreateLimitReadFile(String^ filename, ReadFile^ alreadyOpenedFile, long areaPosition, long areaSize);
 	ReadFile^ CreateMemoryReadFile(String^ filename, array<unsigned char>^ content);

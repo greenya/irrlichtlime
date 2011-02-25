@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <doc>
 	<assembly>
 		<name>IrrlichtLime</name>
@@ -3162,14 +3162,14 @@ After calling this, the Irrlicht Engine will also search and open files directly
 			<param name="driver">Video driver to be used to load textures when specified as attribute values. Can be null to prevent automatic texture loading by attributes. Default: null.</param>
 			<returns>Attributes object. After usage it has to be deleted using Drop() method.</returns>
 		</member>
-		<member name="M:IrrlichtLime.IO.FileSystem.CreateEmptyFileList(System.String,System.Boolean,System.Boolean)">
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateFileList(System.String,System.Boolean,System.Boolean)">
 			<summary>Creates an empty filelist.</summary>
 			<param name="path">Virtual path to use.</param>
 			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case.</param>
 			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path.</param>
 			<returns>Created FileList is returned. After the list has been used it has to be deleted using Drop() method.</returns>
 		</member>
-		<member name="M:IrrlichtLime.IO.FileSystem.CreateFileList">
+		<member name="M:IrrlichtLime.IO.FileSystem.CreateFileListFromWorkingDirectory">
 			<summary>Creates a list of files and directories in the current working directory and returns it.</summary>
 			<returns>Created FileList is returned. After the list has been used it has to be deleted using Drop() method.</returns>
 		</member>

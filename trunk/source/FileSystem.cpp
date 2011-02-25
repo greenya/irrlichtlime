@@ -176,7 +176,7 @@ WriteFile^ FileSystem::CreateWriteFile(String^ filename)
 	return WriteFile::Wrap(f);
 }
 
-FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ignorePaths)
+FileList^ FileSystem::CreateFileList(String^ path, bool ignoreCase, bool ignorePaths)
 {
 	LIME_ASSERT(path != nullptr);
 
@@ -188,7 +188,7 @@ FileList^ FileSystem::CreateEmptyFileList(String^ path, bool ignoreCase, bool ig
 	return FileList::Wrap(l);
 }
 
-FileList^ FileSystem::CreateFileList()
+FileList^ FileSystem::CreateFileListFromWorkingDirectory()
 {
 	io::IFileList* l = m_FileSystem->createFileList();
 	return FileList::Wrap(l);
