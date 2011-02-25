@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AnimatedMesh.h"
 #include "AnimatedMeshSceneNode.h"
+#include "Attributes.h"
 #include "BillboardSceneNode.h"
 #include "BillboardTextSceneNode.h"
 #include "CameraSceneNode.h"
@@ -3109,6 +3110,12 @@ void SceneManager::AmbientLight::set(Video::Colorf^ value)
 {
 	LIME_ASSERT(value != nullptr);
 	m_SceneManager->setAmbientLight(*value->m_NativeValue);
+}
+
+IO::Attributes^ SceneManager::Attributes::get()
+{
+	io::IAttributes* a = m_SceneManager->getParameters();
+	return IO::Attributes::Wrap(a);
 }
 
 IO::FileSystem^ SceneManager::FileSystem::get()

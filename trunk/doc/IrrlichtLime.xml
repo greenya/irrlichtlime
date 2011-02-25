@@ -5494,6 +5494,25 @@ This class is one of the most important classes of the Irrlicht Lime: all render
 			<param name="format">Desired color format of the texture. Please note that the driver may choose to create the texture in another color format. Default: ColorFormat.A8R8G8B8.</param>
 			<returns>Pointer to the newly created texture.</returns>
 		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.Attributes">
+			<summary>Attributes of the actual video driver.
+
+The following names can be queried for the given types:
+MaxTextures (int) The maximum number of simultaneous textures supported by the driver. This can be less than the supported number of textures of the driver.
+MaxSupportedTextures (int) The maximum number of simultaneous textures supported by the fixed function pipeline of the (hw) driver. The actual supported number of textures supported by the engine can be lower.
+MaxLights (int) Number of hardware lights supported in the fixed function pipieline of the driver, typically 6-8. Use light manager or deferred shading for more.
+MaxAnisotropy (int) Number of anisotropy levels supported for filtering. At least 1, max is typically at 16 or 32.
+MaxUserClipPlanes (int) Number of additional clip planes, which can be set by the user via dedicated driver methods.
+MaxAuxBuffers (int) Special render buffers, which are currently not really usable inside Irrlicht. Only supported by OpenGL.
+MaxMultipleRenderTargets (int) Number of render targets which can be bound simultaneously. Rendering to MRTs is done via shaders.
+MaxIndices (int) Number of indices which can be used in one render call (i.e. one mesh buffer).
+MaxTextureSize (int) Dimension that a texture may have, both in width and height.
+MaxGeometryVerticesOut (int) Number of vertices the geometry shader can output in one pass. Only OpenGL so far.
+MaxTextureLODBias (float) Maximum value for LOD bias. Is usually at around 16, but can be lower on some systems.
+Version (int) Version of the driver. Formatted as Major*100+Minor.
+ShaderLanguageVersion (int) Version of the high level shader language. Formatted as Major*100+Minor.
+AntiAlias (int) Number of samples the driver uses for each pixel. 0 and 1 means anti aliasing is off, typical values are 2,4,8,16,32.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene">
 			<summary>Applications must call this method before performing any rendering.
 
@@ -5558,6 +5577,11 @@ Note that you usually need not to call this method, as it is automatically done 
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoDriver.ColorFormat">
 			<summary>Color format of the color buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateAttributesFromMaterial(IrrlichtLime.Video.Material)">
+			<summary>Creates material attributes list from a material.</summary>
+			<param name="material">The material to serialize.</param>
+			<returns>Attributes container holding the material properties.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.IO.ReadFile)">
 			<summary>Creates a software image from a file.
@@ -5951,6 +5975,11 @@ This value is updated approximately every 1.5 seconds and is only intended to pr
 			<param name="index">Index of the loader. Must be from 0 to ImageLoaderCount-1.</param>
 			<returns>Pointer to the specified loader.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialFromAttributes(IrrlichtLime.IO.Attributes)">
+			<summary>Gets a material initialized with values from given attributes.</summary>
+			<param name="attributes">The attributes to read from.</param>
+			<returns>Deserialized material.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.GetMaterialRenderer(System.Int32)">
 			<summary>Get access to a material.</summary>
 			<param name="index">Index of the material. Must be from 0 to MaterialRendererCount-1.</param>
@@ -6057,9 +6086,6 @@ This material allows to alter certain render states of the 2d methods. Not all m
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoDriver.MaterialRendererCount">
 			<summary>Amount of currently available material renderers.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.VideoDriver.MaxClipPlaneCount">
-			<summary>Maximum number of user clipping planes available.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoDriver.MaxDynamicLightCount">
 			<summary>Maximum number of dynamic lights the device can handle.</summary>
