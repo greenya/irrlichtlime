@@ -48,6 +48,8 @@ public:
 
 	void ClearZBuffer();
 
+	IO::Attributes^ CreateAttributesFromMaterial(Material^ material);
+
 	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
@@ -127,6 +129,8 @@ public:
 	Light^ GetDynamicLight(int index);
 
 	ImageLoader^ GetImageLoader(int index);
+
+	Material^ GetMaterialFromAttributes(IO::Attributes^ attributes);
 
 	MaterialRenderer^ GetMaterialRenderer(int index);
 	MaterialRenderer^ GetMaterialRenderer(MaterialType material);
