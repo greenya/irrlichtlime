@@ -8,9 +8,11 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+namespace Video { ref class VideoDriver; }
 namespace IO {
 
 ref class ArchiveLoader;
+ref class Attributes;
 ref class FileArchive;
 ref class FileList;
 ref class ReadFile;
@@ -33,6 +35,9 @@ public:
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths);
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase);
 	bool AddFileArchive(ReadFile^ file);
+
+	Attributes^ CreateAttributes(Video::VideoDriver^ driver);
+	Attributes^ CreateAttributes();
 
 	ReadFile^ CreateReadFile(String^ filename);
 	WriteFile^ CreateWriteFile(String^ filename, bool append);

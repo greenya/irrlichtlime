@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "ArchiveLoader.h"
+#include "Attributes.h"
 #include "FileArchive.h"
 #include "FileList.h"
 #include "FileSystem.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
+#include "VideoDriver.h"
 #include "WriteFile.h"
 
 using namespace irr;
@@ -133,6 +135,18 @@ bool FileSystem::AddFileArchive(ReadFile^ file)
 
 	return m_FileSystem->addFileArchive(
 		file->m_ReadFile);
+}
+
+Attributes^ FileSystem::CreateAttributes(Video::VideoDriver^ driver)
+{
+	io::IAttributes* a = m_FileSystem->createEmptyAttributes(LIME_SAFEREF(driver, m_VideoDriver));
+	return Attributes::Wrap(a);
+}
+
+Attributes^ FileSystem::CreateAttributes()
+{
+	io::IAttributes* a = m_FileSystem->createEmptyAttributes();
+	return Attributes::Wrap(a);
 }
 
 ReadFile^ FileSystem::CreateReadFile(String^ filename)
