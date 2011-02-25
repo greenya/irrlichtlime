@@ -60,6 +60,7 @@ internal:
 
 	static Material^ Wrap(video::SMaterial* ref);
 	Material(video::SMaterial* ref);
+	Material(const video::SMaterial& copy);
 };
 
 } // end namespace Video

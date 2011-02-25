@@ -181,6 +181,14 @@ void VideoDriver::ClearZBuffer()
 	m_VideoDriver->clearZBuffer();
 }
 
+IO::Attributes^ VideoDriver::CreateAttributesFromMaterial(Material^ material)
+{
+	LIME_ASSERT(material != nullptr);
+
+	io::IAttributes* a = m_VideoDriver->createAttributesFromMaterial(*material->m_NativeValue);
+	return IO::Attributes::Wrap(a);
+}
+
 Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size)
 {
 	LIME_ASSERT(pos != nullptr);
@@ -811,6 +819,16 @@ ImageLoader^ VideoDriver::GetImageLoader(int index)
 
 	video::IImageLoader* l = m_VideoDriver->getImageLoader(index);
 	return ImageLoader::Wrap(l);
+}
+
+Material^ VideoDriver::GetMaterialFromAttributes(IO::Attributes^ attributes)
+{
+	LIME_ASSERT(attributes != nullptr);
+
+	video::SMaterial m;
+	m_VideoDriver->fillMaterialStructureFromAttributes(m, LIME_SAFEREF(attributes, m_Attributes));
+
+	return gcnew Material(m);
 }
 
 MaterialRenderer^ VideoDriver::GetMaterialRenderer(int index)

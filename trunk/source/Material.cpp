@@ -24,6 +24,12 @@ Material::Material(video::SMaterial* ref)
 	m_NativeValue = ref;
 }
 
+Material::Material(const video::SMaterial& copy)
+	: Lime::NativeValue<video::SMaterial>(true)
+{
+	m_NativeValue = new video::SMaterial(copy);
+}
+
 Material::Material()
 	: Lime::NativeValue<video::SMaterial>(true)
 {
