@@ -1238,6 +1238,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AttributeReadWriteFlag.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AttributeReadWriteOptions.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Attributes.cpp"
 				>
 			</File>

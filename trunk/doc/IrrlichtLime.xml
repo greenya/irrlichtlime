@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
 	<assembly>
 		<name>IrrlichtLime</name>
@@ -2925,6 +2925,39 @@ If you want the Irrlicht Engine be able to load archives of currently unsupporte
 		</member>
 		<member name="T:IrrlichtLime.IO.AttributeExchangingObject">
 			<summary>An object which is able to serialize and deserialize its attributes into an attributes object.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.AttributeReadWriteFlag">
+			<summary>Flags describing attribute read/write options.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeReadWriteFlag.ForEditor">
+			<summary>Serialization/deserializion is done for an editor property box.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeReadWriteFlag.ForFile">
+			<summary>Serialization/deserializion is done for an xml file.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeReadWriteFlag.UseRelativePaths">
+			<summary>When writing filenames, relative paths should be used.</summary>
+		</member>
+		<member name="T:IrrlichtLime.IO.AttributeReadWriteOptions">
+			<summary>Options for serialization/deserialization attributes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeReadWriteOptions.#ctor">
+			<summary>Initializes new instance.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeReadWriteOptions.#ctor(IrrlichtLime.IO.AttributeReadWriteFlag)">
+			<summary>Initializes new instance.</summary>
+			<param name="flags">Combination of flags. Default: 0 (no flags).</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeReadWriteOptions.#ctor(IrrlichtLime.IO.AttributeReadWriteFlag,System.String)">
+			<summary>Initializes new instance.</summary>
+			<param name="flags">Combination of flags. Default: 0 (no flags).</param>
+			<param name="filename">The filename. Default: null.</param>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeReadWriteOptions.Filename">
+			<summary>The file name.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeReadWriteOptions.Flags">
+			<summary>The flags.</summary>
 		</member>
 		<member name="T:IrrlichtLime.IO.FileArchive">
 			<summary>The FileArchive manages archives and provides access to files inside them.</summary>
