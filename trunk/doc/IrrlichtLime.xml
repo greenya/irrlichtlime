@@ -2924,7 +2924,25 @@ If you want the Irrlicht Engine be able to load archives of currently unsupporte
 			<returns>True if the archive loader supports this type, false if not.</returns>
 		</member>
 		<member name="T:IrrlichtLime.IO.AttributeExchangingObject">
-			<summary>An object which is able to serialize and deserialize its attributes into an attributes object.</summary>
+			<summary>An object which is able to serialize and deserialize its properties into an Attributes object.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeExchangingObject.DeserializeAttributes(IrrlichtLime.IO.Attributes)">
+			<summary>Restores object from attributes.</summary>
+			<param name="deserializeFrom">Attributes to deserialize from.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeExchangingObject.DeserializeAttributes(IrrlichtLime.IO.Attributes,IrrlichtLime.IO.AttributeReadWriteOptions)">
+			<summary>Restores object from attributes.</summary>
+			<param name="deserializeFrom">Attributes to deserialize from.</param>
+			<param name="options">Deserialization options. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeExchangingObject.SerializeAttributes(IrrlichtLime.IO.Attributes)">
+			<summary>Stores object into attributes.</summary>
+			<param name="serializeTo">Attributes to serialize into. Object's attributes will be added to this collection. Make sure that there will no chance for attribute names collision.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.AttributeExchangingObject.SerializeAttributes(IrrlichtLime.IO.Attributes,IrrlichtLime.IO.AttributeReadWriteOptions)">
+			<summary>Stores object into attributes.</summary>
+			<param name="serializeTo">Attributes to serialize into. Object's attributes will be added to this collection. Make sure that there will no chance for attribute names collision.</param>
+			<param name="options">Serialization options. Default: null.</param>
 		</member>
 		<member name="T:IrrlichtLime.IO.AttributeReadWriteFlag">
 			<summary>Flags describing attribute read/write options.</summary>

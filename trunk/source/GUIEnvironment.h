@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime { ref class Event;
-namespace IO { ref class FileSystem; ref class ReadFile; ref class WriteFile; }
+namespace IO { ref class Attributes; ref class FileSystem; ref class ReadFile; ref class WriteFile; }
 namespace Video { ref class Texture; ref class VideoDriver; }
 namespace GUI {
 
@@ -176,6 +176,9 @@ public:
 
 	GUISkin^ CreateSkin(GUISkinType type);
 
+	void DeserializeAttributes(IO::Attributes^ deserializeFrom, IO::AttributeReadWriteOptions^ options);
+	void DeserializeAttributes(IO::Attributes^ deserializeFrom);
+
 	void DrawAll();
 
 	bool Focused(GUIElement^ element);
@@ -199,6 +202,9 @@ public:
 	bool SaveGUI(String^ filename);
 	bool SaveGUI(IO::WriteFile^ file, GUIElement^ start);
 	bool SaveGUI(IO::WriteFile^ file);
+
+	void SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options);
+	void SerializeAttributes(IO::Attributes^ serializeTo);
 
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
 	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }

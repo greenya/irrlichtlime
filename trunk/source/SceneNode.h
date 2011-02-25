@@ -8,6 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+namespace IO { ref class Attributes; }
 namespace Video { ref class Material; ref class Texture; }
 namespace Scene {
 
@@ -23,6 +24,9 @@ public:
 	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
 
+	void DeserializeAttributes(IO::Attributes^ deserializeFrom, IO::AttributeReadWriteOptions^ options);
+	void DeserializeAttributes(IO::Attributes^ deserializeFrom);
+
 	Video::Material^ GetMaterial(int num);
 
 	void RegisterSceneNode();
@@ -34,6 +38,9 @@ public:
 	bool RemoveChild(SceneNode^ child);
 
 	virtual void Render();
+
+	void SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options);
+	void SerializeAttributes(IO::Attributes^ serializeTo);
 
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
 	void SetMaterialTexture(int textureLayer, Video::Texture^ texture);
