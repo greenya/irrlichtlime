@@ -10,12 +10,17 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace IO {
 
+ref class Attributes;
+
 public ref class AttributeExchangingObject : ReferenceCounted
 {
 public:
 
-	// void serializeAttributes(io::IAttributes* out, io::SAttributeReadWriteOptions* options=0)
-	// void deserializeAttributes(io::IAttributes* in, io::SAttributeReadWriteOptions* options=0)
+	void DeserializeAttributes(Attributes^ deserializeFrom, AttributeReadWriteOptions^ options);
+	void DeserializeAttributes(Attributes^ deserializeFrom);
+
+	void SerializeAttributes(Attributes^ serializeTo, AttributeReadWriteOptions^ options);
+	void SerializeAttributes(Attributes^ serializeTo);
 
 internal:
 

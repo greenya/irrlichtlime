@@ -51,21 +51,25 @@ public:
 
 internal:
 
-	// Allocates io::SAttributeReadWriteOptions and returns pointer.
+	// Allocates io::SAttributeReadWriteOptions from managed representation and returns the pointer.
 	// Note: Free_SAttributeReadWriteOptions() must be called for returned pointer after all.
-	io::SAttributeReadWriteOptions* Allocate_SAttributeReadWriteOptions()
+	// Note: returns null if null argument passed.
+	static io::SAttributeReadWriteOptions* Allocate_SAttributeReadWriteOptions(AttributeReadWriteOptions^ options)
 	{
+		if (options == nullptr)
+			return nullptr;
+
 		io::SAttributeReadWriteOptions* o = new io::SAttributeReadWriteOptions();
 		
-		o->Flags = (io::E_ATTRIBUTE_READ_WRITE_FLAGS)Flags;
+		o->Flags = (io::E_ATTRIBUTE_READ_WRITE_FLAGS)options->Flags;
 		o->Filename = nullptr;
 
-		if (!String::IsNullOrEmpty(Filename))
+		if (!String::IsNullOrEmpty(options->Filename))
 		{
-			int s = Filename->Length + 1;
+			int s = options->Filename->Length + 1;
 			o->Filename = new c8[s];
 
-			core::stringc c = Lime::StringToStringC(Filename);
+			core::stringc c = Lime::StringToStringC(options->Filename);
 			LIME_ASSERT(s == c.size() + 1);
 
 			strcpy_s((c8*)o->Filename, s, c.c_str());
@@ -75,14 +79,16 @@ internal:
 	}
 
 	// Frees io::SAttributeReadWriteOptions pointer, previously allocated by Allocate_SAttributeReadWriteOptions().
-	void Free_SAttributeReadWriteOptions(io::SAttributeReadWriteOptions* o)
+	// Note: if argument null, then function will do nothing.
+	static void Free_SAttributeReadWriteOptions(io::SAttributeReadWriteOptions* options)
 	{
-		LIME_ASSERT(o != nullptr);
+		if (options == nullptr)
+			return;
 
-		if (o->Filename != nullptr)
-			delete o->Filename;
+		if (options->Filename != nullptr)
+			delete options->Filename;
 
-		delete o;
+		delete options;
 	}
 };
 

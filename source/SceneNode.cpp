@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AnimatedMeshSceneNode.h"
 #include "AttributeExchangingObject.h"
+#include "Attributes.h"
 #include "BillboardSceneNode.h"
 #include "CameraSceneNode.h"
 #include "DummyTransformationSceneNode.h"
@@ -183,6 +184,21 @@ void SceneNode::AddChild(SceneNode^ child)
 	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
+void SceneNode::DeserializeAttributes(IO::Attributes^ deserializeFrom, IO::AttributeReadWriteOptions^ options)
+{
+	LIME_ASSERT(deserializeFrom != nullptr);
+
+	io::SAttributeReadWriteOptions* o = IO::AttributeReadWriteOptions::Allocate_SAttributeReadWriteOptions(options);
+	m_SceneNode->deserializeAttributes(LIME_SAFEREF(deserializeFrom, m_Attributes), o);
+	IO::AttributeReadWriteOptions::Free_SAttributeReadWriteOptions(o);
+}
+
+void SceneNode::DeserializeAttributes(IO::Attributes^ deserializeFrom)
+{
+	LIME_ASSERT(deserializeFrom != nullptr);
+	m_SceneNode->deserializeAttributes(LIME_SAFEREF(deserializeFrom, m_Attributes));
+}
+
 Video::Material^ SceneNode::GetMaterial(int num)
 {
 	if (m_Inherited)
@@ -241,6 +257,21 @@ void SceneNode::Render()
 	}
 
 	m_SceneNode->render();
+}
+
+void SceneNode::SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options)
+{
+	LIME_ASSERT(serializeTo != nullptr);
+
+	io::SAttributeReadWriteOptions* o = IO::AttributeReadWriteOptions::Allocate_SAttributeReadWriteOptions(options);
+	m_SceneNode->serializeAttributes(LIME_SAFEREF(serializeTo, m_Attributes), o);
+	IO::AttributeReadWriteOptions::Free_SAttributeReadWriteOptions(o);
+}
+
+void SceneNode::SerializeAttributes(IO::Attributes^ serializeTo)
+{
+	LIME_ASSERT(serializeTo != nullptr);
+	m_SceneNode->serializeAttributes(LIME_SAFEREF(serializeTo, m_Attributes));
 }
 
 void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)

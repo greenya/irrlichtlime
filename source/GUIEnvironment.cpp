@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Attributes.h"
 #include "Event.h"
 #include "FileSystem.h"
 #include "GUIButton.h"
@@ -1207,6 +1208,21 @@ GUISkin^ GUIEnvironment::CreateSkin(GUISkinType type)
 	return GUISkin::Wrap(s);
 }
 
+void GUIEnvironment::DeserializeAttributes(IO::Attributes^ deserializeFrom, IO::AttributeReadWriteOptions^ options)
+{
+	LIME_ASSERT(deserializeFrom != nullptr);
+
+	io::SAttributeReadWriteOptions* o = IO::AttributeReadWriteOptions::Allocate_SAttributeReadWriteOptions(options);
+	m_GUIEnvironment->deserializeAttributes(LIME_SAFEREF(deserializeFrom, m_Attributes), o);
+	IO::AttributeReadWriteOptions::Free_SAttributeReadWriteOptions(o);
+}
+
+void GUIEnvironment::DeserializeAttributes(IO::Attributes^ deserializeFrom)
+{
+	LIME_ASSERT(deserializeFrom != nullptr);
+	m_GUIEnvironment->deserializeAttributes(LIME_SAFEREF(deserializeFrom, m_Attributes));
+}
+
 void GUIEnvironment::DrawAll()
 {
 	m_GUIEnvironment->drawAll();
@@ -1305,6 +1321,21 @@ bool GUIEnvironment::SaveGUI(IO::WriteFile^ file)
 {
 	LIME_ASSERT(file != nullptr);
 	return m_GUIEnvironment->saveGUI(LIME_SAFEREF(file, m_WriteFile));
+}
+
+void GUIEnvironment::SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options)
+{
+	LIME_ASSERT(serializeTo != nullptr);
+
+	io::SAttributeReadWriteOptions* o = IO::AttributeReadWriteOptions::Allocate_SAttributeReadWriteOptions(options);
+	m_GUIEnvironment->serializeAttributes(LIME_SAFEREF(serializeTo, m_Attributes), o);
+	IO::AttributeReadWriteOptions::Free_SAttributeReadWriteOptions(o);
+}
+
+void GUIEnvironment::SerializeAttributes(IO::Attributes^ serializeTo)
+{
+	LIME_ASSERT(serializeTo != nullptr);
+	m_GUIEnvironment->serializeAttributes(LIME_SAFEREF(serializeTo, m_Attributes));
 }
 
 GUIFont^ GUIEnvironment::BuiltInFont::get()
