@@ -10,6 +10,7 @@
 #include "AnimatedMeshType.h"
 #include "AnimationTypeMD2.h"
 #include "AntiAliasingMode.h"
+#include "AttributeReadWriteFlag.h"
 #include "AttributeType.h"
 #include "BoneAnimationMode.h"
 #include "BoneSkinningSpace.h"
@@ -91,6 +92,7 @@
 #include "KeyMap.h"
 #include "ExposedVideoData.h"
 #include "NamedPath.h"
+#include "AttributeReadWriteOptions.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"
