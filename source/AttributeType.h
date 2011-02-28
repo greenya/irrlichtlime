@@ -15,7 +15,7 @@ public enum class AttributeType
 	Float = EAT_FLOAT,
 	String = EAT_STRING,
 	Bool = EAT_BOOL,
-	// Enum = EAT_ENUM // we don't support it
+	Enum = EAT_ENUM, // read-only type; i don't have clear solution for implementation of adding and modifying values; read more in Attributes::AddValue() in proper switch-case region
 	Color = EAT_COLOR,
 	Colorf = EAT_COLORF,
 	Vector3Df = EAT_VECTOR3D,

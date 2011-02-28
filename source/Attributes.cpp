@@ -19,6 +19,7 @@ AttributeType Attributes::GetAttributeTypeFromValue(Object^ value)
 	else if (t == float::typeid) return AttributeType::Float;
 	else if (t == String::typeid) return AttributeType::String;
 	else if (t == bool::typeid) return AttributeType::Bool;
+	else if (t->IsEnum) return AttributeType::Enum;
 	else if (t == Video::Color::typeid) return AttributeType::Color;
 	else if (t == Vector3Df::typeid) return AttributeType::Vector3Df;
 	else if (t == Vector2Di::typeid) return AttributeType::Vector2Di;
@@ -74,6 +75,47 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 	case AttributeType::Bool:
 		m_Attributes->addBool(n.c_str(), (bool)value);
 		return;
+
+	case AttributeType::Enum:
+		{
+			// Curretnly i disable ability to add values as enums, since i don't have clear solution for it.
+
+			LIME_ASSERT2(
+				GetAttributeTypeFromValue(value) != AttributeType::Enum,
+				"Sorry but you cannot add attributes of Enum type. Please use Int instead.");
+
+			return;
+
+			// Code below works just fine, but there is a problem with Irrlicht' enums,
+			// for example, E_MATERIAL_TYPE, which has special array sBuiltInMaterialTypeNames defined.
+			// P.S.: some kind of mapping is required, OR internal Irrlicht won't be able to read values.
+
+			/*
+			LIME_ASSERT(value->GetType()->IsEnum);
+
+			System::Array^ arr1 = Enum::GetValues(value->GetType());
+			int l = arr1->Length;
+
+			c8** arr2 = new c8*[l + 1];
+			for (int i = 0; i < l; i++)
+			{
+				core::stringc s = Lime::StringToStringC(arr1->GetValue(i)->ToString());
+				arr2[i] = new c8[s.size() + 1];
+				strcpy_s(arr2[i], s.size() + 1, s.c_str());
+			}
+			arr2[l] = nullptr; // ending null
+
+			core::stringc c = Lime::StringToStringC(value->ToString());
+			m_Attributes->addEnum(n.c_str(), c.c_str(), arr2);
+
+			for (int i = 0; i < l; i++)
+				delete arr2[i];
+
+			delete arr2;
+
+			return;
+			*/
+		}
 
 	case AttributeType::Color:
 		m_Attributes->addColor(n.c_str(), *((Video::Color^)value)->m_NativeValue);
@@ -228,6 +270,10 @@ Object^ Attributes::GetValue(int attributeIndex)
 	case AttributeType::Bool:
 		return m_Attributes->getAttributeAsBool(attributeIndex);
 
+	case AttributeType::Enum:
+		// i return enum as string because Enum values are read-only accessed for Lime for now
+		return gcnew String(m_Attributes->getAttributeAsEnumeration(attributeIndex));
+
 	case AttributeType::Color:
 		return gcnew Video::Color(m_Attributes->getAttributeAsColor(attributeIndex));
 
@@ -327,6 +373,17 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 	case AttributeType::Bool:
 		m_Attributes->setAttribute(attributeIndex, (bool)value);
 		return;
+
+	case AttributeType::Enum:
+		{
+			// Currently i disable ability to modify values of enum type, since i don't have clear solution for it.
+
+			LIME_ASSERT2(
+				GetAttributeTypeFromValue(value) != AttributeType::Enum,
+				"Sorry but you cannot modify attributes of Enum type.");
+
+			return;
+		}
 
 	case AttributeType::Color:
 		m_Attributes->setAttribute(attributeIndex, *((Video::Color^)value)->m_NativeValue);
