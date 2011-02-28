@@ -2977,6 +2977,70 @@ If you want the Irrlicht Engine be able to load archives of currently unsupporte
 		<member name="F:IrrlichtLime.IO.AttributeReadWriteOptions.Flags">
 			<summary>The flags.</summary>
 		</member>
+		<member name="T:IrrlichtLime.IO.AttributeType">
+			<summary>Types of attributes available for Attributes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.AABBox">
+			<summary>Axis aligned bounding box attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Bool">
+			<summary>Boolean attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.ByteArray">
+			<summary>Array of bytes attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Color">
+			<summary>Color attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Colorf">
+			<summary>Floating-point color attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Enum">
+			<summary>Enumeration attribute.
+It is possible only to detect and read this type of attributes; you cannot create or modify them.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Float">
+			<summary>32-bit floating-point attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Int">
+			<summary>32-bit signed integer attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Line3Df">
+			<summary>3D floating-point line attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Matrix">
+			<summary>Matrix attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Plane3Df">
+			<summary>3D floating-point plane attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Quaternion">
+			<summary>Quaternion attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Recti">
+			<summary>Rectangle integer attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.String">
+			<summary>Unicode string attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.StringArray">
+			<summary>Array of unicode strings attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Texture">
+			<summary>Texture reference attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Triangle3Df">
+			<summary>3D floating-point triangle attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Unknown">
+			<summary>Unknown attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Vector2Di">
+			<summary>2D integer vector attribute.</summary>
+		</member>
+		<member name="F:IrrlichtLime.IO.AttributeType.Vector3Df">
+			<summary>3D floating-point vector attribute.</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.FileArchive">
 			<summary>The FileArchive manages archives and provides access to files inside them.</summary>
 		</member>
