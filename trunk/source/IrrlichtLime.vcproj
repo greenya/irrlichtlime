@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(NoInherit);..\irrlicht\lib\Win32-visualstudio\Irrlicht.lib"
+				AdditionalDependencies="..\irrlicht\lib\Win32-visualstudio\Irrlicht.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
@@ -135,7 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(NoInherit);..\irrlicht\lib\Win32-visualstudio\Irrlicht.lib"
+				AdditionalDependencies="..\irrlicht\lib\Win32-visualstudio\Irrlicht.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
