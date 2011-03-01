@@ -1,5 +1,5 @@
 ============================
-Changes in 0.8 (??-???-2011)
+Changes in 0.8 (??-Mar-2011)
 ============================
 
 - Added example L05.ScreenshotToTexture.
@@ -7,6 +7,16 @@ Changes in 0.8 (??-???-2011)
 - Updated Irrlicht SDK to trunk rev. 3599: added new items to GUIDefaultColor; added MaxAngleDegrees, MaxLifeTime and MinLifeTime to ParticleEmitter; ParticleFadeOutAffector.FadeOutTime now has int type; added AffectorList to ParticleSystemSceneNode. GUIElement.BringToBack renamed to SendToBack. BoneSceneNode.BoneName renamed to Name.
 
 - ...
+
+- Added Attributes class and AttributeType enum. Added Attributes prop to VideoDriver and SceneManager.
+
+- Added AttributeReadWriteOptions class and AttributeReadWriteFlag enum.
+
+- Added CreateAttributesFromMaterial() and GetMaterialFromAttributes() to VideoDriver.
+
+- Added SerializeAttributes() and DeserializeAttributes() to AttributeExchangingObject, GUIEnvironment and SceneNode.
+
+- Added CreateAttributes() to FileSystem. FileSystem methods renaming: CreateFileList => CreateFileListFromWorkingDirectory, CreateEmptyFileList => CreateFileList.
 
 - Added class Quaternion.
 
