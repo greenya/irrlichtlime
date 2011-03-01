@@ -146,11 +146,47 @@ Can be used only when Type == EventType.Joystick.</summary>
 		<member name="T:IrrlichtLime.Event.JoystickEvent">
 			<summary>Any kind of joystick event.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Event.JoystickEvent.Axis">
+			<summary>State of all axes.
+
+The index must be less than AxisCount of proper JoystickInfo.
+
+Common axis indices:
+[0]: X axis (analog stick 1 left to right);
+[1]: Y axis (analog stick 1 top to bottom);
+[2]: Z axis (throttle, or analog 2 stick 2 left to right);
+[3]: R axis (rudder, or analog 2 stick 2 top to bottom);
+[4]: U axis;
+[5]: V axis.
+
+Common axis values:
+Values are in the range -32768 to 32767, with 0 representing the center position. You will receive the raw value from the joystick, and so will usually want to implement a dead zone around the center of the range. Axes not supported by this joystick will always have a value of 0.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.JoystickEvent.AxisCount">
+			<summary>Maximal amount of axis which Axis can hold.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.JoystickEvent.ButtonCount">
+			<summary>Maximal amount of buttons which ButtonState can hold.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.JoystickEvent.ButtonStates">
+			<summary>A bitmap of button states.
+
+You can use IsButtonPressed() to check the state of each button individually.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Event.JoystickEvent.IsButtonPressed(System.Int32)">
 			<summary>A helper function to check if a button is pressed.</summary>
+			<param name="button">Button index. Must be less than ButtonCount of proper JoystickInfo.</param>
+			<returns>True if button pressed.</returns>
 		</member>
 		<member name="F:IrrlichtLime.Event.JoystickEvent.Joystick">
-			<summary>The ID of the joystick which generated this event.</summary>
+			<summary>The ID of the joystick which generated this event.
+
+This is an internal Irrlicht index; it does not map directly to any particular hardware joystick. Same joystick will have this value identical to JoystickInfo.Joystick.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Event.JoystickEvent.POV">
+			<summary>Represents the angle of the POV hat in degrees * 100, from 0 to 35,900.
+
+A value of 65535 indicates that the POV hat is centered (or not present).</summary>
 		</member>
 		<member name="P:IrrlichtLime.Event.Key">
 			<summary>Keyboard event.
@@ -249,7 +285,7 @@ Can be used only when Type == EventType.User.</summary>
 GUI events are created by the GUI environment or the GUI elements in response to mouse or keyboard events. When a GUI element receives an event it will either process it and return true, or pass the event to its parent. If an event is not absorbed before it reaches the root element then it will then be passed to the user receiver.</summary>
 		</member>
 		<member name="F:IrrlichtLime.EventType.Joystick">
-			<summary>A joystick (joypad, gamepad) input event.
+			<summary>A joystick (joypad, gamepad) input event. You should call IrrlichtDevice.ActivateJoysticks() in order to start receive events of this type.
 
 Joystick events are created by polling all connected joysticks once per device Run() and then passing the events to IrrlichtDevice.PostEvent(). They take the same path as mouse events.
 
@@ -396,6 +432,12 @@ Default value: 16.</summary>
 			<summary>The Irrlicht device. You can create it with CreateDevice().
 
 This is the most important class of the Irrlicht Engine. You can access everything in the engine if you have a pointer to an instance of this class. There should be only one instance of this class at any time.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.ActivateJoysticks">
+			<summary>Activates all joysticks found, and returns list of them.
+
+Irrlicht contains support for joysticks, but does not generate joystick events by default, as this would consume joystick info that 3rd party libraries might rely on. Call this method to activate joystick support in Irrlicht and to receive events.</summary>
+			<returns>Returns list joysticks that were found and activated or null on error.</returns>
 		</member>
 		<member name="M:IrrlichtLime.IrrlichtDevice.ClearSystemMessages">
 			<summary>Remove messages pending in the system message loop.
@@ -589,6 +631,38 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		</member>
 		<member name="M:IrrlichtLime.IrrlichtDevice.Yield">
 			<summary>Cause the device to temporarily pause execution and let other processes run. This should bring down processor usage without major performance loss for Irrlicht.</summary>
+		</member>
+		<member name="T:IrrlichtLime.JoystickInfo">
+			<summary>Information on a joystick, returned from IrrlichtDevice.ActivateJoysticks().</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.AxisCount">
+			<summary>Amount of axes that the joystick has, i.e. X, Y, Z, R, U, V.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.ButtonCount">
+			<summary>Amount of buttons that the joystick has.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.Joystick">
+			<summary>The ID of the joystick.
+
+This is an internal Irrlicht index; it does not map directly to any particular hardware joystick. Same joystick will have this value identical to Event.JoystickEvent.Joystick.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.Name">
+			<summary>The name that the joystick uses to identify itself.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.PovHat">
+			<summary>An indication of whether the joystick has a POV hat.</summary>
+		</member>
+		<member name="T:IrrlichtLime.JoystickInfo.PovHatPresence">
+			<summary>Enumeration of POV hat presence.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.PovHatPresence.Absent">
+			<summary>A hat is definitely not present.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.PovHatPresence.Present">
+			<summary>A hat is definitely present.</summary>
+		</member>
+		<member name="F:IrrlichtLime.JoystickInfo.PovHatPresence.Unknown">
+			<summary>The presence or absence of a hat cannot be determined.</summary>
 		</member>
 		<member name="T:IrrlichtLime.KeyAction">
 			<summary>Key actions. Used for example in the FPS Camera.</summary>
