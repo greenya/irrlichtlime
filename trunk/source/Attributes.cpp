@@ -343,11 +343,16 @@ Object^ Attributes::GetValue(int attributeIndex)
 void Attributes::SetValue(String^ attributeName, Object^ value)
 {
 	LIME_ASSERT(attributeName != nullptr);
-	LIME_ASSERT(GetIndex(attributeName) >= 0);
-	LIME_ASSERT(GetType(attributeName) != AttributeType::Unknown);
-	LIME_ASSERT(GetType(attributeName) == GetAttributeTypeFromValue(value));
 
-	SetValue(GetIndex(attributeName), value);
+	int i = GetIndex(attributeName);
+	if (i >= 0)
+	{
+		SetValue(i, value);
+	}
+	else
+	{
+		AddValue(attributeName, value);
+	}
 }
 
 void Attributes::SetValue(int attributeIndex, Object^ value)

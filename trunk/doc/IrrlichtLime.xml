@@ -3059,8 +3059,9 @@ Default: 65536.</summary>
 			<param name="value">New value for the attribute. Must not be null.</param>
 		</member>
 		<member name="M:IrrlichtLime.IO.Attributes.SetValue(System.String,System.Object)">
-			<summary>Sets new value for existing attribute in the collection.</summary>
-			<param name="attributeName">Name of the attribute. Must be non-empty and not null. Must not contain unicode-dependent characters.</param>
+			<summary>Sets new value for existing attribute in the collection.
+Note: if attribute with given name is absent, then it will be added.</summary>
+			<param name="attributeName">Name of the attribute (existing or new). Must be non-empty and not null. Must not contain unicode-dependent characters.</param>
 			<param name="value">New value for the attribute. Must not be null.</param>
 		</member>
 		<member name="T:IrrlichtLime.IO.AttributeType">
