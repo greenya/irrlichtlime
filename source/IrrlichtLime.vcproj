@@ -1347,6 +1347,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\JoystickInfo.h"
+			>
+		</File>
+		<File
 			RelativePath=".\KeyAction.h"
 			>
 		</File>

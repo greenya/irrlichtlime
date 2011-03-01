@@ -17,6 +17,7 @@ namespace Video { ref class VideoDriver; ref class VideoModeList; }
 ref class Event;
 class EventReceiverInheritor;
 ref class IrrlichtCreationParameters;
+ref class JoystickInfo;
 ref class Logger;
 ref class OSOperator;
 ref class Timer;
@@ -39,6 +40,8 @@ public:
 
 	~IrrlichtDevice();
 	!IrrlichtDevice();
+
+	List<JoystickInfo^>^ ActivateJoysticks();
 
 	void ClearSystemMessages();
 	void Close();
