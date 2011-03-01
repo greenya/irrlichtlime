@@ -5,6 +5,7 @@
 #include "GUIEnvironment.h"
 #include "IrrlichtCreationParameters.h"
 #include "IrrlichtDevice.h"
+#include "JoystickInfo.h"
 #include "Logger.h"
 #include "OSOperator.h"
 #include "ReferenceCounted.h"
@@ -161,6 +162,22 @@ IrrlichtDevice^ IrrlichtDevice::CreateDevice()
 bool IrrlichtDevice::IsDriverSupported(Video::DriverType driver)
 {
 	return irr::IrrlichtDevice::isDriverSupported((video::E_DRIVER_TYPE)driver);
+}
+
+List<JoystickInfo^>^ IrrlichtDevice::ActivateJoysticks()
+{
+	core::array<SJoystickInfo> ji;
+	if (m_IrrlichtDevice->activateJoysticks(ji))
+	{
+		List<JoystickInfo^>^ l = gcnew List<JoystickInfo^>();
+
+		for(int i = 0; i < (int)ji.size(); i++)
+			l->Add(gcnew JoystickInfo(ji[i]));
+
+		return l;
+	}
+
+	return nullptr;
 }
 
 void IrrlichtDevice::ClearSystemMessages()
