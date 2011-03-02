@@ -44,6 +44,21 @@ The Irrlicht Lime SDK
   application, make sure that IrrlichtLime.dll and Irrlicht.dll are
   placed near your executable.
 
+  If you use Visual Studio 2010, it creates projects which uses
+  .NET Framework 4.0 by default. In this case you probably will keep
+  receiving error:
+
+   > Mixed mode assembly is built against version 'v2.0.50727' of the
+   > runtime and cannot be loaded in the 4.0 runtime without additional
+   > configuration information.
+
+  To solve this problem there are three ways:
+  1. Modify your app.config: add useLegacyV2RuntimeActivationPolicy="true"
+     attribute-value pair to the "startup" tag.
+  2. Use .NET Framework 3.5 or below in your project.
+  3. Recompile source\IrrlichtLime.vcproj with .NET Framework 4.0 support;
+     however, some project configuration tweaking can be required.
+
 
 
 ==========================================================================
@@ -70,7 +85,7 @@ The Irrlicht Lime SDK
   The Irrlicht Lime License
   =========================
 
-  Copyright (C) 2010 Yuriy Grinevich
+  Copyright (C) 2010-2011 Yuriy Grinevich
 
   This software is provided 'as-is', without any express or implied
   warranty. In no event will the authors be held liable for any damages
@@ -101,7 +116,8 @@ The Irrlicht Lime SDK
   http://irrlichtlime.sourceforge.net
 
   Additional information (discussion thread):
-  http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38512
+  English: http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38512
+  Russian: http://www.irrlicht.ru/forum/viewtopic.php?f=3&t=118
 
   If you found bug, please sumbit it at:
   http://sourceforge.net/tracker/?atid=1355121&group_id=322499&func=browse
