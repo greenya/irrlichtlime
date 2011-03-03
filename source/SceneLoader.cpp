@@ -3,7 +3,6 @@
 #include "SceneNode.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
-#include "ISceneLoader.h" // !!! we add this because irrlicht.h is missing it (i believe this is temp solution)
 
 using namespace irr;
 using namespace System;
