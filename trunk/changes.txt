@@ -1,12 +1,12 @@
 ============================
-Changes in 0.8 (??-Mar-2011)
+Changes in 0.8 (03-Mar-2011)
 ============================
 
-- Added example L05.ScreenshotToTexture.
+- Added examples 19.MouseAndJoystick and L05.ScreenshotToTexture.
 
-- Updated Irrlicht SDK to trunk rev. 3599: added new items to GUIDefaultColor; added MaxAngleDegrees, MaxLifeTime and MinLifeTime to ParticleEmitter; ParticleFadeOutAffector.FadeOutTime now has int type; added AffectorList to ParticleSystemSceneNode. GUIElement.BringToBack renamed to SendToBack. BoneSceneNode.BoneName renamed to Name.
+- Updated Irrlicht SDK to trunk rev. 3601: added new items to GUIDefaultColor; added MaxAngleDegrees, MaxLifeTime and MinLifeTime to ParticleEmitter; ParticleFadeOutAffector.FadeOutTime now has int type; added AffectorList to ParticleSystemSceneNode. GUIElement.BringToBack renamed to SendToBack. BoneSceneNode.BoneName renamed to Name.
 
-- ...
+- Added JoystickInfo class. Added ActivateJoysticks() to IrrlichtDevice.
 
 - Added Attributes class and AttributeType enum. Added Attributes prop to VideoDriver and SceneManager.
 
