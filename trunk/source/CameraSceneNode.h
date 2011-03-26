@@ -14,6 +14,9 @@ public ref class CameraSceneNode : SceneNode
 {
 public:
 
+	void SetProjectionMatrix(Matrix^ projection, bool isOrthogonal);
+	void SetProjectionMatrix(Matrix^ projection);
+
 	property float AspectRatio { float get(); void set(float value); }
 	property float FarValue { float get(); void set(float value); }
 	property float FOV { float get(); void set(float value); }
