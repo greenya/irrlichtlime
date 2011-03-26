@@ -31,10 +31,31 @@ public:
 		return !(v1 == v2);
 	}
 
+	AABBox()
+		: Lime::NativeValue<core::aabbox3df>(true)
+	{
+		m_NativeValue = new core::aabbox3df();
+	}
+
+	AABBox(AABBox^ copy)
+		: Lime::NativeValue<core::aabbox3df>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+
+		m_NativeValue = new core::aabbox3df();
+		m_NativeValue->reset(*copy->m_NativeValue);
+	}
+
 	AABBox(float minx, float miny, float minz, float maxx, float maxy, float maxz)
 		: Lime::NativeValue<core::aabbox3df>(true)
 	{
 		m_NativeValue = new core::aabbox3df(minx, miny, minz, maxx, maxy, maxz);
+	}
+
+	AABBox(float x, float y, float z)
+		: Lime::NativeValue<core::aabbox3df>(true)
+	{
+		m_NativeValue = new core::aabbox3df(x, y, z, x, y, z);
 	}
 
 	AABBox(Vector3Df^ min, Vector3Df^ max)
@@ -53,10 +74,10 @@ public:
 		m_NativeValue = new core::aabbox3df(*point->m_NativeValue);
 	}
 
-	AABBox()
-		: Lime::NativeValue<core::aabbox3df>(true)
+	void Set(float minx, float miny, float minz, float maxx, float maxy, float maxz)
 	{
-		m_NativeValue = new core::aabbox3df();
+		m_NativeValue->MinEdge.set(minx, miny, minz);
+		m_NativeValue->MaxEdge.set(maxx, maxy, maxz);
 	}
 
 	void Set(float x, float y, float z)
@@ -64,16 +85,25 @@ public:
 		m_NativeValue->reset(x, y, z);
 	}
 
-	void Set(AABBox^ newBox)
+	void Set(Vector3Df^ min, Vector3Df^ max)
 	{
-		LIME_ASSERT(newBox != nullptr);
-		m_NativeValue->reset(*newBox->m_NativeValue);
+		LIME_ASSERT(min != nullptr);
+		LIME_ASSERT(max != nullptr);
+
+		m_NativeValue->MinEdge = *min->m_NativeValue;
+		m_NativeValue->MaxEdge = *max->m_NativeValue;
 	}
 
 	void Set(Vector3Df^ newPoint)
 	{
 		LIME_ASSERT(newPoint != nullptr);
 		m_NativeValue->reset(*newPoint->m_NativeValue);
+	}
+
+	void Set(AABBox^ newBox)
+	{
+		LIME_ASSERT(newBox != nullptr);
+		m_NativeValue->reset(*newBox->m_NativeValue);
 	}
 
 	void AddInternalPoint(float x, float y, float z)

@@ -1368,13 +1368,17 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="M:IrrlichtLime.Core.AABBox.#ctor">
 			<summary>Default Constructor.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor(IrrlichtLime.Core.AABBox)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Constructor with min edge and max edge.</summary>
 			<param name="min">Min edge.</param>
 			<param name="max">Max edge.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
-			<summary>Constructor with min edge and max edge as single values, not vectors.</summary>
+			<summary>Constructor with min edge and max edge as six floats.</summary>
 			<param name="minx">X coordinate of min edge.</param>
 			<param name="miny">Y coordinate of min edge.</param>
 			<param name="minz">Z coordinate of min edge.</param>
@@ -1385,6 +1389,12 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="M:IrrlichtLime.Core.AABBox.#ctor(IrrlichtLime.Core.Vector3Df)">
 			<summary>Constructor with only one point.</summary>
 			<param name="point">Min and max edge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Constructor with only one point as three floats.</summary>
+			<param name="x">X coordinate of both edges.</param>
+			<param name="y">Y coordinate of both edges.</param>
+			<param name="z">Z coordinate of both edges.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.AddInternalBox(IrrlichtLime.Core.AABBox)">
 			<summary>Adds another bounding box.</summary>
@@ -1435,6 +1445,20 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.Repair">
 			<summary>Repairs the box. Necessary if for example MinEdge and MaxEdge are swapped.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets the bounding box.</summary>
+			<param name="min">Min edge.</param>
+			<param name="max">Max edge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.AABBox.Set(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Sets the bounding box.</summary>
+			<param name="minx">X coordinate of min edge.</param>
+			<param name="miny">Y coordinate of min edge.</param>
+			<param name="minz">Z coordinate of min edge.</param>
+			<param name="maxx">X coordinate of max edge.</param>
+			<param name="maxy">Y coordinate of max edge.</param>
+			<param name="maxz">Z coordinate of max edge.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.Set(IrrlichtLime.Core.AABBox)">
 			<summary>Sets the bounding box.</summary>
