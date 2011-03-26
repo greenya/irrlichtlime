@@ -23,6 +23,18 @@ CameraSceneNode::CameraSceneNode(scene::ICameraSceneNode* ref)
 	m_CameraSceneNode = ref;
 }
 
+void CameraSceneNode::SetProjectionMatrix(Matrix^ projection, bool isOrthogonal)
+{
+	LIME_ASSERT(projection != nullptr);
+	m_CameraSceneNode->setProjectionMatrix(*projection->m_NativeValue, isOrthogonal);
+}
+
+void CameraSceneNode::SetProjectionMatrix(Matrix^ projection)
+{
+	LIME_ASSERT(projection != nullptr);
+	m_CameraSceneNode->setProjectionMatrix(*projection->m_NativeValue);
+}
+
 float CameraSceneNode::AspectRatio::get()
 {
 	return m_CameraSceneNode->getAspectRatio();
