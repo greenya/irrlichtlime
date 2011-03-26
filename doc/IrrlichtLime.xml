@@ -3640,10 +3640,10 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 			<returns>How much bytes actually were written.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
-			<param name="startPosition">0.0f ... 1.0f</param>
+			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
-			<param name="startPosition">0.0f ... 1.0f</param>
+			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
 		<member name="T:IrrlichtLime.Video.AntiAliasingMode">
 			<summary>These flags are used to specify the anti-aliasing and smoothing modes.
