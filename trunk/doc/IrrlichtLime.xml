@@ -1677,6 +1677,10 @@ Assumes that the point is already somewhere on the line.</summary>
 		<member name="M:IrrlichtLime.Core.Line3Df.#ctor">
 			<summary>Default constructor. Line from (0,0,0) to (1,1,1).</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(IrrlichtLime.Core.Line3Df)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Constructor with two points as vectors.</summary>
 			<param name="start">Start point.</param>
@@ -1830,6 +1834,10 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.#ctor">
 			<summary>Default constructor. Creates identity matrix.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Matrix)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.MultiplyWith1x4Matrix(System.Single[])">
 			<summary>Multiplies this matrix by a 1x4 matrix.</summary>
@@ -2033,14 +2041,53 @@ Thus, this method assumes a camera position from which the triangle is definitel
 		<member name="P:IrrlichtLime.Core.Plane3Df.Normal">
 			<summary>Normal vector of the plane.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor">
+			<summary>Creates default plane.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor(IrrlichtLime.Core.Plane3Df)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates plane using member point and a normal vector.</summary>
+			<param name="memberPoint">Point on the plane.</param>
+			<param name="normal">Normal vector of the plane.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates plane using normal vector and the distance from origin.</summary>
+			<param name="normal">Normal vector of the plane.</param>
+			<param name="d">Distance from origin.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates plane using three points.</summary>
+			<param name="point1">First point on the plane.</param>
+			<param name="point2">Second point on the plane.</param>
+			<param name="point3">Third point on the plane.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Plane3Df.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates plane using member point and a normal vector.</summary>
+			<param name="pointX">X coordinate of the member point.</param>
+			<param name="pointY">Y coordinate of the member point.</param>
+			<param name="pointZ">Z coordinate of the member point.</param>
+			<param name="normalX">X coordinate of the normal vector.</param>
+			<param name="normalY">Y coordinate of the normal vector.</param>
+			<param name="normalZ">Z coordinate of the normal vector.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Sets plane by its member point and normal vector.</summary>
+			<param name="memberPoint">Point on the plane.</param>
+			<param name="normal">Normal vector of the plane.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,System.Single)">
 			<summary>Sets plane by its normal vector and the distance from origin.</summary>
+			<param name="normal">Normal vector of the plane.</param>
+			<param name="d">Distance from origin.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Plane3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Sets plane by three points.</summary>
+			<param name="point1">First point on the plane.</param>
+			<param name="point2">Second point on the plane.</param>
+			<param name="point3">Third point on the plane.</param>
 		</member>
 		<member name="T:IrrlichtLime.Core.Quaternion">
 			<summary>Quaternion class for representing rotations.
@@ -2416,10 +2463,14 @@ This method is an implementation of the example used in a paper by Kasper Fauerb
 			<param name="point3">Point C.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor">
-			<summary>Constructor for an all 0 triangle.</summary>
+			<summary>Creates empty triangle (each point will be 0,0,0).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor(IrrlichtLime.Core.Triangle3Df)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
-			<summary>Constructor for triangle with given three points.</summary>
+			<summary>Creates triangle using given three points.</summary>
 			<param name="point1">Point A.</param>
 			<param name="point2">Point B.</param>
 			<param name="point3">Point C.</param>

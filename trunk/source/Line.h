@@ -37,6 +37,21 @@ public:
 		m_NativeValue = new core::line3df();
 	}
 
+	Line3Df(Line3Df^ copy)
+		: Lime::NativeValue<core::line3df>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+
+		m_NativeValue = new core::line3df();
+		m_NativeValue->setLine(*copy->m_NativeValue);
+	}
+
+	Line3Df(float startX, float startY, float startZ, float endX, float endY, float endZ)
+		: Lime::NativeValue<core::line3df>(true)
+	{
+		m_NativeValue = new core::line3df(startX, startY, startZ, endX, endY, endZ);
+	}
+
 	Line3Df(Vector3Df^ start, Vector3Df^ end)
 		: Lime::NativeValue<core::line3df>(true)
 	{
@@ -46,16 +61,9 @@ public:
 		m_NativeValue = new core::line3df(*start->m_NativeValue, *end->m_NativeValue);
 	}
 
-	Line3Df(float startX, float startY, float startZ, float endX, float endY, float endZ)
-		: Lime::NativeValue<core::line3df>(true)
+	void Set(float newStartX, float newStartY, float newStartZ, float newEndX, float newEndY, float newEndZ)
 	{
-		m_NativeValue = new core::line3df(startX, startY, startZ, endX, endY, endZ);
-	}
-
-	void Set(Line3Df^ newLine)
-	{
-		LIME_ASSERT(newLine != nullptr);
-		m_NativeValue->setLine(*newLine->m_NativeValue);
+		m_NativeValue->setLine(newStartX, newStartY, newStartZ, newEndX, newEndY, newEndZ);
 	}
 
 	void Set(Vector3Df^ newStart, Vector3Df^ newEnd)
@@ -66,9 +74,10 @@ public:
 		m_NativeValue->setLine(*newStart->m_NativeValue, *newEnd->m_NativeValue);
 	}
 
-	void Set(float newStartX, float newStartY, float newStartZ, float newEndX, float newEndY, float newEndZ)
+	void Set(Line3Df^ newLine)
 	{
-		m_NativeValue->setLine(newStartX, newStartY, newStartZ, newEndX, newEndY, newEndZ);
+		LIME_ASSERT(newLine != nullptr);
+		m_NativeValue->setLine(*newLine->m_NativeValue);
 	}
 
 	bool IsPointBetweenStartAndEnd(Vector3Df^ point)
