@@ -37,6 +37,13 @@ public:
 		m_NativeValue = new core::triangle3df();
 	}
 
+	Triangle3Df(Triangle3Df^ copy)
+		: Lime::NativeValue<core::triangle3df>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::triangle3df(copy->m_NativeValue->pointA, copy->m_NativeValue->pointB, copy->m_NativeValue->pointC);
+	}
+
 	Triangle3Df(Vector3Df^ point1, Vector3Df^ point2, Vector3Df^ point3)
 		: Lime::NativeValue<core::triangle3df>(true)
 	{

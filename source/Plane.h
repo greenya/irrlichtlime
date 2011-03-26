@@ -37,6 +37,13 @@ public:
 		m_NativeValue = new core::plane3df();
 	}
 
+	Plane3Df(Plane3Df^ copy)
+		: Lime::NativeValue<core::plane3df>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::plane3df(copy->m_NativeValue->Normal, copy->m_NativeValue->D);
+	}
+
 	Plane3Df(Vector3Df^ memberPoint, Vector3Df^ normal)
 		: Lime::NativeValue<core::plane3df>(true)
 	{

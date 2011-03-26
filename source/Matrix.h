@@ -69,6 +69,13 @@ public:
 		m_NativeValue = new core::matrix4();
 	}
 
+	Matrix(Matrix^ copy)
+		: Lime::NativeValue<core::matrix4>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::matrix4(*copy->m_NativeValue);
+	}
+
 	void BuildAxisAlignedBillboard(Vector3Df^ camPos, Vector3Df^ center, Vector3Df^ translation, Vector3Df^ axis, Vector3Df^ from)
 	{
 		LIME_ASSERT(camPos != nullptr);
