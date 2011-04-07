@@ -228,11 +228,6 @@ void SceneNode::Remove()
 	m_SceneNode->remove();
 }
 
-void SceneNode::RemoveAll()
-{
-	m_SceneNode->removeAll();
-}
-
 void SceneNode::RemoveAnimator(SceneNodeAnimator^ animator)
 {
 	m_SceneNode->removeAnimator(LIME_SAFEREF(animator, m_SceneNodeAnimator));
@@ -246,6 +241,11 @@ void SceneNode::RemoveAnimators()
 bool SceneNode::RemoveChild(SceneNode^ child)
 {
 	return m_SceneNode->removeChild(LIME_SAFEREF(child, m_SceneNode));
+}
+
+void SceneNode::RemoveChildren()
+{
+	m_SceneNode->removeAll();
 }
 
 void SceneNode::Render()

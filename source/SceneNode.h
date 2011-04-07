@@ -32,10 +32,10 @@ public:
 	void RegisterSceneNode();
 
 	void Remove();
-	void RemoveAll();
 	void RemoveAnimator(SceneNodeAnimator^ animator);
 	void RemoveAnimators();
 	bool RemoveChild(SceneNode^ child);
+	void RemoveChildren();
 
 	virtual void Render();
 

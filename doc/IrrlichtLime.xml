@@ -3801,6 +3801,30 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 		<member name="P:IrrlichtLime.Video.Color.Luminance">
 			<summary>Luminance of the color in range [0, 255].</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueBlack">
+			<summary>Fully opaque black color: 0xff-000000.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueBlue">
+			<summary>Fully opaque blue color: 0xff-0000ff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueCyan">
+			<summary>Fully opaque cyan color: 0xff-00ffff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueGreen">
+			<summary>Fully opaque green color: 0xff-00ff00.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueMagenta">
+			<summary>Fully opaque magenta color: 0xff-ff00ff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueRed">
+			<summary>Fully opaque red color: 0xff-ff0000.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueWhite">
+			<summary>Fully opaque white color: 0xff-ffffff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueYellow">
+			<summary>Fully opaque yellow color: 0xff-ffff00.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Color.Red">
 			<summary>Red component of the color.</summary>
 		</member>
