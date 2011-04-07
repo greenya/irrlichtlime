@@ -12,6 +12,34 @@ public ref class Color : Lime::NativeValue<video::SColor>
 {
 public:
 
+	static property Color^ OpaqueBlack { Color^ get() { return gcnew Color(0, 0, 0); } }
+	static property Color^ OpaqueBlue { Color^ get() { return gcnew Color(0, 0, 255); } }
+	static property Color^ OpaqueCyan { Color^ get() { return gcnew Color(0, 255, 255); } }
+	static property Color^ OpaqueGreen { Color^ get() { return gcnew Color(0, 255, 0); } }
+	static property Color^ OpaqueMagenta { Color^ get() { return gcnew Color(255, 0, 255); } }
+	static property Color^ OpaqueRed { Color^ get() { return gcnew Color(255, 0, 0); } }
+	static property Color^ OpaqueWhite { Color^ get() { return gcnew Color(255, 255, 255); } }
+	static property Color^ OpaqueYellow { Color^ get() { return gcnew Color(255, 255, 0); } }
+
+	static bool operator == (Color^ v1, Color^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Color^ v1, Color^ v2)
+	{
+		return !(v1 == v2);
+	}
+
 	Color()
 		: Lime::NativeValue<video::SColor>(true)
 	{
@@ -149,6 +177,32 @@ internal:
 public ref class Colorf : Lime::NativeValue<video::SColorf>
 {
 public:
+
+	static bool operator == (Colorf^ v1, Colorf^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		video::SColorf& c1 = *v1->m_NativeValue;
+		video::SColorf& c2 = *v2->m_NativeValue;
+
+		return
+			core::equals(c1.r, c2.r) &&
+			core::equals(c1.g, c2.g) &&
+			core::equals(c1.b, c2.b) &&
+			core::equals(c1.a, c2.a);
+	}
+
+	static bool operator != (Colorf^ v1, Colorf^ v2)
+	{
+		return !(v1 == v2);
+	}
 
 	Colorf()
 		: Lime::NativeValue<video::SColorf>(true)
