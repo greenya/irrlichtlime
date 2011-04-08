@@ -1814,7 +1814,8 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 			<returns>Inverse matrix or null if not applicable.</returns>
 		</member>
 		<member name="P:IrrlichtLime.Core.Matrix.Identity">
-			<summary>Identity matrix.</summary>
+			<summary>Identity matrix.
+Equivalent to "new Matrix()".</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Matrix.IdentityIntegerBase">
 			<summary>True if the matrix is the identity matrix.</summary>
@@ -4811,6 +4812,10 @@ For details how to use specular highlights, see Material.Shininess.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.GouraudShading">
 			<summary>Flat or Gouraud shading? Default: true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.Identity">
+			<summary>Identity material.
+Equivalent to "new Material()".</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.Layer">
 			<summary>Material layers.</summary>
