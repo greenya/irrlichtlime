@@ -274,6 +274,14 @@ void SceneNode::SerializeAttributes(IO::Attributes^ serializeTo)
 	m_SceneNode->serializeAttributes(LIME_SAFEREF(serializeTo, m_Attributes));
 }
 
+void SceneNode::SetMaterial(int num, Video::Material^ newMaterialToCopyFrom)
+{
+	LIME_ASSERT(num >= 0 && num < MaterialCount);
+	LIME_ASSERT(newMaterialToCopyFrom != nullptr);
+
+	m_SceneNode->getMaterial(num) = *newMaterialToCopyFrom->m_NativeValue;
+}
+
 void SceneNode::SetMaterialFlag(Video::MaterialFlag flag, bool value)
 {
 	m_SceneNode->setMaterialFlag((video::E_MATERIAL_FLAG)flag, value);

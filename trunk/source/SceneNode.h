@@ -42,6 +42,7 @@ public:
 	void SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options);
 	void SerializeAttributes(IO::Attributes^ serializeTo);
 
+	void SetMaterial(int num, Video::Material^ newMaterialToCopyFrom); // we need this method to compensate unavailability to assign directly to GetMaterial(). IMPORTANT: this method automatically copies the input value (unlike to GetMaterial(), which returns a reference!)
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
 	void SetMaterialTexture(int textureLayer, Video::Texture^ texture);
 	void SetMaterialType(Video::MaterialType newType);
