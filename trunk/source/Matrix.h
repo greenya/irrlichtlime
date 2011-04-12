@@ -76,6 +76,39 @@ public:
 		m_NativeValue = new core::matrix4(*copy->m_NativeValue);
 	}
 
+	Matrix(Vector3Df^ translation, Vector3Df^ rotation, Vector3Df^ scale)
+		: Lime::NativeValue<core::matrix4>(true)
+	{
+		LIME_ASSERT(translation != nullptr);
+		LIME_ASSERT(rotation != nullptr);
+		LIME_ASSERT(scale != nullptr);
+
+		m_NativeValue = new core::matrix4();
+		m_NativeValue->setTranslation(*translation->m_NativeValue);
+		m_NativeValue->setRotationDegrees(*rotation->m_NativeValue);
+		m_NativeValue->setScale(*scale->m_NativeValue);
+	}
+
+	Matrix(Vector3Df^ translation, Vector3Df^ rotation)
+		: Lime::NativeValue<core::matrix4>(true)
+	{
+		LIME_ASSERT(translation != nullptr);
+		LIME_ASSERT(rotation != nullptr);
+
+		m_NativeValue = new core::matrix4();
+		m_NativeValue->setTranslation(*translation->m_NativeValue);
+		m_NativeValue->setRotationDegrees(*rotation->m_NativeValue);
+	}
+
+	Matrix(Vector3Df^ translation)
+		: Lime::NativeValue<core::matrix4>(true)
+	{
+		LIME_ASSERT(translation != nullptr);
+
+		m_NativeValue = new core::matrix4();
+		m_NativeValue->setTranslation(*translation->m_NativeValue);
+	}
+
 	void BuildAxisAlignedBillboard(Vector3Df^ camPos, Vector3Df^ center, Vector3Df^ translation, Vector3Df^ axis, Vector3Df^ from)
 	{
 		LIME_ASSERT(camPos != nullptr);
