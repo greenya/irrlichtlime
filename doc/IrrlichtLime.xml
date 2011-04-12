@@ -1834,11 +1834,26 @@ Equivalent to "new Matrix()".</summary>
 			<returns>False if there is no inverse matrix.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.#ctor">
-			<summary>Default constructor. Creates identity matrix.</summary>
+			<summary>Creates identity matrix.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Matrix)">
-			<summary>Creates separete copy.</summary>
+			<summary>Creates separate copy.</summary>
 			<param name="copy">Value to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates new matrix with provided initial values.</summary>
+			<param name="translation">Translation vector. Default: (0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates new matrix with provided initial values.</summary>
+			<param name="translation">Translation vector. Default: (0).</param>
+			<param name="rotation">Rotation vector. Default: (0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates new matrix with provided initial values.</summary>
+			<param name="translation">Translation vector. Default: (0).</param>
+			<param name="rotation">Rotation vector. Default: (0).</param>
+			<param name="scale">Scale vector. Default: (1).</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.MultiplyWith1x4Matrix(System.Single[])">
 			<summary>Multiplies this matrix by a 1x4 matrix.</summary>
