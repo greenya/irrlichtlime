@@ -87,10 +87,10 @@ public:
 
 	void Draw2DRectangleOutline(Recti^ pos, Color^ color);
 
-	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
-	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit);
-	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
-	void Draw2DVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
 
 	void Draw3DBox(AABBox^ box, Color^ color);
 
@@ -111,10 +111,10 @@ public:
 	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail);
 	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles);
 
-	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
-	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned short>^ indices16bit);
-	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
-	void DrawVertexPrimitiveList(List<Vertex3D^>^ vertices, List<unsigned int>^ indices32bit);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
 
 	void EnableClipPlane(int index, bool enable);
 	void EnableClipPlane(int index);
