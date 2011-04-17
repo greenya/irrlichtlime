@@ -15,6 +15,7 @@ namespace L07.FastStaticRendering
 		static void Main(string[] args)
 		{
 			int N = AskUserForN();
+			bool B = AskUserForB();
 
 			DriverType driverType;
 			if (!AskUserForDriver(out driverType))
@@ -31,7 +32,7 @@ namespace L07.FastStaticRendering
 			camera.Position = new Vector3Df(-200);
 			camera.Target = new Vector3Df(0);
 
-			MeshBuffersBatch batch = new MeshBuffersBatch(device, N);
+			MeshBuffersBatch batch = new MeshBuffersBatch(device, N, B);
 
 			while (device.Run())
 			{
@@ -48,7 +49,7 @@ namespace L07.FastStaticRendering
 					device.VideoDriver.Name + " | " +
 					device.VideoDriver.FPS + " fps | " +
 					N * N * N + " cubes  | " +
-					device.VideoDriver.PrimitiveCountDrawn + " prims | " +
+					device.VideoDriver.PrimitiveCountDrawn + " primitives | " +
 					MemUsageText + " of physical memory used");
 			}
 
@@ -59,11 +60,21 @@ namespace L07.FastStaticRendering
 		static int AskUserForN()
 		{
 			Console.WriteLine("Enter size of bounding cube side");
-			Console.WriteLine("(10 to render 10*10*10=1k cubes; 20 for 8k; 40 => 64k; 50 => 125k)");
-			Console.Write("(typing less than 1 or more than 80 (512k) is not recommended): ");
+			Console.WriteLine(" (10 to render 10*10*10=1k cubes; 20 for 8k; 40 => 64k; 50 => 125k)");
+			Console.WriteLine(" (typing less than 1 or more than 80 (512k) is not recommended): ");
 			string s = Console.ReadLine();
 
 			return Convert.ToInt32(s);
+		}
+
+		static bool AskUserForB()
+		{
+			Console.WriteLine("What meshbuffers to use?");
+			Console.WriteLine(" (1) split to 16-bit meshbuffers");
+			Console.WriteLine(" (2) use single 32-bit meshbuffer ");
+			ConsoleKeyInfo k = Console.ReadKey();
+
+			return k.KeyChar == '1';
 		}
 
 		static bool AskUserForDriver(out DriverType driverType)
@@ -104,10 +115,9 @@ namespace L07.FastStaticRendering
 		Material material;
 		Matrix matrix;
 
-		List<MeshBuffer> meshbuffers; // list of pointers on ready-to-be-drawn meshbuffers
-		List<Mesh> meshesToDrop; // list of meshes that we have created (to use their meshbuffers) and must drop after all
+		List<MeshBuffer> meshbuffers;
 
-		public MeshBuffersBatch(IrrlichtDevice device, int N)
+		public MeshBuffersBatch(IrrlichtDevice device, int N, bool B)
 		{
 			this.device = device;
 
@@ -116,34 +126,60 @@ namespace L07.FastStaticRendering
 
 			matrix = new Matrix();
 
+			if (B)
+				generateMultiple16bitMeshbuffers(N);
+			else
+				generateSingle32BitMeshbuffer(N);
+
+			device.Logger.Log("Collecting garbage...", LogLevel.Debug);
+			GC.Collect();
+		}
+
+		public void Draw()
+		{
+			device.VideoDriver.SetTransform(TransformationState.World, matrix);
+			device.VideoDriver.SetMaterial(material);
+
+			foreach (MeshBuffer mb in meshbuffers)
+				device.VideoDriver.DrawMeshBuffer(mb);
+		}
+
+		public void Drop()
+		{
+			foreach (MeshBuffer mb in meshbuffers)
+				mb.Drop();
+		}
+
+		void generateMultiple16bitMeshbuffers(int N)
+		{
 			Vertex3D[] vertices32bit;
 			uint[] indices32bit;
-			generate(device, N, out vertices32bit, out indices32bit);
+			generateVerticesAndIndices(N, out vertices32bit, out indices32bit);
 
 			int chunk = 0; // current 16-bit chunk of indices
-			int chunkSize = 65520; // must be less than 0xffff and able to divide on 36 without remaining (36 is a number of indices in each single cube)
-			// 65520/36 == 1820 cubes per chunk (maximum possible)
+			int chunkSize = 65520; // must be less than 0xffff and able to divide on 36 without remaining
+			// (36 is a number of indices in each single cube)
+			// (65520/36 == 1820 cubes per chunk (maximum possible))
 
 			meshbuffers = new List<MeshBuffer>();
-			meshesToDrop = new List<Mesh>();
 
 			device.Logger.Log("Batching cubes into chunks (meshbuffers)...");
 
 			while (true)
 			{
-				int startVertexIndex = int.MaxValue;
-				int endVertexIndex = int.MinValue;
+				uint startVertexIndex = uint.MaxValue;
+				uint endVertexIndex = uint.MinValue;
 
-				List<int> indicesChunk = new List<int>();
+				List<uint> indicesChunk = new List<uint>();
 				for (int i = chunk * chunkSize; i < indices32bit.Length && i < (chunk + 1) * chunkSize; i++)
 				{
 					if (indices32bit[i] < startVertexIndex)
-						startVertexIndex = (int)indices32bit[i];
+						startVertexIndex = indices32bit[i];
 
 					if (indices32bit[i] > endVertexIndex)
-						endVertexIndex = (int)indices32bit[i];
+						endVertexIndex = indices32bit[i];
 
-					indicesChunk.Add((int)indices32bit[i]);
+					indicesChunk.Add(indices32bit[i]);
 				}
 
 				for (int i = 0; i < indicesChunk.Count; i++)
@@ -153,38 +189,14 @@ namespace L07.FastStaticRendering
 				for (int i = (int)startVertexIndex; i <= (int)endVertexIndex; i++)
 					verticesChunk.Add(vertices32bit[i]);
 
-				// as we cannot create MeshBuffer (for now this is impossible in Lime), we going to ask Irrlicht to create some primitive,
-				// than we will use its mesh buffer for modification and rendering after all.
-				// Note: Irrlicht' GeometryCreator creates 16-bit meshbuffers only, so we have one more problem to care about.
-
-				Mesh mesh = device.SceneManager.GeometryCreator.CreateCubeMesh(new Vector3Df(1));
-				MeshBuffer mb = mesh.GetMeshBuffer(0);
-
+				MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
 				meshbuffers.Add(mb);
-				meshesToDrop.Add(mesh);
 
-				// all stuff below is only because we have to deal with existing 36 indices and 12 vertices in just created mesh :(
-				// p.s.: otherwise we would write something like "mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());"
-				// {{{
+				ushort[] indicesChunk16bit = new ushort[indicesChunk.Count];
+				for (int i = 0; i < indicesChunk.Count; i++)
+					indicesChunk16bit[i] = (ushort)indicesChunk[i];
 
-				ushort[] indicesToUpdate = new ushort[36];
-				for (int i = 0; i < 36; i++) indicesToUpdate[i] = (ushort)indicesChunk[i];
-
-				ushort[] indicesToAppend = new ushort[indicesChunk.Count - 36];
-				for (int i = 0; i < indicesChunk.Count - 36; i++) indicesToAppend[i] = (ushort)(indicesChunk[i + 36] - 12);
-
-				Vertex3D[] verticesToUpdate = new Vertex3D[12];
-				for (int i = 0; i < 12; i++) verticesToUpdate[i] = verticesChunk[i];
-
-				Vertex3D[] verticesToAppend = new Vertex3D[verticesChunk.Count - 12];
-				for (int i = 0; i < verticesChunk.Count - 12; i++) verticesToAppend[i] = verticesChunk[i + 12];
-
-				mb.UpdateIndices(indicesToUpdate, 0);
-				mb.UpdateVertices(verticesToUpdate, 0);
-				mb.Append(verticesToAppend, indicesToAppend);
-
-				// }}}
-
+				mb.Append(verticesChunk.ToArray(), indicesChunk16bit);
 				mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
 
 				device.Logger.Log(
@@ -203,23 +215,26 @@ namespace L07.FastStaticRendering
 			}
 		}
 
-		public void Draw()
+		void generateSingle32BitMeshbuffer(int N)
 		{
-			device.VideoDriver.SetTransform(TransformationState.World, matrix);
-			device.VideoDriver.SetMaterial(material);
+			Vertex3D[] vertices32bit;
+			uint[] indices32bit;
+			generateVerticesAndIndices(N, out vertices32bit, out indices32bit);
 
-			foreach (MeshBuffer mb in meshbuffers)
-				device.VideoDriver.DrawMeshBuffer(mb);
-		}
+			meshbuffers = new List<MeshBuffer>();
+			MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._32Bit);
+			meshbuffers.Add(mb);
 
-		public void Drop()
-		{
-			foreach (Mesh m in meshesToDrop)
-				m.Drop();
+			device.Logger.Log("Appending " +
+				vertices32bit.Length + " vertices and " +
+				indices32bit.Length + " indices to 32-bit meshbuffer...");
+
+			mb.Append(vertices32bit, indices32bit);
+			mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
 		}
 
 		/// <param name="N">Number of cubes in single dimension (e.g. total cubes for 20 is 20^3=8000)</param>
-		private void generate(IrrlichtDevice device, int N, out Vertex3D[] vertices, out uint[] indices)
+		void generateVerticesAndIndices(int N, out Vertex3D[] vertices, out uint[] indices)
 		{
 			int cubeSide = 32;
 
