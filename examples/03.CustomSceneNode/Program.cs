@@ -60,7 +60,7 @@ namespace _03.CustomSceneNode
 	class CSampleSceneNode : SceneNode
 	{
 		AABBox bbox = new AABBox();
-		List<Vertex3D> vertices = new List<Vertex3D>();
+		Vertex3D[] vertices;
 		Material material = new Material();
 
 		public CSampleSceneNode(SceneNode parent, SceneManager smgr, int id)
@@ -75,13 +75,14 @@ namespace _03.CustomSceneNode
 			material.Wireframe = false;
 			material.Lighting = false;
 
-			vertices.Add(new Vertex3D(0, 0, 10, 1, 1, 0, new Color(0, 255, 255), 0, 1));
-			vertices.Add(new Vertex3D(10, 0, -10, 1, 0, 0, new Color(255, 0, 255), 1, 1));
-			vertices.Add(new Vertex3D(0, 20, 0, 0, 1, 1, new Color(255, 255, 0), 1, 0));
-			vertices.Add(new Vertex3D(-10, 0, -10, 0, 0, 1, new Color(0, 255, 0), 0, 0));
+			vertices = new Vertex3D[4];
+			vertices[0] = new Vertex3D(0, 0, 10, 1, 1, 0, new Color(0, 255, 255), 0, 1);
+			vertices[1] = new Vertex3D(10, 0, -10, 1, 0, 0, new Color(255, 0, 255), 1, 1);
+			vertices[2] = new Vertex3D(0, 20, 0, 0, 1, 1, new Color(255, 255, 0), 1, 0);
+			vertices[3] = new Vertex3D(-10, 0, -10, 0, 0, 1, new Color(0, 255, 0), 0, 0);
 
 			bbox.Set(vertices[0].Position);
-			for (int i = 1; i < vertices.Count; i++)
+			for (int i = 1; i < vertices.Length; i++)
 				bbox.AddInternalPoint(vertices[i].Position);
 		}
 
@@ -93,7 +94,7 @@ namespace _03.CustomSceneNode
 
 		void CSampleSceneNode_OnRender()
 		{
-			List<ushort> indices = new List<ushort>() { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
+			ushort[] indices = new ushort[] { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
 			VideoDriver driver = SceneManager.VideoDriver;
 
 			driver.SetMaterial(material);
