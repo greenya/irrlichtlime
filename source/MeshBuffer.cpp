@@ -235,9 +235,17 @@ void MeshBuffer::UpdateIndices(array<unsigned short>^ indices16bit, int startInd
 	LIME_ASSERT(startIndex + indices16bit->Length <= this->IndexCount);
 
 	unsigned short* p = m_MeshBuffer->getIndices();
+	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(p + startIndex), indices16bit->Length);
+}
 
-	for (int i = 0; i < indices16bit->Length; i++)
-		p[i + startIndex] = indices16bit[i];
+void MeshBuffer::UpdateIndices(array<unsigned int>^ indices32bit, int startIndex)
+{
+	LIME_ASSERT(this->IndexType == Video::IndexType::_32Bit);
+	LIME_ASSERT(indices32bit != nullptr);
+	LIME_ASSERT(startIndex + indices32bit->Length <= this->IndexCount);
+
+	unsigned int* p = (unsigned int*)m_MeshBuffer->getIndices();
+	Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(p + startIndex), indices32bit->Length);
 }
 
 void MeshBuffer::UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int startIndex)

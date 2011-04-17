@@ -34,6 +34,7 @@ public:
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 
 	void UpdateIndices(array<unsigned short>^ indices16bit, int startIndex);
+	void UpdateIndices(array<unsigned int>^ indices32bit, int startIndex);
 	void UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int startIndex);
 	void UpdateVertices(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, int startIndex);
 	void UpdateVertices(array<Video::Vertex3DTangents^>^ verticesTangents, int startIndex);
