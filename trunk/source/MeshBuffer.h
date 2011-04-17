@@ -14,6 +14,8 @@ public ref class MeshBuffer : ReferenceCounted
 {
 public:
 
+	static MeshBuffer^ Create(Video::VertexType vertexType, Video::IndexType indexType);
+
 	void Append(MeshBuffer^ other);
 	void Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned short>^ indices16bit);
 	void Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array<unsigned short>^ indices16bit);

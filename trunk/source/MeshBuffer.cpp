@@ -24,6 +24,36 @@ MeshBuffer::MeshBuffer(scene::IMeshBuffer* ref)
 	m_MeshBuffer = ref;
 }
 
+MeshBuffer^ MeshBuffer::Create(Video::VertexType vertexType, Video::IndexType indexType)
+{
+	scene::IMeshBuffer* mb = nullptr;
+
+	switch (indexType)
+	{
+	case Video::IndexType::_16Bit:
+		switch (vertexType)
+		{
+		case Video::VertexType::Standard:
+			return gcnew MeshBuffer(new CMeshBuffer<video::S3DVertex>);
+
+		case Video::VertexType::TTCoords:
+			return gcnew MeshBuffer(new CMeshBuffer<video::S3DVertex2TCoords>);
+
+		case Video::VertexType::Tangents:
+			return gcnew MeshBuffer(new CMeshBuffer<video::S3DVertexTangents>);
+		}
+
+		LIME_ASSERT2(false, "Unexpected vertexType: " + vertexType.ToString());
+		return nullptr;
+
+	case Video::IndexType::_32Bit:
+		return gcnew MeshBuffer(new CDynamicMeshBuffer((video::E_VERTEX_TYPE)vertexType, (video::E_INDEX_TYPE)indexType));
+	}
+
+	LIME_ASSERT2(false, "Unexpected combination of vertexType,indexType: " + vertexType.ToString() + "," + indexType.ToString());
+	return nullptr;
+}
+
 void MeshBuffer::Append(MeshBuffer^ other)
 {
 	m_MeshBuffer->append(LIME_SAFEREF(other, m_MeshBuffer));
@@ -41,12 +71,10 @@ void MeshBuffer::Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigne
 	for (int i = 0; i < vc; i++)
 		va[i] = *verticesStandard[i]->m_NativeValue;
 
-	int ic = indices16bit->Length;
-	unsigned short* ia = new unsigned short[ic];
-	for (int i = 0; i < ic; i++)
-		ia[i] = indices16bit[i];
+	unsigned short* ia = new unsigned short[indices16bit->Length];
+	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);
 
-	m_MeshBuffer->append(va, vc, ia, ic);
+	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
 	delete ia;
 	delete va;
@@ -64,12 +92,10 @@ void MeshBuffer::Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array
 	for (int i = 0; i < vc; i++)
 		va[i] = *verticesTTCoords[i]->m_NativeValue;
 
-	int ic = indices16bit->Length;
-	unsigned short* ia = new unsigned short[ic];
-	for (int i = 0; i < ic; i++)
-		ia[i] = indices16bit[i];
+	unsigned short* ia = new unsigned short[indices16bit->Length];
+	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);
 
-	m_MeshBuffer->append(va, vc, ia, ic);
+	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
 	delete ia;
 	delete va;
@@ -87,12 +113,10 @@ void MeshBuffer::Append(array<Video::Vertex3DTangents^>^ verticesTangents, array
 	for (int i = 0; i < vc; i++)
 		va[i] = *verticesTangents[i]->m_NativeValue;
 
-	int ic = indices16bit->Length;
-	unsigned short* ia = new unsigned short[ic];
-	for (int i = 0; i < ic; i++)
-		ia[i] = indices16bit[i];
+	unsigned short* ia = new unsigned short[indices16bit->Length];
+	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);
 
-	m_MeshBuffer->append(va, vc, ia, ic);
+	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
 	delete ia;
 	delete va;
@@ -296,7 +320,7 @@ Object^ MeshBuffer::Vertices::get()
 
 String^ MeshBuffer::ToString()
 {
-	return String::Format("MeshBuffer: VertexCount={0}; IndexCount={1}", VertexCount, IndexCount);
+	return String::Format("MeshBuffer: {0} {1} vertices; {2} {3} indices", VertexCount, VertexType, IndexCount, IndexType);
 }
 
 } // end namespace Scene
