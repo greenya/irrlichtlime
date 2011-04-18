@@ -226,6 +226,12 @@ void MeshBuffer::SetHardwareMappingHint(HardwareMappingHint mappingHint, Hardwar
 	m_MeshBuffer->setHardwareMappingHint((scene::E_HARDWARE_MAPPING)mappingHint, (scene::E_BUFFER_TYPE)buffer);
 }
 
+void MeshBuffer::SetMaterial(Video::Material^ newMaterialToCopyFrom)
+{
+	LIME_ASSERT(newMaterialToCopyFrom != nullptr);
+	m_MeshBuffer->getMaterial() = *newMaterialToCopyFrom->m_NativeValue;
+}
+
 void MeshBuffer::UpdateIndices(array<unsigned short>^ indices16bit, int startIndex)
 {
 	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);

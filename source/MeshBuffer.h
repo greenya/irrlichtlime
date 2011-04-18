@@ -33,6 +33,8 @@ public:
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 
+	void SetMaterial(Video::Material^ newMaterialToCopyFrom);
+
 	void UpdateIndices(array<unsigned short>^ indices16bit, int startIndex);
 	void UpdateIndices(array<unsigned int>^ indices32bit, int startIndex);
 	void UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int startIndex);
