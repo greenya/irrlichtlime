@@ -26,8 +26,6 @@ MeshBuffer::MeshBuffer(scene::IMeshBuffer* ref)
 
 MeshBuffer^ MeshBuffer::Create(Video::VertexType vertexType, Video::IndexType indexType)
 {
-	scene::IMeshBuffer* mb = nullptr;
-
 	switch (indexType)
 	{
 	case Video::IndexType::_16Bit:

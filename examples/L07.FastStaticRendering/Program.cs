@@ -114,25 +114,31 @@ namespace L07.FastStaticRendering
 		IrrlichtDevice device;
 		Material material;
 		Matrix matrix;
-
-		List<MeshBuffer> meshbuffers;
+		Mesh mesh;
 
 		public MeshBuffersBatch(IrrlichtDevice device, int N, bool B)
 		{
 			this.device = device;
-
 			material = new Material();
 			material.Lighting = false;
-
 			matrix = new Matrix();
+
+			mesh = Mesh.Create();
 
 			if (B)
 				generateMultiple16bitMeshbuffers(N);
 			else
 				generateSingle32BitMeshbuffer(N);
 
+			mesh.RecalculateBoundingBox();
+
 			device.Logger.Log("Collecting garbage...", LogLevel.Debug);
 			GC.Collect();
+		}
+
+		public void Drop()
+		{
+			mesh.Drop();
 		}
 
 		public void Draw()
@@ -140,14 +146,8 @@ namespace L07.FastStaticRendering
 			device.VideoDriver.SetTransform(TransformationState.World, matrix);
 			device.VideoDriver.SetMaterial(material);
 
-			foreach (MeshBuffer mb in meshbuffers)
-				device.VideoDriver.DrawMeshBuffer(mb);
-		}
-
-		public void Drop()
-		{
-			foreach (MeshBuffer mb in meshbuffers)
-				mb.Drop();
+			for (int i = 0; i < mesh.MeshBufferCount; i++)
+				device.VideoDriver.DrawMeshBuffer(mesh.GetMeshBuffer(i));
 		}
 
 		void generateMultiple16bitMeshbuffers(int N)
@@ -160,8 +160,6 @@ namespace L07.FastStaticRendering
 			int chunkSize = 65520; // must be less than 0xffff and able to divide on 36 without remaining
 			// (36 is a number of indices in each single cube)
 			// (65520/36 == 1820 cubes per chunk (maximum possible))
-
-			meshbuffers = new List<MeshBuffer>();
 
 			device.Logger.Log("Batching cubes into chunks (meshbuffers)...");
 
@@ -190,7 +188,8 @@ namespace L07.FastStaticRendering
 					verticesChunk.Add(vertices32bit[i]);
 
 				MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
-				meshbuffers.Add(mb);
+				mesh.AddMeshBuffer(mb);
+				mb.Drop();
 
 				ushort[] indicesChunk16bit = new ushort[indicesChunk.Count];
 				for (int i = 0; i < indicesChunk.Count; i++)
@@ -221,9 +220,9 @@ namespace L07.FastStaticRendering
 			uint[] indices32bit;
 			generateVerticesAndIndices(N, out vertices32bit, out indices32bit);
 
-			meshbuffers = new List<MeshBuffer>();
 			MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._32Bit);
-			meshbuffers.Add(mb);
+			mesh.AddMeshBuffer(mb);
+			mb.Drop();
 
 			device.Logger.Log("Appending " +
 				vertices32bit.Length + " vertices and " +
