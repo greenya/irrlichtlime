@@ -25,6 +25,18 @@ Mesh::Mesh(scene::IMesh* ref)
 	m_Mesh = ref;
 }
 
+Mesh^ Mesh::Create()
+{
+	scene::IMesh* m = new scene::SMesh();
+	return gcnew Mesh(m);
+}
+
+void Mesh::AddMeshBuffer(MeshBuffer^ buffer)
+{
+	LIME_ASSERT(buffer != nullptr);
+	((scene::SMesh*)m_Mesh)->addMeshBuffer(buffer->m_MeshBuffer); // !!! cast to SMesh*
+}
+
 MeshBuffer^ Mesh::GetMeshBuffer(Video::Material^ material)
 {
 	LIME_ASSERT(material != nullptr);
@@ -39,6 +51,11 @@ MeshBuffer^ Mesh::GetMeshBuffer(int index)
 	
 	scene::IMeshBuffer* b = m_Mesh->getMeshBuffer(index);
 	return MeshBuffer::Wrap(b);
+}
+
+void Mesh::RecalculateBoundingBox()
+{
+	((scene::SMesh*)m_Mesh)->recalculateBoundingBox(); // !!! cast to SMesh*
 }
 
 void Mesh::SetDirty(HardwareBufferType buffer)
@@ -70,6 +87,11 @@ void Mesh::BoundingBox::set(AABBox^ value)
 int Mesh::MeshBufferCount::get()
 {
 	return m_Mesh->getMeshBufferCount();
+}
+
+String^ Mesh::ToString()
+{
+	return String::Format("Mesh: MeshBufferCount={0}", MeshBufferCount);
 }
 
 } // end namespace Scene
