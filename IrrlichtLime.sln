@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L06.AnalogueClock", "exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L07.FastStaticRendering", "examples\L07.FastStaticRendering\L07.FastStaticRendering.csproj", "{0BE18F08-1221-44C3-A6D2-0E21E4EAED72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "23.MeshHandling", "examples\23.MeshHandling\23.MeshHandling.csproj", "{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -349,6 +351,18 @@ Global
 		{0BE18F08-1221-44C3-A6D2-0E21E4EAED72}.Release|Win32.ActiveCfg = Release|x86
 		{0BE18F08-1221-44C3-A6D2-0E21E4EAED72}.Release|x86.ActiveCfg = Release|x86
 		{0BE18F08-1221-44C3-A6D2-0E21E4EAED72}.Release|x86.Build.0 = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|Win32.ActiveCfg = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|x86.ActiveCfg = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Debug|x86.Build.0 = Debug|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|Any CPU.ActiveCfg = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|Win32.ActiveCfg = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|x86.ActiveCfg = Release|x86
+		{B370ED1D-252B-4357-ABFB-1DF4766DCB3F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
