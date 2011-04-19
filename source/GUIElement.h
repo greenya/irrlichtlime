@@ -47,7 +47,7 @@ public:
 
 	property Recti^ AbsoluteClippingRect { Recti^ get(); }
 	property Recti^ AbsolutePosition { Recti^ get(); }
-	property List<GUIElement^>^ ChildList { List<GUIElement^>^ get(); }
+	property array<GUIElement^>^ Children { array<GUIElement^>^ get(); }
 	property bool Clipped { bool get(); void set(bool value); }
 	property bool Enabled { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
