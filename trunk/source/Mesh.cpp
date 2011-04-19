@@ -113,9 +113,36 @@ int Mesh::MeshBufferCount::get()
 	return m_Mesh->getMeshBufferCount();
 }
 
+array<MeshBuffer^>^ Mesh::MeshBuffers::get()
+{
+	array<MeshBuffer^>^ l = gcnew array<MeshBuffer^>(m_Mesh->getMeshBufferCount());
+	int li = 0;
+
+	for (int i = 0; i < l->Length; i++)
+	{
+		scene::IMeshBuffer* buf = m_Mesh->getMeshBuffer(i);
+		MeshBuffer^ mb = MeshBuffer::Wrap(buf);
+		if (mb != nullptr)
+			l[li++] = mb;
+	}
+
+	return l;
+}
+
 String^ Mesh::ToString()
 {
-	return String::Format("Mesh: MeshBufferCount={0}", MeshBufferCount);
+	unsigned int totalVertices = 0;
+	unsigned int totalIndices = 0;
+	for (unsigned int i = 0; i < m_Mesh->getMeshBufferCount(); i++)
+	{
+		scene::IMeshBuffer* mb = m_Mesh->getMeshBuffer(i);
+		totalVertices += mb->getVertexCount();
+		totalIndices += mb->getIndexCount();
+	}
+	
+	return String::Format(
+		"Mesh: {0} vertices and {1} indices in {2} mesh buffer(s)",
+		totalVertices, totalIndices, m_Mesh->getMeshBufferCount());
 }
 
 } // end namespace Scene

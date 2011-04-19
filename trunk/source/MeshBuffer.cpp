@@ -405,7 +405,7 @@ Object^ MeshBuffer::Vertices::get()
 
 String^ MeshBuffer::ToString()
 {
-	return String::Format("MeshBuffer: {0} {1} vertices; {2} {3} indices", VertexCount, VertexType, IndexCount, IndexType);
+	return String::Format("MeshBuffer: {0} {1} vertices and {2} {3} indices", VertexCount, VertexType, IndexCount, IndexType);
 }
 
 } // end namespace Scene

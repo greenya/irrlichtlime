@@ -379,16 +379,17 @@ AABBox^ SceneNode::BoundingBoxTransformed::get()
 	return gcnew AABBox(m_SceneNode->getTransformedBoundingBox());
 }
 
-List<SceneNode^>^ SceneNode::ChildList::get()
+array<SceneNode^>^ SceneNode::Children::get()
 {
-	List<SceneNode^>^ l = gcnew List<SceneNode^>();
+	array<SceneNode^>^ l = gcnew array<SceneNode^>(m_SceneNode->getChildren().size());
+	int li = 0;
 
 	core::list<scene::ISceneNode*> a = m_SceneNode->getChildren();
 	for (core::list<scene::ISceneNode*>::ConstIterator i = a.begin(); i != a.end(); ++i)
 	{
 		SceneNode^ n = Wrap(*i);
 		if (n != nullptr)
-			l->Add(n);
+			l[li++] = n;
 	}
 
 	return l;

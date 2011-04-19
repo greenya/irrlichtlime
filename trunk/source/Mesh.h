@@ -34,6 +34,7 @@ public:
 
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property int MeshBufferCount { int get(); }
+	property array<MeshBuffer^>^ MeshBuffers { array<MeshBuffer^>^ get(); }
 
 	virtual String^ ToString() override;
 
