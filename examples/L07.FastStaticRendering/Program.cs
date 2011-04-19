@@ -156,61 +156,49 @@ namespace L07.FastStaticRendering
 			uint[] indices32bit;
 			generateVerticesAndIndices(N, out vertices32bit, out indices32bit);
 
-			int chunk = 0; // current 16-bit chunk of indices
-			int chunkSize = 65520; // must be less than 0xffff and able to divide on 36 without remaining
-			// (36 is a number of indices in each single cube)
-			// (65520/36 == 1820 cubes per chunk (maximum possible))
+			List<Vertex3D> verticesChunk = new List<Vertex3D>();
+			List<ushort> indicesChunk = new List<ushort>();
+			
+			int totalCubes = N * N * N;
+			int indicesInCube = indices32bit.Length / totalCubes;
+			int verticesInCube = vertices32bit.Length / totalCubes;
+			int maximumVerticesPerChunk = ushort.MaxValue; // must not be more than 0xffff (because we use 16-bit indices)
+			int verticesIndexOffset = 0;
 
-			device.Logger.Log("Batching cubes into chunks (meshbuffers)...");
+			device.Logger.Log("Batching cubes into 16-bit meshbuffers...");
 
-			while (true)
+			for (int cubeIndex = 0; cubeIndex < totalCubes; cubeIndex++)
 			{
-				uint startVertexIndex = uint.MaxValue;
-				uint endVertexIndex = uint.MinValue;
+				// add vertices
+				for (int i = 0; i < verticesInCube; i++)
+					verticesChunk.Add(vertices32bit[cubeIndex * verticesInCube + i]);
 
-				List<uint> indicesChunk = new List<uint>();
-				for (int i = chunk * chunkSize; i < indices32bit.Length && i < (chunk + 1) * chunkSize; i++)
+				// add indices
+				for (int i = 0; i < indicesInCube; i++)
+					indicesChunk.Add((ushort)(indices32bit[cubeIndex * indicesInCube + i] - verticesIndexOffset));
+
+				if (verticesChunk.Count + verticesInCube > maximumVerticesPerChunk // if this chunk is full
+					|| cubeIndex == totalCubes - 1) // or this is last cube
 				{
-					if (indices32bit[i] < startVertexIndex)
-						startVertexIndex = indices32bit[i];
+					// we create meshbuffer and add it to the main mesh
+					MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
+					mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
+					mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());
+					mb.RecalculateBoundingBox();
+					mesh.AddMeshBuffer(mb);
+					mb.Drop();
 
-					if (indices32bit[i] > endVertexIndex)
-						endVertexIndex = indices32bit[i];
+					// clean up vertex and index chunks
+					verticesIndexOffset += verticesChunk.Count;
+					verticesChunk = new List<Vertex3D>();
+					indicesChunk = new List<ushort>();
 
-					indicesChunk.Add(indices32bit[i]);
-				}
+					device.Logger.Log(
+						(((cubeIndex + 1) * 100) / totalCubes) + "%: " + mesh + ". ~" + Program.MemUsageText,
+						LogLevel.Debug);
 
-				for (int i = 0; i < indicesChunk.Count; i++)
-					indicesChunk[i] -= startVertexIndex;
-
-				List<Vertex3D> verticesChunk = new List<Vertex3D>();
-				for (int i = (int)startVertexIndex; i <= (int)endVertexIndex; i++)
-					verticesChunk.Add(vertices32bit[i]);
-
-				MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
-				mesh.AddMeshBuffer(mb);
-				mb.Drop();
-
-				ushort[] indicesChunk16bit = new ushort[indicesChunk.Count];
-				for (int i = 0; i < indicesChunk.Count; i++)
-					indicesChunk16bit[i] = (ushort)indicesChunk[i];
-
-				mb.Append(verticesChunk.ToArray(), indicesChunk16bit);
-				mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
-
-				device.Logger.Log(
-					(chunk * 100 / ((indices32bit.Length / chunkSize) + 1)) + "%: " +
-					"Chunk #" + (chunk + 1) + " has been created. ~" +
-					Program.MemUsageText,
-					LogLevel.Debug);
-
-				if ((chunk & 0xf) == 0xf)
 					GC.Collect();
-
-				if (indices32bit.Length <= (chunk + 1) * chunkSize)
-					break;
-
-				chunk++;
+				}
 			}
 		}
 
