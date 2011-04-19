@@ -34,7 +34,9 @@ Mesh^ Mesh::Create()
 void Mesh::AddMeshBuffer(MeshBuffer^ buffer)
 {
 	LIME_ASSERT(buffer != nullptr);
-	((scene::SMesh*)m_Mesh)->addMeshBuffer(buffer->m_MeshBuffer); // !!! cast to SMesh*
+
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+	m->addMeshBuffer(buffer->m_MeshBuffer);
 }
 
 MeshBuffer^ Mesh::GetMeshBuffer(Video::Material^ material)
@@ -56,6 +58,28 @@ MeshBuffer^ Mesh::GetMeshBuffer(int index)
 void Mesh::RecalculateBoundingBox()
 {
 	((scene::SMesh*)m_Mesh)->recalculateBoundingBox(); // !!! cast to SMesh*
+}
+
+void Mesh::RemoveMeshBuffer(int index)
+{
+	LIME_ASSERT(index >= 0 && index < MeshBufferCount);
+	
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+	m->MeshBuffers[index]->drop();
+	m->MeshBuffers.erase(index);
+}
+
+void Mesh::RemoveMeshBuffer(int index, int count)
+{
+	LIME_ASSERT(index >= 0 && index < MeshBufferCount);
+	LIME_ASSERT(count >= 1 && index + count <= MeshBufferCount);
+	
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+
+	for (int i = index; i < index + count; i++)
+		m->MeshBuffers[i]->drop();
+
+	m->MeshBuffers.erase(index, count);
 }
 
 void Mesh::SetDirty(HardwareBufferType buffer)
