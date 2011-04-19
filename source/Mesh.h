@@ -25,6 +25,9 @@ public:
 
 	void RecalculateBoundingBox();
 
+	void RemoveMeshBuffer(int index);
+	void RemoveMeshBuffer(int index, int count);
+
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
