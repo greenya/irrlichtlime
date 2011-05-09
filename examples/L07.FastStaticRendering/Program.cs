@@ -132,7 +132,7 @@ namespace L07.FastStaticRendering
 
 			mesh.RecalculateBoundingBox();
 
-			device.Logger.Log("Collecting garbage...", LogLevel.Debug);
+			device.Logger.Log("Collecting garbage...");
 			GC.Collect();
 		}
 
@@ -194,8 +194,9 @@ namespace L07.FastStaticRendering
 					indicesChunk = new List<ushort>();
 
 					device.Logger.Log(
-						(((cubeIndex + 1) * 100) / totalCubes) + "%: " + mesh + ". ~" + Program.MemUsageText,
-						LogLevel.Debug);
+						(((cubeIndex + 1) * 100) / totalCubes) + "%: " +
+						mesh + ". ~" +
+						Program.MemUsageText);
 
 					GC.Collect();
 				}
@@ -234,7 +235,7 @@ namespace L07.FastStaticRendering
 
 			// generate cubes
 
-			device.Logger.Log("Generating " + N * N * N + " cubes...", LogLevel.Debug);
+			device.Logger.Log("Generating " + N * N * N + " cubes...");
 
 			vertices = new Vertex3D[N * N * N * cubeVertices.Length];
 			indices = new uint[N * N * N * cubeIndices.Length];
@@ -269,8 +270,7 @@ namespace L07.FastStaticRendering
 				device.Logger.Log(
 					(((i + 1) * 100) / N) + "%: " +
 					(i + 1) * N * N + " cubes has been generated. ~" +
-					Program.MemUsageText,
-					LogLevel.Debug);
+					Program.MemUsageText);
 
 				if ((i & 0xf) == 0xf)
 					GC.Collect();
