@@ -5,8 +5,8 @@ IrrCompileConfig.h
 	+ _IRR_COMPILE_WITH_DIRECT3D_8_
 	+ _IRR_WCHAR_FILESYSTEM
 
-Irrlicht9.0.vcproj
+Irrlicht10.0.vcxproj
 	General -> Character Set = "Use Unicode Character Set"
-	C/C++ -> General -> Additional Include Directories += ";..\..\..\DX89SDK\Include"
+	VC++ Directories -> Include Directories += ";..\..\..\DX89SDK\Include"
+	VC++ Directories -> Library Directories += ";..\..\..\DX89SDK\Lib\x86"
 	C/C++ -> Code Generation -> Runtime Library = "Multi-threaded Debug DLL" / "Multi-threaded DLL"
-	Linker -> General -> Additional Library Directories = "..\..\..\DX89SDK\Lib\x86"
