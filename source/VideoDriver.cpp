@@ -59,6 +59,16 @@ MaterialType VideoDriver::AddMaterialRenderer(MaterialRenderer^ renderer)
 		LIME_SAFEREF(renderer, m_MaterialRenderer));
 }
 
+void VideoDriver::AddOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh)
+{
+	m_VideoDriver->addOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), LIME_SAFEREF(mesh, m_Mesh));
+}
+
+void VideoDriver::AddOcclusionQuery(Scene::SceneNode^ node)
+{
+	m_VideoDriver->addOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format)
 {
 	LIME_ASSERT(size != nullptr);
@@ -231,16 +241,6 @@ Image^ VideoDriver::CreateImage(IO::ReadFile^ file)
 
 	video::IImage* i = m_VideoDriver->createImageFromFile(LIME_SAFEREF(file, m_ReadFile));
 	return Image::Wrap(i);
-}
-
-void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh)
-{
-	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode), LIME_SAFEREF(mesh, m_Mesh));
-}
-
-void VideoDriver::CreateOcclusionQuery(Scene::SceneNode^ node)
-{
-	m_VideoDriver->createOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
 }
 
 Image^ VideoDriver::CreateScreenShot()

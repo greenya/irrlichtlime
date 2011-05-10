@@ -25,6 +25,7 @@ namespace irr
 namespace io
 {
 	class IAttributes;
+	struct SAttributeReadWriteOptions;
 	class IReadFile;
 	class IWriteFile;
 } // end namespace io
@@ -84,11 +85,11 @@ namespace video
 		ETS_COUNT
 	};
 
-	//! enumeration for signalling ressources which were lost after the last render cycle
-	/** These values can be signalled by the driver, telling the app that some ressources
+	//! enumeration for signaling resources which were lost after the last render cycle
+	/** These values can be signaled by the driver, telling the app that some resources
 	were lost and need to be recreated. Irrlicht will sometimes recreate the actual objects,
 	but the content needs to be recreated by the application. */
-	enum E_LOST_RESSOURCE
+	enum E_LOST_RESOURCE
 	{
 		//! The whole device/driver is lost
 		ELR_DEVICE = 1,
@@ -208,20 +209,20 @@ namespace video
 				E_COLOR_PLANE colorMask=ECP_ALL,
 				E_BLEND_FACTOR blendFuncSrc=EBF_ONE,
 				E_BLEND_FACTOR blendFuncDst=EBF_ONE_MINUS_SRC_ALPHA,
-				bool blendEnable=false) :
+				E_BLEND_OPERATION blendOp=EBO_NONE) :
 			RenderTexture(texture),
 			TargetType(ERT_RENDER_TEXTURE), ColorMask(colorMask),
 			BlendFuncSrc(blendFuncSrc), BlendFuncDst(blendFuncDst),
-			BlendEnable(blendEnable) {}
+			BlendOp(blendOp) {}
 		IRenderTarget(E_RENDER_TARGET target,
 				E_COLOR_PLANE colorMask=ECP_ALL,
 				E_BLEND_FACTOR blendFuncSrc=EBF_ONE,
 				E_BLEND_FACTOR blendFuncDst=EBF_ONE_MINUS_SRC_ALPHA,
-				bool blendEnable=false) :
+				E_BLEND_OPERATION blendOp=EBO_NONE) :
 			RenderTexture(0),
 			TargetType(target), ColorMask(colorMask),
 			BlendFuncSrc(blendFuncSrc), BlendFuncDst(blendFuncDst),
-			BlendEnable(blendEnable) {}
+			BlendOp(blendOp) {}
 		bool operator!=(const IRenderTarget& other) const
 		{
 			return ((RenderTexture != other.RenderTexture) ||
@@ -229,14 +230,14 @@ namespace video
 				(ColorMask != other.ColorMask) ||
 				(BlendFuncSrc != other.BlendFuncSrc) ||
 				(BlendFuncDst != other.BlendFuncDst) ||
-				(BlendEnable != other.BlendEnable));
+				(BlendOp != other.BlendOp));
 		}
 		ITexture* RenderTexture;
 		E_RENDER_TARGET TargetType:8;
 		E_COLOR_PLANE ColorMask:8;
 		E_BLEND_FACTOR BlendFuncSrc:4;
 		E_BLEND_FACTOR BlendFuncDst:4;
-		bool BlendEnable;
+		E_BLEND_OPERATION BlendOp:4;
 	};
 
 	//! Interface to driver which is able to perform 2d and 3d graphics functions.
@@ -462,7 +463,7 @@ namespace video
 
 		//! Create occlusion query.
 		/** Use node for identification and mesh for occlusion test. */
-		virtual void createOcclusionQuery(scene::ISceneNode* node,
+		virtual void addOcclusionQuery(scene::ISceneNode* node,
 				const scene::IMesh* mesh=0) =0;
 
 		//! Remove occlusion query.
@@ -1310,9 +1311,12 @@ namespace video
 		renderer names from getMaterialRendererName() to write out the
 		material type name, so they should be set before.
 		\param material The material to serialize.
+		\param options Additional options which might influence the
+		serialization.
 		\return The io::IAttributes container holding the material
 		properties. */
-		virtual io::IAttributes* createAttributesFromMaterial(const video::SMaterial& material) =0;
+		virtual io::IAttributes* createAttributesFromMaterial(const video::SMaterial& material,
+			io::SAttributeReadWriteOptions* options=0) =0;
 
 		//! Fills an SMaterial structure from attributes.
 		/** Please note that for setting material types of the
