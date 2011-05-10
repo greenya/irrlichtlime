@@ -29,6 +29,9 @@ public:
 	MaterialType AddMaterialRenderer(MaterialRenderer^ renderer, String^ name);
 	MaterialType AddMaterialRenderer(MaterialRenderer^ renderer);
 
+	void AddOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
+	void AddOcclusionQuery(Scene::SceneNode^ node);
+
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size);
@@ -54,9 +57,6 @@ public:
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 	Image^ CreateImage(IO::ReadFile^ file);
-
-	void CreateOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
-	void CreateOcclusionQuery(Scene::SceneNode^ node);
 
 	Image^ CreateScreenShot();
 
