@@ -164,6 +164,15 @@ public:
 		return m;
 	}
 
+	Quaternion^ Lerp(Quaternion^ q1, Quaternion^ q2, float time)
+	{
+		LIME_ASSERT(q1 != nullptr);
+		LIME_ASSERT(q2 != nullptr);
+
+		m_NativeValue->lerp(*q1->m_NativeValue, *q2->m_NativeValue, time);
+		return this;
+	}
+
 	Quaternion^ MakeIdentity()
 	{
 		m_NativeValue->makeIdentity();
