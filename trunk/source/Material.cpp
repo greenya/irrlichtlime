@@ -187,12 +187,12 @@ void Material::Thickness::set(float value)
 	m_NativeValue->Thickness = value;
 }
 
-ZBufferCompFunc Material::ZBuffer::get()
+ComparisonFunc Material::ZBuffer::get()
 {
-	return (ZBufferCompFunc)m_NativeValue->ZBuffer;
+	return (ComparisonFunc)m_NativeValue->ZBuffer;
 }
 
-void Material::ZBuffer::set(ZBufferCompFunc value)
+void Material::ZBuffer::set(ComparisonFunc value)
 {
 	m_NativeValue->ZBuffer = (E_COMPARISON_FUNC)value;
 }

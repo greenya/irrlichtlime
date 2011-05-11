@@ -138,9 +138,6 @@
     <ClInclude Include="VideoModeList.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="ZBufferCompFunc.h">
-      <Filter>Video</Filter>
-    </ClInclude>
     <ClInclude Include="AABBox.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -582,6 +579,24 @@
     <ClInclude Include="ReferenceCounted.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="BlendFactor.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="BlendOperation.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulateFunc.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="ComparisonFunc.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaSource.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="PolygonOffset.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">

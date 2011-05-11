@@ -3743,6 +3743,19 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
+		<member name="T:IrrlichtLime.Video.AlphaSource">
+			<summary>Source of the alpha value to take.
+This is currently only supported in MaterialType.OneTextureBlend. You can use an or'ed combination of values. Alpha values are modulated (multiplicated).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AlphaSource.None">
+			<summary>Use no alpha, somewhat redundant with other settings.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AlphaSource.Texture">
+			<summary>Use texture alpha channel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.AlphaSource.VertexColor">
+			<summary>Use vertex color alpha.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.AntiAliasingMode">
 			<summary>These flags are used to specify the anti-aliasing and smoothing modes.
 
@@ -3768,6 +3781,76 @@ Techniques supported are multisampling, geometry smoothing, and alpha to coverag
 		</member>
 		<member name="F:IrrlichtLime.Video.AntiAliasingMode.Simple">
 			<summary>Default anti-aliasing mode.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.BlendFactor">
+			<summary>Flag for MaterialType.OneTextureBlend.
+BlendFunc = source * sourceFactor + dest * destFactor.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.DstAlpha">
+			<summary>src &amp; dest	(destA, destA, destA, destA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.DstColor">
+			<summary>src (destR, destG, destB, destA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.One">
+			<summary>src &amp; dest	(1, 1, 1, 1).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.OneMinusDstAlpha">
+			<summary>src &amp; dest	(1-destA, 1-destA, 1-destA, 1-destA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.OneMinusDstColor">
+			<summary>src (1-destR, 1-destG, 1-destB, 1-destA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.OneMinusSrcAlpha">
+			<summary>src &amp; dest	(1-srcA, 1-srcA, 1-srcA, 1-srcA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.OneMinusSrcColor">
+			<summary>dest (1-srcR, 1-srcG, 1-srcB, 1-srcA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.SrcAlpha">
+			<summary>src &amp; dest	(srcA, srcA, srcA, srcA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.SrcAlphaSaturate">
+			<summary>src (min(srcA, 1-destA), idem, ...).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.SrcColor">
+			<summary>dest (srcR, srcG, srcB, srcA).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendFactor.Zero">
+			<summary>src &amp; dest	(0, 0, 0, 0).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.BlendOperation">
+			<summary>Values defining the blend operation used when blend is enabled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.Add">
+			<summary>Default blending adds the color values.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.Max">
+			<summary>Choose maximum value of each color channel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.MaxAlpha">
+			<summary>Choose maximum value of each color channel based on alpha value, not widely supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.MaxFactor">
+			<summary>Choose maximum value of each color channel after applying blend factors, not widely supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.Min">
+			<summary>Choose minimum value of each color channel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.MinAlpha">
+			<summary>Choose minimum value of each color channel based on alpha value, not widely supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.MinFactor">
+			<summary>Choose minimum value of each color channel after applying blend factors, not widely supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.None">
+			<summary>No blending happens.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.RevSubtract">
+			<summary>This modes subtracts destination from source.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.BlendOperation.Subtract">
+			<summary>This mode subtracts the color values.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.Color">
 			<summary>Class representing a 32 bit ARGB color.
@@ -4036,6 +4119,33 @@ Without lighting being enabled the vertex color is the only value defining the f
 		</member>
 		<member name="F:IrrlichtLime.Video.ColorPlane.RGB">
 			<summary>All colors, no alpha.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ComparisonFunc">
+			<summary>Enumeration for comparison functions, e.g. for depth buffer test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Always">
+			<summary>Test succeeds always.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Equal">
+			<summary>Exact equality.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Greater">
+			<summary>Inverse of LessEqual.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.GreaterEqual">
+			<summary>Greater or equal test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Less">
+			<summary>Exclusive less comparison.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.LessEqual">
+			<summary>Less or equal test, default for e.g. depth test.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Never">
+			<summary>Test never succeeds, this equals disable.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.NotEqual">
+			<summary>Succeeds almost always, except for exact equality.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.DriverType">
 			<summary>Enumerates all supported driver types.</summary>
@@ -4904,7 +5014,7 @@ Equivalent to "new Material()".</summary>
 			<summary>Draw as wireframe or filled triangles? Default: false.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.ZBuffer">
-			<summary>Is the ZBuffer enabled? Default: ZBufferCompFunc.LessEqual.</summary>
+			<summary>Is the ZBuffer enabled? Default: ComparisonFunc.LessEqual.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.ZWrite">
 			<summary>Is the z-buffer writeable or is it read-only. Default: true.</summary>
@@ -5124,11 +5234,9 @@ First texture is the color map, the second should be the normal map. Note that y
 First texture is the color map, the second should be the normal map. Note that you should use this material only when drawing geometry consisting of vertices of type Vertex3DTangents (VertexType.Tangents). You can convert any mesh into this format using MeshManipulator.CreateMeshWithTangents(). This shader runs on vertex shader 1.1 and pixel shader 1.1 capable hardware and falls back to a fixed function lighted material if this hardware is not available. Only two lights are supported by this shader, if there are more, the nearest two are chosen.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialType.OneTextureBlend">
-			<summary>BlendFunc = source * sourceFactor + dest * destFactor (E_BLEND_FUNC).
+			<summary>BlendFunc = source * sourceFactor + dest * destFactor (see BlendFactor enum).
 
-Using only first texture. Generic blending method.
-
-&lt;&lt;&lt; incompleted !!! what is E_BLEND_FUNC ??? &gt;&gt;&gt;</summary>
+Using only first texture. Generic blending method.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialType.ParallaxMapSolid">
 			<summary>Just like MaterialType.NormalMapSolid, but uses parallax mapping.
@@ -5188,6 +5296,18 @@ The reflection map should be set as first texture. The transparency depends on t
 		<member name="F:IrrlichtLime.Video.MaterialType.TransparentVertexAlpha">
 			<summary>Makes the material transparent based on the vertex alpha value.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.ModulateFunc">
+			<summary>MaterialTypeParam: e.g. DirectX: D3DTOP_MODULATE, D3DTOP_MODULATE2X, D3DTOP_MODULATE4X.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ModulateFunc._1x">
+			<summary>Modulate 1x.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ModulateFunc._2x">
+			<summary>Modulate 2x.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ModulateFunc._4x">
+			<summary>Modulate 4x.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.PixelShaderType">
 			<summary>Enumeration for pixel shader versions.</summary>
 		</member>
@@ -5223,6 +5343,18 @@ The reflection map should be set as first texture. The transparency depends on t
 		</member>
 		<member name="F:IrrlichtLime.Video.PixelShaderType.PS_5_0">
 			<summary>Version 5.0.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.PolygonOffset">
+			<summary>Flags for the definition of the polygon offset feature.
+These flags define whether the offset should be into the screen, or towards the eye.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PolygonOffset.Back">
+			<summary>Push pixel towards the far plane, away from the eye.
+This is typically used for rendering inner areas.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.PolygonOffset.Front">
+			<summary>Pull pixels towards the camera.
+This is typically used for polygons which should appear on top of other elements, such as decals.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.RenderTarget">
 			<summary>Special render targets, which usually map to dedicated hardware.</summary>
@@ -6956,33 +7088,6 @@ You can get a list via IrrlichtDevice.VideoModeList. There is no need to start u
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoModeList.ModeList">
 			<summary>List of all available video modes.</summary>
-		</member>
-		<member name="T:IrrlichtLime.Video.ZBufferCompFunc">
-			<summary>Enumeration for comparison functions, e.g. for depth buffer test.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Always">
-			<summary>Test succeeds always.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Equal">
-			<summary>Exact equality.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Greater">
-			<summary>Inverse of LessEqual.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.GreaterEqual">
-			<summary>Greater or equal test.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Less">
-			<summary>Exclusive less comparison.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.LessEqual">
-			<summary>Less or equal test, default for e.g. depth test.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.Never">
-			<summary>Test never succeeds, this equals disable.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.ZBufferCompFunc.NotEqual">
-			<summary>Succeeds almost always, except for exact equality.</summary>
 		</member>
 	</members>
 </doc>

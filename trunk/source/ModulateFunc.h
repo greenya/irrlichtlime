@@ -9,11 +9,11 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class FogType
+public enum class ModulateFunc
 {
-	Exp = EFT_FOG_EXP,
-	Linear = EFT_FOG_LINEAR,
-	Exp2 = EFT_FOG_EXP2
+	_1x = EMFN_MODULATE_1X,
+	_2x = EMFN_MODULATE_2X,
+	_4x = EMFN_MODULATE_4X
 };
 
 } // end namespace Video
