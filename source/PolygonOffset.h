@@ -9,11 +9,10 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class FogType
+public enum class PolygonOffset
 {
-	Exp = EFT_FOG_EXP,
-	Linear = EFT_FOG_LINEAR,
-	Exp2 = EFT_FOG_EXP2
+	Back = EPO_BACK,
+	Front = EPO_FRONT
 };
 
 } // end namespace Video

@@ -9,7 +9,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class ZBufferCompFunc
+public enum class ComparisonFunc
 {
 	Never = ECFN_NEVER,
 	LessEqual = ECFN_LESSEQUAL,

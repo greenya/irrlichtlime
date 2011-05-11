@@ -38,7 +38,7 @@ public:
 	property float MaterialTypeParam { float get(); void set(float value); }
 	property float MaterialTypeParam2 { float get(); void set(float value); }
 	property float Thickness { float get(); void set(float value); }
-	property ZBufferCompFunc ZBuffer { ZBufferCompFunc get(); void set(ZBufferCompFunc value); }
+	property ComparisonFunc ZBuffer { ComparisonFunc get(); void set(ComparisonFunc value); }
 	property AntiAliasingMode AntiAliasing { AntiAliasingMode get(); void set(AntiAliasingMode value); }
 	property ColorPlane ColorMask { ColorPlane get(); void set(ColorPlane value); }
 	property Video::ColorMaterial ColorMaterial { Video::ColorMaterial get(); void set(Video::ColorMaterial value); }

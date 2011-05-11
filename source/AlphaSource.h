@@ -9,11 +9,12 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class FogType
+[Flags]
+public enum class AlphaSource
 {
-	Exp = EFT_FOG_EXP,
-	Linear = EFT_FOG_LINEAR,
-	Exp2 = EFT_FOG_EXP2
+	None = EAS_NONE,
+	VertexColor = EAS_VERTEX_COLOR,
+	Texture = EAS_TEXTURE
 };
 
 } // end namespace Video

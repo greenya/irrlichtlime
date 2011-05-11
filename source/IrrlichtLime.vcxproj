@@ -111,11 +111,15 @@ copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlphaSource.h" />
     <ClInclude Include="AntiAliasingMode.h" />
+    <ClInclude Include="BlendFactor.h" />
+    <ClInclude Include="BlendOperation.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorFormat.h" />
     <ClInclude Include="ColorMaterial.h" />
     <ClInclude Include="ColorPlane.h" />
+    <ClInclude Include="ComparisonFunc.h" />
     <ClInclude Include="DriverType.h" />
     <ClInclude Include="ExposedVideoData.h" />
     <ClInclude Include="Fog.h" />
@@ -133,7 +137,9 @@ copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
     <ClInclude Include="MaterialRenderer.h" />
     <ClInclude Include="MaterialRendererServices.h" />
     <ClInclude Include="MaterialType.h" />
+    <ClInclude Include="ModulateFunc.h" />
     <ClInclude Include="PixelShaderType.h" />
+    <ClInclude Include="PolygonOffset.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
     <ClInclude Include="Texture.h" />
@@ -151,7 +157,6 @@ copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
     <ClInclude Include="VideoMode.h" />
     <ClInclude Include="VideoModeAspectRatio.h" />
     <ClInclude Include="VideoModeList.h" />
-    <ClInclude Include="ZBufferCompFunc.h" />
     <ClInclude Include="AABBox.h" />
     <ClInclude Include="Dimension.h" />
     <ClInclude Include="Dimension2D_template.h" />
