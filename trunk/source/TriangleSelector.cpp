@@ -32,6 +32,14 @@ SceneNode^ TriangleSelector::GetSceneNodeForTriangle(int triangleIndex)
 	return SceneNode::Wrap(n);
 }
 
+TriangleSelector^ TriangleSelector::GetSelector(int selectorIndex)
+{
+	LIME_ASSERT(selectorIndex >= 0 && selectorIndex < SelectorCount);
+
+	scene::ITriangleSelector* s = (scene::ITriangleSelector*)m_TriangleSelector->getSelector(selectorIndex); // !!! cast to non-const pointer
+	return TriangleSelector::Wrap(s);
+}
+
 List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(box != nullptr);
@@ -135,6 +143,11 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount)
 	return l;
 }
 
+int TriangleSelector::SelectorCount::get()
+{
+	return m_TriangleSelector->getSelectorCount();
+}
+
 int TriangleSelector::TriangleCount::get()
 {
 	return m_TriangleSelector->getTriangleCount();
@@ -142,7 +155,7 @@ int TriangleSelector::TriangleCount::get()
 
 String^ TriangleSelector::ToString()
 {
-	return String::Format("TriangleSelector: TriangleCount={0}", TriangleCount);
+	return String::Format("TriangleSelector: {0} triangle(s) in {1} selector(s)", TriangleCount, SelectorCount);
 }
 
 } // end namespace Scene
