@@ -116,6 +116,37 @@ void Material::AmbientColor::set(Color^ value)
 	m_NativeValue->AmbientColor = *value->m_NativeValue;
 }
 
+Video::BlendOperation Material::BlendOperation::get()
+{
+	return (Video::BlendOperation)m_NativeValue->BlendOperation;
+}
+
+void Material::BlendOperation::set(Video::BlendOperation value)
+{
+	m_NativeValue->BlendOperation = (video::E_BLEND_OPERATION)value;
+}
+
+Video::PolygonOffset Material::PolygonOffsetDirection::get()
+{
+	return (Video::PolygonOffset)m_NativeValue->PolygonOffsetDirection;
+}
+
+void Material::PolygonOffsetDirection::set(Video::PolygonOffset value)
+{
+	m_NativeValue->PolygonOffsetDirection = (video::E_POLYGON_OFFSET)value;
+}
+
+unsigned char Material::PolygonOffsetFactor::get()
+{
+	return m_NativeValue->PolygonOffsetFactor;
+}
+
+void Material::PolygonOffsetFactor::set(unsigned char value)
+{
+	LIME_ASSERT(value >= 0 && value <= 7);
+	m_NativeValue->PolygonOffsetFactor = value;
+}
+
 Color^ Material::DiffuseColor::get()
 {
 	return gcnew Color(m_NativeValue->DiffuseColor);

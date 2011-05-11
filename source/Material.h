@@ -31,6 +31,9 @@ public:
 
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
 	property Color^ AmbientColor { Color^ get(); void set(Color^ value); }
+	property Video::BlendOperation BlendOperation { Video::BlendOperation get(); void set(Video::BlendOperation value); }
+	property Video::PolygonOffset PolygonOffsetDirection { Video::PolygonOffset get(); void set(Video::PolygonOffset value); }
+	property unsigned char PolygonOffsetFactor { unsigned char get(); void set(unsigned char value); }
 	property Color^ DiffuseColor { Color^ get(); void set(Color^ value); }
 	property Color^ EmissiveColor { Color^ get(); void set(Color^ value); }
 	property Color^ SpecularColor { Color^ get(); void set(Color^ value); }
