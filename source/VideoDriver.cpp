@@ -199,6 +199,17 @@ IO::Attributes^ VideoDriver::CreateAttributesFromMaterial(Material^ material)
 	return IO::Attributes::Wrap(a);
 }
 
+IO::Attributes^ VideoDriver::CreateAttributesFromMaterial(Material^ material, IO::AttributeReadWriteOptions^ options)
+{
+	LIME_ASSERT(material != nullptr);
+
+	io::SAttributeReadWriteOptions* o = IO::AttributeReadWriteOptions::Allocate_SAttributeReadWriteOptions(options);
+	io::IAttributes* a = m_VideoDriver->createAttributesFromMaterial(*material->m_NativeValue, o);
+	IO::AttributeReadWriteOptions::Free_SAttributeReadWriteOptions(o);
+
+	return IO::Attributes::Wrap(a);
+}
+
 Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size)
 {
 	LIME_ASSERT(pos != nullptr);
