@@ -6157,6 +6157,12 @@ Note that you usually need not to call this method, as it is automatically done 
 			<param name="material">The material to serialize.</param>
 			<returns>Attributes container holding the material properties.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateAttributesFromMaterial(IrrlichtLime.Video.Material,IrrlichtLime.IO.AttributeReadWriteOptions)">
+			<summary>Creates material attributes list from a material.</summary>
+			<param name="material">The material to serialize.</param>
+			<param name="options">Additional options which might influence the serialization. Default: null.</param>
+			<returns>Attributes container holding the material properties.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.IO.ReadFile)">
 			<summary>Creates a software image from a file.
 
