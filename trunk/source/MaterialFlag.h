@@ -28,7 +28,9 @@ public enum class MaterialFlag
 	AntiAliasing = EMF_ANTI_ALIASING,
 	ColorMask = EMF_COLOR_MASK,
 	ColorMaterial = EMF_COLOR_MATERIAL,
-	Mipmaps = EMF_USE_MIP_MAPS
+	Mipmaps = EMF_USE_MIP_MAPS,
+	BlendOperation = EMF_BLEND_OPERATION,
+	PolygonOffset = EMF_POLYGON_OFFSET
 };
 
 } // end namespace Video
