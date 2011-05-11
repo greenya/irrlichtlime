@@ -23,6 +23,7 @@ public:
 
 	int GetCellData(int rowIndex, int columnIndex);
 	String^ GetCellText(int rowIndex, int columnIndex);
+	int GetColumnWidth(int columnIndex);
 
 	void OrderRows(int columnIndex, GUIOrderingMode mode);
 	void OrderRows(int columnIndex);

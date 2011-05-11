@@ -66,6 +66,12 @@ String^ GUITable::GetCellText(int rowIndex, int columnIndex)
 	return gcnew String(m_GUITable->getCellText(rowIndex, columnIndex));
 }
 
+int GUITable::GetColumnWidth(int columnIndex)
+{
+	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+	return m_GUITable->getColumnWidth(columnIndex);
+}
+
 void GUITable::OrderRows(int columnIndex, GUIOrderingMode mode)
 {
 	LIME_ASSERT(columnIndex >= -1 && columnIndex < ColumnCount); // -1 is valid here
