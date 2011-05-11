@@ -4911,6 +4911,10 @@ For details how to use specular highlights, see Material.Shininess.</summary>
 		<member name="P:IrrlichtLime.Video.Material.BackfaceCulling">
 			<summary>Is backface culling enabled? Default: true.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Material.BlendOperation">
+			<summary>Defines blend operation.
+NOTE: the actual way to use this value is not yet determined, so ignore it for now.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Material.ColorMask">
 			<summary>Defines the enabled color planes.</summary>
 		</member>
@@ -4979,6 +4983,14 @@ Equivalent to "new Material()".</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.PointCloud">
 			<summary>Draw as point cloud or filled triangles? Default: false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.PolygonOffsetDirection">
+			<summary>Defines the direction the polygon offset is applied to.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.PolygonOffsetFactor">
+			<summary>Factor specifying how far the polygon offset should be made.
+Specifying 0 disables the polygon offset.
+The factor can be from 0 to 7.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Material.SetFlag(IrrlichtLime.Video.MaterialFlag,System.Boolean)">
 			<summary>Sets the value of material flag.</summary>
