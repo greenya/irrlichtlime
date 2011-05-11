@@ -1130,10 +1130,10 @@ This is an internal Irrlicht index; it does not map directly to any particular h
 			<summary>Key map dictionary.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Lime">
-			<summary>IrrlichtLime core class. Provides wrapper common functionality.</summary>
+			<summary>Irrlicht Lime core class. Provides wrapper common functionality.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Lime.Version">
-			<summary>IrrlichtLime version.</summary>
+			<summary>Irrlicht Lime version.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Logger">
 			<summary>Class for logging messages, warnings and errors.</summary>
@@ -2135,6 +2135,13 @@ Also useful for interpolations.</summary>
 		<member name="P:IrrlichtLime.Core.Quaternion.Identity">
 			<summary>Identity quaternion.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Sets this quaternion to the result of the linear interpolation between two quaternions.</summary>
+			<param name="q1">First quaternion.</param>
+			<param name="q2">Second quaternion.</param>
+			<param name="time">Interpolation value.</param>
+			<returns>This quaternion.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.MakeIdentity">
 			<summary>Sets this quaternion to identity.</summary>
 			<returns>This quaternion.</returns>
@@ -2210,7 +2217,7 @@ The rotation is q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k).</summary>
 			<param name="newW">W value (real part).</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
-			<summary>Sets this quaternion to the result of the spherical linear interpolation (slerp) between two quaternions.</summary>
+			<summary>Sets this quaternion to the result of the spherical interpolation between two quaternions.</summary>
 			<param name="q1">First quaternion.</param>
 			<param name="q2">Second quaternion.</param>
 			<param name="time">Interpolation value.</param>
@@ -5861,6 +5868,19 @@ This class is one of the most important classes of the Irrlicht Lime: all render
 			<param name="name">Optional name for the material renderer entry. Default: null.</param>
 			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds occlusion query.
+
+Use node for identification and mesh for occlusion test.</summary>
+			<param name="node">Node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddOcclusionQuery(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.Mesh)">
+			<summary>Adds occlusion query.
+
+Use node for identification and mesh for occlusion test.</summary>
+			<param name="node">Node.</param>
+			<param name="mesh">Mesh. Default: null.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di)">
 			<summary>Adds a new render target texture to the texture cache.</summary>
 			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
@@ -6013,18 +6033,6 @@ No hardware texture will be created for this image. This method is useful for ex
 			<param name="pos">Position of rectangle to copy.</param>
 			<param name="size">Extents of rectangle to copy.</param>
 			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.CreateOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
-			<summary>Create occlusion query.
-
-Use node for identification and mesh for occlusion test.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.CreateOcclusionQuery(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.Mesh)">
-			<summary>Create occlusion query.
-
-Use node for identification and mesh for occlusion test.</summary>
-			<param name="node">Node.</param>
-			<param name="mesh">Mesh. Default: null.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot">
 			<summary>Make a screenshot of the last rendered frame.</summary>
