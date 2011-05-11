@@ -5031,10 +5031,13 @@ In Irrlicht you can use anisotropic texture filtering in conjunction with biline
 			<summary>AntiAliasing mode.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.BackFaceCulling">
-			<summary>Is backface culling enabled? Default: true.</summary>
+			<summary>Is back face culling enabled? Default: true.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.BilinearFilter">
 			<summary>Is bilinear filtering enabled? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.BlendOperation">
+			<summary>Is blend operation enabled? Default: false.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.ColorMask">
 			<summary>ColorMask bits, for enabling the color planes.</summary>
@@ -5046,7 +5049,7 @@ In Irrlicht you can use anisotropic texture filtering in conjunction with biline
 			<summary>Is fog enabled? Default: false.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.FrontFaceCulling">
-			<summary>Is frontface culling enabled? Default: false.</summary>
+			<summary>Is front face culling enabled? Default: false.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.GouraudShading">
 			<summary>Flat or Gouraud shading? Default: true.</summary>
@@ -5064,6 +5067,9 @@ You can enable this if you need to scale a dynamic lighted model. Usually, its n
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.PointCloud">
 			<summary>Draw as point cloud or filled triangles? Default: false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.PolygonOffset">
+			<summary>Is polygon offset enabled? Default: false.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.TextureWrap">
 			<summary>Access to all layers texture wrap settings. Overwrites separate layer settings.</summary>
@@ -6899,34 +6905,37 @@ Requires that there is a suitable image writer registered for writing the image.
 			<summary>Enumeration for querying features of the video driver.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.AlphaToCoverage">
-			<summary>Alpha To Coverage supported.</summary>
+			<summary>Alpha To Coverage is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_FragmentProgram_1">
-			<summary>ARB fragment programs v1.0 supported.</summary>
+			<summary>ARB fragment programs v1.0 are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_GLSL">
-			<summary>GLSL supported.</summary>
+			<summary>GLSL is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ARB_VertexProgram_1">
-			<summary>ARB vertex programs v1.0 supported.</summary>
+			<summary>ARB vertex programs v1.0 are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.BilinearFilter">
 			<summary>Driver able to render with a bilinear filter applied.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.BlendOperations">
+			<summary>Different blend functions are supported, otherwise only BlendOperation.Add is available.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ColorMask">
-			<summary>Color masks (disabling color planes in output) supported.</summary>
+			<summary>Color masks (disabling color planes in output) are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.FrameBufferObject">
-			<summary>Framebuffer objects supported.</summary>
+			<summary>Framebuffer objects are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.GeomertyShader">
-			<summary>Geometry shaders supported.</summary>
+			<summary>Geometry shaders are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.HardwareTL">
-			<summary>Hardeware transform and lighting supported.</summary>
+			<summary>Hardeware transform and lighting is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.HLSL">
-			<summary>HLSL supported.</summary>
+			<summary>HLSL is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.Mipmap">
 			<summary>Driver able to handle mip maps.</summary>
@@ -6935,40 +6944,43 @@ Requires that there is a suitable image writer registered for writing the image.
 			<summary>Driver able to update mip maps automatically.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_Blend">
-			<summary>Separate blend settings for multiple render targets supported.</summary>
+			<summary>Separate blend settings for multiple render targets is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_BlendFunc">
-			<summary>Separate blend functions for multiple render targets supported.</summary>
+			<summary>Separate blend functions for multiple render targets is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MRT_ColorMask">
-			<summary>Separate color masks for multiple render targets supported.</summary>
+			<summary>Separate color masks for multiple render targets is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.MultipleRenderTargets">
-			<summary>Multiple render targets supported.</summary>
+			<summary>Multiple render targets are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.Multitexture">
 			<summary>Multiple textures per material are possible.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.OcclusionQuery">
-			<summary>Occlusion queries supported.</summary>
+			<summary>Occlusion queries are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_1">
-			<summary>Pixel shader version 1.1 supported.</summary>
+			<summary>Pixel shader version 1.1 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_2">
-			<summary>Pixel shader version 1.2 supported.</summary>
+			<summary>Pixel shader version 1.2 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_3">
-			<summary>Pixel shader version 1.3 supported.</summary>
+			<summary>Pixel shader version 1.3 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_1_4">
-			<summary>Pixel shader version 1.4 supported.</summary>
+			<summary>Pixel shader version 1.4 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_2_0">
-			<summary>Pixel shader version 2.0 supported.</summary>
+			<summary>Pixel shader version 2.0 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PixelShader_3_0">
-			<summary>Pixel shader version 3.0 supported.</summary>
+			<summary>Pixel shader version 3.0 is supported.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.PolygonOffset">
+			<summary>Polygon offset/depth bias for avoiding z-fighting is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.RenderToTarget">
 			<summary>Driver able to render to a surface.</summary>
@@ -6977,22 +6989,22 @@ Requires that there is a suitable image writer registered for writing the image.
 			<summary>Stencil buffers switched on and the device supports stencil buffers.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureNonPOT">
-			<summary>Non-power-of-two (Non-POT) textures supported.</summary>
+			<summary>Non-power-of-two (Non-POT) textures are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureNonSquare">
-			<summary>Non-square textures supported.</summary>
+			<summary>Non-square textures are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexBufferObject">
-			<summary>Vertex buffer objects supported.</summary>
+			<summary>Vertex buffer objects are supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_1_1">
-			<summary>Vertex shader version 1.1 supported.</summary>
+			<summary>Vertex shader version 1.1 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_2_0">
-			<summary>Vertex shader version 2.0 supported.</summary>
+			<summary>Vertex shader version 2.0 is supported.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.VertexShader_3_0">
-			<summary>Vertex shader version 3.0 supported.</summary>
+			<summary>Vertex shader version 3.0 is supported.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.VideoMode">
 			<summary>Holds information about single video mode.</summary>

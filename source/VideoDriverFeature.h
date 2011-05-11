@@ -42,7 +42,9 @@ public enum class VideoDriverFeature
 	MRT_ColorMask = EVDF_MRT_COLOR_MASK,
 	MRT_BlendFunc = EVDF_MRT_BLEND_FUNC,
 	GeomertyShader = EVDF_GEOMETRY_SHADER,
-	OcclusionQuery = EVDF_OCCLUSION_QUERY
+	OcclusionQuery = EVDF_OCCLUSION_QUERY,
+	PolygonOffset = EVDF_POLYGON_OFFSET,
+	BlendOperations = EVDF_BLEND_OPERATIONS
 };
 
 } // end namespace Video
