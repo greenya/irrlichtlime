@@ -169,6 +169,7 @@ namespace _12.TerrainRendering
 			this.skybox = skybox;
 			this.skydome = skydome;
 			showBox = true;
+			showDebug = false;
 
 			skybox.Visible = true;
 			skydome.Visible = false;
@@ -178,7 +179,7 @@ namespace _12.TerrainRendering
 
 		bool device_OnEvent(Event e)
 		{
-			// check if user presses the key 'W' or 'D'
+			// check if user presses the key 'W', 'P', 'D', 'S' or 'X'
 			if (e.Type == EventType.Key && e.Key.PressedDown)
 			{
 				switch (e.Key.Key)
@@ -203,15 +204,21 @@ namespace _12.TerrainRendering
 						skybox.Visible = showBox;
 						skydome.Visible = !showBox;
 						return true;
+
+					case KeyCode.KeyX: // toggle debug information
+						showDebug = !showDebug;
+						terrain.DebugDataVisible = showDebug ? DebugSceneType.BBoxAll : DebugSceneType.Off;
+						return true;
 				}
 			}
 
 			return false;
 		}
 
-		private SceneNode terrain;
-		private SceneNode skybox;
-		private SceneNode skydome;
-		private bool showBox;
+		SceneNode terrain;
+		SceneNode skybox;
+		SceneNode skydome;
+		bool showBox;
+		bool showDebug;
 	}
 }
