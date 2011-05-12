@@ -1,5 +1,5 @@
 SRC: https://irrlicht.svn.sourceforge.net/svnroot/irrlicht/trunk
-REV: 3714
+REV: 3719
 
 IrrCompileConfig.h
 	+ _IRR_COMPILE_WITH_DIRECT3D_8_

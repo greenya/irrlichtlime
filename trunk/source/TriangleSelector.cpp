@@ -36,7 +36,7 @@ TriangleSelector^ TriangleSelector::GetSelector(int selectorIndex)
 {
 	LIME_ASSERT(selectorIndex >= 0 && selectorIndex < SelectorCount);
 
-	scene::ITriangleSelector* s = (scene::ITriangleSelector*)m_TriangleSelector->getSelector(selectorIndex); // !!! cast to non-const pointer
+	scene::ITriangleSelector* s = m_TriangleSelector->getSelector(selectorIndex);
 	return TriangleSelector::Wrap(s);
 }
 
