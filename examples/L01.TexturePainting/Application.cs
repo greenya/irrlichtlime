@@ -73,7 +73,7 @@ namespace L01.TexturePainting
 			gui.Clear();
 
 			gui.AddImage(
-				drv.GetTexture("../media/lime_logo_alpha.png"),
+				drv.GetTexture("../../media/lime_logo_alpha.png"),
 				new Vector2Di(30, 0));
 
 			guiWindow = gui.AddWindow(new Recti(20, 120, size + 20 + 20, size + 120 + 20 + 20 + 30), false, "Paint");

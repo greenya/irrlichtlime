@@ -116,14 +116,14 @@ namespace L04.ParticleEmitterViewer
 
 			// Skydome
 
-			irrDevice.SceneManager.AddSkyDomeSceneNode(irrDevice.VideoDriver.GetTexture("../media/skydome.jpg"), 16, 8, 0.95f, 2.0f);
+			irrDevice.SceneManager.AddSkyDomeSceneNode(irrDevice.VideoDriver.GetTexture("../../media/skydome.jpg"), 16, 8, 0.95f, 2.0f);
 
 			// Plane
 
 			var m = irrDevice.SceneManager.AddHillPlaneMesh("plane", new Dimension2Df(1000), new Dimension2Di(1), null, 0, new Dimension2Df(0), new Dimension2Df(8));
 			var n = irrDevice.SceneManager.AddAnimatedMeshSceneNode(m, null, (int)SceneNodeID.Plane);
 			n.SetMaterialFlag(MaterialFlag.Lighting, false);
-			n.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture("../media/rockwall.jpg"));
+			n.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture("../../media/rockwall.jpg"));
 
 			// Axes
 
@@ -150,7 +150,7 @@ namespace L04.ParticleEmitterViewer
 
 			ps.SetMaterialFlag(MaterialFlag.Lighting, false);
 			ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
-			ps.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture("../media/particle.bmp"));
+			ps.SetMaterialTexture(0, irrDevice.VideoDriver.GetTexture("../../media/particle.bmp"));
 			ps.SetMaterialType(MaterialType.TransparentAddColor);
 
 			ParticleEmitter em = ps.CreateSphereEmitter(

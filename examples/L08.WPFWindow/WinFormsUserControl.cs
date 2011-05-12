@@ -121,21 +121,21 @@ namespace L08.WPFWindow
 			anim.Drop();
 
 			SceneNode cube = smgr.AddCubeSceneNode(20);
-			cube.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
-			cube.SetMaterialTexture(1, driver.GetTexture("../media/water.jpg"));
+			cube.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
+			cube.SetMaterialTexture(1, driver.GetTexture("../../media/water.jpg"));
 			cube.SetMaterialFlag(MaterialFlag.Lighting, false);
 			cube.SetMaterialType(MaterialType.Reflection2Layer);
 
 			smgr.AddSkyBoxSceneNode(
-				"../media/irrlicht2_up.jpg",
-				"../media/irrlicht2_dn.jpg",
-				"../media/irrlicht2_lf.jpg",
-				"../media/irrlicht2_rt.jpg",
-				"../media/irrlicht2_ft.jpg",
-				"../media/irrlicht2_bk.jpg");
+				"../../media/irrlicht2_up.jpg",
+				"../../media/irrlicht2_dn.jpg",
+				"../../media/irrlicht2_lf.jpg",
+				"../../media/irrlicht2_rt.jpg",
+				"../../media/irrlicht2_ft.jpg",
+				"../../media/irrlicht2_bk.jpg");
 
 			gui.AddImage(
-				driver.GetTexture("../media/lime_logo_alpha.png"),
+				driver.GetTexture("../../media/lime_logo_alpha.png"),
 				new Vector2Di(30, 0));
 
 			// draw all

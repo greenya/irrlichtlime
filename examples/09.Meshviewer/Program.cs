@@ -113,12 +113,12 @@ namespace _09.Meshviewer
 			smgr.AmbientLight = new Colorf(0.3f, 0.3f, 0.3f);
 
 			// add our media directory as "search path"
-			device.FileSystem.AddFileArchive("../media/");
+			device.FileSystem.AddFileArchive("../../media/");
 
 			// read configuration from xml file
 			// (we use .NET way to do this, since Lime doesn't support native Irrlicht' xml reader)
 			XmlDocument xml = new XmlDocument();
-			xml.Load("../media/config.xml");
+			xml.Load("../../media/config.xml");
 			startUpModelFile = xml.DocumentElement["startUpModel"].Attributes["file"].Value;
 			caption = xml.DocumentElement["messageText"].Attributes["caption"].Value;
 			messageText = xml.DocumentElement["messageText"].InnerText;

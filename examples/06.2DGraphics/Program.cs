@@ -26,11 +26,11 @@ namespace _06._2DGraphics
 
 			VideoDriver driver = device.VideoDriver;
 
-			Texture images = driver.GetTexture("../media/2ddemo.png");
+			Texture images = driver.GetTexture("../../media/2ddemo.png");
 			driver.MakeColorKeyTexture(images, new Vector2Di(0, 0));
 
 			GUIFont font = device.GUIEnvironment.BuiltInFont;
-			GUIFont font2 = device.GUIEnvironment.GetFont("../media/fonthaettenschweiler.bmp");
+			GUIFont font2 = device.GUIEnvironment.GetFont("../../media/fonthaettenschweiler.bmp");
 
 			Recti imp1 = new Recti(349, 15, 385, 78);
 			Recti imp2 = new Recti(387, 15, 423, 78);

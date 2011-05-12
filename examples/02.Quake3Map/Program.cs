@@ -43,7 +43,7 @@ namespace _02.Quake3Map
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
-			device.FileSystem.AddFileArchive("../media/map-20kdm2.pk3");
+			device.FileSystem.AddFileArchive("../../media/map-20kdm2.pk3");
 
 			AnimatedMesh mesh = smgr.GetMesh("20kdm2.bsp");
 			SceneNode node = null;

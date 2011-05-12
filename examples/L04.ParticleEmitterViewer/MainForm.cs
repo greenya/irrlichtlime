@@ -40,7 +40,7 @@ namespace L04.ParticleEmitterViewer
 		{
 			listBoxParticleList.Items.Clear();
 
-			string[] l = Directory.GetFiles("../media", "*particle*", SearchOption.TopDirectoryOnly);
+			string[] l = Directory.GetFiles("../../media", "*particle*", SearchOption.TopDirectoryOnly);
 			foreach (string f in l)
 				addImageToParticleList(f, false);
 

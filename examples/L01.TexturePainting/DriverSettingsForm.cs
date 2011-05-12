@@ -25,7 +25,7 @@ namespace L01.TexturePainting
 		public bool ShowDialog()
 		{
 			device = IrrlichtDevice.CreateDevice(DriverType.BurningsVideo, new Dimension2Di(320, 320));
-			device.FileSystem.AddFileArchive("../media/");
+			device.FileSystem.AddFileArchive("../../media/");
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 			device.SetWindowCaption(windowCaption);
 

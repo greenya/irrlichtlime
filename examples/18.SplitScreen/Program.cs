@@ -38,7 +38,7 @@ namespace _18.SplitScreen
 			SceneManager smgr = device.SceneManager;
 
 			// load model
-			AnimatedMesh model = smgr.GetMesh("../media/sydney.md2");
+			AnimatedMesh model = smgr.GetMesh("../../media/sydney.md2");
 			if (model == null)
 				return;
 
@@ -47,14 +47,14 @@ namespace _18.SplitScreen
 			// load texture
 			if (model_node != null)
 			{
-				Texture texture = driver.GetTexture("../media/sydney.bmp");
+				Texture texture = driver.GetTexture("../../media/sydney.bmp");
 				model_node.SetMaterialTexture(0, texture);
 				model_node.SetMD2Animation(AnimationTypeMD2.Run);
 				model_node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			}
 
 			// load map
-			device.FileSystem.AddFileArchive("../media/map-20kdm2.pk3");
+			device.FileSystem.AddFileArchive("../../media/map-20kdm2.pk3");
 			AnimatedMesh map = smgr.GetMesh("20kdm2.bsp");
 			if (map != null)
 			{

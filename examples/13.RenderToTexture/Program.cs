@@ -28,10 +28,10 @@ namespace _13.RenderToTexture
 			GUIEnvironment env = device.GUIEnvironment;
 
 			// load and display animated fairy mesh
-			AnimatedMeshSceneNode fairy = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/faerie.md2"));
+			AnimatedMeshSceneNode fairy = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/faerie.md2"));
 			if (fairy != null)
 			{
-				fairy.SetMaterialTexture(0, driver.GetTexture("../media/faerie2.bmp")); // set diffuse texture
+				fairy.SetMaterialTexture(0, driver.GetTexture("../../media/faerie2.bmp")); // set diffuse texture
 				fairy.SetMaterialFlag(MaterialFlag.Lighting, true); // enable dynamic lighting
 				fairy.GetMaterial(0).Shininess = 20.0f; // set size of specular highlights
 				fairy.Position = new Vector3Df(-10, 0, -100);
@@ -77,7 +77,7 @@ namespace _13.RenderToTexture
 			else
 			{
 				// create problem text
-				GUIFont font = env.GetFont("../media/fonthaettenschweiler.bmp");
+				GUIFont font = env.GetFont("../../media/fonthaettenschweiler.bmp");
 				if (font != null)
 					env.Skin.SetFont(font);
 

@@ -29,7 +29,7 @@ namespace _07.Collision
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
-			device.FileSystem.AddFileArchive("../media/map-20kdm2.pk3");
+			device.FileSystem.AddFileArchive("../../media/map-20kdm2.pk3");
 
 			AnimatedMesh q3levelmesh = smgr.GetMesh("20kdm2.bsp");
 			MeshSceneNode q3node = null;
@@ -76,7 +76,7 @@ namespace _07.Collision
 			// Add the billboard.
 			BillboardSceneNode bill = smgr.AddBillboardSceneNode();
 			bill.SetMaterialType(MaterialType.TransparentAddColor);
-			bill.SetMaterialTexture(0, driver.GetTexture("../media/particle.bmp"));
+			bill.SetMaterialTexture(0, driver.GetTexture("../../media/particle.bmp"));
 			bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 			bill.SetMaterialFlag(MaterialFlag.ZBuffer, false);
 			bill.Size = new Dimension2Df(20.0f, 20.0f);
@@ -85,12 +85,12 @@ namespace _07.Collision
 			AnimatedMeshSceneNode node = null;
 
 			// Add an MD2 node, which uses vertex-based animation.
-			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/faerie.md2"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
+			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/faerie.md2"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
 			node.Position = new Vector3Df(-90, -15, -140); // Put its feet on the floor.
 			node.Scale = new Vector3Df(1.6f); // Make it appear realistically scaled
 			node.SetMD2Animation(AnimationTypeMD2.Point);
 			node.AnimationSpeed = 20.0f;
-			node.GetMaterial(0).SetTexture(0, driver.GetTexture("../media/faerie2.bmp"));
+			node.GetMaterial(0).SetTexture(0, driver.GetTexture("../../media/faerie2.bmp"));
 			node.GetMaterial(0).Lighting = true;
 			node.GetMaterial(0).NormalizeNormals = true;
 
@@ -101,7 +101,7 @@ namespace _07.Collision
 			selector.Drop(); // We're done with this selector, so drop it now.
 
 			// And this B3D file uses skinned skeletal animation.
-			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/ninja.b3d"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
+			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/ninja.b3d"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
 			node.Scale = new Vector3Df(10);
 			node.Position = new Vector3Df(-75, -66, -80);
 			node.Rotation = new Vector3Df(0, 90, 0);
@@ -113,7 +113,7 @@ namespace _07.Collision
 			selector.Drop();
 
 			// This X files uses skeletal animation, but without skinning.
-			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/dwarf.x"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
+			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/dwarf.x"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
 			node.Position = new Vector3Df(-70, -66, -30); // Put its feet on the floor.
 			node.Rotation = new Vector3Df(0, -90, 0); // And turn it towards the camera.
 			node.AnimationSpeed = 20.0f;
@@ -122,7 +122,7 @@ namespace _07.Collision
 			selector.Drop();
 
 			// And this mdl file uses skinned skeletal animation.
-			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/yodan.mdl"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
+			node = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/yodan.mdl"), null, IDFlag_IsPickable | IDFlag_IsHighlightable);
 			node.Position = new Vector3Df(-90, -25, 20);
 			node.Scale = new Vector3Df(0.8f);
 			node.GetMaterial(0).Lighting = true;
