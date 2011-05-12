@@ -29,7 +29,7 @@ namespace _15.LoadIrrFile
 			if (args.Length > 0)
 				smgr.LoadScene(args[0]);
 			else
-				smgr.LoadScene("../media/example.irr");
+				smgr.LoadScene("../../media/example.irr");
 
 			CameraSceneNode camera = smgr.AddCameraSceneNodeFPS(null, 50, 0.1f);
 

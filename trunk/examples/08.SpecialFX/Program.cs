@@ -27,14 +27,14 @@ namespace _08.SpecialFX
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 
-			AnimatedMesh mesh = smgr.GetMesh("../media/room.3ds");
+			AnimatedMesh mesh = smgr.GetMesh("../../media/room.3ds");
 
 			smgr.MeshManipulator.MakePlanarTextureMapping(mesh.GetMesh(0), 0.004f);
 
 			SceneNode node = null;
 
 			node = smgr.AddAnimatedMeshSceneNode(mesh);
-			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.jpg"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.jpg"));
 			node.GetMaterial(0).SpecularColor.Set(0, 0, 0, 0);
 
 			mesh = smgr.AddHillPlaneMesh("myHill",
@@ -46,8 +46,8 @@ namespace _08.SpecialFX
 			node = smgr.AddWaterSurfaceSceneNode(mesh.GetMesh(0), 3.0f, 300.0f, 30.0f);
 			node.Position = new Vector3Df(0, 7, 0);
 
-			node.SetMaterialTexture(0, driver.GetTexture("../media/stones.jpg"));
-			node.SetMaterialTexture(1, driver.GetTexture("../media/water.jpg"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/stones.jpg"));
+			node.SetMaterialTexture(1, driver.GetTexture("../../media/water.jpg"));
 
 			node.SetMaterialType(MaterialType.Reflection2Layer);
 
@@ -63,7 +63,7 @@ namespace _08.SpecialFX
 			node = smgr.AddBillboardSceneNode(node, new Dimension2Df(50, 50));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			node.SetMaterialType(MaterialType.TransparentAddColor);
-			node.SetMaterialTexture(0, driver.GetTexture("../media/particlewhite.bmp"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/particlewhite.bmp"));
 
 			// create a particle system
 
@@ -91,7 +91,7 @@ namespace _08.SpecialFX
 			ps.Scale = new Vector3Df(2);
 			ps.SetMaterialFlag(MaterialFlag.Lighting, false);
 			ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
-			ps.SetMaterialTexture(0, driver.GetTexture("../media/fire.bmp"));
+			ps.SetMaterialTexture(0, driver.GetTexture("../../media/fire.bmp"));
 			ps.SetMaterialType(MaterialType.TransparentVertexAlpha);
 
 			VolumeLightSceneNode n = smgr.AddVolumeLightSceneNode(null, -1,
@@ -109,7 +109,7 @@ namespace _08.SpecialFX
 				List<Texture> textures = new List<Texture>();
 				for (int i = 7; i > 0; i--)
 				{
-					string s = string.Format("../media/portal{0}.bmp", i);
+					string s = string.Format("../../media/portal{0}.bmp", i);
 					textures.Add(driver.GetTexture(s));
 				}
 
@@ -125,7 +125,7 @@ namespace _08.SpecialFX
 
 			// add animated character
 
-			mesh = smgr.GetMesh("../media/dwarf.x");
+			mesh = smgr.GetMesh("../../media/dwarf.x");
 			AnimatedMeshSceneNode anode = smgr.AddAnimatedMeshSceneNode(mesh);
 
 			anode.Position = new Vector3Df(-50, 20, -60);

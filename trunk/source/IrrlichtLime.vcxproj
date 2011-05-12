@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)bin\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
-    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;$(TargetPath)</ExtensionsToDeleteOnClean>
+    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)bin\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;$(TargetPath)</ExtensionsToDeleteOnClean>
+    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -69,8 +69,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y ..\irrlicht\dll\Irrlicht_debug.dll ..\bin\Irrlicht.dll &gt;nul
-copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
+      <Command>copy /y ..\irrlicht\dll\Irrlicht_$(Configuration).dll $(SolutionDir)bin\$(Configuration)\Irrlicht.dll &gt;nul
+copy /y ..\doc\IrrlichtLime.xml $(SolutionDir)bin\$(Configuration)\ &gt;nul
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -91,8 +91,8 @@ copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y ..\irrlicht\dll\Irrlicht_release.dll ..\bin\Irrlicht.dll &gt;nul
-copy /y ..\doc\IrrlichtLime.xml ..\bin\ &gt;nul
+      <Command>copy /y ..\irrlicht\dll\Irrlicht_$(Configuration).dll $(SolutionDir)bin\$(Configuration)\Irrlicht.dll &gt;nul
+copy /y ..\doc\IrrlichtLime.xml $(SolutionDir)bin\$(Configuration)\ &gt;nul
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

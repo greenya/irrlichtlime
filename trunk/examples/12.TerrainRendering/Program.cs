@@ -30,10 +30,10 @@ namespace _12.TerrainRendering
 			driver.SetTextureCreationFlag(TextureCreationFlag.Always32Bit, true);
 
 			// add irrlicht logo
-			env.AddImage(driver.GetTexture("../media/irrlichtlogoalpha2.tga"), new Vector2Di(10));
+			env.AddImage(driver.GetTexture("../../media/irrlichtlogoalpha2.tga"), new Vector2Di(10));
 
 			//set other font
-			env.Skin.SetFont(env.GetFont("../media/fontlucida.png"));
+			env.Skin.SetFont(env.GetFont("../../media/fontlucida.png"));
 
 			// add some help text
 			env.AddStaticText(
@@ -51,7 +51,7 @@ namespace _12.TerrainRendering
 
 			// add terrain scene node
 			TerrainSceneNode terrain = smgr.AddTerrainSceneNode(
-				"../media/terrain-heightmap.bmp",	// heightmap
+				"../../media/terrain-heightmap.bmp",	// heightmap
 				null,								// parent node
 				-1,									// node id
 				new Vector3Df(),					// position
@@ -63,8 +63,8 @@ namespace _12.TerrainRendering
 				4);									// smooth factor
 
 			terrain.SetMaterialFlag(MaterialFlag.Lighting, false);
-			terrain.SetMaterialTexture(0, driver.GetTexture("../media/terrain-texture.jpg"));
-			terrain.SetMaterialTexture(1, driver.GetTexture("../media/detailmap3.jpg"));
+			terrain.SetMaterialTexture(0, driver.GetTexture("../../media/terrain-texture.jpg"));
+			terrain.SetMaterialTexture(1, driver.GetTexture("../../media/detailmap3.jpg"));
 			terrain.SetMaterialType(MaterialType.DetailMap);
 
 			terrain.ScaleTexture(1, 20);
@@ -88,14 +88,14 @@ namespace _12.TerrainRendering
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, false);
 
 			SceneNode skybox = smgr.AddSkyBoxSceneNode(
-				"../media/irrlicht2_up.jpg",
-				"../media/irrlicht2_dn.jpg",
-				"../media/irrlicht2_lf.jpg",
-				"../media/irrlicht2_rt.jpg",
-				"../media/irrlicht2_ft.jpg",
-				"../media/irrlicht2_bk.jpg");
+				"../../media/irrlicht2_up.jpg",
+				"../../media/irrlicht2_dn.jpg",
+				"../../media/irrlicht2_lf.jpg",
+				"../../media/irrlicht2_rt.jpg",
+				"../../media/irrlicht2_ft.jpg",
+				"../../media/irrlicht2_bk.jpg");
 
-			SceneNode skydome = smgr.AddSkyDomeSceneNode(driver.GetTexture("../media/skydome.jpg"), 16, 8, 0.95f, 2);
+			SceneNode skydome = smgr.AddSkyDomeSceneNode(driver.GetTexture("../../media/skydome.jpg"), 16, 8, 0.95f, 2);
 
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, true);
 

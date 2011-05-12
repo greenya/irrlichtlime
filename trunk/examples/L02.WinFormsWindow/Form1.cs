@@ -109,24 +109,24 @@ namespace L02.WinFormsWindow
 			anim.Drop();
 
 			SceneNode cube = smgr.AddCubeSceneNode(20);
-			cube.SetMaterialTexture(0, drv.GetTexture("../media/wall.bmp"));
-			cube.SetMaterialTexture(1, drv.GetTexture("../media/water.jpg"));
+			cube.SetMaterialTexture(0, drv.GetTexture("../../media/wall.bmp"));
+			cube.SetMaterialTexture(1, drv.GetTexture("../../media/water.jpg"));
 			cube.SetMaterialFlag(MaterialFlag.Lighting, false);
 			cube.SetMaterialType(MaterialType.Reflection2Layer);
 
 			if (settings.BackColor == null)
 			{
 				smgr.AddSkyBoxSceneNode(
-					"../media/irrlicht2_up.jpg",
-					"../media/irrlicht2_dn.jpg",
-					"../media/irrlicht2_lf.jpg",
-					"../media/irrlicht2_rt.jpg",
-					"../media/irrlicht2_ft.jpg",
-					"../media/irrlicht2_bk.jpg");
+					"../../media/irrlicht2_up.jpg",
+					"../../media/irrlicht2_dn.jpg",
+					"../../media/irrlicht2_lf.jpg",
+					"../../media/irrlicht2_rt.jpg",
+					"../../media/irrlicht2_ft.jpg",
+					"../../media/irrlicht2_bk.jpg");
 			}
 
 			dev.GUIEnvironment.AddImage(
-				drv.GetTexture("../media/lime_logo_alpha.png"),
+				drv.GetTexture("../../media/lime_logo_alpha.png"),
 				new Vector2Di(30, 0));
 
 			// draw all

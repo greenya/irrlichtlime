@@ -19,7 +19,7 @@ namespace _01.HelloWorld
 				DriverType.Software, new Dimension2Di(640, 480), 16, false, false, false);
 
 			device.SetWindowCaption("Hello World! - Irrlicht Engine Demo");
-			
+
 			VideoDriver driver = device.VideoDriver;
 			SceneManager smgr = device.SceneManager;
 			GUIEnvironment gui = device.GUIEnvironment;
@@ -27,14 +27,14 @@ namespace _01.HelloWorld
 			gui.AddStaticText("Hello World! This is the Irrlicht Software renderer!",
 				new Recti(10, 10, 260, 22), true);
 
-			AnimatedMesh mesh = smgr.GetMesh("../media/sydney.md2");
+			AnimatedMesh mesh = smgr.GetMesh("../../media/sydney.md2");
 			AnimatedMeshSceneNode node = smgr.AddAnimatedMeshSceneNode(mesh);
 
 			if (node != null)
 			{
 				node.SetMaterialFlag(MaterialFlag.Lighting, false);
 				node.SetMD2Animation(AnimationTypeMD2.Stand);
-				node.SetMaterialTexture(0, driver.GetTexture("../media/sydney.bmp"));
+				node.SetMaterialTexture(0, driver.GetTexture("../../media/sydney.bmp"));
 			}
 
 			smgr.AddCameraSceneNode(null, new Vector3Df(0, 30, -40), new Vector3Df(0, 5, 0));

@@ -37,33 +37,33 @@ namespace _10.Shaders
 			switch (driverType)
 			{
 				case DriverType.Direct3D8:
-					psFileName = "../media/d3d8.psh";
-					vsFileName = "../media/d3d8.vsh";
+					psFileName = "../../media/d3d8.psh";
+					vsFileName = "../../media/d3d8.vsh";
 					break;
 
 				case DriverType.Direct3D9:
 					if (useHighLevelShaders)
 					{
-						psFileName = "../media/d3d9.hlsl";
+						psFileName = "../../media/d3d9.hlsl";
 						vsFileName = psFileName; // both shaders are in the same file
 					}
 					else
 					{
-						psFileName = "../media/d3d9.psh";
-						vsFileName = "../media/d3d9.vsh";
+						psFileName = "../../media/d3d9.psh";
+						vsFileName = "../../media/d3d9.vsh";
 					}
 					break;
 
 				case DriverType.OpenGL:
 					if (useHighLevelShaders)
 					{
-						psFileName = "../media/opengl.frag";
-						vsFileName = "../media/opengl.vert";
+						psFileName = "../../media/opengl.frag";
+						vsFileName = "../../media/opengl.vert";
 					}
 					else
 					{
-						psFileName = "../media/opengl.psh";
-						vsFileName = "../media/opengl.vsh";
+						psFileName = "../../media/opengl.psh";
+						vsFileName = "../../media/opengl.vsh";
 					}
 					break;
 			}
@@ -122,7 +122,7 @@ namespace _10.Shaders
 
 			SceneNode node = smgr.AddCubeSceneNode(50);
 			node.Position = new Vector3Df(0);
-			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			node.SetMaterialType(newMaterialType1);
 
@@ -136,7 +136,7 @@ namespace _10.Shaders
 
 			node = smgr.AddCubeSceneNode(50);
 			node.Position = new Vector3Df(0, -10, 50);
-			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			node.SetMaterialType(newMaterialType2);
 
@@ -150,7 +150,7 @@ namespace _10.Shaders
 
 			node = smgr.AddCubeSceneNode(50);
 			node.Position = new Vector3Df(0, 50, 25);
-			node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
+			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
 
 			smgr.AddTextSceneNode(device.GUIEnvironment.BuiltInFont, "NO SHADER", new Color(255, 255, 255), node);
@@ -160,12 +160,12 @@ namespace _10.Shaders
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, false);
 
 			SceneNode skybox = smgr.AddSkyBoxSceneNode(
-				"../media/irrlicht2_up.jpg",
-				"../media/irrlicht2_dn.jpg",
-				"../media/irrlicht2_lf.jpg",
-				"../media/irrlicht2_rt.jpg",
-				"../media/irrlicht2_ft.jpg",
-				"../media/irrlicht2_bk.jpg");
+				"../../media/irrlicht2_up.jpg",
+				"../../media/irrlicht2_dn.jpg",
+				"../../media/irrlicht2_lf.jpg",
+				"../../media/irrlicht2_rt.jpg",
+				"../../media/irrlicht2_ft.jpg",
+				"../../media/irrlicht2_bk.jpg");
 
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, true);
 

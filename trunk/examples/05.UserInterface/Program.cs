@@ -38,7 +38,7 @@ namespace _05.UserInterface
 			GUIEnvironment env = device.GUIEnvironment;
 
 			GUISkin skin = env.Skin;
-			GUIFont font = env.GetFont("../media/fonthaettenschweiler.bmp");
+			GUIFont font = env.GetFont("../../media/fonthaettenschweiler.bmp");
 			if (font != null)
 				skin.SetFont(font);
 
@@ -59,7 +59,7 @@ namespace _05.UserInterface
 
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 
-			env.AddImage(driver.GetTexture("../media/irrlichtlogoalpha2.tga"), new Vector2Di(10, 10));
+			env.AddImage(driver.GetTexture("../../media/irrlichtlogoalpha2.tga"), new Vector2Di(10, 10));
 
 			while (device.Run())
 			if (device.WindowActive)

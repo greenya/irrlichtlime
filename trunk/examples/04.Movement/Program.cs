@@ -32,14 +32,14 @@ namespace _04.Movement
 			if (node != null)
 			{
 				node.Position = new Vector3Df(0, 0, 30);
-				node.SetMaterialTexture(0, driver.GetTexture("../media/wall.bmp"));
+				node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
 				node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			}
 
 			SceneNode n = smgr.AddCubeSceneNode();
 			if (n != null)
 			{
-				n.SetMaterialTexture(0, driver.GetTexture("../media/t351sml.jpg"));
+				n.SetMaterialTexture(0, driver.GetTexture("../../media/t351sml.jpg"));
 				n.SetMaterialFlag(MaterialFlag.Lighting, false);
 
 				SceneNodeAnimator anim = smgr.CreateFlyCircleAnimator(new Vector3Df(0, 0, 30), 20.0f);
@@ -50,7 +50,7 @@ namespace _04.Movement
 				}
 			}
 
-			AnimatedMeshSceneNode anms = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../media/ninja.b3d"));
+			AnimatedMeshSceneNode anms = smgr.AddAnimatedMeshSceneNode(smgr.GetMesh("../../media/ninja.b3d"));
 			if (anms != null)
 			{
 				SceneNodeAnimator anim = smgr.CreateFlyStraightAnimator(
@@ -74,7 +74,7 @@ namespace _04.Movement
 			device.CursorControl.Visible = false;
 
 			device.GUIEnvironment.AddImage(
-				driver.GetTexture("../media/irrlichtlogoalpha2.tga"),
+				driver.GetTexture("../../media/irrlichtlogoalpha2.tga"),
 				new Vector2Di(10, 20));
 
 			int lastFPS = -1;

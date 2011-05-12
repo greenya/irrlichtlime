@@ -30,7 +30,7 @@ namespace _11.PerPixelLighting
 			driver.SetTextureCreationFlag(TextureCreationFlag.Always32Bit, true);
 
 			// add irrlicht logo
-			env.AddImage(driver.GetTexture("../media/irrlichtlogoalpha2.tga"), new Vector2Di(10));
+			env.AddImage(driver.GetTexture("../../media/irrlichtlogoalpha2.tga"), new Vector2Di(10));
 
 			// add camera
 			CameraSceneNode camera = smgr.AddCameraSceneNodeFPS();
@@ -41,7 +41,7 @@ namespace _11.PerPixelLighting
 
 			driver.Fog = new Fog(new Color(138, 125, 81, 0), FogType.Linear, 250, 1000, 0.003f, true, false);
 
-			AnimatedMesh roomMesh = smgr.GetMesh("../media/room.3ds");
+			AnimatedMesh roomMesh = smgr.GetMesh("../../media/room.3ds");
 			SceneNode room = null;
 			SceneNode earth = null;
 
@@ -51,13 +51,13 @@ namespace _11.PerPixelLighting
 				// so we can recreate them on runtime
 				smgr.MeshManipulator.MakePlanarTextureMapping(roomMesh.GetMesh(0), 0.003f);
 
-				Texture normalMap = driver.GetTexture("../media/rockwall_height.bmp");
+				Texture normalMap = driver.GetTexture("../../media/rockwall_height.bmp");
 				if (normalMap != null)
 					driver.MakeNormalMapTexture(normalMap, 9.0f);
 
 				Mesh tangentMesh = smgr.MeshManipulator.CreateMeshWithTangents(roomMesh.GetMesh(0));
 				room = smgr.AddMeshSceneNode(tangentMesh);
-				room.SetMaterialTexture(0, driver.GetTexture("../media/rockwall.jpg"));
+				room.SetMaterialTexture(0, driver.GetTexture("../../media/rockwall.jpg"));
 				room.SetMaterialTexture(1, normalMap);
 				room.GetMaterial(0).SpecularColor = new Color(0);
 				room.GetMaterial(0).Shininess = 0.0f;
@@ -69,7 +69,7 @@ namespace _11.PerPixelLighting
 			}
 
 			// add earth sphere
-			AnimatedMesh earthMesh = smgr.GetMesh("../media/earth.x");
+			AnimatedMesh earthMesh = smgr.GetMesh("../../media/earth.x");
 			if (earthMesh != null)
 			{
 				// perform various task with the mesh manipulator
@@ -90,7 +90,7 @@ namespace _11.PerPixelLighting
 				earth.Position = new Vector3Df(-70, 130, 45);
 
 				// load heightmap, create normal map from it and set it
-				Texture earthNormalMap = driver.GetTexture("../media/earthbump.jpg");
+				Texture earthNormalMap = driver.GetTexture("../../media/earthbump.jpg");
 				if (earthNormalMap != null)
 				{
 					driver.MakeNormalMapTexture(earthNormalMap, 20);
@@ -126,7 +126,7 @@ namespace _11.PerPixelLighting
 				bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 				bill.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				bill.SetMaterialType(MaterialType.TransparentAddColor);
-				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlegreen.jpg"));
+				bill.SetMaterialTexture(0, driver.GetTexture("../../media/particlegreen.jpg"));
 			}
 
 			// add light 2 (red)
@@ -143,7 +143,7 @@ namespace _11.PerPixelLighting
 				bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 				bill.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				bill.SetMaterialType(MaterialType.TransparentAddColor);
-				bill.SetMaterialTexture(0, driver.GetTexture("../media/particlered.bmp"));
+				bill.SetMaterialTexture(0, driver.GetTexture("../../media/particlered.bmp"));
 
 				// add particle system
 				ParticleSystemSceneNode ps = smgr.AddParticleSystemSceneNode(false, light2);
@@ -170,7 +170,7 @@ namespace _11.PerPixelLighting
 				// adjust some material settings
 				ps.SetMaterialFlag(MaterialFlag.Lighting, false);
 				ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
-				ps.SetMaterialTexture(0, driver.GetTexture("../media/fireball.bmp"));
+				ps.SetMaterialTexture(0, driver.GetTexture("../../media/fireball.bmp"));
 				ps.SetMaterialType(MaterialType.TransparentAddColor);
 			}
 
@@ -245,7 +245,7 @@ namespace _11.PerPixelLighting
 			GUIEnvironment env = device.GUIEnvironment;
 
 			// set a nicer font
-			GUIFont font = env.GetFont("../media/fonthaettenschweiler.bmp");
+			GUIFont font = env.GetFont("../../media/fonthaettenschweiler.bmp");
 			if (font != null)
 				env.Skin.SetFont(font);
 
