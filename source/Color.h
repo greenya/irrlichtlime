@@ -342,5 +342,158 @@ internal:
 	}
 };
 
+public ref class ColorHSL : Lime::NativeValue<video::SColorHSL>
+{
+public:
+
+	static bool operator == (ColorHSL^ v1, ColorHSL^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		video::SColorHSL& c1 = *v1->m_NativeValue;
+		video::SColorHSL& c2 = *v2->m_NativeValue;
+
+		return
+			core::equals(c1.Hue, c2.Hue) &&
+			core::equals(c1.Saturation, c2.Saturation) &&
+			core::equals(c1.Luminance, c2.Luminance);
+	}
+
+	static bool operator != (ColorHSL^ v1, ColorHSL^ v2)
+	{
+		return !(v1 == v2);
+	}
+
+	ColorHSL()
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		m_NativeValue = new video::SColorHSL();
+	}
+
+	ColorHSL(ColorHSL^ copyColorHSL)
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		LIME_ASSERT(copyColorHSL != nullptr);
+
+		video::SColorHSL &c = *copyColorHSL->m_NativeValue;
+		m_NativeValue = new video::SColorHSL(c.Hue, c.Saturation, c.Luminance);
+	}
+
+	ColorHSL(Color^ copyColor)
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		LIME_ASSERT(copyColor != nullptr);
+
+		m_NativeValue = new video::SColorHSL();
+		m_NativeValue->fromRGB(video::SColorf(*copyColor->m_NativeValue));
+	}
+
+	ColorHSL(Colorf^ copyColorf)
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		LIME_ASSERT(copyColorf != nullptr);
+
+		m_NativeValue = new video::SColorHSL();
+		m_NativeValue->fromRGB(*copyColorf->m_NativeValue);
+	}
+
+	ColorHSL(float hue, float saturation, float luminance)
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		LIME_ASSERT(hue >= 0.0f && hue <= 360.0f);
+		LIME_ASSERT(saturation >= 0.0f && saturation <= 100.0f);
+		LIME_ASSERT(luminance >= 0.0f && luminance <= 100.0f);
+
+		m_NativeValue = new video::SColorHSL(hue, saturation, luminance);
+	}
+
+	void Set(ColorHSL^ copyColorHSL)
+	{
+		LIME_ASSERT(copyColorHSL != nullptr);
+
+		video::SColorHSL &c = *copyColorHSL->m_NativeValue;
+		m_NativeValue->Hue = c.Hue;
+		m_NativeValue->Saturation = c.Saturation;
+		m_NativeValue->Luminance = c.Luminance;
+	}
+
+	void Set(Color^ copyColor)
+	{
+		LIME_ASSERT(copyColor != nullptr);
+		m_NativeValue->fromRGB(video::SColorf(*copyColor->m_NativeValue));
+	}
+
+	void Set(Colorf^ copyColorf)
+	{
+		LIME_ASSERT(copyColorf != nullptr);
+		m_NativeValue->fromRGB(*copyColorf->m_NativeValue);
+	}
+
+	void Set(float hue, float saturation, float luminance)
+	{
+		LIME_ASSERT(hue >= 0.0f && hue <= 360.0f);
+		LIME_ASSERT(saturation >= 0.0f && saturation <= 100.0f);
+		LIME_ASSERT(luminance >= 0.0f && luminance <= 100.0f);
+
+		m_NativeValue->Hue = hue;
+		m_NativeValue->Saturation = saturation;
+		m_NativeValue->Luminance = luminance;
+	}
+
+	Color^ ToColor()
+	{
+		Colorf^ c = gcnew Colorf();
+		m_NativeValue->toRGB(*c->m_NativeValue);
+
+		return c->ToColor();
+	}
+
+	Colorf^ ToColorf()
+	{
+		Colorf^ c = gcnew Colorf();
+		m_NativeValue->toRGB(*c->m_NativeValue);
+
+		return c;
+	}
+
+	property float Hue
+	{
+		float get() { return m_NativeValue->Hue; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 360.0f); m_NativeValue->Hue = value; }
+	}
+
+	property float Luminance
+	{
+		float get() { return m_NativeValue->Luminance; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); m_NativeValue->Luminance = value; }
+	}
+
+	property float Saturation
+	{
+		float get() { return m_NativeValue->Saturation; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); m_NativeValue->Saturation = value; }
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("Hue={0:F3}, Saturation={1:F3}, Luminance={2:F3}", Hue, Saturation, Luminance);
+	}
+
+internal:
+
+	ColorHSL(const video::SColorHSL& value)
+		: Lime::NativeValue<video::SColorHSL>(true)
+	{
+		m_NativeValue = new video::SColorHSL(value);
+	}
+};
+
 } // end namespace Video
 } // end namespace IrrlichtLime
