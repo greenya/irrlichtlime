@@ -153,7 +153,7 @@ namespace _11.PerPixelLighting
 					new AABBox(-3, 0, -3, 3, 1, 3),
 					new Vector3Df(0.0f, 0.03f, 0.0f),
 					80, 100,
-					new Color(255, 255, 255, 0), new Color(255, 255, 255, 0),
+					new Color(255, 255, 255, 10), new Color(255, 255, 255, 10),
 					400, 1100);
 
 				em.MinStartSize = new Dimension2Df(30.0f, 40.0f);
@@ -171,7 +171,7 @@ namespace _11.PerPixelLighting
 				ps.SetMaterialFlag(MaterialFlag.Lighting, false);
 				ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				ps.SetMaterialTexture(0, driver.GetTexture("../media/fireball.bmp"));
-				ps.SetMaterialType(MaterialType.TransparentVertexAlpha);
+				ps.SetMaterialType(MaterialType.TransparentAddColor);
 			}
 
 			MyEventReceiver receiver = new MyEventReceiver(device, room, earth);
