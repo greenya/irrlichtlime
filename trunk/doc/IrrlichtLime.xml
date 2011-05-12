@@ -3935,7 +3935,7 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 			<summary>Red component of the color.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(System.UInt32)">
-			<summary>Sets a color value using ARGB value.</summary>
+			<summary>Sets the color value using ARGB value.</summary>
 			<param name="argb">Value from 0 to 0xffffffff.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(IrrlichtLime.Video.Color)">
@@ -3943,13 +3943,13 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 			<param name="copy">Color to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32)">
-			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<summary>Sets the color value using red, green, blue and alpha values.</summary>
 			<param name="r">Red component. Must be value between 0 and 255.</param>
 			<param name="g">Green component. Must be value between 0 and 255.</param>
 			<param name="b">Blue component. Must be value between 0 and 255.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32,System.Int32)">
-			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<summary>Sets the color value using red, green, blue and alpha values.</summary>
 			<param name="r">Red component. Must be value between 0 and 255.</param>
 			<param name="g">Green component. Must be value between 0 and 255.</param>
 			<param name="b">Blue component. Must be value between 0 and 255.</param>
@@ -4005,13 +4005,13 @@ The color values for red, green, blue and alpha are each stored in a 32 bit floa
 			<param name="copyColorf">Color to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single)">
-			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<summary>Sets the color value using red, green, blue and alpha values.</summary>
 			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
 			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
 			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single,System.Single)">
-			<summary>Sets a color value using red, green, blue and alpha values.</summary>
+			<summary>Sets the color value using red, green, blue and alpha values.</summary>
 			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
 			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
 			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
@@ -4072,6 +4072,65 @@ Note: this format may only be used for render target textures.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.Unknown">
 			<summary>Unknown color format.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ColorHSL">
+			<summary>Class representing a color in HSL format.
+
+The color values for hue, saturation and luminance are stored in 32 bit floating point variables. Hue is in range [0,360], Luminance and Saturation are in percent [0,100].</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor">
+			<summary>Creates a default color. Sets hue, saturation and luminance to 0.0f.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.Color)">
+			<summary>Creates a copy of 32 bit color.</summary>
+			<param name="copyColor">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.Colorf)">
+			<summary>Creates a copy of 128 bit color.</summary>
+			<param name="copyColorf">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.ColorHSL)">
+			<summary>Creates a copy of HSL color.</summary>
+			<param name="copyColorHSL">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(System.Single,System.Single,System.Single)">
+			<summary>Creates a color using hue, saturation and luminance.</summary>
+			<param name="hue">Hue value. Must be value between 0.0f and 360.0f.</param>
+			<param name="saturation">Saturation value. Must be value between 0.0f and 100.0f.</param>
+			<param name="luminance">Luminance value. Must be value between 0.0f and 100.0f.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.ColorHSL.Hue">
+			<summary>Hue value.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.ColorHSL.Luminance">
+			<summary>Luminance value.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.ColorHSL.Saturation">
+			<summary>Saturation value.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.Color)">
+			<summary>Sets value of the color to provided 32 bit color.</summary>
+			<param name="copyColor">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.Colorf)">
+			<summary>Sets value of the color to provided 128 bit color.</summary>
+			<param name="copyColorf">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.ColorHSL)">
+			<summary>Sets value of the color to provided HSL color.</summary>
+			<param name="copyColorHSL">Color to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.Set(System.Single,System.Single,System.Single)">
+			<summary>Sets the color using hue, saturation and luminance.</summary>
+			<param name="hue">Hue value. Must be value between 0.0f and 360.0f.</param>
+			<param name="saturation">Saturation value. Must be value between 0.0f and 100.0f.</param>
+			<param name="luminance">Luminance value. Must be value between 0.0f and 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.ToColor">
+			<summary>Creates 32 bit color.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ColorHSL.ToColorf">
+			<summary>Creates 128 bit color.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.ColorMaterial">
 			<summary>These flags allow to define the interpretation of vertex color when lighting is enabled.
