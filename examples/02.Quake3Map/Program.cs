@@ -79,6 +79,8 @@ namespace _02.Quake3Map
 					}
 				}
 			}
+
+			device.Drop();
 		}
 	}
 }
