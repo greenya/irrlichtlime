@@ -32,7 +32,7 @@ namespace _12.TerrainRendering
 			// add irrlicht logo
 			env.AddImage(driver.GetTexture("../../media/irrlichtlogoalpha2.tga"), new Vector2Di(10));
 
-			//set other font
+			// set gui font
 			env.Skin.SetFont(env.GetFont("../../media/fontlucida.png"));
 
 			// add some help text

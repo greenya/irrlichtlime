@@ -24,9 +24,6 @@ public:
 	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
 
-	void DeserializeAttributes(IO::Attributes^ deserializeFrom, IO::AttributeReadWriteOptions^ options);
-	void DeserializeAttributes(IO::Attributes^ deserializeFrom);
-
 	Video::Material^ GetMaterial(int num);
 
 	void RegisterSceneNode();
@@ -38,9 +35,6 @@ public:
 	void RemoveChildren();
 
 	virtual void Render();
-
-	void SerializeAttributes(IO::Attributes^ serializeTo, IO::AttributeReadWriteOptions^ options);
-	void SerializeAttributes(IO::Attributes^ serializeTo);
 
 	void SetMaterial(int num, Video::Material^ newMaterialToCopyFrom); // we need this method to compensate unavailability to assign directly to GetMaterial(). IMPORTANT: this method automatically copies the input value (unlike to GetMaterial(), which returns a reference!)
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);

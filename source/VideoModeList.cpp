@@ -50,9 +50,12 @@ List<VideoMode>^ VideoModeList::ModeList::get()
 	List<VideoMode>^ l = gcnew List<VideoMode>();
 
 	for (int i = 0; i < m_VideoModeList->getVideoModeCount(); i++)
-		l->Add(VideoMode(
-			(core::dimension2di&)m_VideoModeList->getVideoModeResolution(i),
-			m_VideoModeList->getVideoModeDepth(i)));
+	{
+		core::dimension2di r = (core::dimension2di)m_VideoModeList->getVideoModeResolution(i);
+		int d = m_VideoModeList->getVideoModeDepth(i);
+
+		l->Add(VideoMode(r, d));
+	}
 
 	return l;
 }
