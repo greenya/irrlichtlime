@@ -70,7 +70,7 @@ internal:
 			o->Filename = new c8[s];
 
 			core::stringc c = Lime::StringToStringC(options->Filename);
-			LIME_ASSERT(s == c.size() + 1);
+			LIME_ASSERT(s == (int)(c.size() + 1));
 
 			strcpy_s((c8*)o->Filename, s, c.c_str());
 		}

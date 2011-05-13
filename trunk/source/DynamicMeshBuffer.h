@@ -17,9 +17,7 @@ public ref class DynamicMeshBuffer : MeshBuffer
 public:
 
 	property Scene::IndexBuffer^ IndexBuffer { Scene::IndexBuffer^ get(); void set(Scene::IndexBuffer^ value); }
-	property int IndexCount { int get(); }
 	property Scene::VertexBuffer^ VertexBuffer { Scene::VertexBuffer^ get(); void set(Scene::VertexBuffer^ value); }
-	property int VertexCount { int get(); }
 
 internal:
 

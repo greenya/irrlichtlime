@@ -225,7 +225,7 @@ ComparisonFunc Material::ZBuffer::get()
 
 void Material::ZBuffer::set(ComparisonFunc value)
 {
-	m_NativeValue->ZBuffer = (E_COMPARISON_FUNC)value;
+	m_NativeValue->ZBuffer = (irr::u8)(E_COMPARISON_FUNC)value;
 }
 
 AntiAliasingMode Material::AntiAliasing::get()
@@ -235,7 +235,7 @@ AntiAliasingMode Material::AntiAliasing::get()
 
 void Material::AntiAliasing::set(AntiAliasingMode value)
 {
-	m_NativeValue->AntiAliasing = (E_ANTI_ALIASING_MODE)value;
+	m_NativeValue->AntiAliasing = (irr::u8)(E_ANTI_ALIASING_MODE)value;
 }
 
 ColorPlane Material::ColorMask::get()

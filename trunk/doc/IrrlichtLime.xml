@@ -3150,7 +3150,8 @@ If you want the Irrlicht Engine be able to load archives of currently unsupporte
 			<summary>The flags.</summary>
 		</member>
 		<member name="T:IrrlichtLime.IO.Attributes">
-			<summary>Manages attributes collection.</summary>
+			<summary>Manages attributes collection.
+You can create new instance of this class using FileSystem.CreateAttributes() instance method.</summary>
 		</member>
 		<member name="M:IrrlichtLime.IO.Attributes.AddValue(System.String,System.Object)">
 			<summary>Adds an attribute to the collection.

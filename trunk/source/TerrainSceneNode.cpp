@@ -41,7 +41,7 @@ List<int>^ TerrainSceneNode::GetCurrentLODOfPatches()
 
 	core::array<s32> a;
 	int t = m_TerrainSceneNode->getCurrentLODOfPatches(a);
-	LIME_ASSERT(t == a.size());
+	LIME_ASSERT(t == (int)a.size());
 
 	for (int i = 0; i < t; i++)
 		l->Add(a[i]);
@@ -64,7 +64,7 @@ List<int>^ TerrainSceneNode::GetIndicesForPatch(int patchX, int patchZ, int lodL
 
 	core::array<u32> a;
 	int t = m_TerrainSceneNode->getIndicesForPatch(a, patchX, patchZ, lodLevel);
-	LIME_ASSERT(t == a.size());
+	LIME_ASSERT(t == (int)a.size());
 
 	for (int i = 0; i < t; i++)
 		l->Add(a[i]);
@@ -81,7 +81,7 @@ List<int>^ TerrainSceneNode::GetIndicesForPatch(int patchX, int patchZ)
 
 	core::array<u32> a;
 	int t = m_TerrainSceneNode->getIndicesForPatch(a, patchX, patchZ);
-	LIME_ASSERT(t == a.size());
+	LIME_ASSERT(t == (int)a.size());
 
 	for (int i = 0; i < t; i++)
 		l->Add(a[i]);

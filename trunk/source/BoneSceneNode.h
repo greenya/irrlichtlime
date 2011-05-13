@@ -22,8 +22,6 @@ public:
 
 	property BoneAnimationMode AnimationMode { BoneAnimationMode get(); void set(BoneAnimationMode value); }
 	property int BoneIndex { int get(); }
-	property  AABBox^ BoundingBox { AABBox^ get(); }
-	property String^ Name { String^ get(); }
 	property BoneSkinningSpace SkinningSpace { BoneSkinningSpace get(); void set(BoneSkinningSpace value); }
 
 	property int PositionHint { int get(); void set(int value); }

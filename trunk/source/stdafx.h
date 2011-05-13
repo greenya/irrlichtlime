@@ -1,7 +1,9 @@
 #pragma once
 
 #pragma unmanaged
+#pragma warning(push, 3)
 #include "irrlicht.h"
+#pragma warning(pop)
 #pragma managed
 
 #include "Lime.h"
