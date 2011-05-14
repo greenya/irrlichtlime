@@ -93,6 +93,13 @@ namespace L01.TexturePainting
 			Texture o = texture;
 
 			texture = drv.AddTexture(new Dimension2Di(size), "tex");
+
+			TexturePainter p = texture.GetTexturePainter();
+			p.Lock(TextureLockMode.WriteOnly);
+			for (int i = 0; i < p.MipMapLevelHeight; i++)
+				p.SetLine(0, i, p.MipMapLevelWidth - 1, i, new Color(200, 200, 200));
+			p.Unlock(true);
+
 			guiImage.Image = texture;
 			sceneNodePainter.SetMaterialTexture(0, texture);
 
