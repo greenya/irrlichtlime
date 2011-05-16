@@ -212,6 +212,7 @@ public:
 	property Video::DriverType DriverType { Video::DriverType get(); }
 	property int DynamicLightCount { int get(); }
 	property Video::ExposedVideoData^ ExposedVideoData { Video::ExposedVideoData^ get(); }
+	property List<VideoDriverFeature>^ FeatureList { List<VideoDriverFeature>^ get(); }
 	property Video::Fog^ Fog { Video::Fog^ get(); void set(Video::Fog^ value); }
 	property int FPS { int get(); }
 	property Video::GPUProgrammingServices^ GPUProgrammingServices { Video::GPUProgrammingServices^ get(); }

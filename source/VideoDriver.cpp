@@ -1182,6 +1182,17 @@ Dimension2Di^ VideoDriver::MaxTextureSize::get()
 	return gcnew Dimension2Di(m_VideoDriver->getMaxTextureSize());
 }
 
+List<VideoDriverFeature>^ VideoDriver::FeatureList::get()
+{
+	List<VideoDriverFeature>^ l = gcnew List<VideoDriverFeature>();
+
+	for each(VideoDriverFeature f in Enum::GetValues(VideoDriverFeature::typeid))
+		if (m_VideoDriver->queryFeature((video::E_VIDEO_DRIVER_FEATURE)f))
+			l->Add(f);
+
+	return l;
+}
+
 Video::Fog^ VideoDriver::Fog::get()
 {
 	video::SColor c;
