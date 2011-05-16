@@ -6579,6 +6579,9 @@ Applications must call this method after performing any rendering.</summary>
 
 This method should only be used if the engine should be extended without having to modify the source of the engine.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.FeatureList">
+			<summary>List of all supported features detected by QueryFeature().</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.FindTexture(System.String)">
 			<summary>Check if the texture is already loaded.
 
