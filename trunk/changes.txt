@@ -1,4 +1,52 @@
 ============================
+Changes in 0.9 (xx-May-2011)
+============================
+
+- Added examples 23.MeshHandling, 26.OcclusionQuery, L06.AnalogueClock, L07.FastStaticRenderin and L08.WPFWindow.
+
+- Updated Irrlicht SDK to trunk rev. 3722: Added GetSelector() and SelectorCount to TriangleSelector. Added BlendOperation and PolygonOffset to MaterialFlag enum. Added BlendOperations and PolygonOffset to VideoDriverFeature enum. Added BlendOperation, PolygonOffsetDirection and PolygonOffsetFactor to Material. Added VideoDriver.CreateAttributesFromMaterial overloading with AttributeReadWriteOptions argument. Renamed CreateOcclusionQuery to AddOcclusionQuery in VideoDriver.
+
+- Moved to VS2010 and .NET Framework 4.0. Reorganized build process: now building is done into sub folders of the bin folder: Debug and Release (so it is possible to batch build IrrlichtLime).
+
+- Added FeatureList prop to VideoDriver.
+
+- Added ColorHSL class.
+
+- Added enums: AlphaSource, BlendFactor, BlendOperation, ModulateFunc and PolygonOffset. Renamed enum ZBufferCompFunc to ComparisonFunc.
+
+- Added Lerp to Quaternion.
+
+- 12.TerrainRendering updated: now it reacts on 'X' key which toggles debug information.
+
+- Added GetColumnWidth to GUITable.
+
+- Added MeshBuffers (get-only prop) to Mesh. ChildList replaced with Children array (get-only prop) in SceneNode and GUIElement.
+
+- Added Mesh.RemoveMeshBuffer().
+
+- Added Create() (static), AddMeshBuffer() and RecalculateBoundingBox() methods to Mesh.
+
+- Added MeshBuffer.Append() overloadings which handles 32-bit indices. Added MeshBuffer.UpdateIndices() overloading which handles 32-bit indices.
+
+- MeshBuffer changes: 1) added Create() static method; 2) optimized copying of indices from managed to unmanaged buffers in Append() methods.
+
+- DrawVertexPrimitiveList() and Draw2DVertexPrimitiveList() changes: 1) now takes arrays (was Lists); 2) optimized copying of indices from managed to unmanaged buffers.
+
+- Added constructors with transition, rotation and scale vectors to Matrix.
+
+- Added method SetMaterial() to SceneNode and MeshBuffer classes. Added static prop Material.Identity.
+
+- Renamed RemoveAll() to RemoveChildren() in SceneNode.
+
+- Added "==" and "!=" operators to Color/f. Added named colors as static props to Color.
+
+- Added copy constructors to Line3Df, Triangle3Df, Plane3Df and Matrix.
+
+- Added more constructors and Set()s to AABBox.
+
+- Added SetProjectionMatrix() to CameraSceneNode.
+
+============================
 Changes in 0.8 (03-Mar-2011)
 ============================
 
