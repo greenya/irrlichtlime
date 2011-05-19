@@ -57,6 +57,11 @@ String^ GUIListBox::GetItem(int index)
 	return gcnew String(m_GUIListBox->getListItem(index));
 }
 
+int GUIListBox::GetItemAt(int xpos, int ypos)
+{
+	return m_GUIListBox->getItemAt(xpos, ypos);
+}
+
 Video::Color^ GUIListBox::GetItemDefaultColor(GUIListBoxColor colorType)
 {
 	return gcnew Video::Color(m_GUIListBox->getItemDefaultColor((gui::EGUI_LISTBOX_COLOR)colorType));

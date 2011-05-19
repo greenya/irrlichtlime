@@ -4,7 +4,7 @@ Changes in 0.9 (xx-May-2011)
 
 - Added examples 23.MeshHandling, 26.OcclusionQuery, L06.AnalogueClock, L07.FastStaticRenderin and L08.WPFWindow.
 
-- Updated Irrlicht SDK to trunk rev. 3727: Added GetSelector() and SelectorCount to TriangleSelector. Added BlendOperation and PolygonOffset to MaterialFlag enum. Added BlendOperations and PolygonOffset to VideoDriverFeature enum. Added BlendOperation, PolygonOffsetDirection and PolygonOffsetFactor to Material. Added VideoDriver.CreateAttributesFromMaterial overloading with AttributeReadWriteOptions argument. Renamed CreateOcclusionQuery to AddOcclusionQuery in VideoDriver.
+- Updated Irrlicht SDK to trunk rev. 3727: added GetItemAt() to GUIListBox. Added GetSelector() and SelectorCount to TriangleSelector. Added BlendOperation and PolygonOffset to MaterialFlag enum. Added BlendOperations and PolygonOffset to VideoDriverFeature enum. Added BlendOperation, PolygonOffsetDirection and PolygonOffsetFactor to Material. Added VideoDriver.CreateAttributesFromMaterial overloading with AttributeReadWriteOptions argument. Renamed CreateOcclusionQuery to AddOcclusionQuery in VideoDriver.
 
 - Moved to VS2010 and .NET Framework 4.0. Reorganized build process: now building is done into sub folders of the bin folder: Debug and Release (so it is possible to batch build IrrlichtLime).
 
