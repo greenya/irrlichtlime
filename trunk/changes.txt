@@ -1,5 +1,5 @@
 ============================
-Changes in 0.9 (xx-May-2011)
+Changes in 0.9 (19-May-2011)
 ============================
 
 - Added examples 23.MeshHandling, 26.OcclusionQuery, L06.AnalogueClock, L07.FastStaticRenderin and L08.WPFWindow.
