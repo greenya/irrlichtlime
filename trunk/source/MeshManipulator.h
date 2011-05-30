@@ -21,7 +21,7 @@ public:
 	AnimatedMesh^ CreateAnimatedMesh(Mesh^ mesh, AnimatedMeshType type);
 	AnimatedMesh^ CreateAnimatedMesh(Mesh^ mesh);
 
-	//virtual SMesh* createMeshCopy(IMesh *mesh);
+	Mesh^ CreateMeshCopy(Mesh^ mesh);
 
 	Mesh^ CreateMeshUniquePrimitives(Mesh^ mesh);
 
