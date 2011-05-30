@@ -43,11 +43,12 @@ public:
 	int GetPolyCount(AnimatedMesh^ animatedMesh);
 	int GetPolyCount(Mesh^ mesh);
 
+	void MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
+	void MakePlanarTextureMapping(Mesh^ mesh, float resolution);
+	void MakePlanarTextureMapping(Mesh^ mesh);
 	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
 	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolution);
 	void MakePlanarTextureMapping(MeshBuffer^ buffer);
-	void MakePlanarTextureMapping(Mesh^ mesh, float resolution);
-	void MakePlanarTextureMapping(Mesh^ mesh);
 
 	void RecalculateNormals(MeshBuffer^ buffer, bool smooth, bool angleWeighted);
 	void RecalculateNormals(MeshBuffer^ buffer, bool smooth);
@@ -61,6 +62,11 @@ public:
 	void RecalculateTangents(Mesh^ mesh, bool recalculateNormals);
 	void RecalculateTangents(Mesh^ mesh);
 
+	void RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals, bool smooth, bool angleWeighted);
+	void RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals, bool smooth);
+	void RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals);
+	void RecalculateTangents(MeshBuffer^ buffer);
+
 	void Scale(MeshBuffer^ buffer, Vector3Df^ factor);
 	void Scale(Mesh^ mesh, Vector3Df^ factor);
 
@@ -70,8 +76,10 @@ public:
 	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor);
 
 	void SetVertexColorAlpha(Mesh^ mesh, int alpha);
+	void SetVertexColorAlpha(MeshBuffer^ buffer, int alpha);
 
 	void SetVertexColors(Mesh^ mesh, Video::Color^ color);
+	void SetVertexColors(MeshBuffer^ buffer, Video::Color^ color);
 
 	void Transform(MeshBuffer^ buffer, Matrix^ m);
 	void Transform(Mesh^ mesh, Matrix^ m);
