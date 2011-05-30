@@ -64,7 +64,13 @@ public:
 		String^ get()
 		{
 			System::Version^ v = Assembly::GetAssembly(Lime::typeid)->GetName()->Version;
-			String^ s = String::Format("{0}.{1}", v->Major, v->Minor);
+			String^ s;
+
+			if (v->Build != 0)
+				s = String::Format("{0}.{1}.{2}", v->Major, v->Minor, v->Build);
+			else
+				s = String::Format("{0}.{1}", v->Major, v->Minor);
+
 #if _DEBUG
 			s += " (DEBUG)";
 #endif
