@@ -59,6 +59,12 @@ public:
 		void set(bool value) { m_NativeValue->Fullscreen = value; }
 	}
 
+	property bool HandleSRGB
+	{
+		bool get() { return m_NativeValue->HandleSRGB; }
+		void set(bool value) { m_NativeValue->HandleSRGB = value; }
+	}
+
 	property bool HighPrecisionFPU
 	{
 		bool get() { return m_NativeValue->HighPrecisionFPU; }
