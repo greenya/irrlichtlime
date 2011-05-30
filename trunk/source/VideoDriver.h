@@ -60,6 +60,8 @@ public:
 	Image^ CreateImage(IO::ReadFile^ file);
 
 	Image^ CreateScreenShot();
+	Image^ CreateScreenShot(Video::ColorFormat format);
+	Image^ CreateScreenShot(Video::ColorFormat format, Video::RenderTarget target);
 
 	void DeleteAllDynamicLights();
 

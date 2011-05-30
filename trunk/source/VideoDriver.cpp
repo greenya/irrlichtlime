@@ -260,6 +260,23 @@ Image^ VideoDriver::CreateScreenShot()
 	return Image::Wrap(i);
 }
 
+Image^ VideoDriver::CreateScreenShot(Video::ColorFormat format)
+{
+	video::IImage* i = m_VideoDriver->createScreenShot(
+		(video::ECOLOR_FORMAT)format);
+
+	return Image::Wrap(i);
+}
+
+Image^ VideoDriver::CreateScreenShot(Video::ColorFormat format, Video::RenderTarget target)
+{
+	video::IImage* i = m_VideoDriver->createScreenShot(
+		(video::ECOLOR_FORMAT)format,
+		(video::E_RENDER_TARGET)target);
+
+	return Image::Wrap(i);
+}
+
 void VideoDriver::DeleteAllDynamicLights()
 {
 	m_VideoDriver->deleteAllDynamicLights();
