@@ -6261,6 +6261,17 @@ No hardware texture will be created for this image. This method is useful for ex
 			<summary>Make a screenshot of the last rendered frame.</summary>
 			<returns>Created image.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot(IrrlichtLime.Video.ColorFormat)">
+			<summary>Make a screenshot of the last rendered frame.</summary>
+			<param name="format">Color format to use. Default: Unknown (which means "best suitable").</param>
+			<returns>Created image.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot(IrrlichtLime.Video.ColorFormat,IrrlichtLime.Video.RenderTarget)">
+			<summary>Make a screenshot of the last rendered frame.</summary>
+			<param name="format">Color format to use. Default: Unknown (which means "best suitable").</param>
+			<param name="target">Render target to use. Default: FrameBuffer.</param>
+			<returns>Created image.</returns>
+		</member>
 		<member name="P:IrrlichtLime.Video.VideoDriver.CurrentRenderTargetSize">
 			<summary>Size of the current render target.
 
