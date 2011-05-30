@@ -133,6 +133,29 @@ int MeshManipulator::GetPolyCount(Mesh^ mesh)
 	return m_MeshManipulator->getPolyCount(LIME_SAFEREF(mesh, m_Mesh));
 }
 
+void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset)
+{
+	LIME_ASSERT(offset != nullptr);
+	LIME_ASSERT(axis <= 2); // The axis along which the texture is projected. The allowed values are 0 (X), 1(Y), and 2(Z).
+
+	m_MeshManipulator->makePlanarTextureMapping(
+		LIME_SAFEREF(mesh, m_Mesh),
+		resolutionS,
+		resolutionT,
+		axis,
+		*offset->m_NativeValue);
+}
+
+void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolution)
+{
+	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(mesh, m_Mesh), resolution);
+}
+
+void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh)
+{
+	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(mesh, m_Mesh));
+}
+
 void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset)
 {
 	LIME_ASSERT(offset != nullptr);
@@ -154,16 +177,6 @@ void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolut
 void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer)
 {
 	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(buffer, m_MeshBuffer));
-}
-
-void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolution)
-{
-	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(mesh, m_Mesh), resolution);
-}
-
-void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh)
-{
-	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(mesh, m_Mesh));
 }
 
 void MeshManipulator::RecalculateNormals(MeshBuffer^ buffer, bool smooth, bool angleWeighted)
@@ -216,6 +229,26 @@ void MeshManipulator::RecalculateTangents(Mesh^ mesh)
 	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(mesh, m_Mesh));
 }
 
+void MeshManipulator::RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals, bool smooth, bool angleWeighted)
+{
+	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(buffer, m_MeshBuffer), recalculateNormals, smooth, angleWeighted);
+}
+
+void MeshManipulator::RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals, bool smooth)
+{
+	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(buffer, m_MeshBuffer), recalculateNormals, smooth);
+}
+
+void MeshManipulator::RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals)
+{
+	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(buffer, m_MeshBuffer), recalculateNormals);
+}
+
+void MeshManipulator::RecalculateTangents(MeshBuffer^ buffer)
+{
+	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(buffer, m_MeshBuffer));
+}
+
 void MeshManipulator::Scale(MeshBuffer^ buffer, Vector3Df^ factor)
 {
 	LIME_ASSERT(factor != nullptr);
@@ -262,10 +295,22 @@ void MeshManipulator::SetVertexColorAlpha(Mesh^ mesh, int alpha)
 	m_MeshManipulator->setVertexColorAlpha(LIME_SAFEREF(mesh, m_Mesh), alpha);
 }
 
+void MeshManipulator::SetVertexColorAlpha(MeshBuffer^ buffer, int alpha)
+{
+	LIME_ASSERT(alpha >= 0 && alpha <= 255);
+	m_MeshManipulator->setVertexColorAlpha(LIME_SAFEREF(buffer, m_MeshBuffer), alpha);
+}
+
 void MeshManipulator::SetVertexColors(Mesh^ mesh, Video::Color^ color)
 {
 	LIME_ASSERT(color != nullptr);
 	m_MeshManipulator->setVertexColors(LIME_SAFEREF(mesh, m_Mesh), *color->m_NativeValue);
+}
+
+void MeshManipulator::SetVertexColors(MeshBuffer^ buffer, Video::Color^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	m_MeshManipulator->setVertexColors(LIME_SAFEREF(buffer, m_MeshBuffer), *color->m_NativeValue);
 }
 
 void MeshManipulator::Transform(MeshBuffer^ buffer, Matrix^ m)
