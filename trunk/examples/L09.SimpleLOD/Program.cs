@@ -19,7 +19,16 @@ namespace L09.SimpleLOD
 
 		static void Main(string[] args)
 		{
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(640, 480));
+			int lodItemCount = AskUserForLODItemCount();
+
+			DriverType driverType;
+			if (!AskUserForDriver(out driverType))
+				return;
+
+			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(800, 600));
+			if (device == null)
+				return;
+
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 			device.SetWindowCaption("Simple LOD - Irrlicht Lime");
 			device.CursorControl.Visible = false;
@@ -54,7 +63,6 @@ namespace L09.SimpleLOD
 			// generate world,
 			// we generate a lot of objects with random positions in huge virtual cube
 
-			int lodItemCount = 5000;
 			int virtualCubeSide = 20000;
 			LODItem[] lodItems = new LODItem[lodItemCount];
 			Random r = new Random(12345000);
@@ -261,6 +269,43 @@ namespace L09.SimpleLOD
 			}
 
 			return false;
+		}
+
+		static int AskUserForLODItemCount()
+		{
+			Console.Write("Enter number of planets to generate (recommended value is 5000): ");
+			string s = Console.ReadLine();
+
+			int i = Convert.ToInt32(s);
+			if (i < 1) i = 1;
+
+			return i;
+		}
+
+		static bool AskUserForDriver(out DriverType driverType)
+		{
+			driverType = DriverType.Null;
+
+			Console.Write("Please select the driver you want for this example:\n" +
+						" (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
+						" (d) Burning's Software Renderer\n (e) Software Renderer\n" +
+						" (f) NullDevice\n (otherKey) exit\n\n");
+
+			ConsoleKeyInfo i = Console.ReadKey();
+
+			switch (i.Key)
+			{
+				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
+				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
+				case ConsoleKey.C: driverType = DriverType.Direct3D8; break;
+				case ConsoleKey.D: driverType = DriverType.BurningsVideo; break;
+				case ConsoleKey.E: driverType = DriverType.Software; break;
+				case ConsoleKey.F: driverType = DriverType.Null; break;
+				default:
+					return false;
+			}
+
+			return true;
 		}
 	}
 
