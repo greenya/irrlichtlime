@@ -23,6 +23,13 @@ public:
 	{
 	}
 
+	gcroot<SceneNode::AnimateEventHandler^> m_OnAnimateHandler;
+	virtual void OnAnimate(u32 timeMs)
+	{
+		ISceneNode::OnAnimate(timeMs);
+		m_OnAnimateHandler->Invoke(timeMs);
+	}
+
 	gcroot<SceneNode::RenderEventHandler^> m_renderHandler;
 	virtual void render()
 	{

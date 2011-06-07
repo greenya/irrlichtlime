@@ -184,6 +184,17 @@ void SceneNode::AddChild(SceneNode^ child)
 	m_SceneNode->addChild(LIME_SAFEREF(child, m_SceneNode));
 }
 
+void SceneNode::Animate(unsigned int time)
+{
+	if (m_Inherited)
+	{
+		OnAnimate(time);
+		return;
+	}
+
+	m_SceneNode->OnAnimate(time);
+}
+
 Video::Material^ SceneNode::GetMaterial(int num)
 {
 	if (m_Inherited)
@@ -513,10 +524,12 @@ String^ SceneNode::ToString()
 void SceneNode::initInheritor(SceneNodeInheritor* i)
 {
 	i->m_renderHandler = gcnew RenderEventHandler(this, &SceneNode::Render);
-	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
 	i->m_getBoundingBoxHandler = gcnew GetBoundingBoxEventHandler(this, &SceneNode::BoundingBox::get);
 	i->m_getMaterialCountHandler = gcnew GetMaterialCountEventHandler(this, &SceneNode::MaterialCount::get);
 	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
+
+	i->m_OnAnimateHandler = gcnew AnimateEventHandler(this, &SceneNode::Animate);
+	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
 }
 
 } // end namespace Scene

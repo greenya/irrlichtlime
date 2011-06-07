@@ -23,11 +23,6 @@ BoneSceneNode::BoneSceneNode(scene::IBoneSceneNode* ref)
 	m_BoneSceneNode = ref;
 }
 
-void BoneSceneNode::Render()
-{
-	m_BoneSceneNode->render();
-}
-
 void BoneSceneNode::UpdateAbsolutePositionOfAllChildren()
 {
 	m_BoneSceneNode->updateAbsolutePositionOfAllChildren();

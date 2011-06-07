@@ -14,10 +14,6 @@ public ref class BoneSceneNode : SceneNode
 {
 public:
 
-	//virtual void OnAnimate(u32 timeMs); // not implemented yet
-
-	virtual void Render() override;
-
 	void UpdateAbsolutePositionOfAllChildren();
 
 	property BoneAnimationMode AnimationMode { BoneAnimationMode get(); void set(BoneAnimationMode value); }
