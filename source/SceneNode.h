@@ -24,6 +24,8 @@ public:
 	void AddAnimator(SceneNodeAnimator^ animator);
 	void AddChild(SceneNode^ child);
 
+	void Animate(unsigned int time);
+
 	Video::Material^ GetMaterial(int num);
 
 	void RegisterSceneNode();
@@ -34,7 +36,7 @@ public:
 	bool RemoveChild(SceneNode^ child);
 	void RemoveChildren();
 
-	virtual void Render();
+	void Render();
 
 	void SetMaterial(int num, Video::Material^ newMaterialToCopyFrom); // we need this method to compensate unavailability to assign directly to GetMaterial(). IMPORTANT: this method automatically copies the input value (unlike to GetMaterial(), which returns a reference!)
 	void SetMaterialFlag(Video::MaterialFlag flag, bool value);
@@ -68,6 +70,7 @@ public:
 
 	virtual String^ ToString() override;
 
+	delegate void AnimateEventHandler(unsigned int time);
 	delegate AABBox^ GetBoundingBoxEventHandler();
 	delegate int GetMaterialCountEventHandler();
 	delegate Video::Material^ GetMaterialEventHandler(int index);
@@ -82,6 +85,7 @@ protected:
 	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id);
 	SceneNode(SceneNode^ parent, Scene::SceneManager^ manager);
 
+	event AnimateEventHandler^ OnAnimate;
 	event GetBoundingBoxEventHandler^ OnGetBoundingBox;
 	event GetMaterialCountEventHandler^ OnGetMaterialCount;
 	event GetMaterialEventHandler^ OnGetMaterial;
