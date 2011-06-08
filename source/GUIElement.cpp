@@ -7,6 +7,7 @@
 #include "GUIContextMenu.h"
 #include "GUIEditBox.h"
 #include "GUIElement.h"
+#include "GUIEnvironment.h"
 #include "GUIFileOpenDialog.h"
 #include "GUIImage.h"
 #include "GUIInOutFader.h"
@@ -117,6 +118,42 @@ GUIElement::GUIElement(gui::IGUIElement* ref)
 	m_GUIElement = ref;
 }
 
+GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle, int id)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	GUIElementInheritor* i = new GUIElementInheritor(
+		(gui::EGUI_ELEMENT_TYPE)type,
+		LIME_SAFEREF(environment, m_GUIEnvironment),
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		*rectangle->m_NativeValue);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_GUIElement = i;
+	m_Inherited = true;
+}
+
+GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	GUIElementInheritor* i = new GUIElementInheritor(
+		(gui::EGUI_ELEMENT_TYPE)type,
+		LIME_SAFEREF(environment, m_GUIEnvironment),
+		LIME_SAFEREF(parent, m_GUIElement),
+		-1,
+		*rectangle->m_NativeValue);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_GUIElement = i;
+	m_Inherited = true;
+}
+
 void GUIElement::AddChild(GUIElement^ child)
 {
 	LIME_ASSERT(child != nullptr);
@@ -137,7 +174,23 @@ bool GUIElement::BringToFront(GUIElement^ child)
 
 void GUIElement::Draw()
 {
+	if (m_Inherited)
+	{
+		OnDraw();
+		return;
+	}
+
 	m_GUIElement->draw();
+}
+
+bool GUIElement::Event(IrrlichtLime::Event^ evnt)
+{
+	LIME_ASSERT(evnt != nullptr);
+
+	if (m_Inherited)
+		return OnEvent(evnt);
+
+	return m_GUIElement->OnEvent(*evnt->m_NativeValue);
 }
 
 GUIElement^ GUIElement::GetElementFromID(int id, bool searchchildren)
@@ -304,6 +357,25 @@ void GUIElement::Enabled::set(bool value)
 	m_GUIElement->setEnabled(value);
 }
 
+GUIEnvironment^ GUIElement::Environment::get()
+{
+	LIME_ASSERT(m_Inherited == true);
+
+	GUIElementInheritor* i = (GUIElementInheritor*)m_GUIElement;
+	gui::IGUIEnvironment* g = i->Environment_get();
+
+	return GUIEnvironment::Wrap(g);
+}
+
+void GUIElement::Environment::set(GUIEnvironment^ value)
+{
+	LIME_ASSERT(m_Inherited == true);
+	LIME_ASSERT(value != nullptr);
+
+	GUIElementInheritor* i = (GUIElementInheritor*)m_GUIElement;
+	i->Environment_set(value->m_GUIEnvironment);
+}
+
 int GUIElement::ID::get()
 {
 	return m_GUIElement->getID();
@@ -420,6 +492,12 @@ void GUIElement::Visible::set(bool value)
 String^ GUIElement::ToString()
 {
 	return String::Format("GUIElement: Type={0}; ID={1}; Text={2}", Type, ID, Text);
+}
+
+void GUIElement::initInheritor(GUIElementInheritor* i)
+{
+	i->m_drawHandler = gcnew DrawEventHandler(this, &GUIElement::Draw);
+	i->m_OnEventHandler = gcnew OnEventEventHandler(this, &GUIElement::Event);
 }
 
 } // end namespace GUI

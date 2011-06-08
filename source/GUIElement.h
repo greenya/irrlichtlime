@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "AttributeExchangingObject.h"
+#include "GUIEnvironment.h"
 
 using namespace irr;
 using namespace System;
@@ -9,6 +10,8 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace GUI {
+
+class GUIElementInheritor;
 
 public ref class GUIElement : IO::AttributeExchangingObject
 {
@@ -20,6 +23,7 @@ public:
 	bool BringToFront(GUIElement^ child);
 
 	void Draw();
+	bool Event(Event^ evnt);
 
 	GUIElement^ GetElementFromID(int id, bool searchchildren);
 	GUIElement^ GetElementFromID(int id);
@@ -66,12 +70,30 @@ public:
 
 	virtual String^ ToString() override;
 
+	delegate void DrawEventHandler();
+	delegate bool OnEventEventHandler(IrrlichtLime::Event^ evnt);
+
+protected:
+
+	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle, int id);
+	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle);
+
+	event DrawEventHandler^ OnDraw;
+	event OnEventEventHandler^ OnEvent;
+
+	property GUIEnvironment^ Environment { GUIEnvironment^ get(); void set(GUIEnvironment^ value); }
+
 internal:
 
 	static GUIElement^ Wrap(gui::IGUIElement* ref);
 	GUIElement(gui::IGUIElement* ref);
 
 	gui::IGUIElement* m_GUIElement;
+	bool m_Inherited;
+
+private:
+
+	void initInheritor(GUIElementInheritor* i);
 };
 
 } // end namespace GUI
