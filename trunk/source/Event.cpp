@@ -246,7 +246,55 @@ EventType Event::Type::get()
 
 String^ Event::ToString()
 {
-	return String::Format("Event: Type={0}", Type);
+	switch (Type)
+	{
+	case EventType::GUI:
+		return String::Format(
+			"GUI event: [{0}] Caller={{{1}}}; Element={{{2}}}",
+			GUI.Type,
+			GUI.Caller,
+			GUI.Element);
+
+	case EventType::Mouse:
+		return String::Format(
+			"Mouse event: [{0}] X,Y={{{1},{2}}}; Wheel={3}; ButtonStates={4}",
+			Mouse.Type,
+			Mouse.X,
+			Mouse.Y,
+			Mouse.Wheel,
+			Mouse.ButtonStates);
+
+	case EventType::Key:
+		return String::Format(
+			"Key event: [{0}] PressedDown={1}; Char='{2}'",
+			Key.Key,
+			Key.PressedDown,
+			Key.Char != '\0' ? gcnew String(Key.Char, 1) : "\\0");
+
+	case EventType::Joystick:
+		return String::Format(
+			"Joystick event: [{0}] ButtonStates={1}; POV={2}",
+			Joystick.Joystick,
+			Joystick.ButtonStates,
+			Joystick.POV);
+
+	case EventType::Log:
+		return String::Format(
+			"Log event: [{0}] {1}",
+			Log.Level,
+			Log.Text);
+
+	case EventType::User:
+		return String::Format(
+			"User event: UserData1={0}; UserData2={1}",
+			User.UserData1,
+			User.UserData2);
+
+	default:
+		return String::Format(
+			"Event: Type={0}",
+			Type);
+	}
 }
 
 } // end namespace IrrlichtLime
