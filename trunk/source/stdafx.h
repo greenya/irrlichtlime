@@ -103,5 +103,6 @@
 
 // inheritors
 #include "EventReceiverInheritor.h"
+#include "GUIElementInheritor.h"
 #include "SceneNodeInheritor.h"
 #include "ShaderCallBackInheritor.h"

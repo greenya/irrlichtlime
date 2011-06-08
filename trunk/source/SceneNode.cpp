@@ -91,7 +91,7 @@ SceneNode::SceneNode(scene::ISceneNode* ref)
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
-	: IO::AttributeExchangingObject(0)
+	: IO::AttributeExchangingObject(nullptr)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -112,7 +112,7 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation)
-	: IO::AttributeExchangingObject(0)
+	: IO::AttributeExchangingObject(nullptr)
 {
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
@@ -131,7 +131,7 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position)
-	: IO::AttributeExchangingObject(0)
+	: IO::AttributeExchangingObject(nullptr)
 {
 	LIME_ASSERT(position != nullptr);
 
@@ -148,7 +148,7 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id)
-	: IO::AttributeExchangingObject(0)
+	: IO::AttributeExchangingObject(nullptr)
 {
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
@@ -162,7 +162,7 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id)
 }
 
 SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager)
-	: IO::AttributeExchangingObject(0)
+	: IO::AttributeExchangingObject(nullptr)
 {
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
@@ -527,7 +527,6 @@ void SceneNode::initInheritor(SceneNodeInheritor* i)
 	i->m_getBoundingBoxHandler = gcnew GetBoundingBoxEventHandler(this, &SceneNode::BoundingBox::get);
 	i->m_getMaterialCountHandler = gcnew GetMaterialCountEventHandler(this, &SceneNode::MaterialCount::get);
 	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
-
 	i->m_OnAnimateHandler = gcnew AnimateEventHandler(this, &SceneNode::Animate);
 	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
 }
