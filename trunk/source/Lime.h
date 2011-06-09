@@ -35,12 +35,8 @@ public:
 
 		!NativeValue()
 		{
-			if (m_DeleteOnFinalize &&
-				m_NativeValue != nullptr)
-			{
+			if (m_DeleteOnFinalize)
 				delete m_NativeValue;
-				m_NativeValue = nullptr;
-			}
 		}
 
 	internal:
