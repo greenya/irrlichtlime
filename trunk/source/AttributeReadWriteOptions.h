@@ -67,12 +67,12 @@ internal:
 		if (!String::IsNullOrEmpty(options->Filename))
 		{
 			int s = options->Filename->Length + 1;
-			o->Filename = new c8[s];
+			o->Filename = new wchar_t[s];
 
-			core::stringc c = Lime::StringToStringC(options->Filename);
-			LIME_ASSERT(s == (int)(c.size() + 1));
+			core::stringw w = Lime::StringToStringW(options->Filename);
+			LIME_ASSERT(s == (int)(w.size() + 1));
 
-			strcpy_s((c8*)o->Filename, s, c.c_str());
+			wcscpy_s((wchar_t*)o->Filename, s, w.c_str());
 		}
 
 		return o;
