@@ -41,6 +41,45 @@ GUITab^ GUITabControl::AddTab(String^ caption)
 	return GUITab::Wrap(t);
 }
 
+void GUITabControl::Clear()
+{
+	m_GUITabControl->clear();
+}
+
+int GUITabControl::GetTabAt(int xpos, int ypos)
+{
+	return m_GUITabControl->getTabAt(xpos, ypos);
+}
+
+GUITab^ GUITabControl::InsertTab(int indexAt, String^ caption, int id)
+{
+	LIME_ASSERT(indexAt >= 0 && indexAt <= TabCount); // "<=" is not a mistype
+
+	gui::IGUITab* t = m_GUITabControl->insertTab(
+		indexAt,
+		Lime::StringToStringW(caption).c_str(),
+		id);
+
+	return GUITab::Wrap(t);
+}
+
+GUITab^ GUITabControl::InsertTab(int indexAt, String^ caption)
+{
+	LIME_ASSERT(indexAt >= 0 && indexAt <= TabCount); // "<=" is not a mistype
+
+	gui::IGUITab* t = m_GUITabControl->insertTab(
+		indexAt,
+		Lime::StringToStringW(caption).c_str());
+
+	return GUITab::Wrap(t);
+}
+
+void GUITabControl::RemoveTab(int index)
+{
+	LIME_ASSERT(index >= 0 && index < TabCount);
+	m_GUITabControl->removeTab(index);
+}
+
 GUITab^ GUITabControl::ActiveTab::get()
 {
 	int i = m_GUITabControl->getActiveTab();
