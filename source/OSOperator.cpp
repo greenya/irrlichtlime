@@ -35,7 +35,7 @@ void OSOperator::ClipboardText::set(String^ value)
 
 String^ OSOperator::OSVersion::get()
 {
-	return gcnew String(m_OSOperator->getOperationSystemVersion());
+	return gcnew String(m_OSOperator->getOperatingSystemVersion().c_str());
 }
 
 int OSOperator::ProcessorSpeedMHz::get()
