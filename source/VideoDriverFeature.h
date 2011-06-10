@@ -44,7 +44,8 @@ public enum class VideoDriverFeature
 	GeomertyShader = EVDF_GEOMETRY_SHADER,
 	OcclusionQuery = EVDF_OCCLUSION_QUERY,
 	PolygonOffset = EVDF_POLYGON_OFFSET,
-	BlendOperations = EVDF_BLEND_OPERATIONS
+	BlendOperations = EVDF_BLEND_OPERATIONS,
+	TextureMatrix = EVDF_TEXTURE_MATRIX
 };
 
 } // end namespace Video
