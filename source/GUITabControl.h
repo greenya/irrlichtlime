@@ -18,6 +18,15 @@ public:
 	GUITab^ AddTab(String^ caption, int id);
 	GUITab^ AddTab(String^ caption);
 
+	void Clear();
+
+	int GetTabAt(int xpos, int ypos);
+
+	GUITab^ InsertTab(int indexAt, String^ caption, int id);
+	GUITab^ InsertTab(int indexAt, String^ caption);
+
+	void RemoveTab(int index);
+
 	property GUITab^ ActiveTab { GUITab^ get(); void set(GUITab^ value); }
 	property int ActiveTabIndex { int get(); void set(int value); }
 	property int TabCount { int get(); }
