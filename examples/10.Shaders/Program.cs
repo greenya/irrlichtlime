@@ -138,6 +138,7 @@ namespace _10.Shaders
 			node.Position = new Vector3Df(0, -10, 50);
 			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.bmp"));
 			node.SetMaterialFlag(MaterialFlag.Lighting, false);
+			node.SetMaterialFlag(MaterialFlag.BlendOperation, true);
 			node.SetMaterialType(newMaterialType2);
 
 			smgr.AddTextSceneNode(device.GUIEnvironment.BuiltInFont, "PS & VS & EMT_TRANSPARENT", new Color(255, 255, 255), node);
