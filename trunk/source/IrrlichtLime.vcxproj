@@ -69,8 +69,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y ..\irrlicht\dll\$(Configuration)\Irrlicht.dll $(SolutionDir)bin\$(Configuration)\Irrlicht.dll &gt;nul
-copy /y ..\doc\IrrlichtLime.xml $(SolutionDir)bin\$(Configuration)\ &gt;nul
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)\Irrlicht.dll" "$(SolutionDir)bin\$(Configuration)\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -91,8 +91,8 @@ copy /y ..\doc\IrrlichtLime.xml $(SolutionDir)bin\$(Configuration)\ &gt;nul
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y ..\irrlicht\dll\$(Configuration)\Irrlicht.dll $(SolutionDir)bin\$(Configuration)\Irrlicht.dll &gt;nul
-copy /y ..\doc\IrrlichtLime.xml $(SolutionDir)bin\$(Configuration)\ &gt;nul
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)\Irrlicht.dll" "$(SolutionDir)bin\$(Configuration)\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
