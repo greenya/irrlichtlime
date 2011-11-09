@@ -1419,6 +1419,11 @@ ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ s
 	return ParticleSphereEmitter::Wrap(e);
 }
 
+void ParticleSystemSceneNode::DoParticleSystem(unsigned int time)
+{
+	m_ParticleSystemSceneNode->doParticleSystem(time);
+}
+
 void ParticleSystemSceneNode::RemoveAllAffectors()
 {
 	m_ParticleSystemSceneNode->removeAllAffectors();

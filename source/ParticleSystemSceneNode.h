@@ -118,6 +118,8 @@ public:
 	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction);
 	ParticleSphereEmitter^ CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius);
 
+	void DoParticleSystem(unsigned int time);
+
 	void RemoveAllAffectors();
 
 	void SetParticlesAreGlobal(bool global);
