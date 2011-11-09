@@ -6534,6 +6534,14 @@ To draw a stencil shadow, do next: draw all geometry, then use this method, to d
 			<param name="triangles">List of triangles specifying the shadow volume. Note: count of vectors in this list must be multiple to 3.</param>
 			<param name="zfail">True to use Z-fail method, otherwise Z-pass will be used. Default: true.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadowVolume(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Boolean,IrrlichtLime.Scene.DebugSceneType)">
+			<summary>Draws a shadow volume into the stencil buffer.
+
+To draw a stencil shadow, do next: draw all geometry, then use this method, to draw the shadow volume, then, use DrawStencilShadow() to visualize the shadow.</summary>
+			<param name="triangles">List of triangles specifying the shadow volume. Note: count of vectors in this list must be multiple to 3.</param>
+			<param name="zfail">True to use Z-fail method, otherwise Z-pass will be used. Default: true.</param>
+			<param name="debugDataVisible">The debug data that is enabled for this shadow volume.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
 			<summary>Draws a vertex primitive list.
 

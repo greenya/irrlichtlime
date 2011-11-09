@@ -685,23 +685,36 @@ void VideoDriver::DrawStencilShadow()
 	m_VideoDriver->drawStencilShadow();
 }
 
+void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible)
+{
+	LIME_ASSERT(triangles != nullptr);
+	LIME_ASSERT(triangles->Count > 0);
+	LIME_ASSERT((triangles->Count % 3) == 0);
+
+	core::array<core::vector3df> t;
+	for (int i = 0; i < triangles->Count; i++)
+	{
+		LIME_ASSERT(triangles[i] != nullptr);
+		t.push_back(*triangles[i]->m_NativeValue);
+	}
+
+	m_VideoDriver->drawStencilShadowVolume(t, zfail, (scene::E_DEBUG_SCENE_TYPE)debugDataVisible);
+}
+
 void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail)
 {
 	LIME_ASSERT(triangles != nullptr);
 	LIME_ASSERT(triangles->Count > 0);
 	LIME_ASSERT((triangles->Count % 3) == 0);
 
-	int c = triangles->Count;
-	core::vector3df* t = new core::vector3df[c];
-	for (int i = 0; i < c; i++)
+	core::array<core::vector3df> t;
+	for (int i = 0; i < triangles->Count; i++)
 	{
 		LIME_ASSERT(triangles[i] != nullptr);
-		t[i] = *triangles[i]->m_NativeValue;
+		t.push_back(*triangles[i]->m_NativeValue);
 	}
 
-	m_VideoDriver->drawStencilShadowVolume(t, c / 3, zfail);
-
-	delete t;
+	m_VideoDriver->drawStencilShadowVolume(t, zfail);
 }
 
 void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
@@ -710,17 +723,14 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
 	LIME_ASSERT(triangles->Count > 0);
 	LIME_ASSERT((triangles->Count % 3) == 0);
 
-	int c = triangles->Count;
-	core::vector3df* t = new core::vector3df[c];
-	for (int i = 0; i < c; i++)
+	core::array<core::vector3df> t;
+	for (int i = 0; i < triangles->Count; i++)
 	{
 		LIME_ASSERT(triangles[i] != nullptr);
-		t[i] = *triangles[i]->m_NativeValue;
+		t.push_back(*triangles[i]->m_NativeValue);
 	}
 
-	m_VideoDriver->drawStencilShadowVolume(t, c / 3);
-
-	delete t;
+	m_VideoDriver->drawStencilShadowVolume(t);
 }
 
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
