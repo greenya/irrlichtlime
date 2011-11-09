@@ -183,18 +183,23 @@ namespace video
 						case EMF_ZWRITE_ENABLE: material.ZWriteEnable = Material.ZWriteEnable; break;
 						case EMF_BACK_FACE_CULLING: material.BackfaceCulling = Material.BackfaceCulling; break;
 						case EMF_FRONT_FACE_CULLING: material.FrontfaceCulling = Material.FrontfaceCulling; break;
-						case EMF_FOG_ENABLE: material.FogEnable = Material.FogEnable; break;
-						case EMF_NORMALIZE_NORMALS: material.NormalizeNormals = Material.NormalizeNormals; break;
-						case EMF_ANTI_ALIASING: material.AntiAliasing = Material.AntiAliasing; break;
-						case EMF_COLOR_MASK: material.ColorMask = Material.ColorMask; break;
-						case EMF_USE_MIP_MAPS: material.UseMipMaps = Material.UseMipMaps; break;
 						case EMF_BILINEAR_FILTER: material.TextureLayer[0].BilinearFilter = Material.TextureLayer[0].BilinearFilter; break;
 						case EMF_TRILINEAR_FILTER: material.TextureLayer[0].TrilinearFilter = Material.TextureLayer[0].TrilinearFilter; break;
 						case EMF_ANISOTROPIC_FILTER: material.TextureLayer[0].AnisotropicFilter = Material.TextureLayer[0].AnisotropicFilter; break;
+						case EMF_FOG_ENABLE: material.FogEnable = Material.FogEnable; break;
+						case EMF_NORMALIZE_NORMALS: material.NormalizeNormals = Material.NormalizeNormals; break;
 						case EMF_TEXTURE_WRAP:
 							material.TextureLayer[0].TextureWrapU = Material.TextureLayer[0].TextureWrapU;
 							material.TextureLayer[0].TextureWrapV = Material.TextureLayer[0].TextureWrapV;
 							break;
+						case EMF_ANTI_ALIASING: material.AntiAliasing = Material.AntiAliasing; break;
+						case EMF_COLOR_MASK: material.ColorMask = Material.ColorMask; break;
+						case EMF_COLOR_MATERIAL: material.ColorMaterial = Material.ColorMaterial; break;
+						case EMF_USE_MIP_MAPS: material.UseMipMaps = Material.UseMipMaps; break;
+						case EMF_BLEND_OPERATION: material.BlendOperation = Material.BlendOperation; break;
+						case EMF_POLYGON_OFFSET:
+							material.PolygonOffsetDirection = Material.PolygonOffsetDirection;
+							material.PolygonOffsetFactor = Material.PolygonOffsetFactor; break;
 						}
 					}
 				}
@@ -974,12 +979,14 @@ namespace video
 		Please note that the code for the opengl version of the method
 		is based on free code sent in by Philipp Dortmann, lots of
 		thanks go to him!
-		\param triangles Pointer to array of 3d vectors, specifying the
-		shadow volume.
-		\param count Amount of triangles in the array.
+		\param triangles Array of 3d vectors, specifying the shadow
+		volume.
 		\param zfail If set to true, zfail method is used, otherwise
-		zpass. */
-		virtual void drawStencilShadowVolume(const core::vector3df* triangles, s32 count, bool zfail=true) =0;
+		zpass.
+		\param debugDataVisible The debug data that is enabled for this
+		shadow node
+		*/
+		virtual void drawStencilShadowVolume(const core::array<core::vector3df>& triangles, bool zfail=true, u32 debugDataVisible=0) =0;
 
 		//! Fills the stencil shadow with color.
 		/** After the shadow volume has been drawn into the stencil
@@ -1086,7 +1093,7 @@ namespace video
 
 		//! Returns light data which was previously set by IVideoDriver::addDynamicLight().
 		/** \param idx Zero based index of the light. Must be 0 or
-		greater and smaller than IVideoDriver()::getDynamicLightCount.
+		greater and smaller than IVideoDriver::getDynamicLightCount.
 		\return Light data. */
 		virtual const SLight& getDynamicLight(u32 idx) const =0;
 

@@ -111,6 +111,7 @@ public:
 	void DrawStencilShadow(bool clearStencilBuffer);
 	void DrawStencilShadow();
 
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible);
 	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail);
 	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles);
 

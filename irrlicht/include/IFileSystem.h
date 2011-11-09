@@ -111,11 +111,13 @@ public:
 	you use a different extension then you can use this parameter to force
 	a specific type of archive.
 	\param password An optional password, which is used in case of encrypted archives.
+	\param retArchive A pointer that will be set to the archive that is added.
 	\return True if the archive was added successfully, false if not. */
 	virtual bool addFileArchive(const path& filename, bool ignoreCase=true,
 			bool ignorePaths=true,
 			E_FILE_ARCHIVE_TYPE archiveType=EFAT_UNKNOWN,
-			const core::stringc& password="") =0;
+			const core::stringc& password="",
+			IFileArchive** retArchive=0) =0;
 
 	//! Adds an archive to the file system.
 	/** After calling this, the Irrlicht Engine will also search and open
@@ -127,6 +129,10 @@ public:
 	IArchiveLoader and passing an instance to addArchiveLoader.
 	Irrlicht supports AES-encrypted zip files, and the advanced compression
 	techniques lzma and bzip2.
+	If you want to add a directory as an archive, prefix its name with a
+	slash in order to let Irrlicht recognize it as a folder mount (mypath/).
+	Using this technique one can build up a search order, because archives
+	are read first, and can be used more easily with relative filenames.
 	\param file: Archive to add to the file system.
 	\param ignoreCase: If set to true, files in the archive can be accessed without
 	writing all letters in the right case.
@@ -137,18 +143,26 @@ public:
 	you use a different extension then you can use this parameter to force
 	a specific type of archive.
 	\param password An optional password, which is used in case of encrypted archives.
+	\param retArchive A pointer that will be set to the archive that is added.
 	\return True if the archive was added successfully, false if not. */
 	virtual bool addFileArchive(IReadFile* file, bool ignoreCase=true,
 			bool ignorePaths=true,
 			E_FILE_ARCHIVE_TYPE archiveType=EFAT_UNKNOWN,
-			const core::stringc& password="") =0;
+			const core::stringc& password="",
+			IFileArchive** retArchive=0) =0;
+
+	//! Adds an archive to the file system.
+	/** \param archive: The archive to add to the file system.
+	\return True if the archive was added successfully, false if not. */
+	virtual bool addFileArchive(IFileArchive* archive) =0;
 
 	//! Get the number of archives currently attached to the file system
 	virtual u32 getFileArchiveCount() const =0;
 
 	//! Removes an archive from the file system.
-	/** This will close the archive and free any file handles, but will not close resources which have already
-	been loaded and are now cached, for example textures and meshes.
+	/** This will close the archive and free any file handles, but will not
+	close resources which have already been loaded and are now cached, for
+	example textures and meshes.
 	\param index: The index of the archive to remove
 	\return True on success, false on failure */
 	virtual bool removeFileArchive(u32 index) =0;
@@ -156,10 +170,24 @@ public:
 	//! Removes an archive from the file system.
 	/** This will close the archive and free any file handles, but will not
 	close resources which have already been loaded and are now cached, for
-	example textures and meshes.
-	\param filename The archive of the given name will be removed
+	example textures and meshes. Note that a relative filename might be
+	interpreted differently on each call, depending on the current working
+	directory. In case you want to remove an archive that was added using
+	a relative path name, you have to change to the same working directory
+	again. This means, that the filename given on creation is not an
+	identifier for the archive, but just a usual filename that is used for
+	locating the archive to work with.
+	\param filename The archive pointed to by the name will be removed
 	\return True on success, false on failure */
 	virtual bool removeFileArchive(const path& filename) =0;
+
+	//! Removes an archive from the file system.
+	/** This will close the archive and free any file handles, but will not
+	close resources which have already been loaded and are now cached, for
+	example textures and meshes.
+	\param archive The archive to remove.
+	\return True on success, false on failure */
+	virtual bool removeFileArchive(const IFileArchive* archive) =0;
 
 	//! Changes the search order of attached archives.
 	/**
