@@ -18,6 +18,7 @@ public:
 	void SetBackgroundColor(Video::Color^ color);
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
+	property GUIFont^ ActiveFont { GUIFont^ get(); }
 	property bool DrawBackgroundEnabled { bool get(); void set(bool value); }
 	property bool DrawBorderEnabled { bool get(); void set(bool value); }
 	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }

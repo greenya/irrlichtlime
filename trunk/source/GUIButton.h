@@ -21,9 +21,6 @@ public:
 	void SetNormalImage(Video::Texture^ image);
 	void SetNormalImage();
 
-	void OverrideFont(GUIFont^ font);
-	void OverrideFont();
-
 	void SetPressedImage(Video::Texture^ image, Recti^ pos);
 	void SetPressedImage(Video::Texture^ image);
 	void SetPressedImage();
@@ -35,8 +32,10 @@ public:
 	void SetSpriteBank(GUISpriteBank^ bank);
 	void SetSpriteBank();
 
+	property GUIFont^ ActiveFont { GUIFont^ get(); }
 	property bool AlphaChannel { bool get(); void set(bool value); }
 	property bool Border { bool get(); void set(bool value); }
+	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property bool Pressed { bool get(); void set(bool value); }
 	property bool PushButton { bool get(); void set(bool value); }
 	property bool ScaleImage { bool get(); void set(bool value); }

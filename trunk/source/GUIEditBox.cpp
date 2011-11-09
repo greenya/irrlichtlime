@@ -29,11 +29,6 @@ void GUIEditBox::SetDrawBorder(bool draw)
 	m_GUIEditBox->setDrawBorder(draw);
 }
 
-void GUIEditBox::SetOverrideFont(GUIFont^ font)
-{
-	m_GUIEditBox->setOverrideFont(LIME_SAFEREF(font, m_GUIFont));
-}
-
 void GUIEditBox::SetPasswordChar(Char x)
 {
 	m_GUIEditBox->setPasswordBox(m_GUIEditBox->isPasswordBox(), x);
@@ -42,6 +37,12 @@ void GUIEditBox::SetPasswordChar(Char x)
 void GUIEditBox::SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical)
 {
 	m_GUIEditBox->setTextAlignment((gui::EGUI_ALIGNMENT)horizontal, (gui::EGUI_ALIGNMENT)vertical);
+}
+
+GUIFont^ GUIEditBox::ActiveFont::get()
+{
+	gui::IGUIFont* f = m_GUIEditBox->getActiveFont();
+	return GUIFont::Wrap(f);
 }
 
 bool GUIEditBox::AutoScroll::get()
@@ -94,6 +95,17 @@ bool GUIEditBox::OverrideColorEnabled::get()
 void GUIEditBox::OverrideColorEnabled::set(bool value)
 {
 	m_GUIEditBox->enableOverrideColor(value);
+}
+
+GUIFont^ GUIEditBox::OverrideFont::get()
+{
+	gui::IGUIFont* f = m_GUIEditBox->getOverrideFont();
+	return GUIFont::Wrap(f);
+}
+
+void GUIEditBox::OverrideFont::set(GUIFont^ value)
+{
+	m_GUIEditBox->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
 bool GUIEditBox::PasswordBox::get()

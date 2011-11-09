@@ -35,6 +35,12 @@ void GUIStaticText::SetTextAlignment(GUIAlignment horizontal, GUIAlignment verti
 	m_GUIStaticText->setTextAlignment((gui::EGUI_ALIGNMENT)horizontal, (gui::EGUI_ALIGNMENT)vertical);
 }
 
+GUIFont^ GUIStaticText::ActiveFont::get()
+{
+	gui::IGUIFont* f = m_GUIStaticText->getActiveFont();
+	return GUIFont::Wrap(f);
+}
+
 bool GUIStaticText::DrawBackgroundEnabled::get()
 {
 	return m_GUIStaticText->isDrawBackgroundEnabled();
