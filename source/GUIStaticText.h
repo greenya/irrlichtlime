@@ -16,10 +16,10 @@ public ref class GUIStaticText : GUIElement
 public:
 
 	void SetBackgroundColor(Video::Color^ color);
-	void SetDrawBackground(bool draw);
-	void SetDrawBorder(bool draw);
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
+	property bool DrawBackgroundEnabled { bool get(); void set(bool value); }
+	property bool DrawBorderEnabled { bool get(); void set(bool value); }
 	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }
 	property bool OverrideColorEnabled { bool get(); void set(bool value); }
 	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }

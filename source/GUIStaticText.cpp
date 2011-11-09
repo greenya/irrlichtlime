@@ -30,19 +30,29 @@ void GUIStaticText::SetBackgroundColor(Video::Color^ color)
 	m_GUIStaticText->setBackgroundColor(*color->m_NativeValue);
 }
 
-void GUIStaticText::SetDrawBackground(bool draw)
-{
-	m_GUIStaticText->setDrawBackground(draw);
-}
-
-void GUIStaticText::SetDrawBorder(bool draw)
-{
-	m_GUIStaticText->setDrawBorder(draw);
-}
-
 void GUIStaticText::SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical)
 {
 	m_GUIStaticText->setTextAlignment((gui::EGUI_ALIGNMENT)horizontal, (gui::EGUI_ALIGNMENT)vertical);
+}
+
+bool GUIStaticText::DrawBackgroundEnabled::get()
+{
+	return m_GUIStaticText->isDrawBackgroundEnabled();
+}
+
+void GUIStaticText::DrawBackgroundEnabled::set(bool value)
+{
+	m_GUIStaticText->setDrawBackground(value);
+}
+
+bool GUIStaticText::DrawBorderEnabled::get()
+{
+	return m_GUIStaticText->isDrawBorderEnabled();
+}
+
+void GUIStaticText::DrawBorderEnabled::set(bool value)
+{
+	m_GUIStaticText->setDrawBorder(value);
 }
 
 Video::Color^ GUIStaticText::OverrideColor::get()
