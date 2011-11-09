@@ -42,16 +42,6 @@ void GUIButton::SetNormalImage()
 	m_GUIButton->setImage();
 }
 
-void GUIButton::OverrideFont(GUIFont^ font)
-{
-	m_GUIButton->setOverrideFont(LIME_SAFEREF(font, m_GUIFont));
-}
-
-void GUIButton::OverrideFont()
-{
-	m_GUIButton->setOverrideFont();
-}
-
 void GUIButton::SetPressedImage(Video::Texture^ image, Recti^ pos)
 {
 	LIME_ASSERT(pos != nullptr);
@@ -95,6 +85,12 @@ void GUIButton::SetSpriteBank()
 	m_GUIButton->setSpriteBank();
 }
 
+GUIFont^ GUIButton::ActiveFont::get()
+{
+	gui::IGUIFont* f = m_GUIButton->getActiveFont();
+	return GUIFont::Wrap(f);
+}
+
 bool GUIButton::AlphaChannel::get()
 {
 	return m_GUIButton->isAlphaChannelUsed();
@@ -113,6 +109,17 @@ bool GUIButton::Border::get()
 void GUIButton::Border::set(bool value)
 {
 	m_GUIButton->setDrawBorder(value);
+}
+
+GUIFont^ GUIButton::OverrideFont::get()
+{
+	gui::IGUIFont* f = m_GUIButton->getOverrideFont();
+	return GUIFont::Wrap(f);
+}
+
+void GUIButton::OverrideFont::set(GUIFont^ value)
+{
+	m_GUIButton->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
 bool GUIButton::Pressed::get()
