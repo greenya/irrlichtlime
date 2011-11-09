@@ -141,6 +141,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClInclude Include="ModulateFunc.h" />
     <ClInclude Include="PixelShaderType.h" />
     <ClInclude Include="PolygonOffset.h" />
+    <ClInclude Include="Randomizer.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
     <ClInclude Include="Texture.h" />
@@ -327,6 +328,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClCompile Include="MaterialLayer.cpp" />
     <ClCompile Include="MaterialRenderer.cpp" />
     <ClCompile Include="MaterialRendererServices.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
     <ClCompile Include="VideoDriver.cpp" />
