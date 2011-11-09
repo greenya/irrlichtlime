@@ -20,6 +20,7 @@ ref class IrrlichtCreationParameters;
 ref class JoystickInfo;
 ref class Logger;
 ref class OSOperator;
+ref class Randomizer;
 ref class Timer;
 
 public ref class IrrlichtDevice : ReferenceCounted
@@ -42,6 +43,8 @@ public:
 	!IrrlichtDevice();
 
 	List<JoystickInfo^>^ ActivateJoysticks();
+
+	IrrlichtLime::Randomizer^ CreateRandomizer();
 
 	void ClearSystemMessages();
 	void Close();
@@ -72,6 +75,7 @@ public:
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
 	property IrrlichtLime::Logger^ Logger { IrrlichtLime::Logger^ get(); }
 	property IrrlichtLime::OSOperator^ OSOperator { IrrlichtLime::OSOperator^ get(); }
+	property IrrlichtLime::Randomizer^ Randomizer { IrrlichtLime::Randomizer^ get(); void set(IrrlichtLime::Randomizer^ value); }
 	property Scene::SceneManager^ SceneManager { Scene::SceneManager^ get(); }
 	property IrrlichtLime::Timer^ Timer { IrrlichtLime::Timer^ get(); }
 	property DeviceType Type { DeviceType get(); }

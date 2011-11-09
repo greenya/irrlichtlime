@@ -8,6 +8,7 @@
 #include "JoystickInfo.h"
 #include "Logger.h"
 #include "OSOperator.h"
+#include "Randomizer.h"
 #include "ReferenceCounted.h"
 #include "SceneManager.h"
 #include "Timer.h"
@@ -180,6 +181,12 @@ List<JoystickInfo^>^ IrrlichtDevice::ActivateJoysticks()
 	return nullptr;
 }
 
+IrrlichtLime::Randomizer^ IrrlichtDevice::CreateRandomizer()
+{
+	irr::IRandomizer* r = m_IrrlichtDevice->createDefaultRandomizer();
+	return IrrlichtLime::Randomizer::Wrap(r);
+}
+
 void IrrlichtDevice::ClearSystemMessages()
 {
 	m_IrrlichtDevice->clearSystemMessages();
@@ -305,6 +312,17 @@ IrrlichtLime::OSOperator^ IrrlichtDevice::OSOperator::get()
 {
 	irr::IOSOperator* o = m_IrrlichtDevice->getOSOperator();
 	return IrrlichtLime::OSOperator::Wrap(o);
+}
+
+IrrlichtLime::Randomizer^ IrrlichtDevice::Randomizer::get()
+{
+	irr::IRandomizer* r = m_IrrlichtDevice->getRandomizer();
+	return IrrlichtLime::Randomizer::Wrap(r);
+}
+
+void IrrlichtDevice::Randomizer::set(IrrlichtLime::Randomizer^ value)
+{
+	m_IrrlichtDevice->setRandomizer(LIME_SAFEREF(value, m_Randomizer));
 }
 
 Scene::SceneManager^ IrrlichtDevice::SceneManager::get()
