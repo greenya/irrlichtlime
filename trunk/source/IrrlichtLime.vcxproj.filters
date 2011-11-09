@@ -600,6 +600,7 @@
     <ClInclude Include="GUIElementInheritor.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Randomizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -895,5 +896,6 @@
     <ClCompile Include="ReferenceCounted.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
   </ItemGroup>
 </Project>
