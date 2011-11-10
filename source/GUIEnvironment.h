@@ -74,6 +74,8 @@ public:
 
 	GUISpriteBank^ AddEmptySpriteBank(String^ name);
 
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir, String^ startDir);
+	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent);
 	GUIFileOpenDialog^ AddFileOpenDialog(String^ title, bool modal);

@@ -335,6 +335,31 @@ GUISpriteBank^ GUIEnvironment::AddEmptySpriteBank(String^ name)
 	return GUISpriteBank::Wrap(b);
 }
 
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir, String^ startDir)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		restoreCurrentWorkingDir,
+		(wchar_t*)Lime::StringToStringW(startDir).c_str()); // !!! cast to non-const
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
+GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir)
+{
+	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
+		Lime::StringToStringW(title).c_str(),
+		modal,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id,
+		restoreCurrentWorkingDir);
+
+	return GUIFileOpenDialog::Wrap(f);
+}
+
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
