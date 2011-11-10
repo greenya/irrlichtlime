@@ -24,12 +24,6 @@ GUIStaticText::GUIStaticText(gui::IGUIStaticText* ref)
 	m_GUIStaticText = ref;
 }
 
-void GUIStaticText::SetBackgroundColor(Video::Color^ color)
-{
-	LIME_ASSERT(color != nullptr);
-	m_GUIStaticText->setBackgroundColor(*color->m_NativeValue);
-}
-
 void GUIStaticText::SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical)
 {
 	m_GUIStaticText->setTextAlignment((gui::EGUI_ALIGNMENT)horizontal, (gui::EGUI_ALIGNMENT)vertical);
@@ -39,6 +33,17 @@ GUIFont^ GUIStaticText::ActiveFont::get()
 {
 	gui::IGUIFont* f = m_GUIStaticText->getActiveFont();
 	return GUIFont::Wrap(f);
+}
+
+Video::Color^ GUIStaticText::BackgroundColor::get()
+{
+	return gcnew Video::Color(m_GUIStaticText->getBackgroundColor());
+}
+
+void GUIStaticText::BackgroundColor::set(Video::Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_GUIStaticText->setBackgroundColor(*value->m_NativeValue);
 }
 
 bool GUIStaticText::DrawBackgroundEnabled::get()
