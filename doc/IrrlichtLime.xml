@@ -252,7 +252,7 @@ Can be used only when Type == EventType.Mouse.</summary>
 			<summary>Type of mouse event.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Event.MouseEvent.Wheel">
-			<summary>Mouse wheel delta, usually 1.0 or -1.0.</summary>
+			<summary>Mouse wheel delta, often 1.0 or -1.0, but can have other values &lt; 0.0f or &gt; 0.0f.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Event.MouseEvent.X">
 			<summary>X position of mouse cursor.</summary>
@@ -2023,7 +2023,9 @@ The result box of this operation should by accurate, but this operation is slowe
 			<summary>Transposed matrix.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Plane3Df">
-			<summary>Plane class with some intersection testing methods.</summary>
+			<summary>Plane class with some intersection testing methods.
+
+It has to be ensured, that the normal is always normalized. The constructors and setters of this class will not ensure this automatically. So any normal passed in has to be normalized in advance. No change to the normal will be made by any of the class methods.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Plane3Df.D">
 			<summary>Distance from origin.</summary>
@@ -2484,16 +2486,18 @@ Thus, this method assumes a camera position from which the triangle is definitel
 			<returns>True if the plane is front facing and false if it is backfacing.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.IsPointInside(IrrlichtLime.Core.Vector3Df)">
-			<summary>Check if a point is inside the triangle. Assumes that this point is already on the plane of the triangle.</summary>
-			<param name="point">Point to test.</param>
+			<summary>Check if a point is inside the triangle (border-points count also as inside).</summary>
+			<param name="point">Point to test. Assumes that this point is already on the plane of the triangle.</param>
 			<returns>True if the point is inside the triangle, otherwise false.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.IsPointInsideFast(IrrlichtLime.Core.Vector3Df)">
-			<summary>Check if a point is inside the triangle. Assumes that this point is already on the plane of the triangle.
+			<summary>Check if a point is inside the triangle.
 
-This method is an implementation of the example used in a paper by Kasper Fauerby original written by Keidy from Mr-Gamemaker.</summary>
-			<param name="point">Point to test.</param>
-			<returns>True if point is inside the triangle, otherwise false.</returns>
+This method is an implementation of the example used in a paper by Kasper Fauerby original written by Keidy from Mr-Gamemaker.
+
+This was once faster than an old IsPointInside() implementation, but the current IsPointInside() is usualy as fast, sometimes even faster. Border-points in IsPointInsideFast() are not defined, some are inside and some outside.</summary>
+			<param name="point">Point to test. Assumes that this point is already on the plane of the triangle.</param>
+			<returns>True if the point is inside the triangle, otherwise false.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.IsTotalInsideBox(IrrlichtLime.Core.AABBox)">
 			<summary>Determines if the triangle is totally inside a bounding box.</summary>
@@ -3515,14 +3519,18 @@ After calling this, the Irrlicht Engine will also search and open files directly
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String)">
 			<summary>Adds an archive to the file system.
 
-After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.
+
+If you want to add a directory as an archive, prefix its name with a slash in order to let Irrlicht recognize it as a folder mount (mypath/). Using this technique one can build up a search order, because archives are read first, and can be used more easily with relative filenames.</summary>
 			<param name="filename">Filename of the archive to add to the file system.</param>
 			<returns>True if the archive was added successfully, false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean)">
 			<summary>Adds an archive to the file system.
 
-After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.
+
+If you want to add a directory as an archive, prefix its name with a slash in order to let Irrlicht recognize it as a folder mount (mypath/). Using this technique one can build up a search order, because archives are read first, and can be used more easily with relative filenames.</summary>
 			<param name="filename">Filename of the archive to add to the file system.</param>
 			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
 			<returns>True if the archive was added successfully, false if not.</returns>
@@ -3530,7 +3538,9 @@ After calling this, the Irrlicht Engine will also search and open files directly
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean)">
 			<summary>Adds an archive to the file system.
 
-After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.
+
+If you want to add a directory as an archive, prefix its name with a slash in order to let Irrlicht recognize it as a folder mount (mypath/). Using this technique one can build up a search order, because archives are read first, and can be used more easily with relative filenames.</summary>
 			<param name="filename">Filename of the archive to add to the file system.</param>
 			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
 			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
@@ -3539,7 +3549,9 @@ After calling this, the Irrlicht Engine will also search and open files directly
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType)">
 			<summary>Adds an archive to the file system.
 
-After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.
+
+If you want to add a directory as an archive, prefix its name with a slash in order to let Irrlicht recognize it as a folder mount (mypath/). Using this technique one can build up a search order, because archives are read first, and can be used more easily with relative filenames.</summary>
 			<param name="filename">Filename of the archive to add to the file system.</param>
 			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
 			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
@@ -3549,7 +3561,9 @@ After calling this, the Irrlicht Engine will also search and open files directly
 		<member name="M:IrrlichtLime.IO.FileSystem.AddFileArchive(System.String,System.Boolean,System.Boolean,IrrlichtLime.IO.FileArchiveType,System.String)">
 			<summary>Adds an archive to the file system.
 
-After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.</summary>
+After calling this, the Irrlicht Engine will also search and open files directly from this archive. This is useful for hiding data from the end user, speeding up file access and making it possible to access for example Quake3 .pk3 files, which are just renamed .zip files. Irrlicht supports AES-encrypted zip files, and the advanced compression techniques lzma and bzip2.
+
+If you want to add a directory as an archive, prefix its name with a slash in order to let Irrlicht recognize it as a folder mount (mypath/). Using this technique one can build up a search order, because archives are read first, and can be used more easily with relative filenames.</summary>
 			<param name="filename">Filename of the archive to add to the file system.</param>
 			<param name="ignoreCase">If set to true, files in the archive can be accessed without writing all letters in the right case. Default: true.</param>
 			<param name="ignorePaths">If set to true, files in the added archive can be accessed without its complete path. Default: true.</param>
@@ -3671,7 +3685,7 @@ This allows you to use a memory where a WriteFile is requested. You are responsi
 		<member name="M:IrrlichtLime.IO.FileSystem.RemoveFileArchive(System.String)">
 			<summary>Removes an archive from the file system.
 
-This will close the archive and free any file handles, but will not close resources which have already been loaded and are now cached, for example textures and meshes.</summary>
+This will close the archive and free any file handles, but will not close resources which have already been loaded and are now cached, for example textures and meshes. Note that a relative filename might be interpreted differently on each call, depending on the current working directory. In case you want to remove an archive that was added using a relative path name, you have to change to the same working directory again. This means, that the filename given on creation is not an identifier for the archive, but just a usual filename that is used for locating the archive to work with.</summary>
 			<param name="filename">The archive of the given name will be removed.</param>
 			<returns>True on success, false on failure.</returns>
 		</member>
