@@ -71,6 +71,17 @@ int GUIComboBox::ItemCount::get()
 	return m_GUIComboBox->getItemCount();
 }
 
+int GUIComboBox::MaxSelectionRows::get()
+{
+	return m_GUIComboBox->getMaxSelectionRows();
+}
+
+void GUIComboBox::MaxSelectionRows::set(int value)
+{
+	LIME_ASSERT(value >= 1);
+	m_GUIComboBox->setMaxSelectionRows(value);
+}
+
 int GUIComboBox::SelectedIndex::get()
 {
 	return m_GUIComboBox->getSelected();

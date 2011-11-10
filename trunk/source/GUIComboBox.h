@@ -27,6 +27,7 @@ public:
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
 	property int ItemCount { int get(); }
+	property int MaxSelectionRows { int get(); void set(int value); }
 	property int SelectedIndex { int get(); void set(int value); }
 
 internal:
