@@ -73,6 +73,7 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	case scene::ESNT_VOLUME_LIGHT:
 		return gcnew VolumeLightSceneNode((scene::IVolumeLightSceneNode*)ref);
 
+	case scene::ESNT_SCENE_MANAGER:
 	case scene::ESNT_WATER_SURFACE:
 	case scene::ESNT_SKY_BOX:
 	case scene::ESNT_SKY_DOME:

@@ -10,6 +10,7 @@ namespace Scene {
 
 public enum class SceneNodeType
 {
+	SceneManager = ESNT_SCENE_MANAGER,
 	Cube = ESNT_CUBE,
 	Sphere = ESNT_SPHERE,
 	Text = ESNT_TEXT,
