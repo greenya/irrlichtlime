@@ -250,9 +250,19 @@ namespace _09.Meshviewer
 			caption = string.Format("{0} - [{1}]", caption, driver.Name);
 			device.SetWindowCaption(caption);
 
+			// remember state so we notice when the window does lose the focus
+			bool hasFocus = device.WindowFocused;
+
 			// draw everything
 			while (device.Run() && driver != null)
 			{
+				// Catch focus changes (workaround until Irrlicht has events for this)
+				bool focused = device.WindowFocused;
+				if (hasFocus && !focused)
+					onKillFocus();
+
+				hasFocus = focused;
+
 				if (device.WindowActive)
 				{
 					driver.BeginScene(true, true, new Color(50, 50, 50));
@@ -573,6 +583,28 @@ namespace _09.Meshviewer
 				case 4: // Isotropic
 					model.SetMaterialFlag(MaterialFlag.AnisotropicFilter, false);
 					break;
+			}
+		}
+
+		static void onKillFocus()
+		{
+			// Avoid that the FPS-camera continues moving when the user presses alt-tab while moving the camera.
+
+			foreach (SceneNodeAnimator a in camera[1].AnimatorList)
+			{
+				CameraFPSSceneNodeAnimator f = a as CameraFPSSceneNodeAnimator;
+				if (f != null)
+				{
+					// we send a key-down event for all keys used by this animator
+					foreach (List<KeyCode> l in f.KeyMap.Map.Values)
+					{
+						foreach (KeyCode k in l)
+						{
+							Event e = new Event('\0', k, false);
+							device.PostEvent(e);
+						}
+					}
+				}
 			}
 		}
 
