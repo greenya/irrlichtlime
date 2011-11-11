@@ -14,9 +14,9 @@ public ref class CameraFPSSceneNodeAnimator : SceneNodeAnimator
 public:
 
 	void SetInvertMouse(bool invert);
-	void SetKeyMap(KeyMap^ keyMap);
 	void SetVerticalMovement(bool allow);
 
+	property IrrlichtLime::KeyMap^ KeyMap { IrrlichtLime::KeyMap^ get(); void set(IrrlichtLime::KeyMap^ value); }
 	property float MoveSpeed { float get(); void set(float value); }
 	property float RotateSpeed { float get(); void set(float value); }
 
