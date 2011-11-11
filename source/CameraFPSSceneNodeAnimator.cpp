@@ -27,23 +27,23 @@ void CameraFPSSceneNodeAnimator::SetInvertMouse(bool invert)
 	m_CameraFPSSceneNodeAnimator->setInvertMouse(invert);
 }
 
-void CameraFPSSceneNodeAnimator::SetKeyMap(KeyMap^ keyMap)
-{
-	SKeyMap* keyMapArray = 0;
-	int keyMapSize = 0;
-
-	if (keyMap != nullptr)
-		keyMapSize = keyMap->GetSKeyMapArray(keyMapArray); // allocates keyMapArray
-
-	m_CameraFPSSceneNodeAnimator->setKeyMap(keyMapArray, keyMapSize);
-
-	if (keyMapArray != 0)
-		delete keyMapArray;
-}
-
 void CameraFPSSceneNodeAnimator::SetVerticalMovement(bool allow)
 {
 	m_CameraFPSSceneNodeAnimator->setVerticalMovement(allow);
+}
+
+IrrlichtLime::KeyMap^ CameraFPSSceneNodeAnimator::KeyMap::get()
+{
+	const core::array<SKeyMap>& m = m_CameraFPSSceneNodeAnimator->getKeyMap();
+	return gcnew IrrlichtLime::KeyMap(m);
+}
+
+void CameraFPSSceneNodeAnimator::KeyMap::set(IrrlichtLime::KeyMap^ value)
+{
+	LIME_ASSERT(value != nullptr);
+
+	core::array<SKeyMap> m = value->GetSKeyMapArray();
+	m_CameraFPSSceneNodeAnimator->setKeyMap(m);
 }
 
 float CameraFPSSceneNodeAnimator::MoveSpeed::get()

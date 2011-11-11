@@ -33,9 +33,19 @@ public:
 
 internal:
 
-	// Allocates and fills SKeyMap array, returns poiter to it and count of elements it has.
-	// Note: you should delete keyMapArray pointer manually.
-	int GetSKeyMapArray(SKeyMap*& keyMapArray)
+	KeyMap(const core::array<SKeyMap>& initialKeyMap)
+	{
+		m_Map = gcnew Dictionary<KeyAction, List<KeyCode>^>();
+
+		for (unsigned int i = 0; i < initialKeyMap.size(); i++)
+		{
+			KeyAction a = (KeyAction)initialKeyMap[i].Action;
+			KeyCode c = (KeyCode)initialKeyMap[i].KeyCode;
+			Add(a, c);
+		}
+	}
+
+	core::array<SKeyMap> GetSKeyMapArray()
 	{
 		core::array<SKeyMap> l;
 
@@ -49,6 +59,16 @@ internal:
 				l.push_back(m);
 			}
 		}
+
+		return l;
+	}
+
+	// Allocates and fills SKeyMap array, returns poiter to it and count of elements it has.
+	// If this method returns 0 then keyMapArray remains unchanged.
+	// Note: you should delete keyMapArray pointer manually.
+	int GetSKeyMapArray(SKeyMap*& keyMapArray)
+	{
+		core::array<SKeyMap> l = GetSKeyMapArray();
 
 		if (l.size() == 0)
 			return 0;
