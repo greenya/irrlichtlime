@@ -4777,6 +4777,9 @@ Image loaders create these images from files. VideoDriver convert these images i
 		<member name="P:IrrlichtLime.Video.Image.ColorFormat">
 			<summary>Color format of the image.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyTo">
+			<summary>Copies this image to byte array and returns it.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image)">
 			<summary>Copies this image to the target.</summary>
 			<param name="target">Target image.</param>
@@ -4803,26 +4806,23 @@ Image loaders create these images from files. VideoDriver convert these images i
 			<summary>Copies this image to the target, scaling the image to fit.</summary>
 			<param name="target">Target image.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32)">
-			<summary>Copies this image to the target, scaling the image to fit.</summary>
-			<param name="target">Target image.</param>
-			<param name="width">Target width.</param>
-			<param name="height">Target height.</param>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Int32,System.Int32)">
+			<summary>Copies this image with scaling to byte array and returns it.</summary>
+			<param name="width">Width to scale to.</param>
+			<param name="height">Height to scale to.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat)">
-			<summary>Copies this image to the target, scaling the image to fit.</summary>
-			<param name="target">Target image.</param>
-			<param name="width">Target width.</param>
-			<param name="height">Target height.</param>
-			<param name="format">Target color format. Default: ColorFormat.A8R8G8B8.</param>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat)">
+			<summary>Copies this image with scaling to byte array and returns it.</summary>
+			<param name="width">Width to scale to.</param>
+			<param name="height">Height to scale to.</param>
+			<param name="format">Color format to convert to. Default: ColorFormat.A8R8G8B8.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Byte[],System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat,System.Int32)">
-			<summary>Copies this image to the target, scaling the image to fit.</summary>
-			<param name="target">Target image.</param>
-			<param name="width">Target width.</param>
-			<param name="height">Target height.</param>
-			<param name="format">Target color format. Default: ColorFormat.A8R8G8B8.</param>
-			<param name="pitch">Targe pitch size. Default: 0.</param>
+		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(System.Int32,System.Int32,IrrlichtLime.Video.ColorFormat,System.Int32)">
+			<summary>Copies this image with scaling to byte array and returns it.</summary>
+			<param name="width">Width to scale to.</param>
+			<param name="height">Height to scale to.</param>
+			<param name="format">Color format to convert to. Default: ColorFormat.A8R8G8B8.</param>
+			<param name="pitch">Pitch value to use. Default: 0.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Image.CopyToScalingBoxFilter(IrrlichtLime.Video.Image)">
 			<summary>Copies this image to the target, scaling it to fit, appyling a box filter.</summary>
