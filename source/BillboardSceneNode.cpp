@@ -23,15 +23,93 @@ BillboardSceneNode::BillboardSceneNode(scene::IBillboardSceneNode* ref)
 	m_BillboardSceneNode = ref;
 }
 
-Dimension2Df^ BillboardSceneNode::Size::get()
+void BillboardSceneNode::SetShape(float bottomWidth, float topWidth, float height)
 {
-	return gcnew Dimension2Df(m_BillboardSceneNode->getSize());
+	LIME_ASSERT(bottomWidth > 0.0f);
+	LIME_ASSERT(topWidth > 0.0f);
+	LIME_ASSERT(height > 0.0f);
+
+	m_BillboardSceneNode->setSize(core::dimension2d<f32>(111, height)); // "111" can be anyhting else
+	m_BillboardSceneNode->setWidths(bottomWidth, topWidth);
 }
 
-void BillboardSceneNode::Size::set(Dimension2Df^ value)
+Video::Color^ BillboardSceneNode::BottomColor::get()
+{
+	video::SColor t, b;
+	m_BillboardSceneNode->getColor(t, b);
+	return gcnew Video::Color(b);
+}
+
+void BillboardSceneNode::BottomColor::set(Video::Color^ value)
 {
 	LIME_ASSERT(value != nullptr);
-	m_BillboardSceneNode->setSize(*value->m_NativeValue);
+
+	video::SColor t, b;
+	m_BillboardSceneNode->getColor(t, b);
+	m_BillboardSceneNode->setColor(t, *value->m_NativeValue);
+}
+
+float BillboardSceneNode::BottomWidth::get()
+{
+	float s, e;
+	m_BillboardSceneNode->getWidths(s, e);
+	return s;
+}
+
+void BillboardSceneNode::BottomWidth::set(float value)
+{
+	LIME_ASSERT(value > 0.0f);
+
+	float s, e;
+	m_BillboardSceneNode->getWidths(s, e);
+	m_BillboardSceneNode->setWidths(value, e);
+}
+
+float BillboardSceneNode::Height::get()
+{
+	return m_BillboardSceneNode->getSize().Height;
+}
+
+void BillboardSceneNode::Height::set(float value)
+{
+	LIME_ASSERT(value > 0.0f);
+
+	float s, e;
+	m_BillboardSceneNode->getWidths(s, e); // save widths
+	m_BillboardSceneNode->setSize(core::dimension2d<f32>(111, value)); // "111" can be anyhting else
+	m_BillboardSceneNode->setWidths(s, e); // restore widths
+}
+
+Video::Color^ BillboardSceneNode::TopColor::get()
+{
+	video::SColor t, b;
+	m_BillboardSceneNode->getColor(t, b);
+	return gcnew Video::Color(t);
+}
+
+void BillboardSceneNode::TopColor::set(Video::Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+
+	video::SColor t, b;
+	m_BillboardSceneNode->getColor(t, b);
+	m_BillboardSceneNode->setColor(*value->m_NativeValue, b);
+}
+
+float BillboardSceneNode::TopWidth::get()
+{
+	float s, e;
+	m_BillboardSceneNode->getWidths(s, e);
+	return e;
+}
+
+void BillboardSceneNode::TopWidth::set(float value)
+{
+	LIME_ASSERT(value > 0.0f);
+
+	float s, e;
+	m_BillboardSceneNode->getWidths(s, e);
+	m_BillboardSceneNode->setWidths(s, value);
 }
 
 } // end namespace Scene
