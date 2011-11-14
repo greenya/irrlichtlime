@@ -21,11 +21,12 @@ public:
 	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect);
 	void CopyTo(Image^ target, Vector2Di^ targetPos);
 	void CopyTo(Image^ target);
+	array<unsigned char>^ CopyTo();
 
 	void CopyToScaling(Image^ target);
-	void CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format, int pitch);
-	void CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format);
-	void CopyToScaling(array<unsigned char>^ target, int width, int height);
+	array<unsigned char>^ CopyToScaling(int width, int height, Video::ColorFormat format, int pitch);
+	array<unsigned char>^ CopyToScaling(int width, int height, Video::ColorFormat format);
+	array<unsigned char>^ CopyToScaling(int width, int height);
 
 	void CopyToScalingBoxFilter(Image^ target, int bias, bool blend);
 	void CopyToScalingBoxFilter(Image^ target, int bias);

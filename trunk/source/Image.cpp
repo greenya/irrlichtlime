@@ -75,22 +75,32 @@ void Image::CopyTo(Image^ target)
 	m_Image->copyTo(target->m_Image);
 }
 
+array<unsigned char>^ Image::CopyTo()
+{
+	int s = m_Image->getImageDataSizeInBytes();
+	array<unsigned char>^ r = gcnew array<unsigned char>(s);
+
+	unsigned char* a = (unsigned char*)m_Image->lock();
+	Marshal::Copy(IntPtr(a), r, 0, s);
+	m_Image->unlock();
+	
+	return r;
+}
+
 void Image::CopyToScaling(Image^ target)
 {
 	LIME_ASSERT(target != nullptr);
 	m_Image->copyToScaling(target->m_Image);
 }
 
-void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format, int pitch)
+array<unsigned char>^ Image::CopyToScaling(int width, int height, Video::ColorFormat format, int pitch)
 {
-	LIME_ASSERT(target != nullptr);
 	LIME_ASSERT(width > 0);
 	LIME_ASSERT(height > 0);
 	LIME_ASSERT(pitch >= 0);
 
-	unsigned char* a = new unsigned char[target->Length];
-	for (int i = 0; i < target->Length; i++)
-		a[i] = target[i];
+	int s = width * height * (video::IImage::getBitsPerPixelFromFormat((video::ECOLOR_FORMAT)format) / 8) + pitch * height;
+	unsigned char* a = new unsigned char[s];
 
 	m_Image->copyToScaling(
 		a,
@@ -99,18 +109,20 @@ void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, V
 		(video::ECOLOR_FORMAT)format,
 		pitch);
 
+	array<unsigned char>^ r = gcnew array<unsigned char>(s);
+	Marshal::Copy(IntPtr(a), r, 0, s);
+
 	delete a;
+	return r;
 }
 
-void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, Video::ColorFormat format)
+array<unsigned char>^ Image::CopyToScaling(int width, int height, Video::ColorFormat format)
 {
-	LIME_ASSERT(target != nullptr);
 	LIME_ASSERT(width > 0);
 	LIME_ASSERT(height > 0);
 
-	unsigned char* a = new unsigned char[target->Length];
-	for (int i = 0; i < target->Length; i++)
-		a[i] = target[i];
+	int s = width * height * (video::IImage::getBitsPerPixelFromFormat((video::ECOLOR_FORMAT)format) / 8);
+	unsigned char* a = new unsigned char[s];
 
 	m_Image->copyToScaling(
 		a,
@@ -118,25 +130,31 @@ void Image::CopyToScaling(array<unsigned char>^ target, int width, int height, V
 		height,
 		(video::ECOLOR_FORMAT)format);
 
+	array<unsigned char>^ r = gcnew array<unsigned char>(s);
+	Marshal::Copy(IntPtr(a), r, 0, s);
+
 	delete a;
+	return r;
 }
 
-void Image::CopyToScaling(array<unsigned char>^ target, int width, int height)
+array<unsigned char>^ Image::CopyToScaling(int width, int height)
 {
-	LIME_ASSERT(target != nullptr);
 	LIME_ASSERT(width > 0);
 	LIME_ASSERT(height > 0);
 
-	unsigned char* a = new unsigned char[target->Length];
-	for (int i = 0; i < target->Length; i++)
-		a[i] = target[i];
+	int s = width * height * (video::IImage::getBitsPerPixelFromFormat(video::ECF_A8R8G8B8) / 8);
+	unsigned char* a = new unsigned char[s];
 
 	m_Image->copyToScaling(
 		a,
 		width,
 		height);
 
+	array<unsigned char>^ r = gcnew array<unsigned char>(s);
+	Marshal::Copy(IntPtr(a), r, 0, s);
+
 	delete a;
+	return r;
 }
 
 void Image::CopyToScalingBoxFilter(Image^ target, int bias, bool blend)
