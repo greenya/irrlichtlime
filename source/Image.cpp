@@ -19,6 +19,35 @@ bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
 	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
 }
 
+System::Drawing::Imaging::PixelFormat Image::GetPixelFormat(Video::ColorFormat format)
+{
+	switch ((ECOLOR_FORMAT)format)
+	{
+	case ECF_A1R5G5B5:
+		return System::Drawing::Imaging::PixelFormat::Format16bppArgb1555;
+
+	case ECF_R5G6B5:
+		return System::Drawing::Imaging::PixelFormat::Format16bppRgb565;
+
+	case ECF_R8G8B8:
+		return System::Drawing::Imaging::PixelFormat::Format24bppRgb;
+
+	case ECF_A8R8G8B8:
+		return System::Drawing::Imaging::PixelFormat::Format32bppArgb;
+
+	case ECF_A16B16G16R16F:
+		return System::Drawing::Imaging::PixelFormat::Format64bppArgb;
+
+	case ECF_R16F:
+	case ECF_G16R16F:
+	case ECF_R32F:
+	case ECF_G32R32F:
+	case ECF_A32B32G32R32F:
+	default:
+		return System::Drawing::Imaging::PixelFormat::Undefined;
+	}
+}
+
 Image^ Image::Wrap(video::IImage* ref)
 {
 	if (ref == nullptr)
@@ -85,6 +114,30 @@ array<unsigned char>^ Image::CopyTo()
 	m_Image->unlock();
 	
 	return r;
+}
+
+System::Drawing::Bitmap^ Image::CopyToBitmap()
+{
+	LIME_ASSERT(GetPixelFormat(ColorFormat) != System::Drawing::Imaging::PixelFormat::Undefined);
+
+	System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(
+		m_Image->getDimension().Width,
+		m_Image->getDimension().Height,
+		GetPixelFormat(ColorFormat));
+
+	System::Drawing::Imaging::BitmapData^ d = b->LockBits(
+		System::Drawing::Rectangle(0, 0, b->Width, b->Height),
+		System::Drawing::Imaging::ImageLockMode::WriteOnly,
+		b->PixelFormat);
+
+	m_Image->copyToScaling(
+		d->Scan0.ToPointer(),
+		m_Image->getDimension().Width,
+		m_Image->getDimension().Height,
+		m_Image->getColorFormat());
+
+	b->UnlockBits(d);
+	return b;
 }
 
 void Image::CopyToScaling(Image^ target)

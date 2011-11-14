@@ -16,12 +16,15 @@ public:
 
 	static int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
+	static System::Drawing::Imaging::PixelFormat GetPixelFormat(Video::ColorFormat format);
 
 	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect);
 	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect);
 	void CopyTo(Image^ target, Vector2Di^ targetPos);
 	void CopyTo(Image^ target);
 	array<unsigned char>^ CopyTo();
+
+	System::Drawing::Bitmap^ CopyToBitmap();
 
 	void CopyToScaling(Image^ target);
 	array<unsigned char>^ CopyToScaling(int width, int height, Video::ColorFormat format, int pitch);
