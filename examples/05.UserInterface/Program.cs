@@ -114,12 +114,27 @@ namespace _05.UserInterface
 
 							case GUI_ID_ButtonFileOpen:
 								listbox.AddItem("File open");
-								env.AddFileOpenDialog("Choose a file");
+								// There are some options for the file open dialog
+								// We set the title, make it a modal window, and make sure
+								// that the working directory is restored after the dialog
+								// is finished.
+								env.AddFileOpenDialog("Please choose a file", true, null, -1, true);
 								return true;
 
 							default:
 								return false;
 						}
+
+					case GUIEventType.FileDialogFileSelected:
+						{
+							// show the filename, selected in the file dialog
+							GUIFileOpenDialog d = e.GUI.Caller as GUIFileOpenDialog;
+							listbox.AddItem(d.FileName);
+							break;
+						}
+
+					default:
+						break;
 				}
 			}
 
