@@ -440,28 +440,6 @@ Default value: 16.</summary>
 
 This is the most important class of the Irrlicht Engine. You can access everything in the engine if you have a pointer to an instance of this class. There should be only one instance of this class at any time.</summary>
 		</member>
-		<member name="M:IrrlichtLime.IrrlichtDevice.ActivateJoysticks">
-			<summary>Activates all joysticks found, and returns list of them.
-
-Irrlicht contains support for joysticks, but does not generate joystick events by default, as this would consume joystick info that 3rd party libraries might rely on. Call this method to activate joystick support in Irrlicht and to receive events.</summary>
-			<returns>Returns list joysticks that were found and activated or null on error.</returns>
-		</member>
-		<member name="M:IrrlichtLime.IrrlichtDevice.ClearSystemMessages">
-			<summary>Remove messages pending in the system message loop.
-
-This function is usually used after messages have been buffered for a longer time, for example when loading a large scene. Clearing the message loop prevents that mouse- or buttonclicks which users have pressed in the meantime will now trigger unexpected actions in the gui.
-
-So far the following messages are cleared:
-Win32: All keyboard and mouse messages;
-Linux: All keyboard and mouse messages;
-All other devices are not yet supported here.</summary>
-		</member>
-		<member name="M:IrrlichtLime.IrrlichtDevice.Close">
-			<summary>Notifies the device that it should close itself.</summary>
-		</member>
-		<member name="P:IrrlichtLime.IrrlichtDevice.ColorFormat">
-			<summary>Current color format of the window.</summary>
-		</member>
 		<member name="M:IrrlichtLime.IrrlichtDevice.CreateDevice">
 			<summary>Creates an Irrlicht device. The Irrlicht device is the root object for using the engine.</summary>
 			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
@@ -516,6 +494,34 @@ All other devices are not yet supported here.</summary>
 			<param name="parameters">Advanced parameters for the creation of the device. See IrrlichtCreationParameters for details.</param>
 			<returns>Created IrrlichtDevice or null if the device could not be created.</returns>
 		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.IsDriverSupported(IrrlichtLime.Video.DriverType)">
+			<summary>Check if a driver type is supported by the engine.
+
+Even if true is returned the driver may not be available for a configuration requested when creating the device.</summary>
+			<param name="driver">Driver type to check.</param>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.ActivateJoysticks">
+			<summary>Activates all joysticks found, and returns list of them.
+
+Irrlicht contains support for joysticks, but does not generate joystick events by default, as this would consume joystick info that 3rd party libraries might rely on. Call this method to activate joystick support in Irrlicht and to receive events.</summary>
+			<returns>Returns list joysticks that were found and activated or null on error.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.ClearSystemMessages">
+			<summary>Remove messages pending in the system message loop.
+
+This function is usually used after messages have been buffered for a longer time, for example when loading a large scene. Clearing the message loop prevents that mouse- or buttonclicks which users have pressed in the meantime will now trigger unexpected actions in the gui.
+
+So far the following messages are cleared:
+Win32: All keyboard and mouse messages;
+Linux: All keyboard and mouse messages;
+All other devices are not yet supported here.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IrrlichtDevice.Close">
+			<summary>Notifies the device that it should close itself.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.ColorFormat">
+			<summary>Current color format of the window.</summary>
+		</member>
 		<member name="M:IrrlichtLime.IrrlichtDevice.CreateRandomizer">
 			<summary>Creates a new default randomizer. The default randomizer provides the random sequence known from previous Irrlicht versions and is the initial randomizer set on device creation.</summary>
 		</member>
@@ -539,12 +545,6 @@ Please take care that you should only return 'true' when you want to _prevent_ I
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.GUIEnvironment">
 			<summary>Provides access to the 2d user interface environment.</summary>
-		</member>
-		<member name="M:IrrlichtLime.IrrlichtDevice.IsDriverSupported(IrrlichtLime.Video.DriverType)">
-			<summary>Check if a driver type is supported by the engine.
-
-Even if true is returned the driver may not be available for a configuration requested when creating the device.</summary>
-			<param name="driver">Driver type to check.</param>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.Logger">
 			<summary>Provides access to the message logger.</summary>
@@ -3189,6 +3189,12 @@ If you want the Irrlicht Engine be able to load archives of currently unsupporte
 			<summary>Manages attributes collection.
 You can create new instance of this class using FileSystem.CreateAttributes() instance method.</summary>
 		</member>
+		<member name="M:IrrlichtLime.IO.Attributes.GetAttributeTypeFromValue(System.Object)">
+			<summary>Gets type of attribute that used to store given value.
+Note: returns Unknown for unsupported types of value.</summary>
+			<param name="value">A value. Must not be null.</param>
+			<returns>Attribute type for given value.</returns>
+		</member>
 		<member name="M:IrrlichtLime.IO.Attributes.AddValue(System.String,System.Object)">
 			<summary>Adds an attribute to the collection.
 Note: it is impossible to add Enum attributes, please use Int type instead.</summary>
@@ -3205,12 +3211,6 @@ Note: it is impossible to add Enum attributes, please use Int type instead.</sum
 			<summary>Checks if an attribute with given name exists.</summary>
 			<param name="attributeName">Name of the attribute.</param>
 			<returns>True if exists, otherwise false.</returns>
-		</member>
-		<member name="M:IrrlichtLime.IO.Attributes.GetAttributeTypeFromValue(System.Object)">
-			<summary>Gets type of attribute that used to store given value.
-Note: returns Unknown for unsupported types of value.</summary>
-			<param name="value">A value. Must not be null.</param>
-			<returns>Attribute type for given value.</returns>
 		</member>
 		<member name="M:IrrlichtLime.IO.Attributes.GetIndex(System.String)">
 			<summary>Gets an index of the attribute or "-1" if attribute not found.</summary>
@@ -4762,6 +4762,22 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 
 Image loaders create these images from files. VideoDriver convert these images into their (hardware) textures.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.Image.GetBitsPerPixelFromFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Gets the amount of bits per one pixel for the given color format.</summary>
+			<param name="format">Color format.</param>
+			<returns>Amount of bits.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.GetPixelFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Gets System.Drawing' pixel format from given Irrlciht' ColorFormat.
+
+Returns PixelFormat.Undefined if format cannot be translated.</summary>
+			<param name="format">Color format to translate.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.IsRenderTargetOnlyFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Tests if the color format is only viable for RTT (render target textures).</summary>
+			<param name="format">Color format to test.</param>
+			<returns>True if color format is only for RTT.</returns>
+		</member>
 		<member name="P:IrrlichtLime.Video.Image.AlphaMask">
 			<summary>Mask for alpha value of a pixel.</summary>
 		</member>
@@ -4801,6 +4817,9 @@ Image loaders create these images from files. VideoDriver convert these images i
 			<param name="targetPos">Target position.</param>
 			<param name="sourceRect">Source rectangle.</param>
 			<param name="clipRect">Clipping rectangle. Use null if you do not want to specify it. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.CopyToBitmap">
+			<summary>Copies this image to System.Drawing' Bitmap object and returns it.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Image.CopyToScaling(IrrlichtLime.Video.Image)">
 			<summary>Copies this image to the target, scaling the image to fit.</summary>
@@ -4858,11 +4877,6 @@ Image loaders create these images from files. VideoDriver convert these images i
 			<summary>Fills the image data with specified color.</summary>
 			<param name="color">Color to fill with.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.GetBitsPerPixelFromFormat(IrrlichtLime.Video.ColorFormat)">
-			<summary>Gets the amount of bits per one pixel for the given color format.</summary>
-			<param name="format">Color format.</param>
-			<returns>Amount of bits.</returns>
-		</member>
 		<member name="M:IrrlichtLime.Video.Image.GetPixel(System.Int32,System.Int32)">
 			<summary>Gets color of the pixel in specified coordinates.</summary>
 			<param name="x">X coord.</param>
@@ -4877,11 +4891,6 @@ Image loaders create these images from files. VideoDriver convert these images i
 		</member>
 		<member name="P:IrrlichtLime.Video.Image.ImageDataSizeInPixels">
 			<summary>Image data size in pixels.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.Image.IsRenderTargetOnlyFormat(IrrlichtLime.Video.ColorFormat)">
-			<summary>Tests if the color format is only viable for RTT (render target textures).</summary>
-			<param name="format">Color format to test.</param>
-			<returns>True if color format is only for RTT.</returns>
 		</member>
 		<member name="P:IrrlichtLime.Video.Image.Pitch">
 			<summary>Pitch size of the image.</summary>
@@ -7158,12 +7167,6 @@ Requires that there is a suitable image writer registered for writing the image.
 		<member name="T:IrrlichtLime.Video.VideoMode">
 			<summary>Holds information about single video mode.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.VideoMode.AspectRatio">
-			<summary>Aspect ratio.</summary>
-		</member>
-		<member name="F:IrrlichtLime.Video.VideoMode.Depth">
-			<summary>Bits per pixel.</summary>
-		</member>
 		<member name="M:IrrlichtLime.Video.VideoMode.GetAspectRatio(System.Int32,System.Int32)">
 			<summary>Returns aspect ratio using provided resolution.
 
@@ -7171,6 +7174,12 @@ Please note, next screen resolutions considered to be 16:9 (1.777): 848x480 (1.7
 			<param name="width">Video mode width.</param>
 			<param name="height">Video mode height.</param>
 			<returns>Video mode aspect ratio.</returns>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoMode.AspectRatio">
+			<summary>Aspect ratio.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoMode.Depth">
+			<summary>Bits per pixel.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoMode.Resolution">
 			<summary>Width and height.</summary>
