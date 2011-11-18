@@ -146,6 +146,12 @@ Can be used only when Type == EventType.Joystick.</summary>
 		<member name="T:IrrlichtLime.Event.JoystickEvent">
 			<summary>Any kind of joystick event.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Event.JoystickEvent.AxisCount">
+			<summary>Maximal amount of axis which Axis can hold.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Event.JoystickEvent.ButtonCount">
+			<summary>Maximal amount of buttons which ButtonState can hold.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Event.JoystickEvent.Axis">
 			<summary>State of all axes.
 
@@ -161,12 +167,6 @@ Common axis indices:
 
 Common axis values:
 Values are in the range -32768 to 32767, with 0 representing the center position. You will receive the raw value from the joystick, and so will usually want to implement a dead zone around the center of the range. Axes not supported by this joystick will always have a value of 0.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Event.JoystickEvent.AxisCount">
-			<summary>Maximal amount of axis which Axis can hold.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Event.JoystickEvent.ButtonCount">
-			<summary>Maximal amount of buttons which ButtonState can hold.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Event.JoystickEvent.ButtonStates">
 			<summary>A bitmap of button states.
@@ -1759,6 +1759,10 @@ Assumes that the point is already somewhere on the line.</summary>
 
 The matrix is a D3D style matrix, row major with translations in the 4th row.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Core.Matrix.Identity">
+			<summary>Identity matrix.
+Equivalent to "new Matrix()".</summary>
+		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.BuildAxisAlignedBillboard(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Builds a matrix which rotates a source vector to a look vector over an arbitrary axis.</summary>
 			<param name="camPos">Viewer position in world coords.</param>
@@ -1844,10 +1848,6 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 		<member name="M:IrrlichtLime.Core.Matrix.GetInversePrimitive">
 			<summary>Inverts a primitive matrix which only contains a translation and a rotation. Note: if no inverse exists then null is returned.</summary>
 			<returns>Inverse matrix or null if not applicable.</returns>
-		</member>
-		<member name="P:IrrlichtLime.Core.Matrix.Identity">
-			<summary>Identity matrix.
-Equivalent to "new Matrix()".</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Matrix.IdentityIntegerBase">
 			<summary>True if the matrix is the identity matrix.</summary>
@@ -2144,6 +2144,9 @@ Thus, this method assumes a camera position from which the triangle is definitel
 It provides cheap combinations and avoids gimbal locks.
 Also useful for interpolations.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Core.Quaternion.Identity">
+			<summary>Identity quaternion.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.DotProduct(IrrlichtLime.Core.Quaternion)">
 			<summary>Calculates the dot product.</summary>
 			<param name="other">Other quaternion.</param>
@@ -2165,9 +2168,6 @@ Also useful for interpolations.</summary>
 			<summary>Gets matrix from this quatertion.</summary>
 			<param name="center">Rotation vector.</param>
 			<param name="translation">Translation vector.</param>
-		</member>
-		<member name="P:IrrlichtLime.Core.Quaternion.Identity">
-			<summary>Identity quaternion.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
 			<summary>Sets this quaternion to the result of the linear interpolation between two quaternions.</summary>
@@ -3944,6 +3944,30 @@ The color values for alpha, red, green, and blue are stored in a single unsigned
 
 Another way is using the class Colorf, which stores the color values in 4 floats.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueBlack">
+			<summary>Fully opaque black color: 0xff-000000.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueBlue">
+			<summary>Fully opaque blue color: 0xff-0000ff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueCyan">
+			<summary>Fully opaque cyan color: 0xff-00ffff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueGreen">
+			<summary>Fully opaque green color: 0xff-00ff00.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueMagenta">
+			<summary>Fully opaque magenta color: 0xff-ff00ff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueRed">
+			<summary>Fully opaque red color: 0xff-ff0000.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueWhite">
+			<summary>Fully opaque white color: 0xff-ffffff.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Color.OpaqueYellow">
+			<summary>Fully opaque yellow color: 0xff-ffff00.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Color.A1R5G5B5">
 			<summary>Color in A1R5G5B5 format.</summary>
 		</member>
@@ -3991,30 +4015,6 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 		</member>
 		<member name="P:IrrlichtLime.Video.Color.Luminance">
 			<summary>Luminance of the color in range [0, 255].</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueBlack">
-			<summary>Fully opaque black color: 0xff-000000.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueBlue">
-			<summary>Fully opaque blue color: 0xff-0000ff.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueCyan">
-			<summary>Fully opaque cyan color: 0xff-00ffff.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueGreen">
-			<summary>Fully opaque green color: 0xff-00ff00.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueMagenta">
-			<summary>Fully opaque magenta color: 0xff-ff00ff.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueRed">
-			<summary>Fully opaque red color: 0xff-ff0000.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueWhite">
-			<summary>Fully opaque white color: 0xff-ffffff.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Color.OpaqueYellow">
-			<summary>Fully opaque yellow color: 0xff-ffff00.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Color.Red">
 			<summary>Red component of the color.</summary>
@@ -5055,6 +5055,16 @@ For details how to use specular highlights, see Material.Shininess.</summary>
 		<member name="T:IrrlichtLime.Video.Material">
 			<summary>Holds parameters for a material renderer.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Material.Identity">
+			<summary>Identity material.
+Equivalent to "new Material()".</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.IdentityNoLighting">
+			<summary>Identity material with disabled Lighting.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Material.MaxTextures">
+			<summary>Maximum number of textures a Material can have.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Material.AmbientColor">
 			<summary>How much ambient light (a global light) is reflected by this material.</summary>
 		</member>
@@ -5102,10 +5112,6 @@ NOTE: the actual way to use this value is not yet determined, so ignore it for n
 		<member name="P:IrrlichtLime.Video.Material.GouraudShading">
 			<summary>Flat or Gouraud shading? Default: true.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Material.Identity">
-			<summary>Identity material.
-Equivalent to "new Material()".</summary>
-		</member>
 		<member name="P:IrrlichtLime.Video.Material.Layer">
 			<summary>Material layers.</summary>
 		</member>
@@ -5124,9 +5130,6 @@ Equivalent to "new Material()".</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.MaterialTypeParam2">
 			<summary>Second free parameter, dependent on the material type.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.Material.MaxTextures">
-			<summary>Maximum number of textures a Material can have.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Material.Mipmaps">
 			<summary>Shall mipmaps be used if available? Default: true.</summary>
