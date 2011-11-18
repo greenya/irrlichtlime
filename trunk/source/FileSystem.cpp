@@ -37,6 +37,26 @@ void FileSystem::AddArchiveLoader(ArchiveLoader^ loader)
 	m_FileSystem->addArchiveLoader(loader->m_ArchiveLoader);
 }
 
+bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	io::IFileArchive* a;
+
+	bool b = m_FileSystem->addFileArchive(
+		Lime::StringToPath(filename),
+		ignoreCase,
+		ignorePaths,
+		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		Lime::StringToStringC(password),
+		&a);
+
+	if (b && a != nullptr)
+		addedArchive = FileArchive::Wrap(a);
+
+	return b;
+}
+
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
 {
 	LIME_ASSERT(filename != nullptr);
@@ -87,6 +107,26 @@ bool FileSystem::AddFileArchive(String^ filename)
 		Lime::StringToPath(filename));
 }
 
+bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive)
+{
+	LIME_ASSERT(file != nullptr);
+
+	io::IFileArchive* a;
+
+	bool b = m_FileSystem->addFileArchive(
+		file->m_ReadFile,
+		ignoreCase,
+		ignorePaths,
+		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		Lime::StringToStringC(password),
+		&a);
+
+	if (b && a != nullptr)
+		addedArchive = FileArchive::Wrap(a);
+
+	return b;
+}
+
 bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
 {
 	LIME_ASSERT(file != nullptr);
@@ -135,6 +175,12 @@ bool FileSystem::AddFileArchive(ReadFile^ file)
 
 	return m_FileSystem->addFileArchive(
 		file->m_ReadFile);
+}
+
+bool FileSystem::AddFileArchive(FileArchive^ archive)
+{
+	LIME_ASSERT(archive != nullptr);
+	return m_FileSystem->addFileArchive(archive->m_FileArchive);
 }
 
 Attributes^ FileSystem::CreateAttributes(Video::VideoDriver^ driver)
@@ -311,6 +357,12 @@ bool FileSystem::RemoveFileArchive(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
 	return m_FileSystem->removeFileArchive(Lime::StringToPath(filename));
+}
+
+bool FileSystem::RemoveFileArchive(FileArchive^ archive)
+{
+	LIME_ASSERT(archive != nullptr);
+	return m_FileSystem->removeFileArchive(archive->m_FileArchive);
 }
 
 FileSystemType FileSystem::SetFileSystemType(FileSystemType newType)

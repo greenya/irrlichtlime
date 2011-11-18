@@ -24,17 +24,21 @@ public:
 
 	void AddArchiveLoader(ArchiveLoader^ loader);
 
+	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive);
 	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password);
 	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType);
 	bool AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths);
 	bool AddFileArchive(String^ filename, bool ignoreCase);
 	bool AddFileArchive(String^ filename);
 
+	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive);
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password);
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType);
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths);
 	bool AddFileArchive(ReadFile^ file, bool ignoreCase);
 	bool AddFileArchive(ReadFile^ file);
+
+	bool AddFileArchive(FileArchive^ archive);
 
 	Attributes^ CreateAttributes(Video::VideoDriver^ driver);
 	Attributes^ CreateAttributes();
@@ -61,6 +65,7 @@ public:
 	bool MoveFileArchive(int index, int relative);
 	bool RemoveFileArchive(int index);
 	bool RemoveFileArchive(String^ filename);
+	bool RemoveFileArchive(FileArchive^ archive);
 
 	FileSystemType SetFileSystemType(FileSystemType newType);
 
