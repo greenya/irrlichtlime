@@ -23,14 +23,23 @@ BillboardSceneNode::BillboardSceneNode(scene::IBillboardSceneNode* ref)
 	m_BillboardSceneNode = ref;
 }
 
-void BillboardSceneNode::SetShape(float bottomWidth, float topWidth, float height)
+void BillboardSceneNode::GetSize([Out] float% height, [Out] float% bottomWidth, [Out] float% topWidth)
 {
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+
+	height = h;
+	bottomWidth = b;
+	topWidth = t;
+}
+
+void BillboardSceneNode::SetSize(float height, float bottomWidth, float topWidth)
+{
+	LIME_ASSERT(height > 0.0f);
 	LIME_ASSERT(bottomWidth > 0.0f);
 	LIME_ASSERT(topWidth > 0.0f);
-	LIME_ASSERT(height > 0.0f);
 
-	m_BillboardSceneNode->setSize(core::dimension2d<f32>(111, height)); // "111" can be anyhting else
-	m_BillboardSceneNode->setWidths(bottomWidth, topWidth);
+	m_BillboardSceneNode->setSize(height, bottomWidth, topWidth);
 }
 
 Video::Color^ BillboardSceneNode::BottomColor::get()
@@ -51,33 +60,34 @@ void BillboardSceneNode::BottomColor::set(Video::Color^ value)
 
 float BillboardSceneNode::BottomWidth::get()
 {
-	float s, e;
-	m_BillboardSceneNode->getWidths(s, e);
-	return s;
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	return b;
 }
 
 void BillboardSceneNode::BottomWidth::set(float value)
 {
 	LIME_ASSERT(value > 0.0f);
 
-	float s, e;
-	m_BillboardSceneNode->getWidths(s, e);
-	m_BillboardSceneNode->setWidths(value, e);
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	m_BillboardSceneNode->setSize(h, value, t);
 }
 
 float BillboardSceneNode::Height::get()
 {
-	return m_BillboardSceneNode->getSize().Height;
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	return h;
 }
 
 void BillboardSceneNode::Height::set(float value)
 {
 	LIME_ASSERT(value > 0.0f);
 
-	float s, e;
-	m_BillboardSceneNode->getWidths(s, e); // save widths
-	m_BillboardSceneNode->setSize(core::dimension2d<f32>(111, value)); // "111" can be anyhting else
-	m_BillboardSceneNode->setWidths(s, e); // restore widths
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	m_BillboardSceneNode->setSize(value, b, t);
 }
 
 Video::Color^ BillboardSceneNode::TopColor::get()
@@ -98,18 +108,18 @@ void BillboardSceneNode::TopColor::set(Video::Color^ value)
 
 float BillboardSceneNode::TopWidth::get()
 {
-	float s, e;
-	m_BillboardSceneNode->getWidths(s, e);
-	return e;
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	return t;
 }
 
 void BillboardSceneNode::TopWidth::set(float value)
 {
 	LIME_ASSERT(value > 0.0f);
 
-	float s, e;
-	m_BillboardSceneNode->getWidths(s, e);
-	m_BillboardSceneNode->setWidths(s, value);
+	float h, b, t;
+	m_BillboardSceneNode->getSize(h, b, t);
+	m_BillboardSceneNode->setSize(h, b, value);
 }
 
 } // end namespace Scene

@@ -2,8 +2,6 @@
 #include "Randomizer.h"
 #include "ReferenceCounted.h"
 
-#include "IRandomizer.h" // TODO: remove this include when irrlicht.h will have it
-
 using namespace irr;
 using namespace System;
 using namespace IrrlichtLime::Core;
