@@ -18,6 +18,7 @@ public:
 	Mesh^ GetMesh(int frame, int detailLevel);
 	Mesh^ GetMesh(int frame);
 
+	property float AnimationSpeed { float get(); void set(float value); }
 	property int FrameCount { int get(); }
 	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 

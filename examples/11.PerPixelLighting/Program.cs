@@ -122,7 +122,7 @@ namespace _11.PerPixelLighting
 				anim.Drop();
 
 				// attach billboard to the light
-				SceneNode bill = smgr.AddBillboardSceneNode(light1, new Dimension2Df(60, 60));
+				BillboardSceneNode bill = smgr.AddBillboardSceneNode(light1, new Dimension2Df(60, 60));
 				bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 				bill.SetMaterialFlag(MaterialFlag.ZWrite, false);
 				bill.SetMaterialType(MaterialType.TransparentAddColor);
