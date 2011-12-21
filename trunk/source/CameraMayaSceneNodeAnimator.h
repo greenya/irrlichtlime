@@ -13,6 +13,7 @@ public ref class CameraMayaSceneNodeAnimator : SceneNodeAnimator
 {
 public:
 
+	property float Distance { float get(); void set(float value); }
 	property float MoveSpeed { float get(); void set(float value); }
 	property float RotateSpeed { float get(); void set(float value); }
 	property float ZoomSpeed { float get(); void set(float value); }
