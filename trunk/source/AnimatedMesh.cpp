@@ -46,6 +46,16 @@ Mesh^ AnimatedMesh::GetMesh(int frame)
 	return Mesh::Wrap(m);
 }
 
+float AnimatedMesh::AnimationSpeed::get()
+{
+	return m_AnimatedMesh->getAnimationSpeed();
+}
+
+void AnimatedMesh::AnimationSpeed::set(float value)
+{
+	m_AnimatedMesh->setAnimationSpeed(value);
+}
+
 int AnimatedMesh::FrameCount::get()
 {
 	return m_AnimatedMesh->getFrameCount();
