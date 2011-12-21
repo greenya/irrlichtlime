@@ -22,6 +22,17 @@ CameraMayaSceneNodeAnimator::CameraMayaSceneNodeAnimator(scene::ISceneNodeAnimat
 	m_CameraMayaSceneNodeAnimator = ref;
 }
 
+float CameraMayaSceneNodeAnimator::Distance::get()
+{
+	return m_CameraMayaSceneNodeAnimator->getDistance();
+}
+
+void CameraMayaSceneNodeAnimator::Distance::set(float value)
+{
+	LIME_ASSERT(value > 0.0f);
+	m_CameraMayaSceneNodeAnimator->setDistance(value);
+}
+
 float CameraMayaSceneNodeAnimator::MoveSpeed::get()
 {
 	return m_CameraMayaSceneNodeAnimator->getMoveSpeed();
