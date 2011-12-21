@@ -79,7 +79,7 @@ namespace _07.Collision
 			bill.SetMaterialTexture(0, driver.GetTexture("../../media/particle.bmp"));
 			bill.SetMaterialFlag(MaterialFlag.Lighting, false);
 			bill.SetMaterialFlag(MaterialFlag.ZBuffer, false);
-			bill.SetShape(20, 20, 20);
+			bill.SetSize(20, 20, 20);
 			bill.ID = ID_IsNotPickable; // This ensures that we don't accidentally ray-pick it
 
 			AnimatedMeshSceneNode node = null;
