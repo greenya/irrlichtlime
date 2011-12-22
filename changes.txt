@@ -1,3 +1,43 @@
+============================
+Changes in 1.0 (22-Dec-2011)
+============================
+
+- Added example L09.SimpleLOD.
+
+- Updated Irrlicht SDK to trunk rev. 4021.
+
+- Added Clear(), RemoveTab(), InsertTab() and GetTabAt() to GUITabControl. Added DoParticleSystem() to ParticleSystemSceneNode.
+
+- Added props ActiveFont and OverrideFont to GUIButton, GUIEditBox and GUIStaticText.
+
+- SetDrawBackground() and SetDrawBorder() replaced with get-and-set props DrawBackgroundEnabled and DrawBorderEnabled in GUIStaticText.
+
+- Added TextureMatrix value to VideoDriverFeature. Added SceneManager value to SceneNodeType.
+
+- Added OnAnimate protected event to SceneNode.
+
+- Added ability to inherit from GUIElement. Added protected members: OnDraw and OnEvent events; Environment prop.
+
+- Added Randomizer class. Added CreateRandomizer() and prop Randomizer to IrrlichtDevice.
+
+- Added MaxSelectionRows to GUIComboBox.
+
+- Added overloadings to GUIEnvironment.AddFileOpenDialog() with arguments restoreCurrentWorkingDir and startDir.
+
+- SetKeyMap() replaced with get-and-set prop KeyMap in CameraFPSSceneNodeAnimator.
+
+- Image class changes: added GetPixelFormat() and CopyToBitmap(); fixed bug with CopyToScaling(), now it returns byte array and it is correctly filled in; added CopyTo() overloading which returns byte array.
+
+- BillboardSceneNode class chnages: added SetSize(), GetSize(), BottomColor, TopColor, BottomWidth, TopWidth, Height and removed Size prop.
+
+- Added IdentityNoLighting (static get-only prop) to Material.
+
+- Added AnimationSpeed prop to AnimatedMesh.
+
+- Added Distance prop to CameraMayaSceneNodeAnimator.
+
+- Added Vector2Df type support to Attributes.
+
 ==============================
 Changes in 0.9.1 (30-May-2011)
 ==============================
