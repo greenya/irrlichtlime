@@ -20,7 +20,7 @@ public enum class AttributeType
 	Colorf = EAT_COLORF,
 	Vector3Df = EAT_VECTOR3D,
 	Vector2Di = EAT_POSITION2D,
-	// EAT_VECTOR2D // this value not used by Irrlicht at all
+	Vector2Df = EAT_VECTOR2D,
 	Recti = EAT_RECT,
 	Matrix = EAT_MATRIX,
 	Quaternion = EAT_QUATERNION,
@@ -35,6 +35,7 @@ public enum class AttributeType
 	ByteArray = EAT_BINARY,
 	Texture = EAT_TEXTURE,
 	// EAT_USER_POINTER // we don't support it
+	// EAT_DIMENSION2D // we don't have Dimension2Du type; for holding Dimension2Di-type-like value user can use Vector2Di
 	// EAT_COUNT
 	Unknown = EAT_UNKNOWN
 };

@@ -23,6 +23,7 @@ AttributeType Attributes::GetAttributeTypeFromValue(Object^ value)
 	else if (t == Video::Color::typeid) return AttributeType::Color;
 	else if (t == Vector3Df::typeid) return AttributeType::Vector3Df;
 	else if (t == Vector2Di::typeid) return AttributeType::Vector2Di;
+	else if (t == Vector2Df::typeid) return AttributeType::Vector2Df;
 	else if (t == Recti::typeid) return AttributeType::Recti;
 	else if (t == Matrix::typeid) return AttributeType::Matrix;
 	else if (t == Quaternion::typeid) return AttributeType::Quaternion;
@@ -131,6 +132,10 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 
 	case AttributeType::Vector2Di:
 		m_Attributes->addPosition2d(n.c_str(), *((Vector2Di^)value)->m_NativeValue);
+		return;
+
+	case AttributeType::Vector2Df:
+		m_Attributes->addVector2d(n.c_str(), *((Vector2Df^)value)->m_NativeValue);
 		return;
 
 	case AttributeType::Recti:
@@ -286,6 +291,9 @@ Object^ Attributes::GetValue(int attributeIndex)
 	case AttributeType::Vector2Di:
 		return gcnew Vector2Di(m_Attributes->getAttributeAsPosition2d(attributeIndex));
 
+	case AttributeType::Vector2Df:
+		return gcnew Vector2Df(m_Attributes->getAttributeAsVector2d(attributeIndex));
+
 	case AttributeType::Recti:
 		return gcnew Recti(m_Attributes->getAttributeAsRect(attributeIndex));
 
@@ -404,6 +412,10 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 
 	case AttributeType::Vector2Di:
 		m_Attributes->setAttribute(attributeIndex, *((Vector2Di^)value)->m_NativeValue);
+		return;
+
+	case AttributeType::Vector2Df:
+		m_Attributes->setAttribute(attributeIndex, *((Vector2Df^)value)->m_NativeValue);
 		return;
 
 	case AttributeType::Recti:
