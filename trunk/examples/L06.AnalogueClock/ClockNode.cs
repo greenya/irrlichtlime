@@ -35,6 +35,7 @@ namespace L06.AnalogueClock
 			OnGetMaterial += new GetMaterialEventHandler(ClockNode_OnGetMaterial);
 			OnRegisterSceneNode += new RegisterSceneNodeEventHandler(ClockNode_OnRegisterSceneNode);
 			OnRender += new RenderEventHandler(ClockNode_OnRender);
+			OnAnimate += new AnimateEventHandler(ClockNode_OnAnimate);
 
 			// add clock face
 
@@ -149,11 +150,17 @@ namespace L06.AnalogueClock
 
 		void ClockNode_OnRender()
 		{
-			DateTime time = DateTime.Now;
+			// we need to add code here if we want to draw something that is not fitted into scene nodes,
+			// but now our clock elements all is done via scene nodes.
+		}
 
-			arrowSeconds.Rotation = new Vector3Df(0, 0, -time.Second * (360 / 60));
-			arrowMinutes.Rotation = new Vector3Df(0, 0, -time.Minute * (360 / 60));
-			arrowHours.Rotation = new Vector3Df(0, 0, -(time.Hour % 12) * (360 / 12));
+		void ClockNode_OnAnimate(uint time)
+		{
+			DateTime t = DateTime.Now;
+
+			arrowSeconds.Rotation = new Vector3Df(0, 0, -t.Second * (360 / 60));
+			arrowMinutes.Rotation = new Vector3Df(0, 0, -t.Minute * (360 / 60));
+			arrowHours.Rotation = new Vector3Df(0, 0, -(t.Hour % 12) * (360 / 12));
 		}
 	}
 }
