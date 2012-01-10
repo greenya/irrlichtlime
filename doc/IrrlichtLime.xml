@@ -560,7 +560,7 @@ Please take care that you should only return 'true' when you want to _prevent_ I
 
 Raises for each event from the engine.
 
-If you handle this event, you should return true if you have handled the event, and false -- if not (in this case Irrlicht Engine will process it).</summary>
+You should return true if you have handled the event, and false -- if not (in this case Irrlicht Engine will process it).</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.OSOperator">
 			<summary>Provides access to the operation system functionality.
