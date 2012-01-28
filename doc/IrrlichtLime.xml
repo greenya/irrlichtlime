@@ -1580,6 +1580,11 @@ This is a function often used for texture dimension calculations. The function r
 		<member name="P:IrrlichtLime.Core.Dimension2Df.Height">
 			<summary>Height of the dimension.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Df.Inflate(System.Single,System.Single)">
+			<summary>Enlarges this dimension by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Dimension2Df.Set(IrrlichtLime.Core.Dimension2Df)">
 			<summary>Set to new value using another dimension.</summary>
 			<param name="copy">Another dimension.</param>
@@ -1662,6 +1667,11 @@ This is a function often used for texture dimension calculations. The function r
 		</member>
 		<member name="P:IrrlichtLime.Core.Dimension2Di.Height">
 			<summary>Height of the dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Di.Inflate(System.Int32,System.Int32)">
+			<summary>Enlarges this dimension by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Dimension2Di.Set(IrrlichtLime.Core.Dimension2Di)">
 			<summary>Set to new value using another dimension.</summary>
@@ -2316,6 +2326,11 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="P:IrrlichtLime.Core.Rectf.Height">
 			<summary>Height of the rectangle.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.Inflate(System.Single,System.Single)">
+			<summary>Adjusts LowerRightCorner of this rect by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.IsPointInside(IrrlichtLime.Core.Vector2Df)">
 			<summary>Checks if a 2d point is within this rectangle.</summary>
 			<param name="pos">Position to test.</param>
@@ -2328,6 +2343,11 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Rectf.LowerRightCorner">
 			<summary>Lower right corner of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.Offset(System.Single,System.Single)">
+			<summary>Adjusts UpperLeftCorner of this rect by the specified amount.</summary>
+			<param name="x">Horizontal offset.</param>
+			<param name="y">Vertical offset.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor">
 			<summary>Default constructor creating empty rectangle at (0,0).</summary>
@@ -2395,6 +2415,11 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="P:IrrlichtLime.Core.Recti.Height">
 			<summary>Height of the rectangle.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Recti.Inflate(System.Int32,System.Int32)">
+			<summary>Adjusts LowerRightCorner of this rect by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Recti.IsPointInside(IrrlichtLime.Core.Vector2Di)">
 			<summary>Checks if a 2d point is within this rectangle.</summary>
 			<param name="pos">Position to test.</param>
@@ -2407,6 +2432,11 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Recti.LowerRightCorner">
 			<summary>Lower right corner of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.Offset(System.Int32,System.Int32)">
+			<summary>Adjusts UpperLeftCorner of this rect by the specified amount.</summary>
+			<param name="x">Horizontal offset.</param>
+			<param name="y">Vertical offset.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor">
 			<summary>Default constructor creating empty rectangle at (0,0).</summary>
