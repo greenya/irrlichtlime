@@ -2308,6 +2308,13 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="x">X-Coordinate of the point to add to this box.</param>
 			<param name="y">Y-Coordinate of the point to add to this box.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.Adjust(System.Single,System.Single,System.Single,System.Single)">
+			<summary>Adjusts both corners of this rect by the specified amount.</summary>
+			<param name="x1">UpperLeftCorner.X to adjust for.</param>
+			<param name="y1">UpperLeftCorner.Y to adjust for.</param>
+			<param name="x2">LowerRightCorner.X to adjust for.</param>
+			<param name="y2">LowerRightCorner.Y to adjust for.</param>
+		</member>
 		<member name="P:IrrlichtLime.Core.Rectf.Area">
 			<summary>Area of the rectangle: Width x Height.</summary>
 		</member>
@@ -2327,7 +2334,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<summary>Height of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.Inflate(System.Single,System.Single)">
-			<summary>Adjusts LowerRightCorner of this rect by the specified amount.</summary>
+			<summary>Inflates this rect by the specified amount.</summary>
 			<param name="width">Width to enlarge.</param>
 			<param name="height">Height to enlarge.</param>
 		</member>
@@ -2345,7 +2352,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<summary>Lower right corner of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.Offset(System.Single,System.Single)">
-			<summary>Adjusts UpperLeftCorner of this rect by the specified amount.</summary>
+			<summary>Offsets position of this rect by the specified amount.</summary>
 			<param name="x">Horizontal offset.</param>
 			<param name="y">Vertical offset.</param>
 		</member>
@@ -2397,6 +2404,13 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="x">X-Coordinate of the point to add to this box.</param>
 			<param name="y">Y-Coordinate of the point to add to this box.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Recti.Adjust(System.Int32,System.Int32,System.Int32,System.Int32)">
+			<summary>Adjusts both corners of this rect by the specified amount.</summary>
+			<param name="x1">UpperLeftCorner.X to adjust for.</param>
+			<param name="y1">UpperLeftCorner.Y to adjust for.</param>
+			<param name="x2">LowerRightCorner.X to adjust for.</param>
+			<param name="y2">LowerRightCorner.Y to adjust for.</param>
+		</member>
 		<member name="P:IrrlichtLime.Core.Recti.Area">
 			<summary>Area of the rectangle: Width x Height.</summary>
 		</member>
@@ -2416,7 +2430,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<summary>Height of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.Inflate(System.Int32,System.Int32)">
-			<summary>Adjusts LowerRightCorner of this rect by the specified amount.</summary>
+			<summary>Inflates this rect by the specified amount.</summary>
 			<param name="width">Width to enlarge.</param>
 			<param name="height">Height to enlarge.</param>
 		</member>
@@ -2434,7 +2448,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<summary>Lower right corner of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.Offset(System.Int32,System.Int32)">
-			<summary>Adjusts UpperLeftCorner of this rect by the specified amount.</summary>
+			<summary>Offsets position of this rect by the specified amount.</summary>
 			<param name="x">Horizontal offset.</param>
 			<param name="y">Vertical offset.</param>
 		</member>
