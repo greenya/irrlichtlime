@@ -89,6 +89,14 @@ public:
 		m_NativeValue->addInternalPoint(*point->m_NativeValue);
 	}
 
+	void Adjust(_WRAPTYPE_ x1, _WRAPTYPE_ y1, _WRAPTYPE_ x2, _WRAPTYPE_ y2)
+	{
+		m_NativeValue->UpperLeftCorner.X += x1;
+		m_NativeValue->UpperLeftCorner.Y += y1;
+		m_NativeValue->LowerRightCorner.X += x2;
+		m_NativeValue->LowerRightCorner.Y += y2;
+	}
+
 	void ClipAgainst(_REFCLASS_^ other)
 	{
 		LIME_ASSERT(other != nullptr);
@@ -103,8 +111,13 @@ public:
 
 	void Inflate(_WRAPTYPE_ width, _WRAPTYPE_ height)
 	{
-		m_NativeValue->LowerRightCorner.X += width;
-		m_NativeValue->LowerRightCorner.Y += height;
+		_WRAPTYPE_ w2 = width / 2;
+		_WRAPTYPE_ h2 = height / 2;
+
+		m_NativeValue->UpperLeftCorner.X -= w2;
+		m_NativeValue->UpperLeftCorner.Y -= h2;
+		m_NativeValue->LowerRightCorner.X += w2;
+		m_NativeValue->LowerRightCorner.Y += h2;
 	}
 
 	bool IsPointInside(_OTHERTYPE1_^ pos)
@@ -123,6 +136,8 @@ public:
 	{
 		m_NativeValue->UpperLeftCorner.X += x;
 		m_NativeValue->UpperLeftCorner.Y += y;
+		m_NativeValue->LowerRightCorner.X += x;
+		m_NativeValue->LowerRightCorner.Y += y;
 	}
 
 	property bool Valid
