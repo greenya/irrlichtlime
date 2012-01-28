@@ -118,6 +118,12 @@ public:
 		return gcnew _REFCLASS_(m_NativeValue->getOptimalSize());
 	}
 
+	void Inflate(_WRAPTYPE_ width, _WRAPTYPE_ height)
+	{
+		m_NativeValue->Width += width;
+		m_NativeValue->Height += height;
+	}
+
 	property _WRAPTYPE_ Width
 	{
 		_WRAPTYPE_ get() { return m_NativeValue->Width; }

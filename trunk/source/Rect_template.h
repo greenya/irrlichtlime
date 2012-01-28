@@ -101,6 +101,12 @@ public:
 		return m_NativeValue->constrainTo(*other->m_NativeValue);
 	}
 
+	void Inflate(_WRAPTYPE_ width, _WRAPTYPE_ height)
+	{
+		m_NativeValue->LowerRightCorner.X += width;
+		m_NativeValue->LowerRightCorner.Y += height;
+	}
+
 	bool IsPointInside(_OTHERTYPE1_^ pos)
 	{
 		LIME_ASSERT(pos != nullptr);
@@ -111,6 +117,12 @@ public:
 	{
 		LIME_ASSERT(other != nullptr);
 		return m_NativeValue->isRectCollided(*other->m_NativeValue);
+	}
+
+	void Offset(_WRAPTYPE_ x, _WRAPTYPE_ y)
+	{
+		m_NativeValue->UpperLeftCorner.X += x;
+		m_NativeValue->UpperLeftCorner.Y += y;
 	}
 
 	property bool Valid
