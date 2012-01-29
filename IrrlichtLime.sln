@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "26.OcclusionQuery", "exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L09.SimpleLOD", "examples\L09.SimpleLOD\L09.SimpleLOD.csproj", "{193127A4-9058-4F6E-B474-CAE76672546F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L10.ImageBrowser", "examples\L10.ImageBrowser\L10.ImageBrowser.csproj", "{4CF26F1A-AF01-4B55-8A59-77C83798935C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -405,6 +407,18 @@ Global
 		{193127A4-9058-4F6E-B474-CAE76672546F}.Release|Win32.ActiveCfg = Release|x86
 		{193127A4-9058-4F6E-B474-CAE76672546F}.Release|x86.ActiveCfg = Release|x86
 		{193127A4-9058-4F6E-B474-CAE76672546F}.Release|x86.Build.0 = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|Win32.ActiveCfg = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|x86.ActiveCfg = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Debug|x86.Build.0 = Debug|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|Any CPU.ActiveCfg = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|Win32.ActiveCfg = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|x86.ActiveCfg = Release|x86
+		{4CF26F1A-AF01-4B55-8A59-77C83798935C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
