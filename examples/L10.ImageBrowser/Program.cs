@@ -248,7 +248,8 @@ namespace L10.ImageBrowser
 
 			if (evnt.Type == EventType.Mouse &&
 				evnt.Mouse.Type == MouseEventType.LeftUp &&
-				selectedNode != null)
+				selectedNode != null &&
+				selectedNode.GetMaterial(0).GetTexture(0) != hoveredNode.GetMaterial(0).GetTexture(0))
 			{
 				if (animationManager.IsAnimated(selectedNode))
 					return true;
