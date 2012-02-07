@@ -33,7 +33,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
-	int o = m_GPUProgrammingServices->addHighLevelShaderMaterialFromFiles(
+	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
 		Lime::StringToStringC(vertexShaderProgram).c_str(),
 		Lime::StringToStringC(vertexShaderEntryPoint).c_str(),
 		(video::E_VERTEX_SHADER_TYPE)vsCompileTarget,
