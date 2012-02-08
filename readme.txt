@@ -6,8 +6,8 @@ The Irrlicht Lime SDK
 
   Contents:
 
-  1. Directory Structure Overview
-  2. How to Start
+  1. How to Start
+  2. Directory Structure Overview
   3. Release Notes
   4. License
   5. Contact
@@ -15,7 +15,24 @@ The Irrlicht Lime SDK
 
 
 ==========================================================================
-1. Directory Structure Overview
+1. How to Start
+==========================================================================
+
+  To see wrapper in action, go to \bin folder and run couple examples.
+
+  To start developing your own applications, all you need is to add a
+  reference on IrrlichtLime.dll to your .NET project. When running your
+  application, make sure that IrrlichtLime.dll and Irrlicht.dll are
+  placed near your executable.
+
+  If you get FileNotFoundException while running any example, you need
+  to install Microsoft Visual C++ 2010 Redistributable Package (x86),
+  which can be easily found at http://www.microsoft.com/downloads/.
+
+
+
+==========================================================================
+2. Directory Structure Overview
 ==========================================================================
 
   \bin         This is the output directory. When you compile Lime and
@@ -30,23 +47,6 @@ The Irrlicht Lime SDK
                is copying into \bin folder each time you compile Lime.
   \media       Media resources for the examples.
   \source      Source code of the Irrlicht Lime.
-
-
-
-==========================================================================
-2. How to Start
-==========================================================================
-
-  To see wrapper in action, go to \bin folder and run couple examples.
-
-  To start developing your own applications, all you need is to add a
-  reference on IrrlichtLime.dll to your .NET project. When running your
-  application, make sure that IrrlichtLime.dll and Irrlicht.dll are
-  placed near your executable.
-
-  If you get FileNotFoundException while running any example, you need
-  to install Microsoft Visual C++ 2010 Redistributable Package (x86),
-  which can be easily found at http://www.microsoft.com/downloads/.
 
 
 
@@ -67,14 +67,14 @@ The Irrlicht Lime SDK
 
   The license of the Irrlicht Lime is based on the zlib/libpng license.
   Even though this license does not require you to mention that you are
-  using the Irrlicht Lime in your product, an acknowledgement
-  would be highly appreciated.
+  using the Irrlicht Lime in your product, an acknowledgement would be
+  highly appreciated.
 
 
   The Irrlicht Lime License
   =========================
 
-  Copyright (C) 2010-2011 Yuriy Grinevich
+  Copyright (C) 2010-2012 Yuriy Grinevich
 
   This software is provided 'as-is', without any express or implied
   warranty. In no event will the authors be held liable for any damages
@@ -86,11 +86,14 @@ The Irrlicht Lime SDK
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgement in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be clearly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
+     in a product, an acknowledgement in the product documentation would
+     be appreciated but is not required.
+
+  2. Altered source versions must be clearly marked as such, and must not
+     be misrepresented as being the original software.
+
+  3. This notice may not be removed or altered from any source
+     distribution.
 
 
 
