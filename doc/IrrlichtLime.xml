@@ -6627,6 +6627,21 @@ This method works with all drivers because it simply calls DrawVertexPrimitiveLi
 			<summary>Draws a mesh buffer.</summary>
 			<param name="mb">Buffer to draw.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawMeshBufferNormals(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Draws normals of a mesh buffer.</summary>
+			<param name="mb">Buffer to draw the normals of.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawMeshBufferNormals(IrrlichtLime.Scene.MeshBuffer,System.Single)">
+			<summary>Draws normals of a mesh buffer.</summary>
+			<param name="mb">Buffer to draw the normals of.</param>
+			<param name="length">Length scale factor of the normals. Default: 10.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawMeshBufferNormals(IrrlichtLime.Scene.MeshBuffer,System.Single,IrrlichtLime.Video.Color)">
+			<summary>Draws normals of a mesh buffer.</summary>
+			<param name="mb">Buffer to draw the normals of.</param>
+			<param name="length">Length scale factor of the normals. Default: 10.0f.</param>
+			<param name="color">Color the normals are rendered with. Default: 0xffffffff.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.DrawPixel(System.Int32,System.Int32,IrrlichtLime.Video.Color)">
 			<summary>Draws 2d pixel.</summary>
 			<param name="x">The X-position of the pixel.</param>

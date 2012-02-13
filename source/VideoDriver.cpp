@@ -651,6 +651,28 @@ void VideoDriver::DrawMeshBuffer(Scene::MeshBuffer^ mb)
 	m_VideoDriver->drawMeshBuffer(LIME_SAFEREF(mb, m_MeshBuffer));
 }
 
+void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color^ color)
+{
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->drawMeshBufferNormals(
+		LIME_SAFEREF(mb, m_MeshBuffer),
+		length,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length)
+{
+	m_VideoDriver->drawMeshBufferNormals(
+		LIME_SAFEREF(mb, m_MeshBuffer),
+		length);
+}
+
+void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb)
+{
+	m_VideoDriver->drawMeshBufferNormals(LIME_SAFEREF(mb, m_MeshBuffer));
+}
+
 void VideoDriver::DrawPixel(int x, int y, Color^ color)
 {
 	LIME_ASSERT(x >= 0 && x < CurrentRenderTargetSize->Width);

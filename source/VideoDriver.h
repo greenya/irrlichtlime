@@ -105,6 +105,10 @@ public:
 
 	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
 
+	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color^ color);
+	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length);
+	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb);
+
 	void DrawPixel(int x, int y, Color^ color);
 
 	void DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, Color^ rightUpEdge, Color^ leftDownEdge, Color^ rightDownEdge);
