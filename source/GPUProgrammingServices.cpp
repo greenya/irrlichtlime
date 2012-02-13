@@ -22,6 +22,34 @@ GPUProgrammingServices::GPUProgrammingServices(video::IGPUProgrammingServices* r
 	m_GPUProgrammingServices = ref;
 }
 
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, MaterialType baseMaterial, int userData)
+{
+	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
+	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
+	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
+
+	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
+		Lime::StringToStringC(vertexShaderProgram).c_str(),
+		Lime::StringToStringC(pixelShaderProgram).c_str(),
+		c,
+		(video::E_MATERIAL_TYPE)baseMaterial,
+		userData);
+
+	c->drop();
+
+	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, MaterialType baseMaterial)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, baseMaterial, 0);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, MaterialType::Solid);
+}
+
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
 	VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
 	MaterialType baseMaterial, int userData)
@@ -75,6 +103,58 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 {
 	return AddHighLevelShaderMaterial(vertexShaderProgram, "main", VertexShaderType::VS_1_1,
 		"", "main", PixelShaderType::PS_1_1, MaterialType::Solid, 0);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram,
+	Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
+{
+	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
+	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
+	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
+
+	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
+		Lime::StringToStringC(vertexShaderProgram).c_str(),
+		Lime::StringToStringC(pixelShaderProgram).c_str(),
+		Lime::StringToStringC(geometryShaderProgram).c_str(),
+		(scene::E_PRIMITIVE_TYPE)inType,
+		(scene::E_PRIMITIVE_TYPE)outType,
+		verticesOut,
+		c,
+		(video::E_MATERIAL_TYPE)baseMaterial,
+		userData);
+
+	c->drop();
+
+	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram,
+	Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, geometryShaderProgram, inType, outType, verticesOut, baseMaterial, 0);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram,
+	Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, geometryShaderProgram, inType, outType, verticesOut, MaterialType::Solid);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram,
+	Scene::PrimitiveType inType, Scene::PrimitiveType outType)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, geometryShaderProgram, inType, outType, 0);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram,
+	Scene::PrimitiveType inType)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, geometryShaderProgram, inType, Scene::PrimitiveType::TriangleStrip);
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, pixelShaderProgram, geometryShaderProgram, Scene::PrimitiveType::Triangles);
 }
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
