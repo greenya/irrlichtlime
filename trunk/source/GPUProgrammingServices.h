@@ -16,11 +16,22 @@ public ref class GPUProgrammingServices
 {
 public:
 
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, MaterialType baseMaterial, int userData);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, MaterialType baseMaterial);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram);
+
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, MaterialType baseMaterial, int userData);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, MaterialType baseMaterial);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram);
+
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram, Scene::PrimitiveType inType, Scene::PrimitiveType outType);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram, Scene::PrimitiveType inType);
+	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ pixelShaderProgram, String^ geometryShaderProgram);
 
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial);
