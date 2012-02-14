@@ -1385,6 +1385,12 @@ void GUIEnvironment::Focus::set(GUIElement^ value)
 	m_GUIEnvironment->setFocus(LIME_SAFEREF(value, m_GUIElement));
 }
 
+GUIElement^ GUIEnvironment::HoveredElement::get()
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getHovered();
+	return GUIElement::Wrap(e);
+}
+
 GUIElement^ GUIEnvironment::RootElement::get()
 {
 	gui::IGUIElement* e = m_GUIEnvironment->getRootGUIElement();
