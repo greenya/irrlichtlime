@@ -40,6 +40,12 @@ AnimatedMesh^ MeshManipulator::CreateAnimatedMesh(Mesh^ mesh)
 	return AnimatedMesh::Wrap(m);
 }
 
+Mesh^ MeshManipulator::CreateForsythOptimizedMesh(Mesh^ mesh)
+{
+	scene::IMesh* m = m_MeshManipulator->createForsythOptimizedMesh(LIME_SAFEREF(mesh, m_Mesh));
+	return Mesh::Wrap(m);
+}
+
 Mesh^ MeshManipulator::CreateMeshCopy(Mesh^ mesh)
 {
 	scene::IMesh* m = m_MeshManipulator->createMeshCopy(LIME_SAFEREF(mesh, m_Mesh));

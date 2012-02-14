@@ -21,6 +21,8 @@ public:
 	AnimatedMesh^ CreateAnimatedMesh(Mesh^ mesh, AnimatedMeshType type);
 	AnimatedMesh^ CreateAnimatedMesh(Mesh^ mesh);
 
+	Mesh^ CreateForsythOptimizedMesh(Mesh^ mesh);
+
 	Mesh^ CreateMeshCopy(Mesh^ mesh);
 
 	Mesh^ CreateMeshUniquePrimitives(Mesh^ mesh);
