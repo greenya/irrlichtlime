@@ -386,9 +386,27 @@ namespace _09.Meshviewer
 			return false;
 		}
 
+		static bool hasModalDialog()
+		{
+			GUIElement focused = device.GUIEnvironment.Focus;
+
+			while (focused != null)
+			{
+				if (focused.Visible && focused.Type == GUIElementType.ModalScreen)
+					return true;
+
+				focused = focused.Parent;
+			}
+
+			return false;
+		}
+
 		static bool OnKeyUp(KeyCode keyCode)
 		{
 			if (device == null)
+				return false;
+
+			if (hasModalDialog())
 				return false;
 
 			switch (keyCode)
