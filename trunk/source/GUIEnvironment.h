@@ -211,6 +211,7 @@ public:
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
 	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }
 	property GUIElement^ Focus { GUIElement^ get(); void set(GUIElement^ value); }
+	property GUIElement^ HoveredElement { GUIElement^ get(); }
 	property GUIElement^ RootElement { GUIElement^ get(); }
 	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
