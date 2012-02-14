@@ -127,6 +127,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClInclude Include="FogType.h" />
     <ClInclude Include="GeometryShaderType.h" />
     <ClInclude Include="GPUProgrammingServices.h" />
+    <ClInclude Include="GPUShadingLanguage.h" />
     <ClInclude Include="GUIElementInheritor.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />

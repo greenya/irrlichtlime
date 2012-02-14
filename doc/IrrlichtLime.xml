@@ -5077,6 +5077,15 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 			<summary>Event raises after OnSetConstants.</summary>
 			<param name="material">Shader material.</param>
 		</member>
+		<member name="T:IrrlichtLime.Video.GPUShadingLanguage">
+			<summary>Enumeration for different types of shading languages.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.GPUShadingLanguage.Cg">
+			<summary>Cg shading language.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.GPUShadingLanguage.Default">
+			<summary>The default language, so HLSL for Direct3D and GLSL for OpenGL.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.Image">
 			<summary>Software image data.
 

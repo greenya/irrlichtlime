@@ -601,6 +601,9 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="Randomizer.h" />
+    <ClInclude Include="GPUShadingLanguage.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
