@@ -2191,9 +2191,9 @@ Also useful for interpolations.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
 			<summary>Sets this quaternion to the result of the linear interpolation between two quaternions.</summary>
-			<param name="q1">First quaternion.</param>
-			<param name="q2">Second quaternion.</param>
-			<param name="time">Interpolation value.</param>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
 			<returns>This quaternion.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.MakeIdentity">
@@ -2272,9 +2272,17 @@ The rotation is q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
 			<summary>Sets this quaternion to the result of the spherical interpolation between two quaternions.</summary>
-			<param name="q1">First quaternion.</param>
-			<param name="q2">Second quaternion.</param>
-			<param name="time">Interpolation value.</param>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single,System.Single)">
+			<summary>Sets this quaternion to the result of the spherical interpolation between two quaternions.</summary>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
+			<param name="threshold">To avoid inaccuracies at the end (time=1) the interpolation switches to linear interpolation at some point. This value defines how much of the remaining interpolation will be calculated with Lerp(). Everything from 1-threshold up will be linear interpolation. Default: 0.05f.</param>
 			<returns>This quaternion.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.ToAngleAxis(System.Single@,IrrlichtLime.Core.Vector3Df@)">

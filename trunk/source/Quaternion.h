@@ -217,6 +217,15 @@ public:
 		return this;
 	}
 
+	Quaternion^ Slerp(Quaternion^ q1, Quaternion^ q2, float time, float threshold)
+	{
+		LIME_ASSERT(q1 != nullptr);
+		LIME_ASSERT(q2 != nullptr);
+
+		m_NativeValue->slerp(*q1->m_NativeValue, *q2->m_NativeValue, time, threshold);
+		return this;
+	}
+
 	void ToAngleAxis([Out] float% angle, [Out] Vector3Df^% axis)
 	{
 		LIME_ASSERT(axis != nullptr);
