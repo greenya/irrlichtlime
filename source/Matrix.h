@@ -410,6 +410,22 @@ public:
 		return this;
 	}
 
+	Matrix^ SetRotationAxisRadiansLH(float angle, Vector3Df^ axis)
+	{
+		LIME_ASSERT(axis != nullptr);
+
+		m_NativeValue->setRotationAxisRadiansLH(angle, *axis->m_NativeValue);
+		return this;
+	}
+
+	Matrix^ SetRotationAxisRadiansRH(float angle, Vector3Df^ axis)
+	{
+		LIME_ASSERT(axis != nullptr);
+
+		m_NativeValue->setRotationAxisRadiansRH(angle, *axis->m_NativeValue);
+		return this;
+	}
+
 	Matrix^ SetTextureRotationCenter(float radAngle)
 	{
 		m_NativeValue->setTextureRotationCenter(radAngle);

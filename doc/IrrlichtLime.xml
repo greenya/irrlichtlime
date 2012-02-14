@@ -1949,6 +1949,16 @@ The 4th row and column are unmodified.</summary>
 		<member name="M:IrrlichtLime.Core.Matrix.SetInverseTranslation(IrrlichtLime.Core.Vector3Df)">
 			<summary>Set the inverse translation of the current matrix. Will erase any previous values.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetRotationAxisRadiansLH(System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Make a rotation matrix from angle and axis using LH rotation.
+
+The 4th row and column are unmodified.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.SetRotationAxisRadiansRH(System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Make a rotation matrix from angle and axis using RH rotation.
+
+The 4th row and column are unmodified.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.SetRotationCenter(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Builds a combined matrix which translates to a center before rotation and translates from origin afterwards.</summary>
 			<param name="center">Position to rotate around.</param>
