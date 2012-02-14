@@ -2583,11 +2583,9 @@ Thus, this method assumes a camera position from which the triangle is definitel
 			<returns>True if the point is inside the triangle, otherwise false.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.IsPointInsideFast(IrrlichtLime.Core.Vector3Df)">
-			<summary>Check if a point is inside the triangle.
+			<summary>Check if a point is inside the triangle (border-points count also as inside).
 
-This method is an implementation of the example used in a paper by Kasper Fauerby original written by Keidy from Mr-Gamemaker.
-
-This was once faster than an old IsPointInside() implementation, but the current IsPointInside() is usualy as fast, sometimes even faster. Border-points in IsPointInsideFast() are not defined, some are inside and some outside.</summary>
+This method uses a barycentric coordinate system. It is faster than IsPointInside() but is more susceptible to floating point rounding errors. This will especially be noticable when the FPU is in single precision mode (which is for example set on default by Direct3D).</summary>
 			<param name="point">Point to test. Assumes that this point is already on the plane of the triangle.</param>
 			<returns>True if the point is inside the triangle, otherwise false.</returns>
 		</member>
