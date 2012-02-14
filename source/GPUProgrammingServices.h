@@ -39,11 +39,22 @@ public:
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType, Scene::PrimitiveType outType);
 	MaterialType AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget);
 
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, MaterialType baseMaterial, int userData);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, MaterialType baseMaterial);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName);
+
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, MaterialType baseMaterial, int userData);
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, MaterialType baseMaterial);
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget);
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget);
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName);
+
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName, Scene::PrimitiveType inType, Scene::PrimitiveType outType);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName, Scene::PrimitiveType inType);
+	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName);
 
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderFileName, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData);
 	MaterialType AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint, VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget, String^ geometryShaderFileName, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial);
