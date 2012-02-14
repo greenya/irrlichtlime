@@ -52,7 +52,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
 	VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
-	MaterialType baseMaterial, int userData)
+	MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
@@ -70,11 +70,20 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
 		c,
 		(video::E_MATERIAL_TYPE)baseMaterial,
-		userData);
+		userData,
+		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
 
 	c->drop();
 
 	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
+	VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
+	MaterialType baseMaterial, int userData)
+{
+	return AddHighLevelShaderMaterial(vertexShaderProgram, vertexShaderEntryPoint, vsCompileTarget, pixelShaderProgram,
+		pixelShaderEntryPoint, psCompileTarget, baseMaterial, userData, GPUShadingLanguage::Default);
 }
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
@@ -160,7 +169,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
 	VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
 	String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType,
-	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
+	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
@@ -185,11 +194,23 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 		verticesOut,
 		c,
 		(video::E_MATERIAL_TYPE)baseMaterial,
-		userData);
+		userData,
+		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
 
 	c->drop();
 
 	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
+	VertexShaderType vsCompileTarget, String^ pixelShaderProgram, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
+	String^ geometryShaderProgram, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType,
+	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
+{
+	return AddHighLevelShaderMaterial(
+		vertexShaderProgram, vertexShaderEntryPoint, vsCompileTarget, pixelShaderProgram, pixelShaderEntryPoint, psCompileTarget,
+		geometryShaderProgram, geometryShaderEntryPoint, gsCompileTarget, inType, outType, verticesOut, baseMaterial, userData,
+		GPUShadingLanguage::Default);
 }
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexShaderProgram, String^ vertexShaderEntryPoint,
@@ -262,7 +283,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
 	VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
-	MaterialType baseMaterial, int userData)
+	MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
@@ -280,11 +301,20 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
 		c,
 		(video::E_MATERIAL_TYPE)baseMaterial,
-		userData);
+		userData,
+		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
 
 	c->drop();
 
 	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
+	VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
+	MaterialType baseMaterial, int userData)
+{
+	return AddHighLevelShaderMaterialFromFiles(vertexShaderFileName, vertexShaderEntryPoint, vsCompileTarget, pixelShaderFileName,
+		pixelShaderEntryPoint, psCompileTarget, baseMaterial, userData, GPUShadingLanguage::Default);
 }
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
@@ -370,7 +400,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
 	VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
 	String^ geometryShaderFileName, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType,
-	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
+	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
@@ -395,11 +425,23 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 		verticesOut,
 		c,
 		(video::E_MATERIAL_TYPE)baseMaterial,
-		userData);
+		userData,
+		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
 
 	c->drop();
 
 	return (MaterialType)o;
+}
+
+MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
+	VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
+	String^ geometryShaderFileName, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType,
+	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
+{
+	return AddHighLevelShaderMaterialFromFiles(
+		vertexShaderFileName, vertexShaderEntryPoint, vsCompileTarget, pixelShaderFileName, pixelShaderEntryPoint, psCompileTarget,
+		geometryShaderFileName, geometryShaderEntryPoint, gsCompileTarget, inType, outType, verticesOut, baseMaterial, userData,
+		GPUShadingLanguage::Default);
 }
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ vertexShaderEntryPoint,
