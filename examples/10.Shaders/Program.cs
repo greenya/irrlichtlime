@@ -15,6 +15,7 @@ namespace _10.Shaders
 	{
 		static IrrlichtDevice device = null;
 		static bool useHighLevelShaders = false;
+		static bool useCgShaders = false;
 
 		static void Main(string[] args)
 		{
@@ -23,6 +24,9 @@ namespace _10.Shaders
 				return;
 
 			useHighLevelShaders = AskUserForHighLevelShaders(driverType);
+
+			if (useHighLevelShaders)
+				useCgShaders = AskUserForCgShaders(driverType);
 
 			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
@@ -44,6 +48,7 @@ namespace _10.Shaders
 				case DriverType.Direct3D9:
 					if (useHighLevelShaders)
 					{
+						// Cg can also handle this syntax
 						psFileName = "../../media/d3d9.hlsl";
 						vsFileName = psFileName; // both shaders are in the same file
 					}
@@ -57,8 +62,17 @@ namespace _10.Shaders
 				case DriverType.OpenGL:
 					if (useHighLevelShaders)
 					{
-						psFileName = "../../media/opengl.frag";
-						vsFileName = "../../media/opengl.vert";
+						if (useCgShaders)
+						{
+							// Use HLSL syntax for Cg
+							psFileName = "../../media/d3d9.hlsl";
+							vsFileName = psFileName; // both shaders are in the same file
+						}
+						else
+						{
+							psFileName = "../../media/opengl.frag";
+							vsFileName = "../../media/opengl.vert";
+						}
 					}
 					else
 					{
@@ -90,15 +104,19 @@ namespace _10.Shaders
 
 				if (useHighLevelShaders)
 				{
+					GPUShadingLanguage shadingLanguage = useCgShaders
+						? GPUShadingLanguage.Cg
+						: GPUShadingLanguage.Default;
+
 					newMaterialType1 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
-						MaterialType.Solid);
+						MaterialType.Solid, 0, shadingLanguage);
 
 					newMaterialType2 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
-						MaterialType.TransparentAddColor);
+						MaterialType.TransparentAddColor, 0, shadingLanguage);
 				}
 				else
 				{
@@ -255,9 +273,25 @@ namespace _10.Shaders
 			Matrix transpWorld = driver.GetTransform(TransformationState.World).Transposed;
 
 			if (useHighLevelShaders)
+			{
 				services.SetVertexShaderVariable("mTransWorld", transpWorld.ToArray());
+
+				// set texture
+				if (useHighLevelShaders) // !!! THIS IF DEFINETLY ERROR, SINCE ITS DOUBLE TEST OF useHighLevelShaders
+					services.SetVertexShaderVariable("myTexture", new float[1] { 0.0f });
+			}
 			else
 				services.SetVertexShaderRegisters(10, transpWorld.ToArray());
+		}
+
+		static bool AskUserForCgShaders(DriverType driverType)
+		{
+			if (driverType != DriverType.Direct3D9 &&
+				driverType != DriverType.OpenGL)
+				return false;
+
+			Console.WriteLine("\nPlease press 'y' if you want to use Cg shaders.");
+			return Console.ReadKey().Key == ConsoleKey.Y;
 		}
 
 		static bool AskUserForHighLevelShaders(DriverType driverType)
