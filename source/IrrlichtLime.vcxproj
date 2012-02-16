@@ -145,6 +145,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClInclude Include="PolygonOffset.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="SceneParameters.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureClamp.h" />

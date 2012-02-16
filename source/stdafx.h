@@ -72,6 +72,7 @@
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
+#include "SceneParameters.h"
 #include "TerrainPatchSize.h"
 #include "TextureClamp.h"
 #include "TextureCreationFlag.h"
