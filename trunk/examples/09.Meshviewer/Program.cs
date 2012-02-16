@@ -101,11 +101,7 @@ namespace _09.Meshviewer
 			GUIEnvironment env = device.GUIEnvironment;
 			SceneManager smgr = device.SceneManager;
 
-			// "COLLADA_CreateSceneInstances" is a value of scene::COLLADA_CREATE_SCENE_INSTANCES, Irrlicht' constant.
-			// It is not ported yet, so for Lime it is a "magic" value.
-			// All "magic" values that can be used with SceneManager's Attributes,
-			// described in "Variables" section at http://irrlicht.sourceforge.net/docu/namespaceirr_1_1scene.html.
-			smgr.Attributes.SetValue("COLLADA_CreateSceneInstances", true);
+			smgr.Attributes.SetValue(SceneParameters.COLLADA_CreateSceneInstances, true);
 
 			driver.SetTextureCreationFlag(TextureCreationFlag.Always32Bit, true);
 
