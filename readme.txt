@@ -25,9 +25,14 @@ The Irrlicht Lime SDK
   application, make sure that IrrlichtLime.dll and Irrlicht.dll are
   placed near your executable.
 
+  Also make sure you have installed Microsoft .NET Framework 4.0.
+
   If you get FileNotFoundException while running any example, you need
   to install Microsoft Visual C++ 2010 Redistributable Package (x86),
   which can be easily found at http://www.microsoft.com/downloads/.
+
+  Examples in \bin\Release should run just fine; to run examples from
+  \bin\Debug you need Visual Studio 2010 installed.
 
 
 
