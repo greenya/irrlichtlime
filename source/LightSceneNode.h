@@ -16,7 +16,7 @@ public ref class LightSceneNode : SceneNode
 public:
 
 	property bool CastShadows { bool get(); void set(bool value); }
-	property Video::Light^ LightData { Video::Light^ get(); }
+	property Video::Light^ LightData { Video::Light^ get(); void set(Video::Light^ value); }
 	property Video::LightType LightType { Video::LightType get(); void set(Video::LightType value); }
 	property float Radius { float get(); void set(float value); }
 	property bool Visible { virtual void set(bool value) override; }

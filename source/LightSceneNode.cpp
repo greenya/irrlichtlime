@@ -39,6 +39,12 @@ Video::Light^ LightSceneNode::LightData::get()
 	return gcnew Video::Light(&m_LightSceneNode->getLightData());
 }
 
+void LightSceneNode::LightData::set(Video::Light^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_LightSceneNode->setLightData(*value->m_NativeValue);
+}
+
 Video::LightType LightSceneNode::LightType::get()
 {
 	return (Video::LightType)m_LightSceneNode->getLightType();
