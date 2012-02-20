@@ -47,6 +47,11 @@ bool Light::CastShadows::get()
 	return m_NativeValue->CastShadows;
 }
 
+void Light::CastShadows::set(bool value)
+{
+	m_NativeValue->CastShadows = value;
+}
+
 Colorf^ Light::DiffuseColor::get()
 {
 	return gcnew Colorf(m_NativeValue->DiffuseColor);
@@ -61,6 +66,12 @@ void Light::DiffuseColor::set(Colorf^ value)
 Vector3Df^ Light::Direction::get()
 {
 	return gcnew Vector3Df(m_NativeValue->Direction);
+}
+
+void Light::Direction::set(Vector3Df^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->Direction = *value->m_NativeValue;
 }
 
 float Light::Falloff::get()
@@ -98,9 +109,20 @@ Vector3Df^ Light::Position::get()
 	return gcnew Vector3Df(m_NativeValue->Position);
 }
 
+void Light::Position::set(Vector3Df^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->Position = *value->m_NativeValue;
+}
+
 float Light::Radius::get()
 {
 	return m_NativeValue->Radius;
+}
+
+void Light::Radius::set(float value)
+{
+	m_NativeValue->Radius = value;
 }
 
 Colorf^ Light::SpecularColor::get()
@@ -117,6 +139,11 @@ void Light::SpecularColor::set(Colorf^ value)
 LightType Light::Type::get()
 {
 	return (LightType)m_NativeValue->Type;
+}
+
+void Light::Type::set(LightType value)
+{
+	m_NativeValue->Type = (video::E_LIGHT_TYPE)value;
 }
 
 String^ Light::ToString()

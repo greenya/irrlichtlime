@@ -5313,7 +5313,9 @@ Irrlicht Engine supports point lights, spot lights, and directional lights.</sum
 Changes the light strength fading over distance. Can also be altered by setting the radius, Attenuation will change to (0,1.f/radius,0). Can be overridden after radius was set.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.CastShadows">
-			<summary>Indicate that the light casts shadows.</summary>
+			<summary>Indicate that the light casts shadows.
+
+This value is ignored when set for LightSceneNode.SetLightData(), use LightSceneNode.CastShadows to set it.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.DiffuseColor">
 			<summary>Diffuse color emitted by the light.
@@ -5323,8 +5325,9 @@ This is the primary color you want to set.</summary>
 		<member name="P:IrrlichtLime.Video.Light.Direction">
 			<summary>Direction of the light.
 
-If Type == LightType.Point, it is ignored.
-Changed via light scene node's rotation.</summary>
+If Type is LightType.Point, it is ignored.
+
+This value is ignored when set for LightSceneNode.SetLightData(), use SceneNode.Rotation to set it.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.Falloff">
 			<summary>The light strength's decrease between Outer and Inner cone.</summary>
@@ -5341,11 +5344,14 @@ Changed via light scene node's rotation.</summary>
 		<member name="P:IrrlichtLime.Video.Light.Position">
 			<summary>Position of the light.
 
-If Type == LightType.Directional, it is ignored.
-Changed via light scene node's position.</summary>
+If Type is LightType.Directional, it is ignored.
+
+This value is ignored when set for LightSceneNode.SetLightData(), use SceneNode.Position to set it.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.Radius">
-			<summary>Radius of light. Everything within this radius will be lighted.</summary>
+			<summary>Radius of light. Everything within this radius will be lighted.
+
+This value is ignored when set for LightSceneNode.SetLightData(), use LightSceneNode.Radius to set it.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.SpecularColor">
 			<summary>Specular color emitted by the light.
@@ -5353,7 +5359,9 @@ Changed via light scene node's position.</summary>
 For details how to use specular highlights, see Material.Shininess.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Light.Type">
-			<summary>Type of the light.</summary>
+			<summary>Type of the light.
+
+This value is ignored when set for LightSceneNode.SetLightData(), use LightSceneNode.LightType to set it.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.LightType">
 			<summary>Enumeration for different types of lights.</summary>
