@@ -1,4 +1,42 @@
 ============================
+Changes in 1.1 (XX-XXX-2012)
+============================
+
+- Added example L10.ImageBrowser.
+
+- Updated Irrlicht SDK to trunk rev. 4094.
+
+- Added setter for LightSceneNode.LightData. Changes in Light class: CastShadows, Direction, Position, Radius and Type now can be set.
+
+- Added SceneParameters static class.
+
+- Updated 10.Shaders example: ported usage of Cg shaders. (Note: Lime's Irrlicht.dll currently compiled without Cg support.)
+
+- Added GPUShadingLanguage enum. Added shadingLang argument to AddHighLevelShaderMaterial() and AddHighLevelShaderMaterialFromFiles() to GPUProgrammingServices.
+
+- Updated 09.Meshviewer example: ported bug fix: while modal dialog is open, pressing hot keys lead to unexpected application behavior for the user.
+
+- Added some OEM keys to KeyCode.
+
+- Added CreateForsythOptimizedMesh() to MeshManipulator.
+
+- Added threshold argument to Quaternion.Slerp().
+
+- Added HoveredElement prop to GUIEnvironment.
+
+- Added SetRotationAxisRadiansLH() and SetRotationAxisRadiansRH() to Matrix.
+
+- Added more overloads for AddHighLevelShaderMaterial() and for AddHighLevelShaderMaterialFromFiles() in GPUProgrammingServices.
+
+- Added DrawMeshBufferNormals() to VideoDriver.
+
+- Fixed mistype in AddHighLevelShaderMaterial() when it used shader program text as a filename.
+
+- Added Inflate() to Dimension2Di/f, Recti/f. Added Offset() and Adjust() to Recti/f.
+
+- Added handling of OnAnimate event in custom scene node.
+
+============================
 Changes in 1.0 (22-Dec-2011)
 ============================
 
