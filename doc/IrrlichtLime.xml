@@ -5385,6 +5385,9 @@ Equivalent to "new Material()".</summary>
 		<member name="P:IrrlichtLime.Video.Material.IdentityNoLighting">
 			<summary>Identity material with disabled Lighting.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Material.IdentityRedWireframe">
+			<summary>Identity material with enabled Wireframe, red EmissiveColor and ZBuffer set to ComparisonFunc.Always.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Material.MaxTextures">
 			<summary>Maximum number of textures a Material can have.</summary>
 		</member>

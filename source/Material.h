@@ -17,6 +17,7 @@ public:
 
 	static property Material^ Identity { Material^ get() { return gcnew Material(); } }
 	static property Material^ IdentityNoLighting { Material^ get() { Material^ m = gcnew Material(); m->Lighting = false; return m; } }
+	static property Material^ IdentityRedWireframe { Material^ get() { Material^ m = gcnew Material(); m->EmissiveColor = gcnew Color(255, 0, 0); m->ZBuffer = ComparisonFunc::Always; m->Wireframe = true; return m; } }
 
 	static property int MaxTextures { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
