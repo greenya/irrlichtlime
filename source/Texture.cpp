@@ -82,7 +82,7 @@ Dimension2Di^ Texture::Size::get()
 
 String^ Texture::ToString()
 {
-	return String::Format("Texture: Size={0}; ColorFormat={1}", Size, ColorFormat);
+	return String::Format("Texture: Name={0}; Size={1}; ColorFormat={2}", Name->Path, Size, ColorFormat);
 }
 
 } // end namespace Video

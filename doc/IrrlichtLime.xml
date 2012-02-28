@@ -7374,6 +7374,9 @@ These flags define how textures should be created. By changing this value, you c
 		<member name="P:IrrlichtLime.Video.VideoDriver.TextureCount">
 			<summary>Amount of textures currently loaded.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.VideoDriver.TextureList">
+			<summary>List of all currently loaded textures.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.TurnLight(System.Int32,System.Boolean)">
 			<summary>Turns a dynamic light on or off.</summary>
 			<param name="index">Index of the dynamic light. Value returned by AddDynamicLight().</param>
