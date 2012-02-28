@@ -234,6 +234,7 @@ public:
 	property int PrimitiveCountDrawn { int get(); }
 	property Dimension2Di^ ScreenSize { Dimension2Di^ get(); }
 	property int TextureCount { int get(); }
+	property List<Texture^>^ TextureList { List<Texture^>^ get(); }
 	property String^ VendorInfo { String^ get(); }
 	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }
 

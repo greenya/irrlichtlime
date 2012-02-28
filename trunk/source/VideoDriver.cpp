@@ -1339,6 +1339,19 @@ int VideoDriver::TextureCount::get()
 	return m_VideoDriver->getTextureCount();
 }
 
+List<Texture^>^ VideoDriver::TextureList::get()
+{
+	List<Texture^>^ l = gcnew List<Texture^>();
+
+	for (unsigned int i = 0; i < m_VideoDriver->getTextureCount(); i++)
+	{
+		video::ITexture* t = m_VideoDriver->getTextureByIndex(i);
+		l->Add(Texture::Wrap(t));
+	}
+
+	return l;
+}
+
 String^ VideoDriver::VendorInfo::get()
 {
 	return gcnew String(m_VideoDriver->getVendorInfo().c_str());
