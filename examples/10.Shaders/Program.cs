@@ -278,7 +278,7 @@ namespace _10.Shaders
 
 				// set texture
 				if (useHighLevelShaders) // !!! THIS IF DEFINETLY ERROR, SINCE ITS DOUBLE TEST OF useHighLevelShaders
-					services.SetVertexShaderVariable("myTexture", new float[1] { 0.0f });
+					services.SetPixelShaderVariable("myTexture", new float[1] { 0.0f });
 			}
 			else
 				services.SetVertexShaderRegisters(10, transpWorld.ToArray());
