@@ -211,6 +211,28 @@ Vector2Df^ MeshBuffer::GetTCoords(int vertexIndex)
 	return gcnew Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
 }
 
+Object^ MeshBuffer::GetVertex(int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
+
+	void* va = m_MeshBuffer->getVertices();
+
+	switch (m_MeshBuffer->getVertexType())
+	{
+	case video::EVT_STANDARD:
+		return gcnew Video::Vertex3D(((video::S3DVertex*)va)[vertexIndex]);
+
+	case video::EVT_2TCOORDS:
+		return gcnew Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[vertexIndex]);
+
+	case video::EVT_TANGENTS:
+		return gcnew Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[vertexIndex]);
+	}
+
+	LIME_ASSERT2(false, "Unexpected VertexType: " + this->VertexType.ToString());
+	return nullptr;
+}
+
 void MeshBuffer::RecalculateBoundingBox()
 {
 	m_MeshBuffer->recalculateBoundingBox();
