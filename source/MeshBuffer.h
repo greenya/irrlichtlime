@@ -27,6 +27,7 @@ public:
 	Vector3Df^ GetNormal(int vertexIndex);
 	Vector3Df^ GetPosition(int vertexIndex);
 	Vector2Df^ GetTCoords(int vertexIndex);
+	Object^ GetVertex(int vertexIndex);
 
 	void RecalculateBoundingBox();
 
