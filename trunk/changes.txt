@@ -1,39 +1,25 @@
 ============================
-Changes in 1.1 (XX-XXX-2012)
+Changes in 1.1 (09-Mar-2012)
 ============================
 
 - Added example L10.ImageBrowser.
-
-- Updated Irrlicht SDK to trunk rev. 4094.
-
+- Updated Irrlicht SDK to trunk rev. 4098.
 - Added setter for LightSceneNode.LightData. Changes in Light class: CastShadows, Direction, Position, Radius and Type now can be set.
-
 - Added SceneParameters static class.
-
 - Updated 10.Shaders example: ported usage of Cg shaders. (Note: Lime's Irrlicht.dll currently compiled without Cg support.)
-
 - Added GPUShadingLanguage enum. Added shadingLang argument to AddHighLevelShaderMaterial() and AddHighLevelShaderMaterialFromFiles() to GPUProgrammingServices.
-
 - Updated 09.Meshviewer example: ported bug fix: while modal dialog is open, pressing hot keys lead to unexpected application behavior for the user.
-
 - Added some OEM keys to KeyCode.
-
 - Added CreateForsythOptimizedMesh() to MeshManipulator.
-
 - Added threshold argument to Quaternion.Slerp().
-
 - Added HoveredElement prop to GUIEnvironment.
-
 - Added SetRotationAxisRadiansLH() and SetRotationAxisRadiansRH() to Matrix.
-
 - Added more overloads for AddHighLevelShaderMaterial() and for AddHighLevelShaderMaterialFromFiles() in GPUProgrammingServices.
-
-- Added DrawMeshBufferNormals() to VideoDriver.
-
+- Added GetVertex() to MeshBuffer.
+- Added DrawMeshBufferNormals() and TextureList prop to VideoDriver.
+- Added IdentityRedWireframe static prop to Material.
 - Fixed mistype in AddHighLevelShaderMaterial() when it used shader program text as a filename.
-
 - Added Inflate() to Dimension2Di/f, Recti/f. Added Offset() and Adjust() to Recti/f.
-
 - Added handling of OnAnimate event in custom scene node.
 
 ============================
@@ -41,39 +27,22 @@ Changes in 1.0 (22-Dec-2011)
 ============================
 
 - Added example L09.SimpleLOD.
-
 - Updated Irrlicht SDK to trunk rev. 4021.
-
 - Added Clear(), RemoveTab(), InsertTab() and GetTabAt() to GUITabControl. Added DoParticleSystem() to ParticleSystemSceneNode.
-
 - Added props ActiveFont and OverrideFont to GUIButton, GUIEditBox and GUIStaticText.
-
 - SetDrawBackground() and SetDrawBorder() replaced with get-and-set props DrawBackgroundEnabled and DrawBorderEnabled in GUIStaticText.
-
 - Added TextureMatrix value to VideoDriverFeature. Added SceneManager value to SceneNodeType.
-
 - Added OnAnimate protected event to SceneNode.
-
 - Added ability to inherit from GUIElement. Added protected members: OnDraw and OnEvent events; Environment prop.
-
 - Added Randomizer class. Added CreateRandomizer() and prop Randomizer to IrrlichtDevice.
-
 - Added MaxSelectionRows to GUIComboBox.
-
 - Added overloadings to GUIEnvironment.AddFileOpenDialog() with arguments restoreCurrentWorkingDir and startDir.
-
 - SetKeyMap() replaced with get-and-set prop KeyMap in CameraFPSSceneNodeAnimator.
-
 - Image class changes: added GetPixelFormat() and CopyToBitmap(); fixed bug with CopyToScaling(), now it returns byte array and it is correctly filled in; added CopyTo() overloading which returns byte array.
-
 - BillboardSceneNode class chnages: added SetSize(), GetSize(), BottomColor, TopColor, BottomWidth, TopWidth, Height and removed Size prop.
-
 - Added IdentityNoLighting (static get-only prop) to Material.
-
 - Added AnimationSpeed prop to AnimatedMesh.
-
 - Added Distance prop to CameraMayaSceneNodeAnimator.
-
 - Added Vector2Df type support to Attributes.
 
 ==============================
@@ -81,13 +50,9 @@ Changes in 0.9.1 (30-May-2011)
 ==============================
 
 - Updated Irrlicht SDK to trunk rev. 3767: fixed bug with "blend oparations" which causes all the objects to be transparent under OpenGL renderer.
-
 - Added overloadings to MakePlanarTextureMapping(), RecalculateTangents(), SetVertexColorAlpha() and SetVertexColors() to MeshManipulator.
-
 - Added overloadings to VideoDriver.CreateScreenShot() with color format and render target arguments.
-
 - Added HandleSRGB to IrrlichtCreationParameters.
-
 - Added CreateMeshCopy() to MeshManipulator.
 
 ============================
@@ -95,47 +60,26 @@ Changes in 0.9 (19-May-2011)
 ============================
 
 - Added examples 23.MeshHandling, 26.OcclusionQuery, L06.AnalogueClock, L07.FastStaticRenderin and L08.WPFWindow.
-
 - Updated Irrlicht SDK to trunk rev. 3727: added GetItemAt() to GUIListBox. Added GetSelector() and SelectorCount to TriangleSelector. Added BlendOperation and PolygonOffset to MaterialFlag enum. Added BlendOperations and PolygonOffset to VideoDriverFeature enum. Added BlendOperation, PolygonOffsetDirection and PolygonOffsetFactor to Material. Added VideoDriver.CreateAttributesFromMaterial overloading with AttributeReadWriteOptions argument. Renamed CreateOcclusionQuery to AddOcclusionQuery in VideoDriver.
-
 - Moved to VS2010 and .NET Framework 4.0. Reorganized build process: now building is done into sub folders of the bin folder: Debug and Release (so it is possible to batch build IrrlichtLime).
-
 - Added FeatureList prop to VideoDriver.
-
 - Added ColorHSL class.
-
 - Added enums: AlphaSource, BlendFactor, BlendOperation, ModulateFunc and PolygonOffset. Renamed enum ZBufferCompFunc to ComparisonFunc.
-
 - Added Lerp to Quaternion.
-
 - 12.TerrainRendering updated: now it reacts on 'X' key which toggles debug information.
-
 - Added GetColumnWidth to GUITable.
-
 - Added MeshBuffers (get-only prop) to Mesh. ChildList replaced with Children array (get-only prop) in SceneNode and GUIElement.
-
 - Added Mesh.RemoveMeshBuffer().
-
 - Added Create() (static), AddMeshBuffer() and RecalculateBoundingBox() methods to Mesh.
-
 - Added MeshBuffer.Append() overloadings which handles 32-bit indices. Added MeshBuffer.UpdateIndices() overloading which handles 32-bit indices.
-
 - MeshBuffer changes: 1) added Create() static method; 2) optimized copying of indices from managed to unmanaged buffers in Append() methods.
-
 - DrawVertexPrimitiveList() and Draw2DVertexPrimitiveList() changes: 1) now takes arrays (was Lists); 2) optimized copying of indices from managed to unmanaged buffers.
-
 - Added constructors with transition, rotation and scale vectors to Matrix.
-
 - Added method SetMaterial() to SceneNode and MeshBuffer classes. Added static prop Material.Identity.
-
 - Renamed RemoveAll() to RemoveChildren() in SceneNode.
-
 - Added "==" and "!=" operators to Color/f. Added named colors as static props to Color.
-
 - Added copy constructors to Line3Df, Triangle3Df, Plane3Df and Matrix.
-
 - Added more constructors and Set()s to AABBox.
-
 - Added SetProjectionMatrix() to CameraSceneNode.
 
 ============================
@@ -143,51 +87,28 @@ Changes in 0.8 (03-Mar-2011)
 ============================
 
 - Added examples 19.MouseAndJoystick and L05.ScreenshotToTexture.
-
 - Updated Irrlicht SDK to trunk rev. 3601: added new items to GUIDefaultColor; added MaxAngleDegrees, MaxLifeTime and MinLifeTime to ParticleEmitter; ParticleFadeOutAffector.FadeOutTime now has int type; added AffectorList to ParticleSystemSceneNode. GUIElement.BringToBack renamed to SendToBack. BoneSceneNode.BoneName renamed to Name.
-
 - Added JoystickInfo class. Added ActivateJoysticks() to IrrlichtDevice.
-
 - Added Attributes class and AttributeType enum. Added Attributes prop to VideoDriver and SceneManager.
-
 - Added AttributeReadWriteOptions class and AttributeReadWriteFlag enum.
-
 - Added CreateAttributesFromMaterial() and GetMaterialFromAttributes() to VideoDriver.
-
 - Added SerializeAttributes() and DeserializeAttributes() to AttributeExchangingObject, GUIEnvironment and SceneNode.
-
 - Added CreateAttributes() to FileSystem. FileSystem methods renaming: CreateFileList => CreateFileListFromWorkingDirectory, CreateEmptyFileList => CreateFileList.
-
 - Added class Quaternion.
-
 - Added class ViewFrustum and CameraSceneNode.ViewFrustum prop.
-
 - Added class SceneLoader. Added AddExternalSceneLoader(), GetSceneLoader() and SceneLoaderCount prop to SceneManager.
-
 - Added class MeshLoader. Added AddExternalMeshLoader(), GetMeshLoader() and MeshLoaderCount prop to SceneManager.
-
 - Added ClearParticles() to ParticleSystemSceneNode.
-
 - Added overloadings to SaveScene() and LoadScene() with node argument to SceneManager.
-
 - Added CreateSceneNodeAnimator() to SceneManager.
-
 - Added overloading to SceneCollisionManager.GetScreenCoordinatesFrom3DPosition() with useViewPort argument.
-
 - Added RemoveFont() and renamed ClearFocus() to RemoveFocus() in GUIEnvironment. Added GUIElementType.Root.
-
 - Added class ArchiveLoader. Added AddArchiveLoader(), GetArchiveLoader(), ArchiveLoaderCount and GetRelativeFilename() to FileSystem.
-
 - Added FileSystem.AddFileArchive() overloadings with ReadFile argument.
-
 - Added TextRestrainedInside and RightToLeft props to GUIStaticText; added overloadings to GeometryCreator.CreatePlaneMesh().
-
 - Added enum TextureLockMode.
-
 - Changes in TexturePainter: Lock() now takes TextureLockMode (was "bool readOnly"); ReadOnly prop removed; LockMode prop added.
-
 - GUIImage changes: added props Color and Image (get and set); removed SetColor() and SetImage() methods.
-
 - Added classes CameraFPSSceneNodeAnimator and CameraMayaSceneNodeAnimator.
 
 ============================
@@ -195,39 +116,22 @@ Changes in 0.7 (12-Oct-2010)
 ============================
 
 - Added examples 10.Shaders, L03.RGBSwirl and L04.ParticleEmitterViewer.
-
 - Updated Irrlicht SDK to trunk rev. 3427: added Timer.RealTimeAndDate prop, Timer.RealTimeDate class, Timer.WeekDay enum, IrrlichtCreationParameters.UsePerformanceTimer prop. Also some bugs were fixed (see Irrlicht Engine svn trunk logs for details).
-
 - Added Visual Studio' IntelliSense xml doc file for IrrlichtLime.dll. Currently fully documented next namespaces: IrrlichtLime (root), Core, IO and Video.
-
 - Added methods CopyTo(), CopyToScaling(), CopyToScalingBoxFilter() and CopyToWithAlpha() to Image.
-
 - Added methods UpdateIndices, UpdateVertices, overloading of Append method (operates with arrays of vertices and indices), added get-only props Indicies and Vertices to MeshBuffer.
-
 - Added classes Vertex3DTTCoords and Vertex3DTangents.
-
 - Added correct type solving for all derived classes from ParticleAffector and ParticleEmitter.
-
 - Added method IrrlichtDevice.PostEvent. Added method ResizeNotify to VideoDriver.
-
 - Added enum VideoModeAspectRatio. Added static method GetAspectRatio, property Wide, field AspectRatio to VideoMode.
-
 - Added class OSOperator and prop IrrlichtDevice.OSOperator.
-
 - Added methods LoadGUI and SaveGUI to GUIEnvironment; additional overloading of SaveScene and LoadScene to SceneManager; additional overloading of CreateImage and WriteImage to VideoDriver.
-
 - Added methods CreateLimitReadFile, CreateMemoryReadFile, CreateReadFile, CreateWriteFile and CreateMemoryWriteFile to FileSystem. Added class WriteFile.
-
 - Added class GPUProgrammingServices, enums GeometryShaderType, PixelShaderType and VertexShaderType. Added prop VideoDriver.GPUProgrammingServices. Changed return type of Video.AddMaterialRenderer() to MaterialType (was int).
-
 - Added method ToArray to class Colorf. Method GetElementArray renamed to ToArray in class Matrix. Added copy-constructor to Material.
-
 - Added class Logger. Added prop IrrlichtDevice.Logger.
-
 - Added class MaterialRendererServices.
-
 - Added class SkinnedMesh, enum InterpolationMode. Added method SceneManager.CreateSkinnedMesh.
-
 - Added class ImageLoader. Added prop ImageLoaderCount and method GetImageLoader to VideoDriver.
 
 ============================
@@ -235,27 +139,16 @@ Changes in 0.6 (25-Jul-2010)
 ============================
 
 - Added examples 12.TerrainRendering, 13.RenderToTexture, 15.LoadIrrFile, 18.SplitScreen, L01.TexturePainting and L02.WinFormsWindow.
-
 - Updated Irrlicht SDK to trunk rev. 3368. Added AnimatedMeshType.MDL_HalfLife, FileArchiveType.WAD, FileList.GetFileOffset() and GUIElement.BringToBack().
-
 - Added class GeometryCreator. Added prop SceneManager.GeometryCreator.
-
 - Added class MeshCache and prop SceneManager.MeshCache.
-
 - Added methods LoadHeightMap and LoadHeightMapRAW to TerrainSceneNode.
-
 - Added class ReadFile, method FileArchive.CreateAndOpenFile.
-
 - Added class IrrlichtCreationParameters and proper overloading for method IrrlichtDevice.CreateDevice.
-
 - Class VideoDriver extended with methods Draw2DPolygon, Draw2DRectangleOutline, Draw2DVertexPrimitiveList, DrawStencilShadow, DrawStencilShadowVolume, FindTexture, GetTextureCreationFlag, SetClipPlane; props MaxClipPlanes (static), ColorFormat, MeshManipulator; CreateImageFromFile renamed into CreateImage (additional overloading to CreateImage).
-
 - Added method SetLine to class TexturePainter.
-
 - Added comparison operators ("==" and "!=") to ReferenceCounted.
-
 - Class Matrix improved: added most of methods and operators; added static property Identity.
-
 - Removed class Line2Di.
 
 ============================
@@ -263,49 +156,27 @@ Changes in 0.5 (04-Jul-2010)
 ============================
 
 - Added examples 09.Meshviewer and 11.PerPixelLighting.
-
 - Updated Irrlicht SDK to trunk rev. 3330. Added LogLevel.Debug; GUIEditBox changes: removed method SetOverrideColor; added props OverrideColor, OverrideColorEnabled.
-
 - Added comparison operators ("== " and "!=") to AABBox, Line2Di, Line3Df, Matrix, Plane3Df and Triangle3Df.
-
 - Added class MaterialRenderer. Class VideoDriver extended with methods AddDynamicLight, AddMaterialRenderer, GetDynamicLight, GetMaterialRenderer, GetMaterialRendererName and SetMaterialRendererName.
-
 - Changed usage of "unsigned int" to "int" in classes FileList, FileSystem, Image, IrrlichtDevice, Texture, VideoDriver, AnimatedMesh, AnimatedMeshSceneNode, BoneSceneNode, GUIComboBox, GUIEditBox, GUITable, Mesh, MeshBuffer, MeshManipulator, ParticleEmitter, ParticleSystemSceneNode, SceneNode and VolumeLightSceneNode. Renamed method "GetTextureByIndex" to "GetTexture" in VideoDriver. Changed return type of SceneManager.RegisterNodeForRendering from "uint" to "bool".
-
 - Removed class Dimension2Du; made changes to use Dimension2Di instead.
-
 - Renamed classes Coloru => Color, Matrix4f => Matrix and AABBox3Df => AABBox. Also renamed prop Color.Color => Color.ARGB, method Colorf.ToColoru => Colorf.ToColor.
-
 - Added classes NamedPath and TexturePainter. Class Texture extended with methods GetTexturePainter, RegenerateMipMapLevels; props AlphaChannel, ColorFormat, DriverType, MipMaps, Name, OriginalSize, Pitch, RenderTarget and Size.
-
 - Added ability to compile Lime in Release mode. Added release version of Irrlicht.dll. Made proper changes to proj files. Updated AssemblyInfo' AssemblyDescriptionAttribute to indicate debug build.
-
 - Added class BillboardTextSceneNode. Class SceneManager extended with methods AddArrowMesh, AddBillboardTextSceneNode, AddMeshSceneNode, AddSceneNode, CreateTerrainTriangleSelector, CreateTriangleSelectorFromBoundingBox, GetSceneNodesFromType, IsCulled and PostEvent.
-
 - Added classes DynamicMeshBuffer, IndexBuffer, MetaTriangleSelector, TerrainSceneNode, TextSceneNode, VertexBuffer; enum TerrainPatchSize. Class SceneManager extended with methods AddTerrainSceneNode, AddTextSceneNode and CreateMetaTriangleSelector. Changed type of index-related arguments from "unsigned int" to "int" in TriangleSelector.
-
 - Added class DummyTransformationSceneNode. Added method CreateImageFromFile to VideoDriver. Class SceneManager extended methods AddDummyTransformationSceneNode, AddEmptySceneNode, AddSkyDomeSceneNode, AddSphereMesh, AddTerrainMesh, AddToDeletionQueue, AddVolumeLightMesh, CreateDeleteAnimator, CreateFollowSplineAnimator and CreateNewSceneManager.
-
 - Added classes GUITreeView, GUITreeViewNode. Added methods GUIEnvironment.AddTreeView, GUITable.Get/SetCellData.
-
 - Added enums GUIColumnOrdering, GUIOrderingMode, GUITableDrawFlag; classes GUIImageList, GUISpinBox and GUITable. Class GUIEnvironment extended with methods AddEmptySpriteBank, AddFont, AddGUIElement, AddModalScreen, AddSpinBox, AddTable, Clear, ClearFocus, CreateImageList, CreateSkin, Focused, GetSpriteBank, PostEvent; props FileSystem, Focus, VideoDriver. Added constructors to class Event. Added static props ButtonCount and AxisCount to Event.JoystickEvent. Added class Dimension2Di (currently it is used in GUIImageList.ImageSize only).
-
 - Added classes GUICheckBox, GUIColorSelectDialog, GUIInOutFader and GUIMeshViewer. Added methods AddCheckBox, AddColorSelectDialog, AddInOutFader and AddMeshViewer to GUIEnvironment.
-
 - Added proper class wrapping to SceneNode, now it wraps correct type and can be type-casted safely to more specific XXXSceneNode type.
-
 - Changed type of index values from "unsigned int" to "int" in GUIComboBox, GUIContextMenu, GUIListBox and GUISkin.
-
 - Added classes GUITab, GUITabControl. Added methods AddTab, AddTabControl to GUIEnvironment.
-
 - Added classes GUIComboBox, GUIContextMenu, GUIToolBar; enum GUIContextMenuClose. Class GUIEnvironment extended with methods AddComboBox, AddContextMenu, AddMenu and AddToolBar.
-
 - Added enum FileSystemType. Added classes FileArchive and FileList. Class FileSystem extended with methods CreateEmptyFileList, CreateFileListFromWorkingDirectory, GetFileArchive and SetFileSystemType. Class SceneManager extended with methods AddCameraSceneNodeMaya and AddSkyBoxSceneNode.
-
 - Added enums FogType, GUIMessageBoxFlag and TextureCreationFlag. Added class Fog for holding fog data. Class VideoDriver extended with methods SetMinHardwareBufferVertexCount, SetTextureCreationFlag, TurnLight and WriteImageToFile; prop Fog.
-
 - Added enum GUIMessageBoxFlag, method GUIEnvironment.AddMessageBox. Class GUIElement extended with methods AddChild, BringToFront, Draw, GetNextElement, Move, Remove, RemoveChild, SetAlignment, SetMaxSize, SetMinSize, SetRelativePositionProportional and UpdateAbsolutePosition; props ChildList, Parent, SubElement, TabGroup, TabGroupElement and TypeName.
-
 - Added prop GUIEnvironment.RootElement. Renamed prop SceneManager.RootSceneNode to RootNode. Changed argument order in GUISkin class for methods SetColor, SetText, SetFont, SetIcon, SetSize; added overloading for SetFont with only 1 argument - a font. Updated examples to this changes.
 
 ============================
@@ -313,51 +184,28 @@ Changes in 0.4 (19-Jun-2010)
 ============================
 
 - Added and completly ported examples 07.Collision and 08.SpecialFX.
-
 - Added class VolumeLightSceneNode. Added methods AddVolumeLightSceneNode and CreateTextureAnimator to SceneManager.
-
 - Added classes ParticleMeshEmitter, ParticleRingEmitter, ParticleRotationAffector and ParticleSphereEmitter. Class ParticleSystemSceneNode extended with methods: CreateMeshEmitter, CreatePointEmitter, CreateRingEmitter, CreateRotationAffector, CreateScaleParticleAffector and CreateSphereEmitter.
-
 - Added classes ParticleAnimatedMeshSceneNodeEmitter, ParticleAttractionAffector, ParticleBoxEmitter, ParticleCylinderEmitter, ParticleFadeOutAffector, ParticleGravityAffector. Class ParticleSystemSceneNode extended with methods: CreateAnimatedMeshSceneNodeEmitter, CreateAttractionAffector, CreateBoxEmitter, CreateCylinderEmitter, CreateFadeOutParticleAffector and CreateGravityAffector.
-
 - Added enums BoneAnimationMode, BoneSkinningSpace, CullingType and JointUpdateOnRender. Added class BoneSceneNode. Changed ISceneNode.AutomaticCulling prop: now it operates with CullingType values. Class AnimatedMeshSceneNode extended with methods: AddShadowVolumeSceneNode, AnimateJoints, Clone, GetJointNode, SetJointMode, SetLoopMode, SetRenderFromIdentity, SetTransitionTime and prop JointCount.
-
 - Added class ShadowVolumeSceneNode.
-
 - Updated Irrlicht SDK to trunk rev. 3313.
-
 - Added enums ParticleAffectorType and ParticleEmitterType. Added classes Particle, ParticleAffector, ParticleEmitter and ParticleSystemSceneNode. Added method AddParticleSystemSceneNode to SceneManager.
-
 - Added methods AddHillPlaneMesh and AddWaterSurfaceSceneNode to SceneManager.
-
 - Added enum IndexType. MeshBuffer extended with methods Append, GetNormal, GetPosition, GetTCoords, RecalculateBoundingBox, SetDirty, SetHardwareMappingHint; props BoundingBox, HardwareMappingHintForIndex, HardwareMappingHintForVertex, IndexCount, IndexType, Material, VertexCount, VertexType.
-
 - Added enums HardwareBufferType and HardwareMappingHint. Mesh extended with methods GetMeshBuffer, SetDirty, SetHardwareMappingHint, SetMaterialFlag; props BoundingBox, MeshBufferCount.
-
 - Added class MeshManipulator; added prop SceneManager.MeshManipulator.
-
 - Added overloads to GUIFont.Draw(): now position can be specified as Recti, Vector2Di or two int values (x and y).
-
 - Rect improved; now available int and float versions.
-
 - Dimension2D improved; now available unsigned int and float versions.
-
 - Vector2D improved; now available int and float versions.
-
 - VideoDriver has been extended with new methods: ClearZBuffer, CreateScreenShot, DeleteAllDynamicLights, Draw2DLine, Draw3DBox, Draw3DLine, Draw3DTriangle, DrawMeshBuffer, DrawPixel, EnableClipPlane. Changed argument order of some VideoDriver.DrawXXX methods to be same structured: now color follows at the end (or before clip if present) and it became mandatory.
-
 - Vector3D class has been improved: all native functionality wrapped (including operators). Templates imitation has been implemented and now there are two classes for 3d vectors: Vector3Df and Vector3Di.
-
 - Added class SceneCollisionManager, prop SceneManager.SceneCollisionManager and default constructor to Matrix4f.
-
 - Added class CollisionResponseSceneNodeAnimator and method SceneManager.CreateCollisionResponseAnimator.
-
 - Added classes Line3Df, Plane3Df, Triangle3Df and TriangleSelector; prop SceneNode.TriangleSelector; added methods CreateOctreeTriangleSelector and CreateTriangleSelector to SceneManager.
-
 - Added classes Dimension2Df and BillboardSceneNode; added SceneManager.AddBillboardSceneNode().
-
 - Added enum LightType, classes LightSceneNode, Light and Colorf. Normalized argument list of RGBA values in constructors and Set() methods of Coloru/f classes: for constructors: R, G, B, A = 255 or 1.0f, for Set(): R, G, B, A? (if A not set, than it will not be changed). All the examples updated to this change, since there is no need to specify alpha value all the time now (if its 255).
-
 - Added props AspectRatio, FarValue, FOV, InputReceiverEnabled, NearValue, Orthogonal, ProjectionMatrix, Rotation (setter overridden), Target, TargetAndRotationBinding, UpVector, ViewMatrix and ViewMatrixAffector to CameraSceneNode.
 
 ============================
@@ -365,31 +213,18 @@ Changes in 0.3 (05-Jun-2010)
 ============================
 
 - Added and completly ported examples 05.UserInterface and 06.2DGraphics.
-
 - Changes in IrrlichtDevice class: prop WindowResizable became SetWindowResizable method, prop WindowCaption became SetWindowCaption method (since they both had only setters).
-
 - Added class GUIListBox, enum GUIListBoxColor, method GUIEnvironment.AddListBox.
-
 - Renamed property in GUIElement: "NotClipped" => "Clipped" (the meaning also inverted).
-
 - Added class GUIEditBox. Added method GUIEnvironment.AddEditBox.
-
 - Added class GUIFileOpenDialog. Added method GUIEnvironment.AddFileOpenDialog.
-
 - Added class GUIWindow. Added method GUIEnvironment.AddWindow.
-
 - Made changes in wrapping technique and various classes' ToString() formatting.
-
 - Added class GUIScrollBar. Added method GUIEnvironment.AddScrollBar.
-
 - GUIStaticText extended with methods: SetBackgroundColor, SetDrawBackground, SetDrawBorder, SetTextAlignment; props: OverrideColor, OverrideColorEnabled, OverrideFont, TextHeight, TextWidth, WordWrap.
-
 - Added class GUIButton, enum GUIButtonState, method GUIEnvironment.AddButton.
-
 - Added patch which avoids small bug described at http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669.
-
 - Added enums GUIAlignment, GUIDefaultColor, GUIDefaultFont, GUIDefaultIcon, GUIDefaultSize, GUIDefaultText, GUIFontType and GUISkinType. Added classes GUIFont, GUISkin and GUISpriteBank. Added to GUIEnvironment: GetFont(), BuiltInFont, Skin. Added IrrlichtDevice.Close().
-
 - Fixed bug when IrrlichtDevice::createDevice() returns null, IrrlichtLime fails.
 
 ============================
@@ -397,45 +232,25 @@ Changes in 0.2 (29-May-2010)
 ============================
 
 - Added and completly ported examples 03.CustomSceneNode and 04.Movement.
-
 - Added classes Event, GUIEvent, MouseEvent, KeyEvent, JoystickEvent, LogEvent, UserEvent. Added enums EventType, GUIEventType, MouseEventType, LogLevel. Added event IrrlichtDevice.OnEvent.
-
 - Added classes VideoModeList, VideoMode; enum DeviceType; IrrlichtDevice extended with methods IsDriverSupported, ClearSystemMessages, MaximizeWindow, MinimizeWindow, RestoreWindow and properties ColorFormat, Type, VideoModeList.
-
 - Added class GUIImage. Added method GUIEnvironment.AddImage.
-
 - Added class Timer. Added property IrrlichtDevice.Timer.
-
 - Added method SetFrameLoop and properties AnimationSpeed, CurrentFrame, EndFrame, Mesh, StartFrame, ReadOnlyMaterials to AnimatedMeshSceneNode.
-
 - Added methods CreateFlyCircleAnimator and CreateFlyStraightAnimator to SceneManager.
-
 - Added methods AddCubeSceneNode and AddSphereSceneNode to SceneManager.
-
 - Added overloading for VideoDriver.DrawVertexPrimitiveList() with 32bit indices.
-
 - Added classes AttributeExchangingObject, ReferenceCounted. All inherited classes from ReferenceCounted got Drop(), Grab(), ReferenceCount and DebugName.
-
 - Added enum PrimitiveType; added VideoDriver.DrawVertexPrimitiveList(), SceneManager.CreateRotationAnimator().
-
 - SceneNode extended, added events OnGetBoundingBox, OnGetMaterialCount, OnGetMaterial, OnRegisterSceneNode.
-
 - Added classes Image, SceneNodeAnimator, MeshBuffer; enums DebugSceneType, RenderTarget. VideoDriver extended with methods AddRenderTargetTexture, AddTexture, CreateOcclusionQuery, GetOcclusionQueryResult, MakeColorKeyTexture, MakeNormalMapTexture, RemoveAllHardwareBuffers, RemoveAllOcclusionQueries, RemoveAllTextures, RemoveHardwareBuffer, RemoveOcclusionQuery, RemoveTexture, RunAllOcclusionQueries, RunOcclusionQuery, SetRenderTarget, UpdateAllOcclusionQueries, UpdateOcclusionQuery. SceneNode extended with methods AddAnimator, GetMaterial, RemoveAnimator, RemoveAnimators, SetMaterialType; properties AbsoluteTransformation, AnimatorList, BoundingBox, BoundingBoxTransformed, ChildList, DebugDataVisible, MaterialCount, RelativeTransformation.
-
 - Added enums ColorFormat, ExposedVideoData, TransformationState, VideoDriverFeature; VideoDriver class extended with methods CheckDriverReset, DisableFeature, GetExposedVideoData, GetTextureByIndex, GetTransform, QueryFeature, RenameTexture, SetMaterial, SetTransform; property TextureCount.
-
 - Added enums SceneNodeRenderPass, SceneNodeAnimatorType; SceneManager extended with methods: Clear, GetSceneNodeFromId, GetSceneNodeFromName, GetSceneNodeFromType, GetAnimatorTypeName, GetSceneNodeTypeName, RegisterNodeForRendering, SaveScene, LoadScene; properties: ActiveCamera, FileSystem, GUIEnvironment, SceneNodeRenderPass, ShadowColor, VideoDriver.
-
 - Added classes Matrix, Material; enums AntiAliasingMode, ColorMaterial, ColorPlane, MaterialType, ZBufferCompFunc.
-
 - Added Vertex3D class; VertexType enum.
-
 - Added AABBox3Df class.
-
 - Added protected constructor for SceneNode. Added SceneNode.OnRender event.
-
 - Added Dimension2Di class.
-
 - Added CursorControl.ReferenceRect property.
 
 ============================
@@ -443,19 +258,11 @@ Changes in 0.1 (19-May-2010)
 ============================
 
 - Added and completly ported examples 01.HelloWorld and 02.Quake3Map.
-
 - Added classes Coloru, Texture and VideoDriver; enums DriverType and MaterialFlag.
-
 - Added classes AnimatedMesh, AnimatedMeshSceneNode, CameraSceneNode, Mesh, MeshSceneNode, SceneManager and SceneNode; enums AnimatedMeshType, AnimationTypeMD2 and SceneNodeType.
-
 - Added class FileSystem and FileArchiveType enum.
-
 - Added classes CursorControl, GUIElement, GUIEnvironment and GUIStaticText; GUIElementType enum.
-
 - Added classes Dimension2Du, Recti, Vector2Df, Vector2Di and Vector3Df.
-
 - Added class KeyMap, enums KeyCode and KeyAction.
-
 - Added class IrrlichtDevice, and its methods: CreateDevice, Drop, Run, Sleep, Yield, GetGammaRamp, SetGammaRamp; properties: CursorControl, FileSystem, FullScreen, GUIEnvironment, SceneManager, Version, VideoDriver, WindowActive, WindowCaption, WindowFocused, WindowMinimized, WindowResizable.
-
 - Added class Lime - wrapper core class.
