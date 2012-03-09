@@ -276,12 +276,16 @@ namespace _10.Shaders
 			{
 				services.SetVertexShaderVariable("mTransWorld", transpWorld.ToArray());
 
-				// set texture
-				if (useHighLevelShaders) // !!! THIS IF DEFINETLY ERROR, SINCE ITS DOUBLE TEST OF useHighLevelShaders
+				if (driver.DriverType == DriverType.OpenGL)
+				{
+					// set texture
 					services.SetPixelShaderVariable("myTexture", new float[1] { 0.0f });
+				}
 			}
 			else
+			{
 				services.SetVertexShaderRegisters(10, transpWorld.ToArray());
+			}
 		}
 
 		static bool AskUserForCgShaders(DriverType driverType)
