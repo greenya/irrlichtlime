@@ -386,6 +386,16 @@ void GUIElement::ID::set(int value)
 	m_GUIElement->setID(value);
 }
 
+String^ GUIElement::Name::get()
+{
+	return gcnew String(m_GUIElement->getName());
+}
+
+void GUIElement::Name::set(String^ value)
+{
+	m_GUIElement->setName(Lime::StringToStringC(value).c_str());
+}
+
 GUIElement^ GUIElement::Parent::get()
 {
 	gui::IGUIElement* e = m_GUIElement->getParent();

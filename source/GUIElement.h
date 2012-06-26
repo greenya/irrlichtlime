@@ -55,6 +55,7 @@ public:
 	property bool Clipped { bool get(); void set(bool value); }
 	property bool Enabled { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
+	property String^ Name { String^ get(); void set(String^ value); }
 	property GUIElement^ Parent { GUIElement^ get(); }
 	property Recti^ RelativePosition { Recti^ get(); void set(Recti^ value); }
 	property bool SubElement { bool get(); void set(bool value); }
