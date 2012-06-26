@@ -235,9 +235,9 @@ namespace _10.Shaders
 			invWorld.MakeInverse();
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderVariable("mInvWorld", invWorld.ToArray());
+				services.SetVertexShaderConstant("mInvWorld", invWorld.ToArray());
 			else
-				services.SetVertexShaderRegisters(0, invWorld.ToArray());
+				services.SetVertexShaderConstant(0, invWorld.ToArray());
 
 			// set clip matrix
 
@@ -246,27 +246,27 @@ namespace _10.Shaders
 			worldViewProj *= driver.GetTransform(TransformationState.World);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderVariable("mWorldViewProj", worldViewProj.ToArray());
+				services.SetVertexShaderConstant("mWorldViewProj", worldViewProj.ToArray());
 			else
-				services.SetVertexShaderRegisters(4, worldViewProj.ToArray());
+				services.SetVertexShaderConstant(4, worldViewProj.ToArray());
 
 			// set camera position
 
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderVariable("mLightPos", pos.ToArray());
+				services.SetVertexShaderConstant("mLightPos", pos.ToArray());
 			else
-				services.SetVertexShaderRegisters(8, pos.ToArray());
+				services.SetVertexShaderConstant(8, pos.ToArray());
 
 			// set light color
 
 			Colorf col = new Colorf(0, 1, 1, 0);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderVariable("mLightColor", col.ToArray());
+				services.SetVertexShaderConstant("mLightColor", col.ToArray());
 			else
-				services.SetVertexShaderRegisters(9, col.ToArray());
+				services.SetVertexShaderConstant(9, col.ToArray());
 
 			// set transposed world matrix
 
@@ -274,17 +274,17 @@ namespace _10.Shaders
 
 			if (useHighLevelShaders)
 			{
-				services.SetVertexShaderVariable("mTransWorld", transpWorld.ToArray());
+				services.SetVertexShaderConstant("mTransWorld", transpWorld.ToArray());
 
 				if (driver.DriverType == DriverType.OpenGL)
 				{
 					// set texture
-					services.SetPixelShaderVariable("myTexture", new float[1] { 0.0f });
+					services.SetPixelShaderConstant("myTexture", new float[1] { 0.0f });
 				}
 			}
 			else
 			{
-				services.SetVertexShaderRegisters(10, transpWorld.ToArray());
+				services.SetVertexShaderConstant(10, transpWorld.ToArray());
 			}
 		}
 
