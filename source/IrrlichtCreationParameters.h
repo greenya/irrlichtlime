@@ -47,6 +47,12 @@ public:
 		void set(bool value) { m_NativeValue->Doublebuffer = value; }
 	}
 
+	property bool DriverMultithreaded
+	{
+		bool get() { return m_NativeValue->DriverMultithreaded; }
+		void set(bool value) { m_NativeValue->DriverMultithreaded = value; }
+	}
+
 	property Video::DriverType DriverType
 	{
 		Video::DriverType get() { return (Video::DriverType)m_NativeValue->DriverType; }
