@@ -92,7 +92,7 @@ namespace _08.SpecialFX
 			ps.SetMaterialFlag(MaterialFlag.Lighting, false);
 			ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
 			ps.SetMaterialTexture(0, driver.GetTexture("../../media/fire.bmp"));
-			ps.SetMaterialType(MaterialType.TransparentVertexAlpha);
+			ps.SetMaterialType(MaterialType.TransparentAddColor);
 
 			VolumeLightSceneNode n = smgr.AddVolumeLightSceneNode(null, -1,
 				32,								// Subdivisions on U axis
