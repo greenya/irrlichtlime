@@ -395,9 +395,9 @@ namespace _23.MeshHandling
 				{
 					int n = (y - y0) * width + x;
 					indices[i++] = (ushort)n;
-					indices[i++] = (ushort)(n + height);
-					indices[i++] = (ushort)(n + height + 1);
-					indices[i++] = (ushort)(n + height + 1);
+					indices[i++] = (ushort)(n + width);
+					indices[i++] = (ushort)(n + width + 1);
+					indices[i++] = (ushort)(n + width + 1);
 					indices[i++] = (ushort)(n + 1);
 					indices[i++] = (ushort)n;
 				}
