@@ -349,6 +349,13 @@ This should be usually enabled, in order to avoid render artifacts on the visibl
 
 Default value: true.</summary>
 		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DriverMultithreaded">
+			<summary>Driver should be multithreaded.
+
+Enabling this can slow down your application. Note that this does _not_ make Irrlicht threadsafe, but only the underlying driver-API for the graphiccard. So far only supported on D3D.
+
+Default value: false.</summary>
+		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.DriverType">
 			<summary>Type of video driver used to render graphics.
 
