@@ -5648,35 +5648,51 @@ Sets all basic render states if needed. Basic render states are diffuse, ambient
 			<param name="lastMaterial">The material used until now.</param>
 			<param name="resetAllRenderStates">Set to true if all renderstates should be set, regardless of their current state.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderRegisters(System.Int32,System.Single[])">
-			<summary>Sets a pixel shader register (s).
-
-Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
-			<param name="startRegisterIndex">First register to be set.</param>
-			<param name="values">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderVariable(System.String,System.Single[])">
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Single[])">
 			<summary>Sets a variable for the pixel shader based on the name.
 
 This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
 			<param name="name">Name of the variable.</param>
-			<param name="values">Array of floats (the value of the variable).</param>
+			<param name="valueFloats">Value of the variable.</param>
 			<returns>True if successful.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderRegisters(System.Int32,System.Single[])">
-			<summary>Sets a vertex shader register(s).
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Int32[])">
+			<summary>Sets a variable for the pixel shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="valueInts">Value of the variable.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single[])">
+			<summary>Sets a pixel shader register (s).
 
 Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
 			<param name="startRegisterIndex">First register to be set.</param>
-			<param name="values">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
+			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderVariable(System.String,System.Single[])">
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Single[])">
 			<summary>Sets a variable for the vertex shader based on the name.
 
 This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
 			<param name="name">Name of the variable.</param>
-			<param name="values">Array of floats (the value of the variable).</param>
+			<param name="valueFloats">Value of the variable.</param>
 			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Int32[])">
+			<summary>Sets a variable for the vertex shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="valueInts">Value of the variable.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single[])">
+			<summary>Sets a vertex shader register(s).
+
+Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
+			<param name="startRegisterIndex">First register to be set.</param>
+			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 		</member>
 		<member name="P:IrrlichtLime.Video.MaterialRendererServices.VideoDriver">
 			<summary>Pointer to the VideoDriver.</summary>
@@ -6774,13 +6790,17 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="useAlphaChannelOfTexture">True if alpha channel will be blended. Default: false.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DLine(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Video.Color)">
-			<summary>Draws a 2d line.</summary>
+			<summary>Draws a 2d line.
+
+Both start and end will be included in coloring.</summary>
 			<param name="start">Start point of the line.</param>
 			<param name="end">End point of the line.</param>
 			<param name="color">Color of the line.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DLine(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
-			<summary>Draws a 2d line.</summary>
+			<summary>Draws a 2d line.
+
+Both start and end will be included in coloring.</summary>
 			<param name="x1">X coord of start point of the line.</param>
 			<param name="y1">Y coord of start point of the line.</param>
 			<param name="x2">X coord of end point of the line.</param>
