@@ -87,9 +87,10 @@ public:
 	GUIElement^ AddGUIElement(String^ elementName, GUIElement^ parent);
 	GUIElement^ AddGUIElement(String^ elementName);
 
-	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
-	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIImage^ AddImage(Recti^ rectangle, GUIElement^ parent);
+	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
+	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id);
+	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent);
+	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel);
 	GUIImage^ AddImage(Recti^ rectangle);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id);

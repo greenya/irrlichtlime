@@ -432,7 +432,7 @@ GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName)
 	return GUIElement::Wrap(e);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
@@ -440,30 +440,50 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent, int id,
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str());
+		Lime::StringToStringW(text).c_str(),
+		useAlphaChannel);
 
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent, int id)
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
-		id);
+		id,
+		0,
+		useAlphaChannel);
 
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, GUIElement^ parent)
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		*rectangle->m_NativeValue,
-		LIME_SAFEREF(parent, m_GUIElement));
+		LIME_SAFEREF(parent, m_GUIElement),
+		-1,
+		0,
+		useAlphaChannel);
+
+	return GUIImage::Wrap(i);
+}
+
+GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(
+		*rectangle->m_NativeValue,
+		0,
+		-1,
+		0,
+		useAlphaChannel);
 
 	return GUIImage::Wrap(i);
 }

@@ -82,7 +82,7 @@ namespace L01.TexturePainting
 			guiSize256 = gui.AddButton(new Recti(50, 30, 80, 30 + 20), guiWindow, -1, "256");
 			guiSize512 = gui.AddButton(new Recti(90, 30, 120, 30 + 20), guiWindow, -1, "512");
 
-			guiImage = gui.AddImage(new Recti(10, 30 + 30, size + 10 - 1, size + 30 - 1 + 30), guiWindow);
+			guiImage = gui.AddImage(new Recti(10, 30 + 30, size + 10 - 1, size + 30 - 1 + 30), true, guiWindow);
 			gui.Focus = guiImage;
 		}
 
