@@ -21,10 +21,12 @@ public:
 	void SetPixelShaderConstant(int startRegisterIndex, array<float>^ valueFloats);
 	bool SetPixelShaderConstant(String^ name, array<float>^ valueFloats);
 	bool SetPixelShaderConstant(String^ name, array<int>^ valueInts);
+	bool SetPixelShaderConstant(String^ name, array<bool>^ valueBools);
 
 	void SetVertexShaderConstant(int startRegisterIndex, array<float>^ valueFloats);
 	bool SetVertexShaderConstant(String^ name, array<float>^ valueFloats);
 	bool SetVertexShaderConstant(String^ name, array<int>^ valueInts);
+	bool SetVertexShaderConstant(String^ name, array<bool>^ valueBools);
 
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 
