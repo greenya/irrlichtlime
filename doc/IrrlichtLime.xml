@@ -5655,6 +5655,14 @@ Sets all basic render states if needed. Basic render states are diffuse, ambient
 			<param name="lastMaterial">The material used until now.</param>
 			<param name="resetAllRenderStates">Set to true if all renderstates should be set, regardless of their current state.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Boolean[])">
+			<summary>Sets a variable for the pixel shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="valueBools">Value of the variable.</param>
+			<returns>True if successful.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Single[])">
 			<summary>Sets a variable for the pixel shader based on the name.
 
@@ -5677,6 +5685,14 @@ This can be used if you used a high level shader language like GLSL or HLSL to c
 Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
 			<param name="startRegisterIndex">First register to be set.</param>
 			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Boolean[])">
+			<summary>Sets a variable for the vertex shader based on the name.
+
+This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
+			<param name="name">Name of the variable.</param>
+			<param name="valueBools">Value of the variable.</param>
+			<returns>True if successful.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Single[])">
 			<summary>Sets a variable for the vertex shader based on the name.
