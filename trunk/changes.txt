@@ -1,4 +1,15 @@
 ============================
+Changes in 1.2 (??-???-2012)
+============================
+
+- Added example L11.BulletSharpTest.
+- Updated Irrlicht SDK to trunk rev. 4???.
+- MaterialRendererServices changes: renamed SetPixelShaderRegisters() and SetPixelShaderVariable() to SetPixelShaderConstant(); renamed SetVertexShaderRegisters() and SetVertexShaderVariable() to SetVertexShaderConstant(); added 2 more overloadings to Set*ShaderConstant() which takes int array and 2 more overloadings for bool arrays.
+- Added DriverMultithreaded prop to IrrlichtCreationParameters.
+- Added useAlphaChannel argument to AddImage() to GUIEnvironment.
+- Added Name prop to GUIElement.
+
+============================
 Changes in 1.1 (09-Mar-2012)
 ============================
 
