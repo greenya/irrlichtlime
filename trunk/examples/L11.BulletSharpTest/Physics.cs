@@ -82,7 +82,11 @@ namespace L11.BulletSharpTest
 
 			simThread = new System.Threading.Thread(new ParameterizedThreadStart(delegate(object t)
 			{
-				bulletWorld.StepSimulation((float)t);
+				float s = (float)t;
+				if (s > 1.0f / 60)
+					s = 1.0f / 60;
+
+				bulletWorld.StepSimulation(s);
 
 				List<CollisionObject> r = new List<CollisionObject>();
 
