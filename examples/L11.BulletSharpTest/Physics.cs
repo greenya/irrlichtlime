@@ -44,6 +44,25 @@ namespace L11.BulletSharpTest
 			if (simThread != null)
 				simThread.Join();
 
+			for (int i = bulletWorld.NumConstraints - 1; i >= 0; i--)
+			{
+				TypedConstraint c = bulletWorld.GetConstraint(i);
+				bulletWorld.RemoveConstraint(c);
+				c.Dispose();
+			}
+
+			for (int i = bulletWorld.NumCollisionObjects - 1; i >= 0; i--)
+			{
+				CollisionObject o = bulletWorld.CollisionObjectArray[i];
+
+				RigidBody b = o as RigidBody;
+				if (b != null && b.MotionState != null)
+					b.MotionState.Dispose();
+
+				bulletWorld.RemoveCollisionObject(o);
+				o.Dispose();
+			}
+
 			bulletWorld.Dispose();
 			bulletBroadphase.Dispose();
 			bulletCollisionDispatcher.Dispose();
@@ -108,8 +127,11 @@ namespace L11.BulletSharpTest
 
 				foreach (CollisionObject o in r)
 				{
-					(o.UserObject as SceneNode).SceneManager.AddToDeletionQueue(o.UserObject as SceneNode);
+					SceneNode n = o.UserObject as SceneNode;
+					n.SceneManager.AddToDeletionQueue(n);
+
 					bulletWorld.RemoveCollisionObject(o);
+					o.Dispose();
 				}
 
 				simThread = null;
@@ -121,7 +143,7 @@ namespace L11.BulletSharpTest
 			return true;
 		}
 
-		public int NumCollisionObject { get { return bulletWorld.NumCollisionObjects; } }
+		public int NumCollisionObjects { get { return bulletWorld.NumCollisionObjects; } }
 
 		CollisionShape bulletGetCollisionShape(Shape shape, SceneNode node)
 		{
@@ -143,7 +165,7 @@ namespace L11.BulletSharpTest
 						if (meshNode == null)
 							throw new ArgumentException();
 
-						TriangleMesh triagleMesh = new TriangleMesh();
+						TriangleMesh triangleMesh = new TriangleMesh();
 						for (int i = 0; i < meshNode.Mesh.MeshBufferCount; i++)
 						{
 							MeshBuffer b = meshNode.Mesh.GetMeshBuffer(i);
@@ -153,16 +175,20 @@ namespace L11.BulletSharpTest
 							if (inds == null || verts == null)
 								throw new ArgumentException();
 
-							for (int j = 0; j < inds.Length / 3; j++)
+							for (int j = 0; j < inds.Length; j += 3)
 							{
-								triagleMesh.AddTriangle(
-									new Vector3(verts[inds[j * 3 + 0]].Position.X, verts[inds[j * 3 + 0]].Position.Y, verts[inds[j * 3 + 0]].Position.Z),
-									new Vector3(verts[inds[j * 3 + 1]].Position.X, verts[inds[j * 3 + 1]].Position.Y, verts[inds[j * 3 + 1]].Position.Z),
-									new Vector3(verts[inds[j * 3 + 2]].Position.X, verts[inds[j * 3 + 2]].Position.Y, verts[inds[j * 3 + 2]].Position.Z));
+								Vector3Df v0 = verts[inds[j + 0]].Position;
+								Vector3Df v1 = verts[inds[j + 1]].Position;
+								Vector3Df v2 = verts[inds[j + 2]].Position;
+
+								triangleMesh.AddTriangle(
+									new Vector3(v0.X, v0.Y, v0.Z),
+									new Vector3(v1.X, v1.Y, v1.Z),
+									new Vector3(v2.X, v2.Y, v2.Z));
 							}
 						}
 
-						return new BvhTriangleMeshShape(triagleMesh, false);
+						return new BvhTriangleMeshShape(triangleMesh, false);
 					}
 
 				default:
