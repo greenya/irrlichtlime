@@ -222,8 +222,8 @@ namespace L11.BulletSharpTest
 		static void checkBulletSharpDllPresence()
 		{
 			const string bulletSharpDllFilename = "BulletSharp.dll";
-			const string bulletSharpUrl = "https://code.google.com/p/bulletsharp/";
-			const string bulletSharpDllUrl = "https://code.google.com/p/bulletsharp/downloads/detail?name=bulletsharp-2.80-sp1.zip";
+			const string bulletSharpUrl = "http://code.google.com/p/bulletsharp/";
+			const string bulletSharpDllUrl = "http://code.google.com/p/bulletsharp/downloads/detail?name=bulletsharp-r396.zip";
 
 			if (System.IO.File.Exists(bulletSharpDllFilename))
 				return;
@@ -233,7 +233,7 @@ namespace L11.BulletSharpTest
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.WriteLine();
 			Console.WriteLine("If you want to run this example you have to place it near this EXE file.");
-			Console.WriteLine("This example was tested with bulletsharp-2.80-sp1 a \"Release NoGfx\" dll.");
+			Console.WriteLine("This example was tested with bulletsharp-r396 a \"Release Generic\" dll.");
 			Console.WriteLine("You can get it from " + bulletSharpUrl);
 			Console.WriteLine();
 			Console.WriteLine("Press any key to exit or F1 if you want to navigate your web browser right now.");
