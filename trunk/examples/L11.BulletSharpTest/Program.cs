@@ -147,14 +147,16 @@ namespace L11.BulletSharpTest
 					font.Draw(scene.Attributes.GetValue("calls") + " nodes", v, Color.OpaqueWhite);
 					v.Y += 16;
 					font.Draw(driver.FPS + " fps", v, Color.OpaqueWhite);
+					v.Y += 16;
+					font.Draw("[T]rails " + (useTrails ? "ON" : "OFF"), v, Color.OpaqueGreen);
 					v.Y += 32;
 					font.Draw("Physics" + (simPaused ? " (paused)" : ""), v, Color.OpaqueYellow);
 					v.Y += 16;
-					font.Draw(physics.NumCollisionObject + " shapes", v, Color.OpaqueWhite);
+					font.Draw(physics.NumCollisionObjects + " shapes", v, Color.OpaqueWhite);
 					v.Y += 16;
 					font.Draw(simFps + " fps", v, Color.OpaqueWhite);
-					v.Y += 32;
-					font.Draw("[T]rails " + (useTrails ? "ON" : "OFF"), v, Color.OpaqueGreen);
+					v.Y += 16;
+					font.Draw("[Space] to pause", v, Color.OpaqueGreen);
 
 					driver.EndScene();
 				}
