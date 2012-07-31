@@ -6984,6 +6984,13 @@ After the shadow volume has been drawn into the stencil buffer using DrawStencil
 After the shadow volume has been drawn into the stencil buffer using DrawStencilShadowVolume(), use this to draw the color of the shadow.</summary>
 			<param name="clearStencilBuffer">True, if you want to paint every shadow with its own color. False, if you want to draw every shadow with the same color, and only want to call DrawStencilShadow() once after all shadow volumes have been drawn. Default: false.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadow(System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Fills the stencil shadow with a color.
+
+After the shadow volume has been drawn into the stencil buffer using DrawStencilShadowVolume(), use this to draw the color of the shadow.</summary>
+			<param name="clearStencilBuffer">True, if you want to paint every shadow with its own color. False, if you want to draw every shadow with the same color, and only want to call DrawStencilShadow() once after all shadow volumes have been drawn. Default: false.</param>
+			<param name="allEdges">Color of the shadow. Default: opaque black.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.DrawStencilShadow(System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
 			<summary>Fills the stencil shadow with a color.
 

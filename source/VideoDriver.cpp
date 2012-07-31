@@ -697,6 +697,18 @@ void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, 
 		*rightDownEdge->m_NativeValue);
 }
 
+void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color^ allEdges)
+{
+	LIME_ASSERT(allEdges != nullptr);
+
+	m_VideoDriver->drawStencilShadow(
+		clearStencilBuffer,
+		*allEdges->m_NativeValue,
+		*allEdges->m_NativeValue,
+		*allEdges->m_NativeValue,
+		*allEdges->m_NativeValue);
+}
+
 void VideoDriver::DrawStencilShadow(bool clearStencilBuffer)
 {
 	m_VideoDriver->drawStencilShadow(clearStencilBuffer);
