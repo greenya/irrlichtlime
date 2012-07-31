@@ -25,6 +25,7 @@ namespace L11.BulletSharpTest
 		CollisionDispatcher bulletCollisionDispatcher;
 		BroadphaseInterface bulletBroadphase;
 		DiscreteDynamicsWorld bulletWorld;
+		List<CollisionShape> bulletShapes = new List<CollisionShape>();
 
 		Thread simThread = null;
 		float simTimeStep = 0;
@@ -63,6 +64,10 @@ namespace L11.BulletSharpTest
 				o.Dispose();
 			}
 
+			foreach (CollisionShape s in bulletShapes)
+				s.Dispose();
+			bulletShapes.Clear();
+
 			bulletWorld.Dispose();
 			bulletBroadphase.Dispose();
 			bulletCollisionDispatcher.Dispose();
@@ -75,6 +80,8 @@ namespace L11.BulletSharpTest
 
 			if (simThread != null)
 				simThread.Join();
+
+			bulletShapes.Add(collShape);
 
 			RigidBody body = bulletCreateRigidBody(
 				mass,
@@ -107,31 +114,26 @@ namespace L11.BulletSharpTest
 
 				bulletWorld.StepSimulation(s);
 
-				List<CollisionObject> r = new List<CollisionObject>();
-
 				IrrlichtLime.Core.Matrix m = new IrrlichtLime.Core.Matrix();
-				foreach (CollisionObject collObj in bulletWorld.CollisionObjectArray)
+				AlignedCollisionObjectArray collObjects = bulletWorld.CollisionObjectArray;
+				for (int i = collObjects.Count - 1; i >= 0; i--)
 				{
-					if (collObj.IsStaticObject || !collObj.IsActive)
+					CollisionObject collObject = collObjects[i];
+					if (collObject.IsStaticObject || !collObject.IsActive)
 						continue;
 
-					m.SetElementArray(collObj.WorldTransform.ToArray());
+					m.SetElementArray(collObject.WorldTransform.ToArray());
 
-					SceneNode n = collObj.UserObject as SceneNode;
+					SceneNode n = collObject.UserObject as SceneNode;
 					n.Position = m.Translation;
 					n.Rotation = m.Rotation;
-					
+
 					if (m.Translation.Y < -40000)
-						r.Add(collObj);
-				}
-
-				foreach (CollisionObject o in r)
-				{
-					SceneNode n = o.UserObject as SceneNode;
-					n.SceneManager.AddToDeletionQueue(n);
-
-					bulletWorld.RemoveCollisionObject(o);
-					o.Dispose();
+					{
+						n.SceneManager.AddToDeletionQueue(n);
+						bulletWorld.RemoveCollisionObject(collObject);
+						collObject.Dispose();
+					}
 				}
 
 				simThread = null;
