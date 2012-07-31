@@ -112,6 +112,7 @@ public:
 	void DrawPixel(int x, int y, Color^ color);
 
 	void DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, Color^ rightUpEdge, Color^ leftDownEdge, Color^ rightDownEdge);
+	void DrawStencilShadow(bool clearStencilBuffer, Color^ allEdges);
 	void DrawStencilShadow(bool clearStencilBuffer);
 	void DrawStencilShadow();
 
