@@ -129,11 +129,6 @@ void AnimatedMeshSceneNode::SetJointMode(JointUpdateOnRender mode)
 	m_AnimatedMeshSceneNode->setJointMode((scene::E_JOINT_UPDATE_ON_RENDER)mode);
 }
 
-void AnimatedMeshSceneNode::SetLoopMode(bool playAnimationLooped)
-{
-	m_AnimatedMeshSceneNode->setLoopMode(playAnimationLooped);
-}
-
 bool AnimatedMeshSceneNode::SetMD2Animation(AnimationTypeMD2 animationType)
 {
 	return m_AnimatedMeshSceneNode->setMD2Animation((scene::EMD2_ANIMATION_TYPE)animationType);
@@ -182,6 +177,16 @@ int AnimatedMeshSceneNode::EndFrame::get()
 int AnimatedMeshSceneNode::JointCount::get()
 {
 	return m_AnimatedMeshSceneNode->getJointCount();
+}
+
+bool AnimatedMeshSceneNode::LoopMode::get()
+{
+	return m_AnimatedMeshSceneNode->getLoopMode();
+}
+
+void AnimatedMeshSceneNode::LoopMode::set(bool value)
+{
+	m_AnimatedMeshSceneNode->setLoopMode(value);
 }
 
 AnimatedMesh^ AnimatedMeshSceneNode::Mesh::get()

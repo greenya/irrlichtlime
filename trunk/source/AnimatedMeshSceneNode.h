@@ -42,7 +42,6 @@ public:
 
 	bool SetFrameLoop(int begin, int end);
 	void SetJointMode(JointUpdateOnRender mode);
-	void SetLoopMode(bool playAnimationLooped);
 
 	bool SetMD2Animation(AnimationTypeMD2 animationType);
 	bool SetMD2Animation(String^ animationName);
@@ -54,6 +53,7 @@ public:
 	property float CurrentFrame { float get(); void set(float value); }
 	property int EndFrame { int get(); }
 	property int JointCount { int get(); }
+	property bool LoopMode { bool get(); void set(bool value); }
 	property AnimatedMesh^ Mesh { AnimatedMesh^ get(); void set(AnimatedMesh^ value); }
 	property int StartFrame { int get(); }
 	property bool ReadOnlyMaterials { bool get(); void set(bool value); }
