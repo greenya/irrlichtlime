@@ -121,6 +121,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClInclude Include="ColorMaterial.h" />
     <ClInclude Include="ColorPlane.h" />
     <ClInclude Include="ComparisonFunc.h" />
+    <ClInclude Include="CursorPlatformBehavior.h" />
     <ClInclude Include="DriverType.h" />
     <ClInclude Include="ExposedVideoData.h" />
     <ClInclude Include="Fog.h" />
