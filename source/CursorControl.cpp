@@ -29,6 +29,16 @@ void CursorControl::SetReferenceRect(Recti^ rect_or_null)
 	m_CursorControl->setReferenceRect(LIME_SAFEREF(rect_or_null, m_NativeValue));
 }
 
+CursorPlatformBehavior CursorControl::PlatformBehavior::get()
+{
+	return (CursorPlatformBehavior)m_CursorControl->getPlatformBehavior();
+}
+
+void CursorControl::PlatformBehavior::set(CursorPlatformBehavior value)
+{
+	m_CursorControl->setPlatformBehavior((gui::ECURSOR_PLATFORM_BEHAVIOR)value);
+}
+
 Vector2Di^ CursorControl::Position::get()
 {
 	return gcnew Vector2Di(m_CursorControl->getPosition());
