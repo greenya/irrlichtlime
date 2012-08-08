@@ -4428,6 +4428,28 @@ Runs on all platforms, with every hardware. It should only be used for 2d graphi
 
 This data can be retrived by VideoDriver.ExposedVideoData. Use this with caution. This only should be used to make it possible to extend the engine easily without modification of its source. Note: this class does not contain any valid data, if you are using the software or the null device.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.ExposedVideoData.DeviceContext">
+			<summary>Device context.
+
+Can be pointer to IDirect3D8, IDirect3D9 or HDC (private GDI device context) depends on the video driver.
+
+Note: for software renderers this value is not valid.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.ExposedVideoData.#ctor">
+			<summary>Creates new instance.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.ExposedVideoData.RenderingContext">
+			<summary>Rendering context.
+
+Can be pointer to IDirect3DDevice8, IDirect3DDevice9 or HGLRC (permanent rendering context) depends on the video driver.
+
+Note: for software renderers this value is not valid.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.ExposedVideoData.WindowID">
+			<summary>Rendering window handle.
+
+Note: for software renderers this value is not valid.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.Fog">
 			<summary>Fog data.
 
