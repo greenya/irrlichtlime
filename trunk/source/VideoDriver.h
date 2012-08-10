@@ -78,6 +78,17 @@ public:
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect);
 	void Draw2DImage(Texture^ texture, Vector2Di^ destPos);
 	
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color^ color);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects);
+
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color^ color);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices);
+
 	void Draw2DLine(int x1, int y1, int x2, int y2, Color^ color);
 	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color);
 
