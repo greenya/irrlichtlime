@@ -6834,6 +6834,99 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="colors">List of four colors denoting the color values of the corners of the destRect. Default: null.</param>
 			<param name="useAlphaChannelOfTexture">True if alpha channel will be blended. Default: false.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32})">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="position">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="position">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
+			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="position">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
+			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="position">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
+			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="position">Upper left 2d destination position where the image will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
+			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
+			<param name="useAlphaChannelOfTexture">If true, the alpha channel of the texture is used to draw the image. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti})">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="positions">List of upper left 2d destinations where the images will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="positions">List of upper left 2d destinations where the images will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="positions">List of upper left 2d destinations where the images will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
+
+All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
+			<param name="texture">Texture to be drawn.</param>
+			<param name="positions">List of upper left 2d destinations where the images will be drawn.</param>
+			<param name="sourceRects">Source rectangles of the image.</param>
+			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
+			<param name="useAlphaChannelOfTexture">If true, the alpha channel of the texture is used to draw the image. Default: false.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DLine(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Video.Color)">
 			<summary>Draws a 2d line.
 
