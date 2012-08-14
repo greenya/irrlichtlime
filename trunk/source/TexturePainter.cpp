@@ -43,7 +43,6 @@ Color^ TexturePainter::GetPixel(int x, int y)
 
 bool TexturePainter::Lock(TextureLockMode lockMode, int mipmapLevel)
 {
-	LIME_ASSERT(!Locked);
 	LIME_ASSERT(mipmapLevel >= 0 && mipmapLevel < m_mipmapLevelCount);
 
 	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode, mipmapLevel);
@@ -62,8 +61,6 @@ bool TexturePainter::Lock(TextureLockMode lockMode, int mipmapLevel)
 
 bool TexturePainter::Lock(TextureLockMode lockMode)
 {
-	LIME_ASSERT(!Locked);
-
 	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode);
 	if (m_pointer == nullptr)
 		return false;
@@ -78,8 +75,6 @@ bool TexturePainter::Lock(TextureLockMode lockMode)
 
 bool TexturePainter::Lock()
 {
-	LIME_ASSERT(!Locked);
-
 	m_pointer = m_texture->m_Texture->lock();
 	if (m_pointer == nullptr)
 		return false;
