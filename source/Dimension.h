@@ -28,5 +28,13 @@ namespace Core {
 #undef _WRAPCLASS_
 #undef _REFCLASS_
 
+#define _REFCLASS_ Dimension2Dd
+#define _WRAPCLASS_ core::dimension2d<double>
+#define _WRAPTYPE_ double
+#include "Dimension2Df.h" // "f" version here is not a mistype
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
+
 } // end namespace Core
 } // end namespace IrrlichtLime
