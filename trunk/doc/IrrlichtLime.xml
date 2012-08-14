@@ -1546,6 +1546,93 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="P:IrrlichtLime.Core.AABBox.Volume">
 			<summary>The volume enclosed by the box in cubed units.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Dimension2Dd">
+			<summary>Specifies a 2 dimensional double size.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Dd.Area">
+			<summary>Area of the dimension: Width x Height.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.#ctor">
+			<summary>Default constructor for empty dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.#ctor(IrrlichtLime.Core.Dimension2Dd)">
+			<summary>Creates separete copy.</summary>
+			<param name="copy">Value to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.#ctor(System.Double,System.Double)">
+			<summary>Creates dimension using Width and Height.</summary>
+			<param name="width">Width.</param>
+			<param name="height">Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.#ctor(System.Double)">
+			<summary>Creates dimension using same width and height (a square).</summary>
+			<param name="widthAndHeight">One value for both Width and Height.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetInterpolated(IrrlichtLime.Core.Dimension2Dd,System.Single)">
+			<summary>Get the interpolated dimension.</summary>
+			<param name="other">Other dimension to interpolate with.</param>
+			<param name="d">Value between 0.0f and 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetOptimalSize">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetOptimalSize(System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetOptimalSize(System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.GetOptimalSize(System.Boolean,System.Boolean,System.Boolean,System.UInt32)">
+			<summary>Get the optimal size according to some properties.
+
+This is a function often used for texture dimension calculations. The function returns the next larger or smaller dimension which is a power-of-two dimension (2^n,2^m) and/or square (Width=Height).</summary>
+			<param name="requirePowerOfTwo">Forces the result to use only powers of two as values. Default: true.</param>
+			<param name="requireSquare">Makes width==height in the result. Default: false.</param>
+			<param name="larger">Choose whether the result is larger or smaller than the current dimension. If one dimension need not be changed it is kept with any value of larger. Default: true.</param>
+			<param name="maxValue">Maximum texturesize. if value &gt; 0 size is clamped to maxValue. Default: 0.</param>
+			<returns>The optimal dimension under the given constraints.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Dd.Height">
+			<summary>Height of the dimension.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.Inflate(System.Double,System.Double)">
+			<summary>Enlarges this dimension by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.Set(IrrlichtLime.Core.Dimension2Dd)">
+			<summary>Set to new value using another dimension.</summary>
+			<param name="copy">Another dimension.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Dimension2Dd.Set(System.Double,System.Double)">
+			<summary>Set to new value using new Width and Height.</summary>
+			<param name="width">New Width.</param>
+			<param name="height">New Height.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Dimension2Dd.Width">
+			<summary>Width of the dimension.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Core.Dimension2Df">
 			<summary>Specifies a 2 dimensional float size.</summary>
 		</member>
@@ -2343,6 +2430,110 @@ The rotation is q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k).</summary>
 		<member name="P:IrrlichtLime.Core.Quaternion.Z">
 			<summary>Z value of vectorial (imaginary) part.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Rectd">
+			<summary>Rectangular area.
+
+Mostly used by 2D GUI elements and for 2D drawing methods. It has 2 positions instead of position and dimension and a fast method for collision detection with other rectangles and points.
+
+Coordinates are (0,0) for top-left corner, and increasing to the right and to the bottom.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.AddInternalPoint(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="point">Point to add to the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.AddInternalPoint(System.Double,System.Double)">
+			<summary>Adds a point to the bounding rectangle.
+
+Causes the rectangle to grow bigger if point is outside of the box.</summary>
+			<param name="x">X-Coordinate of the point to add to this box.</param>
+			<param name="y">Y-Coordinate of the point to add to this box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.Adjust(System.Double,System.Double,System.Double,System.Double)">
+			<summary>Adjusts both corners of this rect by the specified amount.</summary>
+			<param name="x1">UpperLeftCorner.X to adjust for.</param>
+			<param name="y1">UpperLeftCorner.Y to adjust for.</param>
+			<param name="x2">LowerRightCorner.X to adjust for.</param>
+			<param name="y2">LowerRightCorner.Y to adjust for.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.Area">
+			<summary>Area of the rectangle: Width x Height.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.Center">
+			<summary>Center of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.ClipAgainst(IrrlichtLime.Core.Rectd)">
+			<summary>Clips this rectangle with another one.</summary>
+			<param name="other">Rectangle to clip with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.ConstrainTo(IrrlichtLime.Core.Rectd)">
+			<summary>Moves this rectangle to fit inside another one.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True on success, false if not possible.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.Height">
+			<summary>Height of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.Inflate(System.Double,System.Double)">
+			<summary>Inflates this rect by the specified amount.</summary>
+			<param name="width">Width to enlarge.</param>
+			<param name="height">Height to enlarge.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.IsPointInside(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="pos">Position to test.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.IsRectCollided(IrrlichtLime.Core.Rectd)">
+			<summary>Checks if the rectangle collides with another rectangle.</summary>
+			<param name="other">Other rectangle.</param>
+			<returns>True if the rectangles collide.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.LowerRightCorner">
+			<summary>Lower right corner of the rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.Offset(System.Double,System.Double)">
+			<summary>Offsets position of this rect by the specified amount.</summary>
+			<param name="x">Horizontal offset.</param>
+			<param name="y">Vertical offset.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.#ctor">
+			<summary>Default constructor creating empty rectangle at (0,0).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.#ctor(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Dimension2Dd)">
+			<summary>Constructor with upper left corner and dimension.</summary>
+			<param name="pos">Position.</param>
+			<param name="size">Size.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.#ctor(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Constructor with two corners.</summary>
+			<param name="upperLeft">Upper left corner.</param>
+			<param name="lowerRight">Lower right corner.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.#ctor(System.Double,System.Double,System.Double,System.Double)">
+			<summary>Constructor with two corners.</summary>
+			<param name="x1">Upper left X.</param>
+			<param name="y1">Upper left Y.</param>
+			<param name="x2">Lower right X.</param>
+			<param name="y2">Lower right Y.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.Repair">
+			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.UpperLeftCorner">
+			<summary>Upper left corner of the rectangle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.Valid">
+			<summary>Checks if the rectangle is valid to draw.
+
+It would be invalid if the UpperLeftCorner is lower or more right than the LowerRightCorner.
+
+Note: use Repair() to make it valid.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Rectd.Width">
+			<summary>Width of the rectangle.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Core.Rectf">
 			<summary>Rectangular area.
 
@@ -2416,12 +2607,20 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Dimension2Df)">
 			<summary>Constructor with upper left corner and dimension.</summary>
+			<param name="pos">Position.</param>
+			<param name="size">Size.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
 			<summary>Constructor with two corners.</summary>
+			<param name="upperLeft">Upper left corner.</param>
+			<param name="lowerRight">Lower right corner.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor(System.Single,System.Single,System.Single,System.Single)">
 			<summary>Constructor with two corners.</summary>
+			<param name="x1">Upper left X.</param>
+			<param name="y1">Upper left Y.</param>
+			<param name="x2">Lower right X.</param>
+			<param name="y2">Lower right Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.Repair">
 			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
@@ -2512,12 +2711,20 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
 			<summary>Constructor with upper left corner and dimension.</summary>
+			<param name="pos">Position.</param>
+			<param name="size">Size.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
 			<summary>Constructor with two corners.</summary>
+			<param name="upperLeft">Upper left corner.</param>
+			<param name="lowerRight">Lower right corner.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
 			<summary>Constructor with two corners.</summary>
+			<param name="x1">Upper left X.</param>
+			<param name="y1">Upper left Y.</param>
+			<param name="x2">Lower right X.</param>
+			<param name="y2">Lower right Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.Repair">
 			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
@@ -2631,6 +2838,128 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 			<param name="point2">Point B.</param>
 			<param name="point3">Point C.</param>
 		</member>
+		<member name="T:IrrlichtLime.Core.Vector2Dd">
+			<summary>2d vector class with lots of operators and methods.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.Angle">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.AngleTrig">
+			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.DotProduct(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Get the dot product of this vector with another.</summary>
+			<param name="other">Other vector to take dot product with.</param>
+			<returns>The dot product of the two vectors.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.EqualsTo(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Checks if this vector equals the other one.
+
+Takes floating point rounding errors into account.</summary>
+			<param name="other">Vector to compare with.</param>
+			<returns>True if the two vector are (almost) equal, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetAngleWith(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Calculates the angle between this vector and another one in degree.</summary>
+			<param name="other">Other vector to test with.</param>
+			<returns>Returns a value between 0 and 90.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetDistanceFrom(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Gets distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetDistanceFromSQ(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as a point in 2-dimensional space.</summary>
+			<param name="other">Other vector to measure from.</param>
+			<returns>Squared distance from other point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetInterpolated(IrrlichtLime.Core.Vector2Dd,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.Interpolate(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other vectors.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector b) and 1.0f (all vector a). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector, after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.IsBetweenPoints(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.LengthSQ">
+			<summary>The squared length of the vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.Normalize">
+			<summary>Normalizes the vector.
+
+The null vector is left untouched.</summary>
+			<returns>Reference to this vector, after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.RotateBy(System.Double)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.RotateBy(System.Double,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Rotates the point anticlockwise around a center by an amount of degrees.</summary>
+			<param name="degrees">Amount of degrees to rotate by, anticlockwise.</param>
+			<param name="center">Rotation center. Default: (0,0,0).</param>
+			<returns>Reference to this vector after transformation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.Set(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Set value of this vector using provided vector.</summary>
+			<param name="copy">Vector to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.Set(System.Double,System.Double)">
+			<summary>Set value of this vector using provided coordinates.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(System.Double)">
+			<summary>Constructor with the same value for both members.</summary>
+			<param name="all">Coordinate for X and Y.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(System.Double,System.Double)">
+			<summary>Constructor with two different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector2Dd.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Core.Vector2Df">
 			<summary>2d vector class with lots of operators and methods.</summary>
 		</member>
@@ -2703,9 +3032,7 @@ It is assumed that the point is on the line.</summary>
 			<summary>Length of the vector.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.LengthSQ">
-			<summary>The squared length of the vector.
-
-This is useful because it is faster than: Length x Length.</summary>
+			<summary>The squared length of the vector.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.Normalize">
 			<summary>Normalizes the vector.
@@ -2726,21 +3053,28 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.Set(IrrlichtLime.Core.Vector2Df)">
 			<summary>Set value of this vector using provided vector.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.Set(System.Single,System.Single)">
 			<summary>Set value of this vector using provided coordinates.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor">
 			<summary>Default constructor (null vector).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single)">
 			<summary>Constructor with the same value for both members.</summary>
+			<param name="all">Coordinate for X and Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(IrrlichtLime.Core.Vector2Df)">
 			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single,System.Single)">
 			<summary>Constructor with two different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.X">
 			<summary>X coordinate of the vector.</summary>
@@ -2820,9 +3154,7 @@ It is assumed that the point is on the line.</summary>
 			<summary>Length of the vector.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.LengthSQ">
-			<summary>The squared length of the vector.
-
-This is useful because it is faster than: Length x Length.</summary>
+			<summary>The squared length of the vector.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.Normalize">
 			<summary>Normalizes the vector.
@@ -2843,21 +3175,28 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.Set(IrrlichtLime.Core.Vector2Di)">
 			<summary>Set value of this vector using provided vector.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.Set(System.Int32,System.Int32)">
 			<summary>Set value of this vector using provided coordinates.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor">
 			<summary>Default constructor (null vector).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32)">
 			<summary>Constructor with the same value for both members.</summary>
+			<param name="all">Coordinate for X and Y.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(IrrlichtLime.Core.Vector2Di)">
 			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32,System.Int32)">
 			<summary>Constructor with two different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.X">
 			<summary>X coordinate of the vector.</summary>
@@ -2865,10 +3204,187 @@ The null vector is left untouched.</summary>
 		<member name="P:IrrlichtLime.Core.Vector2Di.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Core.Vector3Dd">
+			<summary>3d vector class with lots of operators and methods.
+
+The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.CrossProduct(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Calculates the cross product with another vector.</summary>
+			<param name="other">Vector to multiply with.</param>
+			<returns>Cross product of this vector with other.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.DotProduct(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Get the dot product with another vector.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Dot product result.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.EqualsTo(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<returns>True if vectors are equal.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.EqualsTo(IrrlichtLime.Core.Vector3Dd,System.Double)">
+			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
+			<param name="other">Other vector for comparision.</param>
+			<param name="tolerance">Tolerance of comparision. Default: 0.000001f.</param>
+			<returns>True if vectors are equal.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.GetDistanceFrom(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Get distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Distance from the point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Returns squared distance from another point.
+
+Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Squared distance.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.GetInterpolated(IrrlichtLime.Core.Vector3Dd,System.Double)">
+			<summary>Creates an interpolated vector between this vector and another vector.</summary>
+			<param name="other">The other vector to interpolate with.</param>
+			<param name="d">Interpolation value between 0.0f (all the other vector) and 1.0f (all this vector). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.GetInterpolatedQuadratic(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd,System.Double)">
+			<summary>Creates a quadratically interpolated vector between this and two other vectors.</summary>
+			<param name="other1">Second vector to interpolate with.</param>
+			<param name="other2">Third vector to interpolate with (maximum at 1.0f)</param>
+			<param name="d">Interpolation value between 0.0f (all this vector) and 1.0f (all the 3rd vector). Note that this is the opposite direction of interpolation to GetInterpolated() and Interpolate().</param>
+			<returns>An interpolated vector. This vector is not modified.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.HorizontalAngle">
+			<summary>The rotations that would make a (0,0,1) direction vector point in the same direction as this direction vector.
+
+This property contains a rotation vector containing the X (pitch) and Y (raw) rotations (in degrees) that when applied to a +Z (e.g. 0, 0, 1) direction vector would make it point in the same direction as this vector. The Z (roll) rotation is always 0, since two Euler rotations are sufficient to point in any given direction.
+
+Thanks to Arras on the Irrlicht forums for this method.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.Interpolate(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd,System.Double)">
+			<summary>Sets this vector to the linearly interpolated vector between two other.</summary>
+			<param name="other1">First vector to interpolate with, maximum at 1.0f.</param>
+			<param name="other2">Second vector to interpolate with, maximum at 0.0f.</param>
+			<param name="d">Interpolation value between 0.0f (all vector other2) and 1.0f (all vector other1). Note that this is the opposite direction of interpolation to GetInterpolatedQuadratic().</param>
+			<returns>Reference to this vector after interpolation.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.Invert">
+			<summary>Inverts the vector.</summary>
+			<returns>Reference to this vector after inversion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.IsBetweenPoints(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd)">
+			<summary>Checks if this vector interpreted as a point is on a line between two other points.
+
+It is assumed that the point is on the line.</summary>
+			<param name="begin">Beginning vector to compare between.</param>
+			<param name="end">Ending vector to compare between.</param>
+			<returns>True if this vector is between begin and end, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.Length">
+			<summary>Length of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.LengthSQ">
+			<summary>The squared length of the vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.Normalize">
+			<summary>Normalizes the vector.
+
+In case of the 0 vector the result is still 0, otherwise the length of the vector will be 1.</summary>
+			<returns>Reference to this vector after normalization.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateXYby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateXYby(System.Double,IrrlichtLime.Core.Vector3Dd)">
+			<summary>Rotates the vector by a specified number of degrees around the Z axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Z axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateXZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateXZby(System.Double,IrrlichtLime.Core.Vector3Dd)">
+			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateYZby(System.Double)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotateYZby(System.Double,IrrlichtLime.Core.Vector3Dd)">
+			<summary>Rotates the vector by a specified number of degrees around the X axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the X axis.</param>
+			<param name="center">The center of the rotation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotationToDirection">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.RotationToDirection(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Builds a direction vector from (this) rotation vector.
+
+This vector is assumed to be a rotation vector composed of 3 Euler angle rotations, in degrees. The implementation performs the same calculations as using a matrix to do the rotation.</summary>
+			<param name="forwards">The direction representing "forwards" which will be rotated by this vector. If you do not provide a direction, then the +Z axis (0, 0, 1) will be assumed to be forwards.</param>
+			<returns>A direction vector calculated by rotating the forwards direction by the 3 Euler angles (in degrees) represented by this vector.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.Set(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Sets new value of this vector.</summary>
+			<param name="copy">Vector to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.Set(System.Double,System.Double,System.Double)">
+			<summary>Sets new value of this vector.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
+			<param name="z">New Z.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.SphericalCoordinateAngles">
+			<summary>The spherical coordinate angles.
+
+This returns Euler degrees for the point represented by this vector. The calculation assumes the pole at (0,1,0) and returns the angles in X and Y.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.ToArray">
+			<summary>Fills an array of 4 values with the vector data.
+
+The fourth value will always be 0.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor">
+			<summary>Default constructor (null vector).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(System.Double)">
+			<summary>Constructor with the same value for all three elements.</summary>
+			<param name="all">Coordinate for X, Y and Z.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(System.Double,System.Double,System.Double)">
+			<summary>Constructor with three different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+			<param name="z">Z coordinate.</param>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.X">
+			<summary>X coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.Y">
+			<summary>Y coordinate of the vector.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Core.Vector3Dd.Z">
+			<summary>Z coordinate of the vector.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Core.Vector3Df">
 			<summary>3d vector class with lots of operators and methods.
 
-The Vector3d class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.CrossProduct(IrrlichtLime.Core.Vector3Df)">
 			<summary>Calculates the cross product with another vector.</summary>
@@ -2877,6 +3393,7 @@ The Vector3d class is used in Irrlicht for three main purposes: 1) As a directio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.DotProduct(IrrlichtLime.Core.Vector3Df)">
 			<summary>Get the dot product with another vector.</summary>
+			<param name="other">Other vector.</param>
 			<returns>Dot product result.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.EqualsTo(IrrlichtLime.Core.Vector3Df)">
@@ -2894,12 +3411,15 @@ The Vector3d class is used in Irrlicht for three main purposes: 1) As a directio
 			<summary>Get distance from another point.
 
 Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
 			<returns>Distance from the point.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Df)">
 			<summary>Returns squared distance from another point.
 
 Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Squared distance.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.GetInterpolated(IrrlichtLime.Core.Vector3Df,System.Double)">
 			<summary>Creates an interpolated vector between this vector and another vector.</summary>
@@ -2944,9 +3464,7 @@ It is assumed that the point is on the line.</summary>
 			<summary>Length of the vector.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Df.LengthSQ">
-			<summary>The squared length of the vector.
-
-This is useful because it is faster than: Length x Length.</summary>
+			<summary>The squared length of the vector.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.Normalize">
 			<summary>Normalizes the vector.
@@ -2996,9 +3514,13 @@ This vector is assumed to be a rotation vector composed of 3 Euler angle rotatio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.Set(IrrlichtLime.Core.Vector3Df)">
 			<summary>Sets new value of this vector.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.Set(System.Single,System.Single,System.Single)">
 			<summary>Sets new value of this vector.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
+			<param name="z">New Z.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Df.SphericalCoordinateAngles">
 			<summary>The spherical coordinate angles.
@@ -3015,12 +3537,17 @@ Useful for setting in shader constants for example. The fourth value will always
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single)">
 			<summary>Constructor with the same value for all three elements.</summary>
+			<param name="all">Coordiante for X, Y and Z.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(IrrlichtLime.Core.Vector3Df)">
 			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single,System.Single,System.Single)">
 			<summary>Constructor with three different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+			<param name="z">Z coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Df.X">
 			<summary>X coordinate of the vector.</summary>
@@ -3043,6 +3570,8 @@ The Vector3D class is used in Irrlicht for three main purposes: 1) As a directio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.DotProduct(IrrlichtLime.Core.Vector3Di)">
 			<summary>Get the dot product with another vector.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Dot product result.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.EqualsTo(IrrlichtLime.Core.Vector3Di)">
 			<summary>Checks if this vector equals the other one, taking floating point rounding errors into account.</summary>
@@ -3059,11 +3588,15 @@ The Vector3D class is used in Irrlicht for three main purposes: 1) As a directio
 			<summary>Get distance from another point.
 
 Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Distance from the point.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.GetDistanceFromSQ(IrrlichtLime.Core.Vector3Di)">
 			<summary>Returns squared distance from another point.
 
 Here, the vector is interpreted as point in 3 dimensional space.</summary>
+			<param name="other">Other vector.</param>
+			<returns>Squared distance.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.GetInterpolated(IrrlichtLime.Core.Vector3Di,System.Double)">
 			<summary>Creates an interpolated vector between this vector and another vector.</summary>
@@ -3108,9 +3641,7 @@ It is assumed that the point is on the line.</summary>
 			<summary>Length of the vector.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Di.LengthSQ">
-			<summary>The squared length of the vector.
-
-This is useful because it is faster than: Length x Length.</summary>
+			<summary>The squared length of the vector.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.Normalize">
 			<summary>Normalizes the vector.
@@ -3159,9 +3690,13 @@ This vector is assumed to be a rotation vector composed of 3 Euler angle rotatio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.Set(IrrlichtLime.Core.Vector3Di)">
 			<summary>Sets new value of this vector.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.Set(System.Int32,System.Int32,System.Int32)">
 			<summary>Sets new value of this vector.</summary>
+			<param name="x">New X.</param>
+			<param name="y">New Y.</param>
+			<param name="z">New Z.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Di.SphericalCoordinateAngles">
 			<summary>The spherical coordinate angles.
@@ -3178,12 +3713,17 @@ Useful for setting in shader constants for example. The fourth value will always
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32)">
 			<summary>Constructor with the same value for all three elements.</summary>
+			<param name="all">Coordinate for X, Y and Z.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(IrrlichtLime.Core.Vector3Di)">
 			<summary>Copy constructor.</summary>
+			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32,System.Int32,System.Int32)">
 			<summary>Constructor with three different values.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+			<param name="z">Z coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Di.X">
 			<summary>X coordinate of the vector.</summary>

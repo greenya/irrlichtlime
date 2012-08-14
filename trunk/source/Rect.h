@@ -36,5 +36,17 @@ namespace Core {
 #undef _WRAPCLASS_
 #undef _REFCLASS_
 
+#define _REFCLASS_ Rectd
+#define _WRAPCLASS_ core::rect<double>
+#define _WRAPTYPE_ double
+#define _OTHERTYPE1_ Vector2Dd
+#define _OTHERTYPE2_ Dimension2Dd
+#include "Rect_template.h"
+#undef _OTHERTYPE2_
+#undef _OTHERTYPE1_
+#undef _WRAPTYPE_
+#undef _WRAPCLASS_
+#undef _REFCLASS_
+
 } // end namespace Core
 } // end namespace IrrlichtLime
