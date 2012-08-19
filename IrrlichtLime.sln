@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L11.BulletSharpTest", "exam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L12.StencilShadows", "examples\L12.StencilShadows\L12.StencilShadows.csproj", "{F3B6877D-C46C-4B06-827A-EC587178A9E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L13.FractalBrowser", "examples\L13.FractalBrowser\L13.FractalBrowser.csproj", "{73BAC070-1382-4981-80A7-13AFE5343145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -447,6 +449,18 @@ Global
 		{F3B6877D-C46C-4B06-827A-EC587178A9E8}.Release|Win32.ActiveCfg = Release|x86
 		{F3B6877D-C46C-4B06-827A-EC587178A9E8}.Release|x86.ActiveCfg = Release|x86
 		{F3B6877D-C46C-4B06-827A-EC587178A9E8}.Release|x86.Build.0 = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|Win32.ActiveCfg = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|x86.ActiveCfg = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Debug|x86.Build.0 = Debug|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|Any CPU.ActiveCfg = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|Mixed Platforms.Build.0 = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|Win32.ActiveCfg = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|x86.ActiveCfg = Release|x86
+		{73BAC070-1382-4981-80A7-13AFE5343145}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
