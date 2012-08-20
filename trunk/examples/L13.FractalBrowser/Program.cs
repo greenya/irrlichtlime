@@ -16,14 +16,22 @@ namespace L13.FractalBrowser
 		static IrrlichtDevice device;
 		static FractalGenerator fGen;
 		static Vector2Di mouseMoveStart = null;
+		static bool showHelp = false;
 
 		static void Main(string[] args)
 		{
 			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D8, new Dimension2Di(1024, 768));
-			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
-			VideoDriver driver = device.VideoDriver;
+			if (device == null)
+				return;
 
+			device.SetWindowCaption("Fractal Generator - Irrlicht Engine");
+			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
+
+			VideoDriver driver = device.VideoDriver;
 			GUIFont font = device.GUIEnvironment.GetFont("../../media/fontlucida.png");
+			Color fontBackgroundColor = new Color(0x7f000000);
+			Color fontNormalColor = Color.OpaqueWhite;
+			Color fontActionColor = Color.OpaqueYellow;
 
 			fGen = new FractalGenerator(device);
 			fGen.Generate(new Rectd(
@@ -42,16 +50,40 @@ namespace L13.FractalBrowser
 
 				float w = fGen.DrawAll(o);
 
-				driver.Draw2DRectangle(new Recti(10, 10, 160, 56 + (w < 1 ? 16 : 0)), new Color(0x7f000000));
+				// draw stats
+
+				driver.Draw2DRectangle(new Recti(10, 10, 160, 56 + (w < 1 ? 16 : 0)), fontBackgroundColor);
 
 				Vector2Di v = new Vector2Di(20, 16);
-				font.Draw("Max iterations: " + fGen.GetMaxIterations(), v, Color.OpaqueWhite);
+				font.Draw("Max iterations: " + fGen.GetMaxIterations(), v, fontNormalColor);
 				v.Y += 16;
-				font.Draw("Zoom: " + (long)fGen.GetZoomFactor().X + "x", v, Color.OpaqueWhite);
+				font.Draw("Zoom: " + (long)fGen.GetZoomFactor().X + "x", v, fontNormalColor);
 				if (w < 1)
 				{
 					v.Y += 16;
-					font.Draw("Computing: " + (int)(w * 100) + "%...", v, Color.OpaqueYellow);
+					font.Draw("Computing: " + (int)(w * 100) + "%...", v, fontActionColor);
+				}
+
+				// draw help
+
+				int h = driver.ScreenSize.Height;
+				driver.Draw2DRectangle(new Recti(10, showHelp ? h - 130 : h - 40, showHelp ? 220 : 160, h - 10), fontBackgroundColor);
+
+				v.Y = h - 34;
+				font.Draw("[F1] " + (showHelp ? "Hide" : "Show") + " help", v, fontNormalColor);
+
+				if (showHelp)
+				{
+					v.Y = h - 124;
+					font.Draw("[Mouse Left Button] Navigate", v, fontNormalColor);
+					v.Y += 16;
+					font.Draw("[Mouse Wheel] Zoom in/out", v, fontNormalColor);
+					v.Y += 16;
+					font.Draw("[+][-][*][/] Max iterations", v, fontNormalColor);
+					v.Y += 16;
+					font.Draw("[PrintScreen] Save screenshot", v, fontNormalColor);
+					v.Y += 16;
+					font.Draw("[Esc] Exit application", v, fontNormalColor);
 				}
 
 				driver.EndScene();
@@ -118,8 +150,20 @@ namespace L13.FractalBrowser
 				}
 			}
 
-			if (evnt.Type == EventType.Key)
+			if (evnt.Type == EventType.Key && evnt.Key.PressedDown)
 			{
+				if (evnt.Key.Key == KeyCode.Esc)
+				{
+					device.Close();
+					return true;
+				}
+
+				if (evnt.Key.Key == KeyCode.F1)
+				{
+					showHelp = !showHelp;
+					return true;
+				}
+
 				if (evnt.Key.Key == KeyCode.PrintScreen)
 				{
 					string n = "Screenshot-" + DateTime.Now.Ticks + ".png";
