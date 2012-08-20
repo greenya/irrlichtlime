@@ -2,9 +2,16 @@
 Changes in 1.2 (??-???-2012)
 ============================
 
-- Added example L11.BulletSharpTest.
+- Added examples L11.BulletSharpTest, L12.StencilShadows and L13.FractalBrowser.
 - Updated Irrlicht SDK to trunk rev. 4???.
 - MaterialRendererServices changes: renamed SetPixelShaderRegisters() and SetPixelShaderVariable() to SetPixelShaderConstant(); renamed SetVertexShaderRegisters() and SetVertexShaderVariable() to SetVertexShaderConstant(); added 2 more overloadings to Set*ShaderConstant() which takes int array and 2 more overloadings for bool arrays.
+- Added "double" versions for common types: Vector2Dd, Vector3Dd, Dimension2Dd and Rectd.
+- Removed assert check for !Locked in Lock() in TexturePainter, since Lock() returns bool, and it is OK to receive "false" and check it at runtime.
+- Added Draw2DImageBatch() to VideoDriver.
+- Added DeviceContext, RenderingContext, WindowID props and public constructor to ExposedVideoData.
+- Added CursorPlatformBehavior enum. Added PlatformBehavior prop to CursorControl.
+- Removed SetLoopMode() and added LoopMode prop (getter and setter) to AnimatedMeshSceneNode.
+- Added overloading to DrawStencilShadow() which takes single color of the shadow in VideoDriver.
 - Added DriverMultithreaded prop to IrrlichtCreationParameters.
 - Added useAlphaChannel argument to AddImage() to GUIEnvironment.
 - Added Name prop to GUIElement.
