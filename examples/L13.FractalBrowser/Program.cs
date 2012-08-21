@@ -150,21 +150,43 @@ namespace L13.FractalBrowser
 				}
 			}
 
-			if (evnt.Type == EventType.Key && evnt.Key.PressedDown)
+			if (evnt.Type == EventType.Key)
 			{
-				if (evnt.Key.Key == KeyCode.Esc)
+				if (evnt.Key.PressedDown)
 				{
-					device.Close();
-					return true;
+					if (evnt.Key.Key == KeyCode.Esc)
+					{
+						device.Close();
+						return true;
+					}
+
+					if (evnt.Key.Key == KeyCode.F1)
+					{
+						showHelp = !showHelp;
+						return true;
+					}
+
+					switch (evnt.Key.Char)
+					{
+						case '+':
+							fGen.Generate(fGen.GetMaxIterations() + 1);
+							return true;
+
+						case '-':
+							fGen.Generate(fGen.GetMaxIterations() - 1);
+							return true;
+
+						case '*':
+							fGen.Generate(fGen.GetMaxIterations() + 10);
+							return true;
+
+						case '/':
+							fGen.Generate(fGen.GetMaxIterations() - 10);
+							return true;
+					}
 				}
 
-				if (evnt.Key.Key == KeyCode.F1)
-				{
-					showHelp = !showHelp;
-					return true;
-				}
-
-				if (evnt.Key.Key == KeyCode.PrintScreen)
+				if (evnt.Key.Key == KeyCode.PrintScreen) // PrintScreen never comes with "evnt.Key.PressedDown == true" so we process it without checking that
 				{
 					string n = "Screenshot-" + DateTime.Now.Ticks + ".png";
 					Image i = device.VideoDriver.CreateScreenShot();
@@ -173,25 +195,6 @@ namespace L13.FractalBrowser
 
 					device.Logger.Log("Screenshot saved as " + n);
 					return true;
-				}
-
-				switch (evnt.Key.Char)
-				{
-					case '+':
-						fGen.Generate(fGen.GetMaxIterations() + 1);
-						return true;
-
-					case '-':
-						fGen.Generate(fGen.GetMaxIterations() - 1);
-						return true;
-
-					case '*':
-						fGen.Generate(fGen.GetMaxIterations() + 10);
-						return true;
-
-					case '/':
-						fGen.Generate(fGen.GetMaxIterations() - 10);
-						return true;
 				}
 			}
 
