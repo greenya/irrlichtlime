@@ -1,11 +1,12 @@
 ============================
-Changes in 1.2 (??-???-2012)
+Changes in 1.2 (21-Aug-2012)
 ============================
 
 - Added examples L11.BulletSharpTest, L12.StencilShadows and L13.FractalBrowser.
-- Updated Irrlicht SDK to trunk rev. 4???.
+- Updated Irrlicht SDK to trunk rev. 4295.
 - MaterialRendererServices changes: renamed SetPixelShaderRegisters() and SetPixelShaderVariable() to SetPixelShaderConstant(); renamed SetVertexShaderRegisters() and SetVertexShaderVariable() to SetVertexShaderConstant(); added 2 more overloadings to Set*ShaderConstant() which takes int array and 2 more overloadings for bool arrays.
 - Added "double" versions for common types: Vector2Dd, Vector3Dd, Dimension2Dd and Rectd.
+- Replaced SetRotationAxisRadiansLH() and SetRotationAxisRadiansRH() with SetRotationAxisRadians() in Matrix, which assumes left handed rotation.
 - Removed assert check for !Locked in Lock() in TexturePainter, since Lock() returns bool, and it is OK to receive "false" and check it at runtime.
 - Added Draw2DImageBatch() to VideoDriver.
 - Added DeviceContext, RenderingContext, WindowID props and public constructor to ExposedVideoData.
