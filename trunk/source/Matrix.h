@@ -410,19 +410,11 @@ public:
 		return this;
 	}
 
-	Matrix^ SetRotationAxisRadiansLH(float angle, Vector3Df^ axis)
+	Matrix^ SetRotationAxisRadians(float angle, Vector3Df^ axis)
 	{
 		LIME_ASSERT(axis != nullptr);
 
-		m_NativeValue->setRotationAxisRadiansLH(angle, *axis->m_NativeValue);
-		return this;
-	}
-
-	Matrix^ SetRotationAxisRadiansRH(float angle, Vector3Df^ axis)
-	{
-		LIME_ASSERT(axis != nullptr);
-
-		m_NativeValue->setRotationAxisRadiansRH(angle, *axis->m_NativeValue);
+		m_NativeValue->setRotationAxisRadians(angle, *axis->m_NativeValue);
 		return this;
 	}
 
