@@ -74,8 +74,8 @@ void MeshBuffer::Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigne
 
 	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
-	delete ia;
-	delete va;
+	delete[] ia;
+	delete[] va;
 }
 
 void MeshBuffer::Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array<unsigned short>^ indices16bit)
@@ -95,8 +95,8 @@ void MeshBuffer::Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array
 
 	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
-	delete ia;
-	delete va;
+	delete[] ia;
+	delete[] va;
 }
 
 void MeshBuffer::Append(array<Video::Vertex3DTangents^>^ verticesTangents, array<unsigned short>^ indices16bit)
@@ -116,8 +116,8 @@ void MeshBuffer::Append(array<Video::Vertex3DTangents^>^ verticesTangents, array
 
 	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
 
-	delete ia;
-	delete va;
+	delete[] ia;
+	delete[] va;
 }
 
 void MeshBuffer::Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned int>^ indices32bit)

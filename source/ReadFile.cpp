@@ -36,7 +36,7 @@ array<unsigned char>^ ReadFile::Read(int bytesToRead)
 	for (int i = 0; i < s; i++)
 		a[i] = b[i];
 
-	delete b;
+	delete[] b;
 	return a;
 }
 

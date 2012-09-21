@@ -53,7 +53,7 @@ void MaterialRendererServices::SetPixelShaderConstant(int startRegisterIndex, ar
 		startRegisterIndex,
 		c / 4);
 
-	delete f;
+	delete[] f;
 }
 
 bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<float>^ valueFloats)
@@ -71,7 +71,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<float>
 		Lime::StringToStringC(name).c_str(),
 		f, c);
 
-	delete f;
+	delete[] f;
 	return b;
 }
 
@@ -90,7 +90,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<int>^ 
 		Lime::StringToStringC(name).c_str(),
 		v, c);
 
-	delete v;
+	delete[] v;
 	return b;
 }
 
@@ -109,7 +109,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<bool>^
 		Lime::StringToStringC(name).c_str(),
 		v, c);
 
-	delete v;
+	delete[] v;
 	return b;
 }
 
@@ -131,7 +131,7 @@ void MaterialRendererServices::SetVertexShaderConstant(int startRegisterIndex, a
 		startRegisterIndex,
 		c / 4);
 
-	delete f;
+	delete[] f;
 }
 
 bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<float>^ valueFloats)
@@ -149,7 +149,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<float
 		Lime::StringToStringC(name).c_str(),
 		f, c);
 
-	delete f;
+	delete[] f;
 	return b;
 }
 
@@ -168,7 +168,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<int>^
 		Lime::StringToStringC(name).c_str(),
 		v, c);
 
-	delete v;
+	delete[] v;
 	return b;
 }
 
@@ -187,7 +187,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<bool>
 		Lime::StringToStringC(name).c_str(),
 		v, c);
 
-	delete v;
+	delete[] v;
 	return b;
 }
 

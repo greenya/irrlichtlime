@@ -165,7 +165,7 @@ array<unsigned char>^ Image::CopyToScaling(int width, int height, Video::ColorFo
 	array<unsigned char>^ r = gcnew array<unsigned char>(s);
 	Marshal::Copy(IntPtr(a), r, 0, s);
 
-	delete a;
+	delete[] a;
 	return r;
 }
 
@@ -186,7 +186,7 @@ array<unsigned char>^ Image::CopyToScaling(int width, int height, Video::ColorFo
 	array<unsigned char>^ r = gcnew array<unsigned char>(s);
 	Marshal::Copy(IntPtr(a), r, 0, s);
 
-	delete a;
+	delete[] a;
 	return r;
 }
 
@@ -206,7 +206,7 @@ array<unsigned char>^ Image::CopyToScaling(int width, int height)
 	array<unsigned char>^ r = gcnew array<unsigned char>(s);
 	Marshal::Copy(IntPtr(a), r, 0, s);
 
-	delete a;
+	delete[] a;
 	return r;
 }
 

@@ -316,7 +316,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		useAlphaChannelOfTexture);
 
 	if (colorList != nullptr)
-		delete colorList;
+		delete[] colorList;
 }
 
 void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors)
@@ -342,7 +342,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		colorList);
 
 	if (colorList != nullptr)
-		delete colorList;
+		delete[] colorList;
 }
 
 void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect)
@@ -868,8 +868,8 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_16BIT);
 
-	delete indexList;
-	delete vertexList;
+	delete[] indexList;
+	delete[] vertexList;
 }
 
 void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit)
@@ -905,8 +905,8 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_32BIT);
 
-	delete indexList;
-	delete vertexList;
+	delete[] indexList;
+	delete[] vertexList;
 }
 
 void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)
@@ -1113,8 +1113,8 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
 		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_16BIT);
 
-	delete indexList;
-	delete vertexList;
+	delete[] indexList;
+	delete[] vertexList;
 }
 
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit)
@@ -1144,8 +1144,8 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
 		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_32BIT);
 
-	delete indexList;
-	delete vertexList;
+	delete[] indexList;
+	delete[] vertexList;
 }
 
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)

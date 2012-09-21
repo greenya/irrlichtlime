@@ -551,7 +551,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 		makeActive);
 
 	if (keyMapArray != 0)
-		delete keyMapArray;
+		delete[] keyMapArray;
 
 	return CameraSceneNode::Wrap(n);
 }
@@ -575,7 +575,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 		invertMouse);
 
 	if (keyMapArray != 0)
-		delete keyMapArray;
+		delete[] keyMapArray;
 
 	return CameraSceneNode::Wrap(n);
 }
@@ -598,7 +598,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 		jumpSpeed);
 
 	if (keyMapArray != 0)
-		delete keyMapArray;
+		delete[] keyMapArray;
 
 	return CameraSceneNode::Wrap(n);
 }
@@ -620,7 +620,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 		noVerticalMovement);
 
 	if (keyMapArray != 0)
-		delete keyMapArray;
+		delete[] keyMapArray;
 
 	return CameraSceneNode::Wrap(n);
 }
@@ -641,7 +641,7 @@ CameraSceneNode^ SceneManager::AddCameraSceneNodeFPS(SceneNode^ parent, float ro
 		keyMapArray, keyMapSize);
 
 	if (keyMapArray != 0)
-		delete keyMapArray;
+		delete[] keyMapArray;
 
 	return CameraSceneNode::Wrap(n);
 }

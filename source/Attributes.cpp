@@ -189,7 +189,7 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 
 			m_Attributes->addBinary(n.c_str(), b, m->Length);
 
-			delete b;
+			delete[] b;
 			return;
 		}
 
@@ -337,7 +337,7 @@ Object^ Attributes::GetValue(int attributeIndex)
 			for (int i = 0; i < MaxByteArraySize; i++)
 				a[i] = b[i];
 
-			delete b;
+			delete[] b;
 			return a;
 		}
 
@@ -469,7 +469,7 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 
 			m_Attributes->setAttribute(attributeIndex, b, m->Length);
 
-			delete b;
+			delete[] b;
 			return;
 		}
 

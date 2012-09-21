@@ -54,7 +54,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleC
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
@@ -71,7 +71,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleC
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
@@ -89,7 +89,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df^ line, int maxTriangl
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
@@ -106,7 +106,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df^ line, int maxTriangl
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
@@ -123,7 +123,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount, Matrix^
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
@@ -139,7 +139,7 @@ List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount)
 	for (int i = 0; i < c; i++)
 		l->Add(gcnew Triangle3Df(t[i]));
 
-	delete t;
+	delete[] t;
 	return l;
 }
 
