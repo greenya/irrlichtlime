@@ -86,7 +86,7 @@ internal:
 			return;
 
 		if (options->Filename != nullptr)
-			delete options->Filename;
+			delete[] options->Filename;
 
 		delete options;
 	}

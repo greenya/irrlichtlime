@@ -57,7 +57,7 @@ void ParticleAffector::Affect(unsigned int now, List<Particle^>^ particleList)
 
 	m_ParticleAffector->affect(now, a, c);
 
-	delete a;
+	delete[] a;
 }
 
 bool ParticleAffector::Enabled::get()

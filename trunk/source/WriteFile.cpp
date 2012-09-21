@@ -51,7 +51,7 @@ int WriteFile::Write(array<unsigned char>^ buffer)
 
 	int r = m_WriteFile->write(b, c);
 
-	delete b;
+	delete[] b;
 	return r;
 }
 
