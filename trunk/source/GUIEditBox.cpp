@@ -50,6 +50,26 @@ void GUIEditBox::AutoScroll::set(bool value)
 	m_GUIEditBox->setAutoScroll(value);
 }
 
+int GUIEditBox::CursorBlinkTime::get()
+{
+	return (int) m_GUIEditBox->getCursorBlinkTime();
+}
+
+void GUIEditBox::CursorBlinkTime::set(int value)
+{
+	m_GUIEditBox->setCursorBlinkTime((u32)value);
+}
+
+wchar_t GUIEditBox::CursorChar::get()
+{
+	return m_GUIEditBox->getCursorChar();
+}
+
+void GUIEditBox::CursorChar::set(wchar_t value)
+{
+	m_GUIEditBox->setCursorChar(value);
+}
+
 bool GUIEditBox::DrawBackground::get()
 {
 	return m_GUIEditBox->isDrawBackgroundEnabled();
