@@ -20,6 +20,8 @@ public:
 
 	property GUIFont^ ActiveFont { GUIFont^ get(); }
 	property bool AutoScroll { bool get(); void set(bool value); }
+	property int CursorBlinkTime { int get(); void set(int value); }
+	property wchar_t CursorChar { wchar_t get(); void set(wchar_t value); }
 	property bool DrawBackground { bool get(); void set(bool value); }
 	property bool DrawBorder { bool get(); void set(bool value); }
 	property int MaxLength { int get(); void set(int value); }
