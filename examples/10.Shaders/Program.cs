@@ -17,6 +17,14 @@ namespace _10.Shaders
 		static bool useHighLevelShaders = false;
 		static bool useCgShaders = false;
 
+		static bool shaderFirstUpdate = true;
+		static int shaderInvWorldId;
+		static int shaderWorldViewProjId;
+		static int shaderLightPosId;
+		static int shaderLightColorId;
+		static int shaderTransWorldId;
+		static int shaderTextureId;
+
 		static void Main(string[] args)
 		{
 			DriverType driverType;
@@ -227,6 +235,21 @@ namespace _10.Shaders
 		{
 			VideoDriver driver = services.VideoDriver;
 
+			if (useHighLevelShaders && shaderFirstUpdate)
+			{
+				shaderWorldViewProjId = services.GetVertexShaderConstantID("mWorldViewProj");
+				shaderTransWorldId = services.GetVertexShaderConstantID("mTransWorld");
+				shaderInvWorldId = services.GetVertexShaderConstantID("mInvWorld");
+				shaderLightPosId = services.GetVertexShaderConstantID("mLightPos");
+				shaderLightColorId = services.GetVertexShaderConstantID("mLightColor");
+
+				// textures id are important only for OpenGL interface
+				if (driver.DriverType == DriverType.OpenGL)
+					shaderTextureId = services.GetVertexShaderConstantID("myTexture");
+
+				shaderFirstUpdate = false;
+			}
+
 			// set inverted world matrix
 			// if we are using highlevel shaders (the user can select this when
 			// starting the program), we must set the constants by name
@@ -235,7 +258,7 @@ namespace _10.Shaders
 			invWorld.MakeInverse();
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant("mInvWorld", invWorld.ToArray());
+				services.SetVertexShaderConstant(shaderInvWorldId, invWorld.ToArray());
 			else
 				services.SetVertexShaderConstant(0, invWorld.ToArray());
 
@@ -246,7 +269,7 @@ namespace _10.Shaders
 			worldViewProj *= driver.GetTransform(TransformationState.World);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant("mWorldViewProj", worldViewProj.ToArray());
+				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj.ToArray());
 			else
 				services.SetVertexShaderConstant(4, worldViewProj.ToArray());
 
@@ -255,7 +278,7 @@ namespace _10.Shaders
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant("mLightPos", pos.ToArray());
+				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray());
 			else
 				services.SetVertexShaderConstant(8, pos.ToArray());
 
@@ -264,7 +287,7 @@ namespace _10.Shaders
 			Colorf col = new Colorf(0, 1, 1, 0);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant("mLightColor", col.ToArray());
+				services.SetVertexShaderConstant(shaderLightColorId, col.ToArray());
 			else
 				services.SetVertexShaderConstant(9, col.ToArray());
 
@@ -274,8 +297,8 @@ namespace _10.Shaders
 
 			if (useHighLevelShaders)
 			{
-				services.SetVertexShaderConstant("mTransWorld", transpWorld.ToArray());
-				services.SetPixelShaderConstant("myTexture", new int[] { 0 });
+				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray());
+				services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 });
 			}
 			else
 			{

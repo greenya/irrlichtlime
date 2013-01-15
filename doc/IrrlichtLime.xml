@@ -6202,6 +6202,14 @@ The scene managment needs to know this for being able to sort the materials by o
 		<member name="T:IrrlichtLime.Video.MaterialRendererServices">
 			<summary>Provides some methods for changing advanced, internal states of a VideoDriver.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.GetPixelShaderConstantID(System.String)">
+			<summary>Gets an index constant for the pixel shader based on a name.</summary>
+			<param name="name">Name of constant.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.GetVertexShaderConstantID(System.String)">
+			<summary>Gets an index constant for the vertex shader based on a name.</summary>
+			<param name="name">Name of constant.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetBasicRenderStates(IrrlichtLime.Video.Material,IrrlichtLime.Video.Material,System.Boolean)">
 			<summary>Can be called by a MaterialRenderer to make its work easier.
 
@@ -6210,62 +6218,38 @@ Sets all basic render states if needed. Basic render states are diffuse, ambient
 			<param name="lastMaterial">The material used until now.</param>
 			<param name="resetAllRenderStates">Set to true if all renderstates should be set, regardless of their current state.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Boolean[])">
-			<summary>Sets a variable for the pixel shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueBools">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Single[])">
-			<summary>Sets a variable for the pixel shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueFloats">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.String,System.Int32[])">
-			<summary>Sets a variable for the pixel shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueInts">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single[])">
+			<summary>Sets a constant for the pixel shader based on an index of the constant.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueFloats">Floats to set.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32[])">
+			<summary>Sets a constant for the pixel shader based on an index of the constant.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueInts">Ints to set.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstantList(System.Int32,System.Single[])">
 			<summary>Sets a pixel shader register (s).
 
 Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
 			<param name="startRegisterIndex">First register to be set.</param>
 			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Boolean[])">
-			<summary>Sets a variable for the vertex shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueBools">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Single[])">
-			<summary>Sets a variable for the vertex shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueFloats">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.String,System.Int32[])">
-			<summary>Sets a variable for the vertex shader based on the name.
-
-This can be used if you used a high level shader language like GLSL or HLSL to create a shader.</summary>
-			<param name="name">Name of the variable.</param>
-			<param name="valueInts">Value of the variable.</param>
-			<returns>True if successful.</returns>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single[])">
+			<summary>Sets a constant for the vertex shader based on an index of the constant.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueFloats">Floats to set.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32[])">
+			<summary>Sets a constant for the vertex shader based on an index of the constant.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueInts">Ints to set.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstantList(System.Int32,System.Single[])">
 			<summary>Sets a vertex shader register(s).
 
 Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
