@@ -35,7 +35,13 @@ void MaterialRendererServices::SetBasicRenderStates(Material^ newMaterial, Mater
 		resetAllRenderStates);
 }
 
-void MaterialRendererServices::SetPixelShaderConstant(int startRegisterIndex, array<float>^ valueFloats)
+int MaterialRendererServices::GetPixelShaderConstantID(String^ name)
+{
+	LIME_ASSERT(name != nullptr);
+	return m_MaterialRendererServices->getPixelShaderConstantID(Lime::StringToStringC(name).c_str());
+}
+
+void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
 {
 	LIME_ASSERT(startRegisterIndex >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
@@ -56,9 +62,9 @@ void MaterialRendererServices::SetPixelShaderConstant(int startRegisterIndex, ar
 	delete[] f;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<float>^ valueFloats)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ valueFloats)
 {
-	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
@@ -67,17 +73,15 @@ bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<float>
 	for (int i = 0; i < c; i++)
 		f[i] = valueFloats[i];
 
-	bool b = m_MaterialRendererServices->setPixelShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		f, c);
+	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
 
 	delete[] f;
 	return b;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<int>^ valueInts)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ valueInts)
 {
-	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
@@ -86,34 +90,19 @@ bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<int>^ 
 	for (int i = 0; i < c; i++)
 		v[i] = valueInts[i];
 
-	bool b = m_MaterialRendererServices->setPixelShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		v, c);
+	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, v, c);
 
 	delete[] v;
 	return b;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(String^ name, array<bool>^ valueBools)
+int MaterialRendererServices::GetVertexShaderConstantID(String^ name)
 {
 	LIME_ASSERT(name != nullptr);
-	LIME_ASSERT(valueBools != nullptr);
-
-	int c = valueBools->Length;
-	bool* v = new bool[c];
-
-	for (int i = 0; i < c; i++)
-		v[i] = valueBools[i];
-
-	bool b = m_MaterialRendererServices->setPixelShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		v, c);
-
-	delete[] v;
-	return b;
+	return m_MaterialRendererServices->getVertexShaderConstantID(Lime::StringToStringC(name).c_str());
 }
 
-void MaterialRendererServices::SetVertexShaderConstant(int startRegisterIndex, array<float>^ valueFloats)
+void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
 {
 	LIME_ASSERT(startRegisterIndex >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
@@ -134,9 +123,9 @@ void MaterialRendererServices::SetVertexShaderConstant(int startRegisterIndex, a
 	delete[] f;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<float>^ valueFloats)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ valueFloats)
 {
-	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
@@ -145,17 +134,15 @@ bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<float
 	for (int i = 0; i < c; i++)
 		f[i] = valueFloats[i];
 
-	bool b = m_MaterialRendererServices->setVertexShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		f, c);
+	bool b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
 
 	delete[] f;
 	return b;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<int>^ valueInts)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ valueInts)
 {
-	LIME_ASSERT(name != nullptr);
+	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
@@ -164,28 +151,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<int>^
 	for (int i = 0; i < c; i++)
 		v[i] = valueInts[i];
 
-	bool b = m_MaterialRendererServices->setVertexShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		v, c);
-
-	delete[] v;
-	return b;
-}
-
-bool MaterialRendererServices::SetVertexShaderConstant(String^ name, array<bool>^ valueBools)
-{
-	LIME_ASSERT(name != nullptr);
-	LIME_ASSERT(valueBools != nullptr);
-
-	int c = valueBools->Length;
-	bool* v = new bool[c];
-
-	for (int i = 0; i < c; i++)
-		v[i] = valueBools[i];
-
-	bool b = m_MaterialRendererServices->setVertexShaderConstant(
-		Lime::StringToStringC(name).c_str(),
-		v, c);
+	bool b = m_MaterialRendererServices->setVertexShaderConstant(index,	v, c);
 
 	delete[] v;
 	return b;

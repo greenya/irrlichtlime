@@ -1,4 +1,4 @@
-// Copyright (C) 2006-2011 Nikolaus Gebhardt / Thomas Alten
+// Copyright (C) 2006-2012 Nikolaus Gebhardt / Thomas Alten
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -204,6 +204,7 @@ namespace quake3
 		{
 			case 0:
 				ret = video::ECFN_LESSEQUAL;
+				break;
 			case 1:
 				ret = video::ECFN_EQUAL;
 				break;

@@ -384,6 +384,9 @@ namespace _09.Meshviewer
 
 		static bool hasModalDialog()
 		{
+			if (device == null)
+				return false;
+
 			GUIElement focused = device.GUIEnvironment.Focus;
 
 			while (focused != null)

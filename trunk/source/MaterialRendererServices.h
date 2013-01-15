@@ -18,15 +18,15 @@ public:
 
 	void SetBasicRenderStates(Material^ newMaterial, Material^ lastMaterial, bool resetAllRenderStates);
 
-	void SetPixelShaderConstant(int startRegisterIndex, array<float>^ valueFloats);
-	bool SetPixelShaderConstant(String^ name, array<float>^ valueFloats);
-	bool SetPixelShaderConstant(String^ name, array<int>^ valueInts);
-	bool SetPixelShaderConstant(String^ name, array<bool>^ valueBools);
+	int GetPixelShaderConstantID(String^ name);
+	void SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats);
+	bool SetPixelShaderConstant(int index, array<float>^ valueFloats);
+	bool SetPixelShaderConstant(int index, array<int>^ valueInts);
 
-	void SetVertexShaderConstant(int startRegisterIndex, array<float>^ valueFloats);
-	bool SetVertexShaderConstant(String^ name, array<float>^ valueFloats);
-	bool SetVertexShaderConstant(String^ name, array<int>^ valueInts);
-	bool SetVertexShaderConstant(String^ name, array<bool>^ valueBools);
+	int GetVertexShaderConstantID(String^ name);
+	void SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats);
+	bool SetVertexShaderConstant(int index, array<float>^ valueFloats);
+	bool SetVertexShaderConstant(int index, array<int>^ valueInts);
 
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 
