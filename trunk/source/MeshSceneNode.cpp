@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Mesh.h"
 #include "MeshSceneNode.h"
+#include "ShadowVolumeSceneNode.h"
 
 using namespace irr;
 using namespace System;
@@ -21,6 +22,50 @@ MeshSceneNode::MeshSceneNode(scene::IMeshSceneNode* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_MeshSceneNode = ref;
+}
+
+ShadowVolumeSceneNode^ MeshSceneNode::AddShadowVolumeSceneNode(Scene::Mesh^ shadowMesh, int id, bool zfailmethod, float infinity)
+{
+	scene::IShadowVolumeSceneNode* n = m_MeshSceneNode->addShadowVolumeSceneNode(
+		LIME_SAFEREF(shadowMesh, m_Mesh),
+		id,
+		zfailmethod,
+		infinity);
+
+	return ShadowVolumeSceneNode::Wrap(n);
+}
+
+ShadowVolumeSceneNode^ MeshSceneNode::AddShadowVolumeSceneNode(Scene::Mesh^ shadowMesh, int id, bool zfailmethod)
+{
+	scene::IShadowVolumeSceneNode* n = m_MeshSceneNode->addShadowVolumeSceneNode(
+		LIME_SAFEREF(shadowMesh, m_Mesh),
+		id,
+		zfailmethod);
+
+	return ShadowVolumeSceneNode::Wrap(n);
+}
+
+ShadowVolumeSceneNode^ MeshSceneNode::AddShadowVolumeSceneNode(Scene::Mesh^ shadowMesh, int id)
+{
+	scene::IShadowVolumeSceneNode* n = m_MeshSceneNode->addShadowVolumeSceneNode(
+		LIME_SAFEREF(shadowMesh, m_Mesh),
+		id);
+
+	return ShadowVolumeSceneNode::Wrap(n);
+}
+
+ShadowVolumeSceneNode^ MeshSceneNode::AddShadowVolumeSceneNode(Scene::Mesh^ shadowMesh)
+{
+	scene::IShadowVolumeSceneNode* n = m_MeshSceneNode->addShadowVolumeSceneNode(
+		LIME_SAFEREF(shadowMesh, m_Mesh));
+
+	return ShadowVolumeSceneNode::Wrap(n);
+}
+
+ShadowVolumeSceneNode^ MeshSceneNode::AddShadowVolumeSceneNode()
+{
+	scene::IShadowVolumeSceneNode* n = m_MeshSceneNode->addShadowVolumeSceneNode();
+	return ShadowVolumeSceneNode::Wrap(n);
 }
 
 Scene::Mesh^ MeshSceneNode::Mesh::get()
