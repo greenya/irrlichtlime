@@ -15,12 +15,13 @@ public ref class GUIEditBox : GUIElement
 {
 public:
 
-	void SetDrawBorder(bool draw);
 	void SetPasswordChar(Char x);
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
 	property GUIFont^ ActiveFont { GUIFont^ get(); }
 	property bool AutoScroll { bool get(); void set(bool value); }
+	property bool DrawBackground { bool get(); void set(bool value); }
+	property bool DrawBorder { bool get(); void set(bool value); }
 	property int MaxLength { int get(); void set(int value); }
 	property bool MultiLine { bool get(); void set(bool value); }
 	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }

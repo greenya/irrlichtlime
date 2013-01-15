@@ -24,11 +24,6 @@ GUIEditBox::GUIEditBox(gui::IGUIEditBox* ref)
 	m_GUIEditBox = ref;
 }
 
-void GUIEditBox::SetDrawBorder(bool draw)
-{
-	m_GUIEditBox->setDrawBorder(draw);
-}
-
 void GUIEditBox::SetPasswordChar(Char x)
 {
 	m_GUIEditBox->setPasswordBox(m_GUIEditBox->isPasswordBox(), x);
@@ -53,6 +48,26 @@ bool GUIEditBox::AutoScroll::get()
 void GUIEditBox::AutoScroll::set(bool value)
 {
 	m_GUIEditBox->setAutoScroll(value);
+}
+
+bool GUIEditBox::DrawBackground::get()
+{
+	return m_GUIEditBox->isDrawBackgroundEnabled();
+}
+
+void GUIEditBox::DrawBackground::set(bool value)
+{
+	m_GUIEditBox->setDrawBackground(value);
+}
+
+bool GUIEditBox::DrawBorder::get()
+{
+	return m_GUIEditBox->isDrawBorderEnabled();
+}
+
+void GUIEditBox::DrawBorder::set(bool value)
+{
+	m_GUIEditBox->setDrawBorder(value);
 }
 
 int GUIEditBox::MaxLength::get()
