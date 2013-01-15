@@ -11,14 +11,15 @@ namespace Video {
 
 public enum class ComparisonFunc
 {
-	Never = ECFN_NEVER,
+	Disabled = ECFN_DISABLED,
 	LessEqual = ECFN_LESSEQUAL,
 	Equal = ECFN_EQUAL,
 	Less = ECFN_LESS,
 	NotEqual = ECFN_NOTEQUAL,
 	GreaterEqual = ECFN_GREATEREQUAL,
 	Greater = ECFN_GREATER,
-	Always = ECFN_ALWAYS
+	Always = ECFN_ALWAYS,
+	Never = ECFN_NEVER
 };
 
 } // end namespace Video

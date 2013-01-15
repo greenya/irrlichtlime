@@ -4900,6 +4900,9 @@ Without lighting being enabled the vertex color is the only value defining the f
 		<member name="F:IrrlichtLime.Video.ComparisonFunc.Always">
 			<summary>Test succeeds always.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.ComparisonFunc.Disabled">
+			<summary>Depth test disabled (disable also write to depth buffer).</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.ComparisonFunc.Equal">
 			<summary>Exact equality.</summary>
 		</member>
@@ -4916,7 +4919,7 @@ Without lighting being enabled the vertex color is the only value defining the f
 			<summary>Less or equal test, default for e.g. depth test.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.ComparisonFunc.Never">
-			<summary>Test never succeeds, this equals disable.</summary>
+			<summary>Test never succeeds.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.ComparisonFunc.NotEqual">
 			<summary>Succeeds almost always, except for exact equality.</summary>
