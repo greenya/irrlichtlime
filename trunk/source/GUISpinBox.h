@@ -22,6 +22,7 @@ public:
 	property float Maximum { float get(); void set(float value); }
 	property float Minimum { float get(); void set(float value); }
 	property float StepSize { float get(); void set(float value); }
+	property GUISpinBoxValidation ValidateOn { GUISpinBoxValidation get(); void set(GUISpinBoxValidation value); }
 	property float Value { float get(); void set(float value); }
 
 internal:

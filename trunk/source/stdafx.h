@@ -50,6 +50,7 @@
 #include "GUIMessageBoxFlag.h"
 #include "GUIOrderingMode.h"
 #include "GUISkinType.h"
+#include "GUISpinBoxValidation.h"
 #include "GUITableDrawFlag.h"
 #include "HardwareBufferType.h"
 #include "HardwareMappingHint.h"
