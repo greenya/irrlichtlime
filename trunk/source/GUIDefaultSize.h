@@ -27,7 +27,11 @@ public enum class GUIDefaultSize
 	MessageBoxMinTextWidth = EGDS_MESSAGE_BOX_MIN_TEXT_WIDTH,
 	MessageBoxMaxTextWidth = EGDS_MESSAGE_BOX_MAX_TEXT_WIDTH,
 	MessageBoxMinTextHeight = EGDS_MESSAGE_BOX_MIN_TEXT_HEIGHT,
-	MessageBoxMaxTextHeight = EGDS_MESSAGE_BOX_MAX_TEXT_HEIGHT
+	MessageBoxMaxTextHeight = EGDS_MESSAGE_BOX_MAX_TEXT_HEIGHT,
+	ButtonPressedImageOffsetX = EGDS_BUTTON_PRESSED_IMAGE_OFFSET_X,
+	ButtonPressedImageOffsetY = EGDS_BUTTON_PRESSED_IMAGE_OFFSET_Y,
+	ButtonPressedTextOffsetX = EGDS_BUTTON_PRESSED_TEXT_OFFSET_X,
+	ButtonPressedTextOffsetY = EGDS_BUTTON_PRESSED_TEXT_OFFSET_Y
 };
 
 } // end namespace GUI
