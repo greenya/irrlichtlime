@@ -610,6 +610,9 @@
     <ClInclude Include="CursorPlatformBehavior.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="GUISpinBoxValidation.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">

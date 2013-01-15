@@ -77,6 +77,16 @@ void GUISpinBox::StepSize::set(float value)
 	m_GUISpinBox->setStepSize(value);
 }
 
+GUISpinBoxValidation GUISpinBox::ValidateOn::get()
+{
+	return (GUISpinBoxValidation) m_GUISpinBox->getValidateOn();
+}
+
+void GUISpinBox::ValidateOn::set(GUISpinBoxValidation value)
+{
+	m_GUISpinBox->setValidateOn((gui::EGUI_SPINBOX_VALIDATION) value);
+}
+
 float GUISpinBox::Value::get()
 {
 	return m_GUISpinBox->getValue();
