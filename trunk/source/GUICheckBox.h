@@ -14,6 +14,8 @@ public ref class GUICheckBox : GUIElement
 public:
 
 	property bool Checked { bool get(); void set(bool value); }
+	property bool DrawBackground { bool get(); void set(bool value); }
+	property bool DrawBorder { bool get(); void set(bool value); }
 
 internal:
 

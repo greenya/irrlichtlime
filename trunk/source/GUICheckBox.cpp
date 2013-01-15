@@ -33,5 +33,25 @@ void GUICheckBox::Checked::set(bool value)
 	m_GUICheckBox->setChecked(value);
 }
 
+bool GUICheckBox::DrawBackground::get()
+{
+	return m_GUICheckBox->isDrawBackgroundEnabled();
+}
+
+void GUICheckBox::DrawBackground::set(bool value)
+{
+	m_GUICheckBox->setDrawBackground(value);
+}
+
+bool GUICheckBox::DrawBorder::get()
+{
+	return m_GUICheckBox->isDrawBorderEnabled();
+}
+
+void GUICheckBox::DrawBorder::set(bool value)
+{
+	m_GUICheckBox->setDrawBorder(value);
+}
+
 } // end namespace GUI
 } // end namespace IrrlichtLime
