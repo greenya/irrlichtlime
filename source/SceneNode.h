@@ -51,6 +51,7 @@ public:
 	property CullingType AutomaticCulling { CullingType get(); void set(CullingType value); }
 	property AABBox^ BoundingBox { AABBox^ get(); }
 	property AABBox^ BoundingBoxTransformed { AABBox^ get(); }
+	property array<Vector3Df^>^ BoundingBoxTransformedEdges { array<Vector3Df^>^ get(); }
 	property array<SceneNode^>^ Children { array<SceneNode^>^ get(); }
 	property DebugSceneType DebugDataVisible { DebugSceneType get(); void set(DebugSceneType value); }
 	property bool DebugObject { bool get(); void set(bool value); }
