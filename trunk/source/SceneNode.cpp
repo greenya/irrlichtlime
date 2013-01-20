@@ -354,11 +354,37 @@ AABBox^ SceneNode::BoundingBox::get()
 AABBox^ SceneNode::BoundingBoxTransformed::get()
 {
 #if _DEBUG
+	// this allows to browse properties of the root scene node in debugger when you stop code execution (on breakpoint, etc.)
 	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
 		return gcnew AABBox();
 #endif
 
 	return gcnew AABBox(m_SceneNode->getTransformedBoundingBox());
+}
+
+array<Vector3Df^>^ SceneNode::BoundingBoxTransformedEdges::get()
+{
+#if _DEBUG
+	// this allows to browse properties of the root scene node in debugger when you stop code execution (on breakpoint, etc.)
+	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
+	{
+		array<Vector3Df^>^ m = gcnew array<Vector3Df^>(8);
+		for (int i = 0; i < 8; i++)
+			m[i] = gcnew Vector3Df();
+
+		return m;
+	}
+#endif
+
+	core::array<core::vector3d<f32>> a;
+	m_SceneNode->getTransformedBoundingBoxEdges(a);
+	LIME_ASSERT(a.size() == 8);
+
+	array<Vector3Df^>^ m = gcnew array<Vector3Df^>(8);
+	for (int i = 0; i < 8; i++)
+			m[i] = gcnew Vector3Df(a[i]);
+
+	return m;
 }
 
 array<SceneNode^>^ SceneNode::Children::get()
