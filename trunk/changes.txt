@@ -1,4 +1,19 @@
 ============================
+Changes in 1.3 (20-Jan-2013)
+============================
+
+- Added examples L14.Pathfinding and L15.AbstractTrace.
+- Updated Irrlicht SDK to trunk rev. 4446.
+- MaterialRendererServices changes: added GetPixelShaderConstantID and GetVertexShaderConstantID. Updated methods to take index instead of name. Renamed SetPixelShaderConstant (and "Vertex") which took argument "startRegisterIndex" to SetPixelShaderConstantList (and "Vertex"). Removed SetPixelShaderConstant (and "Vertex") with "bool" argument.
+- GUIEditBox changes: added get-set props CursorBlinkTime, CursorChar, DrawBackground and DrawBorder. Removed SetDrawBorder method.
+- Added DrawBackground and DrawBorder props to GUICheckBox.
+- Added ValidateOn prop to GUISpinBox. Added GUISpinBoxValidation enum.
+- Added AddShadowVolumeSceneNode to MeshSceneNode.
+- Added BoundingBoxTransformedEdges to SceneNode.
+- Added ButtonPressedImageOffsetX, ButtonPressedImageOffsetY, ButtonPressedTextOffsetX and ButtonPressedTextOffsetY to GUIDefaultSize enum.
+- Added Disabled to ComparisonFunc enum.
+
+============================
 Changes in 1.2 (21-Aug-2012)
 ============================
 

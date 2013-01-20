@@ -17,11 +17,11 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("Irrlicht Lime")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Yuriy Grinevich 2010-2012")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Yuriy Grinevich 2010-2013")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
-[assembly:AssemblyVersionAttribute("1.2")];
+[assembly:AssemblyVersionAttribute("1.3")];
 
 [assembly:ComVisible(false)];
 [assembly:CLSCompliantAttribute(true)];
