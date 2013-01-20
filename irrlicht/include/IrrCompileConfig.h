@@ -97,6 +97,13 @@
 #define _IRR_COMPILE_WITH_OSX_DEVICE_
 #endif
 
+#if defined(__SVR4) && defined(__sun)
+#define _IRR_SOLARIS_PLATFORM_
+#if defined(__sparc)
+	#define __BIG_ENDIAN__
+#endif
+#endif
+
 #if !defined(_IRR_WINDOWS_API_) && !defined(_IRR_OSX_PLATFORM_)
 #ifndef _IRR_SOLARIS_PLATFORM_
 #define _IRR_LINUX_PLATFORM_
@@ -789,10 +796,6 @@ precision will be lower but speed higher. currently X86 only
 
 #ifndef _IRR_WINDOWS_API_
 	#undef _IRR_WCHAR_FILESYSTEM
-#endif
-
-#if defined(__sparc__) || defined(__sun__)
-#define __BIG_ENDIAN__
 #endif
 
 #if defined(_IRR_SOLARIS_PLATFORM_)
