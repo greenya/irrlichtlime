@@ -2478,6 +2478,12 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="pos">Position to test.</param>
 			<returns>True if the position is within the rectangle, false if not.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.IsPointInside(System.Double,System.Double)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Rectd.IsRectCollided(IrrlichtLime.Core.Rectd)">
 			<summary>Checks if the rectangle collides with another rectangle.</summary>
 			<param name="other">Other rectangle.</param>
@@ -2582,6 +2588,12 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="pos">Position to test.</param>
 			<returns>True if the position is within the rectangle, false if not.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.IsPointInside(System.Single,System.Single)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.IsRectCollided(IrrlichtLime.Core.Rectf)">
 			<summary>Checks if the rectangle collides with another rectangle.</summary>
 			<param name="other">Other rectangle.</param>
@@ -2684,6 +2696,12 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="M:IrrlichtLime.Core.Recti.IsPointInside(IrrlichtLime.Core.Vector2Di)">
 			<summary>Checks if a 2d point is within this rectangle.</summary>
 			<param name="pos">Position to test.</param>
+			<returns>True if the position is within the rectangle, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.IsPointInside(System.Int32,System.Int32)">
+			<summary>Checks if a 2d point is within this rectangle.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="y">Y coordinate.</param>
 			<returns>True if the position is within the rectangle, false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.IsRectCollided(IrrlichtLime.Core.Recti)">

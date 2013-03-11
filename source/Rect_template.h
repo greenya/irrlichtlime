@@ -126,6 +126,11 @@ public:
 		return m_NativeValue->isPointInside(*pos->m_NativeValue);
 	}
 
+	bool IsPointInside(_WRAPTYPE_ x, _WRAPTYPE_ y)
+	{
+		return m_NativeValue->isPointInside(core::vector2d<_WRAPTYPE_>(x, y));
+	}
+
 	bool IsRectCollided(_REFCLASS_^ other)
 	{
 		LIME_ASSERT(other != nullptr);
