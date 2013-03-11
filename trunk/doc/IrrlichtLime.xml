@@ -7497,6 +7497,16 @@ This method can be used to draw circles, but also triangles, tetragons, pentagon
 			<param name="color">Color of the polygon.</param>
 			<param name="vertexCount">Amount of vertices of the polygon. Specify 2 to draw a line, 3 to draw a triangle, 4 for tetragons and a lot (&gt;10) for nearly a circle.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DPolygon(System.Int32,System.Int32,System.Single,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Draws a non filled concyclic regular 2d polygon.
+
+This method can be used to draw circles, but also triangles, tetragons, pentagons, hexagons, heptagons, octagons, enneagons, decagons, hendecagons, dodecagon, triskaidecagons, etc. I think you'll got it now. And all this by simply specifying the vertex count. Welcome to the wonders of geometry.</summary>
+			<param name="x">X position of center of the polygon.</param>
+			<param name="y">Y position of center of the polygon.</param>
+			<param name="radius">Radius of the polygon.</param>
+			<param name="color">Color of the polygon.</param>
+			<param name="vertexCount">Amount of vertices of the polygon. Specify 2 to draw a line, 3 to draw a triangle, 4 for tetragons and a lot (&gt;10) for nearly a circle.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
 			<summary>Draws a 2d rectangle.</summary>
 			<param name="pos">Position of the rectangle.</param>
