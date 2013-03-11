@@ -7264,6 +7264,11 @@ No hardware texture will be created for this image. This method is useful for ex
 			<param name="size">Size of the image to create.</param>
 			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.Video.Texture)">
+			<summary>Creates a software image from the texture.</summary>
+			<param name="texture">Texture to copy to the new image.</param>
+			<returns>Created image. If you no longer need the image, you should call Image.Drop().</returns>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.CreateImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
 			<summary>Creates a software image from a part of a texture.</summary>
 			<param name="texture">Texture to copy to the new image in part.</param>

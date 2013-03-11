@@ -225,6 +225,18 @@ Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ 
 	return Image::Wrap(i);
 }
 
+Image^ VideoDriver::CreateImage(Texture^ texture)
+{
+	LIME_ASSERT(texture != nullptr);
+
+	video::IImage* i = m_VideoDriver->createImage(
+		LIME_SAFEREF(texture, m_Texture),
+		core::vector2di(),
+		(core::dimension2du&)*texture->Size->m_NativeValue);
+
+	return Image::Wrap(i);
+}
+
 Image^ VideoDriver::CreateImage(Video::ColorFormat format, Dimension2Di^ size)
 {
 	LIME_ASSERT(size != nullptr);
