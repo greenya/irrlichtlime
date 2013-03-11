@@ -1093,10 +1093,11 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
-	LIME_ASSERT(vertices->Length > 0);
 	LIME_ASSERT(vertices->Length <= 0xFFFF);
 	LIME_ASSERT(indices16bit != nullptr);
-	LIME_ASSERT(indices16bit->Length > 0);
+
+	if (vertices->Length == 0 || indices16bit->Length == 0)
+		return;
 
 	unsigned int primCount = calculatePrimitiveCount(indices16bit->Length, pType);
 
@@ -1125,9 +1126,10 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
-	LIME_ASSERT(vertices->Length > 0);
 	LIME_ASSERT(indices32bit != nullptr);
-	LIME_ASSERT(indices32bit->Length > 0);
+
+	if (vertices->Length == 0 || indices32bit->Length == 0)
+		return;
 
 	unsigned int primCount = calculatePrimitiveCount(indices32bit->Length, pType);
 
