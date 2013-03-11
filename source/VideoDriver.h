@@ -55,6 +55,8 @@ public:
 	IO::Attributes^ CreateAttributesFromMaterial(Material^ material, IO::AttributeReadWriteOptions^ options);
 
 	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
+	Image^ CreateImage(Texture^ texture);
+
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 	Image^ CreateImage(IO::ReadFile^ file);
