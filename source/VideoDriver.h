@@ -101,8 +101,10 @@ public:
 	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown);
 	void Draw2DRectangle(Recti^ pos, Color^ color, Recti^ clip);
 	void Draw2DRectangle(Recti^ pos, Color^ color);
+	void Draw2DRectangle(int x1, int y1, int x2, int y2, Color^ color);
 
 	void Draw2DRectangleOutline(Recti^ pos, Color^ color);
+	void Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color^ color);
 
 	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
 	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
@@ -111,6 +113,7 @@ public:
 
 	void Draw3DBox(AABBox^ box, Color^ color);
 
+	void Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color^ color);
 	void Draw3DLine(Vector3Df^ start, Vector3Df^ end, Color^ color);
 	void Draw3DLine(Line3Df^ line, Color^ color);
 
