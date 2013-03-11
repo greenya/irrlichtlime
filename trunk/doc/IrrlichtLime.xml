@@ -7535,9 +7535,25 @@ This method can be used to draw circles, but also triangles, tetragons, pentagon
 			<param name="colorRightDown">Color of the lower right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
 			<param name="clip">Clipping rectangle. If the pointer is null, no clipping will be performed. Default: null.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Draws a 2d rectangle.</summary>
+			<param name="x1">X coordinate of top-left corner of the rectangle.</param>
+			<param name="y1">Y coordinate of top-left corner of the rectangle.</param>
+			<param name="x2">X coordinate of bottom-right corner of the rectangle.</param>
+			<param name="y2">Y coordinate of bottom-right corner of the rectangle.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangleOutline(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
 			<summary>Draws the outline of a 2D rectangle.</summary>
 			<param name="pos">Position of the rectangle.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle outline will be.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangleOutline(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Draws the outline of a 2D rectangle.</summary>
+			<param name="x1">X coordinate of top-left corner of the rectangle.</param>
+			<param name="y1">Y coordinate of top-left corner of the rectangle.</param>
+			<param name="x2">X coordinate of bottom-right corner of the rectangle.</param>
+			<param name="y2">Y coordinate of bottom-right corner of the rectangle.</param>
 			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle outline will be.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
@@ -7598,6 +7614,18 @@ For some implementations, this method simply calls DrawVertexPrimitiveList for s
 For some implementations, this method simply calls DrawVertexPrimitiveList for some triangles. Note that the line is drawn using the current transformation matrix and material.</summary>
 			<param name="start">Start of the 3d line.</param>
 			<param name="end">End of the 3d line.</param>
+			<param name="color">Color of the line.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DLine(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color)">
+			<summary>Draws a 3d line.
+
+For some implementations, this method simply calls DrawVertexPrimitiveList for some triangles. Note that the line is drawn using the current transformation matrix and material.</summary>
+			<param name="x1">X coordinate of start of the line.</param>
+			<param name="y1">Y coordinate of start of the line.</param>
+			<param name="z1">Z coordinate of start of the line.</param>
+			<param name="x2">X coordinate of end of the line.</param>
+			<param name="y2">Y coordinate of end of the line.</param>
+			<param name="z2">Z coordinate of end of the line.</param>
 			<param name="color">Color of the line.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DTriangle(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">

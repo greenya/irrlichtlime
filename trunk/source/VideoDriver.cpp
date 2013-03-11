@@ -853,6 +853,15 @@ void VideoDriver::Draw2DRectangle(Recti^ pos, Color^ color)
 		*pos->m_NativeValue);
 }
 
+void VideoDriver::Draw2DRectangle(int x1, int y1, int x2, int y2, Color^ color)
+{
+	LIME_ASSERT(color != nullptr);
+	
+	m_VideoDriver->draw2DRectangle(
+		*color->m_NativeValue,
+		core::recti(x1, y1, x2, y2));
+}
+
 void VideoDriver::Draw2DRectangleOutline(Recti^ pos, Color^ color)
 {
 	LIME_ASSERT(pos != nullptr);
@@ -860,6 +869,15 @@ void VideoDriver::Draw2DRectangleOutline(Recti^ pos, Color^ color)
 
 	m_VideoDriver->draw2DRectangleOutline(
 		*pos->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color^ color)
+{
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw2DRectangleOutline(
+		core::recti(x1, y1, x2, y2),
 		*color->m_NativeValue);
 }
 
@@ -945,6 +963,16 @@ void VideoDriver::Draw3DBox(AABBox^ box, Color^ color)
 
 	m_VideoDriver->draw3DBox(
 		*box->m_NativeValue,
+		*color->m_NativeValue);
+}
+
+void VideoDriver::Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color^ color)
+{
+	LIME_ASSERT(color != nullptr);
+
+	m_VideoDriver->draw3DLine(
+		core::vector3df(x1, y1, z1),
+		core::vector3df(x2, y2, z2),
 		*color->m_NativeValue);
 }
 
