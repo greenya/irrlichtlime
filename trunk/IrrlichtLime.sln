@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L14.Pathfinding", "examples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L15.AbstractTrace", "examples\L15.AbstractTrace\L15.AbstractTrace.csproj", "{47039E3E-3832-4EDB-95E2-3611C9010F03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L16.SphereCamera", "examples\L16.SphereCamera\L16.SphereCamera.csproj", "{C8E52C57-15EE-4B85-8053-DC50FEE7A306}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -489,6 +491,18 @@ Global
 		{47039E3E-3832-4EDB-95E2-3611C9010F03}.Release|Win32.ActiveCfg = Release|x86
 		{47039E3E-3832-4EDB-95E2-3611C9010F03}.Release|x86.ActiveCfg = Release|x86
 		{47039E3E-3832-4EDB-95E2-3611C9010F03}.Release|x86.Build.0 = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|Win32.ActiveCfg = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|x86.ActiveCfg = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Debug|x86.Build.0 = Debug|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|Any CPU.ActiveCfg = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|Win32.ActiveCfg = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|x86.ActiveCfg = Release|x86
+		{C8E52C57-15EE-4B85-8053-DC50FEE7A306}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
