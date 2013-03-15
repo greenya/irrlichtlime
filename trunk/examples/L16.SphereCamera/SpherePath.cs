@@ -12,11 +12,13 @@ namespace L16.SphereCamera
 {
 	class SpherePath
 	{
+		const int MAX_LINE_COUNT = 32000;
+
 		float height;
 		List<Vector3Df> points = new List<Vector3Df>(); // we use this list only to simplify loading and saving routines
-		List<Vertex3D> lineVerticesFront = new List<Vertex3D>();
-		List<Vertex3D> lineVerticesBack = new List<Vertex3D>();
-		List<ushort> lineIndices = new List<ushort>();
+		VertexPrimitive primFront = new VertexPrimitive(MAX_LINE_COUNT * 2, MAX_LINE_COUNT * 2, PrimitiveType.Lines);
+		VertexPrimitive primBack = new VertexPrimitive(MAX_LINE_COUNT * 2, MAX_LINE_COUNT * 2, PrimitiveType.Lines);
+		int primUsed = 0;
 
 		public Vector3Df Center { get; set; }
 		public Color FrontColor { get; set; }
@@ -34,6 +36,20 @@ namespace L16.SphereCamera
 			Center = new Vector3Df(0);
 			FrontColor = Color.OpaqueCyan;
 			BackColor = Color.OpaqueBlue;
+
+			// init all at once indices here
+			System.Diagnostics.Debug.Assert(primFront.IndexCount == primBack.IndexCount);
+			for (int i = 0; i < primFront.IndexCount; i++)
+			{
+				primFront.SetIndex(i, i);
+				primBack.SetIndex(i, i);
+			}
+		}
+
+		public void Drop()
+		{
+			primFront.Drop();
+			primBack.Drop();
 		}
 
 		public void AddPoint(Vector3Df point)
@@ -43,39 +59,35 @@ namespace L16.SphereCamera
 			// add front line
 			Vertex3D v1front = new Vertex3D(point, new Vector3Df(0), new Color(0));
 			Vertex3D v2front = new Vertex3D((point - Center).Normalize() * height, new Vector3Df(0), FrontColor);
-			lineVerticesFront.Add(v1front);
-			lineVerticesFront.Add(v2front);
+			primFront.SetVertex(primUsed + 0, v1front);
+			primFront.SetVertex(primUsed + 1, v2front);
 
 			// add back line
 			Vertex3D v1back = v1front;
 			Vertex3D v2back = new Vertex3D(v2front);
 			v2back.Color = BackColor;
-			lineVerticesBack.Add(v1back);
-			lineVerticesBack.Add(v2back);
+			primBack.SetVertex(primUsed + 0, v1back);
+			primBack.SetVertex(primUsed + 1, v2back);
 
-			// add indices
-			lineIndices.Add((ushort)lineIndices.Count);
-			lineIndices.Add((ushort)lineIndices.Count);
+			primUsed += 2;
 
-			// add connection line if possible (front, back and indices)
-			if (lineVerticesFront.Count >= 4)
+			// add connection line if possible (front and back)
+			if (primUsed >= 4)
 			{
-				lineVerticesFront.Add(lineVerticesFront[lineVerticesFront.Count - 3]);
-				lineVerticesFront.Add(v2front);
-				lineVerticesBack.Add(lineVerticesBack[lineVerticesBack.Count - 3]);
-				lineVerticesBack.Add(v2back);
+				primFront.SetVertex(primUsed + 0, primFront.GetVertex(primUsed - 3));
+				primFront.SetVertex(primUsed + 1, v2front);
 
-				lineIndices.Add((ushort)lineIndices.Count);
-				lineIndices.Add((ushort)lineIndices.Count);
+				primBack.SetVertex(primUsed + 0, primBack.GetVertex(primUsed - 3));
+				primBack.SetVertex(primUsed + 1, v2back);
+
+				primUsed += 2;
 			}
 		}
 
 		public void Clear()
 		{
 			points.Clear();
-			lineVerticesFront.Clear();
-			lineVerticesBack.Clear();
-			lineIndices.Clear();
+			primUsed = 0;
 		}
 
 		public void Draw(VideoDriver driver)
@@ -92,12 +104,17 @@ namespace L16.SphereCamera
 			// draw back lines
 			m.ZBuffer = ComparisonFunc.Greater;
 			driver.SetMaterial(m);
-			driver.DrawVertexPrimitiveList(lineVerticesBack.ToArray(), lineIndices.ToArray(), PrimitiveType.Lines);
+			primBack.Draw(driver, primUsed / 2);
 
 			// draw front lines
 			m.ZBuffer = ComparisonFunc.LessEqual;
 			driver.SetMaterial(m);
-			driver.DrawVertexPrimitiveList(lineVerticesFront.ToArray(), lineIndices.ToArray(), PrimitiveType.Lines);
+			primFront.Draw(driver, primUsed / 2);
+
+			// draw front points
+			m.Thickness = 10;
+			driver.SetMaterial(m);
+			primFront.Draw(driver, primUsed, PrimitiveType.Points);
 		}
 
 		public void Save(string filename)

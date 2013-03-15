@@ -23,7 +23,7 @@ namespace L16.SphereCamera
 
 		static void Main(string[] args)
 		{
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(800, 600));
+			device = IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(800, 600));
 			device.SetWindowCaption("Sphere Camera - Irrlicht Engine");
 			driver = device.VideoDriver;
 			scene = device.SceneManager;
@@ -66,6 +66,7 @@ namespace L16.SphereCamera
 				driver.EndScene();
 			}
 
+			path.Drop();
 			device.Drop();
 		}
 

@@ -15,12 +15,15 @@ public:
 	VertexPrimitive(int vertexCount, int indexCount, Scene::PrimitiveType primitiveType);
 
 	void Draw(VideoDriver^ driver);
-	void Draw(VideoDriver^ driver, unsigned int overridePrimitiveCount);
-	void Draw(VideoDriver^ driver, unsigned int overridePrimitiveCount, Scene::PrimitiveType overridePrimitiveType);
+	void Draw(VideoDriver^ driver, int overridePrimitiveCount);
+	void Draw(VideoDriver^ driver, int overridePrimitiveCount, Scene::PrimitiveType overridePrimitiveType);
 
 	void Drop();
 
+	int GetIndex(int i);
 	void SetIndex(int i, int index);
+
+	Vertex3D^ GetVertex(int i);
 	void SetVertex(int i, Vertex3D^ vertex);
 	void SetVertexColor(int i, Color^ color);
 	void SetVertexColor(int i, unsigned int argb);
@@ -36,7 +39,7 @@ public:
 private:
 
 	scene::E_PRIMITIVE_TYPE m_primitiveType;
-	unsigned int m_primitiveCount;
+	int m_primitiveCount;
 
 	video::S3DVertex* m_vertices;
 	int m_vertexCount;
