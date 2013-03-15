@@ -10,7 +10,7 @@ namespace Video {
 
 VertexPrimitive::VertexPrimitive(int vertexCount, int indexCount, Scene::PrimitiveType primitiveType)
 {
-	LIME_ASSERT(vertexCount > 0);
+	LIME_ASSERT(vertexCount > 0 && vertexCount <= 65536);
 	LIME_ASSERT(indexCount > 0);
 
 	m_primitiveType = (scene::E_PRIMITIVE_TYPE)primitiveType;
@@ -43,7 +43,7 @@ void VertexPrimitive::Draw(VideoDriver^ driver)
 		video::EIT_16BIT);
 }
 
-void VertexPrimitive::Draw(VideoDriver^ driver, unsigned int overridePrimitiveCount)
+void VertexPrimitive::Draw(VideoDriver^ driver, int overridePrimitiveCount)
 {
 	LIME_ASSERT(driver != nullptr);
 	LIME_ASSERT(m_vertices != nullptr);
@@ -51,7 +51,7 @@ void VertexPrimitive::Draw(VideoDriver^ driver, unsigned int overridePrimitiveCo
 	LIME_ASSERT(m_indices != nullptr);
 	LIME_ASSERT(m_indexCount > 0);
 
-	if (overridePrimitiveCount == 0)
+	if (overridePrimitiveCount < 1)
 		return;
 
 	LIME_ASSERT(m_primitiveCount > 0);
@@ -67,7 +67,7 @@ void VertexPrimitive::Draw(VideoDriver^ driver, unsigned int overridePrimitiveCo
 		video::EIT_16BIT);
 }
 
-void VertexPrimitive::Draw(VideoDriver^ driver, unsigned int overridePrimitiveCount, Scene::PrimitiveType overridePrimitiveType)
+void VertexPrimitive::Draw(VideoDriver^ driver, int overridePrimitiveCount, Scene::PrimitiveType overridePrimitiveType)
 {
 	LIME_ASSERT(driver != nullptr);
 	LIME_ASSERT(m_vertices != nullptr);
@@ -75,13 +75,14 @@ void VertexPrimitive::Draw(VideoDriver^ driver, unsigned int overridePrimitiveCo
 	LIME_ASSERT(m_indices != nullptr);
 	LIME_ASSERT(m_indexCount > 0);
 
-	if (overridePrimitiveCount == 0)
+	if (overridePrimitiveCount < 1)
 		return;
 
-	unsigned int maxPrimitiveCount = VideoDriver::calculatePrimitiveCount(m_indexCount, overridePrimitiveType);
-
+#ifdef _DEBUG
+	int maxPrimitiveCount = VideoDriver::calculatePrimitiveCount(m_indexCount, overridePrimitiveType);
 	LIME_ASSERT(maxPrimitiveCount > 0);
 	LIME_ASSERT(overridePrimitiveCount <= maxPrimitiveCount);
+#endif
 
 	driver->m_VideoDriver->drawVertexPrimitiveList(
 		m_vertices,
@@ -106,12 +107,30 @@ void VertexPrimitive::Drop()
 	m_indexCount = 0;
 }
 
-void VertexPrimitive::SetIndex(int i, int index)
+int VertexPrimitive::GetIndex(int i)
 {
 	LIME_ASSERT(m_indices != nullptr);
 	LIME_ASSERT(i >= 0 && i < m_indexCount);
 
+	return m_indices[i];
+}
+
+void VertexPrimitive::SetIndex(int i, int index)
+{
+	LIME_ASSERT(m_indices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_indexCount);
+	LIME_ASSERT(index >= 0 && index <= 65535);
+
 	m_indices[i] = (u16)index;
+}
+
+Vertex3D^ VertexPrimitive::GetVertex(int i)
+{
+	LIME_ASSERT(m_vertices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_vertexCount);
+
+	Vertex3D^ v = gcnew Vertex3D(m_vertices[i]);
+	return v;
 }
 
 void VertexPrimitive::SetVertex(int i, Vertex3D^ vertex)
