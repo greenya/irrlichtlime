@@ -265,9 +265,7 @@ internal:
 
 	video::IVideoDriver* m_VideoDriver;
 
-private:
-
-	unsigned int calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType);
+	static unsigned int calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType);
 };
 
 } // end namespace Video
