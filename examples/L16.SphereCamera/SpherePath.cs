@@ -16,8 +16,8 @@ namespace L16.SphereCamera
 
 		float height;
 		List<Vector3Df> points = new List<Vector3Df>(); // we use this list only to simplify loading and saving routines
-		VertexPrimitive primFront = new VertexPrimitive(MAX_LINE_COUNT * 2, MAX_LINE_COUNT * 2, PrimitiveType.Lines);
-		VertexPrimitive primBack = new VertexPrimitive(MAX_LINE_COUNT * 2, MAX_LINE_COUNT * 2, PrimitiveType.Lines);
+		VertexPrimitive primFront = new VertexPrimitive(PrimitiveType.Lines, VertexType.Standard, MAX_LINE_COUNT * 2, IndexType._16Bit, MAX_LINE_COUNT * 2);
+		VertexPrimitive primBack = new VertexPrimitive(PrimitiveType.Lines, VertexType.Standard, MAX_LINE_COUNT * 2, IndexType._16Bit, MAX_LINE_COUNT * 2);
 		int primUsed = 0;
 
 		public Vector3Df Center { get; set; }
@@ -37,13 +37,8 @@ namespace L16.SphereCamera
 			FrontColor = Color.OpaqueCyan;
 			BackColor = Color.OpaqueBlue;
 
-			// init all at once indices here
-			System.Diagnostics.Debug.Assert(primFront.IndexCount == primBack.IndexCount);
-			for (int i = 0; i < primFront.IndexCount; i++)
-			{
-				primFront.SetIndex(i, i);
-				primBack.SetIndex(i, i);
-			}
+			primFront.SetIndicesSequence();
+			primBack.SetIndicesSequence();
 		}
 
 		public void Drop()
