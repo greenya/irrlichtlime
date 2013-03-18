@@ -7037,21 +7037,21 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="tv2">Second texture V coord. Default: 0.</param>
 		</member>
 		<member name="T:IrrlichtLime.Video.VertexPrimitive">
-			<summary>Incapsulates array of vertices and indices in native (unmanaged) form. Vertices has type Vertex3D and indices are 16-bit. This class uses native pointers and that's why it is able to draw primitives faster then direct calling to VideoDriver.DrawVertexPrimitiveList() in most cases.</summary>
+			<summary>Incapsulates array of vertices and indices in native (unmanaged) form. This class uses native pointers and that's why it is able to draw primitives faster then direct calling to VideoDriver.DrawVertexPrimitiveList() in most cases.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver)">
-			<summary>Draws vertex primitive.</summary>
+			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
 			<param name="driver">Video driver to use.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver,System.Int32)">
-			<summary>Draws vertex primitive.</summary>
+			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
 			<param name="driver">Video driver to use.</param>
-			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to primitive count which is supported by this VertexPrimitive (depends on IndexCount and PrimitiveType). If this value less than 1, the method will do nothing.</param>
+			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to PrimitiveCount. If this value less than 1, the method will do nothing.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver,System.Int32,IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws vertex primitive.</summary>
+			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
 			<param name="driver">Video driver to use.</param>
-			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to primitive count which is supported by this VertexPrimitive (depends on IndexCount and PrimitiveType). If this value less than 1, the method will do nothing.</param>
+			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to PrimitiveCount. If this value less than 1, the method will do nothing.</param>
 			<param name="overridePrimitiveType">Type of primitives to draw. This value must be compatible with IndexCount and overridePrimitiveCount values.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.Drop">
@@ -7062,11 +7062,17 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="i">Index of the index.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.GetVertex(System.Int32)">
-			<summary>Gets specified vertex.</summary>
+			<summary>Gets specified vertex. You need to cast return value to proper vertex type to access the members.</summary>
 			<param name="i">Index of the vertex.</param>
 		</member>
 		<member name="P:IrrlichtLime.Video.VertexPrimitive.IndexCount">
 			<summary>Total number of indices allocated.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VertexPrimitive.IndexType">
+			<summary>Type of indices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.VertexPrimitive.PrimitiveCount">
+			<summary>Total number of primitives. This value is calculated automatically using PrimitiveType and IndexCount.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.VertexPrimitive.PrimitiveType">
 			<summary>Type of primitives.</summary>
@@ -7076,10 +7082,13 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="i">Index of the index.</param>
 			<param name="index">New index value.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertex(System.Int32,IrrlichtLime.Video.Vertex3D)">
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetIndicesSequence">
+			<summary>Sets all indices to a sequence from 0 to IndexCount-1.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertex(System.Int32,System.Object)">
 			<summary>Sets specified vertex.</summary>
 			<param name="i">Index of the vertex.</param>
-			<param name="vertex">New vertex.</param>
+			<param name="vertex">New vertex. The value must have proper vertex type, e.g. Vertex3D for VertexType.Standard and so on.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexColor(System.Int32,System.UInt32)">
 			<summary>Sets specified vertex color.</summary>
@@ -7103,14 +7112,22 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="y">Y coordinate of new position.</param>
 			<param name="z">Z coordinate of new position.</param>
 		</member>
+		<member name="P:IrrlichtLime.Video.VertexPrimitive.TotalBytesAllocated">
+			<summary>Total bytes currenty allocated for vertices and indices.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.VertexPrimitive.VertexCount">
 			<summary>Total number of vertices allocated.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.#ctor(System.Int32,System.Int32,IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Initializes new instance. Allocates memory for native arrays of vertices and indices of specified sizes. You must call Drop() after all to release the memory.</summary>
-			<param name="vertexCount">Total number of vertices. The value must be from 1 to 65536 inclusive.</param>
-			<param name="indexCount">Total number of indices. The value must not be less than 1.</param>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.#ctor(IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Video.VertexType,System.Int32,IrrlichtLime.Video.IndexType,System.Int32)">
+			<summary>Initializes new instance. Allocates memory for native arrays of vertices and indices of specified types and sizes. Note: the memory will not be released until you explicitly call Drop().</summary>
 			<param name="primitiveType">Type of primitives.</param>
+			<param name="vertexType">Type of vertices.</param>
+			<param name="vertexCount">Total number of vertices. The value must not be less than 1. Note: for IndexType._16Bit this value also must not be greater than 65536.</param>
+			<param name="indexType">Type of indices. Smaller type takes less memory but able to index less number of vertices.</param>
+			<param name="indexCount">Total number of indices. The value must not be less than 1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Video.VertexPrimitive.VertexType">
+			<summary>Type of vertices.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.VertexShaderType">
 			<summary>Enumeration for vertex shader versions.</summary>
