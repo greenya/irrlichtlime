@@ -3745,6 +3745,671 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="P:IrrlichtLime.Core.Vector3Di.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.CursorControl">
+			<summary>Mouse cursor manipulation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.PlatformBehavior">
+			<summary>Platform specific behavior.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.Position">
+			<summary>Position of the mouse cursor.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.RelativePosition">
+			<summary>Returns the current position of the cursor. The returned position is a value between (0.0f, 0.0f) and (1.0f, 1.0f), where (0.0f, 0.0f) is the top left corner and (1.0f, 1.0f) is the bottom right corner of the render window. Use SetReferenceRect() to set custom rect.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.CursorControl.SetReferenceRect(IrrlichtLime.Core.Recti)">
+			<summary>Sets an absolute reference rect for setting and retrieving the cursor position.
+
+If this rect is set, the cursor position is not being calculated relative to the rendering window but to this rect. You can set the rect pointer to null to disable this feature again. This feature is useful when rendering into parts of foreign windows for example in an editor.</summary>
+			<param name="rect_or_null">Reference rectangle or null to disable the reference rectangle.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.Visible">
+			<summary>True if the mouse cursor is visible, false if not.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.CursorPlatformBehavior">
+			<summary>Platform specific behavior flags for the cursor.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorPlatformBehavior.None">
+			<summary>No platform specific behavior. This is default value.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorPlatformBehavior.X11CacheUpdates">
+			<summary>On X11 try caching cursor updates as XQueryPointer calls can be expensive.
+
+Update cursor positions only when the irrlicht timer has been updated or the timer is stopped. This means you usually get one cursor update per device-&gt;run() which will be fine in most cases. See this forum-thread for a more detailed explanation: http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&amp;t=45525.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIAlignment">
+			<summary>Alignment values.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIAlignment.Center">
+			<summary>Aligned to the center of parent.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIAlignment.LowerRight">
+			<summary>Aligned to parent's bottom or right side.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIAlignment.Scale">
+			<summary>Stretched to fit parent.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIAlignment.UpperLeft">
+			<summary>Aligned to parent's top or left side. This is default value.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIButton">
+			<summary>Button.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.ActiveFont">
+			<summary>The font which is used right now for drawing.
+Currently this is the override font when one is set and the font of the active skin otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.AlphaChannel">
+			<summary>If the alpha channel should be used for drawing background images on the button.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.Border">
+			<summary>If the border and button face are being drawn using the skin.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.OverrideFont">
+			<summary>The override font (if any).</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.Pressed">
+			<summary>If the button is currently pressed.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.PushButton">
+			<summary>If the button is a push button.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIButton.ScaleImage">
+			<summary>If the button scales the used images.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetNormalImage">
+			<summary>Sets a background image for the button when it is in normal state.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetNormalImage(IrrlichtLime.Video.Texture)">
+			<summary>Sets a background image for the button when it is in normal state.</summary>
+			<param name="image">Texture containing the image to be displayed.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetNormalImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti)">
+			<summary>Sets a background image for the button when it is in normal state.</summary>
+			<param name="image">Texture containing the image to be displayed.</param>
+			<param name="pos">Position in the texture, where the image is located.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetPressedImage">
+			<summary>Sets a background image for the button when it is in pressed state.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetPressedImage(IrrlichtLime.Video.Texture)">
+			<summary>Sets a background image for the button when it is in pressed state.</summary>
+			<param name="image">Texture containing the image to be displayed.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetPressedImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti)">
+			<summary>Sets a background image for the button when it is in pressed state.</summary>
+			<param name="image">Texture containing the image to be displayed.</param>
+			<param name="pos">Position in the texture, where the image is located.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetSprite(IrrlichtLime.GUI.GUIButtonState,System.Int32)">
+			<summary>Sets the animated sprite for a specific button state.</summary>
+			<param name="state">State of the button to set the sprite for.</param>
+			<param name="index">Number of the sprite within the sprite bank, use -1 for no sprite.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetSprite(IrrlichtLime.GUI.GUIButtonState,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Sets the animated sprite for a specific button state.</summary>
+			<param name="state">State of the button to set the sprite for.</param>
+			<param name="index">Number of the sprite within the sprite bank, use -1 for no sprite.</param>
+			<param name="color">The color of the sprite. Default is 0xffffffff.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetSprite(IrrlichtLime.GUI.GUIButtonState,System.Int32,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Sets the animated sprite for a specific button state.</summary>
+			<param name="state">State of the button to set the sprite for.</param>
+			<param name="index">Number of the sprite within the sprite bank, use -1 for no sprite.</param>
+			<param name="color">The color of the sprite. Default is 0xffffffff.</param>
+			<param name="loop">True if the animation should loop, false if not. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetSpriteBank">
+			<summary>Sets the sprite bank used by the button.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIButton.SetSpriteBank(IrrlichtLime.GUI.GUISpriteBank)">
+			<summary>Sets the sprite bank used by the button.</summary>
+			<param name="bank">Sprite bank to use or null to stop its usage by this button. Default is null.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIButtonState">
+			<summary>Button states.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.ButtonDown">
+			<summary>The button is currently pressed down.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.ButtonUp">
+			<summary>The button is not pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.Focused">
+			<summary>The button has the focus.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.MouseOff">
+			<summary>The mouse cursor is not over the button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.MouseOver">
+			<summary>The mouse cursor is over the button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIButtonState.NotFocused">
+			<summary>The button doesn't have the focus.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUICheckBox">
+			<summary>Check box.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUICheckBox.Checked">
+			<summary>If box is checked.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUICheckBox.DrawBackground">
+			<summary>True if background drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUICheckBox.DrawBorder">
+			<summary>True if border drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIColorSelectDialog">
+			<summary>Standard color chooser dialog.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIColumnOrdering">
+			<summary>Modes for ordering used when a column header is clicked.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIColumnOrdering.Ascending">
+			<summary>Sort it ascending by it's ascii value like: a,b,c,...</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIColumnOrdering.Custom">
+			<summary>Send a GUIEventType.TableHeaderChanged message when a column header is clicked.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIColumnOrdering.Descending">
+			<summary>Sort it descending by it's ascii value like: z,x,y,...</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIColumnOrdering.FlipAscendingDescending">
+			<summary>Sort it ascending on first click, descending on next, etc.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIColumnOrdering.None">
+			<summary>Do not use ordering.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIComboBox">
+			<summary>Combo box.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.AddItem(System.String)">
+			<summary>Adds an item and returns the index of it.</summary>
+			<param name="text">Item text.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.AddItem(System.String,System.Int32)">
+			<summary>Adds an item and returns the index of it.</summary>
+			<param name="text">Item text.</param>
+			<param name="data">Item data.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.Clear">
+			<summary>Deletes all items in the combo box.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.GetIndexForItemData(System.Int32)">
+			<summary>Returns index based on item data.</summary>
+			<param name="data">Data to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.GetItem(System.Int32)">
+			<summary>Returns string of an item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.GetItemData(System.Int32)">
+			<summary>Returns data of an item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIComboBox.ItemCount">
+			<summary>Amount of items in box.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIComboBox.MaxSelectionRows">
+			<summary>The maximimal number of rows for the selection listbox.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.RemoveItem(System.Int32)">
+			<summary>Removes an item from the combo box.
+Warning: this will change the index of all following items.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIComboBox.SelectedIndex">
+			<summary>Index of selected item or -1 if no item is selected.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIComboBox.SetTextAlignment(IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>Sets text justification of the text area.</summary>
+			<param name="horizontal">UpperLeft for left justified (default), LowerRight for right justified, or Center for centered text.</param>
+			<param name="vertical">UpperLeft to align with top edge, LowerRight for bottom edge, or Center for centered text (default).</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIContextMenu">
+			<summary>Context menu.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String,System.Int32)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String,System.Int32,System.Boolean)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String,System.Int32,System.Boolean,System.Boolean)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+			<param name="isChecked">Specifies if the menu item should be initially checked. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddItem(System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Adds a menu item and returns its index.</summary>
+			<param name="text">Text of menu item. Set this to null to create a separator instead of a real item, which is the same like calling AddSeparator().</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+			<param name="isChecked">Specifies if the menu item should be initially checked. Default is false.</param>
+			<param name="autoChecking">Specifies if the item should be checked by clicking. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.AddSeparator">
+			<summary>Adds a separator item to the menu.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIContextMenu.CloseHandling">
+			<summary>Behavior when menus are closed.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.FindItem(System.Int32)">
+			<summary>Find an item by it's command id. Returns -1 if no item found.</summary>
+			<param name="commandID">We are looking for the first item which has this command id.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.FindItem(System.Int32,System.Int32)">
+			<summary>Find an item by it's command id. Returns -1 if no item found.</summary>
+			<param name="commandID">We are looking for the first item which has this command id.</param>
+			<param name="indexStartSearch">Start searching from this index. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetItemAutoChecking(System.Int32)">
+			<summary>Does the element change the checked status on clicking?</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetItemChecked(System.Int32)">
+			<summary>Checks if a menu item is checked.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetItemCommandID(System.Int32)">
+			<summary>Gets the command id of a menu item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetItemEnabled(System.Int32)">
+			<summary>Checks if a menu item is enabled.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetItemText(System.Int32)">
+			<summary>Gets text of the menu item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.GetSubMenu(System.Int32)">
+			<summary>Gets submenu of an item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String,System.Int32)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String,System.Int32,System.Boolean)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String,System.Int32,System.Boolean,System.Boolean)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+			<param name="isChecked">Specifies if the menu item should be initially checked. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.InsertItem(System.Int32,System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Inserts a menu item at specified position.</summary>
+			<param name="index">Position to insert the new element, should be smaller than ItemCount otherwise the item is added to the end. Must not be less than 0.</param>
+			<param name="text">Text of menu item. Set this to null to insert a separator instead of a real item.</param>
+			<param name="commandID">Command id of menu item, a simple id you may set to whatever you want. Default is -1.</param>
+			<param name="enabled">Specifies if the menu item should be enabled. Default is true.</param>
+			<param name="hasSubMenu">Set this to true if there should be a submenu at this item. You can access this submenu via GetSubMenu(). Default is false.</param>
+			<param name="isChecked">Specifies if the menu item should be initially checked. Default is false.</param>
+			<param name="autoChecking">Specifies if the item should be checked by clicking. Default is false.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIContextMenu.ItemCount">
+			<summary>Get amount of menu items.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.RemoveAllItems">
+			<summary>Removes all menu items.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.RemoveItem(System.Int32)">
+			<summary>Removes a menu item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIContextMenu.SelectedCommandID">
+			<summary>Selected item command id or -1 if none selected.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIContextMenu.SelectedIndex">
+			<summary>Selected item index in the menu or -1 if none selected.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetEventParent(IrrlichtLime.GUI.GUIElement)">
+			<summary>When an eventparent is set it receives events instead of the usual parent element.</summary>
+			<param name="parent">Elemet which should recive events of this context menu.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetItemAutoChecking(System.Int32,System.Boolean)">
+			<summary>Should the element change the checked status on clicking?</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+			<param name="autoChecking">New behavior.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetItemChecked(System.Int32,System.Boolean)">
+			<summary>Sets if the menu item should be checked.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+			<param name="isChecked">New state.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetItemCommandID(System.Int32,System.Int32)">
+			<summary>Sets the command id of a menu item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+			<param name="commandID">New command id.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetItemEnabled(System.Int32,System.Boolean)">
+			<summary>Sets if the menu item should be enabled.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+			<param name="enabled">New state.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIContextMenu.SetItemText(System.Int32,System.String)">
+			<summary>Sets text of the menu item.</summary>
+			<param name="index">Index of the menu item. Must be from 0 to ItemCount-1.</param>
+			<param name="text">New text.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIContextMenuClose">
+			<summary>Close context menu behavior.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIContextMenuClose.Hide">
+			<summary>Set Visible to "false".</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIContextMenuClose.Ignore">
+			<summary>Do nothing - menu stays open.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIContextMenuClose.Remove">
+			<summary>Remove the gui element. This is default behavior.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIDefaultColor">
+			<summary>Enumeration for skin colors.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor._3dDarkShadow">
+			<summary>Dark shadow for three-dimensional display elements.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor._3dFace">
+			<summary>Face color for three-dimensional display elements and for dialog box backgrounds.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor._3dHighLight">
+			<summary>Highlight color for three-dimensional display elements (for edges facing the light source).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor._3dLight">
+			<summary>Light color for three-dimensional display elements (for edges facing the light source).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor._3dShadow">
+			<summary>Shadow color for three-dimensional display elements (for edges facing away from the light source).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.ActiveBorder">
+			<summary>Active window border.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.ActiveCaption">
+			<summary>Active window title bar text.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.AppWorkspace">
+			<summary>Background color of multiple document interface (MDI) applications.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.ButtonText">
+			<summary>Text on a button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.Editable">
+			<summary>Window background for editable field (editbox, checkbox-field).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.FocusedEditable">
+			<summary>Show focus of window background for editable field (editbox or when checkbox-field is pressed).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.GrayEditable">
+			<summary>Grayed (disabled) window background for editable field (editbox, checkbox-field).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.GrayText">
+			<summary>Grayed (disabled) text.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.GrayWindowSymbol">
+			<summary>Grayed (disabled) window symbols like on close buttons, scroll bars and check boxes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.HighLight">
+			<summary>Item(s) selected in a control.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.HighLightText">
+			<summary>Text of item(s) selected in a control.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.Icon">
+			<summary>Icons in a list or tree.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.IconHighLight">
+			<summary>Selected icons in a list or tree.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.InactiveBorder">
+			<summary>Inactive window border.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.InactiveCaption">
+			<summary>Inactive window caption.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.ScrollBar">
+			<summary>Scrollbar gray area.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.TooltipBackground">
+			<summary>Tool tip background color.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.TooltipText">
+			<summary>Tool tip text color.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.WindowBackground">
+			<summary>Window background.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultColor.WindowSymbol">
+			<summary>Window symbols like on close buttons, scroll bars and check boxes.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIDefaultFont">
+			<summary>Customizable fonts.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultFont.Button">
+			<summary>Font for buttons.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultFont.Default">
+			<summary>For static text, edit boxes, lists and most other places.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultFont.Menu">
+			<summary>Font for menu items.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultFont.Tooltip">
+			<summary>Font for tooltips.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultFont.Window">
+			<summary>Font for window title bars.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIDefaultIcon">
+			<summary>Customizable symbols for GUI.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CheckBoxChecked">
+			<summary>Tick for checkbox.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.Collapse">
+			<summary>Minus icon for trees.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorDown">
+			<summary>Scroll bar down button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorDown_Small">
+			<summary>Smaller down arrow.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorLeft">
+			<summary>Scroll bar left button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorRight">
+			<summary>Scroll bar right button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorUp">
+			<summary>Scroll bar up button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.CursorUp_Small">
+			<summary>Smaller up arrow.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.Directory">
+			<summary>Folder icon for file selection.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.DropDown">
+			<summary>Down arrow for dropdown menus.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.Expand">
+			<summary>Plus icon for trees.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.File">
+			<summary>File icon for file selection.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.MenuMore">
+			<summary>Icon for menu children.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.MoreDown">
+			<summary>Icon indicating that there is more content below.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.MoreLeft">
+			<summary>Icon indicating there is more content to the left.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.MoreRight">
+			<summary>Icon indicating that there is more content to the right.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.MoreUp">
+			<summary>Icon indicating that there is more content above.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.RadioButtonChecked">
+			<summary>Selection dot in a radio button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.WindowClose">
+			<summary>Close window button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.WindowMaximize">
+			<summary>Maximize window button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.WindowMinimize">
+			<summary>Minimize window button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.WindowResize">
+			<summary>Resize icon for bottom right corner of a window.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultIcon.WindowRestore">
+			<summary>Restore window button.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIDefaultSize">
+			<summary>Enumeration for default sizes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonHeight">
+			<summary>Height of a default button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonPressedImageOffsetX">
+			<summary>Pixels to move the button image to the right when a pushbutton is pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonPressedImageOffsetY">
+			<summary>Pixels to move the button image down when a pushbutton is pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonPressedTextOffsetX">
+			<summary>Pixels to move the button text to the right when a pushbutton is pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonPressedTextOffsetY">
+			<summary>Pixels to move the button text down when a pushbutton is pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ButtonWidth">
+			<summary>Width of a default button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.CheckBoxWidth">
+			<summary>Width of a checkbox check.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MenuHeight">
+			<summary>Height of menu.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxGapSpace">
+			<summary>Free space in a messagebox between borders and contents on all sides.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxHeight">
+			<summary>DEPRECATED. This may be removed by Irrlicht 1.9.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxMaxTextHeight">
+			<summary>Maximal space to reserve for messagebox text-height.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxMaxTextWidth">
+			<summary>Maximal space to reserve for messagebox text-width.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxMinTextHeight">
+			<summary>Minimal space to reserve for messagebox text-height.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxMinTextWidth">
+			<summary>Minimal space to reserve for messagebox text-width.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.MessageBoxWidth">
+			<summary>DEPRECATED. This may be removed by Irrlicht 1.9.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.ScrollBarSize">
+			<summary>Default with/height of scrollbar.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.TextDistanceX">
+			<summary>Distance for text from background.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.TextDistanceY">
+			<summary>Distance for text from background.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.TitleBarTextDistanceX">
+			<summary>Distance for text in the title bar, from the left of the window rect.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.TitleBarTextDistanceY">
+			<summary>Distance for text in the title bar, from the top of the window rect.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultSize.WindowButtonWidth">
+			<summary>Width of a window button.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIDefaultText">
+			<summary>Default texts.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.MsgBoxCancel">
+			<summary>Text for the Cancel button on a message box.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.MsgBoxNo">
+			<summary>Text for the No button on a message box.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.MsgBoxOK">
+			<summary>Text for the OK button on a message box.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.MsgBoxYes">
+			<summary>Text for the Yes button on a message box.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.WindowClose">
+			<summary>Tooltip text for window close button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.WindowMaximize">
+			<summary>Tooltip text for window maximize button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.WindowMinimize">
+			<summary>Tooltip text for window minimize button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIDefaultText.WindowRestore">
+			<summary>Tooltip text for window restore button.</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.ArchiveLoader">
 			<summary>Class which is able to create an archive from a file.
 
