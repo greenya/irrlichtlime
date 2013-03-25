@@ -54,6 +54,7 @@ String^ FileArchive::Password::get()
 
 void FileArchive::Password::set(String^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_FileArchive->Password = Lime::StringToStringC(value);
 }
 

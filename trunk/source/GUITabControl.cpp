@@ -27,7 +27,7 @@ GUITabControl::GUITabControl(gui::IGUITabControl* ref)
 GUITab^ GUITabControl::AddTab(String^ caption, int id)
 {
 	gui::IGUITab* t = m_GUITabControl->addTab(
-		Lime::StringToStringW(caption).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
 		id);
 
 	return GUITab::Wrap(t);
@@ -36,7 +36,7 @@ GUITab^ GUITabControl::AddTab(String^ caption, int id)
 GUITab^ GUITabControl::AddTab(String^ caption)
 {
 	gui::IGUITab* t = m_GUITabControl->addTab(
-		Lime::StringToStringW(caption).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption));
 
 	return GUITab::Wrap(t);
 }
@@ -57,7 +57,7 @@ GUITab^ GUITabControl::InsertTab(int indexAt, String^ caption, int id)
 
 	gui::IGUITab* t = m_GUITabControl->insertTab(
 		indexAt,
-		Lime::StringToStringW(caption).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
 		id);
 
 	return GUITab::Wrap(t);
@@ -69,7 +69,7 @@ GUITab^ GUITabControl::InsertTab(int indexAt, String^ caption)
 
 	gui::IGUITab* t = m_GUITabControl->insertTab(
 		indexAt,
-		Lime::StringToStringW(caption).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption));
 
 	return GUITab::Wrap(t);
 }

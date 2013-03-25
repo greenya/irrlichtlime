@@ -393,7 +393,7 @@ String^ GUIElement::Name::get()
 
 void GUIElement::Name::set(String^ value)
 {
-	m_GUIElement->setName(Lime::StringToStringC(value).c_str());
+	m_GUIElement->setName(LIME_SAFESTRINGTOSTRINGC_C_STR(value));
 }
 
 GUIElement^ GUIElement::Parent::get()
@@ -466,7 +466,7 @@ String^ GUIElement::Text::get()
 
 void GUIElement::Text::set(String^ value)
 {
-	m_GUIElement->setText(Lime::StringToStringW(value).c_str());
+	m_GUIElement->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
 String^ GUIElement::ToolTipText::get()
@@ -476,7 +476,7 @@ String^ GUIElement::ToolTipText::get()
 
 void GUIElement::ToolTipText::set(String^ value)
 {
-	m_GUIElement->setToolTipText(Lime::StringToStringW(value).c_str());
+	m_GUIElement->setToolTipText(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
 GUIElementType GUIElement::Type::get()

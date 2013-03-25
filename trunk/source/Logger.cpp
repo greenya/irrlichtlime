@@ -26,22 +26,22 @@ Logger::Logger(irr::ILogger* ref)
 void Logger::Log(String^ text, String^ hint, IrrlichtLime::LogLevel level)
 {
 	m_Logger->log(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(hint).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(hint),
 		(irr::ELOG_LEVEL)level);
 }
 
 void Logger::Log(String^ text, IrrlichtLime::LogLevel level)
 {
 	m_Logger->log(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		(irr::ELOG_LEVEL)level);
 }
 
 void Logger::Log(String^ text)
 {
 	m_Logger->log(
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
 IrrlichtLime::LogLevel Logger::LogLevel::get()

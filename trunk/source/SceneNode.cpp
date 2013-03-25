@@ -448,6 +448,7 @@ String^ SceneNode::Name::get()
 
 void SceneNode::Name::set(String^ value)
 {
+	LIME_ASSERT(value != nullptr);
 	m_SceneNode->setName(Lime::StringToStringC(value));
 }
 

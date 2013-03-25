@@ -249,7 +249,7 @@ void IrrlichtDevice::SetInputReceivingSceneManager(Scene::SceneManager^ sceneMan
 
 void IrrlichtDevice::SetWindowCaption(String^ text)
 {
-	m_IrrlichtDevice->setWindowCaption(Lime::StringToStringW(text).c_str());
+	m_IrrlichtDevice->setWindowCaption(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
 void IrrlichtDevice::SetWindowResizable(bool resize)

@@ -42,7 +42,7 @@ namespace L01.TexturePainting
 		{
 			SceneManager smgr = device.SceneManager;
 
-			AnimatedMesh m = smgr.AddHillPlaneMesh(null, new Dimension2Df(16), new Dimension2Di(16), null, 8);
+			AnimatedMesh m = smgr.AddHillPlaneMesh("plane", new Dimension2Df(16), new Dimension2Di(16), null, 8);
 
 			sceneNodePainter = smgr.AddAnimatedMeshSceneNode(m);
 			sceneNodePainter.Scale = new Vector3Df(0.4f);

@@ -38,7 +38,7 @@ void MaterialRendererServices::SetBasicRenderStates(Material^ newMaterial, Mater
 int MaterialRendererServices::GetPixelShaderConstantID(String^ name)
 {
 	LIME_ASSERT(name != nullptr);
-	return m_MaterialRendererServices->getPixelShaderConstantID(Lime::StringToStringC(name).c_str());
+	return m_MaterialRendererServices->getPixelShaderConstantID(LIME_SAFESTRINGTOSTRINGC_C_STR(name));
 }
 
 void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
@@ -99,7 +99,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ val
 int MaterialRendererServices::GetVertexShaderConstantID(String^ name)
 {
 	LIME_ASSERT(name != nullptr);
-	return m_MaterialRendererServices->getVertexShaderConstantID(Lime::StringToStringC(name).c_str());
+	return m_MaterialRendererServices->getVertexShaderConstantID(LIME_SAFESTRINGTOSTRINGC_C_STR(name));
 }
 
 void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)

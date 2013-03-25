@@ -29,8 +29,8 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
-		Lime::StringToStringC(vertexShaderProgram).c_str(),
-		Lime::StringToStringC(pixelShaderProgram).c_str(),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderProgram),
 		c,
 		(video::E_MATERIAL_TYPE)baseMaterial,
 		userData);
@@ -62,16 +62,16 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
-		Lime::StringToStringC(vertexShaderProgram).c_str(),
-		Lime::StringToStringC(vertexShaderEntryPoint).c_str(),
-		(video::E_VERTEX_SHADER_TYPE)vsCompileTarget,
-		Lime::StringToStringC(pixelShaderProgram).c_str(),
-		Lime::StringToStringC(pixelShaderEntryPoint).c_str(),
-		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderEntryPoint),
+		(video::E_VERTEX_SHADER_TYPE) vsCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderEntryPoint),
+		(video::E_PIXEL_SHADER_TYPE) psCompileTarget,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData,
-		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
+		(video::E_GPU_SHADING_LANGUAGE) shadingLang);
 
 	c->drop();
 
@@ -122,14 +122,14 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
-		Lime::StringToStringC(vertexShaderProgram).c_str(),
-		Lime::StringToStringC(pixelShaderProgram).c_str(),
-		Lime::StringToStringC(geometryShaderProgram).c_str(),
-		(scene::E_PRIMITIVE_TYPE)inType,
-		(scene::E_PRIMITIVE_TYPE)outType,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(geometryShaderProgram),
+		(scene::E_PRIMITIVE_TYPE) inType,
+		(scene::E_PRIMITIVE_TYPE) outType,
 		verticesOut,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData);
 
 	c->drop();
@@ -180,22 +180,22 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterial(
-		Lime::StringToStringC(vertexShaderProgram).c_str(),
-		Lime::StringToStringC(vertexShaderEntryPoint).c_str(),
-		(video::E_VERTEX_SHADER_TYPE)vsCompileTarget,
-		Lime::StringToStringC(pixelShaderProgram).c_str(),
-		Lime::StringToStringC(pixelShaderEntryPoint).c_str(),
-		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
-		Lime::StringToStringC(geometryShaderProgram).c_str(),
-		Lime::StringToStringC(geometryShaderEntryPoint).c_str(),
-		(video::E_GEOMETRY_SHADER_TYPE)gsCompileTarget,
-		(scene::E_PRIMITIVE_TYPE)inType,
-		(scene::E_PRIMITIVE_TYPE)outType,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderEntryPoint),
+		(video::E_VERTEX_SHADER_TYPE) vsCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderEntryPoint),
+		(video::E_PIXEL_SHADER_TYPE) psCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(geometryShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(geometryShaderEntryPoint),
+		(video::E_GEOMETRY_SHADER_TYPE) gsCompileTarget,
+		(scene::E_PRIMITIVE_TYPE) inType,
+		(scene::E_PRIMITIVE_TYPE) outType,
 		verticesOut,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData,
-		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
+		(video::E_GPU_SHADING_LANGUAGE) shadingLang);
 
 	c->drop();
 
@@ -255,6 +255,9 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterial(String^ vertexSh
 
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, MaterialType baseMaterial, int userData)
 {
+	LIME_ASSERT(vertexShaderFileName != nullptr);
+	LIME_ASSERT(pixelShaderFileName != nullptr);
+
 	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
 	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
@@ -263,7 +266,7 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 		Lime::StringToPath(vertexShaderFileName),
 		Lime::StringToPath(pixelShaderFileName),
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData);
 
 	c->drop();
@@ -285,7 +288,9 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 	VertexShaderType vsCompileTarget, String^ pixelShaderFileName, String^ pixelShaderEntryPoint, PixelShaderType psCompileTarget,
 	MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
+	LIME_ASSERT(vertexShaderFileName != nullptr);
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
+	LIME_ASSERT(pixelShaderFileName != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
 
 	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
@@ -294,15 +299,15 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterialFromFiles(
 		Lime::StringToPath(vertexShaderFileName),
-		Lime::StringToStringC(vertexShaderEntryPoint).c_str(),
-		(video::E_VERTEX_SHADER_TYPE)vsCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderEntryPoint),
+		(video::E_VERTEX_SHADER_TYPE) vsCompileTarget,
 		Lime::StringToPath(pixelShaderFileName),
-		Lime::StringToStringC(pixelShaderEntryPoint).c_str(),
-		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderEntryPoint),
+		(video::E_PIXEL_SHADER_TYPE) psCompileTarget,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData,
-		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
+		(video::E_GPU_SHADING_LANGUAGE) shadingLang);
 
 	c->drop();
 
@@ -348,6 +353,10 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, String^ geometryShaderFileName,
 	Scene::PrimitiveType inType, Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData)
 {
+	LIME_ASSERT(vertexShaderFileName != nullptr);
+	LIME_ASSERT(pixelShaderFileName != nullptr);
+	LIME_ASSERT(geometryShaderFileName != nullptr);
+
 	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
 	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
@@ -356,11 +365,11 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 		Lime::StringToPath(vertexShaderFileName),
 		Lime::StringToPath(pixelShaderFileName),
 		Lime::StringToPath(geometryShaderFileName),
-		(scene::E_PRIMITIVE_TYPE)inType,
-		(scene::E_PRIMITIVE_TYPE)outType,
+		(scene::E_PRIMITIVE_TYPE) inType,
+		(scene::E_PRIMITIVE_TYPE) outType,
 		verticesOut,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData);
 
 	c->drop();
@@ -402,8 +411,11 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 	String^ geometryShaderFileName, String^ geometryShaderEntryPoint, GeometryShaderType gsCompileTarget, Scene::PrimitiveType inType,
 	Scene::PrimitiveType outType, unsigned int verticesOut, MaterialType baseMaterial, int userData, GPUShadingLanguage shadingLang)
 {
+	LIME_ASSERT(vertexShaderFileName != nullptr);
 	LIME_ASSERT(vertexShaderEntryPoint != nullptr);
+	LIME_ASSERT(pixelShaderFileName != nullptr);
 	LIME_ASSERT(pixelShaderEntryPoint != nullptr);
+	LIME_ASSERT(geometryShaderFileName != nullptr);
 	LIME_ASSERT(geometryShaderEntryPoint != nullptr);
 
 	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
@@ -412,21 +424,21 @@ MaterialType GPUProgrammingServices::AddHighLevelShaderMaterialFromFiles(String^
 
 	int o = m_GPUProgrammingServices->addHighLevelShaderMaterialFromFiles(
 		Lime::StringToPath(vertexShaderFileName),
-		Lime::StringToStringC(vertexShaderEntryPoint).c_str(),
-		(video::E_VERTEX_SHADER_TYPE)vsCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderEntryPoint),
+		(video::E_VERTEX_SHADER_TYPE) vsCompileTarget,
 		Lime::StringToPath(pixelShaderFileName),
-		Lime::StringToStringC(pixelShaderEntryPoint).c_str(),
-		(video::E_PIXEL_SHADER_TYPE)psCompileTarget,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderEntryPoint),
+		(video::E_PIXEL_SHADER_TYPE) psCompileTarget,
 		Lime::StringToPath(geometryShaderFileName),
-		Lime::StringToStringC(geometryShaderEntryPoint).c_str(),
-		(video::E_GEOMETRY_SHADER_TYPE)gsCompileTarget,
-		(scene::E_PRIMITIVE_TYPE)inType,
-		(scene::E_PRIMITIVE_TYPE)outType,
+		LIME_SAFESTRINGTOSTRINGC_C_STR(geometryShaderEntryPoint),
+		(video::E_GEOMETRY_SHADER_TYPE) gsCompileTarget,
+		(scene::E_PRIMITIVE_TYPE) inType,
+		(scene::E_PRIMITIVE_TYPE) outType,
 		verticesOut,
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData,
-		(video::E_GPU_SHADING_LANGUAGE)shadingLang);
+		(video::E_GPU_SHADING_LANGUAGE) shadingLang);
 
 	c->drop();
 
@@ -491,10 +503,10 @@ MaterialType GPUProgrammingServices::AddShaderMaterial(String^ vertexShaderProgr
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
 
 	int o = m_GPUProgrammingServices->addShaderMaterial(
-		Lime::StringToStringC(vertexShaderProgram).c_str(),
-		Lime::StringToStringC(pixelShaderProgram).c_str(),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(vertexShaderProgram),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(pixelShaderProgram),
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData);
 
 	c->drop();
@@ -519,6 +531,9 @@ MaterialType GPUProgrammingServices::AddShaderMaterial(String^ vertexShaderProgr
 
 MaterialType GPUProgrammingServices::AddShaderMaterialFromFiles(String^ vertexShaderFileName, String^ pixelShaderFileName, MaterialType baseMaterial, int userData)
 {
+	LIME_ASSERT(vertexShaderFileName != nullptr);
+	LIME_ASSERT(pixelShaderFileName != nullptr);
+
 	ShaderCallBackInheritor* c = new ShaderCallBackInheritor();
 	c->m_SetConstantsHandler = gcnew SetConstantsHandler(this, &GPUProgrammingServices::SetConstants);
 	c->m_SetMaterialHandler = gcnew SetMaterialHandler(this, &GPUProgrammingServices::SetMaterial);
@@ -527,7 +542,7 @@ MaterialType GPUProgrammingServices::AddShaderMaterialFromFiles(String^ vertexSh
 		Lime::StringToPath(vertexShaderFileName),
 		Lime::StringToPath(pixelShaderFileName),
 		c,
-		(video::E_MATERIAL_TYPE)baseMaterial,
+		(video::E_MATERIAL_TYPE) baseMaterial,
 		userData);
 
 	c->drop();

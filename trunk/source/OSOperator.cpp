@@ -30,7 +30,7 @@ String^ OSOperator::ClipboardText::get()
 
 void OSOperator::ClipboardText::set(String^ value)
 {
-	m_OSOperator->copyToClipboard(Lime::StringToStringC(value).c_str());
+	m_OSOperator->copyToClipboard(LIME_SAFESTRINGTOSTRINGC_C_STR(value));
 }
 
 String^ OSOperator::OSVersion::get()

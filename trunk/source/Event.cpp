@@ -162,8 +162,8 @@ Event::Event(String^ logText, LogLevel logLevel)
 	m_NativeValue = new SEvent();
 	m_NativeValue->EventType = EET_LOG_TEXT_EVENT;
 
-	m_NativeValue->LogEvent.Text = Lime::StringToStringC(logText).c_str();
-	m_NativeValue->LogEvent.Level = (ELOG_LEVEL)logLevel;
+	m_NativeValue->LogEvent.Text = LIME_SAFESTRINGTOSTRINGC_C_STR(logText);
+	m_NativeValue->LogEvent.Level = (ELOG_LEVEL) logLevel;
 }
 
 Event::Event(String^ logText)
@@ -172,7 +172,7 @@ Event::Event(String^ logText)
 	m_NativeValue = new SEvent();
 	m_NativeValue->EventType = EET_LOG_TEXT_EVENT;
 
-	m_NativeValue->LogEvent.Text = Lime::StringToStringC(logText).c_str();
+	m_NativeValue->LogEvent.Text = LIME_SAFESTRINGTOSTRINGC_C_STR(logText);
 	m_NativeValue->LogEvent.Level = ELL_NONE;
 }
 

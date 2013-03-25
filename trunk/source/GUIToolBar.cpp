@@ -30,8 +30,8 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text, String^ toolTipText, Vide
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(toolTipText).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(toolTipText),
 		LIME_SAFEREF(img, m_Texture),
 		LIME_SAFEREF(pressedImg, m_Texture),
 		isPushButton,
@@ -45,8 +45,8 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text, String^ toolTipText, Vide
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(toolTipText).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(toolTipText),
 		LIME_SAFEREF(img, m_Texture),
 		LIME_SAFEREF(pressedImg, m_Texture),
 		isPushButton);
@@ -58,8 +58,8 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text, String^ toolTipText, Vide
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(toolTipText).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(toolTipText),
 		LIME_SAFEREF(img, m_Texture),
 		LIME_SAFEREF(pressedImg, m_Texture));
 
@@ -70,8 +70,8 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text, String^ toolTipText, Vide
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(toolTipText).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(toolTipText),
 		LIME_SAFEREF(img, m_Texture));
 
 	return GUIButton::Wrap(b);
@@ -81,8 +81,8 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text, String^ toolTipText)
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(toolTipText).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(toolTipText));
 
 	return GUIButton::Wrap(b);
 }
@@ -91,7 +91,7 @@ GUIButton^ GUIToolBar::AddButton(int id, String^ text)
 {
 	gui::IGUIButton* b = m_GUIToolBar->addButton(
 		id,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIButton::Wrap(b);
 }

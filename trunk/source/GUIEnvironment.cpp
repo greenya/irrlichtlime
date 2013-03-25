@@ -64,8 +64,8 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(tooltiptext).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(tooltiptext));
 
 	return GUIButton::Wrap(b);
 }
@@ -78,7 +78,7 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIButton::Wrap(b);
 }
@@ -125,7 +125,7 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUICheckBox::Wrap(c);
 }
@@ -139,7 +139,7 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		-1,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUICheckBox::Wrap(c);
 }
@@ -153,7 +153,7 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 		*rectangle->m_NativeValue,
 		nullptr,
 		-1,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUICheckBox::Wrap(c);
 }
@@ -172,7 +172,7 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle)
 GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent, int id)
 {
 	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
@@ -183,7 +183,7 @@ GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool m
 GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent)
 {
 	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement));
 
@@ -193,7 +193,7 @@ GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool m
 GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool modal)
 {
 	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal);
 
 	return GUIColorSelectDialog::Wrap(d);
@@ -202,7 +202,7 @@ GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title, bool m
 GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog(String^ title)
 {
 	gui::IGUIColorSelectDialog* d = m_GUIEnvironment->addColorSelectDialog(
-		Lime::StringToStringW(title).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title));
 
 	return GUIColorSelectDialog::Wrap(d);
 }
@@ -284,7 +284,7 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -298,7 +298,7 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement));
@@ -311,7 +311,7 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border);
 
@@ -323,7 +323,7 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle)
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue);
 
 	return GUIEditBox::Wrap(b);
@@ -338,12 +338,12 @@ GUISpriteBank^ GUIEnvironment::AddEmptySpriteBank(String^ name)
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir, String^ startDir)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		restoreCurrentWorkingDir,
-		(wchar_t*)Lime::StringToStringW(startDir).c_str()); // !!! cast to non-const
+		(wchar_t*) LIME_SAFESTRINGTOSTRINGW_C_STR(startDir)); // !!! cast to non-const
 
 	return GUIFileOpenDialog::Wrap(f);
 }
@@ -351,7 +351,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, 
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id, bool restoreCurrentWorkingDir)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
@@ -363,7 +363,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, 
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent, int id)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
@@ -374,7 +374,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, 
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, GUIElement^ parent)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal,
 		LIME_SAFEREF(parent, m_GUIElement));
 
@@ -384,7 +384,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal, 
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title),
 		modal);
 
 	return GUIFileOpenDialog::Wrap(f);
@@ -393,7 +393,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title, bool modal)
 GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog(String^ title)
 {
 	gui::IGUIFileOpenDialog* f = m_GUIEnvironment->addFileOpenDialog(
-		Lime::StringToStringW(title).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(title));
 
 	return GUIFileOpenDialog::Wrap(f);
 }
@@ -406,6 +406,7 @@ GUIFileOpenDialog^ GUIEnvironment::AddFileOpenDialog()
 
 GUIFont^ GUIEnvironment::AddFont(String^ name, GUIFont^ font)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(font != nullptr);
 
 	gui::IGUIFont* f = m_GUIEnvironment->addFont(
@@ -418,7 +419,7 @@ GUIFont^ GUIEnvironment::AddFont(String^ name, GUIFont^ font)
 GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName, GUIElement^ parent)
 {
 	gui::IGUIElement* e = m_GUIEnvironment->addGUIElement(
-		Lime::StringToStringC(elementName).c_str(),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(elementName),
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIElement::Wrap(e);
@@ -427,7 +428,7 @@ GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName, GUIElement^ paren
 GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName)
 {
 	gui::IGUIElement* e = m_GUIEnvironment->addGUIElement(
-		Lime::StringToStringC(elementName).c_str());
+		LIME_SAFESTRINGTOSTRINGC_C_STR(elementName));
 
 	return GUIElement::Wrap(e);
 }
@@ -440,7 +441,7 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIEl
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		useAlphaChannel);
 
 	return GUIImage::Wrap(i);
@@ -506,7 +507,7 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 		useAlphaChannel,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIImage::Wrap(i);
 }
@@ -675,7 +676,7 @@ GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ paren
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIMeshViewer::Wrap(v);
 }
@@ -714,8 +715,8 @@ GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle)
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		modal,
 		(gui::EMESSAGE_BOX_FLAG)flags,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -728,8 +729,8 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool mod
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		modal,
 		(gui::EMESSAGE_BOX_FLAG)flags,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -741,8 +742,8 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool mod
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		modal,
 		(gui::EMESSAGE_BOX_FLAG)flags,
 		LIME_SAFEREF(parent, m_GUIElement));
@@ -753,8 +754,8 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool mod
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		modal,
 		(gui::EMESSAGE_BOX_FLAG)flags);
 
@@ -764,8 +765,8 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool mod
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool modal)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		modal);
 
 	return GUIWindow::Wrap(w);
@@ -774,8 +775,8 @@ GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text, bool mod
 GUIWindow^ GUIEnvironment::AddMessageBox(String^ caption, String^ text)
 {
 	gui::IGUIWindow* w = m_GUIEnvironment->addMessageBox(
-		Lime::StringToStringW(caption).c_str(),
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(caption),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIWindow::Wrap(w);
 }
@@ -827,7 +828,7 @@ GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -841,7 +842,7 @@ GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement));
@@ -854,7 +855,7 @@ GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool bord
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border);
 
@@ -866,7 +867,7 @@ GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle)
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue);
 
 	return GUISpinBox::Wrap(b);
@@ -878,7 +879,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
@@ -895,7 +896,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
@@ -910,7 +911,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap,
@@ -924,7 +925,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border,
 		wordWrap);
@@ -937,7 +938,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue,
 		border);
 
@@ -949,7 +950,7 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*rectangle->m_NativeValue);
 
 	return GUIStaticText::Wrap(t);
@@ -1177,7 +1178,7 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text,
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
 		*rectangle->m_NativeValue,
 		modal,
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
@@ -1191,7 +1192,7 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text,
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
 		*rectangle->m_NativeValue,
 		modal,
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIWindow::Wrap(w);
@@ -1204,7 +1205,7 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text)
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
 		*rectangle->m_NativeValue,
 		modal,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIWindow::Wrap(w);
 }
@@ -1280,12 +1281,16 @@ bool GUIEnvironment::Focused(GUIElement^ element)
 
 GUIFont^ GUIEnvironment::GetFont(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	gui::IGUIFont* f = m_GUIEnvironment->getFont(Lime::StringToPath(filename));
 	return GUIFont::Wrap(f);
 }
 
 GUISpriteBank^ GUIEnvironment::GetSpriteBank(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	gui::IGUISpriteBank* b = m_GUIEnvironment->getSpriteBank(Lime::StringToPath(filename));
 	return GUISpriteBank::Wrap(b);
 }
@@ -1302,7 +1307,9 @@ bool GUIEnvironment::LoadGUI(String^ filename, GUIElement^ parent)
 bool GUIEnvironment::LoadGUI(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
-	return m_GUIEnvironment->loadGUI(Lime::StringToPath(filename));
+
+	return m_GUIEnvironment->loadGUI(
+		Lime::StringToPath(filename));
 }
 
 bool GUIEnvironment::LoadGUI(IO::ReadFile^ file, GUIElement^ parent)
@@ -1350,7 +1357,9 @@ bool GUIEnvironment::SaveGUI(String^ filename, GUIElement^ start)
 bool GUIEnvironment::SaveGUI(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
-	return m_GUIEnvironment->saveGUI(Lime::StringToPath(filename));
+
+	return m_GUIEnvironment->saveGUI(
+		Lime::StringToPath(filename));
 }
 
 bool GUIEnvironment::SaveGUI(IO::WriteFile^ file, GUIElement^ start)

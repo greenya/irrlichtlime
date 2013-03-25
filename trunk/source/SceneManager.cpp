@@ -156,6 +156,7 @@ AnimatedMeshSceneNode^ SceneManager::AddAnimatedMeshSceneNode(AnimatedMesh^ mesh
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal, float heightCylinder, float diameterCylinder, float diameterCone)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 	LIME_ASSERT(tesselationCylinder > 0);
@@ -180,6 +181,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal, float heightCylinder)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 	LIME_ASSERT(tesselationCylinder > 0);
@@ -201,6 +203,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone, float heightTotal)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 	LIME_ASSERT(tesselationCylinder > 0);
@@ -221,6 +224,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder,
 	int tesselationCone)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 	LIME_ASSERT(tesselationCylinder > 0);
@@ -238,6 +242,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone, int tesselationCylinder)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 	LIME_ASSERT(tesselationCylinder > 0);
@@ -253,6 +258,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder, Video::Color^ vtxColorCone)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 	LIME_ASSERT(vtxColorCone != nullptr);
 
@@ -266,6 +272,7 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCylinder)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(vtxColorCylinder != nullptr);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(
@@ -277,6 +284,8 @@ AnimatedMesh^ SceneManager::AddArrowMesh(String^ name, Video::Color^ vtxColorCyl
 
 AnimatedMesh^ SceneManager::AddArrowMesh(String^ name)
 {
+	LIME_ASSERT(name != nullptr);
+
 	scene::IAnimatedMesh* m = m_SceneManager->addArrowMesh(Lime::StringToPath(name));
 	return AnimatedMesh::Wrap(m);
 }
@@ -379,7 +388,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_SceneNode),
 		*size->m_NativeValue,
 		*position->m_NativeValue,
@@ -398,7 +407,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_SceneNode),
 		*size->m_NativeValue,
 		*position->m_NativeValue,
@@ -415,7 +424,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_SceneNode),
 		*size->m_NativeValue,
 		*position->m_NativeValue);
@@ -429,7 +438,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_SceneNode),
 		*size->m_NativeValue);
 
@@ -440,7 +449,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 {
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_SceneNode));
 
 	return BillboardTextSceneNode::Wrap(n);
@@ -450,7 +459,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text, GU
 {
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return BillboardTextSceneNode::Wrap(n);
 }
@@ -459,7 +468,7 @@ BillboardTextSceneNode^ SceneManager::AddBillboardTextSceneNode(String^ text)
 {
 	scene::IBillboardTextSceneNode* n = m_SceneManager->addBillboardTextSceneNode(
 		nullptr,
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return BillboardTextSceneNode::Wrap(n);
 }
@@ -896,6 +905,7 @@ void SceneManager::AddExternalSceneLoader(SceneLoader^ externalLoader)
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
 	LIME_ASSERT(tileCount->Width >= 0);
@@ -918,6 +928,7 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight, Dimension2Df^ countHills)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
 	LIME_ASSERT(tileCount->Width >= 0);
@@ -938,6 +949,7 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material,
 	float hillHeight)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
 	LIME_ASSERT(tileCount->Width >= 0);
@@ -955,6 +967,7 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
 	LIME_ASSERT(tileCount->Width >= 0);
@@ -971,6 +984,7 @@ AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSiz
 
 AnimatedMesh^ SceneManager::AddHillPlaneMesh(String^ name, Dimension2Df^ tileSize, Dimension2Di^ tileCount)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(tileSize != nullptr);
 	LIME_ASSERT(tileCount != nullptr);
 	LIME_ASSERT(tileCount->Width >= 0);
@@ -1271,7 +1285,7 @@ ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode()
 SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName, SceneNode^ parent)
 {
 	scene::ISceneNode* n = m_SceneManager->addSceneNode(
-		Lime::StringToStringC(sceneNodeTypeName).c_str(),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(sceneNodeTypeName),
 		LIME_SAFEREF(parent, m_SceneNode));
 
 	return SceneNode::Wrap(n);
@@ -1280,7 +1294,7 @@ SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName, SceneNode^ pare
 SceneNode^ SceneManager::AddSceneNode(String^ sceneNodeTypeName)
 {
 	scene::ISceneNode* n = m_SceneManager->addSceneNode(
-		Lime::StringToStringC(sceneNodeTypeName).c_str());
+		LIME_SAFESTRINGTOSTRINGC_C_STR(sceneNodeTypeName));
 
 	return SceneNode::Wrap(n);
 }
@@ -1333,6 +1347,13 @@ SceneNode^ SceneManager::AddSkyBoxSceneNode(Video::Texture^ topTexture, Video::T
 SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
 	String^ backFile, SceneNode^ parent, int id)
 {
+	LIME_ASSERT(topFile != nullptr);
+	LIME_ASSERT(bottomFile != nullptr);
+	LIME_ASSERT(leftFile != nullptr);
+	LIME_ASSERT(rightFile != nullptr);
+	LIME_ASSERT(frontFile != nullptr);
+	LIME_ASSERT(backFile != nullptr);
+
 	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
 	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
 	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
@@ -1351,6 +1372,13 @@ SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile,
 SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
 	String^ backFile, SceneNode^ parent)
 {
+	LIME_ASSERT(topFile != nullptr);
+	LIME_ASSERT(bottomFile != nullptr);
+	LIME_ASSERT(leftFile != nullptr);
+	LIME_ASSERT(rightFile != nullptr);
+	LIME_ASSERT(frontFile != nullptr);
+	LIME_ASSERT(backFile != nullptr);
+
 	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
 	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
 	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
@@ -1368,6 +1396,13 @@ SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile,
 SceneNode^ SceneManager::AddSkyBoxSceneNode(String^ topFile, String^ bottomFile, String^ leftFile, String^ rightFile, String^ frontFile,
 	String^ backFile)
 {
+	LIME_ASSERT(topFile != nullptr);
+	LIME_ASSERT(bottomFile != nullptr);
+	LIME_ASSERT(leftFile != nullptr);
+	LIME_ASSERT(rightFile != nullptr);
+	LIME_ASSERT(frontFile != nullptr);
+	LIME_ASSERT(backFile != nullptr);
+
 	video::ITexture* t = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(topFile));
 	video::ITexture* b = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(bottomFile));
 	video::ITexture* l = m_SceneManager->getVideoDriver()->getTexture(Lime::StringToPath(leftFile));
@@ -1478,6 +1513,7 @@ SceneNode^ SceneManager::AddSkyDomeSceneNode(Video::Texture^ texture)
 
 AnimatedMesh^ SceneManager::AddSphereMesh(String^ name, float radius, int polyCountX, int polyCountY)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(polyCountX > 0);
 	LIME_ASSERT(polyCountY > 0);
@@ -1493,6 +1529,7 @@ AnimatedMesh^ SceneManager::AddSphereMesh(String^ name, float radius, int polyCo
 
 AnimatedMesh^ SceneManager::AddSphereMesh(String^ name, float radius)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(radius > 0.0f);
 
 	scene::IAnimatedMesh* m = m_SceneManager->addSphereMesh(
@@ -1504,6 +1541,8 @@ AnimatedMesh^ SceneManager::AddSphereMesh(String^ name, float radius)
 
 AnimatedMesh^ SceneManager::AddSphereMesh(String^ name)
 {
+	LIME_ASSERT(name != nullptr);
+
 	scene::IAnimatedMesh* m = m_SceneManager->addSphereMesh(Lime::StringToPath(name));
 	return AnimatedMesh::Wrap(m);
 }
@@ -1610,6 +1649,7 @@ MeshSceneNode^ SceneManager::AddSphereSceneNode()
 AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize,
 	float maxHeight, Dimension2Di^ defaultVertexBlockSize)
 {
+	LIME_ASSERT(meshname != nullptr);
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(heightmap != nullptr);
 	LIME_ASSERT(stretchSize != nullptr);
@@ -1631,6 +1671,7 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize,
 	float maxHeight)
 {
+	LIME_ASSERT(meshname != nullptr);
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(heightmap != nullptr);
 	LIME_ASSERT(stretchSize != nullptr);
@@ -1647,6 +1688,7 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 
 AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap, Dimension2Df^ stretchSize)
 {
+	LIME_ASSERT(meshname != nullptr);
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(heightmap != nullptr);
 	LIME_ASSERT(stretchSize != nullptr);
@@ -1662,6 +1704,7 @@ AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ textu
 
 AnimatedMesh^ SceneManager::AddTerrainMesh(String^ meshname, Video::Image^ texture, Video::Image^ heightmap)
 {
+	LIME_ASSERT(meshname != nullptr);
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(heightmap != nullptr);
 
@@ -1677,6 +1720,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor,
 	bool addAlsoIfHeightmapEmpty)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1704,6 +1748,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize, int smoothFactor)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1730,6 +1775,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD, TerrainPatchSize patchSize)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1754,6 +1800,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor, int maxLOD)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1777,6 +1824,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation, Vector3Df^ scale, Video::Color^ vertexColor)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1797,6 +1845,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation, Vector3Df^ scale)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 	LIME_ASSERT(scale != nullptr);
@@ -1815,6 +1864,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position,
 	Vector3Df^ rotation)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(rotation != nullptr);
 
@@ -1830,6 +1880,7 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id, Vector3Df^ position)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
 	LIME_ASSERT(position != nullptr);
 
 	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
@@ -1843,6 +1894,8 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent, int id)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
+
 	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
 		Lime::StringToPath(heightMapFileName),
 		LIME_SAFEREF(parent, m_SceneNode),
@@ -1853,6 +1906,8 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, SceneNode^ parent)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
+
 	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
 		Lime::StringToPath(heightMapFileName),
 		LIME_SAFEREF(parent, m_SceneNode));
@@ -1862,6 +1917,8 @@ TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName, S
 
 TerrainSceneNode^ SceneManager::AddTerrainSceneNode(String^ heightMapFileName)
 {
+	LIME_ASSERT(heightMapFileName != nullptr);
+
 	scene::ITerrainSceneNode* n = m_SceneManager->addTerrainSceneNode(
 		Lime::StringToPath(heightMapFileName));
 
@@ -2070,7 +2127,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 
 	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*color->m_NativeValue,
 		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue,
@@ -2086,7 +2143,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 
 	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*color->m_NativeValue,
 		LIME_SAFEREF(parent, m_SceneNode),
 		*position->m_NativeValue);
@@ -2100,7 +2157,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 
 	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*color->m_NativeValue,
 		LIME_SAFEREF(parent, m_SceneNode));
 
@@ -2113,7 +2170,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text, 
 
 	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		*color->m_NativeValue);
 
 	return TextSceneNode::Wrap(n);
@@ -2123,7 +2180,7 @@ TextSceneNode^ SceneManager::AddTextSceneNode(GUI::GUIFont^ font, String^ text)
 {
 	scene::ITextSceneNode* n = m_SceneManager->addTextSceneNode(
 		LIME_SAFEREF(font, m_GUIFont),
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return TextSceneNode::Wrap(n);
 }
@@ -2135,6 +2192,7 @@ void SceneManager::AddToDeletionQueue(SceneNode^ node)
 
 AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor, Video::Color^ tailColor)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
 	LIME_ASSERT(footColor != nullptr);
@@ -2152,6 +2210,7 @@ AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int su
 
 AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV, Video::Color^ footColor)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
 	LIME_ASSERT(footColor != nullptr);
@@ -2167,6 +2226,7 @@ AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int su
 
 AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int subdivV)
 {
+	LIME_ASSERT(name != nullptr);
 	LIME_ASSERT(subdivU > 0);
 	LIME_ASSERT(subdivV > 0);
 
@@ -2180,6 +2240,8 @@ AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name, int subdivU, int su
 
 AnimatedMesh^ SceneManager::AddVolumeLightMesh(String^ name)
 {
+	LIME_ASSERT(name != nullptr);
+
 	scene::IAnimatedMesh* m = m_SceneManager->addVolumeLightMesh(Lime::StringToPath(name));
 	return AnimatedMesh::Wrap(m);
 }
@@ -2798,7 +2860,7 @@ SceneNodeAnimator^ SceneManager::CreateSceneNodeAnimator(String^ typeName, Scene
 	LIME_ASSERT(typeName != nullptr);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createSceneNodeAnimator(
-		Lime::StringToStringC(typeName).c_str(),
+		LIME_SAFESTRINGTOSTRINGC_C_STR(typeName),
 		LIME_SAFEREF(targetNode, m_SceneNode));
 
 	return SceneNodeAnimator::Wrap(a);
@@ -2809,7 +2871,7 @@ SceneNodeAnimator^ SceneManager::CreateSceneNodeAnimator(String^ typeName)
 	LIME_ASSERT(typeName != nullptr);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createSceneNodeAnimator(
-		Lime::StringToStringC(typeName).c_str());
+		LIME_SAFESTRINGTOSTRINGC_C_STR(typeName));
 
 	return SceneNodeAnimator::Wrap(a);
 }
@@ -2915,6 +2977,8 @@ String^ SceneManager::GetAnimatorTypeName(SceneNodeAnimatorType type)
 
 AnimatedMesh^ SceneManager::GetMesh(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
+
 	scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToPath(filename));
 	return AnimatedMesh::Wrap(m);
 }
@@ -2957,13 +3021,18 @@ SceneNode^ SceneManager::GetSceneNodeFromID(int id)
 
 SceneNode^ SceneManager::GetSceneNodeFromName(String^ name, SceneNode^ start)
 {
-	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(Lime::StringToStringC(name).c_str(), LIME_SAFEREF(start, m_SceneNode));
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(
+		LIME_SAFESTRINGTOSTRINGC_C_STR(name),
+		LIME_SAFEREF(start, m_SceneNode));
+
 	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneManager::GetSceneNodeFromName(String^ name)
 {
-	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(Lime::StringToStringC(name).c_str());
+	scene::ISceneNode* n = m_SceneManager->getSceneNodeFromName(
+		LIME_SAFESTRINGTOSTRINGC_C_STR(name));
+
 	return SceneNode::Wrap(n);
 }
 

@@ -25,7 +25,7 @@ BillboardTextSceneNode::BillboardTextSceneNode(scene::IBillboardTextSceneNode* r
 
 void BillboardTextSceneNode::SetText(String^ text)
 {
-	m_BillboardTextSceneNode->setText(Lime::StringToStringW(text).c_str());
+	m_BillboardTextSceneNode->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
 void BillboardTextSceneNode::SetTextColor(Video::Color^ color)

@@ -26,6 +26,7 @@ GUIFont::GUIFont(gui::IGUIFont* ref)
 
 void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter, Recti^ clip)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
@@ -41,6 +42,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcen
 
 void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
 
@@ -54,6 +56,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcen
 
 void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
 
@@ -66,6 +69,7 @@ void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcen
 
 void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color, Recti^ clip)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
@@ -81,6 +85,7 @@ void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color, Recti
 
 void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(color != nullptr);
 
@@ -92,6 +97,7 @@ void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color)
 
 void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color, Recti^ clip)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 
@@ -106,6 +112,7 @@ void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color, Recti^ clip)
 
 void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color)
 {
+	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(color != nullptr);
 
 	m_GUIFont->draw(
@@ -116,12 +123,12 @@ void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color)
 
 int GUIFont::GetCharacterFromPos(String^ text, int pixel_x)
 {
-	return m_GUIFont->getCharacterFromPos(Lime::StringToStringW(text).c_str(), pixel_x);
+	return m_GUIFont->getCharacterFromPos(LIME_SAFESTRINGTOSTRINGW_C_STR(text), pixel_x);
 }
 
 Dimension2Di^ GUIFont::GetDimension(String^ text)
 {
-	return gcnew Dimension2Di(m_GUIFont->getDimension(Lime::StringToStringW(text).c_str()));
+	return gcnew Dimension2Di(m_GUIFont->getDimension(LIME_SAFESTRINGTOSTRINGW_C_STR(text)));
 }
 
 int GUIFont::GetKerningWidth(Char thisLetter, Char previousLetter)
@@ -136,7 +143,7 @@ int GUIFont::GetKerningWidth(Char thisLetter)
 
 void GUIFont::SetInvisibleCharacters(String^ s)
 {
-	m_GUIFont->setInvisibleCharacters(Lime::StringToStringW(s).c_str());
+	m_GUIFont->setInvisibleCharacters(LIME_SAFESTRINGTOSTRINGW_C_STR(s));
 }
 
 int GUIFont::KerningHeight::get()

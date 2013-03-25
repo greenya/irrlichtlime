@@ -40,6 +40,7 @@ void FileSystem::AddArchiveLoader(ArchiveLoader^ loader)
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive)
 {
 	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(password != nullptr);
 
 	io::IFileArchive* a;
 
@@ -47,7 +48,7 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 		Lime::StringToPath(filename),
 		ignoreCase,
 		ignorePaths,
-		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		(io::E_FILE_ARCHIVE_TYPE) archiveType,
 		Lime::StringToStringC(password),
 		&a);
 
@@ -60,12 +61,13 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
 {
 	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(password != nullptr);
 
 	return m_FileSystem->addFileArchive(
 		Lime::StringToPath(filename),
 		ignoreCase,
 		ignorePaths,
-		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		(io::E_FILE_ARCHIVE_TYPE) archiveType,
 		Lime::StringToStringC(password));
 }
 
@@ -77,7 +79,7 @@ bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePa
 		Lime::StringToPath(filename),
 		ignoreCase,
 		ignorePaths,
-		(io::E_FILE_ARCHIVE_TYPE)archiveType);
+		(io::E_FILE_ARCHIVE_TYPE) archiveType);
 }
 
 bool FileSystem::AddFileArchive(String^ filename, bool ignoreCase, bool ignorePaths)
@@ -110,6 +112,7 @@ bool FileSystem::AddFileArchive(String^ filename)
 bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password, [Out] FileArchive^% addedArchive)
 {
 	LIME_ASSERT(file != nullptr);
+	LIME_ASSERT(password != nullptr);
 
 	io::IFileArchive* a;
 
@@ -117,7 +120,7 @@ bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePath
 		file->m_ReadFile,
 		ignoreCase,
 		ignorePaths,
-		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		(io::E_FILE_ARCHIVE_TYPE) archiveType,
 		Lime::StringToStringC(password),
 		&a);
 
@@ -130,12 +133,13 @@ bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePath
 bool FileSystem::AddFileArchive(ReadFile^ file, bool ignoreCase, bool ignorePaths, FileArchiveType archiveType, String^ password)
 {
 	LIME_ASSERT(file != nullptr);
+	LIME_ASSERT(password != nullptr);
 
 	return m_FileSystem->addFileArchive(
 		file->m_ReadFile,
 		ignoreCase,
 		ignorePaths,
-		(io::E_FILE_ARCHIVE_TYPE)archiveType,
+		(io::E_FILE_ARCHIVE_TYPE) archiveType,
 		Lime::StringToStringC(password));
 }
 
@@ -333,12 +337,13 @@ String^ FileSystem::GetFileDirectory(String^ filename)
 
 String^ FileSystem::GetRelativeFilename(String^ filename, String^ directory)
 {
+	LIME_ASSERT(filename != nullptr);
+	LIME_ASSERT(directory != nullptr);
+
 	return gcnew String(
 		m_FileSystem->getRelativeFilename(
 			Lime::StringToPath(filename),
-			Lime::StringToPath(directory)
-		).c_str()
-	);
+			Lime::StringToPath(directory)).c_str());
 }
 
 bool FileSystem::MoveFileArchive(int index, int relative)
