@@ -26,12 +26,12 @@ GUITable::GUITable(gui::IGUITable* ref)
 void GUITable::AddColumn(String^ caption, int columnIndex)
 {
 	LIME_ASSERT(columnIndex >= -1); // -1 is valid here
-	m_GUITable->addColumn(Lime::StringToStringW(caption).c_str(), columnIndex);
+	m_GUITable->addColumn(LIME_SAFESTRINGTOSTRINGW_C_STR(caption), columnIndex);
 }
 
 void GUITable::AddColumn(String^ caption)
 {
-	m_GUITable->addColumn(Lime::StringToStringW(caption).c_str());
+	m_GUITable->addColumn(LIME_SAFESTRINGTOSTRINGW_C_STR(caption));
 }
 
 int GUITable::AddRow(int rowIndex)
@@ -128,6 +128,7 @@ void GUITable::SetCellText(int rowIndex, int columnIndex, String^ text)
 {
 	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
 	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+	LIME_ASSERT(text != nullptr);
 
 	m_GUITable->setCellText(
 		rowIndex,

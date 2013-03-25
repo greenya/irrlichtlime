@@ -15,7 +15,9 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #define LIME_ASSERT2(condition, details) ;
 #endif
 
-#define LIME_SAFEREF(object, member) (object == nullptr ? nullptr : object->member)
+#define LIME_SAFEREF(object, member) ((object) == nullptr ? nullptr : (object)->member)
+#define LIME_SAFESTRINGTOSTRINGC_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringC(string).c_str())
+#define LIME_SAFESTRINGTOSTRINGW_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringW(string).c_str())
 
 namespace IrrlichtLime {
 
@@ -83,8 +85,7 @@ internal:
 
 	static core::stringc StringToStringC(String^ s)
 	{
-		if (s == nullptr)
-			return core::stringc();
+		LIME_ASSERT(s != nullptr);
 
 		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
 		core::stringc strC = core::stringc(c);
@@ -95,8 +96,7 @@ internal:
 
 	static core::stringw StringToStringW(String^ s)
 	{
-		if (s == nullptr)
-			return core::stringw();
+		LIME_ASSERT(s != nullptr);
 
 		wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
 		core::stringw strW = core::stringw(w);

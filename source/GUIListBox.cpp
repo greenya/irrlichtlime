@@ -26,12 +26,12 @@ GUIListBox::GUIListBox(gui::IGUIListBox* ref)
 
 int GUIListBox::AddItem(String^ text, int icon)
 {
-	return m_GUIListBox->addItem(Lime::StringToStringW(text).c_str(), icon);
+	return m_GUIListBox->addItem(LIME_SAFESTRINGTOSTRINGW_C_STR(text), icon);
 }
 
 int GUIListBox::AddItem(String^ text)
 {
-	return m_GUIListBox->addItem(Lime::StringToStringW(text).c_str());
+	return m_GUIListBox->addItem(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
 void GUIListBox::ClearItemColor(int index, GUIListBoxColor colorType)
@@ -82,13 +82,13 @@ int GUIListBox::GetItemIcon(int index)
 int GUIListBox::InsertItem(int index, String^ text, int icon)
 {
 	LIME_ASSERT(index >= 0);
-	return m_GUIListBox->insertItem(index, Lime::StringToStringW(text).c_str(), icon);
+	return m_GUIListBox->insertItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), icon);
 }
 
 int GUIListBox::InsertItem(int index, String^ text)
 {
 	LIME_ASSERT(index >= 0);
-	return m_GUIListBox->insertItem(index, Lime::StringToStringW(text).c_str(), -1);
+	return m_GUIListBox->insertItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), -1);
 }
 
 bool GUIListBox::ItemColorOverrided(int index, GUIListBoxColor colorType)
@@ -111,13 +111,13 @@ void GUIListBox::SetDrawBackground(bool draw)
 void GUIListBox::SetItem(int index, String^ text, int icon)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
-	m_GUIListBox->setItem(index, Lime::StringToStringW(text).c_str(), icon);
+	m_GUIListBox->setItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), icon);
 }
 
 void GUIListBox::SetItem(int index, String^ text)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
-	m_GUIListBox->setItem(index, Lime::StringToStringW(text).c_str(), -1);
+	m_GUIListBox->setItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), -1);
 }
 
 void GUIListBox::SetItemColor(int index, GUIListBoxColor colorType, Video::Color^ color)
@@ -188,7 +188,7 @@ void GUIListBox::SelectedItem::set(String^ value)
 	if (value == nullptr)
 		m_GUIListBox->setSelected(nullptr);
 
-	m_GUIListBox->setSelected(Lime::StringToStringW(value).c_str());
+	m_GUIListBox->setSelected(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
 } // end namespace GUI

@@ -390,7 +390,7 @@ void GUISkin::SetColor(Video::Color^ newColor, GUIDefaultColor which)
 
 void GUISkin::SetText(String^ newText, GUIDefaultText which)
 {
-	m_GUISkin->setDefaultText((gui::EGUI_DEFAULT_TEXT)which, Lime::StringToStringW(newText).c_str());
+	m_GUISkin->setDefaultText((gui::EGUI_DEFAULT_TEXT)which, LIME_SAFESTRINGTOSTRINGW_C_STR(newText));
 }
 
 void GUISkin::SetFont(GUIFont^ font, GUIDefaultFont which)

@@ -21,6 +21,7 @@ public:
 	NamedPath(String^ path)
 		: Lime::NativeValue<io::SNamedPath>(true)
 	{
+		LIME_ASSERT(path != nullptr);
 		m_NativeValue = new io::SNamedPath(Lime::StringToPath(path));
 	}
 
@@ -41,6 +42,7 @@ public:
 
 		void set(String^ value)
 		{
+			LIME_ASSERT(value != nullptr);
 			m_NativeValue->setPath(Lime::StringToPath(value));
 		}
 	}

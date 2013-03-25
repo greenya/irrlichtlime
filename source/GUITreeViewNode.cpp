@@ -31,8 +31,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon, int i
 	LIME_ASSERT(selectedImageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildBack(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
 		(void*)data);
@@ -46,8 +46,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon, int i
 	LIME_ASSERT(selectedImageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildBack(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex);
 
@@ -59,8 +59,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon, int i
 	LIME_ASSERT(imageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildBack(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex);
 
 	return GUITreeViewNode::Wrap(n);
@@ -69,8 +69,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon, int i
 GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon)
 {
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildBack(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -78,7 +78,7 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon)
 GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text)
 {
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildBack(
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -89,8 +89,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon, int 
 	LIME_ASSERT(selectedImageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildFront(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
 		(void*)data);
@@ -104,8 +104,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon, int 
 	LIME_ASSERT(selectedImageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildFront(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex);
 
@@ -117,8 +117,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon, int 
 	LIME_ASSERT(imageIndex >= -1);
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildFront(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex);
 
 	return GUITreeViewNode::Wrap(n);
@@ -127,8 +127,8 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon, int 
 GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon)
 {
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildFront(
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -136,7 +136,7 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon)
 GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text)
 {
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->addChildFront(
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -150,8 +150,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildAfter(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
 		(void*)data);
@@ -168,8 +168,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildAfter(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex);
 
@@ -184,8 +184,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildAfter(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex);
 
 	return GUITreeViewNode::Wrap(n);
@@ -198,8 +198,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildAfter(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -211,7 +211,7 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildAfter(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -225,8 +225,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildBefore(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
 		(void*)data);
@@ -243,8 +243,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildBefore(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex);
 
@@ -259,8 +259,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildBefore(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str(),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex);
 
 	return GUITreeViewNode::Wrap(n);
@@ -273,8 +273,8 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildBefore(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str(),
-		Lime::StringToStringW(icon).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		LIME_SAFESTRINGTOSTRINGW_C_STR(icon));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -286,7 +286,7 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 
 	gui::IGUITreeViewNode* n = m_GUITreeViewNode->insertChildBefore(
 		LIME_SAFEREF(other, m_GUITreeViewNode),
-		Lime::StringToStringW(text).c_str());
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -363,7 +363,7 @@ String^ GUITreeViewNode::Icon::get()
 
 void GUITreeViewNode::Icon::set(String^ value)
 {
-	m_GUITreeViewNode->setIcon(Lime::StringToStringW(value).c_str());
+	m_GUITreeViewNode->setIcon(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
 int GUITreeViewNode::ImageIndex::get()
@@ -445,7 +445,7 @@ String^ GUITreeViewNode::Text::get()
 
 void GUITreeViewNode::Text::set(String^ value)
 {
-	m_GUITreeViewNode->setText(Lime::StringToStringW(value).c_str());
+	m_GUITreeViewNode->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
 GUITreeView^ GUITreeViewNode::TreeView::get()

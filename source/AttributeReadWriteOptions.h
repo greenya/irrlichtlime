@@ -13,11 +13,11 @@ namespace IO {
 //	void AttributeReadWriteOptions::Filename::set(String^ value)
 //	{
 //		// !!! i don't like it! Filename is not stringc but only c8* !!!
-//		// !!! returned stringc by Lime::StringToStringC() going to be destroyed after this method ends !!!
+//		// !!! returned stringc by LIME_SAFESTRINGTOSTRINGC_C_STR() going to be destroyed after this method ends !!!
 //		// TODO: maybe remove this method or even all the AttributeReadWriteOptions class, its used only in de/serialization
 //		// and the pointer only required on this class, so maybe design own class and use it, and only when needed create internal
 //		// io::SAttributeReadWriteOptions and pass to Irrlicht? Maybe!
-//		m_NativeValue->Filename = Lime::StringToStringC(value).c_str();
+//		m_NativeValue->Filename = LIME_SAFESTRINGTOSTRINGC_C_STR(value);
 //	}
 //
 // So i decided to don't hesitate and i used ordinary managed struct-like class, because every usage of

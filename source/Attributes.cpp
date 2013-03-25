@@ -70,7 +70,7 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 		return;
 
 	case AttributeType::String:
-		m_Attributes->addString(n.c_str(), Lime::StringToStringW((String^)value).c_str());
+		m_Attributes->addString(n.c_str(), LIME_SAFESTRINGTOSTRINGW_C_STR((String^)value));
 		return;
 
 	case AttributeType::Bool:
@@ -172,7 +172,10 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 
 			core::array<core::stringw> a;
 			for (int i = 0; i < m->Length; i++)
+			{
+				LIME_ASSERT(m[i] != nullptr);
 				a.push_back(Lime::StringToStringW(m[i]));
+			}
 
 			m_Attributes->addArray(n.c_str(), a);
 
@@ -207,13 +210,13 @@ void Attributes::Clear()
 bool Attributes::Exists(String^ attributeName)
 {
 	LIME_ASSERT(attributeName != nullptr);
-	return m_Attributes->existsAttribute(Lime::StringToStringC(attributeName).c_str());
+	return m_Attributes->existsAttribute(LIME_SAFESTRINGTOSTRINGC_C_STR(attributeName));
 }
 
 int Attributes::GetIndex(String^ attributeName)
 {
 	LIME_ASSERT(attributeName != nullptr);
-	return m_Attributes->findAttribute(Lime::StringToStringC(attributeName).c_str());
+	return m_Attributes->findAttribute(LIME_SAFESTRINGTOSTRINGC_C_STR(attributeName));
 }
 
 String^ Attributes::GetName(int attributeIndex)
@@ -225,7 +228,7 @@ String^ Attributes::GetName(int attributeIndex)
 AttributeType Attributes::GetType(String^ attributeName)
 {
 	LIME_ASSERT(attributeName != nullptr);
-	return (AttributeType)m_Attributes->getAttributeType(Lime::StringToStringC(attributeName).c_str());
+	return (AttributeType)m_Attributes->getAttributeType(LIME_SAFESTRINGTOSTRINGC_C_STR(attributeName));
 }
 
 AttributeType Attributes::GetType(int attributeIndex)
@@ -237,7 +240,7 @@ AttributeType Attributes::GetType(int attributeIndex)
 String^ Attributes::GetTypeString(String^ attributeName)
 {
 	LIME_ASSERT(attributeName != nullptr);
-	return gcnew String(m_Attributes->getAttributeTypeString(Lime::StringToStringC(attributeName).c_str()));
+	return gcnew String(m_Attributes->getAttributeTypeString(LIME_SAFESTRINGTOSTRINGC_C_STR(attributeName)));
 }
 
 String^ Attributes::GetTypeString(int attributeIndex)
@@ -380,7 +383,7 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 		return;
 
 	case AttributeType::String:
-		m_Attributes->setAttribute(attributeIndex, Lime::StringToStringW((String^)value).c_str());
+		m_Attributes->setAttribute(attributeIndex, LIME_SAFESTRINGTOSTRINGW_C_STR((String^)value));
 		return;
 
 	case AttributeType::Bool:
@@ -452,7 +455,10 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 
 			core::array<core::stringw> a;
 			for (int i = 0; i < m->Length; i++)
+			{
+				LIME_ASSERT(m[i] != nullptr);
 				a.push_back(Lime::StringToStringW(m[i]));
+			}
 
 			m_Attributes->setAttribute(attributeIndex, a);
 

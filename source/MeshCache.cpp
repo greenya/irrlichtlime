@@ -26,6 +26,8 @@ MeshCache::MeshCache(scene::IMeshCache* ref)
 
 void MeshCache::AddMesh(String^ name, AnimatedMesh^ mesh)
 {
+	LIME_ASSERT(name != nullptr);
+
 	m_MeshCache->addMesh(
 		Lime::StringToPath(name),
 		LIME_SAFEREF(mesh, m_AnimatedMesh));

@@ -48,7 +48,7 @@ String^ SkinnedMesh::GetJointName(int index)
 int SkinnedMesh::GetJointIndex(String^ name)
 {
 	LIME_ASSERT(name != nullptr);
-	return m_SkinnedMesh->getJointNumber(Lime::StringToStringC(name).c_str());
+	return m_SkinnedMesh->getJointNumber(LIME_SAFESTRINGTOSTRINGC_C_STR(name));
 }
 
 bool SkinnedMesh::SetHardwareSkinning(bool turnOn)

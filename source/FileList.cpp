@@ -25,6 +25,7 @@ FileList::FileList(io::IFileList* ref)
 
 int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory, int id)
 {
+	LIME_ASSERT(fullPath != nullptr);
 	LIME_ASSERT(offset >= 0);
 	LIME_ASSERT(size >= 0);
 	LIME_ASSERT(id >= 0);
@@ -34,6 +35,7 @@ int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory, 
 
 int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory)
 {
+	LIME_ASSERT(fullPath != nullptr);
 	LIME_ASSERT(offset >= 0);
 	LIME_ASSERT(size >= 0);
 
@@ -42,11 +44,13 @@ int FileList::AddFile(String^ fullPath, int offset, int size, bool isDirectory)
 
 int FileList::FindFile(String^ filename, bool isDirectory)
 {
+	LIME_ASSERT(filename != nullptr);
 	return m_FileList->findFile(Lime::StringToPath(filename), isDirectory);
 }
 
 int FileList::FindFile(String^ filename)
 {
+	LIME_ASSERT(filename != nullptr);
 	return m_FileList->findFile(Lime::StringToPath(filename));
 }
 

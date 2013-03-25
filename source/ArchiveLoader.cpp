@@ -29,7 +29,11 @@ FileArchive^ ArchiveLoader::CreateArchive(String^ filename, bool ignoreCase, boo
 {
 	LIME_ASSERT(filename != nullptr);
 
-	io::IFileArchive* a = m_ArchiveLoader->createArchive(Lime::StringToPath(filename), ignoreCase, ignorePaths);
+	io::IFileArchive* a = m_ArchiveLoader->createArchive(
+		Lime::StringToPath(filename),
+		ignoreCase,
+		ignorePaths);
+
 	return FileArchive::Wrap(a);
 }
 
@@ -44,7 +48,9 @@ FileArchive^ ArchiveLoader::CreateArchive(ReadFile^ file, bool ignoreCase, bool 
 bool ArchiveLoader::IsALoadableFileFormat(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
-	return m_ArchiveLoader->isALoadableFileFormat(Lime::StringToPath(filename));
+
+	return m_ArchiveLoader->isALoadableFileFormat(
+		Lime::StringToPath(filename));
 }
 
 bool ArchiveLoader::IsALoadableFileFormat(ReadFile^ file)

@@ -115,7 +115,7 @@ BoneSceneNode^ AnimatedMeshSceneNode::GetJointNode(int jointIndex)
 
 BoneSceneNode^ AnimatedMeshSceneNode::GetJointNode(String^ jointName)
 {
-	scene::IBoneSceneNode* n = m_AnimatedMeshSceneNode->getJointNode(Lime::StringToStringC(jointName).c_str());
+	scene::IBoneSceneNode* n = m_AnimatedMeshSceneNode->getJointNode(LIME_SAFESTRINGTOSTRINGC_C_STR(jointName));
 	return BoneSceneNode::Wrap(n);
 }
 
@@ -136,7 +136,7 @@ bool AnimatedMeshSceneNode::SetMD2Animation(AnimationTypeMD2 animationType)
 
 bool AnimatedMeshSceneNode::SetMD2Animation(String^ animationName)
 {
-	return m_AnimatedMeshSceneNode->setMD2Animation(Lime::StringToStringC(animationName).c_str());
+	return m_AnimatedMeshSceneNode->setMD2Animation(LIME_SAFESTRINGTOSTRINGC_C_STR(animationName));
 }
 
 void AnimatedMeshSceneNode::SetRenderFromIdentity(bool on)

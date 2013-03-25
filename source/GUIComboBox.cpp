@@ -25,12 +25,19 @@ GUIComboBox::GUIComboBox(gui::IGUIComboBox* ref)
 
 int GUIComboBox::AddItem(String^ text, int data)
 {
-	return m_GUIComboBox->addItem(Lime::StringToStringW(text).c_str(), data);
+	int i = m_GUIComboBox->addItem(
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
+		data);
+
+	return i;
 }
 
 int GUIComboBox::AddItem(String^ text)
 {
-	return m_GUIComboBox->addItem(Lime::StringToStringW(text).c_str());
+	int i = m_GUIComboBox->addItem(
+		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
+
+	return i;
 }
 
 void GUIComboBox::Clear()
