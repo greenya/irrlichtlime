@@ -4410,6 +4410,330 @@ Warning: this will change the index of all following items.</summary>
 		<member name="F:IrrlichtLime.GUI.GUIDefaultText.WindowRestore">
 			<summary>Tooltip text for window restore button.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUIEditBox">
+			<summary>Edit box.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.ActiveFont">
+			<summary>The font which is used right now for drawing. Currently this is the override font when one is set and the font of the active skin otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.AutoScroll">
+			<summary>Automatic scrolling with cursor position. When "true" the text will move around with the cursor position.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.CursorBlinkTime">
+			<summary>The blink time for the cursor in milliseconds. 2x blink time is one full cycle. When set to 0 the cursor is constantly on without blinking.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.CursorChar">
+			<summary>The character used for the cursor. By default it's "_".</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.DrawBackground">
+			<summary>True if background drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.DrawBorder">
+			<summary>True if border drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.MaxLength">
+			<summary>The maximum amount of characters which may be entered in the box. If 0, the character amount is infinity.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.MultiLine">
+			<summary>Enables or disables newlines. If set to true, the GUIEventType.EditBoxEnter event will not be fired, instead a newline character will be inserted.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.OverrideColor">
+			<summary>Another color for the text. If set, the edit box does not use the GUIDefaultColor.ButtonText color defined in the skin, but this color instead.
+
+Note: setting this value will also set OverrideColorEnabled to true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.OverrideColorEnabled">
+			<summary>If the text should use the override color or the color in the gui skin. If set to true, the override color, which can be set with OverrideColor is used, otherwise the GUIDefaultColor.ButtonText color of the skin.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.OverrideFont">
+			<summary>The override font or null if skin font is used.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.PasswordBox">
+			<summary>If the edit box is currently a password box. Setting to true will disable MultiLine, WordWrap and the ability to copy with Ctrl+C or Ctrl+X.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEditBox.SetPasswordChar(System.Char)">
+			<summary>Sets password char.</summary>
+			<param name="x">The character that is displayed instead of letters.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEditBox.SetTextAlignment(IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>Sets text justification mode.</summary>
+			<param name="horizontal">UpperLeft for left justified (default), LowerRight for right justified, or Center for centered text.</param>
+			<param name="vertical">UpperLeft to align with top edge, LowerRight for bottom edge, or Center for centered text (default).</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.TextDimension">
+			<summary>The size of the text in pixels.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEditBox.WordWrap">
+			<summary>If set to true, words going over one line are broken to the next line.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIElement">
+			<summary>Base class of all GUI elements.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.AbsoluteClippingRect">
+			<summary>The visible area of the element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.AbsolutePosition">
+			<summary>The absolute rectangle of this element.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.AddChild(IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds a GUI element as new child of this element.</summary>
+			<param name="child">Child to add.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.BringToFront(IrrlichtLime.GUI.GUIElement)">
+			<summary>Brings a child to front.</summary>
+			<param name="child">Child element.</param>
+			<returns>True if successful, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Children">
+			<summary>Array of all children added to this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Clipped">
+			<summary>If true, the element will not be clipped by its parent's clipping rectangle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.Draw">
+			<summary>Draws the element and its children.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIElement.DrawEventHandler">
+			<summary>Called if element needs to be redrawn.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Enabled">
+			<summary>True if element is enabled.
+
+Note: currently elements do _not_ care about parent-states. So if you want to affect childs you have to enable/disable them all. The only exception to this are sub-elements which also check their parent.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Environment">
+			<summary>GUI environment pointer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.Event(IrrlichtLime.Event)">
+			<summary>Process given event.</summary>
+			<param name="evnt">Event details.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.GetElementFromID(System.Int32)">
+			<summary>Finds the first element with the given id.</summary>
+			<param name="id">Id to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.GetElementFromID(System.Int32,System.Boolean)">
+			<summary>Finds the first element with the given id.</summary>
+			<param name="id">Id to search for.</param>
+			<param name="searchchildren">True, if also children of this element may contain the element with the searched id and they should be searched too. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.GetElementFromPoint(IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns the topmost GUI element at the specific position.
+
+This will check this GUI element and all of its descendants, so it may return this GUI element.  To check all GUI elements, call this function on device.GUIEnvironment.RootElement. Note that the root element is the size of the screen, so doing so (with an on-screen point) will always return the root element if no other element is above it at that point.</summary>
+			<param name="point">The point at which to find a GUI element.</param>
+			<returns>The topmost GUI element at that point, or null if there are no candidate elements at that point.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.GetNextElement(System.Int32,System.Boolean,System.Boolean,IrrlichtLime.GUI.GUIElement@,IrrlichtLime.GUI.GUIElement@)">
+			<summary>Searches elements to find the closest next element to tab to.</summary>
+			<param name="startOrder">The TabOrder of the current element, -1 if none.</param>
+			<param name="reverse">True if searching for a lower number.</param>
+			<param name="group">True if searching for a higher one.</param>
+			<param name="first">Element with the highest/lowest known tab order depending on search direction.</param>
+			<param name="closest">The closest match, depending on tab order and direction.</param>
+			<returns>True if successfully found an element, false to continue searching/fail.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.GetNextElement(System.Int32,System.Boolean,System.Boolean,IrrlichtLime.GUI.GUIElement@,IrrlichtLime.GUI.GUIElement@,System.Boolean)">
+			<summary>Searches elements to find the closest next element to tab to.</summary>
+			<param name="startOrder">The TabOrder of the current element, -1 if none.</param>
+			<param name="reverse">True if searching for a lower number.</param>
+			<param name="group">True if searching for a higher one.</param>
+			<param name="first">Element with the highest/lowest known tab order depending on search direction.</param>
+			<param name="closest">The closest match, depending on tab order and direction.</param>
+			<param name="includeInvisible">Includes invisible elements in the search. Default is false.</param>
+			<returns>True if successfully found an element, false to continue searching/fail.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.#ctor(IrrlichtLime.GUI.GUIElementType,IrrlichtLime.GUI.GUIEnvironment,IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti)">
+			<summary>Contructor.</summary>
+			<param name="type">The type of new GUI element. In most cases you need to pass GUIElementType.Unknown here.</param>
+			<param name="environment">GUI environment to use.</param>
+			<param name="parent">Parent element if any.</param>
+			<param name="rectangle">Rectangle of this element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.#ctor(IrrlichtLime.GUI.GUIElementType,IrrlichtLime.GUI.GUIEnvironment,IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,System.Int32)">
+			<summary>Contructor.</summary>
+			<param name="type">The type of new GUI element. In most cases you need to pass GUIElementType.Unknown here.</param>
+			<param name="environment">GUI environment to use.</param>
+			<param name="parent">Parent element if any.</param>
+			<param name="rectangle">Rectangle of this element.</param>
+			<param name="id">Id of this element. Default is -1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.ID">
+			<summary>The id of this element.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.IsMyChild(IrrlichtLime.GUI.GUIElement)">
+			<summary>Returns true if the given element is a child of this one.</summary>
+			<param name="child">The child element to check.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.IsPointInside(IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns true if a point is within this element. Elements with a shape other than a rectangle should override this method. (Note: currenty you cannot override this method in Irrlicht Lime).</summary>
+			<param name="point">Point to check.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.Move(IrrlichtLime.Core.Vector2Di)">
+			<summary>Moves this element.</summary>
+			<param name="absoluteMovement">Movement.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Name">
+			<summary>Name of the element.</summary>
+		</member>
+		<member name="E:IrrlichtLime.GUI.GUIElement.OnDraw">
+			<summary>Called if element needs to be redrawn.</summary>
+		</member>
+		<member name="E:IrrlichtLime.GUI.GUIElement.OnEvent">
+			<summary>Called if an event happened.
+
+You should return true if you have handled the event, and false -- if not (in this case Irrlicht Engine will process it).</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIElement.OnEventEventHandler">
+			<summary>Called if an event happened.
+
+Please take care that you should only return 'true' when you want to _prevent_ Irrlicht from processing the event any further. So 'true' does mean that an event is completely done. Therefore your return value for all unprocessed events should be 'false'.</summary>
+			<param name="evnt">Event details.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Parent">
+			<summary>Parent element of this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.RelativePosition">
+			<summary>The relative rectangle of this element.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.Remove">
+			<summary>Removes this element from its parent.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.RemoveChild(IrrlichtLime.GUI.GUIElement)">
+			<summary>Removes a child.</summary>
+			<param name="child">Child to remove.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.SendToBack(IrrlichtLime.GUI.GUIElement)">
+			<summary>Sends a child to the back, so it's siblings are drawn on top of it.</summary>
+			<param name="child">Child element.</param>
+			<returns>True if successful, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.SetAlignment(IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>The alignment defines how the borders of this element will be positioned when the parent element is resized.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.SetMaxSize(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Sets the maximum size allowed for this element. If set to 0,0, there is no maximum size.</summary>
+			<param name="size">New maximum size.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.SetMinSize(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Sets the minimum size allowed for this element.</summary>
+			<param name="size">New minimum size.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.SetRelativePositionProportional(IrrlichtLime.Core.Rectf)">
+			<summary>Sets the relative rectangle of this element as a proportion of its parent's area.</summary>
+			<param name="relativePosition">The rectangle to set, interpreted as a proportion of the parent's area. Meaningful values are in the range [0...1], unless you intend this element to spill outside its parent.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.SubElement">
+			<summary>True if this element was created as part of its parent control. For example, it is true when a scrollbar is part of a listbox. SubElements are not saved to disk when calling GUIEnvironment.SaveGUI().</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TabGroup">
+			<summary>Whether this element is a container for a group of elements which can be navigated using the tab key. For example, windows are tab groups. Groups can be navigated using Ctrl+Tab, providing its TabStop with true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TabGroupElement">
+			<summary>The container element which holds all elements in this element's tab group.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TabOrder">
+			<summary>The priority of focus when using the tab key to navigate between a group of elements. Elements with a lower number are focused first.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TabStop">
+			<summary>If set to true, the focus will visit this element when using the tab key to cycle through elements. If this element is a TabGroup then Ctrl+Tab will be used instead.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Text">
+			<summary>Caption of this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.ToolTipText">
+			<summary>Tooltip of this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Type">
+			<summary>The type of this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TypeName">
+			<summary>The type name of this element.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIElement.UpdateAbsolutePosition">
+			<summary>Updates the absolute position.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.Visible">
+			<summary>True if element is visible.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIElementType">
+			<summary>All basic Irrlicht GUI elements.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Button">
+			<summary>A button (GUIButton).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.CheckBox">
+			<summary>A check box (GUICheckBox).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ColorSelectDialog">
+			<summary>A color select dialog (GUIColorSelectDialog).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ComboBox">
+			<summary>A combo box (GUIComboBox).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ContextMenu">
+			<summary>A context menu (GUIContextMenu).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.EditBox">
+			<summary>An edit box (GUIEditBox).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.FileOpenDialog">
+			<summary>A file open dialog (GUIFileOpenDialog).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Image">
+			<summary>An image (GUIImage).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.InOutFader">
+			<summary>A in/out fader (GUIInOutFader).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ListBox">
+			<summary>A list box (GUIListBox).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Menu">
+			<summary>A menu (GUIMenu).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.MeshViewer">
+			<summary>A mesh viewer (GUIMeshViewer).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.MessageBox">
+			<summary>A message box (GUIWindow).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ModalScreen">
+			<summary>A modal screen.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Root">
+			<summary>The root of the GUI.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ScrollBar">
+			<summary>A scroll bar (GUIScrollBar).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.SpinBox">
+			<summary>A spin box (GUISpinBox).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.StaticText">
+			<summary>A static text (GUIStaticText).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Tab">
+			<summary>A tab (GUITab).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.TabControl">
+			<summary>A tab control (GUITabControl).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Table">
+			<summary>A table (GUITable).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.ToolBar">
+			<summary>A tool bar (GUIToolBar).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.TreeView">
+			<summary>A tree view (GUITreeView).</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Unknown">
+			<summary>Unknown type.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Window">
+			<summary>A window (GUIWindow).</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.ArchiveLoader">
 			<summary>Class which is able to create an archive from a file.
 
