@@ -28,6 +28,7 @@
 #include "GUIToolBar.h"
 #include "GUITreeView.h"
 #include "GUIWindow.h"
+#include "OSOperator.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
 #include "Texture.h"
@@ -1421,6 +1422,12 @@ GUIElement^ GUIEnvironment::HoveredElement::get()
 {
 	gui::IGUIElement* e = m_GUIEnvironment->getHovered();
 	return GUIElement::Wrap(e);
+}
+
+IrrlichtLime::OSOperator^ GUIEnvironment::OSOperator::get()
+{
+	IOSOperator* o = m_GUIEnvironment->getOSOperator();
+	return IrrlichtLime::OSOperator::Wrap(o);
 }
 
 GUIElement^ GUIEnvironment::RootElement::get()

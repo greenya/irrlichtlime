@@ -7,7 +7,7 @@ using namespace irr;
 using namespace System;
 using namespace IrrlichtLime::Core;
 
-namespace IrrlichtLime { ref class Event;
+namespace IrrlichtLime { ref class Event; ref class OSOperator;
 namespace IO { ref class Attributes; ref class FileSystem; ref class ReadFile; ref class WriteFile; }
 namespace Video { ref class Texture; ref class VideoDriver; }
 namespace GUI {
@@ -213,6 +213,7 @@ public:
 	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }
 	property GUIElement^ Focus { GUIElement^ get(); void set(GUIElement^ value); }
 	property GUIElement^ HoveredElement { GUIElement^ get(); }
+	property IrrlichtLime::OSOperator^ OSOperator { IrrlichtLime::OSOperator^ get(); }
 	property GUIElement^ RootElement { GUIElement^ get(); }
 	property GUISkin^ Skin { GUISkin^ get(); void set(GUISkin^ value); }
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
