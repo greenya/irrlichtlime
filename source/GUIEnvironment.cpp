@@ -987,7 +987,7 @@ GUITab^ GUIEnvironment::AddTab(Recti^ rectangle)
 	return GUITab::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border, int id)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground, bool border)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
@@ -1001,7 +1001,7 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ paren
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
@@ -1009,19 +1009,22 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ paren
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
 		fillBackground,
-		border);
+		true,
+		id);
 
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id)
 {
 	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
 		*rectangle->m_NativeValue,
 		LIME_SAFEREF(parent, m_GUIElement),
-		fillBackground);
+		false,
+		true,
+		id);
 
 	return GUITabControl::Wrap(t);
 }

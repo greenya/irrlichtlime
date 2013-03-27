@@ -146,9 +146,9 @@ public:
 	GUITab^ AddTab(Recti^ rectangle, GUIElement^ parent);
 	GUITab^ AddTab(Recti^ rectangle);
 
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border, int id);
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground, bool border);
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, bool fillBackground);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground, bool border);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground);
+	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id);
 	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent);
 	GUITabControl^ AddTabControl(Recti^ rectangle);
 

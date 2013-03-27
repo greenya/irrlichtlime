@@ -778,7 +778,7 @@ namespace _09.Meshviewer
 			GUIWindow w = env.AddWindow(new Recti(600, 45, 800, 480), false, "Toolset", null, (int)guiID.DialogRootWindow);
 
 			// create tab control and tabs
-			GUITabControl tab = env.AddTabControl(new Recti(2, 20, 800 - 602, 480 - 7), w, true, true);
+			GUITabControl tab = env.AddTabControl(new Recti(2, 20, 800 - 602, 480 - 7), w, -1, true, true);
 
 			GUITab t1 = tab.AddTab("Config");
 
