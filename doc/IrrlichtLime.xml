@@ -4734,6 +4734,502 @@ Please take care that you should only return 'true' when you want to _prevent_ I
 		<member name="F:IrrlichtLime.GUI.GUIElementType.Window">
 			<summary>A window (GUIWindow).</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUIEnvironment">
+			<summary>GUI Environment. Used as factory and manager of all other GUI elements.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddButton(IrrlichtLime.Core.Recti)">
+			<summary>Adds a button element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddButton(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds a button element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the button. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddButton(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<summary>Adds a button element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the button. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddButton(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.String)">
+			<summary>Adds a button element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the button. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+			<param name="text">Text displayed on the button. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddButton(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.String,System.String)">
+			<summary>Adds a button element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the button. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+			<param name="text">Text displayed on the button. Default is null.</param>
+			<param name="tooltiptext">Text displayed in the tooltip. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddCheckBox(System.Boolean,IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddCheckBox(System.Boolean,IrrlichtLime.Core.Recti,System.String)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddCheckBox(System.Boolean,IrrlichtLime.Core.Recti,System.String,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the check box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddCheckBox(System.Boolean,IrrlichtLime.Core.Recti,System.String,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the check box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddColorSelectDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the color select dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddColorSelectDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="parent">Parent GUI element of the color select dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddComboBox(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddComboBox(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the combo box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddComboBox(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the combo box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddContextMenu(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddContextMenu(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the context menu. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddContextMenu(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the context menu. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddEditBox(System.String,IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddEditBox(System.String,IrrlichtLime.Core.Recti,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddEditBox(System.String,IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the edit box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddEditBox(System.String,IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the edit box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddEmptySpriteBank(System.String)">
+			<summary>Adds an empty sprite bank to the manager.</summary>
+			<param name="name">Name of the new sprite bank.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddFileOpenDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the file open dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddFileOpenDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="parent">Parent GUI element of the file open dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddFileOpenDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="parent">Parent GUI element of the file open dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddFileOpenDialog(System.String,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean,System.String)">
+			<param name="parent">Parent GUI element of the file open dialog. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddFont(System.String,IrrlichtLime.GUI.GUIFont)">
+			<summary>Adds an externally loaded font to the font list. This method allows to attach an already loaded font to the list of existing fonts.</summary>
+			<param name="name">Name the font should be stored as.</param>
+			<param name="font">Font to add.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddGUIElement(System.String,IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the element. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32,System.String)">
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Core.Recti,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddImage(IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32,System.String)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the image. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the in-out-fader. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the in-out-fader. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddListBox(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddListBox(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the list box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddListBox(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the list box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddListBox(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the list box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMenu(IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the menu. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMenu(IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="parent">Parent GUI element of the menu. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMeshViewer(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMeshViewer(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the mesh viewer. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMeshViewer(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the mesh viewer. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMeshViewer(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.String)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the mesh viewer. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String,System.Boolean)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the message box cannot be used until this message box is removed. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String,System.Boolean,IrrlichtLime.GUI.GUIMessageBoxFlag)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the message box cannot be used until this message box is removed. Default is true.</param>
+			<param name="flags">Flags specifying the layout of the message box. For example to create a message box with an OK and a Cancel button on it, set this to "OK | Cancel". Default is OK.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String,System.Boolean,IrrlichtLime.GUI.GUIMessageBoxFlag,IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the message box cannot be used until this message box is removed. Default is true.</param>
+			<param name="flags">Flags specifying the layout of the message box. For example to create a message box with an OK and a Cancel button on it, set this to "OK | Cancel". Default is OK.</param>
+			<param name="parent">Parent GUI element of the message box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String,System.Boolean,IrrlichtLime.GUI.GUIMessageBoxFlag,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the message box cannot be used until this message box is removed. Default is true.</param>
+			<param name="flags">Flags specifying the layout of the message box. For example to create a message box with an OK and a Cancel button on it, set this to "OK | Cancel". Default is OK.</param>
+			<param name="parent">Parent GUI element of the message box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddMessageBox(System.String,System.String,System.Boolean,IrrlichtLime.GUI.GUIMessageBoxFlag,IrrlichtLime.GUI.GUIElement,System.Int32,IrrlichtLime.Video.Texture)">
+			<summary>Adds a message box.</summary>
+			<param name="caption">Text to be displayed in the title of the message box.</param>
+			<param name="text">Text to be displayed in the body of the message box.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the message box cannot be used until this message box is removed. Default is true.</param>
+			<param name="flags">Flags specifying the layout of the message box. For example to create a message box with an OK and a Cancel button on it, set this to "OK | Cancel". Default is OK.</param>
+			<param name="parent">Parent GUI element of the message box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+			<param name="image">Texture which will be displayed beside the text as an image. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddModalScreen(IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds a modal screen.
+
+This control stops its parent's members from being able to receive input until its last child is removed, it then deletes itself.</summary>
+			<param name="parent">Parent GUI element of the message box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddScrollBar(System.Boolean,IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddScrollBar(System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the scroll bar. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddScrollBar(System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the scroll bar. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddSpinBox(System.String,IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddSpinBox(System.String,IrrlichtLime.Core.Recti,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddSpinBox(System.String,IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the spin box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddSpinBox(System.String,IrrlichtLime.Core.Recti,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the spin box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti,System.Boolean,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti,System.Boolean,System.Boolean,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the static text. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti,System.Boolean,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the static text. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddStaticText(System.String,IrrlichtLime.Core.Recti,System.Boolean,System.Boolean,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the static text. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTab(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTab(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTab(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTabControl(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTabControl(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab control. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTabControl(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab control. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTabControl(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab control. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTabControl(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tab control. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTable(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTable(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the table. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTable(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the table. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTable(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the table. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddToolBar(IrrlichtLime.GUI.GUIElement)">
+			<param name="parent">Parent GUI element of the tool bar. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddToolBar(IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="parent">Parent GUI element of the tool bar. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTreeView(IrrlichtLime.Core.Recti)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTreeView(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tree view. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTreeView(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tree view. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTreeView(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tree view. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddTreeView(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent GUI element of the tree view. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddWindow(IrrlichtLime.Core.Recti)">
+			<summary>Adds an empty window element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddWindow(IrrlichtLime.Core.Recti,System.Boolean)">
+			<summary>Adds an empty window element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the window cannot be used until it is removed. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddWindow(IrrlichtLime.Core.Recti,System.Boolean,System.String)">
+			<summary>Adds an empty window element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the window cannot be used until it is removed. Default is false.</param>
+			<param name="text">Text displayed as the window title. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddWindow(IrrlichtLime.Core.Recti,System.Boolean,System.String,IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds an empty window element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the window cannot be used until it is removed. Default is false.</param>
+			<param name="text">Text displayed as the window title. Default is null.</param>
+			<param name="parent">Parent GUI element of the window. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddWindow(IrrlichtLime.Core.Recti,System.Boolean,System.String,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<summary>Adds an empty window element.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="modal">Defines if the dialog is modal. This means, that all other GUI elements which were created before the window cannot be used until it is removed. Default is false.</param>
+			<param name="text">Text displayed as the window title. Default is null.</param>
+			<param name="parent">Parent GUI element of the window. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+			<param name="id">Id of the element. Default is -1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.BuiltInFont">
+			<summary>The default built-in font.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.Clear">
+			<summary>Removes all elements from the environment.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.CreateImageList(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Dimension2Di,System.Boolean)">
+			<summary>Creates the image list from the given texture.</summary>
+			<param name="texture">Texture to split into images.</param>
+			<param name="imageSize">Dimension of each image.</param>
+			<param name="useAlphaChannel">Whether alpha channel of the texture should be honored.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.CreateSkin(IrrlichtLime.GUI.GUISkinType)">
+			<summary>Creates a new GUI Skin based on a template.
+
+If you no longer need it, you should call GUISkin.Drop().</summary>
+			<param name="type">The type of the new skin.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.DrawAll">
+			<summary>Draws all GUI elements by traversing the GUI environment starting at the root node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.FileSystem">
+			<summary>The file system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.Focus">
+			<summary>The element which holds the focus.
+
+Causes a ElementFocusLost event followed by a ElementFocused event. If someone absorbed either of the events, then the focus will not be changed.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.Focused(IrrlichtLime.GUI.GUIElement)">
+			<summary>Returns whether the element has focus.</summary>
+			<param name="element">The element which is tested.</param>
+			<returns>True if the element has focus, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.GetFont(System.String)">
+			<summary>Returns pointer to the font with the specified filename. Loads the font if it was not loaded before.</summary>
+			<param name="filename">Filename of the font.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.GetSpriteBank(System.String)">
+			<summary>Returns the sprite bank with the specified file name. Loads the bank if it was not loaded before.</summary>
+			<param name="filename">Filename of the sprite bank's origin.</param>
+			<returns>The sprite bank object or null if it could not be loaded.</returns>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.HoveredElement">
+			<summary>The element which was last under the mouse cursor.
+
+This information is updated _after_ the user-event receiver received it's mouse-events. To find the hovered element while catching mouse events you have to use instead: RootElement.GetElementFromPoint(mousePos);</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.OSOperator">
+			<summary>The OS operator.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.PostEvent(IrrlichtLime.Event)">
+			<summary>Posts an input event to the environment.
+
+Usually you do not have to use this method, it is used by the engine internally.</summary>
+			<param name="e">The event to post.</param>
+			<returns>True if succeeded, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.RemoveFocus(IrrlichtLime.GUI.GUIElement)">
+			<summary>Removes the focus from an element.
+
+Causes a ElementFocusLost event. If the event is absorbed then the focus will not be changed.</summary>
+			<param name="element">The element which shall lose the focus.</param>
+			<returns>True on success, false on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.RemoveFont(IrrlichtLime.GUI.GUIFont)">
+			<summary>Remove loaded font.</summary>
+			<param name="font">Font to remove.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.RootElement">
+			<summary>The root GUI element.
+
+This is the first gui element, the (direct or indirect) parent of all other gui elements. It is a valid IGUIElement, with dimensions the same size as the screen.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.Skin">
+			<summary>The GUI skin.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIEnvironment.VideoDriver">
+			<summary>The video driver.</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.ArchiveLoader">
 			<summary>Class which is able to create an archive from a file.
 
