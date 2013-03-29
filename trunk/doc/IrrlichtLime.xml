@@ -5779,6 +5779,219 @@ These fonts reside in system memory and use no video memory 	until they are disp
 		<member name="P:IrrlichtLime.GUI.GUIImageList.ImageSize">
 			<summary>The size of the images in the list.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUIInOutFader">
+			<summary>Element for fading out or in.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIInOutFader.FadeIn(System.UInt32)">
+			<summary>Starts the fade in process.
+
+In the beginning the whole rect is drawn by the set color (black by default) and at the end of the overgiven time the color has faded out.</summary>
+			<param name="time">Time specifying how long it should need to fade in, in milliseconds.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIInOutFader.FadeOut(System.UInt32)">
+			<summary>Starts the fade out process.
+
+In the beginning everything is visible, and at the end of the time only the set color (black by the fault) will be drawn.</summary>
+			<param name="time">Time specifying how long it should need to fade out, in milliseconds.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIInOutFader.Ready">
+			<summary>True if the fade in or out process is done.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIInOutFader.SetColor(IrrlichtLime.Video.Color)">
+			<summary>Sets the color to fade out to or to fade in from.</summary>
+			<param name="bothAplhaIgnored">Color to where it is faded out or from it is faded in.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIInOutFader.SetColor(IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Sets the color to fade out to or to fade in from.</summary>
+			<param name="source">Source color.</param>
+			<param name="dest">Destination color.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIListBox">
+			<summary>List box GUI element.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.AddItem(System.String)">
+			<summary>Adds new item to the list and returns its id.</summary>
+			<param name="text">Text of list entry.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.AddItem(System.String,System.Int32)">
+			<summary>Adds new item to the list and returns its id.</summary>
+			<param name="text">Text of list entry.</param>
+			<param name="icon">Sprite index of the icon within the sprite bank. If -1 no icon will be used. Default is -1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIListBox.AutoScroll">
+			<summary>True if automatic scrolling is enabled, false if not.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.ClearItemColor(System.Int32,IrrlichtLime.GUI.GUIListBoxColor)">
+			<summary>Clears specific color in specified list item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="colorType">Type of the color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.ClearItemColors(System.Int32)">
+			<summary>Clears colors of all types in specified list item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.ClearItems">
+			<summary>Clears the list, deletes all items in the list box.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.GetItem(System.Int32)">
+			<summary>Gets string of a list item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.GetItemAt(System.Int32,System.Int32)">
+			<summary>Gets the id of the item at the given absolute coordinates or -1 if no item there.</summary>
+			<param name="xpos">X coordinate.</param>
+			<param name="ypos">Y coordinate.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.GetItemColor(System.Int32,IrrlichtLime.GUI.GUIListBoxColor)">
+			<summary>Gets the color of specified type of the list item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="colorType">Type of the color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.GetItemDefaultColor(IrrlichtLime.GUI.GUIListBoxColor)">
+			<summary>Gets the default color of specified type.</summary>
+			<param name="colorType">Type of the color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.GetItemIcon(System.Int32)">
+			<summary>Gets the icon of an item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.InsertItem(System.Int32,System.String)">
+			<summary>Inserts the item at the given index.</summary>
+			<param name="index">Index where the item should be inserted. Must be &gt;=0.</param>
+			<param name="text">Text of list entry.</param>
+			<returns>The index on success or -1 on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.InsertItem(System.Int32,System.String,System.Int32)">
+			<summary>Inserts the item at the given index.</summary>
+			<param name="index">Index where the item should be inserted. Must be &gt;=0.</param>
+			<param name="text">Text of list entry.</param>
+			<param name="icon">Sprite index of the icon within the sprite bank. If -1 no icon will be used. Default is -1.</param>
+			<returns>The index on success or -1 on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.ItemColorOverrided(System.Int32,IrrlichtLime.GUI.GUIListBoxColor)">
+			<summary>Has the item at index its color overrided?</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="colorType">Type of the color.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIListBox.ItemCount">
+			<summary>Amount of items in the list.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.RemoveItem(System.Int32)">
+			<summary>Removes an item from the list.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIListBox.SelectedIndex">
+			<summary>Id of selected item or -1 if no item is selected.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIListBox.SelectedItem">
+			<summary>Text of selected item or null if no item is selected.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetDrawBackground(System.Boolean)">
+			<summary>Sets whether to draw the background.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetItem(System.Int32,System.String)">
+			<summary>Sets the item at the given index.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="text">Text of list entry.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetItem(System.Int32,System.String,System.Int32)">
+			<summary>Sets the item at the given index.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="text">Text of list entry.</param>
+			<param name="icon">Sprite index of the icon within the sprite bank. If -1 no icon will be used. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetItemColor(System.Int32,IrrlichtLime.GUI.GUIListBoxColor,IrrlichtLime.Video.Color)">
+			<summary>Sets the color of specified type for the item.</summary>
+			<param name="index">Index of the item. Must be from 0 to ItemCount-1.</param>
+			<param name="colorType">Type of the color.</param>
+			<param name="color">New color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetItemHeight(System.Int32)">
+			<summary>Sets height of the list items.</summary>
+			<param name="height">New height.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SetSpriteBank(IrrlichtLime.GUI.GUISpriteBank)">
+			<summary>Sets sprite bank to use for icons of the list items.</summary>
+			<param name="bank">Sprite bank to use.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIListBox.SwapItems(System.Int32,System.Int32)">
+			<summary>Swap the items at the given indices.</summary>
+			<param name="index1">Index of the first item. Must be from 0 to ItemCount-1. Must be different from index2.</param>
+			<param name="index2">Index of the second item. Must be from 0 to ItemCount-1. Must be different from index1.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIListBoxColor">
+			<summary>Enumeration for list box colors.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIListBoxColor.Icon">
+			<summary>Color of icon.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIListBoxColor.SelectedIcon">
+			<summary>Color of selected icon.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIListBoxColor.SelectedText">
+			<summary>Color of selected text.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIListBoxColor.Text">
+			<summary>Color of text.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIMeshViewer">
+			<summary>3d mesh viewing GUI element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIMeshViewer.Material">
+			<summary>The material.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIMeshViewer.Mesh">
+			<summary>The mesh to be shown.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIMessageBoxFlag">
+			<summary>Enumeration for message box layout flags.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIMessageBoxFlag.Cancel">
+			<summary>"Cancel" button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIMessageBoxFlag.No">
+			<summary>"No" button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIMessageBoxFlag.OK">
+			<summary>"OK" button.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIMessageBoxFlag.Yes">
+			<summary>"Yes" button.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIOrderingMode">
+			<summary>Ordering modes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIOrderingMode.Ascending">
+			<summary>Elements are ordered from the smallest to the largest.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIOrderingMode.Descending">
+			<summary>Elements are ordered from the largest to the smallest.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUIOrderingMode.None">
+			<summary>No element ordering.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIScrollBar">
+			<summary>Default scroll bar GUI element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIScrollBar.LargeStep">
+			<summary>The large step value.
+
+This is the amount that the value changes by when clicking in the tray, or using the page up and page down keys.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIScrollBar.MaxValue">
+			<summary>The maximum value of the scrollbar.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIScrollBar.MinValue">
+			<summary>The minimum value of the scrollbar.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIScrollBar.Position">
+			<summary>The current position of the scroll bar.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIScrollBar.SmallStep">
+			<summary>The small step value.
+
+This is the amount that the value changes by when clicking on the buttons or using the cursor keys.</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.ArchiveLoader">
 			<summary>Class which is able to create an archive from a file.
 
