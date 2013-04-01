@@ -159,6 +159,7 @@ void GUITable::SwapRows(int rowIndexA, int rowIndexB)
 {
 	LIME_ASSERT(rowIndexA >= 0 && rowIndexA < RowCount);
 	LIME_ASSERT(rowIndexB >= 0 && rowIndexB < RowCount);
+	LIME_ASSERT(rowIndexA != rowIndexB);
 
 	m_GUITable->swapRows(
 		rowIndexA,
