@@ -3806,7 +3806,8 @@ Currently this is the override font when one is set and the font of the active s
 			<summary>If the border and button face are being drawn using the skin.</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUIButton.OverrideFont">
-			<summary>The override font (if any).</summary>
+			<summary>The override font (if any).
+If this is set to null, the button uses the font of the skin.</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUIButton.Pressed">
 			<summary>If the button is currently pressed.</summary>
@@ -5991,6 +5992,925 @@ This is the amount that the value changes by when clicking in the tray, or using
 			<summary>The small step value.
 
 This is the amount that the value changes by when clicking on the buttons or using the cursor keys.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISkin">
+			<summary>A skin modifies the look of the GUI elements.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw2DRectangle(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d rectangle.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle will be.</param>
+			<param name="pos">Position of the rectangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw2DRectangle(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a 2d rectangle.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle will be.</param>
+			<param name="pos">Position of the rectangle.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPanePressed(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti)">
+			<summary>Draws a pressed 3d button pane.
+Used for drawing for example buttons in pressed state.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPanePressed(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a pressed 3d button pane.
+Used for drawing for example buttons in pressed state.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPaneStandard(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d button pane.
+Used for drawing for example buttons in normal state.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPaneStandard(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d button pane.
+Used for drawing for example buttons in normal state.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DMenuPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d menu pane.
+Used for drawing for menus and context menus.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DMenuPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d menu pane.
+Used for drawing for menus and context menus.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DSunkenPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti)">
+			<summary>Draws a sunken 3d pane.
+Used for drawing the background of edit, combo or check boxes.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="bgcolor">Background color.</param>
+			<param name="flat">Specifies if the sunken pane should be flat or displayed as sunken deep into the ground.</param>
+			<param name="fillBackGround">Specifies if the background should be filled with the background color or not be drawn at all.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DSunkenPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a sunken 3d pane.
+Used for drawing the background of edit, combo or check boxes.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="bgcolor">Background color.</param>
+			<param name="flat">Specifies if the sunken pane should be flat or displayed as sunken deep into the ground.</param>
+			<param name="fillBackGround">Specifies if the background should be filled with the background color or not be drawn at all.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti)">
+			<summary>Draws a tab control body.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="border">Specifies if the border should be drawn.</param>
+			<param name="background">Specifies if the background should be drawn.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a tab control body.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="border">Specifies if the border should be drawn.</param>
+			<param name="background">Specifies if the background should be drawn.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Int32)">
+			<summary>Draws a tab control body.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="border">Specifies if the border should be drawn.</param>
+			<param name="background">Specifies if the background should be drawn.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+			<param name="tabHeight">Height of tab. If -1 it will be chosen automatically. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Int32,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>Draws a tab control body.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="border">Specifies if the border should be drawn.</param>
+			<param name="background">Specifies if the background should be drawn.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+			<param name="tabHeight">Height of tab. If -1 it will be chosen automatically. Default is -1.</param>
+			<param name="alignment">Alignment of GUI element. Default is UpperLeft.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti)">
+			<summary>Draws a tab button.
+Used for drawing for tab buttons on top of tabs.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="active">Specifies if the tab is currently active.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a tab button.
+Used for drawing for tab buttons on top of tabs.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="active">Specifies if the tab is currently active.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>Draws a tab button.
+Used for drawing for tab buttons on top of tabs.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="active">Specifies if the tab is currently active.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+			<param name="alignment">Alignment of GUI element. Default is UpperLeft.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DToolBar(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d tool bar.
+Used for drawing for toolbars and menus.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DToolBar(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a standard 3d tool bar.
+Used for drawing for toolbars and menus.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+			<summary>Draws a window background.
+Used for drawing the background of dialogs and windows.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="drawTitleBar">True to enable title drawing.</param>
+			<param name="titleBarColor">Color of the title bar.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<returns>Rect where it would be good to draw title bar text. This will work even when checkClientArea is set to a non-null value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a window background.
+Used for drawing the background of dialogs and windows.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="drawTitleBar">True to enable title drawing.</param>
+			<param name="titleBarColor">Color of the title bar.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+			<returns>Rect where it would be good to draw title bar text. This will work even when checkClientArea is set to a non-null value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+			<summary>Draws a window background.
+Used for drawing the background of dialogs and windows.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="drawTitleBar">True to enable title drawing.</param>
+			<param name="titleBarColor">Color of the title bar.</param>
+			<param name="rect">Defining area where to draw.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+			<param name="checkClientArea">If you call this method with this argument, the method will not draw anything, but will instead return the client area which can be used for drawing by the calling window. That is the area without borders and without titlebar.</param>
+			<returns>Rect where it would be good to draw title bar text. This will work even when checkClientArea is set to a non-null value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di)">
+			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="icon">Specifies the icon to be drawn.</param>
+			<param name="position">The position to draw the icon.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32)">
+			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="icon">Specifies the icon to be drawn.</param>
+			<param name="position">The position to draw the icon.</param>
+			<param name="starttime">The time at the start of the animation. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32,System.UInt32)">
+			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="icon">Specifies the icon to be drawn.</param>
+			<param name="position">The position to draw the icon.</param>
+			<param name="starttime">The time at the start of the animation. Default is 0.</param>
+			<param name="currenttime">The present time, used to calculate the frame number. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32,System.UInt32,System.Boolean)">
+			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="icon">Specifies the icon to be drawn.</param>
+			<param name="position">The position to draw the icon.</param>
+			<param name="starttime">The time at the start of the animation. Default is 0.</param>
+			<param name="currenttime">The present time, used to calculate the frame number. Default is 0.</param>
+			<param name="loop">Whether the animation should loop or not. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32,System.UInt32,System.Boolean,IrrlichtLime.Core.Recti)">
+			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
+			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
+			<param name="icon">Specifies the icon to be drawn.</param>
+			<param name="position">The position to draw the icon.</param>
+			<param name="starttime">The time at the start of the animation. Default is 0.</param>
+			<param name="currenttime">The present time, used to calculate the frame number. Default is 0.</param>
+			<param name="loop">Whether the animation should loop or not. Default is false.</param>
+			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.GetColor(IrrlichtLime.GUI.GUIDefaultColor)">
+			<summary>Returns default color.</summary>
+			<param name="color">The color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.GetFont(IrrlichtLime.GUI.GUIDefaultFont)">
+			<summary>Returns the default font.</summary>
+			<param name="which">The font.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.GetIcon(IrrlichtLime.GUI.GUIDefaultIcon)">
+			<summary>Returns a default icon.
+Returns the sprite index within the sprite bank.</summary>
+			<param name="icon">The icon.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.GetSize(IrrlichtLime.GUI.GUIDefaultSize)">
+			<summary>Returns size for the given size type.</summary>
+			<param name="size">The size.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.GetText(IrrlichtLime.GUI.GUIDefaultText)">
+			<summary>Returns a default text.</summary>
+			<param name="text">The text.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetColor(IrrlichtLime.Video.Color,IrrlichtLime.GUI.GUIDefaultColor)">
+			<summary>Sets a default color.</summary>
+			<param name="newColor">New color value.</param>
+			<param name="which">The color to change.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetFont(IrrlichtLime.GUI.GUIFont)">
+			<summary>Sets a default font.</summary>
+			<param name="font">New font value.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetFont(IrrlichtLime.GUI.GUIFont,IrrlichtLime.GUI.GUIDefaultFont)">
+			<summary>Sets a default font.</summary>
+			<param name="font">New font value.</param>
+			<param name="which">The font to change. Default is GUIDefaultFont.Default.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetIcon(System.Int32,IrrlichtLime.GUI.GUIDefaultIcon)">
+			<summary>Sets a default icon.
+Sets the sprite index used for drawing icons like arrows, close buttons and ticks in check boxes.</summary>
+			<param name="index">New icon index within sprite bank.</param>
+			<param name="which">The icon to change.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetSize(System.Int32,IrrlichtLime.GUI.GUIDefaultSize)">
+			<summary>Sets a default size.</summary>
+			<param name="size">New size value.</param>
+			<param name="which">The size to change.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISkin.SetText(System.String,IrrlichtLime.GUI.GUIDefaultText)">
+			<summary>Sets a default text.</summary>
+			<param name="newText">New text value.</param>
+			<param name="which">The text to change.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISkin.SpriteBank">
+			<summary>The sprite bank.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISkin.Type">
+			<summary>The type of this skin.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISkinType">
+			<summary>Enumeration of available default skins.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISkinType.BurningSkin">
+			<summary>Burning's skin.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISkinType.Unknown">
+			<summary>An unknown skin, not serializable at present.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISkinType.WindowsClassic">
+			<summary>Default windows look and feel.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISkinType.WindowsMetallic">
+			<summary>Like WindowsClassic, but with metallic shaded windows and buttons.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISpinBox">
+			<summary>Single line edit box with spin buttons.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.EditBox">
+			<summary>The edit box used in the spin control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.Maximum">
+			<summary>The maximum value which can be used in the spinbox.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.Minimum">
+			<summary>The minimum value which can be used in the spinbox.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpinBox.SetDecimalPlaces(System.Int32)">
+			<summary>Sets the number of decimal places to display. Note that this also rounds the range to the same number of decimal places.</summary>
+			<param name="places">The number of decimal places to display. Use -1 to reset.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpinBox.SetRange(System.Single,System.Single)">
+			<summary>Set the range of values which can be used in the spinbox.</summary>
+			<param name="min">Minimum value.</param>
+			<param name="max">Maximum value.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.StepSize">
+			<summary>The step size by which values are changed when pressing the spin buttons. This value also determines the number of decimal places to display.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.ValidateOn">
+			<summary>When the spinbox has to validate entered text.
+Can be any combination of GUISpinBoxValidation bit flags.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpinBox.Value">
+			<summary>The current value of the spinbox.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISpinBoxValidation">
+			<summary>Enumeration bitflag for when to validate the text typed into the spin box.
+Default used by Irrlicht is "Enter | LostFocus".</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpinBoxValidation.Change">
+			<summary>Validate on each change. Was default up to Irrlicht 1.8.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpinBoxValidation.Enter">
+			<summary>Validate when Enter was pressed.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpinBoxValidation.LoseFocus">
+			<summary>Validate when the edit box loses the focus.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpinBoxValidation.Never">
+			<summary>Does not validate typed text, probably a bad idea setting this usually.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISpriteBank">
+			<summary>Sprite bank.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIStaticText">
+			<summary>Multi or single line text label.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.ActiveFont">
+			<summary>The font which is used right now for drawing.
+Currently this is the override font when one is set and the font of the active skin otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.BackgroundColor">
+			<summary>Color for the background.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.DrawBackgroundEnabled">
+			<summary>True if background drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.DrawBorderEnabled">
+			<summary>True if border drawing is enabled, false otherwise.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.OverrideColor">
+			<summary>Another color for the text. If set, the static text does not use the GUIDefaultColor.ButtonText color defined in the skin, but this color instead.
+
+Note: setting this value will also set OverrideColorEnabled to true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.OverrideColorEnabled">
+			<summary>If the text should use the override color or the color in the gui skin. If set to true, the override color, which can be set with OverrideColor is used, otherwise the GUIDefaultColor.ButtonText color of the skin.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.OverrideFont">
+			<summary>The override font (if any).
+If this is set to null, the static text uses the font of the skin.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.RightToLeft">
+			<summary>Whether the string should be interpreted as right-to-left (RTL) text.
+
+Note: this component does not implement the Unicode bidi standard, the text of the component should be already RTL if you call this. The main difference when RTL is enabled is that the linebreaks for multiline elements are performed starting from the end.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIStaticText.SetTextAlignment(IrrlichtLime.GUI.GUIAlignment,IrrlichtLime.GUI.GUIAlignment)">
+			<summary>Sets text justification mode.</summary>
+			<param name="horizontal">UpperLeft for left justified (default), LowerRight for right justified, or Center for centered text.</param>
+			<param name="vertical">UpperLeft to align with top edge, LowerRight for bottom edge, or Center for centered text (default).</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.TextHeight">
+			<summary>The height of the text in pixels when it is drawn.
+This is useful for adjusting the layout of gui elements based on the height of the multiline text in this element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.TextRestrainedInside">
+			<summary>Whether the text in this label should be clipped if it goes outside bounds.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.TextWidth">
+			<summary>The width of the current text, in the current font.
+If the text is broken, this contains the width of the widest line.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIStaticText.WordWrap">
+			<summary>If set to true, words going over one line are broken on to the next line.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITab">
+			<summary>A tab-page, onto which other gui elements could be added.
+GUITab refers to the page itself, not to the tab in the tabbar of an GUITabControl.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITab.BackgroundColor">
+			<summary>The color of the background.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITab.DrawBackground">
+			<summary>If the tab should draw its background.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITab.Index">
+			<summary>Zero-based index of tab if in tabcontrol.
+
+Can be accessed later GUITabControl.GetTab() by this index.
+Note that this value can change when other tabs are inserted or removed.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITab.TextColor">
+			<summary>The color of the text.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITabControl">
+			<summary>A standard tab control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.ActiveTab">
+			<summary>Currently active tab.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.ActiveTabIndex">
+			<summary>Index of the currently active tab.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.AddTab(System.String)">
+			<summary>Adds a tab.</summary>
+			<param name="caption">Caption for the tab.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.AddTab(System.String,System.Int32)">
+			<summary>Adds a tab.</summary>
+			<param name="caption">Caption for the tab.</param>
+			<param name="id">Id for the tab. Default if -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.Clear">
+			<summary>Clears the tab control removing all tabs.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.GetTabAt(System.Int32,System.Int32)">
+			<summary>Get the id of the tab at the given absolute coordinates.</summary>
+			<param name="xpos">X coordinate.</param>
+			<param name="ypos">Y coordinate.</param>
+			<returns>The id of the tab or -1 when no tab is at those coordinates.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.InsertTab(System.Int32,System.String)">
+			<summary>Inserts the tab at the given index.</summary>
+			<param name="indexAt">Where to insert the tab.</param>
+			<param name="caption">Caption for the tab.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.InsertTab(System.Int32,System.String,System.Int32)">
+			<summary>Inserts the tab at the given index.</summary>
+			<param name="indexAt">Where to insert the tab.</param>
+			<param name="caption">Caption for the tab.</param>
+			<param name="id">Id for the tab. Default if -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITabControl.RemoveTab(System.Int32)">
+			<summary>Removes the tab.</summary>
+			<param name="index">Index of the tab. Must be from 0 to TabCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.TabCount">
+			<summary>Amount of tabs in the tab control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.TabExtraWidth">
+			<summary>The extra width added to tabs on each side of the text.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.TabHeight">
+			<summary>The height of the tabs.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.TabMaxWidth">
+			<summary>The maximal width of a tab. Default width is 0 which means "no width restriction".</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITabControl.TabVerticalAlignment">
+			<summary>The alignment of the tabs. Use UpperLeft or LowerRight.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITable">
+			<summary>Table GUI element.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ActiveColumnIndex">
+			<summary>Which header is currently active.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ActiveColumnOrdering">
+			<summary>The ordering used by the currently active column.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.AddColumn(System.String)">
+			<summary>Adds a column.
+If columnIndex is outside the current range, do push new colum at the end.</summary>
+			<param name="caption">Column caption.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.AddColumn(System.String,System.Int32)">
+			<summary>Adds a column.
+If columnIndex is outside the current range, do push new colum at the end.</summary>
+			<param name="caption">Column caption.</param>
+			<param name="columnIndex">Column index. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.AddRow(System.Int32)">
+			<summary>Adds a row to the table.</summary>
+			<param name="rowIndex">Zero-based index of rows. The row will be inserted at this position, if a row already exist there, it will be placed after it. If the row is larger than the actual number of row by more than one, it won't be created. Note that if you create a row that's not at the end, there might be performance issues.</param>
+			<returns>Index of inserted row.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.Clear">
+			<summary>Clears the table, deletes all items in the table.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.ClearRows">
+			<summary>Clears the table rows, but keeps the columns intact.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ColumnCount">
+			<summary>Amount of columns in the tab control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.DrawFlags">
+			<summary>Drawing flag which influence the layout.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.GetCellData(System.Int32,System.Int32)">
+			<summary>Gets the data of a cell.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.GetCellText(System.Int32,System.Int32)">
+			<summary>Gets the text of a cell.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.GetColumnWidth(System.Int32)">
+			<summary>Gets the width of a column.</summary>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.OrderRows">
+			<summary>This tells the table to start ordering all the rows.
+
+You need to explicitly tell the table to re order the rows when a new row is added or the cells data is changed. This makes the system more flexible and doesn't make you pay the cost of ordering when adding a lot of rows.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.OrderRows(System.Int32)">
+			<summary>This tells the table to start ordering all the rows.
+
+You need to explicitly tell the table to re order the rows when a new row is added or the cells data is changed. This makes the system more flexible and doesn't make you pay the cost of ordering when adding a lot of rows.</summary>
+			<param name="columnIndex">Column index. If -1 then active column is used. Must be from -1 to ColumnCount-1. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.OrderRows(System.Int32,IrrlichtLime.GUI.GUIOrderingMode)">
+			<summary>This tells the table to start ordering all the rows.
+
+You need to explicitly tell the table to re order the rows when a new row is added or the cells data is changed. This makes the system more flexible and doesn't make you pay the cost of ordering when adding a lot of rows.</summary>
+			<param name="columnIndex">Column index. If -1 then active column is used. Must be from -1 to ColumnCount-1. Default is -1.</param>
+			<param name="mode">Ordering mode of the rows. Default is None.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.RemoveColumn(System.Int32)">
+			<summary>Removes a column from the table.</summary>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.RemoveRow(System.Int32)">
+			<summary>Removes a row from the table.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ResizableColumns">
+			<summary>Can columns be resized by mouse.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.RowCount">
+			<summary>Amount of rows in the tab control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.SelectedRowIndex">
+			<summary>The currently selected row index.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SetCellColor(System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Sets the color of a cell.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+			<param name="color">New color.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SetCellData(System.Int32,System.Int32,System.Int32)">
+			<summary>Sets the data of a cell.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+			<param name="data">New data.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SetCellText(System.Int32,System.Int32,System.String)">
+			<summary>Sets the text of a cell.</summary>
+			<param name="rowIndex">Row index. Must be from 0 to RowCount-1.</param>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+			<param name="text">New text.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SetColumnOrdering(System.Int32,IrrlichtLime.GUI.GUIColumnOrdering)">
+			<summary>This tells the table control which ordering mode should be used when a column header is clicked.</summary>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+			<param name="mode">New ordering mode.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SetColumnWidth(System.Int32,System.Int32)">
+			<summary>Sets the width of a column.</summary>
+			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
+			<param name="width">New width. Must be &gt;=0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITable.SwapRows(System.Int32,System.Int32)">
+			<summary>Swap two row positions.</summary>
+			<param name="rowIndexA">First row index to swap. Must be from 0 to RowCount-1. Must be different from rowIndexB.</param>
+			<param name="rowIndexB">Second row index to swap. Must be from 0 to RowCount-1. Must be different from rowIndexA.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITableDrawFlag">
+			<summary>Table drawing flags.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUITableDrawFlag.ActiveRow">
+			<summary>Draw active row.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUITableDrawFlag.Columns">
+			<summary>Draw columns.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUITableDrawFlag.Rows">
+			<summary>Draw rows.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIToolBar">
+			<summary>Stays at the top of its parent like the menu bar and contains tool buttons.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton">
+			<summary>Adds a button to the tool bar.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String,System.String)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+			<param name="toolTipText">Tooltip of the button. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String,System.String,IrrlichtLime.Video.Texture)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+			<param name="toolTipText">Tooltip of the button. Default is null.</param>
+			<param name="img">Normal state image of the button. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String,System.String,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+			<param name="toolTipText">Tooltip of the button. Default is null.</param>
+			<param name="img">Normal state image of the button. Default is null.</param>
+			<param name="pressedImg">Pressed state image of the button. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String,System.String,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,System.Boolean)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+			<param name="toolTipText">Tooltip of the button. Default is null.</param>
+			<param name="img">Normal state image of the button. Default is null.</param>
+			<param name="pressedImg">Pressed state image of the button. Default is null.</param>
+			<param name="isPushButton">True if this is a push button. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIToolBar.AddButton(System.Int32,System.String,System.String,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,System.Boolean,System.Boolean)">
+			<summary>Adds a button to the tool bar.</summary>
+			<param name="id">Id of the button. Default is -1.</param>
+			<param name="text">Text of the button. Default is null.</param>
+			<param name="toolTipText">Tooltip of the button. Default is null.</param>
+			<param name="img">Normal state image of the button. Default is null.</param>
+			<param name="pressedImg">Pressed state image of the button. Default is null.</param>
+			<param name="isPushButton">True if this is a push button. Default is false.</param>
+			<param name="useAlphaChannel">True if alpha channel should be used when drawing button image states. Default is false.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITreeView">
+			<summary>Default tree view GUI element.
+
+Displays a windows like tree buttons to expand/collaps the child nodes of an node and optional tree lines. Each node consits of a text, an icon text and a int value for user data.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.ImageLeftOfIcon">
+			<summary>If the image is left of the icon. Default is true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.ImageList">
+			<summary>The image list which should be used for the image and selected image of every node. This value is null (no images) by default.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.LastEventNode">
+			<summary>The node which is associated to the last event.
+Warning: this value is only valid inside the OnEvent call!</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.LinesVisible">
+			<summary>True if the tree lines are visible.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.RootNode">
+			<summary>The root node (not visible) from the tree.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.SelectedNode">
+			<summary>The selected node of the tree or null if none is selected.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeView.SetIconFont(IrrlichtLime.GUI.GUIFont)">
+			<summary>Sets the font which should be used as icon font.
+
+This font is set to the Irrlicht engine built-in-font by default. Icons can be displayed in front of every list item. An icon is a string, displayed with the icon font.</summary>
+			<param name="font">New font for icons.</param>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUITreeViewNode">
+			<summary>Node for gui tree view.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildBack(System.String)">
+			<summary>Adds a new node behind the last child node.</summary>
+			<param name="text">Text of the new node.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildBack(System.String,System.String)">
+			<summary>Adds a new node behind the last child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildBack(System.String,System.String,System.Int32)">
+			<summary>Adds a new node behind the last child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildBack(System.String,System.String,System.Int32,System.Int32)">
+			<summary>Adds a new node behind the last child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildBack(System.String,System.String,System.Int32,System.Int32,System.Int32)">
+			<summary>Adds a new node behind the last child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+			<param name="data">Data of the new node. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildFront(System.String)">
+			<summary>Adds a new node before the first child node.</summary>
+			<param name="text">Text of the new node.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildFront(System.String,System.String)">
+			<summary>Adds a new node before the first child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildFront(System.String,System.String,System.Int32)">
+			<summary>Adds a new node before the first child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildFront(System.String,System.String,System.Int32,System.Int32)">
+			<summary>Adds a new node before the first child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.AddChildFront(System.String,System.String,System.Int32,System.Int32,System.Int32)">
+			<summary>Adds a new node before the first child node.</summary>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+			<param name="data">Data of the new node. Default is 0.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.ChildCount">
+			<summary>Amount of child nodes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Data">
+			<summary>The user data of this node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Expanded">
+			<summary>True if the node is expanded (children are visible).</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.FirstChild">
+			<summary>The first child node or null if this node has no children.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.HasChildren">
+			<summary>True if this node has child nodes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Icon">
+			<summary>The icon text of the node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.ImageIndex">
+			<summary>The image index of the node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildAfter(IrrlichtLime.GUI.GUITreeViewNode,System.String)">
+			<summary>Adds a new node behind the other node.</summary>
+			<param name="other">Node to insert after.</param>
+			<param name="text">Text of the new node.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildAfter(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String)">
+			<summary>Adds a new node behind the other node.</summary>
+			<param name="other">Node to insert after.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildAfter(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32)">
+			<summary>Adds a new node behind the other node.</summary>
+			<param name="other">Node to insert after.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildAfter(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32,System.Int32)">
+			<summary>Adds a new node behind the other node.</summary>
+			<param name="other">Node to insert after.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildAfter(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+			<summary>Adds a new node behind the other node.</summary>
+			<param name="other">Node to insert after.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+			<param name="data">Data of the new node. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildBefore(IrrlichtLime.GUI.GUITreeViewNode,System.String)">
+			<summary>Adds a new node before the other node.</summary>
+			<param name="other">Node to insert before.</param>
+			<param name="text">Text of the new node.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildBefore(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String)">
+			<summary>Adds a new node before the other node.</summary>
+			<param name="other">Node to insert before.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildBefore(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32)">
+			<summary>Adds a new node before the other node.</summary>
+			<param name="other">Node to insert before.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildBefore(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32,System.Int32)">
+			<summary>Adds a new node before the other node.</summary>
+			<param name="other">Node to insert before.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.InsertChildBefore(IrrlichtLime.GUI.GUITreeViewNode,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+			<summary>Adds a new node before the other node.</summary>
+			<param name="other">Node to insert before.</param>
+			<param name="text">Text of the new node.</param>
+			<param name="icon">Icon text of the new node. Default is null.</param>
+			<param name="imageIndex">Index of the normal state image for the new node or -1 if none. Default is -1.</param>
+			<param name="selectedImageIndex">Index of the selected state image for the new node or -1 if should be the same as imageIndex. Default is -1.</param>
+			<param name="data">Data of the new node. Default is 0.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.LastChild">
+			<summary>The last child node or null if this node has no children.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Level">
+			<summary>The level of this node.
+The root node has level 0. Direct children of the root has level 1, and so on.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.MoveChildDown(IrrlichtLime.GUI.GUITreeViewNode)">
+			<summary>Moves a child node one position down.</summary>
+			<param name="child">Child node to move down.</param>
+			<returns>True if the node was found as a child node and was not already the last child.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.MoveChildUp(IrrlichtLime.GUI.GUITreeViewNode)">
+			<summary>Moves a child node one position up.</summary>
+			<param name="child">Child node to move up.</param>
+			<returns>True if the node was found as a child node and was not already the first child.</returns>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.NextSibling">
+			<summary>The next sibling node from this node or null if this is the last node from the parent node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.NextVisible">
+			<summary>The next visible node from this node or null if this is the last visible node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Parent">
+			<summary>The parent node of this node or null if this is the root node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.PrevSibling">
+			<summary>The previous sibling node from this node or null if this is the first node from the parent node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.RemoveChild(IrrlichtLime.GUI.GUITreeViewNode)">
+			<summary>Removes a child node.</summary>
+			<param name="child">Child node to remove.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUITreeViewNode.RemoveChildren">
+			<summary>Removes all children (recursive) from this node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Root">
+			<summary>True if this node is the root node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Selected">
+			<summary>True if the node is currently selected.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.SelectedImageIndex">
+			<summary>The selected image index of the node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Text">
+			<summary>The text of the node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.TreeView">
+			<summary>The owner (tree view) of this node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeViewNode.Visible">
+			<summary>True if this node is visible (all parents are expanded).</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUIWindow">
+			<summary>Default moveable window GUI element with border, caption and close icons.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.ClientRect">
+			<summary>The rectangle of the drawable area (without border and without titlebar).
+
+The coordinates are given relative to the top-left position of the gui element. So to get absolute positions you have to add the resulting rectangle to AbsolutePosition.UpperLeftCorner. To get it relative to the parent element you have to add the resulting rectangle to RelativePosition.UpperLeftCorner. Beware that adding a menu will not change the ClientRect as menus are own gui elements, so in that case you might want to subtract the menu area additionally.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.CloseButton">
+			<summary>The Close button.
+You can hide the button by calling "CloseButton.Visible = false;".</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.Draggable">
+			<summary>True if the window can be dragged with the mouse, false if not.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.DrawBackground">
+			<summary>True if the window background will be drawn.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.DrawTitleBar">
+			<summary>True if the window titlebar will be drawn.
+Note: If the background is not drawn, then the titlebar is automatically also not drawn.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.MaximizeButton">
+			<summary>The Maximize button.
+You can hide the button by calling "MaximizeButton.Visible = false;".</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIWindow.MinimizeButton">
+			<summary>The Minimize button.
+You can hide the button by calling "MinimizeButton.Visible = false;".</summary>
 		</member>
 		<member name="T:IrrlichtLime.IO.ArchiveLoader">
 			<summary>Class which is able to create an archive from a file.
