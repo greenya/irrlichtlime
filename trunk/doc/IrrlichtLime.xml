@@ -7637,6 +7637,1144 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 			<param name="buffer">Array of bytes to write.</param>
 			<returns>How much bytes actually were written.</returns>
 		</member>
+		<member name="T:IrrlichtLime.Scene.AnimatedMesh">
+			<summary>An animated mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMesh.AnimationSpeed">
+			<summary>The number of frames per second to play the animation with by default. If the amount is 0, it is not animated.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMesh.FrameCount">
+			<summary>The amount of frames. If the amount is 1, it is a static, non-animated mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMesh.GetMesh(System.Int32)">
+			<summary>Gets mesh for a frame.</summary>
+			<param name="frame">Frame number as zero-based index. Must be from 0 to FrameCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMesh.GetMesh(System.Int32,System.Int32)">
+			<summary>Gets mesh for a frame.</summary>
+			<param name="frame">Frame number as zero-based index. Must be from 0 to FrameCount-1.</param>
+			<param name="detailLevel">Level of detail. 0 is the lowest, 255 the highest level of detail. Most meshes will ignore this value. Default is 255.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMesh.GetMesh(System.Int32,System.Int32,System.Int32)">
+			<summary>Gets mesh for a frame.</summary>
+			<param name="frame">Frame number as zero-based index. Must be from 0 to FrameCount-1.</param>
+			<param name="detailLevel">Level of detail. 0 is the lowest, 255 the highest level of detail. Most meshes will ignore this value. Default is 255.</param>
+			<param name="startFrameLoop">Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMesh.GetMesh(System.Int32,System.Int32,System.Int32,System.Int32)">
+			<summary>Gets mesh for a frame.</summary>
+			<param name="frame">Frame number as zero-based index. Must be from 0 to FrameCount-1.</param>
+			<param name="detailLevel">Level of detail. 0 is the lowest, 255 the highest level of detail. Most meshes will ignore this value. Default is 255.</param>
+			<param name="startFrameLoop">Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. Default is -1.</param>
+			<param name="endFrameLoop">Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. Default is -1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMesh.MeshType">
+			<summary>The type of the animated mesh.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.AnimatedMeshSceneNode">
+			<summary>Scene node capable of displaying an animated mesh and its shadow.
+
+The shadow is optional: if a shadow should be displayed too, just invoke the AddShadowVolumeSceneNode().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AddShadowVolumeSceneNode">
+			<summary>Creates shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. If null base mesh is used. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32)">
+			<summary>Creates shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. If null base mesh is used. Default is null.</param>
+			<param name="id">Id of the shadow scene node. This id can be used to identify the node later. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32,System.Boolean)">
+			<summary>Creates shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. If null base mesh is used. Default is null.</param>
+			<param name="id">Id of the shadow scene node. This id can be used to identify the node later. Default is -1.</param>
+			<param name="zfailmethod">If set to true, the shadow will use the zfail method, if not, zpass is used. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32,System.Boolean,System.Single)">
+			<summary>Creates shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the zfail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. If null base mesh is used. Default is null.</param>
+			<param name="id">Id of the shadow scene node. This id can be used to identify the node later. Default is -1.</param>
+			<param name="zfailmethod">If set to true, the shadow will use the zfail method, if not, zpass is used. Default is true.</param>
+			<param name="infinity">Value used by the shadow volume algorithm to scale the shadow volume (for zfail shadow volume we support only finite shadows, so camera zfar must be larger than shadow back cap, which is depend on infinity parameter). Default is 1000.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AnimateJoints">
+			<summary>Animates the joints in the mesh based on the current frame. Also takes into account transitions.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.AnimateJoints(System.Boolean)">
+			<summary>Animates the joints in the mesh based on the current frame. Also takes into account transitions.</summary>
+			<param name="calculateAbsolutePositions">True if absolute positions should be calculated. Default is true.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.AnimationSpeed">
+			<summary>The speed (frames per second) with which the animation is played.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.Clone">
+			<summary>Creates a clone of this scene node and its children.</summary>
+			<returns>The newly created clone of this node.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.Clone(IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a clone of this scene node and its children.</summary>
+			<param name="newParent">An optional new parent. Default is null.</param>
+			<returns>The newly created clone of this node.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.Clone(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager)">
+			<summary>Creates a clone of this scene node and its children.</summary>
+			<param name="newParent">An optional new parent. Default is null.</param>
+			<param name="newManager">An optional new scene manager. Default is null.</param>
+			<returns>The newly created clone of this node.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.CurrentFrame">
+			<summary>The current frame number.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.EndFrame">
+			<summary>The current end frame number.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.GetJointNode(System.Int32)">
+			<summary>Get a joint in the mesh (if the mesh is a bone based mesh).
+
+With this method it is possible to attach scene nodes to joints for example possible to attach a weapon to the left hand of an animated model. For example: "yourAnimatedMeshSceneNode.GetJointNode("LeftHand").AddChild(weaponSceneNode);"
+
+Please note that the joint returned by this method may not exist before this call and the joints in the node were created by it.</summary>
+			<param name="jointIndex">Index of the joint.</param>
+			<returns>The scene node which represents the joint with the specified index. Returns null if the contained mesh is not an skinned mesh or the index of the joint could not be found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.GetJointNode(System.String)">
+			<summary>Get a joint in the mesh (if the mesh is a bone based mesh).
+
+With this method it is possible to attach scene nodes to joints for example possible to attach a weapon to the left hand of an animated model. For example: "yourAnimatedMeshSceneNode.GetJointNode("LeftHand").AddChild(weaponSceneNode);"
+
+Please note that the joint returned by this method may not exist before this call and the joints in the node were created by it.</summary>
+			<param name="jointName">Name of the joint.</param>
+			<returns>The scene node which represents the joint with the specified name. Returns null if the contained mesh is not an skinned mesh or the name of the joint could not be found.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.JointCount">
+			<summary>Amount of joints in the mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.LoopMode">
+			<summary>When true the animations are played looped.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.Mesh">
+			<summary>The current mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.ReadOnlyMaterials">
+			<summary>If the scene node should not copy the materials of the mesh but use them in a read-only style.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetFrameLoop(System.Int32,System.Int32)">
+			<summary>Sets the frame numbers between the animation is looped.</summary>
+			<param name="begin">Start frame number of the loop.</param>
+			<param name="end">End frame number of the loop.</param>
+			<returns>True if successful, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetJointMode(IrrlichtLime.Scene.JointUpdateOnRender)">
+			<summary>Sets how the joints should be updated on render.</summary>
+			<param name="mode">New mode.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetMD2Animation(System.String)">
+			<summary>Starts a default MD2 animation.
+
+With this method it is easily possible to start a Run, Attack, Die or whatever animation, if the mesh contained in this scene node is an MD2 mesh. Otherwise, nothing happens.
+
+This method uses a character string to identify the animation. If the animation is a standard md2 animation, you might want to start this animation with the AnimationTypeMD2 enumeration instead.</summary>
+			<param name="animationName">Name of the animation which should be played.</param>
+			<returns>True if successful, and false if not, for example if the mesh in the scene node is not an MD2 mesh, or no animation with this name could be found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetMD2Animation(IrrlichtLime.Scene.AnimationTypeMD2)">
+			<summary>Starts a default MD2 animation.
+
+With this method it is easily possible to start a Run, Attack, Die or whatever animation, if the mesh contained in this scene node is an MD2 mesh. Otherwise, nothing happens.</summary>
+			<param name="animationType">An MD2 animation type, which should be played.</param>
+			<returns>True if successful, and false if not, for example if the mesh in the scene node is not an MD2 mesh.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetRenderFromIdentity(System.Boolean)">
+			<summary>Enables or disables rendering mesh ignoring its transformation. Culling is unaffected.</summary>
+			<param name="on">True to enable the state or false to disable.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.AnimatedMeshSceneNode.SetTransitionTime(System.Single)">
+			<summary>Sets the transition time.
+
+Note: This needs to enable joints, and call SetJointMode(JointUpdateOnRender.Control). You must call AnimateJoints(), or the mesh will not animate.</summary>
+			<param name="timeInSeconds">New transition time in seconds.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.AnimatedMeshSceneNode.StartFrame">
+			<summary>The current start frame number.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.AnimatedMeshType">
+			<summary>Possible types of (animated) meshes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType._3DS">
+			<summary>3D Studio .3ds file.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.BSP">
+			<summary>Quake 3 .bsp static Map.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.CSM">
+			<summary>Cartography Shop .csm file.
+
+This loader was created by Saurav Mohapatra.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.LMTS">
+			<summary>Pulsar LMTools .lmts file.
+
+This Irrlicht loader was written by Jonas Petersen.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.MD2">
+			<summary>Quake 2 MD2 model file.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.MD3">
+			<summary>Quake 3 MD3 model file.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.MDL_HalfLife">
+			<summary>Halflife MDL model file.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.MY3D">
+			<summary>My3D Mesh, the file format by Zhuck Dimitry.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.OBJ">
+			<summary>Maya .obj static model.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.OCT">
+			<summary>.oct file for Paul Nette's FSRad or from Murphy McCauley's Blender .oct exporter.
+
+The oct file format contains 3D geometry and lightmaps and can be loaded directly by Irrlicht.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.Skinned">
+			<summary>Generic skinned mesh.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.Unknown">
+			<summary>Unknown animated mesh type.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.AnimationTypeMD2">
+			<summary>Types of standard MD2 animations.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Attack">
+			<summary>Attack animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Boom">
+			<summary>Boom animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Crouch_Attack">
+			<summary>Attack while crouching animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Crouch_Death">
+			<summary>Death while crouching animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Crouch_Pain">
+			<summary>Pain while crouching animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Crouch_Stand">
+			<summary>Stand while crouching animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Crouch_Walk">
+			<summary>Walk while crouching animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Death_Fall_Back">
+			<summary>Death fall back animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Death_Fall_Back_Slow">
+			<summary>Death fall back slow animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Death_Fall_Forward">
+			<summary>Death fall forward animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Fallback">
+			<summary>Fall back animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Flip">
+			<summary>Flip animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Jump">
+			<summary>Jump animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Pain_A">
+			<summary>Pain variant #1 animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Pain_B">
+			<summary>Pain variant #2 animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Pain_C">
+			<summary>Pain variant #3 animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Point">
+			<summary>Point animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Run">
+			<summary>Run animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Salute">
+			<summary>Salute animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Stand">
+			<summary>Stand animation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimationTypeMD2.Wave">
+			<summary>Wave animation.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.BillboardSceneNode">
+			<summary>A billboard scene node.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for explosions, fire, lensflares, particles and things like that.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.BottomColor">
+			<summary>The color of the bottom edge of the billboard.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.BottomWidth">
+			<summary>The width of the bottom edge of the billboard.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardSceneNode.GetSize(System.Single@,System.Single@,System.Single@)">
+			<summary>Gets the size of the the billboard.</summary>
+			<param name="height">The height of the billboard.</param>
+			<param name="bottomWidth">The width of the bottom edge of the billboard.</param>
+			<param name="topWidth">The width of the top edge of the billboard.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.Height">
+			<summary>The height of the billboard.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardSceneNode.SetSize(System.Single,System.Single,System.Single)">
+			<summary>Sets the size of the billboard.</summary>
+			<param name="height">The height of the billboard.</param>
+			<param name="bottomWidth">The width of the bottom edge of the billboard.</param>
+			<param name="topWidth">The width of the top edge of the billboard.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.TopColor">
+			<summary>The color of the top edge of the billboard.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.TopWidth">
+			<summary>The width of the top edge of the billboard.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.BillboardTextSceneNode">
+			<summary>A billboard text scene node.
+
+Acts like a billboard which displays the currently set text.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardTextSceneNode.SetText(System.String)">
+			<summary>Sets the text string.</summary>
+			<param name="text">New text string.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardTextSceneNode.SetTextColor(IrrlichtLime.Video.Color)">
+			<summary>Sets the color of the text.</summary>
+			<param name="color">New color.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.BoneAnimationMode">
+			<summary>Enumeration for different bone animation modes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.BoneAnimationMode.Animated">
+			<summary>The bone is animated by the skin, if it's parent is not animated then animation will resume from this bone onward.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.BoneAnimationMode.Automatic">
+			<summary>The bone is usually animated, unless it's parent is not animated.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.BoneAnimationMode.NotAnimated">
+			<summary>The bone is not animated by the skin.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.BoneSceneNode">
+			<summary>Bones used for skeletal animation.
+
+Used with SkinnedMesh and AnimatedMeshSceneNode.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.AnimationMode">
+			<summary>The current animation mode of the bone.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.BoneIndex">
+			<summary>The index of the bone.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.PositionHint">
+			<summary>Position hint.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.RotationHint">
+			<summary>Rotation hint.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.ScaleHint">
+			<summary>Scale hint.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BoneSceneNode.SkinningSpace">
+			<summary>How the relative transformation of the bone is used.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BoneSceneNode.UpdateAbsolutePositionOfAllChildren">
+			<summary>Updates the absolute position based on the relative and the parents position.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.BoneSkinningSpace">
+			<summary>Bone skinning space.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.BoneSkinningSpace.Global">
+			<summary>Global skinning.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.BoneSkinningSpace.Local">
+			<summary>Local skinning, standard.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator">
+			<summary>Special scene node animator for FPS cameras.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.KeyMap">
+			<summary>The keyboard mapping for this animator.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.MoveSpeed">
+			<summary>The speed of movement in units per millisecond.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.RotateSpeed">
+			<summary>The rotation speed in degrees.
+
+The degrees are equivalent to a half screen movement of the mouse, i.e. if the mouse cursor had been moved to the border of the screen since the last animation.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.SetInvertMouse(System.Boolean)">
+			<summary>Sets whether the Y axis of the mouse should be inverted.
+
+If enabled then moving the mouse down will cause the camera to look up. It is disabled by default.</summary>
+			<param name="invert">True if Y axis of mouse should be inverted.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.SetVerticalMovement(System.Boolean)">
+			<summary>Sets whether vertical movement should be allowed.
+
+If vertical movement is enabled then the camera may fight with gravity causing camera shake. Disable this if the camera has a collision animator with gravity enabled.</summary>
+			<param name="allow">True if vertical movement should be allowed.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.CameraMayaSceneNodeAnimator">
+			<summary>Special scene node animator for Maya-style cameras.
+
+The camera is moving relative to the target with the mouse, by pressing either of the three buttons. In order to move the camera, set a new target for the camera. The distance defines the current orbit radius the camera moves on. Distance can be changed via the setter or by mouse events.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraMayaSceneNodeAnimator.Distance">
+			<summary>The current distance, i.e. orbit radius.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraMayaSceneNodeAnimator.MoveSpeed">
+			<summary>The speed of movement.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraMayaSceneNodeAnimator.RotateSpeed">
+			<summary>The rotation speed.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraMayaSceneNodeAnimator.ZoomSpeed">
+			<summary>The zoom speed.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.CameraSceneNode">
+			<summary>Scene Node which is a (controlable) camera.
+
+The whole scene will be rendered from the cameras point of view. Because the CameraScenNode is a SceneNode, it can be attached to any other scene node, and will follow its parents movement, rotation and so on.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.AspectRatio">
+			<summary>The aspect ratio of the camera.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.FarValue">
+			<summary>The value of the far clipping plane of the camera. Default is 2000.0f.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.FOV">
+			<summary>The field of view of the camera in radians.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.InputReceiverEnabled">
+			<summary>If this is set to true, the camera will respond to key and mouse inputs.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.NearValue">
+			<summary>The value of the near clipping plane of the camera. Default is 1.0f.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.Orthogonal">
+			<summary>True if a camera is orthogonal.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.ProjectionMatrix">
+			<summary>The current projection matrix of the camera.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.Rotation">
+			<summary>Rotation of the node in degrees.
+
+This only modifies the relative rotation of the node. If the camera's target and rotation are bound (see TargetAndRotationBinding) then setting this property will also change the camera's scene node rotation to match the target.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.CameraSceneNode.SetProjectionMatrix(IrrlichtLime.Core.Matrix)">
+			<summary>Sets the projection matrix of the camera.
+
+The Matrix class has some methods to build a projection matrix. e.g: Matrix4.BuildProjectionMatrixPerspectiveFovLH. Note that the matrix will only stay as set by this method until you explicitly set one of the following properties: NearValue, FarValue, AspectRatio or FOV.</summary>
+			<param name="projection">The new projection matrix of the camera.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.CameraSceneNode.SetProjectionMatrix(IrrlichtLime.Core.Matrix,System.Boolean)">
+			<summary>Sets the projection matrix of the camera.
+
+The Matrix class has some methods to build a projection matrix. e.g: Matrix4.BuildProjectionMatrixPerspectiveFovLH. Note that the matrix will only stay as set by this method until you explicitly set one of the following properties: NearValue, FarValue, AspectRatio or FOV.</summary>
+			<param name="projection">The new projection matrix of the camera.</param>
+			<param name="isOrthogonal">Set this to true if the matrix is an orthogonal one (e.g. from Matrix.BuildProjectionMatrixOrtho). Default is false.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.Target">
+			<summary>Look at target of the camera, in world co-ordinates.
+
+If the camera's target and rotation are bound (see TargetAndRotationBinding) then setting this property will also change the camera's scene node rotation to match the target. Note that thevalue is the current absolute position internally, so if you changed Position since last rendering you must call UpdateAbsolutePosition() before setting this value.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.TargetAndRotationBinding">
+			<summary>True if the camera scene node's rotation and its target position are bound together.
+
+When bound, setting Rotation will update the camera's target position to be along its +Z axis, and likewise setting Target will update its rotation so that its +Z axis will point at the target point. FPS camera use this binding by default; other cameras do not.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.UpVector">
+			<summary>The up vector of the camera.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.ViewFrustum">
+			<summary>The current view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.ViewMatrix">
+			<summary>The current view matrix of the camera.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraSceneNode.ViewMatrixAffector">
+			<summary>Custom view matrix affector.
+
+This matrix will be multiplied with the view matrix when it gets updated. This allows for custom camera setups like, for example, a reflection camera.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator">
+			<summary>Special scene node animator for doing automatic collision detection and response.
+
+This scene node animator can be attached to any single scene node and will then prevent it from moving through specified collision geometry (e.g. walls and floors of the) world, as well as having it fall under gravity. This animator provides a simple implementation of first person shooter cameras. Attach it to a camera, and the camera will behave as the player control in a first person shooter game: The camera stops and slides at walls, walks up stairs, falls down if there is no floor under it, and so on.
+
+The animator will treat any change in the position of its target scene node as movement, including setting Position, as movement.  If you want to teleport the target scene node manually to a location without it being effected by collision geometry, then set TargetNode after setting node.Position.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.AnimateTarget">
+			<summary>True if TargetNode should react on collision. Default is true.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.CollisionNode">
+			<summary>The node that was collided with.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.CollisionOccurred">
+			<summary>True if a collision occurred during the last call to AnimateNode().</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.CollisionPoint">
+			<summary>The last point of collision.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.CollisionResultPosition">
+			<summary>The position that the TargetNode will be moved to, unless the collision is consumed in a callback.
+
+If you have a collision callback registered, and it consumes the collision, then the node will ignore the collision and will not stop at this position. Instead, it will move fully to the position that caused the collision to occur.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.CollisionTriangle">
+			<summary>The last triangle that caused a collision.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.EllipsoidRadius">
+			<summary>The radius of the ellipsoid for collision detection and response.
+
+If you have a scene node, and you are unsure about how big the radius should be, you could use the following code to determine it: EllipsoidRadius = node.BoundingBox.MaxEdge - node.BoundingBox.Center;</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.EllipsoidTranslation">
+			<summary>The translation of the ellipsoid for collision detection.
+
+By default, the ellipsoid for collision detection is created around the center of the scene node, which means that the ellipsoid surrounds it completely. If this is not what you want, you may specify a translation for the ellipsoid.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.Falling">
+			<summary>True if the attached scene node is falling.
+
+Falling means that there is no blocking wall from the scene node in the direction of the gravity.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.Gravity">
+			<summary>The current vector of gravity.
+
+A good example value would be Vector3Df(0,-100.0f,0) for letting gravity affect all object to fall down. For bigger gravity, make increase the length of the vector. You can disable gravity by setting it to Vector3Df(0,0,0).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.Jump(System.Single)">
+			<summary>'Jump' the animator, by adding a jump speed opposite to its gravity.</summary>
+			<param name="jumpSpeed">The initial speed of the jump; the velocity will be opposite to this animator's Gravity vector.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.TargetNode">
+			<summary>The single node that this animator is acting on.
+
+Setting this value will force the animator to update its last target position for the node, allowing setting Position to teleport the node through collision geometry.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.World">
+			<summary>The current triangle selector holding all triangles of the world with which the scene node may collide.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.CullingType">
+			<summary>An enumeration of flags for all types of automatic culling for built-in scene nodes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.CullingType.Box">
+			<summary>Camera box against node box culling.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.CullingType.FrustumBox">
+			<summary>Camera frustum against node box culling.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.CullingType.FrustumSphere">
+			<summary>Camera frustum against node sphere culling.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.CullingType.OcclusionQuery">
+			<summary>Occlusion query culling.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.CullingType.Off">
+			<summary>No culling.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.DebugSceneType">
+			<summary>An enumeration of flags for all types of debug data for built-in scene nodes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.BBox">
+			<summary>Show bounding boxes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.BBoxAll">
+			<summary>Equals to "BBox | BBoxBuffers".</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.BBoxBuffers">
+			<summary>Show bounding boxes of all mesh buffers.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.Full">
+			<summary>Show all debug infos.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.HalfTransparency">
+			<summary>Temporary use transparency material type.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.MeshWireOverlay">
+			<summary>Overlays mesh wireframe.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.Normals">
+			<summary>Show vertex normals.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.Off">
+			<summary>No debug data. This is default value.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.DebugSceneType.Skeleton">
+			<summary>Shows skeleton/tags.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.DummyTransformationSceneNode">
+			<summary>Dummy scene node for adding additional transformations to the scene graph.
+
+This scene node does not render itself, and does not respond to setting Position, Rotation and Scale. Its just a simple scene node that takes a matrix as relative transformation, making it possible to insert any transformation anywhere into the scene graph. This scene node is for example used by the AnimatedMeshSceneNode for emulating joint scene nodes when playing skeletal animations.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.DummyTransformationSceneNode.RelativeTransformationMatrix">
+			<summary>The current relative transformation matrix.
+
+This is the matrix, this scene node uses instead of actual values of Position, Rotation and Scale.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.DynamicMeshBuffer">
+			<summary>Dynamic mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.DynamicMeshBuffer.IndexBuffer">
+			<summary>Buffer of indices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.DynamicMeshBuffer.VertexBuffer">
+			<summary>Buffer of vertices.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.GeometryCreator">
+			<summary>Helper class for creating geometry on the fly.
+
+You can get an instance of this class through device.SceneManager.GeometryCreator.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh(System.Int32,System.Int32)">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+			<param name="cylinderTesselation">Number of quads composing the cylinder. Default is 4.</param>
+			<param name="coneTesselation">Number of triangles composing the cone's roof. Default is 8.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh(System.Int32,System.Int32,System.Single,System.Single)">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+			<param name="cylinderTesselation">Number of quads composing the cylinder. Default is 4.</param>
+			<param name="coneTesselation">Number of triangles composing the cone's roof. Default is 8.</param>
+			<param name="arrowHeight">Total height of the arrow. Default is 1.0f.</param>
+			<param name="cylinderHeight">Total height of the cylinder, should be lesser than total arrow height. Default is 0.6f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+			<param name="cylinderTesselation">Number of quads composing the cylinder. Default is 4.</param>
+			<param name="coneTesselation">Number of triangles composing the cone's roof. Default is 8.</param>
+			<param name="arrowHeight">Total height of the arrow. Default is 1.0f.</param>
+			<param name="cylinderHeight">Total height of the cylinder, should be lesser than total arrow height. Default is 0.6f.</param>
+			<param name="cylinderWidth">Diameter of the cylinder. Default is 0.05f.</param>
+			<param name="coneWidth">Diameter of the cone's base, should be not smaller than the cylinder's diameter. Default is 0.3f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color)">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+			<param name="cylinderTesselation">Number of quads composing the cylinder. Default is 4.</param>
+			<param name="coneTesselation">Number of triangles composing the cone's roof. Default is 8.</param>
+			<param name="arrowHeight">Total height of the arrow. Default is 1.0f.</param>
+			<param name="cylinderHeight">Total height of the cylinder, should be lesser than total arrow height. Default is 0.6f.</param>
+			<param name="cylinderWidth">Diameter of the cylinder. Default is 0.05f.</param>
+			<param name="coneWidth">Diameter of the cone's base, should be not smaller than the cylinder's diameter. Default is 0.3f.</param>
+			<param name="arrowColor">Color of the arrow (same color for cylinder and cone). Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateArrowMesh(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates an arrow mesh, composed of a cylinder and a cone.</summary>
+			<param name="cylinderTesselation">Number of quads composing the cylinder. Default is 4.</param>
+			<param name="coneTesselation">Number of triangles composing the cone's roof. Default is 8.</param>
+			<param name="arrowHeight">Total height of the arrow. Default is 1.0f.</param>
+			<param name="cylinderHeight">Total height of the cylinder, should be lesser than total arrow height. Default is 0.6f.</param>
+			<param name="cylinderWidth">Diameter of the cylinder. Default is 0.05f.</param>
+			<param name="coneWidth">Diameter of the cone's base, should be not smaller than the cylinder's diameter. Default is 0.3f.</param>
+			<param name="cylinderColor">Color of the cylinder. Default is opaque white.</param>
+			<param name="coneColor">Color of the cone. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateConeMesh(System.Single,System.Single,System.Int32)">
+			<summary>Creates a cone mesh.</summary>
+			<param name="radius">Radius of the cone.</param>
+			<param name="length">Length of the cone.</param>
+			<param name="tesselation">Number of quads around the circumference of the cone.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateConeMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Creates a cone mesh.</summary>
+			<param name="radius">Radius of the cone.</param>
+			<param name="length">Length of the cone.</param>
+			<param name="tesselation">Number of quads around the circumference of the cone.</param>
+			<param name="coneColor">The color of the cone (same color for top and bottom). Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateConeMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a cone mesh.</summary>
+			<param name="radius">Radius of the cone.</param>
+			<param name="length">Length of the cone.</param>
+			<param name="tesselation">Number of quads around the circumference of the cone.</param>
+			<param name="topColor">The color of the top of the cone. Default is opaque white.</param>
+			<param name="bottomColor">The color of the bottom of the cone. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateConeMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Single)">
+			<summary>Creates a cone mesh.</summary>
+			<param name="radius">Radius of the cone.</param>
+			<param name="length">Length of the cone.</param>
+			<param name="tesselation">Number of quads around the circumference of the cone.</param>
+			<param name="topColor">The color of the top of the cone. Default is opaque white.</param>
+			<param name="bottomColor">The color of the bottom of the cone. Default is opaque white.</param>
+			<param name="oblique">!!! To be documented !!! Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCubeMesh">
+			<summary>Creates a simple cube mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCubeMesh(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a simple cube mesh.</summary>
+			<param name="size">Dimensions of the cube. Default value is Vector3Df(5,5,5).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCylinderMesh(System.Single,System.Single,System.Int32)">
+			<summary>Creates a cylinder mesh.</summary>
+			<param name="radius">Radius of the cylinder.</param>
+			<param name="length">Length of the cylinder.</param>
+			<param name="tesselation">Number of quads around the circumference of the cylinder.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCylinderMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Creates a cylinder mesh.</summary>
+			<param name="radius">Radius of the cylinder.</param>
+			<param name="length">Length of the cylinder.</param>
+			<param name="tesselation">Number of quads around the circumference of the cylinder.</param>
+			<param name="color">The color of the cylinder. Default is opque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCylinderMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color,System.Boolean)">
+			<summary>Creates a cylinder mesh.</summary>
+			<param name="radius">Radius of the cylinder.</param>
+			<param name="length">Length of the cylinder.</param>
+			<param name="tesselation">Number of quads around the circumference of the cylinder.</param>
+			<param name="color">The color of the cylinder. Default is opque white.</param>
+			<param name="closeTop">If true, close the ends of the cylinder, otherwise leave them open. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateCylinderMesh(System.Single,System.Single,System.Int32,IrrlichtLime.Video.Color,System.Boolean,System.Single)">
+			<summary>Creates a cylinder mesh.</summary>
+			<param name="radius">Radius of the cylinder.</param>
+			<param name="length">Length of the cylinder.</param>
+			<param name="tesselation">Number of quads around the circumference of the cylinder.</param>
+			<param name="color">The color of the cylinder. Default is opque white.</param>
+			<param name="closeTop">If true, close the ends of the cylinder, otherwise leave them open. Default is true.</param>
+			<param name="oblique">!!! To be documented !!! Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateHillPlaneMesh(IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material,System.Single,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a pseudo-random mesh representing a hilly terrain.</summary>
+			<param name="tileSize">The size of each tile.</param>
+			<param name="tileCount">The number of tiles in each dimension.</param>
+			<param name="material">The material to apply to the mesh.</param>
+			<param name="hillHeight">The maximum height of the hills.</param>
+			<param name="countHills">The number of hills along each dimension.</param>
+			<param name="textureRepeatCount">The number of times to repeat the material texture along each dimension.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreatePlaneMesh(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a simple rectangular textured plane mesh.</summary>
+			<param name="tileSize">The size of each tile.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreatePlaneMesh(IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates a simple rectangular textured plane mesh.</summary>
+			<param name="tileSize">The size of each tile.</param>
+			<param name="tileCount">The number of tiles in each dimension. Default is Dimension2Di(1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreatePlaneMesh(IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material)">
+			<summary>Creates a simple rectangular textured plane mesh.</summary>
+			<param name="tileSize">The size of each tile.</param>
+			<param name="tileCount">The number of tiles in each dimension. Default is Dimension2Di(1,1).</param>
+			<param name="material">The material to apply to the mesh. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreatePlaneMesh(IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a simple rectangular textured plane mesh.</summary>
+			<param name="tileSize">The size of each tile.</param>
+			<param name="tileCount">The number of tiles in each dimension. Default is Dimension2Di(1,1).</param>
+			<param name="material">The material to apply to the mesh. Default is null.</param>
+			<param name="textureRepeatCount">The number of times to repeat the material texture along each dimension. Default is Dimension2Df(1.0f,1.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateSphereMesh">
+			<summary>Creates a sphere mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateSphereMesh(System.Single)">
+			<summary>Creates a sphere mesh.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateSphereMesh(System.Single,System.Int32,System.Int32)">
+			<summary>Creates a sphere mesh.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCountX">Number of quads used for the horizontal tiling. Default is 16.</param>
+			<param name="polyCountY">Number of quads used for the vertical tiling. Default is 16.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateTerrainMesh(IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Core.Dimension2Df,System.Single,IrrlichtLime.Video.VideoDriver,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Creates a terrain mesh from an image representing a heightmap.</summary>
+			<param name="texture">The texture to apply to the terrain.</param>
+			<param name="heightmap">An image that will be interpreted as a heightmap. The brightness (average color) of each pixel is interpreted as a height, with a 255 brightness pixel producing the maximum height.</param>
+			<param name="stretchSize">The size that each pixel will produce, i.e. a 512 x 512 heightmap and a stretchSize of (10, 20) will produce a mesh of size 5120 x 10240.</param>
+			<param name="maxHeight">The maximum height of the terrain.</param>
+			<param name="driver">The current video driver.</param>
+			<param name="defaultVertexBlockSize">!!! To be documented !!!</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateTerrainMesh(IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Core.Dimension2Df,System.Single,IrrlichtLime.Video.VideoDriver,IrrlichtLime.Core.Dimension2Di,System.Boolean)">
+			<summary>Creates a terrain mesh from an image representing a heightmap.</summary>
+			<param name="texture">The texture to apply to the terrain.</param>
+			<param name="heightmap">An image that will be interpreted as a heightmap. The brightness (average color) of each pixel is interpreted as a height, with a 255 brightness pixel producing the maximum height.</param>
+			<param name="stretchSize">The size that each pixel will produce, i.e. a 512 x 512 heightmap and a stretchSize of (10, 20) will produce a mesh of size 5120 x 10240.</param>
+			<param name="maxHeight">The maximum height of the terrain.</param>
+			<param name="driver">The current video driver.</param>
+			<param name="defaultVertexBlockSize">!!! To be documented !!!</param>
+			<param name="debugBorders">!!! To be documented !!! Default value is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateVolumeLightMesh">
+			<summary>Creates a volume light mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateVolumeLightMesh(System.Int32,System.Int32)">
+			<summary>Creates a volume light mesh.</summary>
+			<param name="subdivideU">Horizontal patch count. Default is 32.</param>
+			<param name="subdivideV">Vertical patch count. Default is 32.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateVolumeLightMesh(System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a volume light mesh.</summary>
+			<param name="subdivideU">Horizontal patch count. Default is 32.</param>
+			<param name="subdivideV">Vertical patch count. Default is 32.</param>
+			<param name="footColor">Color at the bottom of the light. Default is opaque white.</param>
+			<param name="tailColor">Color at the mid of the light. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateVolumeLightMesh(System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Single)">
+			<summary>Creates a volume light mesh.</summary>
+			<param name="subdivideU">Horizontal patch count. Default is 32.</param>
+			<param name="subdivideV">Vertical patch count. Default is 32.</param>
+			<param name="footColor">Color at the bottom of the light. Default is opaque white.</param>
+			<param name="tailColor">Color at the mid of the light. Default is opaque white.</param>
+			<param name="lightPointDistance">Virtual distance of the light point for normals. Default is 8.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.GeometryCreator.CreateVolumeLightMesh(System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a volume light mesh.</summary>
+			<param name="subdivideU">Horizontal patch count. Default is 32.</param>
+			<param name="subdivideV">Vertical patch count. Default is 32.</param>
+			<param name="footColor">Color at the bottom of the light. Default is opaque white.</param>
+			<param name="tailColor">Color at the mid of the light. Default is opaque white.</param>
+			<param name="lightPointDistance">Virtual distance of the light point for normals. Default is 8.0f.</param>
+			<param name="lightDimensions">Dimensions of the light. Default is Vector3Df(1.0f,1.2f,1.0f).</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.HardwareBufferType">
+			<summary>Hardware buffer type.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareBufferType.Index">
+			<summary>Change the index mapping.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareBufferType.None">
+			<summary>Does not change anything.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareBufferType.Vertex">
+			<summary>Change the vertex mapping.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareBufferType.VertexAndIndex">
+			<summary>Change both vertex and index mapping to the same value.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.HardwareMappingHint">
+			<summary>Hardware mapping hint.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareMappingHint.Dynamic">
+			<summary>Sometimes changed, driver optimized placement.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareMappingHint.Never">
+			<summary>Don't store on the hardware.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareMappingHint.Static">
+			<summary>Rarely changed, usually stored completely on the hardware.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.HardwareMappingHint.Stream">
+			<summary>Always changed, cache optimizing on the GPU.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.IndexBuffer">
+			<summary>Index buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.AddIndex(System.Int32)">
+			<summary>Adds new index value to the buffer.</summary>
+			<param name="index">Index value to add. Must be not negative.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.AllocatedSize">
+			<summary>Total bytes allocated for the buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.GetValue(System.Int32)">
+			<summary>Gets index value.</summary>
+			<param name="index">Index of the index to get. Must be from 0 to IndexCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.HardwareMappingHint">
+			<summary>The current hardware mapping hint.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.IndexCount">
+			<summary>Total number of indices stored in the buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.SetDirty">
+			<summary>Flags the index buffer as changed, reloads hardware buffers.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.SetValue(System.Int32,System.Int32)">
+			<summary>Sets index value.</summary>
+			<param name="index">Index of the index to set. Must be from 0 to IndexCount-1.</param>
+			<param name="value">New index value. Must be not negative.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.Type">
+			<summary>Indices type.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.InterpolationMode">
+			<summary>Interpolation mode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.InterpolationMode.Constant">
+			<summary>Constant does use the current key-values without interpolation.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.InterpolationMode.Linear">
+			<summary>Linear interpolation.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.JointUpdateOnRender">
+			<summary>Enumeration for how the joints should be updated on render.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.JointUpdateOnRender.Control">
+			<summary>Control joint positions in the mesh (eg. ragdolls, or set the animation from AnimateJoints()).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.JointUpdateOnRender.None">
+			<summary>Do nothing.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.JointUpdateOnRender.Read">
+			<summary>Get joints positions from the mesh (for attached nodes, etc).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightSceneNode">
+			<summary>Scene node which is a dynamic light.
+
+You can switch the light on and off by making it visible or not. It can be animated by ordinary scene node animators. If the light type is directional or spot, the direction of the light source is defined by the rotation of the scene node (assuming (0,0,1) as the local direction of the light).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.LightSceneNode.CastShadows">
+			<summary>True if light would cast shadows, else false.
+
+Enabling this flag won't automatically cast shadows, the meshes will still need shadow scene nodes attached. But one can enable or disable distinct lights for shadow casting for performance reasons.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.LightSceneNode.LightData">
+			<summary>The light data associated with this LightSceneNode.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.LightSceneNode.LightType">
+			<summary>The current light type.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.LightSceneNode.Radius">
+			<summary>The light's radius of influence.
+
+Outside this radius the light won't lighten geometry and cast no shadows. Setting the radius will also influence the attenuation, setting it to (0,1/radius,0). If you want to override this behavior, set the attenuation after the radius.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.LightSceneNode.Visible">
+			<summary>True if the light should be enabled.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.Mesh">
+			<summary>Class which holds the geometry of an object.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.Create">
+			<summary>Creates new Mesh object. You have to call Drop() after you don't need this object.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.AddMeshBuffer(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Adds new mesh buffer to the mesh. The bounding box is not updated automatically.</summary>
+			<param name="buffer">Mesh buffer to add.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Mesh.BoundingBox">
+			<summary>An axis aligned bounding box of the mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.GetMeshBuffer(System.Int32)">
+			<summary>Gets a mesh buffer.</summary>
+			<param name="index">Index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.GetMeshBuffer(IrrlichtLime.Video.Material)">
+			<summary>Gets a mesh buffer.</summary>
+			<param name="material">Material to search for.</param>
+			<returns>The mesh buffer or null if there is no such mesh buffer.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Mesh.MeshBufferCount">
+			<summary>Amount of mesh buffers in this mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Mesh.MeshBuffers">
+			<summary>Array of all mesh buffers in this mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.RecalculateBoundingBox">
+			<summary>Recalculates the bounding box of the mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.RemoveMeshBuffer(System.Int32)">
+			<summary>Removes mesh buffers from the mesh.</summary>
+			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.RemoveMeshBuffer(System.Int32,System.Int32)">
+			<summary>Removes mesh buffers from the mesh.</summary>
+			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
+			<param name="count">Total number of mesh buffers to remove starting from index. Must be &gt;=1 and index + count &lt;= MeshBufferCount. Default is 1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.SetDirty(IrrlichtLime.Scene.HardwareBufferType)">
+			<summary>Flags the mesh as changed, reloads hardware buffers.
+
+This method has to be called every time the vertices or indices have changed. Otherwise, changes won't be updated on the GPU in the next render cycle.</summary>
+			<param name="buffer">Hardware buffer type to flag dirty.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.SetHardwareMappingHint(IrrlichtLime.Scene.HardwareMappingHint,IrrlichtLime.Scene.HardwareBufferType)">
+			<summary>Sets the hardware mapping hint.
+
+This methods allows to define optimization hints for the hardware. This enables, e.g., the use of hardware buffers on platforms that support this feature. This can lead to noticeable performance gains.</summary>
+			<param name="mappingHint">New mapping hint value.</param>
+			<param name="buffer">Which buffer mappingHint refers to.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Mesh.SetMaterialFlag(IrrlichtLime.Video.MaterialFlag,System.Boolean)">
+			<summary>Sets a flag of all contained materials to a new value.</summary>
+			<param name="flag">Flag to set in all materials.</param>
+			<param name="newvalue">New value of the flag.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshBuffer">
+			<summary>Holds a mesh with a single material.
+
+A part of a Mesh which has the same material on each face of that group. Logical groups of a Mesh need not be put into separate mesh buffers, but can be. Separately animated parts of the mesh must be put into separate mesh buffers. Some mesh buffer implementations have limitations on the number of vertices the buffer can hold. In that case, logical grouping can help. Moreover, the number of vertices should be optimized for the GPU upload, which often depends on the type of gfx card. Typial figures are 1000-10000 vertices per buffer.
+
+Since mesh buffers are used for drawing, and hence will be exposed to the driver, chances are high that they are grab()'ed from somewhere. It's therefore required to dynamically allocate mesh buffers which are passed to a video driver and only drop the buffer once it's not used in the current code block anymore.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Create(IrrlichtLime.Video.VertexType,IrrlichtLime.Video.IndexType)">
+			<summary>Creates new MeshBuffer object. You have to call Drop() after you don't need this object.</summary>
+			<param name="vertexType">Type of vertices.</param>
+			<param name="indexType">Type of indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Appends another mesh buffer to this one.</summary>
+			<param name="other">Mesh buffer to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesStandard">Vertices to append.</param>
+			<param name="indices16bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3D[],System.UInt32[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesStandard">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTangents[],System.UInt16[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesTangents">Vertices to append.</param>
+			<param name="indices16bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTangents[],System.UInt32[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesTangents">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTTCoords[],System.UInt16[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesTTCoords">Vertices to append.</param>
+			<param name="indices16bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTTCoords[],System.UInt32[])">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
+			<param name="verticesTTCoords">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.BoundingBox">
+			<summary>Axis aligned bounding box of this mesh buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetNormal(System.Int32)">
+			<summary>Gets normal vector of the vertex.</summary>
+			<param name="vertexIndex">Index of the vertex. Must be from 0 to VertexCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetPosition(System.Int32)">
+			<summary>Gets position of the vertex.</summary>
+			<param name="vertexIndex">Index of the vertex. Must be from 0 to VertexCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetTCoords(System.Int32)">
+			<summary>Gets texture coordinates of the vertex.</summary>
+			<param name="vertexIndex">Index of the vertex. Must be from 0 to VertexCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetVertex(System.Int32)">
+			<summary>Gets the vertex.</summary>
+			<param name="vertexIndex">Index of the vertex. Must be from 0 to VertexCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.HardwareMappingHintForIndex">
+			<summary>The current hardware mapping hint for indices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.HardwareMappingHintForVertex">
+			<summary>The current hardware mapping hint for vertices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.IndexCount">
+			<summary>Amount of indices in the mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.IndexType">
+			<summary>The type of index data which is stored in this mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.Indices">
+			<summary>Array of all indices in this mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.Material">
+			<summary>The material of this mesh buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.RecalculateBoundingBox">
+			<summary>Recalculates the bounding box. Should be called if the mesh buffer has changed.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.SetDirty(IrrlichtLime.Scene.HardwareBufferType)">
+			<summary>Flags the mesh buffer as changed, reloads hardware buffers.
+
+This method has to be called every time the vertices or indices have changed. Otherwise, changes won't be updated on the GPU in the next render cycle.</summary>
+			<param name="buffer">Hardware buffer type to flag dirty.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.SetHardwareMappingHint(IrrlichtLime.Scene.HardwareMappingHint,IrrlichtLime.Scene.HardwareBufferType)">
+			<summary>Sets the hardware mapping hint.
+
+This methods allows to define optimization hints for the hardware. This enables, e.g., the use of hardware buffers on platforms that support this feature. This can lead to noticeable performance gains.</summary>
+			<param name="mappingHint">New mapping hint value.</param>
+			<param name="buffer">Which buffer mappingHint refers to.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.SetMaterial(IrrlichtLime.Video.Material)">
+			<summary>Sets new material for this mesh buffer.</summary>
+			<param name="newMaterialToCopyFrom">New material.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateIndices(System.UInt16[],System.Int32)">
+			<summary>Updates continious set of indices of this mesh buffer.
+Note: Only works for compatible index types. Type of indices you provide must match the mesh buffer'.</summary>
+			<param name="indices16bit">New indices.</param>
+			<param name="startIndex">First index to update from. Must be: startIndex + indices16bit.Length &lt;= IndexCount.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateIndices(System.UInt32[],System.Int32)">
+			<summary>Updates continious set of indices of this mesh buffer.
+Note: Only works for compatible index types. Type of indices you provide must match the mesh buffer'.</summary>
+			<param name="indices32bit">New indices.</param>
+			<param name="startIndex">First index to update from. Must be: startIndex + indices32bit.Length &lt;= IndexCount.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3D[],System.Int32)">
+			<summary>Updates continious set of vertices of this mesh buffer.
+Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
+			<param name="verticesStandard">New vertices.</param>
+			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesStandard.Length &lt;= VertexCount.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3DTangents[],System.Int32)">
+			<summary>Updates continious set of vertices of this mesh buffer.
+Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
+			<param name="verticesTangents">New vertices.</param>
+			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesTangents.Length &lt;= VertexCount.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3DTTCoords[],System.Int32)">
+			<summary>Updates continious set of vertices of this mesh buffer.
+Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
+			<param name="verticesTTCoords">New vertices.</param>
+			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesTTCoords.Length &lt;= VertexCount.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.VertexCount">
+			<summary>Amount of vertices in the mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.VertexType">
+			<summary>The type of vertex data which is stored in this mesh buffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.Vertices">
+			<summary>Array of all vertices in this mesh buffer.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
