@@ -18,6 +18,7 @@ public enum class AnimatedMeshType
 	BSP = EAMT_BSP,
 	_3DS = EAMT_3DS,
 	MY3D = EAMT_MY3D,
+	LMTS = EAMT_LMTS,
 	CSM = EAMT_CSM,
 	OCT = EAMT_OCT,
 	MDL_HalfLife = EAMT_MDL_HALFLIFE,
