@@ -8775,6 +8775,451 @@ Note: Only works for compatible vertex types. Type of vertices you provide must 
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.Vertices">
 			<summary>Array of all vertices in this mesh buffer.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Scene.MeshCache">
+			<summary>The mesh cache stores already loaded meshes and provides an interface to them.
+
+You can access it using device.SceneManager.MeshCache. All existing scene managers will return a pointer to the same mesh cache, because it is shared between them.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.AddMesh(System.String,IrrlichtLime.Scene.AnimatedMesh)">
+			<summary>Adds a mesh to the internal list of loaded meshes.
+
+Usually, SceneManager.GetMesh() is called to load a mesh from a file. That method searches the list of loaded meshes if a mesh has already been loaded and returns a pointer to if it is in that list and already in memory. Otherwise it loads the mesh. With this method it is possible to pretend that a mesh already has been loaded. This method can be used for example by mesh loaders who need to load more than one mesh with one call. They can add additional meshes with this method to the scene manager. The COLLADA loader for example uses this method.</summary>
+			<param name="name">Unique mame of the mesh. When calling SceneManager.GetMesh() with this name it will return the mesh set by this method.</param>
+			<param name="mesh">A mesh which will now be referenced by this name.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.Clear">
+			<summary>Clears meshes from the mesh cache.
+
+Warning: If you have pointers to meshes that were loaded with SceneManager.GetMesh() and you did not grab them, then they may become invalid.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.Clear(System.Boolean)">
+			<summary>Clears meshes from the mesh cache.
+
+Warning: If you have pointers to meshes that were loaded with SceneManager.GetMesh() and you did not grab them, then they may become invalid.</summary>
+			<param name="unusedOnly">True if you need to clear meshes that are held in the mesh cache but not used anywhere else. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.GetMesh(System.Int32)">
+			<summary>Gets a mesh based on its index number.</summary>
+			<param name="index">Index of the mesh. Must be from 0 to MeshCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.GetMesh(System.String)">
+			<summary>Gets a mesh based on its name (often a filename).</summary>
+			<param name="name">Name of the mesh. Usually a filename.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.GetMeshIndex(IrrlichtLime.Scene.Mesh)">
+			<summary>Gets current index number of the mesh or -1 when not found.</summary>
+			<param name="mesh">The mesh to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.GetMeshName(System.Int32)">
+			<summary>Gets the name of a loaded mesh.</summary>
+			<param name="index">Index of the mesh. Must be from 0 to MeshCount-1.</param>
+			<returns>The name if mesh was found and has a name, else the empty value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.GetMeshName(IrrlichtLime.Scene.Mesh)">
+			<summary>Gets the name of a loaded mesh.</summary>
+			<param name="mesh">The mesh to search for.</param>
+			<returns>The name if mesh was found and has a name, else the empty value.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.IsMeshLoaded(System.String)">
+			<summary>Checks if a mesh was already loaded.</summary>
+			<param name="name">Name of the mesh. Usually a filename.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshCache.MeshCount">
+			<summary>Amount of loaded meshes in the cache.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.RemoveMesh(IrrlichtLime.Scene.Mesh)">
+			<summary>Removes the mesh from the cache.
+
+After loading a mesh with SceneManager.GetMesh(), the mesh can be removed from the cache using this method, freeing a lot of memory.</summary>
+			<param name="mesh">The mesh which shall be removed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.RenameMesh(System.Int32,System.String)">
+			<summary>Renames a loaded mesh.
+
+Note that renaming meshes might change the ordering of the meshes, and so the index of the meshes as returned by GetMeshIndex() or taken by some methods will change.</summary>
+			<param name="index">Index of the mesh. Must be from 0 to MeshCount-1.</param>
+			<param name="name">New name for the mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshCache.RenameMesh(IrrlichtLime.Scene.Mesh,System.String)">
+			<summary>Renames a loaded mesh.
+
+Note that renaming meshes might change the ordering of the meshes, and so the index of the meshes as returned by GetMeshIndex() or taken by some methods will change.</summary>
+			<param name="mesh">Mesh to be renamed.</param>
+			<param name="name">New name for the mesh.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshLoader">
+			<summary>Class which is able to load an animated mesh from a file.
+
+If you want Irrlicht be able to load meshes of currently unsupported file formats (e.g. .cob), then implement
+this and add your new MeshLoader with SceneManager.AddExternalMeshLoader() to the engine.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshLoader.CreateMesh(IrrlichtLime.IO.ReadFile)">
+			<summary>Creates/loads an animated mesh from the file.</summary>
+			<param name="file">File handler to load the file from.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshLoader.IsALoadableFileExtension(System.String)">
+			<summary>Returns true if the file might be loaded by this class. This decision should be based on the file extension (e.g. ".cob") only.</summary>
+			<param name="filename">Name of the file to test.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshManipulator">
+			<summary>An interface for easy manipulation of meshes.
+
+Scale, set alpha value, flip surfaces, and so on. This exists for fixing problems with wrong imported or exported meshes quickly after loading. It is not intended for doing mesh modifications and/or animations during runtime.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateAnimatedMesh(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a new AnimatedMesh and adds the mesh to it.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateAnimatedMesh(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.AnimatedMeshType)">
+			<summary>Creates a new AnimatedMesh and adds the mesh to it.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="type">The type of the animated mesh to create. Default is Unknown.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateForsythOptimizedMesh(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a mesh using vertex cache optimization according to the Forsyth paper. The function is thread-safe (read: you can optimize several meshes in different threads).
+
+More information can be found at http://home.comcast.net/~tom_forsyth/papers/fast_vert_cache_opt.html.</summary>
+			<param name="mesh">Source mesh for the operation.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshCopy(IrrlichtLime.Scene.Mesh)">
+			<summary>Clones a mesh.</summary>
+			<param name="mesh">Mesh to copy.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshUniquePrimitives(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a copy of a mesh with all vertices unwelded. The mesh consisting only of unique faces. All vertices which were previously shared are now duplicated.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWelded(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a copy of a mesh with vertices welded. The mesh without redundant vertices.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWelded(IrrlichtLime.Scene.Mesh,System.Single)">
+			<summary>Creates a copy of a mesh with vertices welded. The mesh without redundant vertices.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="tolerance">The threshold for vertex comparisons. Default is 0.000001f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWith1TCoords(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3D vertices.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWith2TCoords(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTTCoord vertices.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWithTangents(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTangents vertices. This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWithTangents(IrrlichtLime.Scene.Mesh,System.Boolean)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTangents vertices. This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="recalculateNormals">The normals are recalculated if set, otherwise the original ones are kept. Note that keeping the normals may introduce inaccurate tangents if the normals are very different to those calculated from the faces. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWithTangents(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTangents vertices. This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="recalculateNormals">The normals are recalculated if set, otherwise the original ones are kept. Note that keeping the normals may introduce inaccurate tangents if the normals are very different to those calculated from the faces. Default is false.</param>
+			<param name="smooth">The normals/tangents are smoothed across the meshbuffer's faces if this flag is set. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWithTangents(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTangents vertices. This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="recalculateNormals">The normals are recalculated if set, otherwise the original ones are kept. Note that keeping the normals may introduce inaccurate tangents if the normals are very different to those calculated from the faces. Default is false.</param>
+			<param name="smooth">The normals/tangents are smoothed across the meshbuffer's faces if this flag is set. Default is false.</param>
+			<param name="angleWeighted">Improved smoothing calculation used. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshWithTangents(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Creates a copy of the mesh, which will only consist of Vertex3DTangents vertices. This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.</summary>
+			<param name="mesh">Input mesh.</param>
+			<param name="recalculateNormals">The normals are recalculated if set, otherwise the original ones are kept. Note that keeping the normals may introduce inaccurate tangents if the normals are very different to those calculated from the faces. Default is false.</param>
+			<param name="smooth">The normals/tangents are smoothed across the meshbuffer's faces if this flag is set. Default is false.</param>
+			<param name="angleWeighted">Improved smoothing calculation used. Default is false.</param>
+			<param name="recalculateTangents">Whether are actually calculated, or just the mesh with proper type is created. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.FlipSurfaces(IrrlichtLime.Scene.Mesh)">
+			<summary>Flips the direction of surfaces. Changes backfacing triangles to frontfacing triangles and vice versa.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.GetPolyCount(IrrlichtLime.Scene.AnimatedMesh)">
+			<summary>Gets amount of polygons in mesh.</summary>
+			<param name="animatedMesh">Input animated mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.GetPolyCount(IrrlichtLime.Scene.Mesh)">
+			<summary>Gets amount of polygons in mesh.</summary>
+			<param name="mesh">Input mesh.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.MeshBuffer,System.Single)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="resolution">Resolution of the planar mapping. This is the value specifying which is the relation between world space and texture coordinate space. Default is 0.001f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.MeshBuffer,System.Single,System.Single,System.Byte,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="resolutionS">Resolution of the planar mapping in horizontal direction. This is the ratio between object space and texture space.</param>
+			<param name="resolutionT">Resolution of the planar mapping in vertical direction. This is the ratio between object space and texture space.</param>
+			<param name="axis">The axis along which the texture is projected. The allowed values are 0 (X), 1(Y), and 2(Z).</param>
+			<param name="offset">Vector added to the vertex positions (in object coordinates).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.Mesh,System.Single)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="resolution">Resolution of the planar mapping. This is the value specifying which is the relation between world space and texture coordinate space. Default is 0.001f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Byte,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a planar texture mapping.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="resolutionS">Resolution of the planar mapping in horizontal direction. This is the ratio between object space and texture space.</param>
+			<param name="resolutionT">Resolution of the planar mapping in vertical direction. This is the ratio between object space and texture space.</param>
+			<param name="axis">The axis along which the texture is projected. The allowed values are 0 (X), 1(Y), and 2(Z).</param>
+			<param name="offset">Vector added to the vertex positions (in object coordinates).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Recalculates all normals.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.MeshBuffer,System.Boolean)">
+			<summary>Recalculates all normals.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.MeshBuffer,System.Boolean,System.Boolean)">
+			<summary>Recalculates all normals.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+			<param name="angleWeighted">True if the normals shall be smoothed in relation to their angles. More expensive, but also higher precision. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.Mesh)">
+			<summary>Recalculates all normals.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.Mesh,System.Boolean)">
+			<summary>Recalculates all normals.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateNormals(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean)">
+			<summary>Recalculates all normals.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+			<param name="angleWeighted">True if the normals shall be smoothed in relation to their angles. More expensive, but also higher precision. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Recalculates tangents.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed. Must contain vertices with tangents.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.MeshBuffer,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.MeshBuffer,System.Boolean,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.MeshBuffer,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="buffer">Mesh buffer on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+			<param name="angleWeighted">True if the normals shall be smoothed in relation to their angles. More expensive, but also higher precision. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.Mesh)">
+			<summary>Recalculates tangents.</summary>
+			<param name="mesh">Mesh on which the operation is performed. Must contain vertices with tangents.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.Mesh,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="mesh">Mesh on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="mesh">Mesh on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.RecalculateTangents(IrrlichtLime.Scene.Mesh,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Recalculates tangents.</summary>
+			<param name="mesh">Mesh on which the operation is performed. Must contain vertices with tangents.</param>
+			<param name="recalculateNormals">True if the normals shall be recalculated, otherwise original normals of the mesh are used unchanged. Default is false.</param>
+			<param name="smooth">True if the normals shall be smoothed. Default is false.</param>
+			<param name="angleWeighted">True if the normals shall be smoothed in relation to their angles. More expensive, but also higher precision. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.Scale(IrrlichtLime.Scene.MeshBuffer,IrrlichtLime.Core.Vector3Df)">
+			<summary>Scales the actual mesh(buffer), not a scene node.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="factor">Scale factor for each axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.Scale(IrrlichtLime.Scene.Mesh,IrrlichtLime.Core.Vector3Df)">
+			<summary>Scales the actual mesh(buffer), not a scene node.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="factor">Scale factor for each axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.ScaleTCoords(IrrlichtLime.Scene.MeshBuffer,IrrlichtLime.Core.Vector2Df)">
+			<summary>Scales the texture coords.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="factor">Vector which defines the scale for each axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.ScaleTCoords(IrrlichtLime.Scene.MeshBuffer,IrrlichtLime.Core.Vector2Df,System.Int32)">
+			<summary>Scales the texture coords.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="factor">Vector which defines the scale for each axis.</param>
+			<param name="level">Number of texture coord, starting from 1. Support for level 2 exists for LightMap buffers. Default is 1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.ScaleTCoords(IrrlichtLime.Scene.Mesh,IrrlichtLime.Core.Vector2Df)">
+			<summary>Scales the texture coords.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="factor">Vector which defines the scale for each axis.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.ScaleTCoords(IrrlichtLime.Scene.Mesh,IrrlichtLime.Core.Vector2Df,System.Int32)">
+			<summary>Scales the texture coords.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="factor">Vector which defines the scale for each axis.</param>
+			<param name="level">Number of texture coord, starting from 1. Support for level 2 exists for LightMap buffers. Default is 1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.SetVertexColorAlpha(IrrlichtLime.Scene.MeshBuffer,System.Int32)">
+			<summary>Sets the alpha vertex color value.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="alpha">New alpha value. Must be a value between 0 and 255.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.SetVertexColorAlpha(IrrlichtLime.Scene.Mesh,System.Int32)">
+			<summary>Sets the alpha vertex color value.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="alpha">New alpha value. Must be a value between 0 and 255.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.SetVertexColors(IrrlichtLime.Scene.MeshBuffer,IrrlichtLime.Video.Color)">
+			<summary>Sets the colors of all vertices to one color.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="color">New color.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.SetVertexColors(IrrlichtLime.Scene.Mesh,IrrlichtLime.Video.Color)">
+			<summary>Sets the colors of all vertices to one color.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="color">New color.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.Transform(IrrlichtLime.Scene.MeshBuffer,IrrlichtLime.Core.Matrix)">
+			<summary>Applies a transformation.</summary>
+			<param name="buffer">Meshbuffer on which the operation is performed.</param>
+			<param name="m">Transformation matrix.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.Transform(IrrlichtLime.Scene.Mesh,IrrlichtLime.Core.Matrix)">
+			<summary>Applies a transformation.</summary>
+			<param name="mesh">Mesh on which the operation is performed.</param>
+			<param name="m">Transformation matrix.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshSceneNode">
+			<summary>A scene node displaying a static mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshSceneNode.AddShadowVolumeSceneNode">
+			<summary>Adds shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the ZFail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh)">
+			<summary>Adds shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the ZFail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32)">
+			<summary>Adds shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the ZFail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. Default is null.</param>
+			<param name="id">Id of the shadow scene node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32,System.Boolean)">
+			<summary>Adds shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the ZFail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. Default is null.</param>
+			<param name="id">Id of the shadow scene node. Default is -1.</param>
+			<param name="zfailmethod">If true, the shadow will use the ZFail method, if not, ZPass is used. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshSceneNode.AddShadowVolumeSceneNode(IrrlichtLime.Scene.Mesh,System.Int32,System.Boolean,System.Single)">
+			<summary>Adds shadow volume scene node as child of this node.
+
+The shadow can be rendered using the ZPass or the ZFail method. ZPass is a little bit faster because the shadow volume creation is easier, but with this method there occur ugly looking artifacs when the camera is inside the shadow volume. These error do not occur with the ZFail method.</summary>
+			<param name="shadowMesh">Optional custom mesh for shadow volume. Default is null.</param>
+			<param name="id">Id of the shadow scene node. Default is -1.</param>
+			<param name="zfailmethod">If true, the shadow will use the ZFail method, if not, ZPass is used. Default is true.</param>
+			<param name="infinity">Value used by the shadow volume algorithm to scale the shadow volume (for ZFail shadow volume we support only finite shadows, so camera' FarValue must be larger than shadow back cap, which is depend on infinity parameter). Default is 1000.0f.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshSceneNode.Mesh">
+			<summary>The currently defined mesh for display.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshSceneNode.ReadOnlyMeterials">
+			<summary>Whether the materials are read-only.
+
+If true the scene node should not copy the materials of the mesh but use them in a read-only style. In this way it is possible to change the materials of a mesh causing all mesh scene nodes referencing this mesh to change, too.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MetaTriangleSelector">
+			<summary>Interface for making multiple triangle selectors work as one big selector.
+
+This is nothing more than a collection of one or more triangle selectors providing together the interface of one triangle selector. In this way, collision tests can be done with different triangle groups in one pass.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MetaTriangleSelector.AddTriangleSelector(IrrlichtLime.Scene.TriangleSelector)">
+			<summary>Adds a triangle selector to the collection of triangle selectors.</summary>
+			<param name="selector">Triangle selector to add to the list.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MetaTriangleSelector.RemoveAllTriangleSelectors">
+			<summary>Removes all triangle selectors from the collection.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MetaTriangleSelector.RemoveTriangleSelector(IrrlichtLime.Scene.TriangleSelector)">
+			<summary>Removes a specific triangle selector from the collection.</summary>
+			<param name="selector">Triangle selector which is in the list but will be removed.</param>
+			<returns>True if successful, false if not.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Scene.Particle">
+			<summary>Holding particle data.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.Color">
+			<summary>Current color of the particle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.EndTime">
+			<summary>End life time of the particle.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.Particle.#ctor">
+			<summary>Initializes new particle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.Position">
+			<summary>Position of the particle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.Size">
+			<summary>Scale of the particle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.StartColor">
+			<summary>Original color of the particle.
+
+That's the color of the particle it had when it was emitted.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.StartSize">
+			<summary>Original scale of the particle.
+
+The scale of the particle when it was emitted.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.StartTime">
+			<summary>Start life time of the particle.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.StartVector">
+			<summary>Original direction and speed of the particle.
+
+The direction and speed the particle had when it was emitted.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Particle.Vector">
+			<summary>Direction and speed of the particle.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
