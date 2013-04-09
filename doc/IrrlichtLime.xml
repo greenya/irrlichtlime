@@ -9220,6 +9220,227 @@ The direction and speed the particle had when it was emitted.</summary>
 		<member name="P:IrrlichtLime.Scene.Particle.Vector">
 			<summary>Direction and speed of the particle.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleAffector">
+			<summary>A particle affector modifies particles.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleAffector.Affect(System.UInt32,System.Collections.Generic.List{IrrlichtLime.Scene.Particle})">
+			<summary>Affects an array of particles.</summary>
+			<param name="now">Current time. Same as contained in device.Timer.Time.</param>
+			<param name="particleList">List of particles.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAffector.Enabled">
+			<summary>Whether or not the affector is currently enabled.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAffector.Type">
+			<summary>Type of this particle affector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleAffectorType">
+			<summary>Types of built in particle affectors.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.Attract">
+			<summary>Attracting affector.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.FadeOut">
+			<summary>Fading out affector.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.Gravity">
+			<summary>Gravity affector.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.None">
+			<summary>None.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.Rotate">
+			<summary>Rotating affector.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleAffectorType.Scale">
+			<summary>Scaling affector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleAnimatedMeshSceneNodeEmitter">
+			<summary>A particle emitter which emits particles from mesh vertices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAnimatedMeshSceneNodeEmitter.EveryMeshVertex">
+			<summary>Whether to emit min&lt;-&gt;max particles for every vertex or to pick min&lt;-&gt;max vertices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAnimatedMeshSceneNodeEmitter.NormalDirectionModifier">
+			<summary>The amount that the normal is divided by for getting a particles direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAnimatedMeshSceneNodeEmitter.ParticleNode">
+			<summary>Mesh we're emitting particles from.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAnimatedMeshSceneNodeEmitter.UseNormalDirection">
+			<summary>Whether to use vertex normal for direction, or direction specified.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleAttractionAffector">
+			<summary>A particle affector which attracts or detracts particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAttractionAffector.AffectX">
+			<summary>Whether or not this will affect particles in the X direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAttractionAffector.AffectY">
+			<summary>Whether or not this will affect particles in the Y direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAttractionAffector.AffectZ">
+			<summary>Whether or not this will affect particles in the Z direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAttractionAffector.Attract">
+			<summary>Whether or not the particles are attracting or detracting.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleAttractionAffector.Point">
+			<summary>The point that particles will attract to.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleBoxEmitter">
+			<summary>A particle emitter which emits particles from a box shaped space.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleBoxEmitter.Box">
+			<summary>The box shape.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleCylinderEmitter">
+			<summary>A particle emitter which emits from a cylindrically shaped space.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleCylinderEmitter.Center">
+			<summary>The center of the radius for the cylinder, at one end of the cylinder.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleCylinderEmitter.Length">
+			<summary>The length of the cylinder.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleCylinderEmitter.Normal">
+			<summary>The normal of the cylinder.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleCylinderEmitter.OutlineOnly">
+			<summary>Whether or not to draw points inside the cylinder.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleCylinderEmitter.Radius">
+			<summary>The radius of the cylinder.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleEmitter">
+			<summary>A Particle emitter emitts new particles into a particle system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.Direction">
+			<summary>Direction the emitter emits particles.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleEmitter.Emitt(System.UInt32,System.UInt32)">
+			<summary>Prepares a list with new particles to emitt into the system. Returns a list of new particles to add into the system.</summary>
+			<param name="now">Current time.</param>
+			<param name="timeSinceLastCall">Time elapsed since last call, in milliseconds.</param>
+			<returns>List of new particles to add into the system.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MaxAngleDegrees">
+			<summary>Maximal random derivation from the direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MaxLifeTime">
+			<summary>Maximum particle life-time in milliseconds.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MaxParticlesPerSecond">
+			<summary>Maximum number of particles the emitter emits per second.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MaxStartColor">
+			<summary>Maximum starting color for particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MaxStartSize">
+			<summary>Maximum starting size for particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MinLifeTime">
+			<summary>Minimum particle life-time in milliseconds.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MinParticlesPerSecond">
+			<summary>Minimum number of particles the emitter emits per second.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MinStartColor">
+			<summary>Minimum starting color for particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.MinStartSize">
+			<summary>Minimum starting size for particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleEmitter.Type">
+			<summary>Type of this particle emitter.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleEmitterType">
+			<summary>Types of built in particle emitters.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.AnimatedMesh">
+			<summary>Animated mesh emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Box">
+			<summary>Box emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Cylinder">
+			<summary>Cylinder emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Mesh">
+			<summary>Mesh emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Point">
+			<summary>Point emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Ring">
+			<summary>Ring emitter.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ParticleEmitterType.Sphere">
+			<summary>Sphere emitter.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleFadeOutAffector">
+			<summary>A particle affector which fades out the particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleFadeOutAffector.FadeOutTime">
+			<summary>The time in milliseconds it takes for each particle to fade out (minimal 1 ms).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleFadeOutAffector.TargetColor">
+			<summary>The color the particles will interpolate to over time.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleGravityAffector">
+			<summary>A particle affector which applies gravity to particles.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleGravityAffector.Gravity">
+			<summary>The direction and force of gravity in all 3 dimensions.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleGravityAffector.TimeForceLost">
+			<summary>The time in milliseconds when the gravity force is totally lost. At that point the particle does not move any more.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleMeshEmitter">
+			<summary>A particle emitter which emits from vertices of a mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleMeshEmitter.EveryMeshVertex">
+			<summary>Whether to emit min&lt;-&gt;max particles for every vertex or to pick min&lt;-&gt;max vertices.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleMeshEmitter.NormalDirectionModifier">
+			<summary>The amount that the normal is divided by for getting a particles direction.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleMeshEmitter.ParticleMesh">
+			<summary>Mesh to emit particles from.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleMeshEmitter.UseNormalDirection">
+			<summary>Whether to use vertex normal for direction, or direction specified.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleRingEmitter">
+			<summary>A particle emitter which emits particles along a ring shaped area.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleRingEmitter.Center">
+			<summary>The center of the ring.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleRingEmitter.Radius">
+			<summary>The radius of the ring.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleRingEmitter.Thickness">
+			<summary>The thickness of the ring.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleRotationAffector">
+			<summary>A particle affector which rotates the particle system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleRotationAffector.Pivot">
+			<summary>The point that particles will rotate around.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleRotationAffector.Speed">
+			<summary>The speed in degrees per second in all 3 dimensions.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleSphereEmitter">
+			<summary>A particle emitter which emits from a spherical space.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleSphereEmitter.Center">
+			<summary>The center of the sphere for particle emissions.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleSphereEmitter.Radius">
+			<summary>The radius of the sphere for particle emissions.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
