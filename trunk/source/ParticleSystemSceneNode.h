@@ -71,7 +71,7 @@ public:
 	ParticleFadeOutAffector^ CreateFadeOutParticleAffector(Video::Color^ targetColor);
 	ParticleFadeOutAffector^ CreateFadeOutParticleAffector();
 
-	ParticleGravityAffector^ CreateGravityAffector(Vector3Df^ gravity, float timeForceLost);
+	ParticleGravityAffector^ CreateGravityAffector(Vector3Df^ gravity, unsigned int timeForceLost);
 	ParticleGravityAffector^ CreateGravityAffector(Vector3Df^ gravity);
 	ParticleGravityAffector^ CreateGravityAffector();
 

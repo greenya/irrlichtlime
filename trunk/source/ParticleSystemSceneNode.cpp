@@ -694,13 +694,13 @@ ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(
 	return ParticleFadeOutAffector::Wrap(a);
 }
 
-ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df^ gravity, float timeForceLost)
+ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df^ gravity, unsigned int timeForceLost)
 {
 	LIME_ASSERT(gravity != nullptr);
 
 	scene::IParticleGravityAffector* a = m_ParticleSystemSceneNode->createGravityAffector(
 		*gravity->m_NativeValue,
-		(u32)(timeForceLost * 1000)); // "* 1000" because it takes u32 (value in milliseconds), but scene::IParticleGravityAffector operates with float
+		timeForceLost);
 
 	return ParticleGravityAffector::Wrap(a);
 }
