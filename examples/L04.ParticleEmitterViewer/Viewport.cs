@@ -172,7 +172,7 @@ namespace L04.ParticleEmitterViewer
 			ps.AddAffector(affFadeOut);
 			affFadeOut.Drop();
 
-			affGravity = ps.CreateGravityAffector(new Vector3Df(0, -1, 0), 3);
+			affGravity = ps.CreateGravityAffector(new Vector3Df(0, -1, 0), 3000);
 			affGravity.Enabled = false;
 			ps.AddAffector(affGravity);
 			affGravity.Drop();
