@@ -8130,7 +8130,7 @@ This matrix will be multiplied with the view matrix when it gets updated. This a
 
 This scene node animator can be attached to any single scene node and will then prevent it from moving through specified collision geometry (e.g. walls and floors of the) world, as well as having it fall under gravity. This animator provides a simple implementation of first person shooter cameras. Attach it to a camera, and the camera will behave as the player control in a first person shooter game: The camera stops and slides at walls, walks up stairs, falls down if there is no floor under it, and so on.
 
-The animator will treat any change in the position of its target scene node as movement, including setting Position, as movement.  If you want to teleport the target scene node manually to a location without it being effected by collision geometry, then set TargetNode after setting node.Position.</summary>
+The animator will treat any change in the position of its target scene node as movement, including setting Position, as movement. If you want to teleport the target scene node manually to a location without it being effected by collision geometry, then set TargetNode after setting node.Position.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CollisionResponseSceneNodeAnimator.AnimateTarget">
 			<summary>True if TargetNode should react on collision. Default is true.</summary>
@@ -9440,6 +9440,1006 @@ The direction and speed the particle had when it was emitted.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.ParticleSphereEmitter.Radius">
 			<summary>The radius of the sphere for particle emissions.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ParticleSystemSceneNode">
+			<summary>A particle system scene node for creating snow, fire, exlosions, smoke...
+
+A scene node controlling a particle System. The behavior of the particles can be controlled by setting the right particle emitters and affectors.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.AddAffector(IrrlichtLime.Scene.ParticleAffector)">
+			<summary>Adds new particle effector to the particle system.
+
+A particle affector modifies the particles. For example, the FadeOut affector lets all particles fade out after some time.</summary>
+			<param name="affector">New affector.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleSystemSceneNode.AffectorList">
+			<summary>The list of all particle affectors attached to this node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.ClearParticles">
+			<summary>Removes all currently visible particles.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAnimatedMeshSceneNodeEmitter(IrrlichtLime.Scene.AnimatedMeshSceneNode,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a particle emitter for an animated mesh scene node.</summary>
+			<param name="particleNode">The animated mesh scene node to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAttractionAffector(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a point attraction affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="point">Point to attract particles to.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAttractionAffector(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a point attraction affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="point">Point to attract particles to.</param>
+			<param name="speed">Speed in units per second, to attract to the specified point. Default is 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAttractionAffector(IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean)">
+			<summary>Creates a point attraction affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="point">Point to attract particles to.</param>
+			<param name="speed">Speed in units per second, to attract to the specified point. Default is 1.0f.</param>
+			<param name="attract">Whether the particles attract or detract from this point. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateAttractionAffector(IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Creates a point attraction affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="point">Point to attract particles to.</param>
+			<param name="speed">Speed in units per second, to attract to the specified point. Default is 1.0f.</param>
+			<param name="attract">Whether the particles attract or detract from this point. Default is true.</param>
+			<param name="affectX">Whether or not this will affect the X position of the particle. Default is true.</param>
+			<param name="affectY">Whether or not this will affect the Y position of the particle. Default is true.</param>
+			<param name="affectZ">Whether or not this will affect the Z position of the particle. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter">
+			<summary>Creates a box particle emitter.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateBoxEmitter(IrrlichtLime.Core.AABBox,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a box particle emitter.</summary>
+			<param name="box">The box for the emitter. Default is AABBox(-10,28,-10,10,30,10).</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateCylinderEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a particle emitter for emitting from a cylinder.</summary>
+			<param name="center">The center of the circle at the base of the cylinder.</param>
+			<param name="radius">The thickness of the cylinder.</param>
+			<param name="normal">Direction of the length of the cylinder.</param>
+			<param name="length">The length of the the cylinder.</param>
+			<param name="outlineOnly">Whether or not to put points inside the cylinder or on the outline only. Default is false.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateFadeOutParticleAffector">
+			<summary>Creates a fade out particle affector.
+
+This affector modifies the color of every particle and reaches the final color when the particle dies. This affector looks really good, if the MaterialType.TransparentAddColor material is used and the targetColor is Color(0,0,0,0): particles are fading out into void with this setting.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateFadeOutParticleAffector(IrrlichtLime.Video.Color)">
+			<summary>Creates a fade out particle affector.
+
+This affector modifies the color of every particle and reaches the final color when the particle dies. This affector looks really good, if the MaterialType.TransparentAddColor material is used and the targetColor is Color(0,0,0,0): particles are fading out into void with this setting.</summary>
+			<param name="targetColor">Color whereto the color of the particle is changed. Default is Color(0,0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateFadeOutParticleAffector(IrrlichtLime.Video.Color,System.Single)">
+			<summary>Creates a fade out particle affector.
+
+This affector modifies the color of every particle and reaches the final color when the particle dies. This affector looks really good, if the MaterialType.TransparentAddColor material is used and the targetColor is Color(0,0,0,0): particles are fading out into void with this setting.</summary>
+			<param name="targetColor">Color whereto the color of the particle is changed. Default is Color(0,0,0,0).</param>
+			<param name="timeNeededToFadeOut">How much time in milliseconds should the affector need to change the color to the targetColor. Default is 1000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateGravityAffector">
+			<summary>Creates a gravity affector.
+
+This affector modifies the direction of the particle. It assumes that the particle is fired out of the emitter with huge force, but is loosing this after some time and is catched by the gravity then. This affector is ideal for creating things like fountains.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateGravityAffector(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a gravity affector.
+
+This affector modifies the direction of the particle. It assumes that the particle is fired out of the emitter with huge force, but is loosing this after some time and is catched by the gravity then. This affector is ideal for creating things like fountains.</summary>
+			<param name="gravity">Direction and force of gravity. Default is Vector3Df(0.0f,-0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateGravityAffector(IrrlichtLime.Core.Vector3Df,System.UInt32)">
+			<summary>Creates a gravity affector.
+
+This affector modifies the direction of the particle. It assumes that the particle is fired out of the emitter with huge force, but is loosing this after some time and is catched by the gravity then. This affector is ideal for creating things like fountains.</summary>
+			<param name="gravity">Direction and force of gravity. Default is Vector3Df(0.0f,-0.03f,0.0f).</param>
+			<param name="timeForceLost">Time in milliseconds when the force of the emitter is totally lost and the particle does not move any more. This is the time where gravity fully affects the particle. Default is 1000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateMeshEmitter(IrrlichtLime.Scene.Mesh,System.Boolean,IrrlichtLime.Core.Vector3Df,System.Single,System.Int32,System.Boolean,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a mesh particle emitter.</summary>
+			<param name="particleMesh">The mesh to emit particles from.</param>
+			<param name="useNormalDirection">If true, the direction of each particle created will be the normal of the vertex that it's emitting from. The normal is divided by the normalDirectionModifier parameter. Default is true.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="normalDirectionModifier">If the emitter is using the normal direction then the normal of the vertex that is being emitted from is divided by this number. Default is 100.0f.</param>
+			<param name="meshBufferIndex">This allows you to specify a specific mesh buffer for the Mesh to emit particles from. If -1, then a random mesh buffer picked from all of the mesh buffers will be selected to pick a random vertex from. If the value is 0 or greater, it will only pick random vertices from the mesh buffer specified by this value. Default is -1.</param>
+			<param name="everyMeshVertex">If true, the emitter will emit between min/max particles every second, for every vertex in the mesh, if false, it will emit between min/max particles from random vertices in the mesh. Default is false.</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter">
+			<summary>Creates a point particle emitter.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreatePointEmitter(IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a point particle emitter.</summary>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRingEmitter(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a ring particle emitter.</summary>
+			<param name="ringCenter">Center of the ring.</param>
+			<param name="ringRadius">Distance of points from center. Points will be rotated around the Y axis at a random 360 degrees and will then be shifted by the provided ringThickness values in each axis.</param>
+			<param name="ringThickness">Thickness of the ring or how wide the ring is.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRotationAffector">
+			<summary>Creates a rotation affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRotationAffector(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a rotation affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="speed">Rotation in degrees per second. Default is Vector3Df(5.0f,5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateRotationAffector(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a rotation affector.
+
+This affector modifies the positions of the particles and attracts them to a specified point at a specified speed per second.</summary>
+			<param name="speed">Rotation in degrees per second. Default is Vector3Df(5.0f,5.0f,5.0f).</param>
+			<param name="pivot">Point to rotate the particles around. Default is Vector3Df(0.0f,0.0f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateScaleParticleAffector">
+			<summary>Creates a scale particle affector.
+
+This affector scales the particle to the a multiple of its size defined by the scaleTo variable.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateScaleParticleAffector(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a scale particle affector.
+
+This affector scales the particle to the a multiple of its size defined by the scaleTo variable.</summary>
+			<param name="scaleTo">Multiple of the size which the particle will be scaled to until deletion. Default is Dimension2Df(1.0f, 1.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.CreateSphereEmitter(IrrlichtLime.Core.Vector3Df,System.Single,IrrlichtLime.Core.Vector3Df,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Int32,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Creates a sphere particle emitter.</summary>
+			<param name="sphereCenter">Center of the sphere.</param>
+			<param name="sphereRadius">Radius of the sphere.</param>
+			<param name="direction">Direction and speed of particle emission. Default is Vector3Df(0.0f,0.03f,0.0f).</param>
+			<param name="minParticlesPerSecond">Minimal amount of particles emitted per second. Default is 5.</param>
+			<param name="maxParticlesPerSecond">Maximal amount of particles emitted per second. Default is 10.</param>
+			<param name="minStartColor">Minimal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque black.</param>
+			<param name="maxStartColor">Maximal initial start color of a particle. The real color of every particle is calculated as random interpolation between minStartColor and maxStartColor. Default is opaque white.</param>
+			<param name="lifeTimeMin">Minimal lifetime of a particle, in milliseconds. Default is 2000.</param>
+			<param name="lifeTimeMax">Maximal lifetime of a particle, in milliseconds. Default is 4000.</param>
+			<param name="maxAngleDegrees">Maximal angle in degrees, the emitting direction of the particle will differ from the original direction. Default is 0.</param>
+			<param name="minStartSize">Minimal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+			<param name="maxStartSize">Maximal initial start size of a particle. The real size of every particle is calculated as random interpolation between minStartSize and maxStartSize. Default is Dimension2Df(5.0f,5.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.DoParticleSystem(System.UInt32)">
+			<summary>Manually updates the particles.
+
+This should only be called when you want to render the node outside the scenegraph, as the node will care about this otherwise automatically.</summary>
+			<param name="time">The time.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ParticleSystemSceneNode.Emitter">
+			<summary>The particle emitter, which creates the particles.
+
+A particle emitter can be created using one of the CreateXXXEmitter() methods. You can set this to null for removing the current emitter and stopping the particle system emitting new particles.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.RemoveAllAffectors">
+			<summary>Removes all particle affectors in the particle system.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.SetParticlesAreGlobal">
+			<summary>Sets if the particles should be global.
+
+If they are, the particles are affected by the movement of the particle system scene node too, otherwise they completely ignore it. Default is true.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.SetParticlesAreGlobal(System.Boolean)">
+			<summary>Sets if the particles should be global.
+
+If they are, the particles are affected by the movement of the particle system scene node too, otherwise they completely ignore it. Default is true.</summary>
+			<param name="global">New value. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.SetParticleSize">
+			<summary>Sets the size of all particles.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.SetParticleSize(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Sets the size of all particles.</summary>
+			<param name="size">New size. Default is Dimension2Df(5.0f, 5.0f).</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.PrimitiveType">
+			<summary>Enumeration for all primitive types there are.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.LineLoop">
+			<summary>Just as LineStrip, but the last and the first vertices are also connected.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.Lines">
+			<summary>Every two vertices are connected creating n/2 lines.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.LineStrip">
+			<summary>All vertices form a single connected line.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.Points">
+			<summary>All vertices are non-connected points.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.PointSprites">
+			<summary>The single vertices are expanded to quad billboards on the GPU.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.Polygon">
+			<summary>Just as LineLoop, but filled.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.Quads">
+			<summary>Every four vertices create a quad.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.QuadStrip">
+			<summary>After the first two vertices each further two vetices create a quad with the preceding two.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.TriangleFan">
+			<summary>After the first two vertices each vertex defines a new triangle. All around the common first vertex.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.Triangles">
+			<summary>Explicitly set all vertices for each triangle.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.PrimitiveType.TriangleStrip">
+			<summary>After the first two vertices each vertex defines a new triangle. Always the two last and the new one forms a new triangle.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneCollisionManager">
+			<summary>The Scene Collision Manager provides methods for performing collision tests and picking on scene nodes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionPoint(IrrlichtLime.Core.Line3Df,IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@,IrrlichtLime.Scene.SceneNode@)">
+			<summary>Finds the nearest collision point of a line and lots of triangles, if there is one.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="selector">The source of triangles.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the line-start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<param name="collisionNode">If a collision is detected, this will contain the scene node associated with the triangle that was hit.</param>
+			<returns>True if a collision was detected and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionResultPosition(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Triangle3Df@,IrrlichtLime.Core.Vector3Df@,System.Boolean@,IrrlichtLime.Scene.SceneNode@)">
+			<summary>Collides a moving ellipsoid with a 3d world with gravity and returns the resulting new position of the ellipsoid.
+
+This can be used for moving a character in a 3d world: The character will slide at walls and is able to walk up stairs. The method used how to calculate the collision result position is based on the paper "Improved Collision detection and Response" by Kasper Fauerby.</summary>
+			<param name="selector">Triangles of world.</param>
+			<param name="ellipsoidPosition">Position of the ellipsoid.</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid.</param>
+			<param name="ellipsoidDirectionAndSpeed">Direction and speed of the movement of the ellipsoid.</param>
+			<param name="collisionTriangle">If there is a collision, this will contain the last triangle causing a collision.</param>
+			<param name="collisionPosition">If there is a collision, this will contain the position of the collision.</param>
+			<param name="falling">Will contain true if the ellipsoid is falling down, caused by gravity.</param>
+			<param name="collisionNode">If there is a collision, this will contain the node with which the ellipoid collided.</param>
+			<returns>New position of the ellipsoid.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionResultPosition(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Triangle3Df@,IrrlichtLime.Core.Vector3Df@,System.Boolean@,IrrlichtLime.Scene.SceneNode@,System.Single)">
+			<summary>Collides a moving ellipsoid with a 3d world with gravity and returns the resulting new position of the ellipsoid.
+
+This can be used for moving a character in a 3d world: The character will slide at walls and is able to walk up stairs. The method used how to calculate the collision result position is based on the paper "Improved Collision detection and Response" by Kasper Fauerby.</summary>
+			<param name="selector">Triangles of world.</param>
+			<param name="ellipsoidPosition">Position of the ellipsoid.</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid.</param>
+			<param name="ellipsoidDirectionAndSpeed">Direction and speed of the movement of the ellipsoid.</param>
+			<param name="collisionTriangle">If there is a collision, this will contain the last triangle causing a collision.</param>
+			<param name="collisionPosition">If there is a collision, this will contain the position of the collision.</param>
+			<param name="falling">Will contain true if the ellipsoid is falling down, caused by gravity.</param>
+			<param name="collisionNode">If there is a collision, this will contain the node with which the ellipoid collided.</param>
+			<param name="slidingSpeed">The speed with witch ellipsoid will slide on the triangles at which it cannot stand. Default is 0.0005f.</param>
+			<returns>New position of the ellipsoid.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionResultPosition(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Triangle3Df@,IrrlichtLime.Core.Vector3Df@,System.Boolean@,IrrlichtLime.Scene.SceneNode@,System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Collides a moving ellipsoid with a 3d world with gravity and returns the resulting new position of the ellipsoid.
+
+This can be used for moving a character in a 3d world: The character will slide at walls and is able to walk up stairs. The method used how to calculate the collision result position is based on the paper "Improved Collision detection and Response" by Kasper Fauerby.</summary>
+			<param name="selector">Triangles of world.</param>
+			<param name="ellipsoidPosition">Position of the ellipsoid.</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid.</param>
+			<param name="ellipsoidDirectionAndSpeed">Direction and speed of the movement of the ellipsoid.</param>
+			<param name="collisionTriangle">If there is a collision, this will contain the last triangle causing a collision.</param>
+			<param name="collisionPosition">If there is a collision, this will contain the position of the collision.</param>
+			<param name="falling">Will contain true if the ellipsoid is falling down, caused by gravity.</param>
+			<param name="collisionNode">If there is a collision, this will contain the node with which the ellipoid collided.</param>
+			<param name="slidingSpeed">The speed with witch ellipsoid will slide on the triangles at which it cannot stand. Default is 0.0005f.</param>
+			<param name="gravityDirectionAndSpeed">Direction and force of gravity. Default is Vector3Df(0.0f,0.0f,0.0f).</param>
+			<returns>New position of the ellipsoid.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetRayFromScreenCoordinates(IrrlichtLime.Core.Vector2Di)">
+			<summary>Gets a 3d ray which would go through the 2d screen coodinates.</summary>
+			<param name="pos">Screen coordinates in pixels.</param>
+			<returns>Ray starting from the position of the camera and ending at a length of the far value of the camera at a position which would be behind the 2d screen coodinates.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetRayFromScreenCoordinates(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Scene.CameraSceneNode)">
+			<summary>Gets a 3d ray which would go through the 2d screen coodinates.</summary>
+			<param name="pos">Screen coordinates in pixels.</param>
+			<param name="camera">Camera from which the ray starts. If null, the active camera is used. Default is null.</param>
+			<returns>Ray starting from the position of the camera and ending at a length of the far value of the camera at a position which would be behind the 2d screen coodinates.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeAndCollisionPointFromRay(IrrlichtLime.Core.Line3Df,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@)">
+			<summary>Perform a ray/box and ray/triangle collision check on a heirarchy of scene nodes.
+
+This checks all scene nodes under the specified one, first by ray/bounding box, and then by accurate ray/triangle collision, finding the nearest collision, and the scene node containg it. It returns the node hit, and (via output parameters) the position of the collision, and the triangle that was hit.
+
+All scene nodes in the hierarchy tree under the specified node are checked. Only nodes that are visible, with an ID that matches at least one bit in the supplied idBitMask, and which have a triangle selector are considered as candidates for being hit. You do not have to build a meta triangle selector; the individual triangle selectors of each candidate scene node are used automatically.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the ray.Start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<returns>Returns the scene node containing the hit triangle nearest to ray.Start. If no collision is detected, then null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeAndCollisionPointFromRay(IrrlichtLime.Core.Line3Df,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@,System.Int32)">
+			<summary>Perform a ray/box and ray/triangle collision check on a heirarchy of scene nodes.
+
+This checks all scene nodes under the specified one, first by ray/bounding box, and then by accurate ray/triangle collision, finding the nearest collision, and the scene node containg it. It returns the node hit, and (via output parameters) the position of the collision, and the triangle that was hit.
+
+All scene nodes in the hierarchy tree under the specified node are checked. Only nodes that are visible, with an ID that matches at least one bit in the supplied idBitMask, and which have a triangle selector are considered as candidates for being hit. You do not have to build a meta triangle selector; the individual triangle selectors of each candidate scene node are used automatically.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the ray.Start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<returns>Returns the scene node containing the hit triangle nearest to ray.Start. If no collision is detected, then null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeAndCollisionPointFromRay(IrrlichtLime.Core.Line3Df,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@,System.Int32,IrrlichtLime.Scene.SceneNode)">
+			<summary>Perform a ray/box and ray/triangle collision check on a heirarchy of scene nodes.
+
+This checks all scene nodes under the specified one, first by ray/bounding box, and then by accurate ray/triangle collision, finding the nearest collision, and the scene node containg it. It returns the node hit, and (via output parameters) the position of the collision, and the triangle that was hit.
+
+All scene nodes in the hierarchy tree under the specified node are checked. Only nodes that are visible, with an ID that matches at least one bit in the supplied idBitMask, and which have a triangle selector are considered as candidates for being hit. You do not have to build a meta triangle selector; the individual triangle selectors of each candidate scene node are used automatically.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the ray.Start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">The scene node at which to begin checking. Only this node and its children will be checked. If you want to check the entire scene, pass null, and the root scene node will be used. Default is null.</param>
+			<returns>Returns the scene node containing the hit triangle nearest to ray.Start. If no collision is detected, then null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeAndCollisionPointFromRay(IrrlichtLime.Core.Line3Df,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@,System.Int32,IrrlichtLime.Scene.SceneNode,System.Boolean)">
+			<summary>Perform a ray/box and ray/triangle collision check on a heirarchy of scene nodes.
+
+This checks all scene nodes under the specified one, first by ray/bounding box, and then by accurate ray/triangle collision, finding the nearest collision, and the scene node containg it. It returns the node hit, and (via output parameters) the position of the collision, and the triangle that was hit.
+
+All scene nodes in the hierarchy tree under the specified node are checked. Only nodes that are visible, with an ID that matches at least one bit in the supplied idBitMask, and which have a triangle selector are considered as candidates for being hit. You do not have to build a meta triangle selector; the individual triangle selectors of each candidate scene node are used automatically.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the ray.Start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">The scene node at which to begin checking. Only this node and its children will be checked. If you want to check the entire scene, pass null, and the root scene node will be used. Default is null.</param>
+			<param name="noDebugObjects">Doesn't take debug objects into account when true. These are scene nodes with DebugObject "true". Default is false.</param>
+			<returns>Returns the scene node containing the hit triangle nearest to ray.Start. If no collision is detected, then null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromCameraBB(IrrlichtLime.Scene.CameraSceneNode)">
+			<summary>Gets the scene node, which the given camera is looking at and whose id matches the bitmask. A ray is simply casted from the position of the camera to the view target position, and all scene nodes are tested against this ray. The collision tests are done using a bounding box for each scene node.</summary>
+			<param name="camera">Camera from which the ray is casted.</param>
+			<returns>Scene node nearest to the camera, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromCameraBB(IrrlichtLime.Scene.CameraSceneNode,System.Int32)">
+			<summary>Gets the scene node, which the given camera is looking at and whose id matches the bitmask. A ray is simply casted from the position of the camera to the view target position, and all scene nodes are tested against this ray. The collision tests are done using a bounding box for each scene node.</summary>
+			<param name="camera">Camera from which the ray is casted.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<returns>Scene node nearest to the camera, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromCameraBB(IrrlichtLime.Scene.CameraSceneNode,System.Int32,System.Boolean)">
+			<summary>Gets the scene node, which the given camera is looking at and whose id matches the bitmask. A ray is simply casted from the position of the camera to the view target position, and all scene nodes are tested against this ray. The collision tests are done using a bounding box for each scene node.</summary>
+			<param name="camera">Camera from which the ray is casted.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="noDebugObjects">Doesn't take debug objects into account when true. These are scene nodes with DebugObject "true". Default is false.</param>
+			<returns>Scene node nearest to the camera, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromRayBB(IrrlichtLime.Core.Line3Df)">
+			<summary>Gets the nearest scene node which collides with a 3d ray and whose id matches a bitmask. The collision tests are done using a bounding box for each scene node. The recursive search can be limited by specifying a collisionRootNode.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<returns>Scene node nearest to ray.Start, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromRayBB(IrrlichtLime.Core.Line3Df,System.Int32)">
+			<summary>Gets the nearest scene node which collides with a 3d ray and whose id matches a bitmask. The collision tests are done using a bounding box for each scene node. The recursive search can be limited by specifying a collisionRootNode.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<returns>Scene node nearest to ray.Start, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromRayBB(IrrlichtLime.Core.Line3Df,System.Int32,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets the nearest scene node which collides with a 3d ray and whose id matches a bitmask. The collision tests are done using a bounding box for each scene node. The recursive search can be limited by specifying a collisionRootNode.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">If different from null, the search is limited to the children of this node. Default is null.</param>
+			<returns>Scene node nearest to ray.Start, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromRayBB(IrrlichtLime.Core.Line3Df,System.Int32,IrrlichtLime.Scene.SceneNode,System.Boolean)">
+			<summary>Gets the nearest scene node which collides with a 3d ray and whose id matches a bitmask. The collision tests are done using a bounding box for each scene node. The recursive search can be limited by specifying a collisionRootNode.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">If different from null, the search is limited to the children of this node. Default is null.</param>
+			<param name="noDebugObjects">Doesn't take debug objects into account when true. These are scene nodes with DebugObject "true". Default is false.</param>
+			<returns>Scene node nearest to ray.Start, which collides with the ray and matches the idBitMask. If no scene node is found, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromScreenCoordinatesBB(IrrlichtLime.Core.Vector2Di)">
+			<summary>Gets the scene node, which is currently visible under the given screen coordinates, viewed from the currently active camera. The collision tests are done using a bounding box for each scene node. You can limit the recursive search so just all children of the specified root are tested.</summary>
+			<param name="pos">Position in pixel screen coordinates, under which the returned scene node will be.</param>
+			<returns>Visible scene node under screen coordinates with matching bits in its id. If there is no scene node under this position, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromScreenCoordinatesBB(IrrlichtLime.Core.Vector2Di,System.Int32)">
+			<summary>Gets the scene node, which is currently visible under the given screen coordinates, viewed from the currently active camera. The collision tests are done using a bounding box for each scene node. You can limit the recursive search so just all children of the specified root are tested.</summary>
+			<param name="pos">Position in pixel screen coordinates, under which the returned scene node will be.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<returns>Visible scene node under screen coordinates with matching bits in its id. If there is no scene node under this position, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromScreenCoordinatesBB(IrrlichtLime.Core.Vector2Di,System.Int32,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets the scene node, which is currently visible under the given screen coordinates, viewed from the currently active camera. The collision tests are done using a bounding box for each scene node. You can limit the recursive search so just all children of the specified root are tested.</summary>
+			<param name="pos">Position in pixel screen coordinates, under which the returned scene node will be.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">If different from null, the search is limited to the children of this node. Default is null.</param>
+			<returns>Visible scene node under screen coordinates with matching bits in its id. If there is no scene node under this position, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetSceneNodeFromScreenCoordinatesBB(IrrlichtLime.Core.Vector2Di,System.Int32,IrrlichtLime.Scene.SceneNode,System.Boolean)">
+			<summary>Gets the scene node, which is currently visible under the given screen coordinates, viewed from the currently active camera. The collision tests are done using a bounding box for each scene node. You can limit the recursive search so just all children of the specified root are tested.</summary>
+			<param name="pos">Position in pixel screen coordinates, under which the returned scene node will be.</param>
+			<param name="idBitMask">Only scene nodes with an id with bits set like in this mask will be tested. If 0, this feature is disabled. Please note that the default node id of -1 will match with every bitmask != 0. Default is 0.</param>
+			<param name="collisionRootNode">If different from null, the search is limited to the children of this node. Default is null.</param>
+			<param name="noDebugObjects">Doesn't take debug objects into account when true. These are scene nodes with DebugObject "true". Default is false.</param>
+			<returns>Visible scene node under screen coordinates with matching bits in its id. If there is no scene node under this position, null is returned.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetScreenCoordinatesFrom3DPosition(IrrlichtLime.Core.Vector3Df)">
+			<summary>Calculates 2d screen position from a 3d position.</summary>
+			<param name="pos">3d position in world space to be transformed into 2d.</param>
+			<returns>2d screen coordinates which a object in the 3d world would have if it would be rendered to the screen. If the 3d position is behind the camera, it is set to (-1000,-1000). In most cases you can ignore this fact, because if you use this method for drawing a decorator over a 3d object, it will be clipped by the screen borders.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetScreenCoordinatesFrom3DPosition(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Scene.CameraSceneNode)">
+			<summary>Calculates 2d screen position from a 3d position.</summary>
+			<param name="pos">3d position in world space to be transformed into 2d.</param>
+			<param name="camera">Camera to be used. If null, the currently active camera is used. Default is null.</param>
+			<returns>2d screen coordinates which a object in the 3d world would have if it would be rendered to the screen. If the 3d position is behind the camera, it is set to (-1000,-1000). In most cases you can ignore this fact, because if you use this method for drawing a decorator over a 3d object, it will be clipped by the screen borders.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetScreenCoordinatesFrom3DPosition(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Scene.CameraSceneNode,System.Boolean)">
+			<summary>Calculates 2d screen position from a 3d position.</summary>
+			<param name="pos">3d position in world space to be transformed into 2d.</param>
+			<param name="camera">Camera to be used. If null, the currently active camera is used. Default is null.</param>
+			<param name="useViewPort">Calculate screen coordinates relative to the current view port. Please note that unless the driver does not take care of the view port, it is usually best to get the result in absolute screen coordinates (useViewPort=false). Default is false.</param>
+			<returns>2d screen coordinates which a object in the 3d world would have if it would be rendered to the screen. If the 3d position is behind the camera, it is set to (-1000,-1000). In most cases you can ignore this fact, because if you use this method for drawing a decorator over a 3d object, it will be clipped by the screen borders.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneLoader">
+			<summary>Class which can load a scene into the scene manager.
+
+If you want Irrlicht to be able to load currently unsupported scene file formats (e.g. .vrml), then implement this and add your new scene loader to the engine with SceneManager.AddExternalSceneLoader().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneLoader.IsALoadableFileExtension(System.String)">
+			<summary>Returns true if the class might be able to load this file. This decision should be based on the file extension (e.g. ".vrml") only.</summary>
+			<param name="filename">Name of the file to test.</param>
+			<returns>True if the extension is a recognized type.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneLoader.IsALoadableFileFormat(IrrlichtLime.IO.ReadFile)">
+			<summary>Returns true if the class might be able to load this file. This decision will be based on a quick look at the contents of the file.</summary>
+			<param name="file">The file to test.</param>
+			<returns>True if the file is a recognized type.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneLoader.LoadScene(IrrlichtLime.IO.ReadFile)">
+			<summary>Loads the scene into the scene manager.</summary>
+			<param name="file">File which contains the scene.</param>
+			<returns>Returns true on success, false on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneLoader.LoadScene(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode)">
+			<summary>Loads the scene into the scene manager.</summary>
+			<param name="file">File which contains the scene.</param>
+			<param name="rootNode">The node to load the scene into. If null, then the scene will be loaded into the root node. Default is null.</param>
+			<returns>Returns true on success, false on failure.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
