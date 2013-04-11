@@ -3,6 +3,7 @@
 #include "CameraFPSSceneNodeAnimator.h"
 #include "CameraMayaSceneNodeAnimator.h"
 #include "CollisionResponseSceneNodeAnimator.h"
+#include "SceneManager.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
 
@@ -49,6 +50,23 @@ SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* ref)
 void SceneNodeAnimator::AnimateNode(SceneNode^ node, unsigned int timeMs)
 {
 	m_SceneNodeAnimator->animateNode(LIME_SAFEREF(node, m_SceneNode), timeMs);
+}
+
+SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node, SceneManager^ newManager)
+{
+	scene::ISceneNodeAnimator* a = m_SceneNodeAnimator->createClone(
+		LIME_SAFEREF(node, m_SceneNode),
+		LIME_SAFEREF(newManager, m_SceneManager));
+
+	return Wrap(a);
+}
+
+SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node)
+{
+	scene::ISceneNodeAnimator* a = m_SceneNodeAnimator->createClone(
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return Wrap(a);
 }
 
 bool SceneNodeAnimator::EventReceiverEnabled::get()

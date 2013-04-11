@@ -9,6 +9,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
+ref class SceneManager;
 ref class SceneNode;
 
 public ref class SceneNodeAnimator : IO::AttributeExchangingObject
@@ -16,6 +17,9 @@ public ref class SceneNodeAnimator : IO::AttributeExchangingObject
 public:
 
 	void AnimateNode(SceneNode^ node, unsigned int timeMs);
+
+	SceneNodeAnimator^ CreateClone(SceneNode^ node, SceneManager^ newManager);
+	SceneNodeAnimator^ CreateClone(SceneNode^ node);
 
 	property bool EventReceiverEnabled { bool get(); }
 	property bool Finished { bool get(); }
