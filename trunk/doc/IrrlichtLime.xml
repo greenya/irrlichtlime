@@ -10447,6 +10447,749 @@ If you want Irrlicht to be able to load currently unsupported scene file formats
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator">
+			<summary>Animates a scene node. Can animate position, rotation, material, and so on.
+
+A scene node animator is able to animate a scene node in a very simple way. It may change its position, rotation, scale and/or material. There are lots of animators to choose from. You can create scene node animators with the SceneManager.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.AnimateNode(IrrlichtLime.Scene.SceneNode,System.UInt32)">
+			<summary>Animates a scene node.</summary>
+			<param name="node">Node to animate.</param>
+			<param name="timeMs">Current time in milliseconds.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.CreateClone(IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a clone of this animator. Please note that you will have to Drop() it.</summary>
+			<param name="node">The node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.CreateClone(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager)">
+			<summary>Creates a clone of this animator. Please note that you will have to Drop() it.</summary>
+			<param name="node">The node.</param>
+			<param name="newManager">New scene manager to use. If null clonned animator will use the same scene manager. Default is null.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.EventReceiverEnabled">
+			<summary>True if this animator receives events.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.Finished">
+			<summary>True if the animator has finished, false if it is still running.
+
+This is only valid for non-looping animators with a discrete end state.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.Type">
+			<summary>The type of the scene node animator.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimatorType">
+			<summary>An enumeration for all types of built-in scene node animators.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.CameraFPS">
+			<summary>FPS camera animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.CameraMaya">
+			<summary>Maya camera animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.CollisionResponse">
+			<summary>Collision respose scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.Deletion">
+			<summary>Deletion scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.FlyCircle">
+			<summary>Fly circle scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.FlyStraight">
+			<summary>Fly straight scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.FollowSpline">
+			<summary>Follow spline scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.Rotation">
+			<summary>Rotation scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.Texture">
+			<summary>Texture scene node animator.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeAnimatorType.Unknown">
+			<summary>Unknown scene node animator.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeRenderPass">
+			<summary>Enumeration for render passes.
+
+A parameter passed to the RegisterNodeForRendering() method of the SceneManager, specifying when the node wants to be drawn in relation to the other nodes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Automatic">
+			<summary>All normal objects can use this for registering themselves.
+
+This value will never be returned by SceneManager.GetSceneNodeRenderPass(). The scene manager will determine by itself if an object is transparent or solid and register the object as Transparent or Solid automatically if you call RegisterNodeForRendering() with this value (which is default). Note that it will register the node only as ONE type. If your scene node has both solid and transparent material types register it twice (one time as Solid, the other time as Transparent) and in the Render() method call GetSceneNodeRenderPass() to find out the current render pass and render only the corresponding parts of the node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Camera">
+			<summary>Camera pass. The active view is set up here. The very first pass.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Light">
+			<summary>In this pass, lights are transformed into camera space and added to the driver.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.None">
+			<summary>No pass currently active.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Shadow">
+			<summary>Drawn after the solid nodes, before the transparent nodes, the time for drawing shadow volumes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.SkyBox">
+			<summary>This is used for sky boxes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Solid">
+			<summary>Solid scene nodes or special scene nodes without materials.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.Transparent">
+			<summary>Transparent scene nodes, drawn after solid nodes. They are sorted from back to front and drawn in that order.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeRenderPass.TransparentEffect">
+			<summary>Transparent effect scene nodes, drawn after Transparent nodes. They are sorted from back to front and drawn in that order.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeType">
+			<summary>An enumeration for all types of built-in scene nodes.
+
+A scene node type is represented by a four character code such as 'cube' or 'mesh' instead of simple numbers, to avoid name clashes with external scene nodes.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.AnimatedMesh">
+			<summary>Animated mesh scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Any">
+			<summary>Will match with any scene node when checking types.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Billboard">
+			<summary>Billboard scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Camera">
+			<summary>Camera scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Camera_FPS">
+			<summary>First person shooter camera scene node.
+
+Legacy, for loading version &lt;= 1.4.x .irr files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Camera_Maya">
+			<summary>Maya camera scene node.
+
+Legacy, for loading version &lt;= 1.4.x .irr files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Cube">
+			<summary>Simple cube scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.DummyTransformation">
+			<summary>Dummy transformation scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Empty">
+			<summary>Empty scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Light">
+			<summary>Light scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Mesh">
+			<summary>Mesh scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Octree">
+			<summary>Octree scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.ParticleSystem">
+			<summary>Particle system scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Quake3_Model">
+			<summary>Quake 3 model scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Quake3_Shader">
+			<summary>Quake 3 shader scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.SceneManager">
+			<summary>SceneManager type. Note that SceneManager is not a SceneNode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.ShadowVolume">
+			<summary>Shadow volume scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.SkyBox">
+			<summary>Sky box scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.SkyDome">
+			<summary>Sky dome scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Sphere">
+			<summary>Sphere scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Terrain">
+			<summary>Terrain scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Text">
+			<summary>Text scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.Unknown">
+			<summary>Unknown scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.VolumeLight">
+			<summary>Volume light scene node.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.WaterSurface">
+			<summary>Water surface scene node.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneParameters">
+			<summary>All parameter names which can be set using SceneManager.Attributes to modify the behavior of plugins and mesh loaders.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.AllowZWriteOnTransparent">
+			<summary>Name of the parameter for changing how Irrlicht handles the ZWrite flag for transparent (blending) materials.
+
+The default behavior in Irrlicht is to disable writing to the z-buffer for all really transparent, i.e. blending materials. This avoids problems with intersecting faces, but can also break renderings. If transparent materials should use the SMaterial flag for ZWriteEnable just as other material types use this attribute.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.B3D_IgnoreMipmapFlag">
+			<summary>Flag to ignore the b3d file's mipmapping flag. Instead Irrlicht's texture creation flag is used.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.B3D_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in b3d loader.
+
+Value type: string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.COLLADA_CreateSceneInstances">
+			<summary>Name of the parameter specifying the COLLADA mesh loading mode.
+
+Specifies if the COLLADA loader should create instances of the models, lights and cameras when loading COLLADA meshes. By default, this is set to false. If this is set to true, the SceneManager.GetMesh() method will only return a pointer to a dummy mesh and create instances of all meshes and lights and cameras in the collada file by itself.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.CSM_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in csm loader.
+
+Value type: string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DebugNormalColor">
+			<summary>Name of the parameter for setting the color of debug normals.
+
+Value type: Color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DebugNormalLength">
+			<summary>Name of the parameter for setting the length of debug normals.
+
+Value type: float.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DMF_AlphaChannelRef">
+			<summary>Name of the parameter for setting reference value of alpha in transparent materials.
+
+Value type: float, from 0.0f to 1.0f.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DMF_FlipAlphaTextures">
+			<summary>Name of the parameter for choose to flip or not tga files.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DMF_IgnoreMaterialsDir">
+			<summary>Name of the parameter for preserving DMF textures dir structure with built-in DMF loader.
+
+If this parameter is set to true, the texture directory defined in the Deled file is ignored, and only the texture name is used to find the proper file. Otherwise, the texture path is also used, which allows to use a nicer media layout.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.DMF_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in DMF loader.
+
+This path is prefixed to the file names defined in the Deled file when loading textures. This allows to alter the paths for a specific project setting.
+
+Value type: string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.IRR_Editor">
+			<summary>Flag set as parameter when the scene manager is used as editor.
+
+In this way special animators like deletion animators can be stopped from deleting scene nodes for example.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.LMTS_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in lmts loader.
+
+Value type: string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.MY3D_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in my3d loader.
+
+Value type: string.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.OBJ_IgnoreGroups">
+			<summary>Flag to avoid loading group structures in .obj files.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.OBJ_IgnoreMaterialFiles">
+			<summary>Flag to avoid loading material .mtl file for .obj files.
+
+Value type: bool.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneParameters.OBJ_TexturePath">
+			<summary>Name of the parameter for changing the texture path of the built-in obj loader.
+
+Value type: string.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ShadowVolumeSceneNode">
+			<summary>Scene node for rendering a shadow volume into a stencil buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ShadowVolumeSceneNode.SetShadowMesh(IrrlichtLime.Scene.Mesh)">
+			<summary>Sets the mesh from which the shadow volume should be generated.
+
+To optimize shadow rendering, use a simpler mesh for shadows.</summary>
+			<param name="mesh">New mesh to use for shadows.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ShadowVolumeSceneNode.UpdateShadowVolumes">
+			<summary>Updates the shadow volumes for current light positions.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SkinnedMesh">
+			<summary>Interface for using some special functions of skinned meshes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.AnimateMesh(System.Single,System.Single)">
+			<summary>Animates this mesh's joints based on frame input.</summary>
+			<param name="frame">Time of animation.</param>
+			<param name="blend">Blend factor.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.ConvertMeshToTangents">
+			<summary>Converts the vertex type of all mesh buffers to tangents. E.g. used for bump mapping.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.FinalizeMeshPopulation">
+			<summary>Loaders should call this after populating the mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.GetJointIndex(System.String)">
+			<summary>Gets the index of a joint.</summary>
+			<param name="name">Name of the joint.</param>
+			<returns>Index of the joint or -1 if not found.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.GetJointName(System.Int32)">
+			<summary>Gets the name of a joint.</summary>
+			<param name="index">Index of the joint. Must be from 0 to JointCount-1.</param>
+			<returns>Name of joint or null if an error happened.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SkinnedMesh.JointCount">
+			<summary>Amount of joints in the skeletal animated mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.SetHardwareSkinning(System.Boolean)">
+			<summary>Allows to enable hardware skinning.
+
+This feature is not implementated in Irrlicht yet.</summary>
+			<param name="turnOn">True to enable hardware skinning.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.SetInterpolationMode(IrrlichtLime.Scene.InterpolationMode)">
+			<summary>Sets interpolation mode.</summary>
+			<param name="mode">New mode to use.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.SkinMesh">
+			<summary>Preforms a software skin on this mesh based of joint positions.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SkinnedMesh.Static">
+			<summary>True if the mesh is non-animated.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.UpdateNormalsWhenAnimating(System.Boolean)">
+			<summary>Sets to update normals when animating.</summary>
+			<param name="turnOn">If false don't animate, which is faster. Else update normals, which allows for proper lighting of animated meshes.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SkinnedMesh.UseAnimationFrom(IrrlichtLime.Scene.SkinnedMesh)">
+			<summary>Uses animation from another mesh.
+
+The animation is linked (not copied) based on joint names so make sure they are unique.</summary>
+			<param name="mesh">The skinned mesh to use animation from.</param>
+			<returns>True if all joints in this mesh were matched up (empty names will not be matched, and it's case sensitive). Unmatched joints will not be animated.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Scene.TerrainPatchSize">
+			<summary>Enumeration for patch sizes specifying the size of patches in the TerrainSceneNode.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.TerrainPatchSize._129">
+			<summary>Patch size of 129, at most, use 8 levels of detail with this patch size.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.TerrainPatchSize._17">
+			<summary>Patch size of 17, at most, use 5 levels of detail with this patch size.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.TerrainPatchSize._33">
+			<summary>Patch size of 33, at most, use 6 levels of detail with this patch size.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.TerrainPatchSize._65">
+			<summary>Patch size of 65, at most, use 7 levels of detail with this patch size.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.TerrainPatchSize._9">
+			<summary>Patch size of 9, at most, use 4 levels of detail with this patch size.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.TerrainSceneNode">
+			<summary>A scene node for displaying terrain using the geo mip map algorithm.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetCurrentLODOfPatches">
+			<summary>Returns list of the CurrentLOD of each patch.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetHeight(System.Single,System.Single)">
+			<summary>Gets height of a point of the terrain.</summary>
+			<param name="x">X coordinate.</param>
+			<param name="z">Z coordinate.</param>
+			<returns>Returns the height (Y coordinate) for specified point. If the point is not on the terrain, the returned value will be something like -3.402823466E+38F (which is "-FLT_MAX" ("minus max float value") in terms of native Irrlicht).</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetIndicesForPatch(System.Int32,System.Int32)">
+			<summary>Gets the indices for a specified patch at a specified level of detail.</summary>
+			<param name="patchX">Patch X coordinate.</param>
+			<param name="patchZ">Patch Z coordinate.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetIndicesForPatch(System.Int32,System.Int32,System.Int32)">
+			<summary>Gets the indices for a specified patch at a specified level of detail.</summary>
+			<param name="patchX">Patch X coordinate.</param>
+			<param name="patchZ">Patch Z coordinate.</param>
+			<param name="lodLevel">The level of detail to get for that patch. If -1, then get the CurrentLOD. If the CurrentLOD is set to -1, meaning it's not shown, then it will retrieve the triangles at the highest LOD (0). Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetMeshBufferForLOD">
+			<summary>Gets the mesh buffer data based on a specified level of detail.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetMeshBufferForLOD(System.Int32)">
+			<summary>Gets the mesh buffer data based on a specified level of detail.</summary>
+			<param name="lodLevel">The level of detail you want the mesh buffer from. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.GetPatchBoundingBox(System.Int32,System.Int32)">
+			<summary>Gets the bounding box of a patch.</summary>
+			<param name="patchX">Patch X coordinate.</param>
+			<param name="patchZ">Patch Z coordinate.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TerrainSceneNode.IndexCount">
+			<summary>The number of indices currently in the mesh buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMap(IrrlichtLime.IO.ReadFile)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The file must contain a loadable image of the heightmap. The heightmap must be square.</summary>
+			<param name="file">The file to read the image from. File is not rewinded.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMap(IrrlichtLime.IO.ReadFile,IrrlichtLime.Video.Color)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The file must contain a loadable image of the heightmap. The heightmap must be square.</summary>
+			<param name="file">The file to read the image from. File is not rewinded.</param>
+			<param name="vertexColor">Color of all vertices. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMap(IrrlichtLime.IO.ReadFile,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The file must contain a loadable image of the heightmap. The heightmap must be square.</summary>
+			<param name="file">The file to read the image from. File is not rewinded.</param>
+			<param name="vertexColor">Color of all vertices. Default is opaque white.</param>
+			<param name="smoothFactor">Number of smoothing passes. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32,System.Boolean)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+			<param name="signedData">Whether we use signed or unsigned ints, ignored for floats. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32,System.Boolean,System.Boolean)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+			<param name="signedData">Whether we use signed or unsigned ints, ignored for floats. Default is false.</param>
+			<param name="floatVals">Whether the data is float or int. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32,System.Boolean,System.Boolean,System.Int32)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+			<param name="signedData">Whether we use signed or unsigned ints, ignored for floats. Default is false.</param>
+			<param name="floatVals">Whether the data is float or int. Default is false.</param>
+			<param name="widthAndHeight">Width (and also Height, as it must be square) of the heightmap. If 0 then it will be autocalculated from the filesize. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32,System.Boolean,System.Boolean,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+			<param name="signedData">Whether we use signed or unsigned ints, ignored for floats. Default is false.</param>
+			<param name="floatVals">Whether the data is float or int. Default is false.</param>
+			<param name="widthAndHeight">Width (and also Height, as it must be square) of the heightmap. If 0 then it will be autocalculated from the filesize. Default is 0.</param>
+			<param name="vertexColor">Color of all vertices. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.LoadHeightMapRAW(IrrlichtLime.IO.ReadFile,System.Int32,System.Boolean,System.Boolean,System.Int32,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Initializes the terrain data. Loads the vertices from the given file. The data is interpreted as (signed) integers of the given bit size or floats (with 32 bits, signed). Allowed bitsizes for integers are 8, 16, and 32. The heightmap must be square.</summary>
+			<param name="file">The file to read the RAW data from. File is not rewinded.</param>
+			<param name="bitsPerPixel">Size of data if integers used, for floats always use 32. Default is 16.</param>
+			<param name="signedData">Whether we use signed or unsigned ints, ignored for floats. Default is false.</param>
+			<param name="floatVals">Whether the data is float or int. Default is false.</param>
+			<param name="widthAndHeight">Width (and also Height, as it must be square) of the heightmap. If 0 then it will be autocalculated from the filesize. Default is 0.</param>
+			<param name="vertexColor">Color of all vertices. Default is opaque white.</param>
+			<param name="smoothFactor">Number of smoothing passes. Default is 0.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TerrainSceneNode.Mesh">
+			<summary>Mesh of the terrain.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.OverrideLODDistance(System.Int32,System.Double)">
+			<summary>Override the default generation of distance thresholds.
+
+For determining the LOD a patch is rendered at. If any LOD is overridden, then the scene node will no longer apply scaling factors to these values. If you override these distances, and then apply a scale to the scene node, it is your responsibility to update the new distances to work best with your new terrain size.</summary>
+			<param name="lodLevel">Level of detail.</param>
+			<param name="newDistance">New distance.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TerrainSceneNode.RenderBuffer">
+			<summary>The buffer used by the terrain (most users will not need this).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.ScaleTexture(System.Single)">
+			<summary>Scales the base texture, similar to MeshManipulator.MakePlanarTextureMapping().</summary>
+			<param name="scale">The scaling amount. Values above 1.0f increase the number of time the texture is drawn on the terrain. Values below 0.0f will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.ScaleTexture(System.Single,System.Single)">
+			<summary>Scales the base texture, similar to MeshManipulator.MakePlanarTextureMapping().</summary>
+			<param name="scale">The scaling amount. Values above 1.0f increase the number of time the texture is drawn on the terrain. Values below 0.0f will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it.</param>
+			<param name="scale2">The scaling amount for the second texture coordinate. Values above 1.0f increase the number of time the texture is drawn on the terrain. Values below 0.0f will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it. If set to 0.0f, then sets the second texture coordinate to the same values as in the first set. Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.SetCameraMovementDelta(System.Single)">
+			<summary>Sets the movement camera threshold. It is used to determine when to recalculate indices for the scene node. The default value is 10.0f.</summary>
+			<param name="delta">New value.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.SetCameraRotationDelta(System.Single)">
+			<summary>Sets the rotation camera threshold. It is used to determine when to recalculate indices for the scene node. The default value is 1.0f.</summary>
+			<param name="delta">New value.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.SetDynamicSelectorUpdate(System.Boolean)">
+			<summary>Sets whether or not the node should dynamically update its associated selector when the geomipmap data changes.</summary>
+			<param name="flag">Whether or not to update selector dynamically.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TerrainSceneNode.SetLODOfPatch(System.Int32,System.Int32,System.Int32)">
+			<summary>Manually sets the LOD of a patch.</summary>
+			<param name="patchX">Patch X coordinate.</param>
+			<param name="patchZ">Patch Z coordinate.</param>
+			<param name="lodLevel">The level of detail to set the patch to.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TerrainSceneNode.TerrainCenter">
+			<summary>Center of the terrain.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.TextSceneNode">
+			<summary>A scene node for displaying 2d text at a position in three dimensional space.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TextSceneNode.SetText(System.String)">
+			<summary>Sets the text string.</summary>
+			<param name="text">New text string.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TextSceneNode.SetTextColor(IrrlichtLime.Video.Color)">
+			<summary>Sets the color of the text.</summary>
+			<param name="color">New color of the text.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.TriangleSelector">
+			<summary>Interface to return triangles with specific properties.
+
+Every SceneNode may have a triangle selector, available with SceneNode.TriangleScelector or SceneManager.CreateTriangleSelector(). This is used for doing collision detection: For example if you know, that a collision may have happened in the area between (1,1,1) and (10,10,10), you can get all triangles of the scene node in this area with the TriangleSelector easily and check every triangle if it collided.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetSceneNodeForTriangle(System.Int32)">
+			<summary>Gets scene node associated with a given triangle.
+
+This allows to find which scene node (potentially of several) is associated with a specific triangle.</summary>
+			<param name="triangleIndex">The index of the triangle for which you want to find the associated scene node. Must be from 0 to TriangleCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetSelector(System.Int32)">
+			<summary>Gets specific TriangleSelector.
+
+Only useful for MetaTriangleSelector, which may contain multiple selectors.</summary>
+			<param name="selectorIndex">Index of the selector to get. Must be from 0 to SelectorCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(IrrlichtLime.Core.AABBox,System.Int32)">
+			<summary>Gets the triangles for one associated node which may lie within a specific bounding box.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.
+
+This method will return at least the triangles that intersect the box, but may return other triangles as well.</summary>
+			<param name="box">Only triangles which are in this axis aligned bounding box will be returned.</param>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(IrrlichtLime.Core.AABBox,System.Int32,IrrlichtLime.Core.Matrix)">
+			<summary>Gets the triangles for one associated node which may lie within a specific bounding box.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.
+
+This method will return at least the triangles that intersect the box, but may return other triangles as well.</summary>
+			<param name="box">Only triangles which are in this axis aligned bounding box will be returned.</param>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+			<param name="transform">Matrix for transforming the triangles before they are returned. Useful for example to scale all triangles down into an ellipsoid space. If null, no transformation will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(IrrlichtLime.Core.Line3Df,System.Int32)">
+			<summary>Gets the triangles for one associated node which have or may have contact with a 3d line.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.
+
+Please note that unoptimized triangle selectors also may return triangles which are not in contact at all with the 3d line.</summary>
+			<param name="line">Only triangles which may be in contact with this 3d line will be returned.</param>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(IrrlichtLime.Core.Line3Df,System.Int32,IrrlichtLime.Core.Matrix)">
+			<summary>Gets the triangles for one associated node which have or may have contact with a 3d line.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.
+
+Please note that unoptimized triangle selectors also may return triangles which are not in contact at all with the 3d line.</summary>
+			<param name="line">Only triangles which may be in contact with this 3d line will be returned.</param>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+			<param name="transform">Matrix for transforming the triangles before they are returned. Useful for example to scale all triangles down into an ellipsoid space. If null, no transformation will be done. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(System.Int32)">
+			<summary>Gets the triangles for one associated node.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.</summary>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TriangleSelector.GetTriangles(System.Int32,IrrlichtLime.Core.Matrix)">
+			<summary>Gets the triangles for one associated node.
+
+This returns all triangles for one scene node associated with this selector. If there is more than one scene node associated (e.g. for an MetaTriangleSelector) this function may be called multiple times to retrieve all triangles.</summary>
+			<param name="maxTriangleCount">Maximal triangles to get. Must be &gt;0.</param>
+			<param name="transform">Matrix for transforming the triangles before they are returned. Useful for example to scale all triangles down into an ellipsoid space. If null, no transformation will be done. Default is null.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TriangleSelector.SelectorCount">
+			<summary>Amount of TriangleSelectors that are part of this one.
+
+Only useful for MetaTriangleSelector, others has 1.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TriangleSelector.TriangleCount">
+			<summary>Amount of all available triangles in this selector.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.VertexBuffer">
+			<summary>Vertex buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.AddVertex(IrrlichtLime.Video.Vertex3D)">
+			<summary>Adds new vertex value to the buffer.</summary>
+			<param name="vertex">Vertex to add.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.AllocatedSize">
+			<summary>Total bytes allocated for the buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.GetValue(System.Int32)">
+			<summary>Gets vertex value.</summary>
+			<param name="index">Index of the vertex to get. Must be from 0 to VertexCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.HardwareMappingHint">
+			<summary>The current hardware mapping hint.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.SetDirty">
+			<summary>Flags the vertex buffer as changed, reloads hardware buffers.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.SetValue(System.Int32,IrrlichtLime.Video.Vertex3D)">
+			<summary>Sets vertex value.</summary>
+			<param name="index">Index of the vertex to set. Must be from 0 to VertexCount-1.</param>
+			<param name="value">Vertex value.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.Type">
+			<summary>Vertices type.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.VertexCount">
+			<summary>Total number of vertices stored in the buffer.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ViewFrustum">
+			<summary>The view frustum. That's the space visible by the camera.
+
+The view frustum is enclosed by 6 planes. These six planes share eight points. A bounding box around these eight points is also stored in this structure.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.BoundingBox">
+			<summary>Bounding box enclosing the whole view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.CameraPosition">
+			<summary>The position of the camera.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.ClipLine(IrrlichtLime.Core.Line3Df@)">
+			<summary>Clips a line to the view frustum.</summary>
+			<param name="line">Line to test.</param>
+			<returns>True if the line was clipped, false if not.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.FarLeftDown">
+			<summary>The point which is on the far left bottom corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.FarLeftUp">
+			<summary>The point which is on the far left upper corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.FarRightDown">
+			<summary>The point which is on the far right bottom corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.FarRightUp">
+			<summary>The point which is on the far right top corner inside the the view frustum.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.GetPlane(IrrlichtLime.Scene.ViewFrustum.Plane)">
+			<summary>Gets specific view frustum' plane.</summary>
+			<param name="plane">Plane to get.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.GetTransform(IrrlichtLime.Video.TransformationState)">
+			<summary>Get the given state's matrix based on frustum TransformationState.</summary>
+			<param name="state">Transformation state to get matrix for.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.NearLeftDown">
+			<summary>The point which is on the near left bottom corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.NearLeftUp">
+			<summary>The point which is on the near left upper corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.NearRightDown">
+			<summary>The point which is on the near right bottom corner inside the the view frustum.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.NearRightUp">
+			<summary>The point which is on the near right top corner inside the the view frustum.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.ViewFrustum.Plane">
+			<summary>Planes enclosing the view frustum.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Bottom">
+			<summary>Bottom plane of the frustum.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Far">
+			<summary>Far plane of the frustum. That is the plane farest away from the eye.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Left">
+			<summary>Left plane of the frustum.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Near">
+			<summary>Near plane of the frustum. That is the plane nearest to the eye.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Right">
+			<summary>Right plane of the frustum.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.ViewFrustum.Plane.Top">
+			<summary>Top plane of the frustum.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.RecalculateBoundingBox">
+			<summary>Recalculates the bounding box member based on the planes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.Set(IrrlichtLime.Core.Matrix)">
+			<summary>Sets a view frustum based on a projection and/or view matrix.</summary>
+			<param name="mat">Projection and/or view matrix.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.SetPlane(IrrlichtLime.Scene.ViewFrustum.Plane,IrrlichtLime.Core.Plane3Df)">
+			<summary>Sets specific view frustum' plane.</summary>
+			<param name="plane">Plane to set.</param>
+			<param name="value">New plane value.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.Transform(IrrlichtLime.Core.Matrix)">
+			<summary>Transforms the frustum by the matrix.</summary>
+			<param name="mat">Matrix by which the view frustum is transformed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.#ctor">
+			<summary>Creates default instance.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.#ctor(IrrlichtLime.Scene.ViewFrustum)">
+			<summary>Creates a copy of given instance.</summary>
+			<param name="copy">Instance to copy from.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.#ctor(IrrlichtLime.Core.Matrix)">
+			<summary>Creates a view frustum based on a projection and/or view matrix.</summary>
+			<param name="mat">Projection and/or view matrix.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.VolumeLightSceneNode">
+			<summary>A scene node for displaying volume light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VolumeLightSceneNode.FootColor">
+			<summary>The color of the base of the light.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VolumeLightSceneNode.SubDivideU">
+			<summary>The number of segments across the U axis.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VolumeLightSceneNode.SubDivideV">
+			<summary>The number of segments across the V axis.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VolumeLightSceneNode.TailColor">
+			<summary>The color of the tip of the light.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.AlphaSource">
 			<summary>Source of the alpha value to take.
 This is currently only supported in MaterialType.OneTextureBlend. You can use an or'ed combination of values. Alpha values are modulated (multiplicated).</summary>
