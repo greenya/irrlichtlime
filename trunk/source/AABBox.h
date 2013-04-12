@@ -151,6 +151,21 @@ public:
 		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getCenter()); }
 	}
 
+	property array<Vector3Df^>^ Edges
+	{
+		array<Vector3Df^>^ get()
+		{
+			core::vector3df v[8];
+			m_NativeValue->getEdges(v);
+
+			array<Vector3Df^>^ a = gcnew array<Vector3Df^>(8);
+			for (int i = 0; i < 8; i++)
+				a[i] = gcnew Vector3Df(v[i]);
+			
+			return a;
+		}
+	}
+
 	property Vector3Df^ Extent
 	{
 		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getExtent()); }
