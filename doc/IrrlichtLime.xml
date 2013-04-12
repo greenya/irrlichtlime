@@ -1485,6 +1485,9 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="P:IrrlichtLime.Core.AABBox.Center">
 			<summary>Center of the bounding box.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Edges">
+			<summary>All 8 edges of the box as an array.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Core.AABBox.Empty">
 			<summary>Check if the box is empty. This means that there is no space between the min and max edge.</summary>
 		</member>
