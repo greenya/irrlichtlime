@@ -10447,6 +10447,325 @@ If you want Irrlicht to be able to load currently unsupported scene file formats
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode">
+			<summary>Base class for all scene nodes.
+
+A scene node is a node in the hierarchical scene graph. Every scene node may have children, which are also scene nodes. Children move relative to their parent's position. If the parent of a node is not visible, its children won't be visible either. In this way, it is for example easily possible to attach a light to a moving car, or to place a walking character on a moving platform on a moving ship.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.AbsolutePosition">
+			<summary>The absolute position of the node in world coordinates.
+
+If you want the position of the node relative to its parent, use Position instead.
+
+Note: For speed reasons the absolute position is not automatically recalculated on each change of the relative position or by a position change of an parent. Instead the update usually happens once per frame in Animate(). You can enforce an update with UpdateAbsolutePosition().</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.AbsoluteTransformation">
+			<summary>The absolute transformation of the node. Is recalculated on every Animate() call.
+
+Note: For speed reasons the absolute transformation is not automatically recalculated on each change of the relative transformation or by a transformation change of an parent. Instead the update usually happens once per frame in Animate(). You can enforce an update with UpdateAbsolutePosition().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.AddAnimator(IrrlichtLime.Scene.SceneNodeAnimator)">
+			<summary>Adds an animator which should animate this node.</summary>
+			<param name="animator">New animator.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.AddChild(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a child to this scene node.
+
+If the scene node already has a parent it is first removed from the other parent.</summary>
+			<param name="child">New child.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.Animate(System.UInt32)">
+			<summary>Called just before rendering the whole scene.
+
+Nodes may calculate or store animations here, and may do other useful things, depending on what they are. Also, Animate() should be called for all child scene nodes here. This method will be called once per frame, independent of whether the scene node is visible or not.
+
+Note: If you are implementing your own node you can handle OnAnimate event. Then call to Animate() will be automatically redirected to your event handler.</summary>
+			<param name="time">Current time in milliseconds.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.AnimateEventHandler">
+			<summary>Called just before rendering the whole scene.
+
+Nodes may calculate or store animations here, and may do other useful things, depending on what they are. Also, Animate() should be called for all child scene nodes here. This method will be called once per frame, independent of whether the scene node is visible or not.
+
+Note: If you are implementing your own node you can handle OnAnimate event. Then call to Animate() will be automatically redirected to your event handler.</summary>
+			<param name="time">Current time in milliseconds.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.AnimatorList">
+			<summary>The list of all animators attached to this node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.AutomaticCulling">
+			<summary>The automatic culling state. Enables or disables automatic culling based on the bounding box.
+
+Automatic culling is enabled by default. Note that not all scene nodes support culling and that some nodes always cull their geometry because it is their only reason for existence, for example the OctreeSceneNode.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.BoundingBox">
+			<summary>The axis aligned, not transformed bounding box of this node.
+
+This means that if this node is an animated 3d character, moving in a room, the bounding box will always be around the origin. To get the box in real world coordinates, just transform it with the matrix you receive with AbsoluteTransformation or simply use BoundingBoxTransformed, which does the same.
+
+Note: If you are implementing your own node you can handle OnGetBoundingBox event. Then getting value of BoundingBox property will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.BoundingBoxTransformed">
+			<summary>The axis aligned, transformed and animated absolute bounding box of this node.
+
+Note: The result is still an axis-aligned bounding box, so it's size changes with rotation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.BoundingBoxTransformedEdges">
+			<summary>The 8 corners of the original bounding box transformed and animated by the absolute transformation.
+
+Note: The result is _not_ identical to BoundingBoxTransformed.Edges, but getting an AABBox of these edges would then be identical.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Children">
+			<summary>All children of this node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.DebugDataVisible">
+			<summary>If debug data like bounding boxes should be drawn. Please note that not all scene nodes support all debug data types.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.DebugObject">
+			<summary>If this scene node is a debug object.
+
+Debug objects have some special properties, for example they can be easily excluded from collision detection or from serialization, etc.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.GetBoundingBoxEventHandler">
+			<summary>The axis aligned, not transformed bounding box of this node.
+
+This means that if this node is an animated 3d character, moving in a room, the bounding box will always be around the origin. To get the box in real world coordinates, just transform it with the matrix you receive with AbsoluteTransformation or simply use BoundingBoxTransformed, which does the same.
+
+Note: If you are implementing your own node you can handle OnGetBoundingBox event. Then getting value of BoundingBox property will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.GetMaterial(System.Int32)">
+			<summary>Gets the material used by this scene node.
+
+This method is needed for inserting the node into the scene hierarchy at an optimal position for minimizing renderstate changes, but can also be used to directly modify the material of a scene node.
+
+Note: If you are implementing your own node you can handle OnGetMaterial event. Then calling to GetMaterial() will be automatically redirected to your event handler.</summary>
+			<param name="num">Index of the material. Must be from 0 to MaterialCount-1.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.GetMaterialCountEventHandler">
+			<summary>Amount of materials used by this scene node.
+
+Note: If you are implementing your own scene node, you should handle OnGetMaterialCount with an implementation code looking like "return yourListOfMaterials.Count;"</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.GetMaterialEventHandler">
+			<summary>Gets the material used by this scene node.
+
+This method is needed for inserting the node into the scene hierarchy at an optimal position for minimizing renderstate changes, but can also be used to directly modify the material of a scene node.
+
+Note: If you are implementing your own node you can handle OnGetMaterial event. Then calling to GetMaterial() will be automatically redirected to your event handler.</summary>
+			<param name="index">Index of the material. Must be from 0 to MaterialCount-1.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.ID">
+			<summary>The ID of the scene node. This value can be used to identify the node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.MaterialCount">
+			<summary>Amount of materials used by this scene node.
+
+Note: If you are implementing your own scene node, you should handle OnGetMaterialCount with an implementation code looking like "return yourListOfMaterials.Count;"</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Name">
+			<summary>The name of the node.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnAnimate">
+			<summary>This event is called just before rendering the whole scene.
+
+Nodes may calculate or store animations here, and may do other useful things, depending on what they are. Also, Animate() should be called for all child scene nodes here. This method will be called once per frame, independent of whether the scene node is visible or not.
+
+Note: If you are implementing your own node you can handle OnAnimate event. Then call to Animate() will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnGetBoundingBox">
+			<summary>The axis aligned, not transformed bounding box of this node.
+
+This means that if this node is an animated 3d character, moving in a room, the bounding box will always be around the origin. To get the box in real world coordinates, just transform it with the matrix you receive with AbsoluteTransformation or simply use BoundingBoxTransformed, which does the same.
+
+Note: If you are implementing your own node you can handle OnGetBoundingBox event. Then getting value of BoundingBox property will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnGetMaterial">
+			<summary>Gets the material used by this scene node.
+
+This method is needed for inserting the node into the scene hierarchy at an optimal position for minimizing renderstate changes, but can also be used to directly modify the material of a scene node.
+
+Note: If you are implementing your own node you can handle OnGetMaterial event. Then calling to GetMaterial() will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnGetMaterialCount">
+			<summary>Amount of materials used by this scene node.
+
+Note: If you are implementing your own scene node, you should handle OnGetMaterialCount with an implementation code looking like "return yourListOfMaterials.Count;"</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnRegisterSceneNode">
+			<summary>Called just before the rendering process of the whole scene.
+
+Nodes may register themselves in the render pipeline during this call, precalculate the geometry which should be renderered, and prevent their children from being able to register themselves if they are clipped.
+
+Note: If you are implementing your own scene node, you should handle OnRegisterSceneNode with an implementation code looking like "if (Visible) SceneManager.RegisterNodeForRendering(this);"</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNode.OnRender">
+			<summary>Called when node needs to be drawn.
+
+Note: If you are implementing your own node you can handle OnRender event. Then calling to Render() will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Parent">
+			<summary>The parent of the scene node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Position">
+			<summary>The position of the node relative to its parent.
+
+Note: If you want the position in world coordinates, use AbsolutePosition instead.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.RegisterSceneNode">
+			<summary>Called just before the rendering process of the whole scene.
+
+Nodes may register themselves in the render pipeline during this call, precalculate the geometry which should be renderered, and prevent their children from being able to register themselves if they are clipped.
+
+Note: If you are implementing your own scene node, you should handle OnRegisterSceneNode with an implementation code looking like "if (Visible) SceneManager.RegisterNodeForRendering(this);"</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.RegisterSceneNodeEventHandler">
+			<summary>Called just before the rendering process of the whole scene.
+
+Nodes may register themselves in the render pipeline during this call, precalculate the geometry which should be renderered, and prevent their children from being able to register themselves if they are clipped.
+
+Note: If you are implementing your own scene node, you should handle OnRegisterSceneNode with an implementation code looking like "if (Visible) SceneManager.RegisterNodeForRendering(this);"</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.RelativeTransformation">
+			<summary>The relative transformation of the scene node.
+
+The relative transformation is stored internally as 3 vectors: translation, rotation and scale. To get the relative transformation matrix, it is calculated from these values.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.Remove">
+			<summary>Removes this scene node from the parent and therefore from the scene.
+
+If no other grab exists for this node, it will be deleted.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.RemoveAnimator(IrrlichtLime.Scene.SceneNodeAnimator)">
+			<summary>Removes an animator from this scene node.
+
+If the animator is found, it is also dropped and might be deleted if not other grab exists for it.</summary>
+			<param name="animator">The animator to be deleted.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.RemoveAnimators">
+			<summary>Removes all animators from this scene node.
+
+The animators might also be deleted if no other grab exists for them.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.RemoveChild(IrrlichtLime.Scene.SceneNode)">
+			<summary>Removes a child from this scene node.
+
+If found in the children list, the child pointer is also dropped and might be deleted if no other grab exists.</summary>
+			<param name="child">The child which shall be removed.</param>
+			<returns>True if the child was removed, and false if not, e.g. because it couldn't be found in the children list.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.RemoveChildren">
+			<summary>Removes all children of this scene node.
+
+The scene nodes found in the children list are also dropped and might be deleted if no other grab exists on them.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.Render">
+			<summary>Called when node needs to be drawn.
+
+Note: If you are implementing your own node you can handle OnRender event. Then calling to Render() will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNode.RenderEventHandler">
+			<summary>Called when node needs to be drawn.
+
+Note: If you are implementing your own node you can handle OnRender event. Then calling to Render() will be automatically redirected to your event handler.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Rotation">
+			<summary>The rotation of the node relative to its parent.
+
+Note: If you want the absolute rotation, use AbsoluteTransformation.Rotation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Scale">
+			<summary>The scale of the scene node relative to its parent.
+
+Note: If you want the absolute scale, use AbsoluteTransformation.Scale.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.SceneManager">
+			<summary>The scene manager for this node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.#ctor(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager)">
+			<summary>Scene node contructor.
+
+Note: If parent argument is not null, then manager argument is ignored and new node will be added as a child to the "parent" and will share its scene manager automatically.</summary>
+			<param name="parent">Parent node. If null, then node will not be added any parent automatically and won't be part of the hierarchy. If you want to add node to the root, you can pass device.SceneManager.RootNode.</param>
+			<param name="manager">Scene manager. If null, then scene manager of the parent argument will be used (if parent is also null, then the node will have no Parent and SceneManager. I this case when you will add the node to some parent later using "someParent.AddChild(theNode);" it will get Parent and SceneManager set).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.#ctor(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager,System.Int32)">
+			<summary>Scene node contructor.
+
+Note: If parent argument is not null, then manager argument is ignored and new node will be added as a child to the "parent" and will share its scene manager automatically.</summary>
+			<param name="parent">Parent node. If null, then node will not be added any parent automatically and won't be part of the hierarchy. If you want to add node to the root, you can pass device.SceneManager.RootNode.</param>
+			<param name="manager">Scene manager. If null, then scene manager of the parent argument will be used (if parent is also null, then the node will have no Parent and SceneManager. I this case when you will add the node to some parent later using "someParent.AddChild(theNode);" it will get Parent and SceneManager set).</param>
+			<param name="id">ID. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.#ctor(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Scene node contructor.
+
+Note: If parent argument is not null, then manager argument is ignored and new node will be added as a child to the "parent" and will share its scene manager automatically.</summary>
+			<param name="parent">Parent node. If null, then node will not be added any parent automatically and won't be part of the hierarchy. If you want to add node to the root, you can pass device.SceneManager.RootNode.</param>
+			<param name="manager">Scene manager. If null, then scene manager of the parent argument will be used (if parent is also null, then the node will have no Parent and SceneManager. I this case when you will add the node to some parent later using "someParent.AddChild(theNode);" it will get Parent and SceneManager set).</param>
+			<param name="id">ID. Default is -1.</param>
+			<param name="position">Position. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.#ctor(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Scene node contructor.
+
+Note: If parent argument is not null, then manager argument is ignored and new node will be added as a child to the "parent" and will share its scene manager automatically.</summary>
+			<param name="parent">Parent node. If null, then node will not be added any parent automatically and won't be part of the hierarchy. If you want to add node to the root, you can pass device.SceneManager.RootNode.</param>
+			<param name="manager">Scene manager. If null, then scene manager of the parent argument will be used (if parent is also null, then the node will have no Parent and SceneManager. I this case when you will add the node to some parent later using "someParent.AddChild(theNode);" it will get Parent and SceneManager set).</param>
+			<param name="id">ID. Default is -1.</param>
+			<param name="position">Position. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.#ctor(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneManager,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Scene node contructor.
+
+Note: If parent argument is not null, then manager argument is ignored and new node will be added as a child to the "parent" and will share its scene manager automatically.</summary>
+			<param name="parent">Parent node. If null, then node will not be added any parent automatically and won't be part of the hierarchy. If you want to add node to the root, you can pass device.SceneManager.RootNode.</param>
+			<param name="manager">Scene manager. If null, then scene manager of the parent argument will be used (if parent is also null, then the node will have no Parent and SceneManager. I this case when you will add the node to some parent later using "someParent.AddChild(theNode);" it will get Parent and SceneManager set).</param>
+			<param name="id">ID. Default is -1.</param>
+			<param name="position">Position. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.SetMaterial(System.Int32,IrrlichtLime.Video.Material)">
+			<summary>Sets the material used by this scene node.</summary>
+			<param name="num">Index of the material to set. Must be from 0 to MaterialCount-1.</param>
+			<param name="newMaterialToCopyFrom">New material to set. This value will be copied.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.SetMaterialFlag(IrrlichtLime.Video.MaterialFlag,System.Boolean)">
+			<summary>Sets all material flags at once to a new value.</summary>
+			<param name="flag">Which flag of all materials to be set.</param>
+			<param name="value">New value of that flag.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.SetMaterialTexture(System.Int32,IrrlichtLime.Video.Texture)">
+			<summary>Sets the texture of the specified layer in all materials of this scene node to the new texture.</summary>
+			<param name="textureLayer">Layer of texture to be set. Must be from 0 to Material.MaxTextures-1.</param>
+			<param name="texture">New texture to be used.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.SetMaterialType(IrrlichtLime.Video.MaterialType)">
+			<summary>Sets the material type of all materials in this scene node to a new material type.</summary>
+			<param name="newType">New type of material to be set.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.TriangleSelector">
+			<summary>The triangle selector attached to this scene node.
+
+The Selector can be used by the engine for doing collision detection. You can create a TriangleSelector with SceneManager.CreateTriangleSelector() or SceneManager.CreateOctreeTriangleSelector and assign returned value to this property. Please note that you will have to Drop() your selector because you created it using method which is started with "Create" word and because scene node will Grab() the selector automatically. If a scene node got no triangle selector, but collision tests should be done with it, a triangle selector is created using the bounding box of the scene node.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.TrulyVisible">
+			<summary>True if the node and all its parents are visible, false if this or any parent node is invisible.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Type">
+			<summary>The type of this scene node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNode.UpdateAbsolutePosition">
+			<summary>Updates the absolute position based on the relative and the parents position.
+
+Note: This does not recursively update the parents absolute positions, so if you have a deeper hierarchy you might want to update the parents first.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNode.Visible">
+			<summary>Whether the node should be visible (if all of its parents are visible).
+
+This is only an option set by the user, but has nothing to do with geometry culling.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator">
 			<summary>Animates a scene node. Can animate position, rotation, material, and so on.
 
