@@ -10444,11 +10444,1718 @@ If you want Irrlicht to be able to load currently unsupported scene file formats
 			<param name="rootNode">The node to load the scene into. If null, then the scene will be loaded into the root node. Default is null.</param>
 			<returns>Returns true on success, false on failure.</returns>
 		</member>
+		<member name="T:IrrlichtLime.Scene.SceneManager">
+			<summary>The Scene Manager manages scene nodes, mesh recources, cameras and all the other stuff.
+
+All Scene nodes can be created only here. There is a always growing list of scene nodes for lots of purposes: Indoor rendering scene nodes like the Octree (AddOctreeSceneNode()) or the terrain renderer (AddTerrainSceneNode()), different Camera scene nodes (AddCameraSceneNode(), AddCameraSceneNodeMaya()), scene nodes for Light (AddLightSceneNode()), Billboards (AddBillboardSceneNode()) and so on.
+
+A scene node is a node in the hierachical scene graph. Every scene node may have children, which are other scene nodes. Children move relative the their parents position. If the parent of a node is not visible, its children won't be visible, too. In this way, it is for example easily possible to attach a light to a moving car or to place a walking character on a moving platform on a moving ship.
+
+The SceneManager is also able to load 3d mesh files of different formats. Take a look at GetMesh() to find out what formats are supported. If these formats are not enough, use AddExternalMeshLoader() to add new formats to the engine.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.ActiveCamera">
+			<summary>The active camera. Note that this can be null, if there was no camera created yet.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddAnimatedMeshSceneNode(IrrlichtLime.Scene.AnimatedMesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Boolean)">
+			<summary>Adds a scene node for rendering an animated mesh model.</summary>
+			<param name="mesh">Animated mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+			<param name="alsoAddIfMeshPointerZero">True if you want to add the scene node even if a mesh argument is null. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+			<param name="tesselationCylinder">Number of quads the cylinder side consists of. Default is 4.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Int32,System.Int32)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+			<param name="tesselationCylinder">Number of quads the cylinder side consists of. Default is 4.</param>
+			<param name="tesselationCone">Number of triangles the cone roof consists of. Default is 8.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Int32,System.Int32,System.Single)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+			<param name="tesselationCylinder">Number of quads the cylinder side consists of. Default is 4.</param>
+			<param name="tesselationCone">Number of triangles the cone roof consists of. Default is 8.</param>
+			<param name="heightTotal">Total height of the arrow. Must be greater than heightCylinder. Default is 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Int32,System.Int32,System.Single,System.Single)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+			<param name="tesselationCylinder">Number of quads the cylinder side consists of. Default is 4.</param>
+			<param name="tesselationCone">Number of triangles the cone roof consists of. Default is 8.</param>
+			<param name="heightTotal">Total height of the arrow. Must be greater than heightCylinder. Default is 1.0f.</param>
+			<param name="heightCylinder">Total height of the cylinder. Must be lesser than heightTotal. Default is 0.6f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddArrowMesh(System.String,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Adds a static arrow mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="vtxColorCylinder">The color of the cylinder. Default is opaque white.</param>
+			<param name="vtxColorCone">The color of the cone. Default is opaque white.</param>
+			<param name="tesselationCylinder">Number of quads the cylinder side consists of. Default is 4.</param>
+			<param name="tesselationCone">Number of triangles the cone roof consists of. Default is 8.</param>
+			<param name="heightTotal">Total height of the arrow. Must be greater than heightCylinder. Default is 1.0f.</param>
+			<param name="heightCylinder">Total height of the cylinder. Must be lesser than heightTotal. Default is 0.6f.</param>
+			<param name="diameterCylinder">Diameter of the cylinder. Must be lesser than diameterCone. Default is 0.05f.</param>
+			<param name="diameterCone">Diameter of the cone. Must be greater than diameterCylinder. Default is 0.3f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">Size of the billboard. This size is 2 dimensional because a billboard only has width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">Size of the billboard. This size is 2 dimensional because a billboard only has width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df,System.Int32)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">Size of the billboard. This size is 2 dimensional because a billboard only has width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">Size of the billboard. This size is 2 dimensional because a billboard only has width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="colorTop">The color of the vertices at the top of the billboard. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Adds a billboard scene node to the scene graph.
+
+A billboard is like a 3d sprite: A 2d element, which always looks to the camera. It is usually used for things like explosions, fire, lensflares and so on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">Size of the billboard. This size is 2 dimensional because a billboard only has width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="colorTop">The color of the vertices at the top of the billboard. Default is opaque white.</param>
+			<param name="colorBottom">The color of the vertices at the bottom of the billboard. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">The billboard's width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">The billboard's width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df,System.Int32)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">The billboard's width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddBillboardTextSceneNode(System.String,IrrlichtLime.GUI.GUIFont,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Vector3Df,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Adds a text scene node, which uses billboards. The node, and the text on it, will scale with distance (unlike to TextSceneNode).</summary>
+			<param name="text">The text to display on the billboard.</param>
+			<param name="font">The font to use on the billboard. Pass null to use the GUI environment's default font. Default is null.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="size">The billboard's width and height. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="colorTop">The color of the vertices at the top of the billboard. Default is opaque white.</param>
+			<param name="colorBottom">The color of the vertices at the bottom of the billboard. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="lookat">Position where the camera will look at. Also known as Target. Default is Vector3Df(0,0,100).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Int32)">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="lookat">Position where the camera will look at. Also known as Target. Default is Vector3Df(0,0,100).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Int32,System.Boolean)">
+			<summary>Adds a camera scene node to the scene graph and sets it as active camera.
+
+This camera does not react on user input like for example the one created with AddCameraSceneNodeFPS(). If you want to move or animate it, use animators or its Position and Target properties. By default, a camera's look at position (set with Target) and its scene node rotation (set with Rotation) are independent. If you want to be able to control the direction that the camera looks by assigning a value to Rotation then set to "true" TargetAndRotationBinding property.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="lookat">Position where the camera will look at. Also known as Target. Default is Vector3Df(0,0,100).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="makeActive">Flag whether this camera should become the active one. Make sure you always have one active camera. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32,IrrlichtLime.KeyMap)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="keyMap">Keymap, specifying what keys should be used to move the camera. If this is null, the default keymap is used. You can define actions more then one time, to bind multiple keys to the same action. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32,IrrlichtLime.KeyMap,System.Boolean)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="keyMap">Keymap, specifying what keys should be used to move the camera. If this is null, the default keymap is used. You can define actions more then one time, to bind multiple keys to the same action. Default is null.</param>
+			<param name="noVerticalMovement">If true, the camera only move within a horizontal plane, and disables vertical movement as known from most ego shooters. When false, it is possible to fly around in space, if no gravity is there. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32,IrrlichtLime.KeyMap,System.Boolean,System.Single)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="keyMap">Keymap, specifying what keys should be used to move the camera. If this is null, the default keymap is used. You can define actions more then one time, to bind multiple keys to the same action. Default is null.</param>
+			<param name="noVerticalMovement">If true, the camera only move within a horizontal plane, and disables vertical movement as known from most ego shooters. When false, it is possible to fly around in space, if no gravity is there. Default is false.</param>
+			<param name="jumpSpeed">Speed with which the camera is moved when jumping. Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32,IrrlichtLime.KeyMap,System.Boolean,System.Single,System.Boolean)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="keyMap">Keymap, specifying what keys should be used to move the camera. If this is null, the default keymap is used. You can define actions more then one time, to bind multiple keys to the same action. Default is null.</param>
+			<param name="noVerticalMovement">If true, the camera only move within a horizontal plane, and disables vertical movement as known from most ego shooters. When false, it is possible to fly around in space, if no gravity is there. Default is false.</param>
+			<param name="jumpSpeed">Speed with which the camera is moved when jumping. Default is 0.0f.</param>
+			<param name="invertMouse">If true, the camera look up when the mouse is moved down and down when the mouse is moved up. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeFPS(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Int32,IrrlichtLime.KeyMap,System.Boolean,System.Single,System.Boolean,System.Boolean)">
+			<summary>Adds a camera scene node with an animator which provides mouse and keyboard control appropriate for first person shooters (FPS).
+
+This FPS camera is intended to provide a demonstration of a camera that behaves like a typical First Person Shooter. It is useful for simple demos and prototyping but is not intended to provide a full solution for a production quality game. It binds the camera scene node rotation to the look-at target, see CameraSceneNode.TargetAndRotationBinding. With this camera, you look with the mouse, and move with cursor keys. If you want to change the key layout, you can specify your own keymap.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Speed in degress with which the camera is rotated. This can be done only with the mouse. Default is 100.0f.</param>
+			<param name="moveSpeed">Speed in units per millisecond with which the camera is moved. Movement is done with the cursor keys. Default is 0.5f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="keyMap">Keymap, specifying what keys should be used to move the camera. If this is null, the default keymap is used. You can define actions more then one time, to bind multiple keys to the same action. Default is null.</param>
+			<param name="noVerticalMovement">If true, the camera only move within a horizontal plane, and disables vertical movement as known from most ego shooters. When false, it is possible to fly around in space, if no gravity is there. Default is false.</param>
+			<param name="jumpSpeed">Speed with which the camera is moved when jumping. Default is 0.0f.</param>
+			<param name="invertMouse">If true, the camera look up when the mouse is moved down and down when the mouse is moved up. Default is false.</param>
+			<param name="makeActive">Flag whether this camera should become the active one. Make sure you always have one active camera. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode,System.Single)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Rotation speed of the camera. Default is -1500.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode,System.Single,System.Single)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Rotation speed of the camera. Default is -1500.0f.</param>
+			<param name="zoomSpeed">Zoom speed of the camera. Default is 200.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Single)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Rotation speed of the camera. Default is -1500.0f.</param>
+			<param name="zoomSpeed">Zoom speed of the camera. Default is 200.0f.</param>
+			<param name="translationSpeed">Translation speed of the camera. Default is 1500.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Single,System.Int32)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Rotation speed of the camera. Default is -1500.0f.</param>
+			<param name="zoomSpeed">Zoom speed of the camera. Default is 200.0f.</param>
+			<param name="translationSpeed">Translation speed of the camera. Default is 1500.0f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCameraSceneNodeMaya(IrrlichtLime.Scene.SceneNode,System.Single,System.Single,System.Single,System.Int32,System.Boolean)">
+			<summary>Adds a maya style user controlled camera scene node to the scene graph.
+
+This is a standard camera with an animator that provides mouse control similar to camera in the 3D Software Maya by Alias Wavefront. The camera does not react on setting Position property anymore after applying this animator. Instead set Target, to fix the target the camera hovers around. And set Distance to set the current distance from that target, i.e. the radius of the orbit the camera hovers on.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="rotateSpeed">Rotation speed of the camera. Default is -1500.0f.</param>
+			<param name="zoomSpeed">Zoom speed of the camera. Default is 200.0f.</param>
+			<param name="translationSpeed">Translation speed of the camera. Default is 1500.0f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="makeActive">Flag whether this camera should become the active one. Make sure you always have one active camera. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode">
+			<summary>Adds cube scene node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddCubeSceneNode(System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds cube scene node.</summary>
+			<param name="size">Size of the cube, uniformly in each dimension. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddDummyTransformationSceneNode">
+			<summary>Adds a dummy transformation scene node to the scene graph.
+
+This scene node does not render itself, and does not respond to using Position, Rotation and Scale properties. Its just a simple scene node that takes a matrix as relative transformation, making it possible to insert any transformation anywhere into the scene graph.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddDummyTransformationSceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a dummy transformation scene node to the scene graph.
+
+This scene node does not render itself, and does not respond to using Position, Rotation and Scale properties. Its just a simple scene node that takes a matrix as relative transformation, making it possible to insert any transformation anywhere into the scene graph.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddDummyTransformationSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a dummy transformation scene node to the scene graph.
+
+This scene node does not render itself, and does not respond to using Position, Rotation and Scale properties. Its just a simple scene node that takes a matrix as relative transformation, making it possible to insert any transformation anywhere into the scene graph.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddEmptySceneNode">
+			<summary>Adds an empty scene node to the scene graph.
+
+Can be used for doing advanced transformations or structuring the scene graph.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddEmptySceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds an empty scene node to the scene graph.
+
+Can be used for doing advanced transformations or structuring the scene graph.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddEmptySceneNode(IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds an empty scene node to the scene graph.
+
+Can be used for doing advanced transformations or structuring the scene graph.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Adds a hill plane mesh to the mesh pool.
+
+The mesh is generated on the fly and looks like a plane with some hills on it. It is uses mostly for quick tests of the engine only. You can specify how many hills there should be on the plane and how high they should be. Also you must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="tileSize">Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.</param>
+			<param name="tileCount">Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10, 10), than you get a field of 100 tiles which has the dimension 100.0f x 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material)">
+			<summary>Adds a hill plane mesh to the mesh pool.
+
+The mesh is generated on the fly and looks like a plane with some hills on it. It is uses mostly for quick tests of the engine only. You can specify how many hills there should be on the plane and how high they should be. Also you must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="tileSize">Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.</param>
+			<param name="tileCount">Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10, 10), than you get a field of 100 tiles which has the dimension 100.0f x 100.0f.</param>
+			<param name="material">Material for this mesh. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material,System.Single)">
+			<summary>Adds a hill plane mesh to the mesh pool.
+
+The mesh is generated on the fly and looks like a plane with some hills on it. It is uses mostly for quick tests of the engine only. You can specify how many hills there should be on the plane and how high they should be. Also you must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="tileSize">Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.</param>
+			<param name="tileCount">Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10, 10), than you get a field of 100 tiles which has the dimension 100.0f x 100.0f.</param>
+			<param name="material">Material for this mesh. Default is null.</param>
+			<param name="hillHeight">Height of the hills. If you specify a negative value you will get holes instead of hills. If the height is 0, no hills will be created. Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material,System.Single,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Adds a hill plane mesh to the mesh pool.
+
+The mesh is generated on the fly and looks like a plane with some hills on it. It is uses mostly for quick tests of the engine only. You can specify how many hills there should be on the plane and how high they should be. Also you must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="tileSize">Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.</param>
+			<param name="tileCount">Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10, 10), than you get a field of 100 tiles which has the dimension 100.0f x 100.0f.</param>
+			<param name="material">Material for this mesh. Default is null.</param>
+			<param name="hillHeight">Height of the hills. If you specify a negative value you will get holes instead of hills. If the height is 0, no hills will be created. Default is 0.0f.</param>
+			<param name="countHills">Amount of hills on the plane. There will be countHills.Width hills along the X axis and countHills.Height along the Y axis. So in total there will be countHills.Width * countHills.Height hills. Default is Dimension2Df(0.0f, 0.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di,IrrlichtLime.Video.Material,System.Single,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Adds a hill plane mesh to the mesh pool.
+
+The mesh is generated on the fly and looks like a plane with some hills on it. It is uses mostly for quick tests of the engine only. You can specify how many hills there should be on the plane and how high they should be. Also you must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="tileSize">Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.</param>
+			<param name="tileCount">Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10, 10), than you get a field of 100 tiles which has the dimension 100.0f x 100.0f.</param>
+			<param name="material">Material for this mesh. Default is null.</param>
+			<param name="hillHeight">Height of the hills. If you specify a negative value you will get holes instead of hills. If the height is 0, no hills will be created. Default is 0.0f.</param>
+			<param name="countHills">Amount of hills on the plane. There will be countHills.Width hills along the X axis and countHills.Height along the Y axis. So in total there will be countHills.Width * countHills.Height hills. Default is Dimension2Df(0.0f, 0.0f).</param>
+			<param name="textureRepeatCount">Defines how often the texture will be repeated in X and Y direction. Default is Dimension2Df(1.0f, 1.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Colorf)">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="color">Diffuse color of the light. Ambient or Specular colors can be set manually with assigning value to the LightSceneNode.LightData property. Default is Colorf(1.0f, 1.0f, 1.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Colorf,System.Single)">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="color">Diffuse color of the light. Ambient or Specular colors can be set manually with assigning value to the LightSceneNode.LightData property. Default is Colorf(1.0f, 1.0f, 1.0f).</param>
+			<param name="radius">Radius of the light. Default is 100.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddLightSceneNode(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Colorf,System.Single,System.Int32)">
+			<summary>Adds a dynamic light scene node to the scene graph.
+
+The light will cast dynamic light on all other scene nodes in the scene, which have the material flag Lighting turned on. (This is the default setting in most scene nodes).</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="color">Diffuse color of the light. Ambient or Specular colors can be set manually with assigning value to the LightSceneNode.LightData property. Default is Colorf(1.0f, 1.0f, 1.0f).</param>
+			<param name="radius">Radius of the light. Default is 100.0f.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddMeshSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Boolean)">
+			<summary>Adds a scene node for rendering a static mesh.</summary>
+			<param name="mesh">Static mesh to be displayed.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+			<param name="alsoAddIfMeshIsNull">True if you want to add the scene node even if a mesh argument is null. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddOctreeSceneNode(IrrlichtLime.Scene.Mesh)">
+			<summary>Adds a scene node for rendering using an octree to the scene graph.
+
+This a good method for rendering scenes with lots of geometry. The Octree is built on the fly from the mesh.</summary>
+			<param name="mesh">The mesh containing all geometry from which the octree will be build.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddOctreeSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node for rendering using an octree to the scene graph.
+
+This a good method for rendering scenes with lots of geometry. The Octree is built on the fly from the mesh.</summary>
+			<param name="mesh">The mesh containing all geometry from which the octree will be build.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddOctreeSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a scene node for rendering using an octree to the scene graph.
+
+This a good method for rendering scenes with lots of geometry. The Octree is built on the fly from the mesh.</summary>
+			<param name="mesh">The mesh containing all geometry from which the octree will be build.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddOctreeSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32)">
+			<summary>Adds a scene node for rendering using an octree to the scene graph.
+
+This a good method for rendering scenes with lots of geometry. The Octree is built on the fly from the mesh.</summary>
+			<param name="mesh">The mesh containing all geometry from which the octree will be build.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="minimalPolysPerNode">Specifies the minimal polygons contained in an octree node. If a node gets less polys than this value it will not be split into smaller nodes. Default is 256.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddOctreeSceneNode(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Boolean)">
+			<summary>Adds a scene node for rendering using an octree to the scene graph.
+
+This a good method for rendering scenes with lots of geometry. The Octree is built on the fly from the mesh.</summary>
+			<param name="mesh">The mesh containing all geometry from which the octree will be build.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="minimalPolysPerNode">Specifies the minimal polygons contained in an octree node. If a node gets less polys than this value it will not be split into smaller nodes. Default is 256.</param>
+			<param name="alsoAddIfMeshPointerZero">True if you want to add the scene node even if a mesh argument is null. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddParticleSystemSceneNode(System.Boolean,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a particle system scene node to the scene graph.</summary>
+			<param name="withDefaultEmitter">If true, creates a default working point emitter which emitts some particles. If set to false, you'll have to set the emitter you want using ParticleSystemSceneNode.Emitter property. Default is true.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(System.String,System.String,System.String,System.String,System.String,System.String)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topFile">Name of the file with the texture for the top plane of the box.</param>
+			<param name="bottomFile">Name of the file with the texture for the bottom plane of the box.</param>
+			<param name="leftFile">Name of the file with the texture for the left plane of the box.</param>
+			<param name="rightFile">Name of the file with the texture for the right plane of the box.</param>
+			<param name="frontFile">Name of the file with the texture for the front plane of the box.</param>
+			<param name="backFile">Name of the file with the texture for the back plane of the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(System.String,System.String,System.String,System.String,System.String,System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topFile">Name of the file with the texture for the top plane of the box.</param>
+			<param name="bottomFile">Name of the file with the texture for the bottom plane of the box.</param>
+			<param name="leftFile">Name of the file with the texture for the left plane of the box.</param>
+			<param name="rightFile">Name of the file with the texture for the right plane of the box.</param>
+			<param name="frontFile">Name of the file with the texture for the front plane of the box.</param>
+			<param name="backFile">Name of the file with the texture for the back plane of the box.</param>
+			<param name="parent">Parent scene node of the skybox. A skybox usually has no parent, so this should be null. Note: If a parent is set to the skybox, the box will not change how it is drawn. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(System.String,System.String,System.String,System.String,System.String,System.String,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topFile">Name of the file with the texture for the top plane of the box.</param>
+			<param name="bottomFile">Name of the file with the texture for the bottom plane of the box.</param>
+			<param name="leftFile">Name of the file with the texture for the left plane of the box.</param>
+			<param name="rightFile">Name of the file with the texture for the right plane of the box.</param>
+			<param name="frontFile">Name of the file with the texture for the front plane of the box.</param>
+			<param name="backFile">Name of the file with the texture for the back plane of the box.</param>
+			<param name="parent">Parent scene node of the skybox. A skybox usually has no parent, so this should be null. Note: If a parent is set to the skybox, the box will not change how it is drawn. Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topTexture">Texture for the top plane of the box.</param>
+			<param name="bottomTexture">Texture for the bottom plane of the box.</param>
+			<param name="leftTexture">Texture for the left plane of the box.</param>
+			<param name="rightTexture">Texture for the right plane of the box.</param>
+			<param name="frontTexture">Texture for the front plane of the box.</param>
+			<param name="backTexture">Texture for the back plane of the box.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topTexture">Texture for the top plane of the box.</param>
+			<param name="bottomTexture">Texture for the bottom plane of the box.</param>
+			<param name="leftTexture">Texture for the left plane of the box.</param>
+			<param name="rightTexture">Texture for the right plane of the box.</param>
+			<param name="frontTexture">Texture for the front plane of the box.</param>
+			<param name="backTexture">Texture for the back plane of the box.</param>
+			<param name="parent">Parent scene node of the skybox. A skybox usually has no parent, so this should be null. Note: If a parent is set to the skybox, the box will not change how it is drawn. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a skybox scene node to the scene graph.
+
+A skybox is a big cube with 6 textures on it and is drawn around the camera position.</summary>
+			<param name="topTexture">Texture for the top plane of the box.</param>
+			<param name="bottomTexture">Texture for the bottom plane of the box.</param>
+			<param name="leftTexture">Texture for the left plane of the box.</param>
+			<param name="rightTexture">Texture for the right plane of the box.</param>
+			<param name="frontTexture">Texture for the front plane of the box.</param>
+			<param name="backTexture">Texture for the back plane of the box.</param>
+			<param name="parent">Parent scene node of the skybox. A skybox usually has no parent, so this should be null. Note: If a parent is set to the skybox, the box will not change how it is drawn. Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture,System.Int32,System.Int32)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+			<param name="horiRes">Number of vertices of a horizontal layer of the sphere. Default is 16.</param>
+			<param name="vertRes">Number of vertices of a vertical layer of the sphere. Default is 8.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture,System.Int32,System.Int32,System.Single,System.Single)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+			<param name="horiRes">Number of vertices of a horizontal layer of the sphere. Default is 16.</param>
+			<param name="vertRes">Number of vertices of a vertical layer of the sphere. Default is 8.</param>
+			<param name="texturePercentage">How much of the height of the texture is used. Should be between 0 and 1. Default is 0.9f.</param>
+			<param name="spherePercentage">How much of the sphere is drawn. Value should be between 0 and 2, where 1 is an exact half-sphere and 2 is a full sphere. Default is 2.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture,System.Int32,System.Int32,System.Single,System.Single,System.Single)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+			<param name="horiRes">Number of vertices of a horizontal layer of the sphere. Default is 16.</param>
+			<param name="vertRes">Number of vertices of a vertical layer of the sphere. Default is 8.</param>
+			<param name="texturePercentage">How much of the height of the texture is used. Should be between 0 and 1. Default is 0.9f.</param>
+			<param name="spherePercentage">How much of the sphere is drawn. Value should be between 0 and 2, where 1 is an exact half-sphere and 2 is a full sphere. Default is 2.0f.</param>
+			<param name="radius">The radius of the sphere. Default is 1000.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture,System.Int32,System.Int32,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+			<param name="horiRes">Number of vertices of a horizontal layer of the sphere. Default is 16.</param>
+			<param name="vertRes">Number of vertices of a vertical layer of the sphere. Default is 8.</param>
+			<param name="texturePercentage">How much of the height of the texture is used. Should be between 0 and 1. Default is 0.9f.</param>
+			<param name="spherePercentage">How much of the sphere is drawn. Value should be between 0 and 2, where 1 is an exact half-sphere and 2 is a full sphere. Default is 2.0f.</param>
+			<param name="radius">The radius of the sphere. Default is 1000.0f.</param>
+			<param name="parent">Parent scene node of the dome. A dome usually has no parent, so this should be null. Note: If a parent is set, the dome will not change how it is drawn. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyDomeSceneNode(IrrlichtLime.Video.Texture,System.Int32,System.Int32,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a skydome scene node to the scene graph.
+
+A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.</summary>
+			<param name="texture">Texture for the dome.</param>
+			<param name="horiRes">Number of vertices of a horizontal layer of the sphere. Default is 16.</param>
+			<param name="vertRes">Number of vertices of a vertical layer of the sphere. Default is 8.</param>
+			<param name="texturePercentage">How much of the height of the texture is used. Should be between 0 and 1. Default is 0.9f.</param>
+			<param name="spherePercentage">How much of the sphere is drawn. Value should be between 0 and 2, where 1 is an exact half-sphere and 2 is a full sphere. Default is 2.0f.</param>
+			<param name="radius">The radius of the sphere. Default is 1000.0f.</param>
+			<param name="parent">Parent scene node of the dome. A dome usually has no parent, so this should be null. Note: If a parent is set, the dome will not change how it is drawn. Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereMesh(System.String)">
+			<summary>Adds a static sphere mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereMesh(System.String,System.Single)">
+			<summary>Adds a static sphere mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="radius">The radius of the sphere. Default is 5.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereMesh(System.String,System.Single,System.Int32,System.Int32)">
+			<summary>Adds a static sphere mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="radius">The radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCountX">The number of quads used for the horizontal tiling. Default is 16.</param>
+			<param name="polyCountY">The number of quads used for the vertical tiling. Default is 16.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode">
+			<summary>Adds sphere scene node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds sphere scene node.</summary>
+			<param name="radius">Radius of the sphere. Default is 5.0f.</param>
+			<param name="polyCount">The number of vertices in horizontal and vertical direction. The total polygon count of the sphere is polyCount*polyCount. This parameter must be less than 256 to stay within the 16-bit limit of the indices of a mesh buffer. Default is 16.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainMesh(System.String,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image)">
+			<summary>Adds a static terrain mesh to the mesh pool.
+
+The mesh is generated on the fly from a texture file and a height map file. Both files may be huge (8000x8000 pixels would be no problem) because the generator splits the files into smaller textures if necessary. You must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="meshname">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="texture">Texture for the terrain. Please note that this is not a hardware texture as usual (Texture), but an Image (software texture). You can load this texture with VideoDriver.CreateImage().</param>
+			<param name="heightmap">A grayscaled heightmap image. Like the texture, it can be created with VideoDriver.CreateImage(). The amount of triangles created depends on the size of this texture, so use a small heightmap to increase rendering speed.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainMesh(System.String,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Core.Dimension2Df)">
+			<summary>Adds a static terrain mesh to the mesh pool.
+
+The mesh is generated on the fly from a texture file and a height map file. Both files may be huge (8000x8000 pixels would be no problem) because the generator splits the files into smaller textures if necessary. You must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="meshname">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="texture">Texture for the terrain. Please note that this is not a hardware texture as usual (Texture), but an Image (software texture). You can load this texture with VideoDriver.CreateImage().</param>
+			<param name="heightmap">A grayscaled heightmap image. Like the texture, it can be created with VideoDriver.CreateImage(). The amount of triangles created depends on the size of this texture, so use a small heightmap to increase rendering speed.</param>
+			<param name="stretchSize">Defines how big a pixel on the heightmap is. Default is Dimension2Df(10.0f, 10.0f).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainMesh(System.String,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Core.Dimension2Df,System.Single)">
+			<summary>Adds a static terrain mesh to the mesh pool.
+
+The mesh is generated on the fly from a texture file and a height map file. Both files may be huge (8000x8000 pixels would be no problem) because the generator splits the files into smaller textures if necessary. You must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="meshname">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="texture">Texture for the terrain. Please note that this is not a hardware texture as usual (Texture), but an Image (software texture). You can load this texture with VideoDriver.CreateImage().</param>
+			<param name="heightmap">A grayscaled heightmap image. Like the texture, it can be created with VideoDriver.CreateImage(). The amount of triangles created depends on the size of this texture, so use a small heightmap to increase rendering speed.</param>
+			<param name="stretchSize">Defines how big a pixel on the heightmap is. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="maxHeight">Defines how high a white pixel on the heighmap is. Default is 200.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainMesh(System.String,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Core.Dimension2Df,System.Single,IrrlichtLime.Core.Dimension2Di)">
+			<summary>Adds a static terrain mesh to the mesh pool.
+
+The mesh is generated on the fly from a texture file and a height map file. Both files may be huge (8000x8000 pixels would be no problem) because the generator splits the files into smaller textures if necessary. You must specify a name for the mesh, because the mesh is added to the mesh pool, and can be retrieved again using SceneManager.GetMesh() with the name as parameter.</summary>
+			<param name="meshname">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="texture">Texture for the terrain. Please note that this is not a hardware texture as usual (Texture), but an Image (software texture). You can load this texture with VideoDriver.CreateImage().</param>
+			<param name="heightmap">A grayscaled heightmap image. Like the texture, it can be created with VideoDriver.CreateImage(). The amount of triangles created depends on the size of this texture, so use a small heightmap to increase rendering speed.</param>
+			<param name="stretchSize">Defines how big a pixel on the heightmap is. Default is Dimension2Df(10.0f, 10.0f).</param>
+			<param name="maxHeight">Defines how high a white pixel on the heighmap is. Default is 200.0f.</param>
+			<param name="defaultVertexBlockSize">Defines the initial dimension between vertices. Default is Dimension2Di(64, 64).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+			<param name="smoothFactor">The number of times the vertices are smoothed. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize,System.Int32,System.Boolean)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFile">The file handle to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+			<param name="smoothFactor">The number of times the vertices are smoothed. Default is 0.</param>
+			<param name="addAlsoIfHeightmapEmpty">True if you want to add the scene node even if a heightMapFile argument is null. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize,System.Int32)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+			<param name="smoothFactor">The number of times the vertices are smoothed. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTerrainSceneNode(System.String,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,System.Int32,IrrlichtLime.Scene.TerrainPatchSize,System.Int32,System.Boolean)">
+			<summary>Adds a terrain scene node to the scene graph.
+
+This node implements is a simple terrain renderer which uses a technique known as geo mip mapping for reducing the detail of triangle blocks which are far away.
+
+The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht and allowed it to be distributed under this licence. I only modified some parts. A lot of thanks go to them.
+
+This scene node is capable of very quickly loading terrains and updating the indices at runtime to enable viewing very large terrains. It uses a CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+
+The Patch Size of the terrain must always be a size of 2^N+1, i.e. 8+1(9), 16+1(17), etc. The MaxLOD available is directly dependent on the patch size of the terrain. LOD 0 contains all of the indices to draw all the triangles at the max detail for a patch. As each LOD goes up by 1 the step taken, in generating indices increases by - 2^LOD, so for LOD 1, the step taken is 2, for LOD 2, the step taken is 4, LOD 3 - 8, etc. The step can be no larger than the size of the patch, so having a LOD of 8, with a patch size of 17, is asking the algoritm to generate indices every 2^8 (256) vertices, which is not possible with a patch size of 17. The maximum LOD for a patch size of 17 is 2^4 (16). So, with a MaxLOD of 5, you'll have LOD 0 (full detail), LOD 1 (every 2 vertices), LOD 2 (every 4 vertices), LOD 3 (every 8 vertices) and LOD 4 (every 16 vertices).</summary>
+			<param name="heightMapFileName">The name of the file on disk, to read vertex data from. This should be a gray scale bitmap.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. If you're using a heightmap of size 129x129 and would like your terrain to be 12900x12900 in game units, then use a scale factor of Vector3Df(100,100,100). If you use a Y scaling factor of 0.0f, then your terrain will be flat. Default is Vector3Df(1,1,1).</param>
+			<param name="vertexColor">The color for all vertices. If no texture is associated with the scene node, then all vertices will be this color. Default is opaque white.</param>
+			<param name="maxLOD">The maximum LOD (level of detail) for the node. Only change if you know what you are doing, this might lead to strange behavior. Default is 5.</param>
+			<param name="patchSize">The patch size of the terrain. Only change if you know what you are doing, this might lead to strange behavior. Default is _17.</param>
+			<param name="smoothFactor">The number of times the vertices are smoothed. Default is 0.</param>
+			<param name="addAlsoIfHeightmapEmpty">True if you want to add the scene node even if a heightMapFileName argument is null. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTextSceneNode(IrrlichtLime.GUI.GUIFont,System.String)">
+			<summary>Adds a text scene node, which is able to display 2d text at a position in three dimensional space.
+
+Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with distance.</summary>
+			<param name="font">The font of the text.</param>
+			<param name="text">The text to display.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTextSceneNode(IrrlichtLime.GUI.GUIFont,System.String,IrrlichtLime.Video.Color)">
+			<summary>Adds a text scene node, which is able to display 2d text at a position in three dimensional space.
+
+Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with distance.</summary>
+			<param name="font">The font of the text.</param>
+			<param name="text">The text to display.</param>
+			<param name="color">The color of the text. Default is Color(255,255,255,100).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTextSceneNode(IrrlichtLime.GUI.GUIFont,System.String,IrrlichtLime.Video.Color,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a text scene node, which is able to display 2d text at a position in three dimensional space.
+
+Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with distance.</summary>
+			<param name="font">The font of the text.</param>
+			<param name="text">The text to display.</param>
+			<param name="color">The color of the text. Default is Color(255,255,255,100).</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTextSceneNode(IrrlichtLime.GUI.GUIFont,System.String,IrrlichtLime.Video.Color,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a text scene node, which is able to display 2d text at a position in three dimensional space.
+
+Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with distance.</summary>
+			<param name="font">The font of the text.</param>
+			<param name="text">The text to display.</param>
+			<param name="color">The color of the text. Default is Color(255,255,255,100).</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddTextSceneNode(IrrlichtLime.GUI.GUIFont,System.String,IrrlichtLime.Video.Color,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,System.Int32)">
+			<summary>Adds a text scene node, which is able to display 2d text at a position in three dimensional space.
+
+Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with distance.</summary>
+			<param name="font">The font of the text.</param>
+			<param name="text">The text to display.</param>
+			<param name="color">The color of the text. Default is Color(255,255,255,100).</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightMesh(System.String)">
+			<summary>Adds a volume light mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightMesh(System.String,System.Int32,System.Int32)">
+			<summary>Adds a volume light mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightMesh(System.String,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Adds a volume light mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="footColor">Color of the bottom of the light. Default is Color(0, 230, 180, 51).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightMesh(System.String,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Adds a volume light mesh to the mesh pool.</summary>
+			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="footColor">Color of the bottom of the light. Default is Color(0, 230, 180, 51).</param>
+			<param name="tailColor">Color of the top of the light. Default is Color(0, 0, 0, 0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode">
+			<summary>Adds volume lighting scene node.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="foot">Foot color. Default is Color(0, 230, 180, 51).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="foot">Foot color. Default is Color(0, 230, 180, 51).</param>
+			<param name="tail">Tail color. Default is Color(0, 0, 0, 0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="foot">Foot color. Default is Color(0, 230, 180, 51).</param>
+			<param name="tail">Tail color. Default is Color(0, 0, 0, 0).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="foot">Foot color. Default is Color(0, 230, 180, 51).</param>
+			<param name="tail">Tail color. Default is Color(0, 0, 0, 0).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightSceneNode(IrrlichtLime.Scene.SceneNode,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds volume lighting scene node.</summary>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="subdivU">Horizontal subdivision count. Default is 32.</param>
+			<param name="subdivV">Vertical subdivision count. Default is 32.</param>
+			<param name="foot">Foot color. Default is Color(0, 230, 180, 51).</param>
+			<param name="tail">Tail color. Default is Color(0, 0, 0, 0).</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddWaterSurfaceSceneNode(IrrlichtLime.Scene.Mesh,System.Single,System.Single,System.Single,IrrlichtLime.Scene.SceneNode,System.Int32,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Adds a scene node for rendering an animated water surface mesh.
+
+Looks really good when the Material type TransparentReflection is used.</summary>
+			<param name="mesh">Static mesh to be displayed with water waves on it.</param>
+			<param name="waveHeight">Height of the water waves. Default is 2.0f.</param>
+			<param name="waveSpeed">Speed of the water waves. Default is 300.0f.</param>
+			<param name="waveLength">Lenght of the water wave. Default is 10.0f.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
+			<param name="id">Id of the node. Default is -1.</param>
+			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
+			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
 			<param name="startPosition">-1.0f ... 1.0f</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateRotationAnimator(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a rotation animator, which rotates the attached scene node around itself.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="rotationSpeed">Specifies the speed of the animation in degree per 10 milliseconds.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.DrawAll">
+			<summary>Draws all the scene nodes.
+
+This can only be invoked between VideoDriver.BeginScene() and VideoDriver.EndScene(). Please note that the scene is not only drawn when calling this, but also animated by existing scene node animators, culling of scene nodes is done, etc.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.FileSystem">
+			<summary>The active file system.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetMesh(IrrlichtLime.IO.ReadFile)">
+			<summary>Gets a pointer to an animateable mesh. Loads the file if not loaded already. If you want to remove a loaded mesh from the cache again, use RemoveMesh().
+
+Currently there are the following mesh formats supported:
+3D Studio (.3ds),
+3D World Studio (.smf),
+Bliz Basic B3D (.b3d),
+Cartography shop 4 (.csm),
+COLLADA (.dae, .xml),
+Delgine DeleD (.dmf),
+DirectX (.x),
+Half-Life model (.mdl),
+Irrlicht Mesh (.irrMesh),
+LightWave (.lwo),
+Maya (.obj),
+Milkshape (.ms3d),
+My3D (.my3d),
+OCT (.oct),
+OGRE Meshes (.mesh),
+Pulsar LMTools (.lmts),
+Quake 3 levels (.bsp),
+Quake 2 models (.md2),
+Quake 3 models (.md3),
+Stanford Triangle (.ply),
+Stereolithography (.stl).</summary>
+			<param name="file">Mesh to load.</param>
+			<returns>Pointer on the loaded mesh or null if loading failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetMesh(System.String)">
+			<summary>Gets a pointer to an animateable mesh. Loads the file if not loaded already. If you want to remove a loaded mesh from the cache again, use RemoveMesh().
+
+Currently there are the following mesh formats supported:
+3D Studio (.3ds),
+3D World Studio (.smf),
+Bliz Basic B3D (.b3d),
+Cartography shop 4 (.csm),
+COLLADA (.dae, .xml),
+Delgine DeleD (.dmf),
+DirectX (.x),
+Half-Life model (.mdl),
+Irrlicht Mesh (.irrMesh),
+LightWave (.lwo),
+Maya (.obj),
+Milkshape (.ms3d),
+My3D (.my3d),
+OCT (.oct),
+OGRE Meshes (.mesh),
+Pulsar LMTools (.lmts),
+Quake 3 levels (.bsp),
+Quake 2 models (.md2),
+Quake 3 models (.md3),
+Stanford Triangle (.ply),
+Stereolithography (.stl).</summary>
+			<param name="filename">Mesh to load.</param>
+			<returns>Pointer on the loaded mesh or null if loading failed.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromID(System.Int32)">
+			<summary>Gets the first scene node with the specified id.</summary>
+			<param name="id">The id to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromID(System.Int32,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets the first scene node with the specified id.</summary>
+			<param name="id">The id to search for.</param>
+			<param name="start">Scene node to start from. All children of this scene node are searched. If null is specified, the root scene node is taken. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromName(System.String)">
+			<summary>Gets the first scene node with the specified name.</summary>
+			<param name="name">The name to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromName(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets the first scene node with the specified name.</summary>
+			<param name="name">The name to search for.</param>
+			<param name="start">Scene node to start from. All children of this scene node are searched. If null is specified, the root scene node is taken. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromType(IrrlichtLime.Scene.SceneNodeType)">
+			<summary>Gets the first scene node with the specified type.</summary>
+			<param name="type">The type to search for.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromType(IrrlichtLime.Scene.SceneNodeType,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets the first scene node with the specified type.</summary>
+			<param name="type">The type to search for.</param>
+			<param name="start">Scene node to start from. All children of this scene node are searched. If null is specified, the root scene node is taken. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodesFromType(IrrlichtLime.Scene.SceneNodeType)">
+			<summary>Gets all scene nodes with the specified type.</summary>
+			<param name="type">Type of scene node to find. Set this to Any to get all child nodes.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodesFromType(IrrlichtLime.Scene.SceneNodeType,IrrlichtLime.Scene.SceneNode)">
+			<summary>Gets all scene nodes with the specified type.</summary>
+			<param name="type">Type of scene node to find. Set this to Any to get all child nodes.</param>
+			<param name="start">Scene node to start from. All children of this scene node are searched. If null is specified, the root scene node is taken. Default is null.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.GUIEnvironment">
+			<summary>The active GUI environment.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.MeshCache">
+			<summary>Interface to the mesh cache which is shared between all existing scene managers.
+
+With this interface, it is possible to manually add new loaded meshes (if SceneManager.GetMesh() is not sufficient), to remove them and to iterate through already loaded meshes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.RegisterNodeForRendering(IrrlichtLime.Scene.SceneNode)">
+			<summary>Registers a node for rendering it at a specific time.
+
+This method should only be used by SceneNodes when they get a OnRegisterSceneNode event.</summary>
+			<param name="node">Node to register for drawing. Usually scene nodes would set "this" as parameter here because they want to be drawn.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.RegisterNodeForRendering(IrrlichtLime.Scene.SceneNode,IrrlichtLime.Scene.SceneNodeRenderPass)">
+			<summary>Registers a node for rendering it at a specific time.
+
+This method should only be used by SceneNodes when they get a OnRegisterSceneNode event.</summary>
+			<param name="node">Node to register for drawing. Usually scene nodes would set "this" as parameter here because they want to be drawn.</param>
+			<param name="pass">Specifies when the node wants to be drawn in relation to the other nodes. For example, if the node is a shadow, it usually wants to be drawn after all other nodes and will use Shadow for this. See SceneNodeRenderPass for details. Default is Automatic.</param>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.RootNode">
+			<summary>The root scene node.
+
+This is the scene node which is parent of all scene nodes. The root scene node is a special scene node which only exists to manage all scene nodes. It will not be rendered and cannot be removed from the scene.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.ShadowColor">
+			<summary>The current color of stencil buffers shadows.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.VideoDriver">
+			<summary>The active video driver.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.SceneNode">
 			<summary>Base class for all scene nodes.
