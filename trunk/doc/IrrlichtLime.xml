@@ -10946,6 +10946,14 @@ Can be used for doing advanced transformations or structuring the scene graph.</
 			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
 			<param name="id">Id of the node. Default is -1.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddExternalMeshLoader(IrrlichtLime.Scene.MeshLoader)">
+			<summary>Adds an external mesh loader for extending the engine with new file formats.</summary>
+			<param name="externalLoader">Implementation of a new mesh loader.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddExternalSceneLoader(IrrlichtLime.Scene.SceneLoader)">
+			<summary>Adds an external scene loader for extending the engine with new file formats.</summary>
+			<param name="externalLoader">Implementation of a new scene loader.</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.AddHillPlaneMesh(System.String,IrrlichtLime.Core.Dimension2Df,IrrlichtLime.Core.Dimension2Di)">
 			<summary>Adds a hill plane mesh to the mesh pool.
 
@@ -11171,6 +11179,15 @@ This a good method for rendering scenes with lots of geometry. The Octree is bui
 			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
 			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
 			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSceneNode(System.String)">
+			<summary>Adds a scene node to the scene by type name.</summary>
+			<param name="sceneNodeTypeName">Scene node type name.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddSceneNode(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node to the scene by type name.</summary>
+			<param name="sceneNodeTypeName">Scene node type name.</param>
+			<param name="parent">Parent of the scene node. If null then node has no specific parent (will be a child of the root node). Default is null.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.AddSkyBoxSceneNode(System.String,System.String,System.String,System.String,System.String,System.String)">
 			<summary>Adds a skybox scene node to the scene graph.
@@ -11829,6 +11846,14 @@ Unlike to BillboardTextSceneNode, TextSceneNode will not scale its text with dis
 			<param name="position">Position of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
 			<param name="id">Id of the node. Default is -1.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.AddToDeletionQueue(IrrlichtLime.Scene.SceneNode)">
+			<summary>Adds a scene node to the deletion queue.
+
+The scene node is immediatly deleted when it's secure. Which means when the scene node does not execute animators and things like that. This method is for example used for deleting scene nodes by their scene node animators. In most other cases, a SceneNode.Remove() call is enough, using this deletion queue is not necessary.
+
+See SceneManager.CreateDeleteAnimator() for details.</summary>
+			<param name="node">Node to detete.</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.AddVolumeLightMesh(System.String)">
 			<summary>Adds a volume light mesh to the mesh pool.</summary>
 			<param name="name">The name of this mesh which must be specified in order to be able to retrieve the mesh later with SceneManager.GetMesh().</param>
@@ -12013,17 +12038,341 @@ Looks really good when the Material type TransparentReflection is used.</summary
 			<param name="rotation">Rotation of the node relative to its parent. Default is Vector3Df(0,0,0).</param>
 			<param name="scale">Scale of the node relative to its parent. Default is Vector3Df(1,1,1).</param>
 		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.AmbientLight">
+			<summary>The ambient color of the scene.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.Attributes">
+			<summary>The parameters set in this scene.
+
+String parameters can be used by plugins and mesh loaders. For example the CMS and LMTS loader want a parameter named "CSM_TexturePath" and "LMTS_TexturePath" set to the path were attached textures can be found.
+
+See SceneParameters for more details.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.Clear">
+			<summary>Clears the whole scene by removing all scene nodes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateCollisionResponseAnimator(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a special scene node animator for doing automatic collision detection and response. See CollisionResponseSceneNodeAnimator for details.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="world">Triangle selector holding all triangles of the world with which the scene node may collide. You can create a triangle selector with SceneManager.CreateTriangleSelector().</param>
+			<param name="node">Scene node which should be manipulated. After you added this animator to the scene node, the scene node will not be able to move through walls and is affected by gravity. If you need to teleport the scene node to a new position without it being effected by the collision geometry, then use "node.Position = newPosition; animator.TargetNode = node;"</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateCollisionResponseAnimator(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a special scene node animator for doing automatic collision detection and response. See CollisionResponseSceneNodeAnimator for details.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="world">Triangle selector holding all triangles of the world with which the scene node may collide. You can create a triangle selector with SceneManager.CreateTriangleSelector().</param>
+			<param name="node">Scene node which should be manipulated. After you added this animator to the scene node, the scene node will not be able to move through walls and is affected by gravity. If you need to teleport the scene node to a new position without it being effected by the collision geometry, then use "node.Position = newPosition; animator.TargetNode = node;"</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid with which collision detection and response is done. If you have got a scene node, and you are unsure about how big the radius should be, you could use "AABBox box = node.BoundingBox; Vector3Df radius = box.MaxEdge - box.Center;". Default is Vector3Df(30,60,30).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateCollisionResponseAnimator(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a special scene node animator for doing automatic collision detection and response. See CollisionResponseSceneNodeAnimator for details.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="world">Triangle selector holding all triangles of the world with which the scene node may collide. You can create a triangle selector with SceneManager.CreateTriangleSelector().</param>
+			<param name="node">Scene node which should be manipulated. After you added this animator to the scene node, the scene node will not be able to move through walls and is affected by gravity. If you need to teleport the scene node to a new position without it being effected by the collision geometry, then use "node.Position = newPosition; animator.TargetNode = node;"</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid with which collision detection and response is done. If you have got a scene node, and you are unsure about how big the radius should be, you could use "AABBox box = node.BoundingBox; Vector3Df radius = box.MaxEdge - box.Center;". Default is Vector3Df(30,60,30).</param>
+			<param name="gravityPerSecond">Gravity of the environment, as an acceleration in units per second. If your units are equivalent to metres, then Vector3Df(0,-10,0) would give an approximately realistic gravity. You can disable gravity by setting it to Vector3Df(0,0,0). Default is Vector3Df(0,-10,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateCollisionResponseAnimator(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a special scene node animator for doing automatic collision detection and response. See CollisionResponseSceneNodeAnimator for details.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="world">Triangle selector holding all triangles of the world with which the scene node may collide. You can create a triangle selector with SceneManager.CreateTriangleSelector().</param>
+			<param name="node">Scene node which should be manipulated. After you added this animator to the scene node, the scene node will not be able to move through walls and is affected by gravity. If you need to teleport the scene node to a new position without it being effected by the collision geometry, then use "node.Position = newPosition; animator.TargetNode = node;"</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid with which collision detection and response is done. If you have got a scene node, and you are unsure about how big the radius should be, you could use "AABBox box = node.BoundingBox; Vector3Df radius = box.MaxEdge - box.Center;". Default is Vector3Df(30,60,30).</param>
+			<param name="gravityPerSecond">Gravity of the environment, as an acceleration in units per second. If your units are equivalent to metres, then Vector3Df(0,-10,0) would give an approximately realistic gravity. You can disable gravity by setting it to Vector3Df(0,0,0). Default is Vector3Df(0,-10,0).</param>
+			<param name="ellipsoidTranslation">By default, the ellipsoid for collision detection is created around the center of the scene node, which means that the ellipsoid surrounds it completely. If this is not what you want, you may specify a translation for the ellipsoid. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateCollisionResponseAnimator(IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Scene.SceneNode,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a special scene node animator for doing automatic collision detection and response. See CollisionResponseSceneNodeAnimator for details.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="world">Triangle selector holding all triangles of the world with which the scene node may collide. You can create a triangle selector with SceneManager.CreateTriangleSelector().</param>
+			<param name="node">Scene node which should be manipulated. After you added this animator to the scene node, the scene node will not be able to move through walls and is affected by gravity. If you need to teleport the scene node to a new position without it being effected by the collision geometry, then use "node.Position = newPosition; animator.TargetNode = node;"</param>
+			<param name="ellipsoidRadius">Radius of the ellipsoid with which collision detection and response is done. If you have got a scene node, and you are unsure about how big the radius should be, you could use "AABBox box = node.BoundingBox; Vector3Df radius = box.MaxEdge - box.Center;". Default is Vector3Df(30,60,30).</param>
+			<param name="gravityPerSecond">Gravity of the environment, as an acceleration in units per second. If your units are equivalent to metres, then Vector3Df(0,-10,0) would give an approximately realistic gravity. You can disable gravity by setting it to Vector3Df(0,0,0). Default is Vector3Df(0,-10,0).</param>
+			<param name="ellipsoidTranslation">By default, the ellipsoid for collision detection is created around the center of the scene node, which means that the ellipsoid surrounds it completely. If this is not what you want, you may specify a translation for the ellipsoid. Default is Vector3Df(0,0,0).</param>
+			<param name="slidingValue">!!! To be documented !!! Default is 0.0005f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateDeleteAnimator(System.Single)">
+			<summary>Creates a scene node animator, which deletes the scene node after some time automatically.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="time">Time in milliseconds, after when the node will be deleted.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator">
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+			<param name="radius">Radius of the circle. Default is 100.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+			<param name="radius">Radius of the circle. Default is 100.</param>
+			<param name="speed">The orbital speed, in radians per millisecond. Default is 0.001f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df)">
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+			<param name="radius">Radius of the circle. Default is 100.</param>
+			<param name="speed">The orbital speed, in radians per millisecond. Default is 0.001f.</param>
+			<param name="direction">The upvector used for alignment of the mesh. Default is Vector3Df(0,1,0).</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single)">
-			<param name="startPosition">-1.0f ... 1.0f</param>
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+			<param name="radius">Radius of the circle. Default is 100.</param>
+			<param name="speed">The orbital speed, in radians per millisecond. Default is 0.001f.</param>
+			<param name="direction">The upvector used for alignment of the mesh. Default is Vector3Df(0,1,0).</param>
+			<param name="startPosition">The position on the circle where the animator will begin. Value is in multiples of a circle, i.e. 0.5 is half way around. Default is 0.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyCircleAnimator(IrrlichtLime.Core.Vector3Df,System.Single,System.Single,IrrlichtLime.Core.Vector3Df,System.Single,System.Single)">
-			<param name="startPosition">-1.0f ... 1.0f</param>
+			<summary>Creates a fly circle animator, which lets the attached scene node fly around a center.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="center">Center of the circle. Default is Vector3Df(0,0,0).</param>
+			<param name="radius">Radius of the circle. Default is 100.</param>
+			<param name="speed">The orbital speed, in radians per millisecond. Default is 0.001f.</param>
+			<param name="direction">The upvector used for alignment of the mesh. Default is Vector3Df(0,1,0).</param>
+			<param name="startPosition">The position on the circle where the animator will begin. Value is in multiples of a circle, i.e. 0.5 is half way around. Default is 0.</param>
+			<param name="radiusEllipsoid">The second radius for an ellipsoid. If 0, then this value is ignored. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyStraightAnimator(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Creates a fly straight animator, which lets the attached scene node fly or move along a line between two points.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="startPoint">Start point of the line.</param>
+			<param name="endPoint">End point of the line.</param>
+			<param name="timeForWay">Time in milliseconds how long the node should need to move from the start point to the end point.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyStraightAnimator(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean)">
+			<summary>Creates a fly straight animator, which lets the attached scene node fly or move along a line between two points.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="startPoint">Start point of the line.</param>
+			<param name="endPoint">End point of the line.</param>
+			<param name="timeForWay">Time in milliseconds how long the node should need to move from the start point to the end point.</param>
+			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFlyStraightAnimator(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single,System.Boolean,System.Boolean)">
+			<summary>Creates a fly straight animator, which lets the attached scene node fly or move along a line between two points.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="startPoint">Start point of the line.</param>
+			<param name="endPoint">End point of the line.</param>
+			<param name="timeForWay">Time in milliseconds how long the node should need to move from the start point to the end point.</param>
+			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is false.</param>
+			<param name="pingpong">Whether the node should fly back from end to start again. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df})">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single)">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single)">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
+			<param name="speed">Movement speed. Default is 1.0f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single)">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
+			<param name="speed">Movement speed. Default is 1.0f.</param>
+			<param name="tightness">Tightness of the spline. Default is 0.5f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean)">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
+			<param name="speed">Movement speed. Default is 1.0f.</param>
+			<param name="tightness">Tightness of the spline. Default is 0.5f.</param>
+			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">
+			<summary>Creates a follow spline animator.
+
+The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="points">List of control points which forms the spline.</param>
+			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
+			<param name="speed">Movement speed. Default is 1.0f.</param>
+			<param name="tightness">Tightness of the spline. Default is 0.5f.</param>
+			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is true.</param>
+			<param name="pingpong">Whether the node should fly back from end to start again. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateMetaTriangleSelector">
+			<summary>Creates a meta triangle selector.
+
+A meta triangle selector is nothing more than a collection of one or more triangle selectors providing together the interface of one triangle selector. In this way, collision tests can be done with different triangle groups in one pass. Please note that the created meta triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateNewSceneManager">
+			<summary>Creates a new scene manager.
+
+This can be used to easily draw and/or store two independent scenes at the same time. The mesh cache will be shared between all existing scene managers, which means if you load a mesh in the original scene manager using for example GetMesh(), the mesh will be available in all other scene managers too, without loading.
+
+The original/main scene manager will still be there and accessible via IrrlichtDevice.SceneManager. If you need input event in this new scene manager, for example for FPS cameras, you'll need to forward input to this manually: Just handle IrrlichtDevoce.OnEvent and call yourNewSceneManager.PostEvent(), and return true so that the original scene manager doesn't get the event. Otherwise, all input will go to the main scene manager automatically.
+
+If you no longer need the new scene manager, you should call SceneManager.Drop().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateNewSceneManager(System.Boolean)">
+			<summary>Creates a new scene manager.
+
+This can be used to easily draw and/or store two independent scenes at the same time. The mesh cache will be shared between all existing scene managers, which means if you load a mesh in the original scene manager using for example GetMesh(), the mesh will be available in all other scene managers too, without loading.
+
+The original/main scene manager will still be there and accessible via IrrlichtDevice.SceneManager. If you need input event in this new scene manager, for example for FPS cameras, you'll need to forward input to this manually: Just handle IrrlichtDevoce.OnEvent and call yourNewSceneManager.PostEvent(), and return true so that the original scene manager doesn't get the event. Otherwise, all input will go to the main scene manager automatically.
+
+If you no longer need the new scene manager, you should call SceneManager.Drop().</summary>
+			<param name="cloneContent">If true, new scene manager will get copy of all children of RootNode. Default is false.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateOctreeTriangleSelector(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates TriangleSelector, optimized by an octree.
+
+Triangle selectors can be used for doing collision detection. This triangle selector is optimized for huge amounts of triangles, it organizes them in an octree. Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="mesh">Mesh of which the triangles are taken.</param>
+			<param name="node">Scene node of which visibility and transformation is used.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateOctreeTriangleSelector(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode,System.Int32)">
+			<summary>Creates TriangleSelector, optimized by an octree.
+
+Triangle selectors can be used for doing collision detection. This triangle selector is optimized for huge amounts of triangles, it organizes them in an octree. Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="mesh">Mesh of which the triangles are taken.</param>
+			<param name="node">Scene node of which visibility and transformation is used.</param>
+			<param name="minimalPolysPerNode">Specifies the minimal polygons contained in an octree node. If a node gets less polys than this value, it will not be splitted into smaller nodes. Default is 32.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateRotationAnimator(IrrlichtLime.Core.Vector3Df)">
 			<summary>Creates a rotation animator, which rotates the attached scene node around itself.
 
 Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
 			<param name="rotationSpeed">Specifies the speed of the animation in degree per 10 milliseconds.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateSceneNodeAnimator(System.String)">
+			<summary>Creates a scene node animator based on its type name.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="typeName">Scene node animator type name.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateSceneNodeAnimator(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a scene node animator based on its type name.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="typeName">Scene node animator type name.</param>
+			<param name="targetNode">Target scene node of the new animator.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateSkinnedMesh">
+			<summary>Creates a skinned mesh.
+
+If you no longer need the skinned mesh, you should call SkinnedMesh.Drop().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTerrainTriangleSelector(IrrlichtLime.Scene.TerrainSceneNode)">
+			<summary>Creates a triangle selector which can select triangles from a terrain scene node.
+
+Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="node">The terrain scene node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTerrainTriangleSelector(IrrlichtLime.Scene.TerrainSceneNode,System.Int32)">
+			<summary>Creates a triangle selector which can select triangles from a terrain scene node.
+
+Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="node">The terrain scene node.</param>
+			<param name="lodLevel">Level of detail, 0 for highest detail. Default is 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTextureAnimator(System.Collections.Generic.List{IrrlichtLime.Video.Texture},System.Single)">
+			<summary>Creates a texture animator, which switches the textures of the target scene node based on a list of textures.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="textures">List of textures to use.</param>
+			<param name="timePerFrame">Time in milliseconds, how long any texture in the list should be used.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTextureAnimator(System.Collections.Generic.List{IrrlichtLime.Video.Texture},System.Single,System.Boolean)">
+			<summary>Creates a texture animator, which switches the textures of the target scene node based on a list of textures.
+
+Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
+			<param name="textures">List of textures to use.</param>
+			<param name="timePerFrame">Time in milliseconds, how long any texture in the list should be used.</param>
+			<param name="loop">If true, the animation restarts with the first texture. If false, the last texture remains set, and the animation stops. Default is true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTriangleSelector(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a simple TriangleSelector, based on a mesh.
+
+Triangle selectors can be used for doing collision detection. Don't use this selector for a huge amount of triangles like in Quake3 maps. Instead, use for example SceneManager.CreateOctreeTriangleSelector(). Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="mesh">Mesh of which the triangles are taken.</param>
+			<param name="node">Scene node of which visibility and transformation is used.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTriangleSelector(IrrlichtLime.Scene.AnimatedMeshSceneNode)">
+			<summary>Creates a simple TriangleSelector, based on an animated mesh scene node.
+
+Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="node">The animated mesh scene node from which to build the selector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTriangleSelectorFromBoundingBox(IrrlichtLime.Scene.SceneNode)">
+			<summary>Creates a simple dynamic TriangleSelector, based on a axis aligned bounding box.
+
+Triangle selectors can be used for doing collision detection. Every time when triangles are queried, the triangle selector gets the bounding box of the scene node, an creates new triangles. In this way, it works good with animated scene nodes. Please note that the created triangle selector is not automaticly attached to the scene node. You will have to use SceneNode.TriangleSelector for this.
+
+If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
+			<param name="node">Scene node of which the bounding box, visibility and transformation is used.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.DrawAll">
 			<summary>Draws all the scene nodes.
@@ -12032,6 +12381,13 @@ This can only be invoked between VideoDriver.BeginScene() and VideoDriver.EndSce
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneManager.FileSystem">
 			<summary>The active file system.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.GeometryCreator">
+			<summary>The geometry creator provides some helper methods to create various types of basic geometry.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetAnimatorTypeName(IrrlichtLime.Scene.SceneNodeAnimatorType)">
+			<summary>Gets a typename from a scene node animator type or null if not found.</summary>
+			<param name="type">Type of the scene node animator.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.GetMesh(IrrlichtLime.IO.ReadFile)">
 			<summary>Gets a pointer to an animateable mesh. Loads the file if not loaded already. If you want to remove a loaded mesh from the cache again, use RemoveMesh().
@@ -12089,6 +12445,14 @@ Stereolithography (.stl).</summary>
 			<param name="filename">Mesh to load.</param>
 			<returns>Pointer on the loaded mesh or null if loading failed.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetMeshLoader(System.Int32)">
+			<summary>Gets specific mesh loader.</summary>
+			<param name="index">The index of the loader to retrieve. Must be from 0 to MeshLoaderCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneLoader(System.Int32)">
+			<summary>Gets specific scene loader.</summary>
+			<param name="index">The index of the loader to retrieve. Must be from 0 to SceneLoaderCount-1.</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeFromID(System.Int32)">
 			<summary>Gets the first scene node with the specified id.</summary>
 			<param name="id">The id to search for.</param>
@@ -12125,13 +12489,66 @@ Stereolithography (.stl).</summary>
 			<param name="type">Type of scene node to find. Set this to Any to get all child nodes.</param>
 			<param name="start">Scene node to start from. All children of this scene node are searched. If null is specified, the root scene node is taken. Default is null.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetSceneNodeTypeName(IrrlichtLime.Scene.SceneNodeType)">
+			<summary>Gets typename from a scene node type or null if not found.</summary>
+			<param name="type">Type of the scene node.</param>
+		</member>
 		<member name="P:IrrlichtLime.Scene.SceneManager.GUIEnvironment">
 			<summary>The active GUI environment.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.IsCulled(IrrlichtLime.Scene.SceneNode)">
+			<summary>Checks if node is culled in the current view frustum.
+
+Please note that depending on the used culling method this check can be rather coarse, or slow. A positive result is correct, though, i.e. if this method returns true the node is positively not visible. The node might still be invisible even if this method returns false.</summary>
+			<param name="node">The scene node which is checked for culling.</param>
+			<returns>True if node is not visible in the current scene, else false.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.LoadScene(IrrlichtLime.IO.ReadFile)">
+			<summary>Loads a scene from the file. Note that the current scene is not cleared before.
+
+The scene is usually loaded from an .irr file, an xml based format, but other scene formats can be added to the engine via AddExternalSceneLoader(). .irr files can be saved directly by the engine using SaveScene().</summary>
+			<param name="file">Where the scene should be loaded from.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.LoadScene(IrrlichtLime.IO.ReadFile,IrrlichtLime.Scene.SceneNode)">
+			<summary>Loads a scene from the file. Note that the current scene is not cleared before.
+
+The scene is usually loaded from an .irr file, an xml based format, but other scene formats can be added to the engine via AddExternalSceneLoader(). .irr files can be saved directly by the engine using SaveScene().</summary>
+			<param name="file">Where the scene should be loaded from.</param>
+			<param name="node">Node which is taken as the root node of the loaded scene. Pass null to load directly into root of the scene manager. Default is null.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.LoadScene(System.String)">
+			<summary>Loads a scene from the file. Note that the current scene is not cleared before.
+
+The scene is usually loaded from an .irr file, an xml based format, but other scene formats can be added to the engine via AddExternalSceneLoader(). .irr files can be saved directly by the engine using SaveScene().</summary>
+			<param name="filename">Where the scene should be loaded from.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.LoadScene(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Loads a scene from the file. Note that the current scene is not cleared before.
+
+The scene is usually loaded from an .irr file, an xml based format, but other scene formats can be added to the engine via AddExternalSceneLoader(). .irr files can be saved directly by the engine using SaveScene().</summary>
+			<param name="filename">Where the scene should be loaded from.</param>
+			<param name="node">Node which is taken as the root node of the loaded scene. Pass null to load directly into root of the scene manager. Default is null.</param>
+			<returns>True if successful.</returns>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneManager.MeshCache">
 			<summary>Interface to the mesh cache which is shared between all existing scene managers.
 
 With this interface, it is possible to manually add new loaded meshes (if SceneManager.GetMesh() is not sufficient), to remove them and to iterate through already loaded meshes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.MeshLoaderCount">
+			<summary>The number of mesh loaders supported by Irrlicht at this time.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.MeshManipulator">
+			<summary>The mesh manipulator.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.PostEvent(IrrlichtLime.Event)">
+			<summary>Posts an input event to the environment.
+
+Usually you do not have to use this method, it is used by the internal engine.</summary>
+			<param name="e">The event to post.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.RegisterNodeForRendering(IrrlichtLime.Scene.SceneNode)">
 			<summary>Registers a node for rendering it at a specific time.
@@ -12150,6 +12567,47 @@ This method should only be used by SceneNodes when they get a OnRegisterSceneNod
 			<summary>The root scene node.
 
 This is the scene node which is parent of all scene nodes. The root scene node is a special scene node which only exists to manage all scene nodes. It will not be rendered and cannot be removed from the scene.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.SaveScene(IrrlichtLime.IO.WriteFile)">
+			<summary>Saves the current scene into a file.
+
+Scene nodes with the option DebugObject set to true are not being saved. The scene is usually written to an .irr file, an xml based format. To load .irr files again use LoadScene().</summary>
+			<param name="file">Where the scene is saved into.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.SaveScene(IrrlichtLime.IO.WriteFile,IrrlichtLime.Scene.SceneNode)">
+			<summary>Saves the current scene into a file.
+
+Scene nodes with the option DebugObject set to true are not being saved. The scene is usually written to an .irr file, an xml based format. To load .irr files again use LoadScene().</summary>
+			<param name="file">Where the scene is saved into.</param>
+			<param name="node">Node which is taken as the top node of the scene. This node and all of its descendants are saved into the scene file. Pass null or RootNode to save the full scene. Default is null.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.SaveScene(System.String)">
+			<summary>Saves the current scene into a file.
+
+Scene nodes with the option DebugObject set to true are not being saved. The scene is usually written to an .irr file, an xml based format. To load .irr files again use LoadScene().</summary>
+			<param name="filename">Where the scene is saved into.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.SaveScene(System.String,IrrlichtLime.Scene.SceneNode)">
+			<summary>Saves the current scene into a file.
+
+Scene nodes with the option DebugObject set to true are not being saved. The scene is usually written to an .irr file, an xml based format. To load .irr files again use LoadScene().</summary>
+			<param name="filename">Where the scene is saved into.</param>
+			<param name="node">Node which is taken as the top node of the scene. This node and all of its descendants are saved into the scene file. Pass null or RootNode to save the full scene. Default is null.</param>
+			<returns>True if successful.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.SceneCollisionManager">
+			<summary>The scene collision manager.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.SceneLoaderCount">
+			<summary>The number of scene loaders supported by Irrlicht at this time.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.SceneNodeRenderPass">
+			<summary>The current render pass.
+
+All scene nodes are being rendered in a specific order. First lights, cameras, sky boxes, solid geometry, and then transparent stuff. During the rendering process, scene nodes may want to know what the scene manager is rendering currently, because for example they registered for rendering twice, once for transparent geometry and once for solid. When knowing what rendering pass currently is active they can render the correct part of their geometry.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneManager.ShadowColor">
 			<summary>The current color of stencil buffers shadows.</summary>
