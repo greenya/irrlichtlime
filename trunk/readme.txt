@@ -113,11 +113,11 @@ The Irrlicht Lime SDK
   http://irrlichtlime.sourceforge.net
 
   Additional information (discussion thread):
-  English: http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38512
+  English: http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512
   Russian: http://www.irrlicht.ru/forum/viewtopic.php?f=3&t=118
 
   If you found bug, please sumbit it at:
-  http://sourceforge.net/tracker/?atid=1355121&group_id=322499&func=browse
+  http://sourceforge.net/p/irrlichtlime/bugs/
 
   If you have feature request, please submit it at:
-  http://sourceforge.net/tracker/?atid=1355124&group_id=322499&func=browse
+  http://sourceforge.net/p/irrlichtlime/feature-requests/
