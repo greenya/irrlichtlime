@@ -314,6 +314,49 @@ void VertexPrimitive::SetVertexColor(int i, unsigned int argb)
 	}
 }
 
+void VertexPrimitive::SetVertexNormal(int i, Vector3Df^ normal)
+{
+	LIME_ASSERT(m_vertices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_vertexCount);
+	LIME_ASSERT(normal != nullptr);
+
+	switch (m_vertexType)
+	{
+	case video::EVT_STANDARD:
+		((video::S3DVertex*)m_vertices)[i].Normal = *normal->m_NativeValue;
+		return;
+
+	case video::EVT_2TCOORDS:
+		((video::S3DVertex2TCoords*)m_vertices)[i].Normal = *normal->m_NativeValue;
+		return;
+
+	case video::EVT_TANGENTS:
+		((video::S3DVertexTangents*)m_vertices)[i].Normal = *normal->m_NativeValue;
+		return;
+	}
+}
+
+void VertexPrimitive::SetVertexNormal(int i, float x, float y, float z)
+{
+	LIME_ASSERT(m_vertices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_vertexCount);
+
+	switch (m_vertexType)
+	{
+	case video::EVT_STANDARD:
+		((video::S3DVertex*)m_vertices)[i].Normal.set(x, y, z);
+		return;
+
+	case video::EVT_2TCOORDS:
+		((video::S3DVertex2TCoords*)m_vertices)[i].Normal.set(x, y, z);
+		return;
+
+	case video::EVT_TANGENTS:
+		((video::S3DVertexTangents*)m_vertices)[i].Normal.set(x, y, z);
+		return;
+	}
+}
+
 void VertexPrimitive::SetVertexPosition(int i, Vector3Df^ position)
 {
 	LIME_ASSERT(m_vertices != nullptr);
@@ -353,6 +396,49 @@ void VertexPrimitive::SetVertexPosition(int i, float x, float y, float z)
 
 	case video::EVT_TANGENTS:
 		((video::S3DVertexTangents*)m_vertices)[i].Pos.set(x, y, z);
+		return;
+	}
+}
+
+void VertexPrimitive::SetVertexTCoords(int i, Vector2Df^ tcoords)
+{
+	LIME_ASSERT(m_vertices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_vertexCount);
+	LIME_ASSERT(tcoords != nullptr);
+
+	switch (m_vertexType)
+	{
+	case video::EVT_STANDARD:
+		((video::S3DVertex*)m_vertices)[i].TCoords = *tcoords->m_NativeValue;
+		return;
+
+	case video::EVT_2TCOORDS:
+		((video::S3DVertex2TCoords*)m_vertices)[i].TCoords = *tcoords->m_NativeValue;
+		return;
+
+	case video::EVT_TANGENTS:
+		((video::S3DVertexTangents*)m_vertices)[i].TCoords = *tcoords->m_NativeValue;
+		return;
+	}
+}
+
+void VertexPrimitive::SetVertexTCoords(int i, float u, float v)
+{
+	LIME_ASSERT(m_vertices != nullptr);
+	LIME_ASSERT(i >= 0 && i < m_vertexCount);
+
+	switch (m_vertexType)
+	{
+	case video::EVT_STANDARD:
+		((video::S3DVertex*)m_vertices)[i].TCoords.set(u, v);
+		return;
+
+	case video::EVT_2TCOORDS:
+		((video::S3DVertex2TCoords*)m_vertices)[i].TCoords.set(u, v);
+		return;
+
+	case video::EVT_TANGENTS:
+		((video::S3DVertexTangents*)m_vertices)[i].TCoords.set(u, v);
 		return;
 	}
 }

@@ -28,12 +28,12 @@ public:
 	void SetVertex(int i, Object^ vertex);
 	void SetVertexColor(int i, Color^ color);
 	void SetVertexColor(int i, unsigned int argb);
-	//void SetVertexNormal(int i, Vector3Df^ normal);
-	//void SetVertexNormal(int i, float x, float y, float z);
+	void SetVertexNormal(int i, Vector3Df^ normal);
+	void SetVertexNormal(int i, float x, float y, float z);
 	void SetVertexPosition(int i, Vector3Df^ position);
 	void SetVertexPosition(int i, float x, float y, float z);
-	//void SetVertexTCoords(int i, Vector2Df^ tcoords);
-	//void SetVertexTCoords(int i, float u, float v);
+	void SetVertexTCoords(int i, Vector2Df^ tcoords);
+	void SetVertexTCoords(int i, float u, float v);
 
 	property int IndexCount { int get(); }
 	property Video::IndexType IndexType { Video::IndexType get(); }
