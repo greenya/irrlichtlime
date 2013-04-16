@@ -16301,6 +16301,18 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="i">Index of the vertex.</param>
 			<param name="color">New color.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexNormal(System.Int32,IrrlichtLime.Core.Vector3Df)">
+			<summary>Sets specified vertex normal.</summary>
+			<param name="i">Index of the vertex.</param>
+			<param name="normal">New normal vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexNormal(System.Int32,System.Single,System.Single,System.Single)">
+			<summary>Sets specified vertex normal.</summary>
+			<param name="i">Index of the vertex.</param>
+			<param name="x">X component of the new normal vector.</param>
+			<param name="y">Y component of the new normal vector.</param>
+			<param name="z">Z component of the new normal vector.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexPosition(System.Int32,IrrlichtLime.Core.Vector3Df)">
 			<summary>Sets specified vertex position.</summary>
 			<param name="i">Index of the vertex.</param>
@@ -16312,6 +16324,17 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="x">X coordinate of new position.</param>
 			<param name="y">Y coordinate of new position.</param>
 			<param name="z">Z coordinate of new position.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexTCoords(System.Int32,IrrlichtLime.Core.Vector2Df)">
+			<summary>Sets specified vertex texture coordinates.</summary>
+			<param name="i">Index of the vertex.</param>
+			<param name="tcoords">New texture coordinates.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexTCoords(System.Int32,System.Single,System.Single)">
+			<summary>Sets specified vertex texture coordinates.</summary>
+			<param name="i">Index of the vertex.</param>
+			<param name="u">U component of the new texture coordinates.</param>
+			<param name="v">V component of the new texture coordinates.</param>
 		</member>
 		<member name="P:IrrlichtLime.Video.VertexPrimitive.TotalBytesAllocated">
 			<summary>Total bytes currenty allocated for vertices and indices.</summary>
