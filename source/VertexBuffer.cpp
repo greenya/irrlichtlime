@@ -23,16 +23,47 @@ VertexBuffer::VertexBuffer(scene::IVertexBuffer* ref)
 	m_VertexBuffer = ref;
 }
 
-void VertexBuffer::AddVertex(Video::Vertex3D^ vertex)
+VertexBuffer^ VertexBuffer::Create()
+{
+	scene::IVertexBuffer* v = new scene::CVertexBuffer(video::EVT_STANDARD);
+	return gcnew VertexBuffer(v);
+}
+
+void VertexBuffer::Add(Video::Vertex3D^ vertex)
 {
 	LIME_ASSERT(vertex != nullptr);
 	m_VertexBuffer->push_back(*vertex->m_NativeValue);
 }
 
-Video::Vertex3D^ VertexBuffer::GetValue(int index)
+Video::Vertex3D^ VertexBuffer::Get(int index)
 {
-	LIME_ASSERT(index >= 0);
+	LIME_ASSERT(index >= 0 && index < Count);
 	return gcnew Video::Vertex3D((*m_VertexBuffer)[index]);
+}
+
+void VertexBuffer::Set(int index, Video::Vertex3D^ vertex)
+{
+	LIME_ASSERT(index >= 0 && index < Count);
+	LIME_ASSERT(vertex != nullptr);
+
+	(*m_VertexBuffer)[index] = *vertex->m_NativeValue;
+}
+
+void VertexBuffer::Clear()
+{
+	m_VertexBuffer->reallocate(0);
+}
+
+void VertexBuffer::Reallocate(int newAllocatedCount)
+{
+	LIME_ASSERT(newAllocatedCount >= 0);
+	m_VertexBuffer->reallocate(newAllocatedCount);
+}
+
+void VertexBuffer::SetCount(int newCount)
+{
+	LIME_ASSERT(newCount >= 0);
+	m_VertexBuffer->set_used(newCount);
 }
 
 void VertexBuffer::SetDirty()
@@ -40,17 +71,14 @@ void VertexBuffer::SetDirty()
 	m_VertexBuffer->setDirty();
 }
 
-void VertexBuffer::SetValue(int index, Video::Vertex3D^ value)
-{
-	LIME_ASSERT(index >= 0);
-	LIME_ASSERT(value != nullptr);
-
-	(*m_VertexBuffer)[index] = *value->m_NativeValue;
-}
-
-int VertexBuffer::AllocatedSize::get()
+int VertexBuffer::AllocatedCount::get()
 {
 	return m_VertexBuffer->allocated_size();
+}
+
+int VertexBuffer::Count::get()
+{
+	return m_VertexBuffer->size();
 }
 
 Scene::HardwareMappingHint VertexBuffer::HardwareMappingHint::get()
@@ -68,19 +96,20 @@ Video::VertexType VertexBuffer::Type::get()
 	return (Video::VertexType)m_VertexBuffer->getType();
 }
 
-void VertexBuffer::Type::set(Video::VertexType value)
+array<Video::Vertex3D^>^ VertexBuffer::Vertices::get()
 {
-	m_VertexBuffer->setType((video::E_VERTEX_TYPE)value);
-}
+	int c = m_VertexBuffer->size();
+	array<Video::Vertex3D^>^ a = gcnew array<Video::Vertex3D^>(c);
 
-int VertexBuffer::VertexCount::get()
-{
-	return m_VertexBuffer->size();
+	for (int i = 0; i < c; i++)
+		a[i] = gcnew Video::Vertex3D((*m_VertexBuffer)[i]);
+
+	return a;
 }
 
 String^ VertexBuffer::ToString()
 {
-	return String::Format("VertexBuffer: VertexCount={0}", VertexCount);
+	return String::Format("VertexBuffer: {0} {1} vertices", Count, Type);
 }
 
 } // end namespace Scene
