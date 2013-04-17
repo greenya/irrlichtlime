@@ -14,15 +14,22 @@ public ref class IndexBuffer : ReferenceCounted
 {
 public:
 
-	void AddIndex(int index);
-	int GetValue(int index);
-	void SetDirty();
-	void SetValue(int index, int value);
+	static IndexBuffer^ Create(Video::IndexType type);
 
-	property int AllocatedSize { int get(); }
+	void Add(int index);
+	int Get(int i);
+	void Set(int i, int index);
+
+	void Clear();
+	void Reallocate(int newAllocatedCount);
+	void SetCount(int newCount);
+	void SetDirty();
+
+	property int AllocatedCount { int get(); }
+	property int Count { int get(); }
 	property Scene::HardwareMappingHint HardwareMappingHint { Scene::HardwareMappingHint get(); void set(Scene::HardwareMappingHint value); }
-	property int IndexCount { int get(); }
-	property Video::IndexType Type { Video::IndexType get(); void set(Video::IndexType value); }
+	property array<int>^ Indices { array<int>^ get(); }
+	property Video::IndexType Type { Video::IndexType get(); }
 
 	virtual String^ ToString() override;
 

@@ -3,6 +3,7 @@
 #include "GPUProgrammingServices.h"
 #include "Image.h"
 #include "ImageLoader.h"
+#include "IndexBuffer.h"
 #include "Light.h"
 #include "Material.h"
 #include "MaterialRenderer.h"
@@ -13,6 +14,7 @@
 #include "ReferenceCounted.h"
 #include "SceneNode.h"
 #include "Texture.h"
+#include "VertexBuffer.h"
 #include "VideoDriver.h"
 #include "WriteFile.h"
 
@@ -888,10 +890,11 @@ void VideoDriver::Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color^ 
 void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
-	LIME_ASSERT(vertices->Length > 0);
 	LIME_ASSERT(vertices->Length <= 0xFFFF);
 	LIME_ASSERT(indices16bit != nullptr);
-	LIME_ASSERT(indices16bit->Length > 0);
+
+	if (vertices->Length == 0 || indices16bit->Length == 0)
+		return;
 
 	unsigned int primCount = calculatePrimitiveCount(indices16bit->Length, pType);
 
@@ -926,9 +929,10 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
-	LIME_ASSERT(vertices->Length > 0);
 	LIME_ASSERT(indices32bit != nullptr);
-	LIME_ASSERT(indices32bit->Length > 0);
+
+	if (vertices->Length == 0 || indices32bit->Length == 0)
+		return;
 
 	unsigned int primCount = calculatePrimitiveCount(indices32bit->Length, pType);
 
@@ -958,6 +962,34 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)
 {
 	Draw2DVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
+}
+
+void VideoDriver::Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType)
+{
+	LIME_ASSERT(vertexBuffer != nullptr);
+	LIME_ASSERT(indexBuffer != nullptr);
+
+	scene::IVertexBuffer* vb = vertexBuffer->m_VertexBuffer;
+	scene::IIndexBuffer* ib = indexBuffer->m_IndexBuffer;
+
+	if (vb->size() == 0 || ib->size() == 0)
+		return;
+
+	unsigned int primCount = calculatePrimitiveCount(ib->size(), pType);
+
+	m_VideoDriver->draw2DVertexPrimitiveList(
+		vb->pointer(),
+		vb->size(),
+		ib->pointer(),
+		primCount,
+		vb->getType(),
+		(scene::E_PRIMITIVE_TYPE)pType,
+		ib->getType());
+}
+
+void VideoDriver::Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer)
+{
+	Draw2DVertexPrimitiveList(vertexBuffer, indexBuffer, Scene::PrimitiveType::Triangles);
 }
 
 void VideoDriver::Draw3DBox(AABBox^ box, Color^ color)
@@ -1209,6 +1241,34 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)
 {
 	DrawVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
+}
+
+void VideoDriver::DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType)
+{
+	LIME_ASSERT(vertexBuffer != nullptr);
+	LIME_ASSERT(indexBuffer != nullptr);
+
+	scene::IVertexBuffer* vb = vertexBuffer->m_VertexBuffer;
+	scene::IIndexBuffer* ib = indexBuffer->m_IndexBuffer;
+
+	if (vb->size() == 0 || ib->size() == 0)
+		return;
+
+	unsigned int primCount = calculatePrimitiveCount(ib->size(), pType);
+
+	m_VideoDriver->drawVertexPrimitiveList(
+		vb->pointer(),
+		vb->size(),
+		ib->pointer(),
+		primCount,
+		vb->getType(),
+		(scene::E_PRIMITIVE_TYPE)pType,
+		ib->getType());
+}
+
+void VideoDriver::DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer)
+{
+	DrawVertexPrimitiveList(vertexBuffer, indexBuffer, Scene::PrimitiveType::Triangles);
 }
 
 void VideoDriver::EnableClipPlane(int index, bool enable)
@@ -1764,9 +1824,7 @@ String^ VideoDriver::ToString()
 
 unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene::PrimitiveType pType)
 {
-	unsigned int c;
-
-	LIME_ASSERT(indexCount > 0);
+	unsigned int c = 0;
 
 	switch (pType)
 	{
@@ -1808,12 +1866,7 @@ unsigned int VideoDriver::calculatePrimitiveCount(unsigned int indexCount, Scene
 		LIME_ASSERT(indexCount == (indexCount / 4) * 4);
 		c = indexCount / 4;
 		break;
-
-	default:
-		c = 0;
 	}
-
-	LIME_ASSERT2(c > 0, "Failed to calculate count of primitives: unexpected value of PrimitiveType or number of indices is invalid.");
 
 	return c;
 }

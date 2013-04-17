@@ -8,7 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
-namespace Scene { ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; }
+namespace Scene { ref class IndexBuffer; ref class Mesh; ref class MeshBuffer; ref class MeshManipulator; ref class SceneNode; ref class VertexBuffer; }
 namespace IO { ref class Attributes; ref class ReadFile; ref class WriteFile; }
 namespace Video {
 
@@ -110,6 +110,8 @@ public:
 	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
 	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
 	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
+	void Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer);
 
 	void Draw3DBox(AABBox^ box, Color^ color);
 
@@ -141,6 +143,8 @@ public:
 	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
 	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
+	void DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer);
 
 	void EnableClipPlane(int index, bool enable);
 	void EnableClipPlane(int index);
