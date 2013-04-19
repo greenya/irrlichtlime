@@ -60,7 +60,7 @@ public:
 	}
 
 	gcroot<SceneNode::GetMaterialEventHandler^> m_getMaterialHandler;
-	virtual video::SMaterial& getMaterial(int i)
+	virtual video::SMaterial& getMaterial(unsigned int i)
 	{
 		Video::Material^ m = m_getMaterialHandler->Invoke(i);
 		if (m != nullptr)
