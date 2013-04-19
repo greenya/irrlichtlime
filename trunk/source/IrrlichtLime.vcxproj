@@ -156,7 +156,6 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClInclude Include="TexturePainter.h" />
     <ClInclude Include="TransformationState.h" />
     <ClInclude Include="Vertex.h" />
-    <ClInclude Include="VertexPrimitive.h" />
     <ClInclude Include="Vertex_template.h" />
     <ClInclude Include="VertexShaderType.h" />
     <ClInclude Include="VertexType.h" />
@@ -337,7 +336,6 @@ copy /y "..\doc\IrrlichtLime.xml" "$(SolutionDir)bin\$(Configuration)\" &gt;nul
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
-    <ClCompile Include="VertexPrimitive.cpp" />
     <ClCompile Include="VideoDriver.cpp" />
     <ClCompile Include="VideoModeList.cpp" />
     <ClCompile Include="AnimatedMesh.cpp" />
