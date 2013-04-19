@@ -8499,30 +8499,52 @@ You can get an instance of this class through device.SceneManager.GeometryCreato
 		<member name="T:IrrlichtLime.Scene.IndexBuffer">
 			<summary>Index buffer.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Scene.IndexBuffer.AddIndex(System.Int32)">
-			<summary>Adds new index value to the buffer.</summary>
-			<param name="index">Index value to add. Must be not negative.</param>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Create(IrrlichtLime.Video.IndexType)">
+			<summary>Creates an instance of IndexBuffer. You have to call Drop() when you don't need the buffer any more.</summary>
+			<param name="type">Type of the index buffer.</param>
 		</member>
-		<member name="P:IrrlichtLime.Scene.IndexBuffer.AllocatedSize">
-			<summary>Total bytes allocated for the buffer.</summary>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Add(System.Int32)">
+			<summary>Adds new index to the buffer.</summary>
+			<param name="index">Index to add.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.IndexBuffer.GetValue(System.Int32)">
-			<summary>Gets index value.</summary>
-			<param name="index">Index of the index to get. Must be from 0 to IndexCount-1.</param>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.AllocatedCount">
+			<summary>Amount of currently allocated indices. It changes automatically when Add() gets called. It can be changed explicitly by calling to Reallocate().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Clear">
+			<summary>Clears the buffer.
+
+This call similar to Reallocate(0).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.Count">
+			<summary>Amount of indices currently used in the buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Get(System.Int32)">
+			<summary>Gets index from the buffer.</summary>
+			<param name="i">Index of the index value. Must be from 0 to Count-1.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.IndexBuffer.HardwareMappingHint">
 			<summary>The current hardware mapping hint.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Scene.IndexBuffer.IndexCount">
-			<summary>Total number of indices stored in the buffer.</summary>
+		<member name="P:IrrlichtLime.Scene.IndexBuffer.Indices">
+			<summary>All the indices in this index buffer.
+
+Please note, this property returns a copy of indices, so do not try to "buffer.Indices[0] = ...".</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Reallocate(System.Int32)">
+			<summary>Reallocates index buffer and implicitly changes AllocatedCount value.</summary>
+			<param name="newAllocatedCount">New amount of indices to allocate. Must be &gt;=0. Count will be changed automatically if the new AllocatedCount will be less.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.Set(System.Int32,System.Int32)">
+			<summary>Sets new value for the index.</summary>
+			<param name="i">Index of the index value. Must be from 0 to Count-1.</param>
+			<param name="index">New index value.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.IndexBuffer.SetCount(System.Int32)">
+			<summary>Sets new amount of indices currently used in the buffer.</summary>
+			<param name="newCount">New count of indices to use. This value must be &gt;=0. If the value greater than current AllocatedCount, then buffer will be automatically Reallocate()d.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.IndexBuffer.SetDirty">
 			<summary>Flags the index buffer as changed, reloads hardware buffers.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.IndexBuffer.SetValue(System.Int32,System.Int32)">
-			<summary>Sets index value.</summary>
-			<param name="index">Index of the index to set. Must be from 0 to IndexCount-1.</param>
-			<param name="value">New index value. Must be not negative.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.IndexBuffer.Type">
 			<summary>Indices type.</summary>
@@ -13538,33 +13560,56 @@ Only useful for MetaTriangleSelector, others has 1.</summary>
 		<member name="T:IrrlichtLime.Scene.VertexBuffer">
 			<summary>Vertex buffer.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Scene.VertexBuffer.AddVertex(IrrlichtLime.Video.Vertex3D)">
-			<summary>Adds new vertex value to the buffer.</summary>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Create">
+			<summary>Creates an instance of VertexBuffer. You have to call Drop() when you don't need the buffer any more.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Add(IrrlichtLime.Video.Vertex3D)">
+			<summary>Adds new vertex to the buffer.</summary>
 			<param name="vertex">Vertex to add.</param>
 		</member>
-		<member name="P:IrrlichtLime.Scene.VertexBuffer.AllocatedSize">
-			<summary>Total bytes allocated for the buffer.</summary>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.AllocatedCount">
+			<summary>Amount of currently allocated vertices. It changes automatically when Add() gets called. It can be changed explicitly by calling to Reallocate().</summary>
 		</member>
-		<member name="M:IrrlichtLime.Scene.VertexBuffer.GetValue(System.Int32)">
-			<summary>Gets vertex value.</summary>
-			<param name="index">Index of the vertex to get. Must be from 0 to VertexCount-1.</param>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Clear">
+			<summary>Clears the buffer.
+
+This call similar to Reallocate(0).</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.Count">
+			<summary>Amount of vertices currently used in the buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Get(System.Int32)">
+			<summary>Gets vertex from the buffer.
+
+Please note, the method returns a copy of the vertex, changing its content will not affect the buffer's vertex. Use Set() to set new vertex value.</summary>
+			<param name="index">Index of the vertex. Must be from 0 to Count-1.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.VertexBuffer.HardwareMappingHint">
 			<summary>The current hardware mapping hint.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Reallocate(System.Int32)">
+			<summary>Reallocates vertex buffer and implicitly changes AllocatedCount value.</summary>
+			<param name="newAllocatedCount">New amount of vertices to allocate. Must be &gt;=0. Count will be changed automatically if the new AllocatedCount will be less.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.Set(System.Int32,IrrlichtLime.Video.Vertex3D)">
+			<summary>Sets new value for the vertex.</summary>
+			<param name="index">Index of the vertex. Must be from 0 to Count-1.</param>
+			<param name="vertex">New vertex.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.VertexBuffer.SetCount(System.Int32)">
+			<summary>Sets new amount of vertices currently used in the buffer.</summary>
+			<param name="newCount">New count of vertices to use. This value must be &gt;=0. If the value greater than current AllocatedCount, then buffer will be automatically Reallocate()d.</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.VertexBuffer.SetDirty">
 			<summary>Flags the vertex buffer as changed, reloads hardware buffers.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.VertexBuffer.SetValue(System.Int32,IrrlichtLime.Video.Vertex3D)">
-			<summary>Sets vertex value.</summary>
-			<param name="index">Index of the vertex to set. Must be from 0 to VertexCount-1.</param>
-			<param name="value">Vertex value.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.VertexBuffer.Type">
 			<summary>Vertices type.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Scene.VertexBuffer.VertexCount">
-			<summary>Total number of vertices stored in the buffer.</summary>
+		<member name="P:IrrlichtLime.Scene.VertexBuffer.Vertices">
+			<summary>All the vertices in this vertex buffer.
+
+Please note, this property returns a copy of vertices, so do not try to "buffer.Vertices[0] = ...".</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.ViewFrustum">
 			<summary>The view frustum. That's the space visible by the camera.
@@ -16237,122 +16282,6 @@ Note: for this class, this property always equals to VertexType.TTCoords.</summa
 			<param name="tu2">Second texture U coord. Default: 0.</param>
 			<param name="tv2">Second texture V coord. Default: 0.</param>
 		</member>
-		<member name="T:IrrlichtLime.Video.VertexPrimitive">
-			<summary>Incapsulates array of vertices and indices in native (unmanaged) form. This class uses native pointers and that's why it is able to draw primitives faster then direct calling to VideoDriver.DrawVertexPrimitiveList() in most cases.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver)">
-			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
-			<param name="driver">Video driver to use.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver,System.Int32)">
-			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
-			<param name="driver">Video driver to use.</param>
-			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to PrimitiveCount. If this value less than 1, the method will do nothing.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.Draw(IrrlichtLime.Video.VideoDriver,System.Int32,IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws vertex primitive using current driver's transformation and material.</summary>
-			<param name="driver">Video driver to use.</param>
-			<param name="overridePrimitiveCount">Number of primitives to draw. This value should be less or equal to PrimitiveCount. If this value less than 1, the method will do nothing.</param>
-			<param name="overridePrimitiveType">Type of primitives to draw. This value must be compatible with IndexCount and overridePrimitiveCount values.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.Drop">
-			<summary>Releases memory allocated for vertices and indices. After calling this method you cannot use this instance of VertexPrimitive any more.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.GetIndex(System.Int32)">
-			<summary>Gets specified index value.</summary>
-			<param name="i">Index of the index.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.GetVertex(System.Int32)">
-			<summary>Gets specified vertex. You need to cast return value to proper vertex type to access the members.</summary>
-			<param name="i">Index of the vertex.</param>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.IndexCount">
-			<summary>Total number of indices allocated.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.IndexType">
-			<summary>Type of indices.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.PrimitiveCount">
-			<summary>Total number of primitives. This value is calculated automatically using PrimitiveType and IndexCount.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.PrimitiveType">
-			<summary>Type of primitives.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetIndex(System.Int32,System.Int32)">
-			<summary>Sets specified index value.</summary>
-			<param name="i">Index of the index.</param>
-			<param name="index">New index value.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetIndicesSequence">
-			<summary>Sets all indices to a sequence from 0 to IndexCount-1.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertex(System.Int32,System.Object)">
-			<summary>Sets specified vertex.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="vertex">New vertex. The value must have proper vertex type, e.g. Vertex3D for VertexType.Standard and so on.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexColor(System.Int32,System.UInt32)">
-			<summary>Sets specified vertex color.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="argb">New color in A8R8G8B8 format.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexColor(System.Int32,IrrlichtLime.Video.Color)">
-			<summary>Sets specified vertex color.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="color">New color.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexNormal(System.Int32,IrrlichtLime.Core.Vector3Df)">
-			<summary>Sets specified vertex normal.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="normal">New normal vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexNormal(System.Int32,System.Single,System.Single,System.Single)">
-			<summary>Sets specified vertex normal.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="x">X component of the new normal vector.</param>
-			<param name="y">Y component of the new normal vector.</param>
-			<param name="z">Z component of the new normal vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexPosition(System.Int32,IrrlichtLime.Core.Vector3Df)">
-			<summary>Sets specified vertex position.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="position">New position.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexPosition(System.Int32,System.Single,System.Single,System.Single)">
-			<summary>Sets specified vertex position.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="x">X coordinate of new position.</param>
-			<param name="y">Y coordinate of new position.</param>
-			<param name="z">Z coordinate of new position.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexTCoords(System.Int32,IrrlichtLime.Core.Vector2Df)">
-			<summary>Sets specified vertex texture coordinates.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="tcoords">New texture coordinates.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.SetVertexTCoords(System.Int32,System.Single,System.Single)">
-			<summary>Sets specified vertex texture coordinates.</summary>
-			<param name="i">Index of the vertex.</param>
-			<param name="u">U component of the new texture coordinates.</param>
-			<param name="v">V component of the new texture coordinates.</param>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.TotalBytesAllocated">
-			<summary>Total bytes currenty allocated for vertices and indices.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.VertexCount">
-			<summary>Total number of vertices allocated.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.VertexPrimitive.#ctor(IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Video.VertexType,System.Int32,IrrlichtLime.Video.IndexType,System.Int32)">
-			<summary>Initializes new instance. Allocates memory for native arrays of vertices and indices of specified types and sizes. Note: the memory will not be released until you explicitly call Drop().</summary>
-			<param name="primitiveType">Type of primitives.</param>
-			<param name="vertexType">Type of vertices.</param>
-			<param name="vertexCount">Total number of vertices. The value must not be less than 1. Note: for IndexType._16Bit this value also must not be greater than 65536.</param>
-			<param name="indexType">Type of indices. Smaller type takes less memory but able to index less number of vertices.</param>
-			<param name="indexCount">Total number of indices. The value must not be less than 1.</param>
-		</member>
-		<member name="P:IrrlichtLime.Video.VertexPrimitive.VertexType">
-			<summary>Type of vertices.</summary>
-		</member>
 		<member name="T:IrrlichtLime.Video.VertexShaderType">
 			<summary>Enumeration for vertex shader versions.</summary>
 		</member>
@@ -16873,6 +16802,25 @@ This method can be used to draw circles, but also triangles, tetragons, pentagon
 			<param name="y2">Y coordinate of bottom-right corner of the rectangle.</param>
 			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle outline will be.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Scene.VertexBuffer,IrrlichtLime.Scene.IndexBuffer)">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertexBuffer">Vertices.</param>
+			<param name="indexBuffer">Indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Scene.VertexBuffer,IrrlichtLime.Scene.IndexBuffer,IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list in 2d.
+
+Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
+
+This method is not available for the software drivers.</summary>
+			<param name="vertexBuffer">Vertices.</param>
+			<param name="indexBuffer">Indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
 			<summary>Draws a vertex primitive list in 2d.
 
@@ -17034,6 +16982,21 @@ To draw a stencil shadow, do next: draw all geometry, then use this method, to d
 			<param name="triangles">List of triangles specifying the shadow volume. Note: count of vectors in this list must be multiple to 3.</param>
 			<param name="zfail">True to use Z-fail method, otherwise Z-pass will be used. Default: true.</param>
 			<param name="debugDataVisible">The debug data that is enabled for this shadow volume.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Scene.VertexBuffer,IrrlichtLime.Scene.IndexBuffer)">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertexBuffer">Vertices.</param>
+			<param name="indexBuffer">Indices.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Scene.VertexBuffer,IrrlichtLime.Scene.IndexBuffer,IrrlichtLime.Scene.PrimitiveType)">
+			<summary>Draws a vertex primitive list.
+
+Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
+			<param name="vertexBuffer">Vertices.</param>
+			<param name="indexBuffer">Indices.</param>
+			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
 			<summary>Draws a vertex primitive list.
