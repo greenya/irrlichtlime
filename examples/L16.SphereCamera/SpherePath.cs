@@ -12,13 +12,11 @@ namespace L16.SphereCamera
 {
 	class SpherePath
 	{
-		const int MAX_LINE_COUNT = 32000;
-
 		float height;
 		List<Vector3Df> points = new List<Vector3Df>(); // we use this list only to simplify loading and saving routines
-		VertexPrimitive primFront = new VertexPrimitive(PrimitiveType.Lines, VertexType.Standard, MAX_LINE_COUNT * 2, IndexType._16Bit, MAX_LINE_COUNT * 2);
-		VertexPrimitive primBack = new VertexPrimitive(PrimitiveType.Lines, VertexType.Standard, MAX_LINE_COUNT * 2, IndexType._16Bit, MAX_LINE_COUNT * 2);
-		int primUsed = 0;
+		VertexBuffer vertFront = VertexBuffer.Create();
+		VertexBuffer vertBack = VertexBuffer.Create();
+		IndexBuffer indBoth = IndexBuffer.Create(IndexType._16Bit); // same indices for both vertex buffers
 
 		public Vector3Df Center { get; set; }
 		public Color FrontColor { get; set; }
@@ -37,14 +35,17 @@ namespace L16.SphereCamera
 			FrontColor = Color.OpaqueCyan;
 			BackColor = Color.OpaqueBlue;
 
-			primFront.SetIndicesSequence();
-			primBack.SetIndicesSequence();
+			// we allocated once 64000 indices, initialize the sequence and never touch them in future... we will only use SetCount() method to set actual number of used indices
+			indBoth.Reallocate(64000);
+			for (int i = 0; i < indBoth.AllocatedCount - 1; i++)
+				indBoth.Add(i);
 		}
 
 		public void Drop()
 		{
-			primFront.Drop();
-			primBack.Drop();
+			vertFront.Drop();
+			vertBack.Drop();
+			indBoth.Drop();
 		}
 
 		public void AddPoint(Vector3Df point)
@@ -54,35 +55,36 @@ namespace L16.SphereCamera
 			// add front line
 			Vertex3D v1front = new Vertex3D(point, new Vector3Df(0), new Color(0));
 			Vertex3D v2front = new Vertex3D((point - Center).Normalize() * height, new Vector3Df(0), FrontColor);
-			primFront.SetVertex(primUsed + 0, v1front);
-			primFront.SetVertex(primUsed + 1, v2front);
+			vertFront.Add(v1front);
+			vertFront.Add(v2front);
 
 			// add back line
 			Vertex3D v1back = v1front;
 			Vertex3D v2back = new Vertex3D(v2front);
 			v2back.Color = BackColor;
-			primBack.SetVertex(primUsed + 0, v1back);
-			primBack.SetVertex(primUsed + 1, v2back);
-
-			primUsed += 2;
+			vertBack.Add(v1back);
+			vertBack.Add(v2back);
 
 			// add connection line if possible (front and back)
-			if (primUsed >= 4)
+			if (vertFront.Count >= 4)
 			{
-				primFront.SetVertex(primUsed + 0, primFront.GetVertex(primUsed - 3));
-				primFront.SetVertex(primUsed + 1, v2front);
+				vertFront.Add(vertFront.Get(vertFront.Count - 3));
+				vertFront.Add(v2front);
 
-				primBack.SetVertex(primUsed + 0, primBack.GetVertex(primUsed - 3));
-				primBack.SetVertex(primUsed + 1, v2back);
-
-				primUsed += 2;
+				vertBack.Add(vertBack.Get(vertBack.Count - 3));
+				vertBack.Add(v2back);
 			}
+
+			// update indices "used" count
+			indBoth.SetCount(vertFront.Count);
 		}
 
 		public void Clear()
 		{
 			points.Clear();
-			primUsed = 0;
+			vertFront.Clear();
+			vertBack.Clear();
+			indBoth.SetCount(0); // we don't deallocate indices, we only set "used" count
 		}
 
 		public void Draw(VideoDriver driver)
@@ -99,17 +101,17 @@ namespace L16.SphereCamera
 			// draw back lines
 			m.ZBuffer = ComparisonFunc.Greater;
 			driver.SetMaterial(m);
-			primBack.Draw(driver, primUsed / 2);
+			driver.DrawVertexPrimitiveList(vertBack, indBoth, PrimitiveType.Lines);
 
 			// draw front lines
 			m.ZBuffer = ComparisonFunc.LessEqual;
 			driver.SetMaterial(m);
-			primFront.Draw(driver, primUsed / 2);
+			driver.DrawVertexPrimitiveList(vertFront, indBoth, PrimitiveType.Lines);
 
 			// draw front points
 			m.Thickness = 10;
 			driver.SetMaterial(m);
-			primFront.Draw(driver, primUsed, PrimitiveType.Points);
+			driver.DrawVertexPrimitiveList(vertFront, indBoth, PrimitiveType.Points);
 		}
 
 		public void Save(string filename)
