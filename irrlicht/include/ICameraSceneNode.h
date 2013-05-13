@@ -76,7 +76,7 @@ namespace scene
 		/** If the camera's target and rotation are bound ( @see
 		bindTargetAndRotation() ) then calling this will also change
 		the camera's scene node rotation to match the target.
-		Note that setTarget uses the current absolute position 
+		Note that setTarget uses the current absolute position
 		internally, so if you changed setPosition since last rendering you must
 		call updateAbsolutePosition before using this function.
 		\param pos Look at target of the camera, in world co-ordinates. */
@@ -165,6 +165,9 @@ namespace scene
 		@see getTargetAndRotationBinding() */
 		virtual void bindTargetAndRotation(bool bound) =0;
 
+		//! Updates the matrices without uploading them to the driver
+		virtual void updateMatrices() = 0;
+
 		//! Queries if the camera scene node's rotation and its target position are bound together.
 		/** @see bindTargetAndRotation() */
 		virtual bool getTargetAndRotationBinding(void) const =0;
@@ -176,7 +179,7 @@ namespace scene
 
 			if (!out)
 				return;
-			out->addBool	("IsOrthogonal", IsOrthogonal );
+			out->addBool("IsOrthogonal", IsOrthogonal);
 		}
 
 		//! Reads attributes of the camera node

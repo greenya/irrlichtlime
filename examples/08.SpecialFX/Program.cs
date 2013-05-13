@@ -69,30 +69,33 @@ namespace _08.SpecialFX
 
 			ParticleSystemSceneNode ps = smgr.AddParticleSystemSceneNode(false);
 
-			ParticleEmitter em = ps.CreateBoxEmitter(
-				new AABBox(-7, 0, -7, 7, 1, 7),	// emitter size
-				new Vector3Df(0.0f, 0.06f, 0.0f),	// initial direction
-				80, 100,							// emit rate
-				new Color(255, 255, 255, 0),		// darkest color
-				new Color(255, 255, 255, 0),		// brightest color
-				800, 2000, 0,						// min and max age, angle
-				new Dimension2Df(10.0f),			// min size
-				new Dimension2Df(20.0f));			// max size
+			if (ps != null)
+			{
+				ParticleEmitter em = ps.CreateBoxEmitter(
+					new AABBox(-7, 0, -7, 7, 1, 7),	// emitter size
+					new Vector3Df(0.0f, 0.06f, 0.0f),	// initial direction
+					80, 100,							// emit rate
+					new Color(255, 255, 255, 0),		// darkest color
+					new Color(255, 255, 255, 0),		// brightest color
+					800, 2000, 0,						// min and max age, angle
+					new Dimension2Df(10.0f),			// min size
+					new Dimension2Df(20.0f));			// max size
 
-			ps.Emitter = em; // this grabs the emitter
-			em.Drop(); // so we can drop it here without deleting it
+				ps.Emitter = em; // this grabs the emitter
+				em.Drop(); // so we can drop it here without deleting it
 
-			ParticleAffector paf = ps.CreateFadeOutParticleAffector();
+				ParticleAffector paf = ps.CreateFadeOutParticleAffector();
 
-			ps.AddAffector(paf); // same goes for the affector
-			paf.Drop();
+				ps.AddAffector(paf); // same goes for the affector
+				paf.Drop();
 
-			ps.Position = new Vector3Df(-70, 60, 40);
-			ps.Scale = new Vector3Df(2);
-			ps.SetMaterialFlag(MaterialFlag.Lighting, false);
-			ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
-			ps.SetMaterialTexture(0, driver.GetTexture("../../media/fire.bmp"));
-			ps.SetMaterialType(MaterialType.TransparentAddColor);
+				ps.Position = new Vector3Df(-70, 60, 40);
+				ps.Scale = new Vector3Df(2);
+				ps.SetMaterialFlag(MaterialFlag.Lighting, false);
+				ps.SetMaterialFlag(MaterialFlag.ZWrite, false);
+				ps.SetMaterialTexture(0, driver.GetTexture("../../media/fire.bmp"));
+				ps.SetMaterialType(MaterialType.TransparentAddColor);
+			}
 
 			VolumeLightSceneNode n = smgr.AddVolumeLightSceneNode(null, -1,
 				32,								// Subdivisions on U axis

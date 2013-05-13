@@ -53,19 +53,19 @@ namespace core
 #undef PI
 #endif
 	//! Constant for PI.
-	const f32 PI		= 3.14159265359f;
+	const f32 PI = 3.14159265359f;
 
 	//! Constant for reciprocal of PI.
-	const f32 RECIPROCAL_PI	= 1.0f/PI;
+	const f32 RECIPROCAL_PI = 1.0f/PI;
 
 	//! Constant for half of PI.
-	const f32 HALF_PI	= PI/2.0f;
+	const f32 HALF_PI = PI/2.0f;
 
 #ifdef PI64 // make sure we don't collide with a define
 #undef PI64
 #endif
 	//! Constant for 64bit PI.
-	const f64 PI64		= 3.1415926535897932384626433832795028841971693993751;
+	const f64 PI64 = 3.1415926535897932384626433832795028841971693993751;
 
 	//! Constant for 64bit reciprocal of PI.
 	const f64 RECIPROCAL_PI64 = 1.0/PI64;
@@ -84,7 +84,7 @@ namespace core
 
 	//! Utility function to convert a radian value to degrees
 	/** Provided as it can be clearer to write radToDeg(X) than RADTODEG * X
-	\param radians	The radians value to convert to degrees.
+	\param radians The radians value to convert to degrees.
 	*/
 	inline f32 radToDeg(f32 radians)
 	{
@@ -93,7 +93,7 @@ namespace core
 
 	//! Utility function to convert a radian value to degrees
 	/** Provided as it can be clearer to write radToDeg(X) than RADTODEG * X
-	\param radians	The radians value to convert to degrees.
+	\param radians The radians value to convert to degrees.
 	*/
 	inline f64 radToDeg(f64 radians)
 	{
@@ -102,7 +102,7 @@ namespace core
 
 	//! Utility function to convert a degrees value to radians
 	/** Provided as it can be clearer to write degToRad(X) than DEGTORAD * X
-	\param degrees	The degrees value to convert to radians.
+	\param degrees The degrees value to convert to radians.
 	*/
 	inline f32 degToRad(f32 degrees)
 	{
@@ -111,7 +111,7 @@ namespace core
 
 	//! Utility function to convert a degrees value to radians
 	/** Provided as it can be clearer to write degToRad(X) than DEGTORAD * X
-	\param degrees	The degrees value to convert to radians.
+	\param degrees The degrees value to convert to radians.
 	*/
 	inline f64 degToRad(f64 degrees)
 	{
@@ -193,6 +193,16 @@ namespace core
 		return (a + tolerance >= b) && (a - tolerance <= b);
 	}
 
+	union FloatIntUnion32
+	{
+		FloatIntUnion32(float f1 = 0.0f) : f(f1) {}
+		// Portable sign-extraction
+		bool sign() const { return (i >> 31) != 0; }
+
+		irr::s32 i;
+		irr::f32 f;
+	};
+
 	//! We compare the difference in ULP's (spacing between floating-point numbers, aka ULP=1 means there exists no float between).
 	//\result true when numbers have a ULP <= maxUlpDiff AND have the same sign.
 	inline bool equalsByUlp(f32 a, f32 b, int maxUlpDiff)
@@ -202,18 +212,9 @@ namespace core
 		// When floats are interpreted as integers the two nearest possible float numbers differ just
 		// by one integer number. Also works the other way round, an integer of 1 interpreted as float
 		// is for example the smallest possible float number.
-		union Float_t
-		{
-			Float_t(float f1 = 0.0f) : f(f1) {}
-			// Portable sign-extraction
-			bool sign() const { return (i >> 31) != 0; }
 
-			int i;
-			float f;
-		};
-
-		Float_t fa(a);
-		Float_t fb(b);
+		FloatIntUnion32 fa(a);
+		FloatIntUnion32 fb(b);
 
 		// Different signs, we could maybe get difference to 0, but so close to 0 using epsilons is better.
 		if ( fa.sign() != fb.sign() )
@@ -347,26 +348,26 @@ namespace core
 	//! code is taken from IceFPU
 	//! Integer representation of a floating-point value.
 #ifdef IRRLICHT_FAST_MATH
-	#define IR(x)                           ((u32&)(x))
+	#define IR(x)			((u32&)(x))
 #else
 	inline u32 IR(f32 x) {inttofloat tmp; tmp.f=x; return tmp.u;}
 #endif
 
 	//! Absolute integer representation of a floating-point value
-	#define AIR(x)				(IR(x)&0x7fffffff)
+	#define AIR(x)			(IR(x)&0x7fffffff)
 
 	//! Floating-point representation of an integer value.
 #ifdef IRRLICHT_FAST_MATH
-	#define FR(x)                           ((f32&)(x))
+	#define FR(x)			((f32&)(x))
 #else
 	inline f32 FR(u32 x) {inttofloat tmp; tmp.u=x; return tmp.f;}
 	inline f32 FR(s32 x) {inttofloat tmp; tmp.s=x; return tmp.f;}
 #endif
 
 	//! integer representation of 1.0
-	#define IEEE_1_0			0x3f800000
+	#define IEEE_1_0		0x3f800000
 	//! integer representation of 255.0
-	#define IEEE_255_0			0x437f0000
+	#define IEEE_255_0		0x437f0000
 
 #ifdef IRRLICHT_FAST_MATH
 	#define	F32_LOWER_0(f)		(F32_AS_U32(f) >  F32_SIGN_BIT)
