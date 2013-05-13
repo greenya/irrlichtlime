@@ -146,6 +146,11 @@ public:
 		m_NativeValue->repair();
 	}
 
+	property float Area
+	{
+		float get() { return m_NativeValue->getArea(); }
+	}
+
 	property Vector3Df^ Center
 	{
 		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getCenter()); }
@@ -166,24 +171,27 @@ public:
 		}
 	}
 
-	property Vector3Df^ Extent
-	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getExtent()); }
-	}
-
 	property bool Empty
 	{
 		bool get() { return m_NativeValue->isEmpty(); }
 	}
 
-	property float Volume
+	property Vector3Df^ Extent
 	{
-		float get() { return m_NativeValue->getVolume(); }
+		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getExtent()); }
 	}
 
-	property float Area
+	property Vector3Df^ MaxEdge
 	{
-		float get() { return m_NativeValue->getArea(); }
+		Vector3Df^ get()
+		{
+			return gcnew Vector3Df(m_NativeValue->MaxEdge);
+		}
+		void set(Vector3Df^ value)
+		{
+			LIME_ASSERT(value != nullptr);
+			m_NativeValue->MaxEdge = *value->m_NativeValue;
+		}
 	}
 
 	property Vector3Df^ MinEdge
@@ -199,17 +207,14 @@ public:
 		}
 	}
 
-	property Vector3Df^ MaxEdge
+	property float Radius
 	{
-		Vector3Df^ get()
-		{
-			return gcnew Vector3Df(m_NativeValue->MaxEdge);
-		}
-		void set(Vector3Df^ value)
-		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->MaxEdge = *value->m_NativeValue;
-		}
+		float get() { return m_NativeValue->getRadius(); }
+	}
+
+	property float Volume
+	{
+		float get() { return m_NativeValue->getVolume(); }
 	}
 
 	virtual String^ ToString() override
