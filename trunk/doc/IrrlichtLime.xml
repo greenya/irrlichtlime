@@ -8114,6 +8114,9 @@ If the camera's target and rotation are bound (see TargetAndRotationBinding) the
 
 When bound, setting Rotation will update the camera's target position to be along its +Z axis, and likewise setting Target will update its rotation so that its +Z axis will point at the target point. FPS camera use this binding by default; other cameras do not.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Scene.CameraSceneNode.UpdateMatrices">
+			<summary>Updates the matrices without uploading them to the driver.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Scene.CameraSceneNode.UpVector">
 			<summary>The up vector of the camera.</summary>
 		</member>
