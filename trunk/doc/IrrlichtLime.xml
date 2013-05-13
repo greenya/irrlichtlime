@@ -1515,6 +1515,9 @@ This value starts with 0 and can be manipulated: value can be set, you can call 
 		<member name="P:IrrlichtLime.Core.AABBox.MinEdge">
 			<summary>The near edge.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Core.AABBox.Radius">
+			<summary>Radius of the bounding sphere.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Core.AABBox.Repair">
 			<summary>Repairs the box. Necessary if for example MinEdge and MaxEdge are swapped.</summary>
 		</member>
