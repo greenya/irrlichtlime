@@ -374,6 +374,11 @@ bool IrrlichtDevice::WindowMinimized::get()
 	return m_IrrlichtDevice->isWindowMinimized();
 }
 
+Vector2Di^ IrrlichtDevice::WindowPosition::get()
+{
+	return gcnew Vector2Di(m_IrrlichtDevice->getWindowPosition());
+}
+
 String^ IrrlichtDevice::ToString()
 {
 	return String::Format("Irrlicht {0}{1}", Version,

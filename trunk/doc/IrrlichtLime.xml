@@ -432,6 +432,11 @@ If this is set to a value other than 0, the Irrlicht Engine will be created in a
 
 Default value: IntPtr.Zero (use own window).</summary>
 		</member>
+		<member name="P:IrrlichtLime.IrrlichtCreationParameters.WindowPosition">
+			<summary>Position of the window on-screen.
+
+Default value: (-1, -1) or centered.</summary>
+		</member>
 		<member name="P:IrrlichtLime.IrrlichtCreationParameters.WindowSize">
 			<summary>Size of the window or the video mode in fullscreen mode.
 
@@ -648,6 +653,9 @@ There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Softwar
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.WindowMinimized">
 			<summary>Checks if the Irrlicht window is minimized.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IrrlichtDevice.WindowPosition">
+			<summary>The position of the frame on-screen.</summary>
 		</member>
 		<member name="M:IrrlichtLime.IrrlichtDevice.Yield">
 			<summary>Cause the device to temporarily pause execution and let other processes run. This should bring down processor usage without major performance loss for Irrlicht.</summary>
