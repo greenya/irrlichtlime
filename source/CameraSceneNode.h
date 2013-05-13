@@ -14,6 +14,8 @@ public ref class CameraSceneNode : SceneNode
 {
 public:
 
+	void UpdateMatrices();
+
 	void SetProjectionMatrix(Matrix^ projection, bool isOrthogonal);
 	void SetProjectionMatrix(Matrix^ projection);
 

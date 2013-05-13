@@ -23,6 +23,11 @@ CameraSceneNode::CameraSceneNode(scene::ICameraSceneNode* ref)
 	m_CameraSceneNode = ref;
 }
 
+void CameraSceneNode::UpdateMatrices()
+{
+	m_CameraSceneNode->updateMatrices();
+}
+
 void CameraSceneNode::SetProjectionMatrix(Matrix^ projection, bool isOrthogonal)
 {
 	LIME_ASSERT(projection != nullptr);
