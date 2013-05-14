@@ -14,6 +14,11 @@ int Image::GetBitsPerPixelFromFormat(Video::ColorFormat format)
 	return video::IImage::getBitsPerPixelFromFormat((ECOLOR_FORMAT)format);
 }
 
+bool Image::IsCompressedFormat(Video::ColorFormat format)
+{
+	return video::IImage::isCompressedFormat((ECOLOR_FORMAT)format);
+}
+
 bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
 {
 	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
@@ -304,6 +309,11 @@ Video::ColorFormat Image::ColorFormat::get()
 	return (Video::ColorFormat)m_Image->getColorFormat();
 }
 
+bool Image::Compressed::get()
+{
+	return m_Image->isCompressed();
+}
+
 Dimension2Di^ Image::Dimension::get()
 {
 	return gcnew Dimension2Di(m_Image->getDimension());
@@ -317,6 +327,11 @@ int Image::ImageDataSizeInBytes::get()
 int Image::ImageDataSizeInPixels::get()
 {
 	return m_Image->getImageDataSizeInPixels();
+}
+
+bool Image::MipMaps::get()
+{
+	return m_Image->hasMipMaps();
 }
 
 int Image::RedMask::get()

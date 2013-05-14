@@ -14046,6 +14046,21 @@ Note: this format may only be used for render target textures.</summary>
 		<member name="F:IrrlichtLime.Video.ColorFormat.A8R8G8B8">
 			<summary>Default 32 bit color format. 8 bits are used for every component: red, green, blue and alpha.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.DXT1">
+			<summary>DXT1 compressed color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.DXT2">
+			<summary>DXT2 compressed color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.DXT3">
+			<summary>DXT3 compressed color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.DXT4">
+			<summary>DXT4 compressed color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.DXT5">
+			<summary>DXT5 compressed color format.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.G16R16F">
 			<summary>32 bit floating point format using 16 bits for the red channel and 16 bits for the green channel.
 
@@ -14978,6 +14993,10 @@ Image loaders create these images from files. VideoDriver convert these images i
 Returns PixelFormat.Undefined if format cannot be translated.</summary>
 			<param name="format">Color format to translate.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.Image.IsCompressedFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Tests if this is compressed color format.</summary>
+			<param name="format">Color format to test.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.Image.IsRenderTargetOnlyFormat(IrrlichtLime.Video.ColorFormat)">
 			<summary>Tests if the color format is only viable for RTT (render target textures).</summary>
 			<param name="format">Color format to test.</param>
@@ -14997,6 +15016,9 @@ Returns PixelFormat.Undefined if format cannot be translated.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Image.ColorFormat">
 			<summary>Color format of the image.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.Compressed">
+			<summary>Image is compressed.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Image.CopyTo">
 			<summary>Copies this image to byte array and returns it.</summary>
@@ -15096,6 +15118,9 @@ Returns PixelFormat.Undefined if format cannot be translated.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Image.ImageDataSizeInPixels">
 			<summary>Image data size in pixels.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.Image.MipMaps">
+			<summary>Image has mip map levels.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Image.Pitch">
 			<summary>Pitch size of the image.</summary>
