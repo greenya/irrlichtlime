@@ -184,6 +184,7 @@ public:
 
 	void DrawAll();
 
+	bool Focused(GUIElement^ element, bool checkSubElements);
 	bool Focused(GUIElement^ element);
 
 	GUIFont^ GetFont(String^ filename);
