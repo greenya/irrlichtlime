@@ -65,6 +65,7 @@ public:
 	property bool TabStop { bool get(); void set(bool value); }
 	property String^ Text { String^ get(); void set(String^ value); }
 	property String^ ToolTipText { String^ get(); void set(String^ value); }
+	property bool TrulyVisible { bool get(); }
 	property GUIElementType Type { GUIElementType get(); }
 	property String^ TypeName { String^ get(); }
 	property bool Visible { bool get(); void set(bool value); }
