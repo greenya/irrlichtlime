@@ -17577,6 +17577,9 @@ Requires that there is a suitable image writer registered for writing the image.
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.StencilBuffer">
 			<summary>Stencil buffers switched on and the device supports stencil buffers.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureCompressedDXT">
+			<summary>Support for DXTn compressed textures.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.TextureMatrix">
 			<summary>Support for texture coord transformation via texture matrix.</summary>
 		</member>
