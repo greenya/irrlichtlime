@@ -479,6 +479,11 @@ void GUIElement::ToolTipText::set(String^ value)
 	m_GUIElement->setToolTipText(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
 }
 
+bool GUIElement::TrulyVisible::get()
+{
+	return m_GUIElement->isTrulyVisible();
+}
+
 GUIElementType GUIElement::Type::get()
 {
 	return (GUIElementType)m_GUIElement->getType();

@@ -4659,6 +4659,9 @@ Please take care that you should only return 'true' when you want to _prevent_ I
 		<member name="P:IrrlichtLime.GUI.GUIElement.ToolTipText">
 			<summary>Tooltip of this element.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUIElement.TrulyVisible">
+			<summary>True if the element and all its parents are visible, false if this or any parent element is invisible.</summary>
+		</member>
 		<member name="P:IrrlichtLime.GUI.GUIElement.Type">
 			<summary>The type of this element.</summary>
 		</member>
