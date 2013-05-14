@@ -1278,9 +1278,17 @@ void GUIEnvironment::DrawAll()
 	m_GUIEnvironment->drawAll();
 }
 
+bool GUIEnvironment::Focused(GUIElement^ element, bool checkSubElements)
+{
+	return m_GUIEnvironment->hasFocus(
+		LIME_SAFEREF(element, m_GUIElement),
+		checkSubElements);
+}
+
 bool GUIEnvironment::Focused(GUIElement^ element)
 {
-	return m_GUIEnvironment->hasFocus(LIME_SAFEREF(element, m_GUIElement));
+	return m_GUIEnvironment->hasFocus(
+		LIME_SAFEREF(element, m_GUIElement));
 }
 
 GUIFont^ GUIEnvironment::GetFont(String^ filename)

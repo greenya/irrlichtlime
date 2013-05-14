@@ -5425,6 +5425,12 @@ Causes a ElementFocusLost event followed by a ElementFocused event. If someone a
 			<param name="element">The element which is tested.</param>
 			<returns>True if the element has focus, else false.</returns>
 		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.Focused(IrrlichtLime.GUI.GUIElement,System.Boolean)">
+			<summary>Returns whether the element has focus.</summary>
+			<param name="element">The element which is tested.</param>
+			<param name="checkSubElements">When true and focus is on a sub-element of element then it will still count as focused and return true. Default is false.</param>
+			<returns>True if the element has focus, else false.</returns>
+		</member>
 		<member name="M:IrrlichtLime.GUI.GUIEnvironment.GetFont(System.String)">
 			<summary>Returns pointer to the font with the specified filename. Loads the font if it was not loaded before.</summary>
 			<param name="filename">Filename of the font.</param>
