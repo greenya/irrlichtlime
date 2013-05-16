@@ -8996,6 +8996,48 @@ More information can be found at http://home.comcast.net/~tom_forsyth/papers/fas
 			<summary>Gets amount of polygons in mesh.</summary>
 			<param name="mesh">Input mesh.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.HeightmapOptimizeMesh(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Optimizes the meshbuffer with an algorithm tuned for heightmaps.
+
+This differs from usual simplification methods in two ways:
+- it's intended to be lossless;
+- it has special care for the borders, which are useful with heightmap tiles;
+
+This function is thread-safe. Remember to weld afterwards - this function only moves vertices, it does not weld.</summary>
+			<param name="buffer">Meshbuffer to operate on.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.HeightmapOptimizeMesh(IrrlichtLime.Scene.MeshBuffer,System.Single)">
+			<summary>Optimizes the meshbuffer with an algorithm tuned for heightmaps.
+
+This differs from usual simplification methods in two ways:
+- it's intended to be lossless;
+- it has special care for the borders, which are useful with heightmap tiles;
+
+This function is thread-safe. Remember to weld afterwards - this function only moves vertices, it does not weld.</summary>
+			<param name="buffer">Meshbuffer to operate on.</param>
+			<param name="tolerance">The threshold for vertex comparisons. Default is 0.000001f.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.HeightmapOptimizeMesh(IrrlichtLime.Scene.Mesh)">
+			<summary>Optimizes the mesh with an algorithm tuned for heightmaps.
+
+This differs from usual simplification methods in two ways:
+- it's intended to be lossless;
+- it has special care for the borders, which are useful with heightmap tiles;
+
+This function is thread-safe. Remember to weld afterwards - this function only moves vertices, it does not weld.</summary>
+			<param name="mesh">Mesh to operate on.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshManipulator.HeightmapOptimizeMesh(IrrlichtLime.Scene.Mesh,System.Single)">
+			<summary>Optimizes the mesh with an algorithm tuned for heightmaps.
+
+This differs from usual simplification methods in two ways:
+- it's intended to be lossless;
+- it has special care for the borders, which are useful with heightmap tiles;
+
+This function is thread-safe. Remember to weld afterwards - this function only moves vertices, it does not weld.</summary>
+			<param name="mesh">Mesh to operate on.</param>
+			<param name="tolerance">The threshold for vertex comparisons. Default is 0.000001f.</param>
+		</member>
 		<member name="M:IrrlichtLime.Scene.MeshManipulator.MakePlanarTextureMapping(IrrlichtLime.Scene.MeshBuffer)">
 			<summary>Creates a planar texture mapping.</summary>
 			<param name="buffer">Meshbuffer on which the operation is performed.</param>
