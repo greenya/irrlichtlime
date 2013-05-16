@@ -45,6 +45,11 @@ public:
 	int GetPolyCount(AnimatedMesh^ animatedMesh);
 	int GetPolyCount(Mesh^ mesh);
 
+	void HeightmapOptimizeMesh(Mesh^ mesh, float tolerance);
+	void HeightmapOptimizeMesh(Mesh^ mesh);
+	void HeightmapOptimizeMesh(MeshBuffer^ buffer, float tolerance);
+	void HeightmapOptimizeMesh(MeshBuffer^ buffer);
+
 	void MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
 	void MakePlanarTextureMapping(Mesh^ mesh, float resolution);
 	void MakePlanarTextureMapping(Mesh^ mesh);
