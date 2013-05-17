@@ -32,6 +32,7 @@ public:
 	property int MipMapLevel { int get(); }
 	property int MipMapLevelCount { int get(); }
 	property int MipMapLevelHeight { int get(); }
+	property System::IntPtr MipMapLevelData { System::IntPtr get(); }
 	property int MipMapLevelWidth { int get(); }
 	property Video::Texture^ Texture { Video::Texture^ get(); }
 

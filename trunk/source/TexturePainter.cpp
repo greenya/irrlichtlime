@@ -162,6 +162,7 @@ void TexturePainter::Unlock(bool alsoRegenerateMipMapLevels)
 		m_texture->m_Texture->regenerateMipMapLevels();
 
 	m_mipmapLevel = -1;
+	m_pointer = nullptr;
 }
 
 void TexturePainter::Unlock()
@@ -170,6 +171,7 @@ void TexturePainter::Unlock()
 
 	m_texture->m_Texture->unlock();
 	m_mipmapLevel = -1;
+	m_pointer = nullptr;
 }
 
 bool TexturePainter::Locked::get()
@@ -198,6 +200,12 @@ int TexturePainter::MipMapLevelHeight::get()
 {
 	LIME_ASSERT(Locked);
 	return m_mipmapLevelHeight;
+}
+
+System::IntPtr TexturePainter::MipMapLevelData::get()
+{
+	LIME_ASSERT(Locked);
+	return System::IntPtr(m_pointer);
 }
 
 int TexturePainter::MipMapLevelWidth::get()

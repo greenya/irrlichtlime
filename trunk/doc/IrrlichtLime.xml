@@ -15990,6 +15990,9 @@ Note: can be from 0 to MipMapLevelCount-1.</summary>
 		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelCount">
 			<summary>Total number of mip map levels in the texture. This value depends on the size of the texture: larger textures has more mip map levels.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelData">
+			<summary>Pointer to unmanaged memory containing texture pixel buffer of currently locked mip map level.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelHeight">
 			<summary>Height of currently locked mip map level.
 
