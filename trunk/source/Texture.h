@@ -16,8 +16,6 @@ public ref class Texture : ReferenceCounted
 {
 public:
 
-	TexturePainter^ GetTexturePainter();
-
 	void RegenerateMipMapLevels(); // argument "void *mipmapData=0" not supported
 
 	property bool AlphaChannel { bool get(); }
@@ -26,6 +24,7 @@ public:
 	property bool MipMaps { bool get(); }
 	property IO::NamedPath^ Name { IO::NamedPath^ get(); }
 	property Dimension2Di^ OriginalSize { Dimension2Di^ get(); }
+	property TexturePainter^ Painter { TexturePainter^ get(); }
 	property int Pitch { int get(); }
 	property bool RenderTarget { bool get(); }
 	property Dimension2Di^ Size { Dimension2Di^ get(); }
@@ -38,6 +37,8 @@ internal:
 	Texture(video::ITexture* ref);
 
 	video::ITexture* m_Texture;
+
+	Video::TexturePainter^ m_painter;
 };
 
 } // end namespace Video

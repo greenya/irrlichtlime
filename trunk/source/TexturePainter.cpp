@@ -24,6 +24,8 @@ TexturePainter::TexturePainter(Video::Texture^ texture)
 	int m = d.Width < d.Height ? d.Width : d.Height;
 	m_mipmapLevelCount = (int)ceil(log((float)m) / log(2.0f)) + 1;
 	m_mipmapLevel = -1;
+	m_mipmapLevelWidth = -1;
+	m_mipmapLevelHeight = -1;
 }
 
 Color^ TexturePainter::GetPixel(int x, int y)
@@ -162,6 +164,8 @@ void TexturePainter::Unlock(bool alsoRegenerateMipMapLevels)
 		m_texture->m_Texture->regenerateMipMapLevels();
 
 	m_mipmapLevel = -1;
+	m_mipmapLevelWidth = -1;
+	m_mipmapLevelHeight = -1;
 	m_pointer = nullptr;
 }
 
@@ -171,6 +175,8 @@ void TexturePainter::Unlock()
 
 	m_texture->m_Texture->unlock();
 	m_mipmapLevel = -1;
+	m_mipmapLevelWidth = -1;
+	m_mipmapLevelHeight = -1;
 	m_pointer = nullptr;
 }
 
@@ -223,17 +229,15 @@ String^ TexturePainter::ToString()
 {
 	if (Locked)
 	{
-		return String::Format("TexturePainter: [Locked <{0}> MipMap#{1}: {2}x{3}] {4}",
+		return String::Format("TexturePainter: [Locked] <{0}> MipMap#{1}: {2}x{3}",
 			m_lockMode,
 			m_mipmapLevel,
 			m_mipmapLevelWidth,
-			m_mipmapLevelHeight,
-			m_texture);
+			m_mipmapLevelHeight);
 	}
 	else
 	{
-		return String::Format("TexturePainter: [Unlocked] {0}",
-			m_texture);
+		return String::Format("TexturePainter: [Unlocked]");
 	}
 }
 

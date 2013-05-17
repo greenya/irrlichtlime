@@ -293,7 +293,7 @@ namespace L13.FractalBrowser
 			{
 				ScreenPos = new Vector2Di(screenX, screenY);
 				Texture = driver.AddTexture(screenDimension, string.Format("TileTexture({0},{1})", screenX, screenY));
-				TexturePainter = Texture.GetTexturePainter();
+				TexturePainter = Texture.Painter;
 			}
 		}
 	}

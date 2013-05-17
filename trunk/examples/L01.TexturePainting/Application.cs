@@ -94,7 +94,7 @@ namespace L01.TexturePainting
 
 			texture = drv.AddTexture(new Dimension2Di(size), "tex");
 
-			TexturePainter p = texture.GetTexturePainter();
+			TexturePainter p = texture.Painter;
 			p.Lock(TextureLockMode.WriteOnly);
 			for (int i = 0; i < p.MipMapLevelHeight; i++)
 				p.SetLine(0, i, p.MipMapLevelWidth - 1, i, new Color(200, 200, 200));
@@ -121,7 +121,7 @@ namespace L01.TexturePainting
 
 					if (e.Mouse.Type == MouseEventType.Move)
 					{
-						TexturePainter t = texture.GetTexturePainter();
+						TexturePainter t = texture.Painter;
 
 						if (p.X < texture.Size.Width &&
 							p.Y < texture.Size.Height &&
