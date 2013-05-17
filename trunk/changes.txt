@@ -8,7 +8,7 @@ Changes in 1.4 (XX-May-2013)
 - Fixed bug when you couldn't actually pass null as string where you might need it (until now it was treated as an empty line, not null). For example now GUIContextMenu.AddItem(null) will add a separator instead of blank menu item.
 - Added Intellisense documentation to all members of Scene and GUI namespaces. Now Lime' Intellisence file should contain all wrapped classes and members.
 - Extended IndexBuffer and VertexBuffer (added new stuff and renamed old). Added static methods Create() to each class. Added additional overloadings to VideoDriver's DrawVertexPrimitiveList() and Draw2DVertexPrimitiveList() with arguments of VertexBuffer and IndexBuffer. Changed assertion check in Draw*VertexPrimitiveList()s, now if count of vertices or indices is zero, the method will do nothing (was assertion failure).
-- Changed Texture class: removed GetTexturePainter() method and added TexturePainter prop. Fixed bug when having more than one TexturePainter per Texture may lead to inconsistency with texture lock state.
+- Changed Texture class: removed GetTexturePainter() method and added Painter prop. Fixed bug when having more than one TexturePainter per Texture may lead to inconsistency with texture lock state.
 - Changed argument order in AddTabControl() in GUIEnvironment. Now id follows parent argument (similar to other "add" methods).
 - Changed argument timeForceLost, now it has type of uint and assumes milliseconds (was float in seconds) in ParticleSystemSceneNode.CreateGravityAffector() method.
 - Added MipMapLevelData to TexturePainter.
