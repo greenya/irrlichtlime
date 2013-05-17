@@ -15843,11 +15843,6 @@ Texture can be created using VideoDriver.AddTexture() or VideoDriver.GetTexture(
 
 This is the driver, which created the texture. This method is used internally by the video devices, to check, if they may use a texture because textures may be incompatible between different devices.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Texture.GetTexturePainter">
-			<summary>Gets texture painter for this texture.
-
-Note: you can use returned TexturePainter pointer as long as you sure that texture not dropped.</summary>
-		</member>
 		<member name="P:IrrlichtLime.Video.Texture.MipMaps">
 			<summary>Texture has mip map levels.</summary>
 		</member>
@@ -15859,6 +15854,9 @@ Note: you can use returned TexturePainter pointer as long as you sure that textu
 
 The texture is usually scaled, if it was created with an unoptimal size. For example if the size was not a power of two. This method returns the size of the texture it had before it was scaled. Can be useful when drawing 2d images on the screen, which should have the exact size of the original texture. Use Texture.Size if you want to know the real size it has now stored in the system.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Texture.Painter">
+			<summary>Texture painter for this texture.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Texture.Pitch">
 			<summary>Pitch of the texture (in bytes).
 
@@ -15867,7 +15865,7 @@ The pitch is the amount of bytes used for a row of pixels in a texture.</summary
 		<member name="M:IrrlichtLime.Video.Texture.RegenerateMipMapLevels">
 			<summary>Regenerates the mip map levels of the texture.
 
-Required in most cases after modifying the texture using the object returned by GetTexturePainter(). Regeneration of mip map levels done in next way: the main level (most detailed level: level 0) is left untoched, all other levels will get automatic regeneration. This means that if you use TexturePainter and draw on different mip map levels, propbably you should not call this method, since only level 0 will contain your unique changes.</summary>
+Required in most cases after modifying the texture using TexturePainter. Regeneration of mip map levels done in next way: the main level (most detailed level: level 0) is left untoched, all other levels will get automatic regeneration. This means that if you use TexturePainter and draw on different mip map levels, probably you should not call this method, since only level 0 will contain your unique changes.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Texture.RenderTarget">
 			<summary>Texture is a render target.</summary>
@@ -15949,9 +15947,9 @@ When using this flag, it does not make sense to use the flags Always16Bit, Alway
 			<summary>Write only. The texture is not downloaded and might be uninitialized.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.TexturePainter">
-			<summary>Provides ability to paint on texture's different mip map levels. Object of TexturePainter can be obtained using Texture.GetTexturePainter().
+			<summary>Provides ability to paint on texture's different mip map levels. Object of TexturePainter can be obtained via Texture.Painter property.
 
-Order of usage: 1) get a Texture object; call its GetTexturePainter() and save the pointer. You can use this pointer until texture not dropped; 2) when you need access texture pixels, use Lock(), then read/write pixels, then Unlock().
+When you need access texture pixels, use Lock(), then read/write pixels, then Unlock().
 
 Note: all the members in this class requires texture to be locked using Lock() before using them (except actually: Lock(), Texture, Locked and MipMapLevelCount).</summary>
 		</member>

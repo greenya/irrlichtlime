@@ -23,11 +23,7 @@ Texture::Texture(video::ITexture* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_Texture = ref;
-}
-
-TexturePainter^ Texture::GetTexturePainter()
-{
-	return gcnew TexturePainter(this);
+	m_painter = nullptr;
 }
 
 void Texture::RegenerateMipMapLevels()
@@ -63,6 +59,14 @@ IO::NamedPath^ Texture::Name::get()
 Dimension2Di^ Texture::OriginalSize::get()
 {
 	return gcnew Dimension2Di(m_Texture->getOriginalSize());
+}
+
+TexturePainter^ Texture::Painter::get()
+{
+	if (m_painter == nullptr)
+		m_painter = gcnew TexturePainter(this);
+
+	return m_painter;
 }
 
 int Texture::Pitch::get()
