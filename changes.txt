@@ -7,7 +7,8 @@ Changes in 1.4 (19-May-2013)
 - Fixed bug in SceneNode when OnGetMaterial event was not fired when internal getMaterial() was actually called by the Irrlicht.
 - Fixed bug when you couldn't actually pass null as string where you might need it (until now it was treated as an empty line, not null). For example now GUIContextMenu.AddItem(null) will add a separator instead of blank menu item.
 - Added Intellisense documentation to all members of Scene and GUI namespaces. Now Lime' Intellisence file should contain all wrapped classes and members.
-- Extended IndexBuffer and VertexBuffer (added new stuff and renamed old). Added static methods Create() to each class. Added additional overloadings to VideoDriver's DrawVertexPrimitiveList() and Draw2DVertexPrimitiveList() with arguments of VertexBuffer and IndexBuffer. Changed assertion check in Draw*VertexPrimitiveList()s, now if count of vertices or indices is zero, the method will do nothing (was assertion failure).
+- Extended IndexBuffer and VertexBuffer (added new stuff and renamed old). Added static methods Create() to each class. Added additional overloadings to VideoDriver's DrawVertexPrimitiveList() and Draw2DVertexPrimitiveList() with arguments of VertexBuffer and IndexBuffer.
+- Changed assertion check in Draw*VertexPrimitiveList()s, now if count of vertices or indices is zero, the method will do nothing (was assertion failure).
 - Changed Texture class: removed GetTexturePainter() method and added Painter prop. Fixed bug when having more than one TexturePainter per Texture may lead to inconsistency with texture lock state.
 - Changed argument order in AddTabControl() in GUIEnvironment. Now id follows parent argument (similar to other "add" methods).
 - Changed argument timeForceLost, now it has type of uint and assumes milliseconds (was float in seconds) in ParticleSystemSceneNode.CreateGravityAffector() method.
@@ -25,7 +26,6 @@ Changes in 1.4 (19-May-2013)
 - Added overloading for VideoDriver.Draw2DPolygon() which takes x and y directly.
 - Added overloading for VideoDriver.CreateImage() with single texture argument; it uses all the texture to create software image.
 - Added overloading for Rect{i|f|d}.IsPointInside() which takes x and y arguments directly.
-- Assert checks changes in VideoDriver.DrawVertexPrimitiveList(): if vertices or indices array has 0 elements, the method simply does nothing instead if failing assert check for ">0" elements in both arrays.
 - Added TextureCompressedDXT value to VideoDriverFeature enum.
 - Added LMTS value to AnimatedMeshType enum.
 
