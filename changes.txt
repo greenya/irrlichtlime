@@ -1,5 +1,5 @@
 ============================
-Changes in 1.4 (XX-May-2013)
+Changes in 1.4 (19-May-2013)
 ============================
 
 - Added examples L16.SphereCamera and L17.Minesweeper.
