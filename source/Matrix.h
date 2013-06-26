@@ -305,13 +305,18 @@ public:
 		return b ? this : nullptr;
 	}
 
-	void MultiplyWith1x4Matrix(array<float>^ m1x4)
+	void MultiplyWith1x4Matrix(array<float>^% m1x4)
 	{
 		LIME_ASSERT(m1x4 != nullptr);
 		LIME_ASSERT(m1x4->Length == 4);
 
 		float f[4] = { m1x4[0], m1x4[1], m1x4[2], m1x4[3] };
 		m_NativeValue->multiplyWith1x4Matrix(f);
+
+		m1x4[0] = f[0];
+		m1x4[1] = f[1];
+		m1x4[2] = f[2];
+		m1x4[3] = f[3];
 	}
 
 	Vector3Df^ RotateVector(Vector3Df^ vect)
