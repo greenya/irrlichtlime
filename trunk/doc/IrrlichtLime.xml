@@ -2035,7 +2035,7 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 			<param name="rotation">Rotation vector. Default: (0).</param>
 			<param name="scale">Scale vector. Default: (1).</param>
 		</member>
-		<member name="M:IrrlichtLime.Core.Matrix.MultiplyWith1x4Matrix(System.Single[])">
+		<member name="M:IrrlichtLime.Core.Matrix.MultiplyWith1x4Matrix(System.Single[]@)">
 			<summary>Multiplies this matrix by a 1x4 matrix.</summary>
 			<param name="m1x4">1x4 matrix. This array must contain 4 elements.</param>
 		</member>
