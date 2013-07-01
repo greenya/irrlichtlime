@@ -55,6 +55,12 @@ Vector2Df^ CursorControl::RelativePosition::get()
 	return gcnew Vector2Df(m_CursorControl->getRelativePosition());
 }
 
+void CursorControl::RelativePosition::set(Vector2Df^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_CursorControl->setPosition(*value->m_NativeValue);
+}
+
 bool CursorControl::Visible::get()
 {
 	return m_CursorControl->isVisible();

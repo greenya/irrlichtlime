@@ -18,7 +18,7 @@ public:
 
 	property CursorPlatformBehavior PlatformBehavior { CursorPlatformBehavior get(); void set(CursorPlatformBehavior value); }
 	property Vector2Di^ Position { Vector2Di^ get(); void set(Vector2Di^ value); }
-	property Vector2Df^ RelativePosition { Vector2Df^ get(); }
+	property Vector2Df^ RelativePosition { Vector2Df^ get(); void set(Vector2Df^ value); }
 	property bool Visible { bool get(); void set(bool value); }
 
 	virtual String^ ToString() override;
