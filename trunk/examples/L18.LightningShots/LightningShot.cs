@@ -156,6 +156,9 @@ namespace L18.LightningShots
 
 		public void Drop()
 		{
+			indexBuffer.Drop();
+			vertexBuffer.Drop();
+
 			shots.ForEach(s => s.node.Remove());
 			shots.Clear();
 		}
