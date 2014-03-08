@@ -113,8 +113,7 @@ The Irrlicht Lime SDK
   http://irrlichtlime.sourceforge.net
 
   Additional information (discussion thread):
-  English: http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512
-  Russian: http://www.irrlicht.ru/forum/viewtopic.php?f=3&t=118
+  http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512
 
   If you found bug, please sumbit it at:
   http://sourceforge.net/p/irrlichtlime/bugs/
