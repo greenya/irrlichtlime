@@ -34,7 +34,6 @@ Scene::MeshTextureLoader^ MeshLoader::MeshTextureLoader::get()
 
 void MeshLoader::MeshTextureLoader::set(Scene::MeshTextureLoader^ value)
 {
-	LIME_ASSERT(value != nullptr);
 	m_MeshLoader->setMeshTextureLoader(LIME_SAFEREF(value, m_MeshTextureLoader));
 }
 
