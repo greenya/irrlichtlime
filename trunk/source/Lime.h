@@ -69,6 +69,13 @@ public:
 			else
 				s = String::Format("{0}.{1}", v->Major, v->Minor);
 
+			if (System::IntPtr::Size == 4)
+				s += " (x86)";
+			else if (System::IntPtr::Size == 8)
+				s += " (x64)";
+			else
+				s += " (x??)";
+
 #if _DEBUG
 			s += " (DEBUG)";
 #endif

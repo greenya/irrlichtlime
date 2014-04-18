@@ -14,7 +14,7 @@ namespace L03.RGBSwirl
 	{
 		static void Main(string[] args)
 		{
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D8, new Dimension2Di(800, 600));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(800, 600));
 			device.SetWindowCaption("RGB swirl example - Irrlicht Lime");
 
 			VideoDriver driver = device.VideoDriver;

@@ -19,7 +19,7 @@ namespace L05.ScreenshotToTexture
 	{
 		static void Main(string[] args)
 		{
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D8, new Dimension2Di(512, 512));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(512, 512));
 			device.SetWindowCaption("Screenshot to texture - Irrlicht Lime");
 
 			// set up very simple scene {{
