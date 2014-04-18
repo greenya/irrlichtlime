@@ -28,6 +28,7 @@ public:
 	property int Pitch { int get(); }
 	property bool RenderTarget { bool get(); }
 	property Dimension2Di^ Size { Dimension2Di^ get(); }
+	property Video::TextureSource Source { Video::TextureSource get(); void set(Video::TextureSource value); }
 
 	virtual String^ ToString() override;
 

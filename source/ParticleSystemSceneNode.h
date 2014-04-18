@@ -130,6 +130,7 @@ public:
 
 	property List<ParticleAffector^>^ AffectorList { List<ParticleAffector^>^ get(); }
 	property ParticleEmitter^ Emitter { ParticleEmitter^ get(); void set(ParticleEmitter^ value); }
+	property Scene::ParticleBehavior ParticleBehavior { Scene::ParticleBehavior get(); void set(Scene::ParticleBehavior value); }
 
 internal:
 

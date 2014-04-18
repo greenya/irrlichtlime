@@ -123,6 +123,22 @@ public:
 		m_NativeValue->addInternalBox(*b->m_NativeValue);
 	}
 
+	AABBox^ Intersect (AABBox^% other)
+	{
+		LIME_ASSERT(other != nullptr);
+		core::aabbox3df* out = new core::aabbox3df();
+		out->reset(m_NativeValue->intersect(*other->m_NativeValue));
+		if (out != nullptr)
+		{
+			//return gcnew AABBox(out);	//does not compile
+			AABBox^ b = gcnew AABBox();
+			b->m_NativeValue->reset(*out);
+			return b;
+		}
+		else
+			return nullptr;
+	}
+
 	bool IsInside(Vector3Df^ p)
 	{
 		LIME_ASSERT(p != nullptr);

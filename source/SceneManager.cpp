@@ -3187,6 +3187,16 @@ IO::Attributes^ SceneManager::Attributes::get()
 	return IO::Attributes::Wrap(a);
 }
 
+Scene::SceneNodeRenderPass SceneManager::CurrentRenderPass::get()
+{
+	return (Scene::SceneNodeRenderPass)m_SceneManager->getCurrentRenderPass();
+}
+
+void SceneManager::CurrentRenderPass::set(Scene::SceneNodeRenderPass value)
+{
+	m_SceneManager->setCurrentRenderPass((E_SCENE_NODE_RENDER_PASS)value);
+}
+
 IO::FileSystem^ SceneManager::FileSystem::get()
 {
 	io::IFileSystem* s = m_SceneManager->getFileSystem();

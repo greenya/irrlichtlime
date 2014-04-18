@@ -189,6 +189,10 @@ public:
 
 	GUIFont^ GetFont(String^ filename);
 
+	GUIElement^ GetNextElement();
+	GUIElement^ GetNextElement(bool reverse);
+	GUIElement^ GetNextElement(bool reverse, bool group);
+
 	GUISpriteBank^ GetSpriteBank(String^ filename);
 
 	bool LoadGUI(String^ filename, GUIElement^ start);
@@ -213,6 +217,7 @@ public:
 	property GUIFont^ BuiltInFont { GUIFont^ get(); }
 	property IrrlichtLime::IO::FileSystem^ FileSystem { IrrlichtLime::IO::FileSystem^ get(); }
 	property GUIElement^ Focus { GUIElement^ get(); void set(GUIElement^ value); }
+	property FocusFlag FocusBehavior { FocusFlag get(); void set(FocusFlag value); }
 	property GUIElement^ HoveredElement { GUIElement^ get(); }
 	property IrrlichtLime::OSOperator^ OSOperator { IrrlichtLime::OSOperator^ get(); }
 	property GUIElement^ RootElement { GUIElement^ get(); }

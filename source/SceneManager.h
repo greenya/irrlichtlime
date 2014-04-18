@@ -343,6 +343,7 @@ public:
 	property CameraSceneNode^ ActiveCamera { CameraSceneNode^ get(); void set(CameraSceneNode^ value); }
 	property Video::Colorf^ AmbientLight { Video::Colorf^ get(); void set(Video::Colorf^ value); }
 	property IO::Attributes^ Attributes { IO::Attributes^ get(); }
+	property Scene::SceneNodeRenderPass CurrentRenderPass { Scene::SceneNodeRenderPass get(); void set(Scene::SceneNodeRenderPass value); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }

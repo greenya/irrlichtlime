@@ -1299,6 +1299,24 @@ GUIFont^ GUIEnvironment::GetFont(String^ filename)
 	return GUIFont::Wrap(f);
 }
 
+GUIElement^ GUIEnvironment::GetNextElement()
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getNextElement();
+	return GUIElement::Wrap(e);
+}
+
+GUIElement^ GUIEnvironment::GetNextElement(bool inverse)
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getNextElement(inverse);
+	return GUIElement::Wrap(e);
+}
+
+GUIElement^ GUIEnvironment::GetNextElement(bool inverse, bool group)
+{
+	gui::IGUIElement* e = m_GUIEnvironment->getNextElement(inverse, group);
+	return GUIElement::Wrap(e);
+}
+
 GUISpriteBank^ GUIEnvironment::GetSpriteBank(String^ filename)
 {
 	LIME_ASSERT(filename != nullptr);
@@ -1424,6 +1442,16 @@ GUIElement^ GUIEnvironment::Focus::get()
 void GUIEnvironment::Focus::set(GUIElement^ value)
 {
 	m_GUIEnvironment->setFocus(LIME_SAFEREF(value, m_GUIElement));
+}
+
+FocusFlag GUIEnvironment::FocusBehavior::get()
+{
+	return (FocusFlag)m_GUIEnvironment->getFocusBehavior();
+}
+
+void GUIEnvironment::FocusBehavior::set(FocusFlag value)
+{
+	m_GUIEnvironment->setFocusBehavior((EFOCUS_FLAG)value);
 }
 
 GUIElement^ GUIEnvironment::HoveredElement::get()

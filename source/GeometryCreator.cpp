@@ -283,6 +283,20 @@ Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tessel
 	return Mesh::Wrap(m);
 }
 
+Mesh^ GeometryCreator::CreateGeoplaneMesh(float radius, unsigned __int32 rows, unsigned __int32 columns)
+{
+	LIME_ASSERT(radius > 0.0f);
+	LIME_ASSERT(rows > 0);
+	LIME_ASSERT(columns > 0);
+
+	scene::IMesh* m = m_GeometryCreator->createGeoplaneMesh(
+		radius,
+		rows,
+		columns);
+
+	return Mesh::Wrap(m);
+}
+
 Mesh^ GeometryCreator::CreateHillPlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, float hillHeight,
 	Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount)
 {

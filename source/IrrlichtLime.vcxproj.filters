@@ -81,9 +81,6 @@
     <ClInclude Include="MaterialRendererServices.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialType.h">
-      <Filter>Video</Filter>
-    </ClInclude>
     <ClInclude Include="PixelShaderType.h">
       <Filter>Video</Filter>
     </ClInclude>
@@ -613,6 +610,24 @@
     <ClInclude Include="GUISpinBoxValidation.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="MaterialType.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureSource.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTextureLoader.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIButtonImageState.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FocusFlag.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleBehavior.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -909,5 +924,8 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Randomizer.cpp" />
+    <ClCompile Include="MeshTextureLoader.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

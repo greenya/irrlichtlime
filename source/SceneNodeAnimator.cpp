@@ -69,6 +69,16 @@ SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node)
 	return Wrap(a);
 }
 
+void SceneNodeAnimator::SetEnabled(bool enabled, unsigned __int32 timeNow)
+{
+	m_SceneNodeAnimator->setEnabled(enabled, timeNow);
+}
+
+void SceneNodeAnimator::SetStartTime(unsigned __int32 time, bool resetPauseTime)
+{
+	m_SceneNodeAnimator->setStartTime(time, resetPauseTime);
+}
+
 bool SceneNodeAnimator::EventReceiverEnabled::get()
 {
 	return m_SceneNodeAnimator->isEventReceiverEnabled();
@@ -82,6 +92,26 @@ bool SceneNodeAnimator::Finished::get()
 SceneNodeAnimatorType SceneNodeAnimator::Type::get()
 {
 	return (SceneNodeAnimatorType)m_SceneNodeAnimator->getType();
+}
+
+bool SceneNodeAnimator::Enabled::get()
+{
+	return m_SceneNodeAnimator->isEnabled();
+}
+
+void SceneNodeAnimator::Enabled::set(bool value)
+{
+	m_SceneNodeAnimator->setEnabled(value);
+}
+
+unsigned __int32 SceneNodeAnimator::StartTime::get()
+{
+	return m_SceneNodeAnimator->getStartTime();
+}
+
+void SceneNodeAnimator::StartTime::set(unsigned __int32 value)
+{
+	m_SceneNodeAnimator->setStartTime(value);
 }
 
 String^ SceneNodeAnimator::ToString()

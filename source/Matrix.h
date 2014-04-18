@@ -281,6 +281,12 @@ public:
 		return nullptr;
 	}
 
+	Vector3Df^ GetRotationDegrees(Vector3Df^ scale)
+	{
+		LIME_ASSERT(scale != nullptr);
+		return gcnew Vector3Df(m_NativeValue->getRotationDegrees(*scale->m_NativeValue));
+	}
+
 	void InverseRotateVector(Vector3Df^% vect)
 	{
 		LIME_ASSERT(vect != nullptr);
