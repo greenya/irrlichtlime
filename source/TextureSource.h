@@ -13,7 +13,7 @@ public enum class TextureSource
 {
 	Unknown = ETS_UNKNOWN,
 	FromCache = ETS_FROM_CACHE,
-	FromFIle = ETS_FROM_FILE
+	FromFile = ETS_FROM_FILE
 };
 
 } // end namespace Video
