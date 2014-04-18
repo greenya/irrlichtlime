@@ -37,6 +37,8 @@ public:
 	Mesh^ CreateCylinderMesh(float radius, float length, int tesselation, Video::Color^ color);
 	Mesh^ CreateCylinderMesh(float radius, float length, int tesselation);
 
+	Mesh^ CreateGeoplaneMesh(float radius, unsigned __int32 rows, unsigned __int32 columns);
+
 	Mesh^ CreateHillPlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, float hillHeight, Dimension2Df^ countHills, Dimension2Df^ textureRepeatCount);
 
 	Mesh^ CreatePlaneMesh(Dimension2Df^ tileSize, Dimension2Di^ tileCount, Video::Material^ material, Dimension2Df^ textureRepeatCount);

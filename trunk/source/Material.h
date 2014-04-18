@@ -57,7 +57,7 @@ public:
 	property bool Fog { bool get(); void set(bool value); }
 	property bool NormalizeNormals { bool get(); void set(bool value); }
 	property bool Mipmaps { bool get(); void set(bool value); }
-	property bool Transparent { bool get(); }
+	//property bool Transparent { bool get(); }
 
 	property List<MaterialLayer^>^ Layer { List<MaterialLayer^>^ get(); }
 

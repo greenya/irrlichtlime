@@ -1472,5 +1472,15 @@ void ParticleSystemSceneNode::Emitter::set(ParticleEmitter^ value)
 	m_ParticleSystemSceneNode->setEmitter(LIME_SAFEREF(value, m_ParticleEmitter));
 }
 
+Scene::ParticleBehavior ParticleSystemSceneNode::ParticleBehavior::get()
+{
+	return (Scene::ParticleBehavior)m_ParticleSystemSceneNode->getParticleBehavior();
+}
+
+void ParticleSystemSceneNode::ParticleBehavior::set(Scene::ParticleBehavior value)
+{
+	m_ParticleSystemSceneNode->setParticleBehavior((EParticleBehavior)value);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime

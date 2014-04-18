@@ -358,10 +358,12 @@ void Material::Mipmaps::set(bool value)
 	m_NativeValue->UseMipMaps = value;
 }
 
+/*
 bool Material::Transparent::get()
 {
 	return m_NativeValue->isTransparent();
 }
+*/
 
 String^ Material::ToString()
 {

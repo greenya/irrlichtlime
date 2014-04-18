@@ -75,5 +75,15 @@ void ParticleAttractionAffector::Point::set(Vector3Df^ value)
 	m_ParticleAttractionAffector->setPoint(*value->m_NativeValue);
 }
 
+float ParticleAttractionAffector::Speed::get()
+{
+	return m_ParticleAttractionAffector->getSpeed();
+}
+
+void ParticleAttractionAffector::Speed::set(float value)
+{
+	m_ParticleAttractionAffector->setSpeed(value);
+}
+
 } // end namespace Scene
 } // end namespace IrrlichtLime

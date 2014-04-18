@@ -29,6 +29,7 @@ public:
 	GUIElement^ GetElementFromID(int id);
 	GUIElement^ GetElementFromPoint(Vector2Di^ point);
 
+	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible, bool includeDisabled);
 	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible);
 	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest);
 

@@ -212,6 +212,22 @@ GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 	return Wrap(e);
 }
 
+bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible, bool includeDisabled)
+{
+	gui::IGUIElement* f;
+	gui::IGUIElement* c;
+
+	bool b = m_GUIElement->getNextElement(startOrder, reverse, group, f, c, includeInvisible, includeDisabled);
+
+	if (b)
+	{
+		first = GUIElement::Wrap(f);
+		closest = GUIElement::Wrap(c);
+	}
+
+	return b;
+}
+
 bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible)
 {
 	gui::IGUIElement* f;

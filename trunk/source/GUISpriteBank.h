@@ -14,7 +14,10 @@ public ref class GUISpriteBank : ReferenceCounted
 {
 public:
 
-	//...
+	//property array<Recti^>^ Positions { array<Recti^>^ get(); }
+
+	//no GUISprite yet
+	//property array<GUISprite^>^ Sprites {array<GUISprite^>^ get(); }
 
 internal:
 

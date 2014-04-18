@@ -227,6 +227,13 @@ namespace irr
 		\param resize Flag whether the window should be resizable. */
 		virtual void setResizable(bool resize=false) = 0;
 
+		//! Resize the render window.
+		/**	This will only work in windowed mode and is not yet supported on all systems.
+		It does set the drawing/clientDC size of the window, the window decorations are added to that.
+		You get the current window size with IVideoDriver::getScreenSize() (might be unified in future)
+		*/
+		virtual void setWindowSize(const irr::core::dimension2d<u32>& size) = 0;
+
 		//! Minimizes the window if possible.
 		virtual void minimizeWindow() =0;
 
@@ -256,6 +263,18 @@ namespace irr
 		//! Get the current Gamma Value for the Display
 		virtual bool getGammaRamp(f32 &red, f32 &green, f32 &blue,
 					f32 &brightness, f32 &contrast) =0;
+
+		//! Set the maximal elapsed time between 2 clicks to generate doubleclicks for the mouse. It also affects tripleclick behavior.
+		/** When set to 0 no double- and tripleclicks will be generated.
+		\param timeMs maximal time in milliseconds for two consecutive clicks to be recognized as double click
+		*/
+		virtual void setDoubleClickTime(u32 timeMs) =0;
+
+		//! Get the maximal elapsed time between 2 clicks to generate double- and tripleclicks for the mouse.
+		/** When return value is 0 no double- and tripleclicks will be generated.
+		\return maximal time in milliseconds for two consecutive clicks to be recognized as double click
+		*/
+		virtual u32 getDoubleClickTime() const =0;
 
 		//! Remove messages pending in the system message loop
 		/** This function is usually used after messages have been buffered for a longer time, for example

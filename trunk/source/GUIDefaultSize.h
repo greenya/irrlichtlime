@@ -31,7 +31,9 @@ public enum class GUIDefaultSize
 	ButtonPressedImageOffsetX = EGDS_BUTTON_PRESSED_IMAGE_OFFSET_X,
 	ButtonPressedImageOffsetY = EGDS_BUTTON_PRESSED_IMAGE_OFFSET_Y,
 	ButtonPressedTextOffsetX = EGDS_BUTTON_PRESSED_TEXT_OFFSET_X,
-	ButtonPressedTextOffsetY = EGDS_BUTTON_PRESSED_TEXT_OFFSET_Y
+	ButtonPressedTextOffsetY = EGDS_BUTTON_PRESSED_TEXT_OFFSET_Y,
+	ButtonPressedSpriteOffsetX = EGDS_BUTTON_PRESSED_SPRITE_OFFSET_X,
+	ButtonPressedSpriteOffsetY = EGDS_BUTTON_PRESSED_SPRITE_OFFSET_Y
 };
 
 } // end namespace GUI

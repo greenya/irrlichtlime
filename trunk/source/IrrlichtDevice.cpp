@@ -285,6 +285,16 @@ GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
 	return GUI::CursorControl::Wrap(c);
 }
 
+unsigned __int32 IrrlichtDevice::DoubleClickTime::get()
+{
+	return m_IrrlichtDevice->getDoubleClickTime();
+}
+
+void IrrlichtDevice::DoubleClickTime::set(unsigned __int32 value)
+{
+	m_IrrlichtDevice->setDoubleClickTime(value);
+}
+
 IO::FileSystem^ IrrlichtDevice::FileSystem::get()
 {
 	io::IFileSystem* s = m_IrrlichtDevice->getFileSystem();
@@ -378,6 +388,12 @@ Vector2Di^ IrrlichtDevice::WindowPosition::get()
 {
 	return gcnew Vector2Di(m_IrrlichtDevice->getWindowPosition());
 }
+
+/*void IrrlichtDevice::WindowSize::set(Dimension2Di^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_IrrlichtDevice->setWindowSize(*value->m_NativeValue);
+}*/	//Does not compile :(
 
 String^ IrrlichtDevice::ToString()
 {

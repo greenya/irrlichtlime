@@ -17,11 +17,14 @@ public ref class GUIButton : GUIElement
 {
 public:
 
-	void SetNormalImage(Video::Texture^ image, Recti^ pos);
-	void SetNormalImage(Video::Texture^ image);
-	void SetNormalImage();
+	void SetImage(GUIButtonImageState state, Video::Texture^ image, Recti^ sourceRect);
+	void SetImage(GUIButtonImageState state, Video::Texture^ image);
+	void SetImage(GUIButtonImageState state);
+	void SetImage(Video::Texture^ image, Recti^ sourceRect);
+	void SetImage(Video::Texture^ image);
+	void SetImage();
 
-	void SetPressedImage(Video::Texture^ image, Recti^ pos);
+	void SetPressedImage(Video::Texture^ image, Recti^ sourceRect);
 	void SetPressedImage(Video::Texture^ image);
 	void SetPressedImage();
 

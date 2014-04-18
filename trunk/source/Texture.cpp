@@ -84,6 +84,16 @@ Dimension2Di^ Texture::Size::get()
 	return gcnew Dimension2Di(m_Texture->getSize());
 }
 
+Video::TextureSource Texture::Source::get()
+{
+	return (Video::TextureSource)m_Texture->getSource();
+}
+
+void Texture::Source::set(Video::TextureSource value)
+{
+	m_Texture->updateSource((E_TEXTURE_SOURCE) value);
+}
+
 String^ Texture::ToString()
 {
 	return String::Format("Texture: Name={0}; Size={1}; ColorFormat={2}", Name->Path, Size, ColorFormat);
