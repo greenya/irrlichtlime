@@ -1,4 +1,37 @@
 ============================
+Changes in 1.5
+============================
+-Updated includes to Irrlicht trunk rev 4775
+-Added x64 support (D3D8 missing for x64), Outputfolders for x64 and x86 are equal, because of relative adress to media-folder
+
+-AABBox: Intersect(AABBox^ other) added
+-CursorControl: RelativePosition::set(...) removed
+-FileArchive: ArchiveName::get() added
+-Enum FocusFlag added
+-GeometryCreator: AddGeoplaneMesh(...) added 
+-GUIButton: SetNormalImage(...) renamed to setImage(...), SetImage(GUIButtonImageState state, ...) added
+-Enum GUIButtonImageState added
+-Enum GUIButtonState modified: ButtonDisabled added
+-GUIColorSelectDialog: properties Color and ColorHSL added
+-Enum GUIDefaultSize modified: ButtonPressedSpriteOffsetX and ButtonPressedSpriteOffsetY added
+-GUIElement: GetNextElement(..., bool includeDisabled) added
+-GUIEnvironment: GetNextElement(...) added
+-GUIImage: properties DrawBounds and SourceRect added
+-GUISpriteBank: only a comment, will be continued in the future
+-IrrlichtDevice: property DoubleClickTime added, WindowSize added as comment (does not compile, don't know why)
+-Material: property Transparent removed
+-Matrix: GetRotationDegrees(Vector3Df^ scale) added
+-MeshLoader: property MeshTextureLoader added
+-Class MeshTextureLoader added
+-ParticleAttractionAffector: property Speed added
+-Enum ParticleBehavior added
+-ParticleSystemSceneNode: property ParticleBehavior added
+-SceneManager: property CurrentRenderPass added
+-SceneNodeAnimator: SetEnabled(...) and SetStartTime(...) added, properties Enabled and StartTime added
+-Texture: property Source added
+-Enum TextureSource added
+
+============================
 Changes in 1.4 (19-May-2013)
 ============================
 
