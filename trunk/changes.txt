@@ -31,6 +31,8 @@ Changes in 1.5
 -Texture: property Source added
 -Enum TextureSource added
 
+- Crash with software drivers solved in example 10.Shaders
+
 ============================
 Changes in 1.4 (19-May-2013)
 ============================

@@ -104,7 +104,7 @@ namespace _10.Shaders
 			MaterialType newMaterialType1 = MaterialType.Solid;
 			MaterialType newMaterialType2 = MaterialType.TransparentAddColor;
 
-			if (gpu != null)
+			if (gpu != null && psFileName != null && vsFileName != null)
 			{
 				gpu.OnSetConstants += new GPUProgrammingServices.SetConstantsHandler(gpu_OnSetConstants);
 
