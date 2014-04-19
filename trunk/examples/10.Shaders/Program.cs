@@ -258,7 +258,7 @@ namespace _10.Shaders
 			invWorld.MakeInverse();
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderInvWorldId, invWorld.ToArray());
+				services.SetVertexShaderConstant(shaderInvWorldId, invWorld.ToArray(), true);
 			else
 				services.SetVertexShaderConstant(0, invWorld.ToArray());
 
@@ -269,7 +269,7 @@ namespace _10.Shaders
 			worldViewProj *= driver.GetTransform(TransformationState.World);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj.ToArray());
+				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj.ToArray(), true);
 			else
 				services.SetVertexShaderConstant(4, worldViewProj.ToArray());
 
@@ -278,7 +278,7 @@ namespace _10.Shaders
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray());
+				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray(), true);
 			else
 				services.SetVertexShaderConstant(8, pos.ToArray());
 
@@ -287,7 +287,7 @@ namespace _10.Shaders
 			Colorf col = new Colorf(0, 1, 1, 0);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightColorId, col.ToArray());
+				services.SetVertexShaderConstant(shaderLightColorId, col.ToArray(), true);
 			else
 				services.SetVertexShaderConstant(9, col.ToArray());
 
@@ -297,8 +297,8 @@ namespace _10.Shaders
 
 			if (useHighLevelShaders)
 			{
-				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray());
-				services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 });
+				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray(), true);
+				services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 }, true);
 			}
 			else
 			{
