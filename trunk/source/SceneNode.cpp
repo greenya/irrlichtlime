@@ -18,6 +18,7 @@
 #include "Texture.h"
 #include "TriangleSelector.h"
 #include "VolumeLightSceneNode.h"
+#include <exception>
 
 using namespace irr;
 using namespace System;
@@ -79,6 +80,12 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	case scene::ESNT_SKY_DOME:
 	case scene::ESNT_EMPTY:
 	default:
+		try {
+			SceneNodeInheritor * node;
+			node = dynamic_cast<SceneNodeInheritor*> (ref);
+			if (node != 0)
+				return node->m_userSceneNode;
+		} catch (...){}
 		return gcnew SceneNode(ref);
 	}
 }
@@ -557,6 +564,7 @@ void SceneNode::initInheritor(SceneNodeInheritor* i)
 	i->m_getMaterialHandler = gcnew GetMaterialEventHandler(this, &SceneNode::GetMaterial);
 	i->m_OnAnimateHandler = gcnew AnimateEventHandler(this, &SceneNode::Animate);
 	i->m_OnRegisterSceneNodeHandler = gcnew RegisterSceneNodeEventHandler(this, &SceneNode::RegisterSceneNode);
+	i->m_userSceneNode = this;
 }
 
 } // end namespace Scene

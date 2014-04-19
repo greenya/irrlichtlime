@@ -69,6 +69,7 @@ public:
 			return *((video::SMaterial*)0);
 	}
 
+	gcroot<SceneNode^> m_userSceneNode;
 // internal:
 
 	void AbsoluteTransformation_set(const core::matrix4& value)
