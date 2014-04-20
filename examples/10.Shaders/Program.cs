@@ -298,7 +298,8 @@ namespace _10.Shaders
 			if (useHighLevelShaders)
 			{
 				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray(), true);
-				services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 }, true);
+				if(driver.DriverType == DriverType.OpenGL)
+                    services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 }, true);
 			}
 			else
 			{
