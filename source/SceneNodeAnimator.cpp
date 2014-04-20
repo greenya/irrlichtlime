@@ -5,7 +5,7 @@
 #include "CollisionResponseSceneNodeAnimator.h"
 #include "SceneManager.h"
 #include "SceneNode.h"
-#include "SceneNodeAnimator.h"
+#include "SceneNodeAnimatorInheritor.h"
 
 using namespace irr;
 using namespace System;
@@ -36,6 +36,12 @@ SceneNodeAnimator^ SceneNodeAnimator::Wrap(scene::ISceneNodeAnimator* ref)
 	case scene::ESNAT_TEXTURE:
 	case scene::ESNAT_DELETION:
 	default:
+		try {
+			SceneNodeAnimatorInheritor * animator;
+			animator = dynamic_cast<SceneNodeAnimatorInheritor*> (ref);
+			if (animator != 0)
+				return animator->m_userSceneNodeAnimator;
+		} catch (...){}
 		return gcnew SceneNodeAnimator(ref);
 	}
 }
@@ -45,10 +51,82 @@ SceneNodeAnimator::SceneNodeAnimator(scene::ISceneNodeAnimator* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_SceneNodeAnimator = ref;
+	m_Inherited = false;
 }
+
+SceneNodeAnimator::SceneNodeAnimator(bool enabled, unsigned __int32 pauseTimeSum, unsigned __int32 pauseTimeStart, unsigned __int32 startTime)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	SceneNodeAnimatorInheritor* i = new SceneNodeAnimatorInheritor(
+		enabled,
+		pauseTimeSum,
+		pauseTimeStart,
+		startTime);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_SceneNodeAnimator = i; 
+	m_Inherited = true;
+}
+
+SceneNodeAnimator::SceneNodeAnimator(bool enabled, unsigned __int32 pauseTimeSum, unsigned __int32 pauseTimeStart)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	SceneNodeAnimatorInheritor* i = new SceneNodeAnimatorInheritor(
+		enabled,
+		pauseTimeSum,
+		pauseTimeStart);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_SceneNodeAnimator = i; 
+	m_Inherited = true;
+}
+
+SceneNodeAnimator::SceneNodeAnimator(bool enabled, unsigned __int32 pauseTimeSum)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	SceneNodeAnimatorInheritor* i = new SceneNodeAnimatorInheritor(
+		enabled,
+		pauseTimeSum);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_SceneNodeAnimator = i; 
+	m_Inherited = true;
+}
+
+SceneNodeAnimator::SceneNodeAnimator(bool enabled)
+	: IO::AttributeExchangingObject(nullptr)
+{
+	SceneNodeAnimatorInheritor* i = new SceneNodeAnimatorInheritor(
+		enabled);
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_SceneNodeAnimator = i; 
+	m_Inherited = true;
+}
+
+SceneNodeAnimator::SceneNodeAnimator()
+	: IO::AttributeExchangingObject(nullptr)
+{
+	SceneNodeAnimatorInheritor* i = new SceneNodeAnimatorInheritor();
+
+	initInheritor(i);
+	setAttributeExchangingObject(i);
+	m_SceneNodeAnimator = i; 
+	m_Inherited = true;
+}
+
 
 void SceneNodeAnimator::AnimateNode(SceneNode^ node, unsigned int timeMs)
 {
+	if (m_Inherited)
+	{
+		OnAnimateNode(node, timeMs);
+		return;
+	}
 	m_SceneNodeAnimator->animateNode(LIME_SAFEREF(node, m_SceneNode), timeMs);
 }
 
@@ -86,6 +164,10 @@ bool SceneNodeAnimator::EventReceiverEnabled::get()
 
 bool SceneNodeAnimator::Finished::get()
 {
+	if (m_Inherited)
+	{
+		return OnGetFinished();
+	}
 	return m_SceneNodeAnimator->hasFinished();
 }
 
@@ -117,6 +199,11 @@ void SceneNodeAnimator::StartTime::set(unsigned __int32 value)
 String^ SceneNodeAnimator::ToString()
 {
 	return String::Format("SceneNodeAnimator: Type={0}", Type);
+}
+
+void SceneNodeAnimator::initInheritor(SceneNodeAnimatorInheritor* i)
+{
+	i->m_userSceneNodeAnimator = this;
 }
 
 } // end namespace Scene

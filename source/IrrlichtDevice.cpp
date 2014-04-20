@@ -389,11 +389,11 @@ Vector2Di^ IrrlichtDevice::WindowPosition::get()
 	return gcnew Vector2Di(m_IrrlichtDevice->getWindowPosition());
 }
 
-/*void IrrlichtDevice::WindowSize::set(Dimension2Di^ value)
+void IrrlichtDevice::WindowSize::set(Dimension2Di^ value)
 {
 	LIME_ASSERT(value != nullptr);
-	m_IrrlichtDevice->setWindowSize(*value->m_NativeValue);
-}*/	//Does not compile :(
+	m_IrrlichtDevice->setWindowSize((core::dimension2du&)*value->m_NativeValue);
+}
 
 String^ IrrlichtDevice::ToString()
 {
