@@ -13234,12 +13234,19 @@ This is only an option set by the user, but has nothing to do with geometry cull
 		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator">
 			<summary>Animates a scene node. Can animate position, rotation, material, and so on.
 
-A scene node animator is able to animate a scene node in a very simple way. It may change its position, rotation, scale and/or material. There are lots of animators to choose from. You can create scene node animators with the SceneManager.</summary>
+A scene node animator is able to animate a scene node in a very simple way. It may change its position, rotation, scale and/or material. There are lots of animators to choose from. You can create scene node animators with the SceneManager.
+
+You can also inherit this class to create your own animators.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.AnimateNode(IrrlichtLime.Scene.SceneNode,System.UInt32)">
 			<summary>Animates a scene node.</summary>
 			<param name="node">Node to animate.</param>
 			<param name="timeMs">Current time in milliseconds.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.AnimateNodeEventHandler">
+			<summary>Called, when the node is being animated.</summary>
+			<param name="node">The node, which should be animated.</param>
+			<param name="time">Current time in milliseconds.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.CreateClone(IrrlichtLime.Scene.SceneNode)">
 			<summary>Creates a clone of this animator. Please note that you will have to Drop() it.</summary>
@@ -13262,6 +13269,10 @@ To pause/resume a SceneNodeAnimator use SetEnabled(...).</summary>
 		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.Finished">
 			<summary>True if the animator has finished, false if it is still running.
 
+This is only valid for non-looping animators with a discrete end state.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.GetFinishedEventHandler">
+			<summary>Return true if the animator has finished, false if it is still running.
 This is only valid for non-looping animators with a discrete end state.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.SetEnabled(System.Boolean,System.UInt32)">

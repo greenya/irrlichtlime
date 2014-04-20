@@ -87,7 +87,7 @@ public:
 	property bool WindowFocused { bool get(); }
 	property bool WindowMinimized { bool get(); }
 	property Vector2Di^ WindowPosition { Vector2Di^ get(); }
-	//property Dimension2Di^ WindowSize { void set(Dimension2Di^ value); }
+	property Dimension2Di^ WindowSize { void set(Dimension2Di^ value); }
 
 	virtual String^ ToString() override;
 
