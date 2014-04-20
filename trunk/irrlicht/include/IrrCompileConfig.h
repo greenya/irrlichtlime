@@ -318,7 +318,7 @@ to provide the user with the proper DLL. That's why it's disabled by default. */
 #endif
 
 //! Define _IRR_COMPILE_WITH_CG_ to enable Cg Shading Language support
-//#define _IRR_COMPILE_WITH_CG_
+#define _IRR_COMPILE_WITH_CG_
 #ifdef NO_IRR_COMPILE_WITH_CG_
 #undef _IRR_COMPILE_WITH_CG_
 #endif
