@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Event.h"
 #include <vcclr.h> // for gcroot
 #include "stdafx.h"
 #include "Material.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
+#include "SceneManager.h"
 
 using namespace irr;
 using namespace System;
@@ -37,24 +39,45 @@ public:
 
 	virtual ISceneNodeAnimator* createClone(ISceneNode* node, ISceneManager* newManager=0)
 	{
-		//Not implemented
-		return 0;
+		SceneNodeAnimator^ clone = m_userSceneNodeAnimator->CreateClone(SceneNode::Wrap(node), SceneManager::Wrap(newManager));
+		SceneNodeAnimatorInheritor* nativeClone = static_cast<SceneNodeAnimatorInheritor*>(clone->m_SceneNodeAnimator);
+		nativeClone->cloneMembers(this);
+		return nativeClone;
 	}
 
-	//Not implemented yet
-	/*virtual bool isEventReceiverEnabled() const
+	virtual bool isEventReceiverEnabled() const
 	{
-		return false;
+		return m_userSceneNodeAnimator->EventReceiverEnabled;
 	}
 
 	virtual bool OnEvent(const SEvent& event)
 	{
-		return false;
-	}*/
+		return m_userSceneNodeAnimator->PostEvent(gcnew Event(event));
+	}
 
 	virtual bool hasFinished(void) const
 	{
 		return m_userSceneNodeAnimator->Finished;
+	}
+
+	unsigned __int32 getPauseTimeSum()
+	{
+		return PauseTimeSum;
+	}
+
+	void setPauseTimeSum(unsigned __int32 value)
+	{
+		PauseTimeSum = value;
+	}
+
+	unsigned __int32 getPauseTimeStart()
+	{
+		return PauseTimeStart;
+	}
+
+	void setPauseTimeStart(unsigned __int32 value)
+	{
+		PauseTimeStart = value;
 	}
 };
 

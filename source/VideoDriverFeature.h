@@ -45,6 +45,7 @@ public enum class VideoDriverFeature
 	OcclusionQuery = EVDF_OCCLUSION_QUERY,
 	PolygonOffset = EVDF_POLYGON_OFFSET,
 	BlendOperations = EVDF_BLEND_OPERATIONS,
+	BlendSeperate = EVDF_BLEND_SEPARATE,
 	TextureMatrix = EVDF_TEXTURE_MATRIX,
 	TextureCompressedDXT = EVDF_TEXTURE_COMPRESSED_DXT
 };

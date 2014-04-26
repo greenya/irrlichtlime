@@ -132,6 +132,12 @@ void SceneNodeAnimator::AnimateNode(SceneNode^ node, unsigned int timeMs)
 
 SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node, SceneManager^ newManager)
 {
+	if (m_Inherited)
+	{
+		SceneNodeAnimator^ clone = OnCreateClone(node, newManager);
+		LIME_ASSERT2(clone != nullptr, "If you inherit SceneNodeAnimator, you must handle OnCreateClone event and return valid SceneNodeAnimator value.");
+		return clone;
+	}
 	scene::ISceneNodeAnimator* a = m_SceneNodeAnimator->createClone(
 		LIME_SAFEREF(node, m_SceneNode),
 		LIME_SAFEREF(newManager, m_SceneManager));
@@ -141,10 +147,27 @@ SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node, SceneManager^
 
 SceneNodeAnimator^ SceneNodeAnimator::CreateClone(SceneNode^ node)
 {
+	if (m_Inherited)
+	{
+		SceneNodeAnimator^ clone = OnCreateClone(node, nullptr);
+		LIME_ASSERT2(clone != nullptr, "If you inherit SceneNodeAnimator, you must handle OnCreateClone event and return valid SceneNodeAnimator value.");
+		return clone;
+	}
 	scene::ISceneNodeAnimator* a = m_SceneNodeAnimator->createClone(
 		LIME_SAFEREF(node, m_SceneNode));
 
 	return Wrap(a);
+}
+
+bool SceneNodeAnimator::PostEvent(Event^ e)
+{
+	LIME_ASSERT(e != nullptr);
+
+	if (m_Inherited)
+	{
+		return OnEvent(e);
+	}
+	return m_SceneNodeAnimator->OnEvent(*e->m_NativeValue);
 }
 
 void SceneNodeAnimator::SetEnabled(bool enabled, unsigned __int32 timeNow)
@@ -159,6 +182,10 @@ void SceneNodeAnimator::SetStartTime(unsigned __int32 time, bool resetPauseTime)
 
 bool SceneNodeAnimator::EventReceiverEnabled::get()
 {
+	if (m_Inherited)
+	{
+		return OnIsEventReceiverEnabled();
+	}
 	return m_SceneNodeAnimator->isEventReceiverEnabled();
 }
 
@@ -169,6 +196,30 @@ bool SceneNodeAnimator::Finished::get()
 		return OnGetFinished();
 	}
 	return m_SceneNodeAnimator->hasFinished();
+}
+
+unsigned __int32 SceneNodeAnimator::PauseTimeSum::get()
+{
+	LIME_ASSERT(!m_Inherited);
+	return static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->getPauseTimeSum();
+}
+
+void SceneNodeAnimator::PauseTimeSum::set(unsigned __int32 value)
+{
+	LIME_ASSERT(!m_Inherited);
+	static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->setPauseTimeSum(value);
+}
+
+unsigned __int32 SceneNodeAnimator::PauseTimeStart::get()
+{
+	LIME_ASSERT(!m_Inherited);
+	return static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->getPauseTimeStart();
+}
+
+void SceneNodeAnimator::PauseTimeStart::set(unsigned __int32 value)
+{
+	LIME_ASSERT(!m_Inherited);
+	static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->setPauseTimeStart(value);
 }
 
 SceneNodeAnimatorType SceneNodeAnimator::Type::get()

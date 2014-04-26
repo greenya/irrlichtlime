@@ -9,6 +9,8 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
+ref class GUIFont;
+
 public ref class GUITable : GUIElement
 {
 public:
@@ -41,10 +43,12 @@ public:
 
 	void SwapRows(int rowIndexA, int rowIndexB);
 
+	property GUIFont^ ActiveFont { GUIFont^ get(); } 
 	property int ActiveColumnIndex { int get(); void set(int value); }
 	property GUIOrderingMode ActiveColumnOrdering { GUIOrderingMode get(); }
 	property int ColumnCount { int get(); }
 	property GUITableDrawFlag DrawFlags { GUITableDrawFlag get(); void set(GUITableDrawFlag value); }
+	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property bool ResizableColumns { bool get(); void set(bool value); }
 	property int RowCount { int get(); }
 	property int SelectedRowIndex { int get(); void set(int value); }
