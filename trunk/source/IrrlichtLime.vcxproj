@@ -203,6 +203,7 @@
     <ClInclude Include="GPUShadingLanguage.h" />
     <ClInclude Include="GUIButtonImageState.h" />
     <ClInclude Include="GUIElementInheritor.h" />
+    <ClInclude Include="GUIProfiler.h" />
     <ClInclude Include="GUISpinBoxValidation.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />
@@ -403,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp" />
+    <ClCompile Include="GUIProfiler.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="Light.cpp" />

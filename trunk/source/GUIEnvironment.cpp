@@ -17,6 +17,7 @@
 #include "GUIInOutFader.h"
 #include "GUIListBox.h"
 #include "GUIMeshViewer.h"
+#include "GUIProfiler.h"
 #include "GUIScrollBar.h"
 #include "GUISkin.h"
 #include "GUISpinBox.h"
@@ -786,6 +787,39 @@ GUIElement^ GUIEnvironment::AddModalScreen(GUIElement^ parent)
 {
 	gui::IGUIElement* e = m_GUIEnvironment->addModalScreen(LIME_SAFEREF(parent, m_GUIElement));
 	return GUIElement::Wrap(e);
+}
+
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent, int id)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement),
+		id);
+
+	return GUIProfiler::Wrap(p);
+}
+
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
+		*rectangle->m_NativeValue,
+		LIME_SAFEREF(parent, m_GUIElement));
+
+	return GUIProfiler::Wrap(p);
+}
+
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle)
+{
+	LIME_ASSERT(rectangle != nullptr);
+
+	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
+		*rectangle->m_NativeValue);
+
+	return GUIProfiler::Wrap(p);
 }
 
 GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)

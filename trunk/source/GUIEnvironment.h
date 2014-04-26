@@ -26,6 +26,7 @@ ref class GUIImageList;
 ref class GUIInOutFader;
 ref class GUIListBox;
 ref class GUIMeshViewer;
+ref class GUIProfiler;
 ref class GUIScrollBar;
 ref class GUISkin;
 ref class GUISpinBox;
@@ -125,6 +126,10 @@ public:
 	GUIWindow^ AddMessageBox(String^ caption, String^ text);
 
 	GUIElement^ AddModalScreen(GUIElement^ parent);
+
+	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent, int id);
+	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent);
+	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle);
 
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
 	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);

@@ -4838,6 +4838,9 @@ Please take care that you should only return 'true' when you want to _prevent_ I
 		<member name="F:IrrlichtLime.GUI.GUIElementType.ModalScreen">
 			<summary>A modal screen.</summary>
 		</member>
+		<member name="F:IrrlichtLime.GUI.GUIElementType.Profiler">
+			<summary>A GUIProfiler.</summary>
+		</member>
 		<member name="F:IrrlichtLime.GUI.GUIElementType.Root">
 			<summary>The root of the GUI.</summary>
 		</member>
@@ -5268,6 +5271,21 @@ Supports unicode input from every keyboard around the world, scrolling, copying 
 
 This control stops its parent's members from being able to receive input until its last child is removed, it then deletes itself.</summary>
 			<param name="parent">Parent GUI element of the message box. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddProfilerDisplay(IrrlichtLime.Core.Recti)">
+			<summary>Adds an element to display the information from the Irrlicht profiler.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddProfilerDisplay(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+			<summary>Adds an element to display the information from the Irrlicht profiler.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent of the element. When null the environment itself will be the parent.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddProfilerDisplay(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+			<summary>Adds an element to display the information from the Irrlicht profiler.</summary>
+			<param name="rectangle">Rectangle specifying the borders of the element.</param>
+			<param name="parent">Parent of the element. When null the environment itself will be the parent.</param>
+			<param name="id">An identifier for the element. Default: -1.</param>
 		</member>
 		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddScrollBar(System.Boolean,IrrlichtLime.Core.Recti)">
 			<summary>Adds a scrollbar.</summary>
@@ -6138,6 +6156,39 @@ In the beginning everything is visible, and at the end of the time only the set 
 		<member name="F:IrrlichtLime.GUI.GUIOrderingMode.None">
 			<summary>No element ordering.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUIProfiler">
+			<summary>Element to display profiler information.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.ActiveFont">
+			<summary>The font which is used right now for drawing.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.FirstPage">
+			<summary>Show first page of profile data.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.FirstPage(System.Boolean)">
+			<summary>Show first page of profile data.</summary>
+			<param name="includeOverview">When true show the group-overview page, when false show the profile data of the first group. Default: true.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.IgnoreUncalled">
+			<summary>If true, don't display stats for data which never got called.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.NextPage">
+			<summary>Show next page of profile data.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.NextPage(System.Boolean)">
+			<summary>Show next page of profile data.</summary>
+			<param name="includeOverview">Include the group-overview page. Default: true.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.OverrideFont">
+			<summary>The override font. Can be null.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.PreviousPage">
+			<summary>Show previous page of profile data.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.PreviousPage(System.Boolean)">
+			<summary>Show previous page of profile data.</summary>
+			<param name="includeOverview">Include the group-overview page. Default: true.</param>
+		</member>
 		<member name="T:IrrlichtLime.GUI.GUIScrollBar">
 			<summary>Default scroll bar GUI element.</summary>
 		</member>
@@ -6634,6 +6685,9 @@ Note that this value can change when other tabs are inserted or removed.</summar
 		<member name="P:IrrlichtLime.GUI.GUITable.ActiveColumnOrdering">
 			<summary>The ordering used by the currently active column.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ActiveFont">
+			<summary>the font which is used right now for drawing.</summary>
+		</member>
 		<member name="M:IrrlichtLime.GUI.GUITable.AddColumn(System.String)">
 			<summary>Adds a column.
 If columnIndex is outside the current range, do push new colum at the end.</summary>
@@ -6693,6 +6747,9 @@ You need to explicitly tell the table to re order the rows when a new row is add
 You need to explicitly tell the table to re order the rows when a new row is added or the cells data is changed. This makes the system more flexible and doesn't make you pay the cost of ordering when adding a lot of rows.</summary>
 			<param name="columnIndex">Column index. If -1 then active column is used. Must be from -1 to ColumnCount-1. Default is -1.</param>
 			<param name="mode">Ordering mode of the rows. Default is None.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.OverrideFont">
+			<summary>If this is set to null, the table uses the font of the skin.</summary>
 		</member>
 		<member name="M:IrrlichtLime.GUI.GUITable.RemoveColumn(System.Int32)">
 			<summary>Removes a column from the table.</summary>
@@ -13257,11 +13314,26 @@ You can also inherit this class to create your own animators.</summary>
 			<param name="node">The node.</param>
 			<param name="newManager">New scene manager to use. If null clonned animator will use the same scene manager. Default is null.</param>
 		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.CreateCloneEventHandler">
+			<summary>CreateClone(...)-calls will be redirected to this event.
+
+Note: The properties Enabled, StartTime, PauseTimeStart and PauseTimeSum don't have to be copied.</summary>
+			<param name="node">The node.</param>
+			<param name="newManager">New scene manager to use. If null clonned animator will use the same scene manager. Default is null.</param>
+		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.Enabled">
 			<summary>Enabled state of this element.
 Manual calls to animateNode still work when disabled.
 
 To pause/resume a SceneNodeAnimator use SetEnabled(...).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.EventHandler">
+			<summary>PostEvent(...)-calls will be redirected to this event.
+
+Note:
+Override this function for camera controlling animators.
+You only have to implement this event, if you let OnIsEventReceiverEnabled return true.</summary>
+			<param name="e">The event.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.EventReceiverEnabled">
 			<summary>True if this animator receives events.</summary>
@@ -13274,6 +13346,70 @@ This is only valid for non-looping animators with a discrete end state.</summary
 		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.GetFinishedEventHandler">
 			<summary>Return true if the animator has finished, false if it is still running.
 This is only valid for non-looping animators with a discrete end state.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.SceneNodeAnimator.IsEventReceiverEnabledEventHandler">
+			<summary>True if this animator receives events.
+
+Note: If you do not implement a OnEvent-event, you have to return false.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNodeAnimator.OnAnimateNode">
+			<summary>Called, when the node is being animated.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNodeAnimator.OnCreateClone">
+			<summary>CreateClone(...)-calls will be redirected to this event.
+
+Note: The properties Enabled, StartTime, PauseTimeStart and PauseTimeSum don't have to be copied.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNodeAnimator.OnEvent">
+			<summary>PostEvent(...)-calls will be redirected to this event.
+
+Note:
+Override this function for camera controlling animators.
+You only have to implement this event, if you let OnIsEventReceiverEnabled return true.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNodeAnimator.OnGetFinished">
+			<summary>Return true if the animator has finished, false if it is still running.
+This is only valid for non-looping animators with a discrete end state.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.SceneNodeAnimator.OnIsEventReceiverEnabled">
+			<summary>True if this animator receives events.
+
+Note: If you do not implement a OnEvent-event, you have to return false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.PauseTimeStart">
+			<summary>The time, when this SceneNodeAnimator has been disabled.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneNodeAnimator.PauseTimeSum">
+			<summary>How long the SceneNodeAnimator has been disabled.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.PostEvent(IrrlichtLime.Event)">
+			<summary>Adds a event for this SceneNodeAnimator.</summary>
+			<param name="e">The event.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.#ctor">
+			<summary>Scene node animator contructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.#ctor(System.Boolean)">
+			<summary>Scene node animator contructor.</summary>
+			<param name="enabled">Is this animator enabled? Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.#ctor(System.Boolean,System.UInt32)">
+			<summary>Scene node animator contructor.</summary>
+			<param name="enabled">Is this animator enabled? Default: true.</param>
+			<param name="pauseTimeSum">How long the SceneNodeAnimator has been disabled. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.#ctor(System.Boolean,System.UInt32,System.UInt32)">
+			<summary>Scene node animator contructor.</summary>
+			<param name="enabled">Is this animator enabled? Default: true.</param>
+			<param name="pauseTimeSum">How long the SceneNodeAnimator has been disabled. Default: 0.</param>
+			<param name="pauseTimeStart">The time, when this SceneNodeAnimator has been disabled. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.#ctor(System.Boolean,System.UInt32,System.UInt32,System.UInt32)">
+			<summary>Scene node animator contructor.</summary>
+			<param name="enabled">Is this animator enabled? Default: true.</param>
+			<param name="pauseTimeSum">How long the SceneNodeAnimator has been disabled. Default: 0.</param>
+			<param name="pauseTimeStart">The time, when this SceneNodeAnimator has been disabled. Default: 0.</param>
+			<param name="startTime">The start time of a time-based movement. Equal to SetStartTime(..., true). Default: 0.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneNodeAnimator.SetEnabled(System.Boolean,System.UInt32)">
 			<summary>Sets the enabled state of this element.
@@ -15666,6 +15802,9 @@ The factor can be from 0 to 7.</summary>
 		<member name="P:IrrlichtLime.Video.Material.Thickness">
 			<summary>Thickness of non-3dimensional elements such as lines and points.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.Material.Transparent">
+			<summary>Is this material transparent.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.Material.Type">
 			<summary>Type of the material. Specifies how everything is blended together.</summary>
 		</member>
@@ -15694,6 +15833,9 @@ In Irrlicht you can use anisotropic texture filtering in conjunction with biline
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.BilinearFilter">
 			<summary>Is bilinear filtering enabled? Default: true.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.MaterialFlag.BlendFactor">
+			<summary>Flag for blend factor.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.MaterialFlag.BlendOperation">
 			<summary>Is blend operation enabled? Default: false.</summary>
@@ -17888,6 +18030,9 @@ Requires that there is a suitable image writer registered for writing the image.
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.BlendOperations">
 			<summary>Different blend functions are supported, otherwise only BlendOperation.Add is available.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.VideoDriverFeature.BlendSeperate">
+			<summary>Support for separate blending for RGB and Alpha.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.VideoDriverFeature.ColorMask">
 			<summary>Color masks (disabling color planes in output) are supported.</summary>

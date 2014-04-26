@@ -8,6 +8,9 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+
+ref class Event;
+
 namespace Scene {
 
 ref class SceneManager;
@@ -23,6 +26,8 @@ public:
 	SceneNodeAnimator^ CreateClone(SceneNode^ node, SceneManager^ newManager);
 	SceneNodeAnimator^ CreateClone(SceneNode^ node);
 
+	bool PostEvent(Event^ e);
+
 	void SetEnabled(bool enabled, unsigned __int32 timeNow);
 	void SetStartTime(unsigned __int32 time, bool resetPauseTime);
 
@@ -35,7 +40,10 @@ public:
 	virtual String^ ToString() override;
 
 	delegate void AnimateNodeEventHandler(SceneNode^ node, unsigned __int32 time);
+	delegate SceneNodeAnimator^ CreateCloneEventHandler(SceneNode^ node, SceneManager^ newManager);
+	delegate bool EventHandler(IrrlichtLime::Event^ e);
 	delegate bool GetFinishedEventHandler();
+	delegate bool IsEventReceiverEnabledEventHandler();
 
 protected:
 
@@ -45,8 +53,14 @@ protected:
 	SceneNodeAnimator(bool enabled);
 	SceneNodeAnimator();
 
-	event AnimateNodeEventHandler^ OnAnimateNode;	 
+	property unsigned __int32 PauseTimeSum { unsigned __int32 get(); void set(unsigned __int32 value); }
+	property unsigned __int32 PauseTimeStart { unsigned __int32 get(); void set(unsigned __int32 value); }
+
+	event AnimateNodeEventHandler^ OnAnimateNode;
+	event CreateCloneEventHandler^ OnCreateClone;
+	event EventHandler^ OnEvent;
 	event GetFinishedEventHandler^ OnGetFinished;
+	event IsEventReceiverEnabledEventHandler^ OnIsEventReceiverEnabled;
 
 internal:
 

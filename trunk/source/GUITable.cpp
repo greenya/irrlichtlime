@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GUIElement.h"
+#include "GUIFont.h"
 #include "GUITable.h"
 
 using namespace irr;
@@ -166,6 +167,11 @@ void GUITable::SwapRows(int rowIndexA, int rowIndexB)
 		rowIndexB);
 }
 
+GUIFont^ GUITable::ActiveFont::get()
+{
+	return GUIFont::Wrap(m_GUITable->getActiveFont());
+}
+
 int GUITable::ActiveColumnIndex::get()
 {
 	return m_GUITable->getActiveColumn();
@@ -195,6 +201,16 @@ GUITableDrawFlag GUITable::DrawFlags::get()
 void GUITable::DrawFlags::set(GUITableDrawFlag value)
 {
 	m_GUITable->setDrawFlags((gui::EGUI_TABLE_DRAW_FLAGS)value);
+}
+
+GUIFont^ GUITable::OverrideFont::get()
+{
+	return GUIFont::Wrap(m_GUITable->getOverrideFont());
+}
+
+void GUITable::OverrideFont::set(GUIFont^ value)
+{
+	m_GUITable->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
 bool GUITable::ResizableColumns::get()

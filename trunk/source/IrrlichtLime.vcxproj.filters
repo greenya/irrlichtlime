@@ -631,6 +631,9 @@
     <ClInclude Include="SceneNodeAnimatorInheritor.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="GUIProfiler.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -929,6 +932,9 @@
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="MeshTextureLoader.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIProfiler.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
