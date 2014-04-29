@@ -1,8 +1,8 @@
 ============================
 Changes in 1.5
 ============================
--Updated includes to Irrlicht trunk rev 4800
--Added x64 support (D3D8 missing for x64), Outputfolders for x64 and x86 are equal, because of relative adress to media-folder
+-Updated includes to Irrlicht trunk rev 4806
+-Added x64 support (D3D8 missing for x64)
 -Irrlicht compiled with CG
 
 -AABBox: Intersect(AABBox^ other) added

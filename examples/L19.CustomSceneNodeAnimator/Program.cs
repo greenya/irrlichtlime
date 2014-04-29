@@ -14,9 +14,12 @@ namespace L19.CustomSceneNodeAnimator
     class Program
     {
 
+        static SceneNodeAnimator customAnimator;
+        static IrrlichtDevice device;
+
         static void Main(string[] args)
         {
-            IrrlichtDevice device =
+            device =
 				IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(640, 480), 16, false);
 
 			VideoDriver driver = device.VideoDriver;
@@ -30,17 +33,20 @@ namespace L19.CustomSceneNodeAnimator
             MeshSceneNode node = smgr.AddCubeSceneNode();
             node.SetMaterialTexture(0, driver.GetTexture("../../media/stones.jpg"));
 
-            SceneNodeAnimator anim = new SampleSceneNodeAnimator();
+            customAnimator = new SampleSceneNodeAnimator();
 
-			if (anim != null)
+			if (customAnimator != null)
 			{
-                node.AddAnimator(anim);
-				anim.Drop();
-				anim = null;
+                node.AddAnimator(customAnimator);
+
+                //usually, we would drop it, but we keep it so the user can pause the animation by pressing space
+                //customAnimator.Drop();
+                //customAnimator = null;
 			}
 
-            //node.Drop();
             node = null;
+
+            device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 
 			int frames = 0;
 			while (device.Run())
@@ -59,8 +65,22 @@ namespace L19.CustomSceneNodeAnimator
 				}
 			}
 
+            //now we really don't need it anymore
+            customAnimator.Drop();
+            customAnimator = null;
 			device.Drop();
 		}
+
+        static bool device_OnEvent(Event evnt)
+        {
+            if (evnt.Type == EventType.Key)
+                if (evnt.Key.Char == ' ')
+                {
+                    customAnimator.SetEnabled(!customAnimator.Enabled, device.Timer.Time);
+                    return true;
+                }
+            return false;
+        }
     }
 
     class SampleSceneNodeAnimator : SceneNodeAnimator
@@ -69,17 +89,38 @@ namespace L19.CustomSceneNodeAnimator
             : base(true)
         {
             this.OnAnimateNode += new AnimateNodeEventHandler(SampleSceneNodeAnimator_OnAnimateNode);
-            this.OnGetFinished +=new GetFinishedEventHandler(SampleSceneNodeAnimator_OnGetFinished);
+            this.OnGetFinished += new GetFinishedEventHandler(SampleSceneNodeAnimator_OnGetFinished);
+            this.OnCreateClone += new CreateCloneEventHandler(SampleSceneNodeAnimator_OnCreateClone);
+            this.OnIsEventReceiverEnabled += new IsEventReceiverEnabledEventHandler(SampleSceneNodeAnimator_OnIsEventReceiverEnabled);
+        }
+
+        bool SampleSceneNodeAnimator_OnIsEventReceiverEnabled()
+        {  
+            //Does not receive events from camera.
+            return false;
         }
 
         void SampleSceneNodeAnimator_OnAnimateNode(SceneNode node, uint time)
         {
-            node.Position = new Vector3Df((float)Math.Sin((double)time/1000)*5, 0, 0);
+            if (node == null)
+                return;
+            //calculate new time without pause and relative to the start time
+            int newTime = ((int)time - (int)(StartTime + PauseTimeSum));
+            //simply move up and down
+            node.Position = new Vector3Df((float)Math.Sin((double)newTime / 1000) * 5, 0, 0);
         }
 
         bool SampleSceneNodeAnimator_OnGetFinished()
         {
+            //Never finishes.
             return false;
+        }
+
+        SceneNodeAnimator SampleSceneNodeAnimator_OnCreateClone(SceneNode node, SceneManager newManager)
+        {
+            //We don't have to copy any attributes.
+            //The properties Enabled, StartTime, PauseTimeStart and PauseTime are copied automaticly.
+            return new SampleSceneNodeAnimator();
         }
     }
 }

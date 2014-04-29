@@ -200,25 +200,25 @@ bool SceneNodeAnimator::Finished::get()
 
 unsigned __int32 SceneNodeAnimator::PauseTimeSum::get()
 {
-	LIME_ASSERT(!m_Inherited);
+	LIME_ASSERT(m_Inherited);
 	return static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->getPauseTimeSum();
 }
 
 void SceneNodeAnimator::PauseTimeSum::set(unsigned __int32 value)
 {
-	LIME_ASSERT(!m_Inherited);
+	LIME_ASSERT(m_Inherited);
 	static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->setPauseTimeSum(value);
 }
 
 unsigned __int32 SceneNodeAnimator::PauseTimeStart::get()
 {
-	LIME_ASSERT(!m_Inherited);
+	LIME_ASSERT(m_Inherited);
 	return static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->getPauseTimeStart();
 }
 
 void SceneNodeAnimator::PauseTimeStart::set(unsigned __int32 value)
 {
-	LIME_ASSERT(!m_Inherited);
+	LIME_ASSERT(m_Inherited);
 	static_cast<SceneNodeAnimatorInheritor*>(m_SceneNodeAnimator)->setPauseTimeStart(value);
 }
 
