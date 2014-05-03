@@ -1,7 +1,7 @@
 ============================
 Changes in 1.5
 ============================
--Updated includes to Irrlicht trunk rev 4806
+-Updated includes to Irrlicht trunk rev 4825
 -Added x64 support (D3D8 missing for x64)
 -Irrlicht compiled with CG
 
@@ -44,6 +44,14 @@ Changes in 1.5
 -Enum VideoDriverFeature: BlendSeperate added
 -Class GUIProfiler added
 -GUITable: added properties ActiveFont and OverrideFont
+
+-SceneManager: property LightManager added
+-Class LightManager added, can be inherited
+-Example 20.ManagedLights added
+
+-GUIListBox: added property VerticalScrollBar
+-GUITable: added property VerticalScrollBar, HorizontalScrollBar and ItemHeight
+-GUITreeView: added propery VerticalScrollBar and HorizontalScrollBar
 
 ============================
 Changes in 1.4 (19-May-2013)

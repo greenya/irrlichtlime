@@ -9,6 +9,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
+ref class GUIScrollBar;
 ref class GUISpriteBank;
 
 public ref class GUIListBox : GUIElement
@@ -50,6 +51,7 @@ public:
 	property int ItemCount { int get(); }
 	property int SelectedIndex { int get(); void set(int value); }
 	property String^ SelectedItem { String^ get(); void set(String^ value); }
+	property GUIScrollBar^ VerticalScrollBar { GUIScrollBar^ get(); }
 
 internal:
 

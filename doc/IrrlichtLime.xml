@@ -6105,6 +6105,9 @@ In the beginning everything is visible, and at the end of the time only the set 
 			<param name="index1">Index of the first item. Must be from 0 to ItemCount-1. Must be different from index2.</param>
 			<param name="index2">Index of the second item. Must be from 0 to ItemCount-1. Must be different from index1.</param>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUIListBox.VerticalScrollBar">
+			<summary>Access the vertical scrollbar.</summary>
+		</member>
 		<member name="T:IrrlichtLime.GUI.GUIListBoxColor">
 			<summary>Enumeration for list box colors.</summary>
 		</member>
@@ -6730,6 +6733,12 @@ If columnIndex is outside the current range, do push new colum at the end.</summ
 			<summary>Gets the width of a column.</summary>
 			<param name="columnIndex">Column index. Must be from 0 to ColumnCount-1.</param>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.HorizontalScrollBar">
+			<summary>Access the horizontal scrollbar.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.ItemHeight">
+			<summary>The height of items/rows.</summary>
+		</member>
 		<member name="M:IrrlichtLime.GUI.GUITable.OrderRows">
 			<summary>This tells the table to start ordering all the rows.
 
@@ -6800,6 +6809,9 @@ You need to explicitly tell the table to re order the rows when a new row is add
 			<summary>Swap two row positions.</summary>
 			<param name="rowIndexA">First row index to swap. Must be from 0 to RowCount-1. Must be different from rowIndexB.</param>
 			<param name="rowIndexB">Second row index to swap. Must be from 0 to RowCount-1. Must be different from rowIndexA.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.VerticalScrollBar">
+			<summary>Access the vertical scrollbar.</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.GUITableDrawFlag">
 			<summary>Table drawing flags.</summary>
@@ -6873,6 +6885,9 @@ You need to explicitly tell the table to re order the rows when a new row is add
 
 Displays a windows like tree buttons to expand/collaps the child nodes of an node and optional tree lines. Each node consits of a text, an icon text and a int value for user data.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.HorizontalScrollBar">
+			<summary>Access the horizontal scrollbar.</summary>
+		</member>
 		<member name="P:IrrlichtLime.GUI.GUITreeView.ImageLeftOfIcon">
 			<summary>If the image is left of the icon. Default is true.</summary>
 		</member>
@@ -6897,6 +6912,9 @@ Warning: this value is only valid inside the OnEvent call!</summary>
 
 This font is set to the Irrlicht engine built-in-font by default. Icons can be displayed in front of every list item. An icon is a string, displayed with the icon font.</summary>
 			<param name="font">New font for icons.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.VerticalScrollBar">
+			<summary>Access the vertical scrollbar.</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.GUITreeViewNode">
 			<summary>Node for gui tree view.</summary>
@@ -8802,6 +8820,82 @@ Please note, this property returns a copy of indices, so do not try to "buffer.I
 		</member>
 		<member name="F:IrrlichtLime.Scene.JointUpdateOnRender.Read">
 			<summary>Get joints positions from the mesh (for attached nodes, etc).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager">
+			<summary>Custom callbacks manager which gets callbacks during scene rendering.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.#ctor">
+			<summary>Light manager contructor.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.NodePostRender(IrrlichtLime.Scene.SceneNode)">
+			<summary>Performs some stuff after a node has been rendered.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+			<param name="node">The node which has been rendered.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.NodePostRenderEventHandler">
+			<summary>Called after a node has been rendered.</summary>
+			<param name="node">The node which has been rendered.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.NodePreRender(IrrlichtLime.Scene.SceneNode)">
+			<summary>Performs some stuff before a node is rendered.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+			<param name="node">The node which is going to be rendered.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.NodePreRenderEventHandler">
+			<summary>Called before a node is rendered.</summary>
+			<param name="node">The node which is going to be rendered.</param>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnNodePostRender">
+			<summary>Called after a node has been rendered.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnNodePreRender">
+			<summary>Called before a node is rendered.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnPostRender">
+			<summary>Called after the scene has been rendered.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnPreRender">
+			<summary>Called before the scene is rendered.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnRenderPassPostRender">
+			<summary>Called after a render pass has finished.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Scene.LightManager.OnRenderPassPreRender">
+			<summary>Called before a render pass starts.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.PostRender">
+			<summary>Performs some stuff after the rendering has been finished.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.PostRenderEventHandler">
+			<summary>Called after the scene has been rendered.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.PreRender(IrrlichtLime.Scene.SceneNode[])">
+			<summary>Performs some stuff before the rendering starts.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+			<param name="lightList">All the lights in the scene.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.PreRenderEventHandler">
+			<summary>Called before the scene is rendered.</summary>
+			<param name="lightList">All the lights in the scene.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.RenderPassPostRender(IrrlichtLime.Scene.SceneNodeRenderPass)">
+			<summary>Performs some stuff after a render pass has been finished.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+			<param name="renderPass">The render pass, which has been finished.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.RenderPassPostRenderEventHandler">
+			<summary>Called after a render pass has finished.</summary>
+			<param name="renderPass">The render pass, which has been finished.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.LightManager.RenderPassPreRender(IrrlichtLime.Scene.SceneNodeRenderPass)">
+			<summary>Performs some stoff before a render pass is started.
+Usually, you don't have to call this. The engine calls it automaticly.</summary>
+			<param name="renderPass">The render pass which is going to be started.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.LightManager.RenderPassPreRenderEventHandler">
+			<summary>Called before a render pass starts.</summary>
+			<param name="renderPass">The render pass which is going to be started.</param>
 		</member>
 		<member name="T:IrrlichtLime.Scene.LightSceneNode">
 			<summary>Scene node which is a dynamic light.
@@ -12856,6 +12950,9 @@ Stereolithography (.stl).</summary>
 Please note that depending on the used culling method this check can be rather coarse, or slow. A positive result is correct, though, i.e. if this method returns true the node is positively not visible. The node might still be invisible even if this method returns false.</summary>
 			<param name="node">The scene node which is checked for culling.</param>
 			<returns>True if node is not visible in the current scene, else false.</returns>
+		</member>
+		<member name="P:IrrlichtLime.Scene.SceneManager.LightManager">
+			<summary>Custom callbacks manager which gets callbacks during scene rendering.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.LoadScene(IrrlichtLime.IO.ReadFile)">
 			<summary>Loads a scene from the file. Note that the current scene is not cleared before.

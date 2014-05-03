@@ -4,6 +4,7 @@
 #include "GUIImageList.h"
 #include "GUITreeView.h"
 #include "GUITreeViewNode.h"
+#include "GUIScrollBar.h"
 
 using namespace irr;
 using namespace System;
@@ -29,6 +30,11 @@ GUITreeView::GUITreeView(gui::IGUITreeView* ref)
 void GUITreeView::SetIconFont(GUIFont^ font)
 {
 	m_GUITreeView->setIconFont(LIME_SAFEREF(font, m_GUIFont));
+}
+
+GUIScrollBar^ GUITreeView::HorizontalScrollBar::get()
+{
+	return GUIScrollBar::Wrap(m_GUITreeView->getHorizontalScrollBar());
 }
 
 bool GUITreeView::ImageLeftOfIcon::get()
@@ -78,6 +84,11 @@ GUITreeViewNode^ GUITreeView::SelectedNode::get()
 {
 	gui::IGUITreeViewNode* n = m_GUITreeView->getSelected();
 	return GUITreeViewNode::Wrap(n);
+}
+
+GUIScrollBar^ GUITreeView::VerticalScrollBar::get()
+{
+	return GUIScrollBar::Wrap(m_GUITreeView->getVerticalScrollBar());
 }
 
 } // end namespace GUI

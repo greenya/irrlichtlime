@@ -61,6 +61,7 @@ namespace L13.FractalBrowser
 			}
 
 			threads[0] = new Thread(new ThreadStart(threadTileManager_main));
+            run = true;
 			threads[0].Start();
 		}
 
@@ -121,11 +122,12 @@ namespace L13.FractalBrowser
 
 		void abortThreads()
 		{
+            run = false;
 			for (int i = 0; i < threads.Length; i++)
 			{
 				if (threads[i] != null)
 				{
-					threads[i].Abort();
+                    threads[i].Join();
 					threads[i] = null;
 				}
 			}
@@ -194,12 +196,16 @@ namespace L13.FractalBrowser
 			tiles.Clear();
 		}
 
+        bool run;
+
 		void threadTileManager_main()
 		{
 			int j;
 
 			foreach (Tile tile in tiles)
 			{
+                if (!run)
+                    return;
 				while (true)
 				{
 					j = -1;

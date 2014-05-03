@@ -20,7 +20,12 @@ namespace L13.FractalBrowser
 
 		static void Main(string[] args)
 		{
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 768));
+           
+            IrrlichtCreationParameters param = new IrrlichtCreationParameters();
+            param.DriverMultithreaded = true;
+            param.DriverType = DriverType.Direct3D9;
+            param.WindowSize = new Dimension2Di(1024, 768);
+			device = IrrlichtDevice.CreateDevice(param);
 			if (device == null)
 				return;
 

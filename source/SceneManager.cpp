@@ -13,6 +13,7 @@
 #include "GUIEnvironment.h"
 #include "GUIFont.h"
 #include "Image.h"
+#include "LightManager.h"
 #include "LightSceneNode.h"
 #include "Mesh.h"
 #include "MeshCache.h"
@@ -3213,6 +3214,11 @@ GUI::GUIEnvironment^ SceneManager::GUIEnvironment::get()
 {
 	gui::IGUIEnvironment* g = m_SceneManager->getGUIEnvironment();
 	return GUI::GUIEnvironment::Wrap(g);
+}
+
+void SceneManager::LightManager::set(Scene::LightManager^ value)
+{
+	m_SceneManager->setLightManager(LIME_SAFEREF(value, m_LightManager));
 }
 
 Scene::MeshCache^ SceneManager::MeshCache::get()
