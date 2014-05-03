@@ -21,6 +21,7 @@ ref class CameraSceneNode;
 ref class CollisionResponseSceneNodeAnimator;
 ref class DummyTransformationSceneNode;
 ref class GeometryCreator;
+ref class LightManager;
 ref class LightSceneNode;
 ref class Mesh;
 ref class MeshCache;
@@ -347,6 +348,7 @@ public:
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }
 	property Scene::GeometryCreator^ GeometryCreator { Scene::GeometryCreator^ get(); }
 	property GUI::GUIEnvironment^ GUIEnvironment { GUI::GUIEnvironment^ get(); }
+	property Scene::LightManager^ LightManager { void set(Scene::LightManager^ value); }
 	property Scene::MeshCache^ MeshCache { Scene::MeshCache^ get(); }
 	property int MeshLoaderCount { int get(); }
 	property Scene::MeshManipulator^ MeshManipulator { Scene::MeshManipulator^ get(); }

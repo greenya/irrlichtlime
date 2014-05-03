@@ -2,6 +2,7 @@
 #include "GUIElement.h"
 #include "GUIFont.h"
 #include "GUITable.h"
+#include "GUIScrollBar.h"
 
 using namespace irr;
 using namespace System;
@@ -203,6 +204,16 @@ void GUITable::DrawFlags::set(GUITableDrawFlag value)
 	m_GUITable->setDrawFlags((gui::EGUI_TABLE_DRAW_FLAGS)value);
 }
 
+GUIScrollBar^ GUITable::HorizontalScrollBar::get()
+{
+	return GUIScrollBar::Wrap(m_GUITable->getHorizontalScrollBar());
+}
+
+__int32 GUITable::ItemHeight::get()
+{
+	return m_GUITable->getItemHeight();
+}
+
 GUIFont^ GUITable::OverrideFont::get()
 {
 	return GUIFont::Wrap(m_GUITable->getOverrideFont());
@@ -237,6 +248,11 @@ void GUITable::SelectedRowIndex::set(int value)
 {
 	LIME_ASSERT(value >= 0 && value < RowCount);
 	m_GUITable->setSelected(value);
+}
+
+GUIScrollBar^ GUITable::VerticalScrollBar::get()
+{
+	return GUIScrollBar::Wrap(m_GUITable->getVerticalScrollBar());
 }
 
 } // end namespace GUI

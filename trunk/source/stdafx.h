@@ -112,6 +112,7 @@
 // inheritors
 #include "EventReceiverInheritor.h"
 #include "GUIElementInheritor.h"
+#include "LightManagerInheritor.h"
 #include "SceneNodeInheritor.h"
 #include "SceneNodeAnimatorInheritor.h"
 #include "ShaderCallBackInheritor.h"

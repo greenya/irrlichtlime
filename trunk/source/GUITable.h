@@ -10,6 +10,7 @@ namespace IrrlichtLime {
 namespace GUI {
 
 ref class GUIFont;
+ref class GUIScrollBar;
 
 public ref class GUITable : GUIElement
 {
@@ -48,10 +49,13 @@ public:
 	property GUIOrderingMode ActiveColumnOrdering { GUIOrderingMode get(); }
 	property int ColumnCount { int get(); }
 	property GUITableDrawFlag DrawFlags { GUITableDrawFlag get(); void set(GUITableDrawFlag value); }
+	property GUIScrollBar^ HorizontalScrollBar { GUIScrollBar^ get(); }
+	property __int32 ItemHeight { __int32 get(); }
 	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property bool ResizableColumns { bool get(); void set(bool value); }
 	property int RowCount { int get(); }
 	property int SelectedRowIndex { int get(); void set(int value); }
+	property GUIScrollBar^ VerticalScrollBar { GUIScrollBar^ get(); }
 
 internal:
 

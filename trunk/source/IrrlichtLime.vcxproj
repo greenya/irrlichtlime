@@ -209,6 +209,8 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IndexType.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightManager.h" />
+    <ClInclude Include="LightManagerInheritor.h" />
     <ClInclude Include="LightType.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialFlag.h" />
@@ -408,6 +410,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialLayer.cpp" />
     <ClCompile Include="MaterialRenderer.cpp" />

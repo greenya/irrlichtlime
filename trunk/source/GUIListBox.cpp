@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GUIElement.h"
 #include "GUIListBox.h"
+#include "GUIScrollBar.h"
 #include "GUISpriteBank.h"
 
 using namespace irr;
@@ -189,6 +190,11 @@ void GUIListBox::SelectedItem::set(String^ value)
 		m_GUIListBox->setSelected(nullptr);
 
 	m_GUIListBox->setSelected(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
+}
+
+GUIScrollBar^ GUIListBox::VerticalScrollBar::get()
+{
+	return GUIScrollBar::Wrap(m_GUIListBox->getVerticalScrollBar());
 }
 
 } // end namespace GUI
