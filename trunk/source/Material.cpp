@@ -43,6 +43,50 @@ Material::Material(Material^ other)
 	m_NativeValue = new video::SMaterial(*other->m_NativeValue);
 }
 
+float Material::PackTextureBlendFunc(BlendFactor srcFact, BlendFactor dstFact, ModulateFunc modulate, AlphaSource alphaSource)
+{
+	return pack_textureBlendFunc((E_BLEND_FACTOR)srcFact, (E_BLEND_FACTOR)dstFact, (E_MODULATE_FUNC)modulate, (u32)alphaSource);
+}
+
+float Material::PackTextureBlendFuncSeparate(BlendFactor srcRGBFact, BlendFactor dstRGBFact, BlendFactor srcAlphaFact, BlendFactor dstAlphaFact, ModulateFunc modulate, AlphaSource alphaSource)
+{
+	return pack_textureBlendFuncSeparate((E_BLEND_FACTOR)srcRGBFact, (E_BLEND_FACTOR)dstRGBFact, (E_BLEND_FACTOR)srcAlphaFact, (E_BLEND_FACTOR)dstAlphaFact, (E_MODULATE_FUNC)modulate, (u32)alphaSource);
+}
+
+void Material::UnpackTextureBlendFunc([Out]BlendFactor% srcFact, [Out]BlendFactor% dstFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param)
+{
+	E_BLEND_FACTOR _srcFact;
+	E_BLEND_FACTOR _dstFact;
+	E_MODULATE_FUNC _modulate;
+	u32 _alphaSource;
+
+	unpack_textureBlendFunc(_srcFact, _dstFact, _modulate, _alphaSource, param);
+
+	srcFact = (BlendFactor)_srcFact;
+	dstFact = (BlendFactor)_dstFact;
+	modulate = (ModulateFunc)_modulate;
+	alphaSource = (AlphaSource)_alphaSource;
+}
+
+void Material::UnpackTextureBlendFuncSeparate([Out]BlendFactor% srcRGBFact, [Out]BlendFactor% dstRGBFact, [Out]BlendFactor% srcAlphaFact, [Out]BlendFactor% dstAlphaFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param)
+{
+	E_BLEND_FACTOR _srcRGBFact;
+	E_BLEND_FACTOR _dstRGBFact;
+	E_BLEND_FACTOR _srcAlphaFact;
+	E_BLEND_FACTOR _dstAlphaFact;
+	E_MODULATE_FUNC _modulate;
+	u32 _alphaSource;
+
+	unpack_textureBlendFuncSeparate(_srcRGBFact, _dstRGBFact, _srcAlphaFact, _dstAlphaFact, _modulate, _alphaSource, param);
+
+	srcRGBFact = (BlendFactor)_srcRGBFact;
+	dstRGBFact = (BlendFactor)_dstRGBFact;
+	srcAlphaFact = (BlendFactor)_srcAlphaFact;
+	dstAlphaFact = (BlendFactor)_dstAlphaFact;
+	modulate = (ModulateFunc)_modulate;
+	alphaSource = (AlphaSource)_alphaSource;
+}
+
 bool Material::GetFlag(MaterialFlag flag)
 {
 	return m_NativeValue->getFlag((E_MATERIAL_FLAG)flag);

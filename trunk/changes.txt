@@ -1,7 +1,7 @@
 ============================
 Changes in 1.5
 ============================
--Updated includes to Irrlicht trunk rev 4825
+-Updated includes to Irrlicht trunk rev 4886
 -Added x64 support (D3D8 missing for x64)
 -Irrlicht compiled with CG
 
@@ -52,6 +52,8 @@ Changes in 1.5
 -GUIListBox: added property VerticalScrollBar
 -GUITable: added property VerticalScrollBar, HorizontalScrollBar and ItemHeight
 -GUITreeView: added propery VerticalScrollBar and HorizontalScrollBar
+
+-Material: Pack(...), PackSeparate(...), Unpack(...) and UnpackSeparate(...) added
 
 ============================
 Changes in 1.4 (19-May-2013)
