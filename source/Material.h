@@ -21,6 +21,11 @@ public:
 
 	static property int MaxTextures { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
+	static float PackTextureBlendFunc(BlendFactor srcFact, BlendFactor dstFact, ModulateFunc modulate, AlphaSource alphaSource);
+	static float PackTextureBlendFuncSeparate(BlendFactor srcRGBFact, BlendFactor dstRGBFact, BlendFactor srcAlphaFact, BlendFactor dstAlphaFact, ModulateFunc modulate, AlphaSource alphaSource);
+	static void UnpackTextureBlendFunc([Out]BlendFactor% srcFact, [Out]BlendFactor% dstFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param);
+	static void UnpackTextureBlendFuncSeparate([Out]BlendFactor% srcRGBFact, [Out]BlendFactor% dstRGBFact, [Out]BlendFactor% srcAlphaFact, [Out]BlendFactor% dstAlphaFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param);
+
 	Material();
 	Material(Material^ other);
 

@@ -15792,6 +15792,42 @@ Equivalent to "new Material()".</summary>
 		<member name="P:IrrlichtLime.Video.Material.MaxTextures">
 			<summary>Maximum number of textures a Material can have.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.Material.PackTextureBlendFunc(IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.ModulateFunc,IrrlichtLime.Video.AlphaSource)">
+			<summary>Pack srcFact, dstFact, modulation and alpha source to MaterialTypeParam or BlendFactor.
+alphaSource can be a comination of AlphaSource values.</summary>
+			<param name="srcFact">The source factor.</param>
+			<param name="dstFact">The destination factor.</param>
+			<param name="modulate">The modulation. Default: 1x</param>
+			<param name="alphaSource">The alpha source. Default: AlphaSource.Texture.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.PackTextureBlendFuncSeparate(IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.BlendFactor,IrrlichtLime.Video.ModulateFunc,IrrlichtLime.Video.AlphaSource)">
+			<summary>Pack srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulation and alpha source to MaterialTypeParam or BlendFactor.
+alphaSource can be a comination of AlphaSource values.</summary>
+			<param name="srcRGBFact">The RGB source factor.</param>
+			<param name="dstRGBFact">The RGB destination factor.</param>
+			<param name="srcAlphaFact">The alpha source factor.</param>
+			<param name="dstAlphaFact">The alpha destination factor.</param>
+			<param name="modulate">The modulation. Default: 1x</param>
+			<param name="alphaSource">The alpha source. Default: AlphaSource.Texture.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.UnpackTextureBlendFunc(IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.ModulateFunc@,IrrlichtLime.Video.AlphaSource@,System.Single)">
+			<summary>Unpack srcFact, dstFact, modulation and alphaSource factors.</summary>
+			<param name="srcFact">The source factor.</param>
+			<param name="dstFact">The destination factor.</param>
+			<param name="modulate">The modulation.</param>
+			<param name="alphaSource">The alpha source.</param>
+			<param name="param">The texture blend func to unpack.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Material.UnpackTextureBlendFuncSeparate(IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.BlendFactor@,IrrlichtLime.Video.ModulateFunc@,IrrlichtLime.Video.AlphaSource@,System.Single)">
+			<summary>Unpack srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulation and alphaSource factors.</summary>
+			<param name="srcRGBFact">The RGB source factor.</param>
+			<param name="dstRGBFact">The RGB destination factor.</param>
+			<param name="srcAlphaFact">The alpha source factor.</param>
+			<param name="dstAlphaFact">The alpha destination factor.</param>
+			<param name="modulate">The modulation.</param>
+			<param name="alphaSource">The alpha source.</param>
+			<param name="param">The texture blend func to unpack.</param>
+		</member>
 		<member name="P:IrrlichtLime.Video.Material.AmbientColor">
 			<summary>How much ambient light (a global light) is reflected by this material.</summary>
 		</member>
