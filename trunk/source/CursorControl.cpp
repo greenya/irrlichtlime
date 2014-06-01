@@ -29,6 +29,16 @@ void CursorControl::SetReferenceRect(Recti^ rect_or_null)
 	m_CursorControl->setReferenceRect(LIME_SAFEREF(rect_or_null, m_NativeValue));
 }
 
+CursorIcon CursorControl::ActiveIcon::get()
+{
+	return (CursorIcon)m_CursorControl->getActiveIcon();
+}
+
+void CursorControl::ActiveIcon::set(CursorIcon value)
+{
+	m_CursorControl->setActiveIcon((gui::ECURSOR_ICON)value);
+}
+
 CursorPlatformBehavior CursorControl::PlatformBehavior::get()
 {
 	return (CursorPlatformBehavior)m_CursorControl->getPlatformBehavior();
@@ -53,6 +63,11 @@ void CursorControl::Position::set(Vector2Di^ value)
 Vector2Df^ CursorControl::RelativePosition::get()
 {
 	return gcnew Vector2Df(m_CursorControl->getRelativePosition());
+}
+
+Dimension2Di^ CursorControl::SupportedIconSize::get()
+{
+	return gcnew Dimension2Di(m_CursorControl->getSupportedIconSize());
 }
 
 bool CursorControl::Visible::get()
