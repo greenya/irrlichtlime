@@ -24,6 +24,7 @@
 #include "ColorPlane.h"
 #include "ComparisonFunc.h"
 #include "CullingType.h"
+#include "CursorIcon.h"
 #include "CursorPlatformBehavior.h"
 #include "DebugSceneType.h"
 #include "DeviceType.h"

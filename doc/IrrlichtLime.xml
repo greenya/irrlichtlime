@@ -3777,6 +3777,9 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="T:IrrlichtLime.GUI.CursorControl">
 			<summary>Mouse cursor manipulation.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.ActiveIcon">
+			<summary>The active cursor icon.</summary>
+		</member>
 		<member name="P:IrrlichtLime.GUI.CursorControl.PlatformBehavior">
 			<summary>Platform specific behavior.</summary>
 		</member>
@@ -3792,8 +3795,53 @@ Useful for setting in shader constants for example. The fourth value will always
 If this rect is set, the cursor position is not being calculated relative to the rendering window but to this rect. You can set the rect pointer to null to disable this feature again. This feature is useful when rendering into parts of foreign windows for example in an editor.</summary>
 			<param name="rect_or_null">Reference rectangle or null to disable the reference rectangle.</param>
 		</member>
+		<member name="P:IrrlichtLime.GUI.CursorControl.SupportedIconSize">
+			<summary>A system-specific size which is supported for cursors. Larger icons will fail, smaller icons might work.</summary>
+		</member>
 		<member name="P:IrrlichtLime.GUI.CursorControl.Visible">
 			<summary>True if the mouse cursor is visible, false if not.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.CursorIcon">
+			<summary>Default icons for cursors.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Cross">
+			<summary>Crosshair</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Hand">
+			<summary>Hand</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Help">
+			<summary>Arrow and question mark</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.IBeam">
+			<summary>Typical text-selection cursor</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.No">
+			<summary>Should not click icon</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Normal">
+			<summary>Arrow</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.SizeAll">
+			<summary>Arrow in all directions</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.SizeNESW">
+			<summary>Resizes in direction north-east or south-west</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.SizeNS">
+			<summary>Resizes in direction north or south</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.SizeNWSE">
+			<summary>Resizes in direction north-west or south-east</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.SizeWE">
+			<summary>Resizes in direction west or east</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Up">
+			<summary>Up-arrow</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.CursorIcon.Wait">
+			<summary>Hourglass</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.CursorPlatformBehavior">
 			<summary>Platform specific behavior flags for the cursor.</summary>
