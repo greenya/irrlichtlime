@@ -55,6 +55,11 @@ Changes in 1.5
 -Material: Pack(...), PackSeparate(...), Unpack(...) and UnpackSeparate(...) added
 -Enum CursorIcon added
 -CursorControl: properties ActiveIcon and SupportedIconSize added
+-Custom SceneNodes and SceneNodeAnimators: Dispose is called if available.
+-VideoDriver: ushort and uint arrays are passed with pin_ptrs in Draw(2D)VertexPrimitiveList(...)
+-Example L11.BulletSharpTest: Thread is reused instead of recreated.
+-Example 03.CustomSceneNode: Node shows message when disposed in debug mode.
+-Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
 
 ============================
 Changes in 1.4 (19-May-2013)

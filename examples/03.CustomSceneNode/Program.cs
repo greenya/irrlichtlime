@@ -57,8 +57,11 @@ namespace _03.CustomSceneNode
 		}
 	}
 
-	class CSampleSceneNode : SceneNode
-	{
+    class CSampleSceneNode : SceneNode
+#if DEBUG
+        , IDisposable   //Only extend IDisposable in debug mode. This is only for demonstration. You only extend IDisposable if you need it as well in the release.
+#endif
+    {
 		AABBox bbox = new AABBox();
 		Vertex3D[] vertices;
 		Material material = new Material();
@@ -116,5 +119,16 @@ namespace _03.CustomSceneNode
 		{
 			return material;
 		}
+
+#if DEBUG
+        //This is called after the last drop.
+        //After Dispose was called, you cannot use this object anymore.
+        public void Dispose()
+        {
+            //If we had to drop Meshes or anything else, we would drop them here.
+            Console.WriteLine(ToString() + " disposed!");
+            Console.ReadKey();
+        }
+#endif
 	}
 }

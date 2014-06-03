@@ -23,6 +23,12 @@ public:
 	{
 	}
 
+	virtual ~SceneNodeInheritor()
+	{
+		SceneNode^ node = m_userSceneNode;	//without gcroot
+		delete node;	//Call Dispose if node is IDisposable
+	}
+
 	gcroot<SceneNode::AnimateEventHandler^> m_OnAnimateHandler;
 	virtual void OnAnimate(u32 timeMs)
 	{
