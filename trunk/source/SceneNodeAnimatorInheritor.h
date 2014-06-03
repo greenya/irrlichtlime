@@ -30,6 +30,12 @@ public:
 		StartTime = startTime;
 	}
 
+	virtual ~SceneNodeAnimatorInheritor()
+	{
+		SceneNodeAnimator^ animator = m_userSceneNodeAnimator;	//without gcroot
+		delete animator;	//Call Dispose if node is IDisposable
+	}
+
 	gcroot<SceneNodeAnimator^> m_userSceneNodeAnimator;
 	virtual void animateNode(ISceneNode* node, u32 timeMs)
 	{

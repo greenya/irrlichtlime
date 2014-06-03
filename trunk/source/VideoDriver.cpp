@@ -905,8 +905,9 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u16* indexList = new u16[indices16bit->Length];
-	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(indexList), indices16bit->Length);
+	pin_ptr<u16> indexList = &indices16bit[0];
+	//u16* indexList = new u16[indices16bit->Length];
+	//Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(indexList), indices16bit->Length);
 
 	m_VideoDriver->draw2DVertexPrimitiveList(
 		vertexList,
@@ -917,7 +918,7 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_16BIT);
 
-	delete[] indexList;
+	//delete[] indexList;
 	delete[] vertexList;
 }
 
@@ -943,8 +944,9 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u32* indexList = new u32[indices32bit->Length];
-	Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(indexList), indices32bit->Length);
+	pin_ptr<u32> indexList = &indices32bit[0];
+	//u32* indexList = new u32[indices32bit->Length];
+	//Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(indexList), indices32bit->Length);
 
 	m_VideoDriver->draw2DVertexPrimitiveList(
 		vertexList,
@@ -955,7 +957,7 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_32BIT);
 
-	delete[] indexList;
+	//delete[] indexList;
 	delete[] vertexList;
 }
 
@@ -1196,13 +1198,14 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u16* indexList = new u16[indices16bit->Length];
-	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(indexList), indices16bit->Length);
+	pin_ptr<u16> indexList = &indices16bit[0];
+	//u16* indexList = new u16[indices16bit->Length];
+	//Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(indexList), indices16bit->Length);
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
 		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_16BIT);
 
-	delete[] indexList;
+	//delete[] indexList;
 	delete[] vertexList;
 }
 
@@ -1228,13 +1231,14 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 		vertexList[i] = *vertices[i]->m_NativeValue;
 	}
 
-	u32* indexList = new u32[indices32bit->Length];
-	Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(indexList), indices32bit->Length);
+	pin_ptr<u32> indexList = &indices32bit[0];
+	//u32* indexList = new u32[indices32bit->Length];
+	//Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(indexList), indices32bit->Length);
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
 		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_32BIT);
 
-	delete[] indexList;
+	//delete[] indexList;
 	delete[] vertexList;
 }
 
