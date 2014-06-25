@@ -49,10 +49,12 @@ void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex
 	LIME_ASSERT((valueFloats->Length % 4) == 0);
 
 	int c = valueFloats->Length;
-	float* f = new float[c];
+	pin_ptr<float> f = &valueFloats[0];
+	//float* f = new float[c];
 
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
+	//for (int i = 0; i < c; i++)
+		//f[i] = valueFloats[i];
+
 
 	if (!highLevelShader)
 		c = (c - 1) / 4 + 1;
@@ -62,7 +64,7 @@ void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex
 		startRegisterIndex,
 		c / 4);
 
-	delete[] f;
+	//delete[] f;
 }
 
 void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
@@ -76,10 +78,11 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ v
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
-	float* f = new float[c];
+	pin_ptr<float> f = &valueFloats[0];
+	//float* f = new float[c];
 
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
+	//for (int i = 0; i < c; i++)
+		//f[i] = valueFloats[i];
 
 	bool b;
 	if (!highLevelShader)
@@ -90,7 +93,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ v
 	} else
 		b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
 
-	delete[] f;
+	//delete[] f;
 	return b;
 }
 
@@ -105,17 +108,18 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ val
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
-	int* v = new int[c];
+	pin_ptr<int> v = &valueInts[0];
+	//int* v = new int[c];
 
-	for (int i = 0; i < c; i++)
-		v[i] = valueInts[i];
+	//for (int i = 0; i < c; i++)
+		//v[i] = valueInts[i];
 
 
 	if (!highLevelShader)
 		c = (c - 1) / 4 + 1;
 	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, v, c);
 
-	delete[] v;
+	//delete[] v;
 	return b;
 }
 
@@ -138,10 +142,11 @@ void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterInde
 	LIME_ASSERT((valueFloats->Length % 4) == 0);
 
 	int c = valueFloats->Length;
-	float* f = new float[c];
+	pin_ptr<float> f = &valueFloats[0];
+	//float* f = new float[c];
 
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
+	//for (int i = 0; i < c; i++)
+		//f[i] = valueFloats[i];
 
 	if (!highLevelShader)
 		c = (c - 1) / 4 + 1;
@@ -151,7 +156,7 @@ void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterInde
 		startRegisterIndex,
 		c / 4);
 
-	delete[] f;
+	//delete[] f;
 }
 
 void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
@@ -165,11 +170,12 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ 
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
-	float* f = new float[c];
+	pin_ptr<float> f = &valueFloats[0];
+	//float* f = new float[c];
 
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
-	
+	//for (int i = 0; i < c; i++)
+		//f[i] = valueFloats[i];
+
 	bool b;
 	if (!highLevelShader)
 	{
@@ -179,7 +185,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ 
 	} else
 		b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
 
-	delete[] f;
+	//delete[] f;
 	return b;
 }
 
@@ -194,16 +200,17 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ va
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
-	int* v = new int[c];
+	pin_ptr<int> v = &valueInts[0];
+	//int* v = new int[c];
 
-	for (int i = 0; i < c; i++)
-		v[i] = valueInts[i];
+	//for (int i = 0; i < c; i++)
+		//v[i] = valueInts[i];
 
 	if (!highLevelShader)
 		c = (c - 1) / 4 + 1;
 	bool b = m_MaterialRendererServices->setVertexShaderConstant(index,	v, c);
 
-	delete[] v;
+	//delete[] v;
 	return b;
 }
 
