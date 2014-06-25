@@ -1,65 +1,62 @@
 ============================
 Changes in 1.5
 ============================
--Updated includes to Irrlicht trunk rev 4886
--Added x64 support (D3D8 missing for x64)
--Irrlicht compiled with CG
 
--AABBox: Intersect(AABBox^ other) added
--CursorControl: RelativePosition::set(...) removed
--FileArchive: ArchiveName::get() added
--Enum FocusFlag added
--GeometryCreator: AddGeoplaneMesh(...) added 
--GUIButton: SetNormalImage(...) renamed to setImage(...), SetImage(GUIButtonImageState state, ...) added
--Enum GUIButtonImageState added
--Enum GUIButtonState modified: ButtonDisabled added
--GUIColorSelectDialog: properties Color and ColorHSL added
--Enum GUIDefaultSize modified: ButtonPressedSpriteOffsetX and ButtonPressedSpriteOffsetY added
--GUIElement: GetNextElement(..., bool includeDisabled) added
--GUIEnvironment: GetNextElement(...) added
--GUIImage: properties DrawBounds and SourceRect added
--GUISpriteBank: only a comment, will be continued in the future
--IrrlichtDevice: property DoubleClickTime added, WindowSize added
--Matrix: GetRotationDegrees(Vector3Df^ scale) added
--MeshLoader: property MeshTextureLoader added
--Class MeshTextureLoader added
--ParticleAttractionAffector: property Speed added
--Enum ParticleBehavior added
--ParticleSystemSceneNode: property ParticleBehavior added
--SceneManager: property CurrentRenderPass added
--SceneNodeAnimator: SetEnabled(...) and SetStartTime(...) added, properties Enabled and StartTime added
--Texture: property Source added
--Enum TextureSource added
-
--Crash with software drivers solved in example 10.Shaders
--Crash with low level shaders in example 10.Shaders solved
--Example 10.Shaders crash with DX9 with CG-Shaders fixed
--SceneNodeAnimator can be inherited
--New Example: 19.CustomSceneNodeAnimator
-
--Enum GUIElementType modifier: Profiler added
--GUIEnvironment: AddProfilerDisplay(...) added
--Enum MaterialFlag: BlendFactor added
--SceneNodeAnimator: PostEvent(...) added
--Enum VideoDriverFeature: BlendSeperate added
--Class GUIProfiler added
--GUITable: added properties ActiveFont and OverrideFont
-
--SceneManager: property LightManager added
--Class LightManager added, can be inherited
--Example 20.ManagedLights added
-
--GUIListBox: added property VerticalScrollBar
--GUITable: added property VerticalScrollBar, HorizontalScrollBar and ItemHeight
--GUITreeView: added propery VerticalScrollBar and HorizontalScrollBar
--Material: Pack(...), PackSeparate(...), Unpack(...) and UnpackSeparate(...) added
--Enum CursorIcon added
--CursorControl: properties ActiveIcon and SupportedIconSize added
--Custom SceneNodes and SceneNodeAnimators: Dispose is called if available.
--VideoDriver: ushort and uint arrays are passed with pin_ptrs in Draw(2D)VertexPrimitiveList(...)
--Example L11.BulletSharpTest: Thread is reused instead of recreated.
--Example 03.CustomSceneNode: Node shows message when disposed in debug mode.
--Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
+- Updated Irrlicht SDK to trunk rev. 4886
+- Added x64 support (D3D8 missing for x64)
+- Irrlicht compiled with CG
+- AABBox: Intersect(AABBox^ other) added
+- CursorControl: RelativePosition::set(...) removed
+- FileArchive: ArchiveName::get() added
+- Enum FocusFlag added
+- GeometryCreator: AddGeoplaneMesh(...) added 
+- GUIButton: SetNormalImage(...) renamed to setImage(...), SetImage(GUIButtonImageState state, ...) added
+- Enum GUIButtonImageState added
+- Enum GUIButtonState modified: ButtonDisabled added
+- GUIColorSelectDialog: properties Color and ColorHSL added
+- Enum GUIDefaultSize modified: ButtonPressedSpriteOffsetX and ButtonPressedSpriteOffsetY added
+- GUIElement: GetNextElement(..., bool includeDisabled) added
+- GUIEnvironment: GetNextElement(...) added
+- GUIImage: properties DrawBounds and SourceRect added
+- GUISpriteBank: only a comment, will be continued in the future
+- IrrlichtDevice: property DoubleClickTime added, WindowSize added
+- Matrix: GetRotationDegrees(Vector3Df^ scale) added
+- MeshLoader: property MeshTextureLoader added
+- Class MeshTextureLoader added
+- ParticleAttractionAffector: property Speed added
+- Enum ParticleBehavior added
+- ParticleSystemSceneNode: property ParticleBehavior added
+- SceneManager: property CurrentRenderPass added
+- SceneNodeAnimator: SetEnabled(...) and SetStartTime(...) added, properties Enabled and StartTime added
+- Texture: property Source added
+- Enum TextureSource added
+- Crash with software drivers solved in example 10.Shaders
+- Crash with low level shaders in example 10.Shaders solved
+- Example 10.Shaders crash with DX9 with CG-Shaders fixed
+- SceneNodeAnimator can be inherited
+- New Example: 19.CustomSceneNodeAnimator
+- Enum GUIElementType modifier: Profiler added
+- GUIEnvironment: AddProfilerDisplay(...) added
+- Enum MaterialFlag: BlendFactor added
+- SceneNodeAnimator: PostEvent(...) added
+- Enum VideoDriverFeature: BlendSeperate added
+- Class GUIProfiler added
+- GUITable: added properties ActiveFont and OverrideFont
+- SceneManager: property LightManager added
+- Class LightManager added, can be inherited
+- Example 20.ManagedLights added
+- GUIListBox: added property VerticalScrollBar
+- GUITable: added property VerticalScrollBar, HorizontalScrollBar and ItemHeight
+- GUITreeView: added propery VerticalScrollBar and HorizontalScrollBar
+- Material: Pack(...), PackSeparate(...), Unpack(...) and UnpackSeparate(...) added
+- Enum CursorIcon added
+- CursorControl: properties ActiveIcon and SupportedIconSize added
+- Custom SceneNodes and SceneNodeAnimators: Dispose is called if available.
+- VideoDriver: ushort and uint arrays are passed with pin_ptrs in Draw(2D)VertexPrimitiveList(...)
+- Example L11.BulletSharpTest: Thread is reused instead of recreated.
+- Example 03.CustomSceneNode: Node shows message when disposed in debug mode.
+- Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
+- MaterialRendererServices: float and int arrays are passed with pin_ptrs in Set|Vertex/Pixel|ShaderConstant(List)(...)
 
 ============================
 Changes in 1.4 (19-May-2013)
