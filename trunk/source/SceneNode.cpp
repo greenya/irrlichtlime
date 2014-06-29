@@ -98,20 +98,16 @@ SceneNode::SceneNode(scene::ISceneNode* ref)
 	m_Inherited = false;
 }
 
-SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation, Vector3Df^ scale)
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df position, Vector3Df rotation, Vector3Df scale)
 	: IO::AttributeExchangingObject(nullptr)
 {
-	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(rotation != nullptr);
-	LIME_ASSERT(scale != nullptr);
-
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
 		LIME_SAFEREF(manager, m_SceneManager),
 		id,
-		*position->m_NativeValue,
-		*rotation->m_NativeValue,
-		*scale->m_NativeValue);
+		position,
+		rotation,
+		scale);
 
 	initInheritor(i);
 	setAttributeExchangingObject(i);
@@ -119,18 +115,15 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 	m_Inherited = true;
 }
 
-SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position, Vector3Df^ rotation)
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df position, Vector3Df rotation)
 	: IO::AttributeExchangingObject(nullptr)
 {
-	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(rotation != nullptr);
-
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
 		LIME_SAFEREF(manager, m_SceneManager),
 		id,
-		*position->m_NativeValue,
-		*rotation->m_NativeValue);
+		position,
+		rotation);
 
 	initInheritor(i);
 	setAttributeExchangingObject(i);
@@ -138,16 +131,14 @@ SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Ve
 	m_Inherited = true;
 }
 
-SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df^ position)
+SceneNode::SceneNode(SceneNode^ parent, Scene::SceneManager^ manager, int id, Vector3Df position)
 	: IO::AttributeExchangingObject(nullptr)
 {
-	LIME_ASSERT(position != nullptr);
-
 	SceneNodeInheritor* i = new SceneNodeInheritor(
 		LIME_SAFEREF(parent, m_SceneNode),
 		LIME_SAFEREF(manager, m_SceneManager),
 		id,
-		*position->m_NativeValue);
+		position);
 
 	initInheritor(i);
 	setAttributeExchangingObject(i);
@@ -296,9 +287,9 @@ void SceneNode::UpdateAbsolutePosition()
 	m_SceneNode->updateAbsolutePosition();
 }
 
-Vector3Df^ SceneNode::AbsolutePosition::get()
+Vector3Df SceneNode::AbsolutePosition::get()
 {
-	return gcnew Vector3Df(m_SceneNode->getAbsolutePosition());
+	return Vector3Df(m_SceneNode->getAbsolutePosition());
 }
 
 Matrix^ SceneNode::AbsoluteTransformation::get()
@@ -369,15 +360,15 @@ AABBox^ SceneNode::BoundingBoxTransformed::get()
 	return gcnew AABBox(m_SceneNode->getTransformedBoundingBox());
 }
 
-array<Vector3Df^>^ SceneNode::BoundingBoxTransformedEdges::get()
+array<Vector3Df>^ SceneNode::BoundingBoxTransformedEdges::get()
 {
 #if _DEBUG
 	// this allows to browse properties of the root scene node in debugger when you stop code execution (on breakpoint, etc.)
 	if (m_SceneNode == m_SceneNode->getSceneManager()->getRootSceneNode())
 	{
-		array<Vector3Df^>^ m = gcnew array<Vector3Df^>(8);
+		array<Vector3Df>^ m = gcnew array<Vector3Df>(8);
 		for (int i = 0; i < 8; i++)
-			m[i] = gcnew Vector3Df();
+			m[i] = Vector3Df();
 
 		return m;
 	}
@@ -387,9 +378,9 @@ array<Vector3Df^>^ SceneNode::BoundingBoxTransformedEdges::get()
 	m_SceneNode->getTransformedBoundingBoxEdges(a);
 	LIME_ASSERT(a.size() == 8);
 
-	array<Vector3Df^>^ m = gcnew array<Vector3Df^>(8);
+	array<Vector3Df>^ m = gcnew array<Vector3Df>(8);
 	for (int i = 0; i < 8; i++)
-			m[i] = gcnew Vector3Df(a[i]);
+			m[i] = Vector3Df(a[i]);
 
 	return m;
 }
@@ -470,15 +461,14 @@ void SceneNode::Parent::set(SceneNode^ value)
 	m_SceneNode->setParent(value->m_SceneNode);
 }
 
-Vector3Df^ SceneNode::Position::get()
+Vector3Df SceneNode::Position::get()
 {
-	return gcnew Vector3Df(m_SceneNode->getPosition());
+	return Vector3Df(m_SceneNode->getPosition());
 }
 
-void SceneNode::Position::set(Vector3Df^ value)
+void SceneNode::Position::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_SceneNode->setPosition(*value->m_NativeValue);
+	m_SceneNode->setPosition(value);
 }
 
 Matrix^ SceneNode::RelativeTransformation::get()
@@ -486,26 +476,24 @@ Matrix^ SceneNode::RelativeTransformation::get()
 	return gcnew Matrix(m_SceneNode->getRelativeTransformation());
 }
 
-Vector3Df^ SceneNode::Rotation::get()
+Vector3Df SceneNode::Rotation::get()
 {
-	return gcnew Vector3Df(m_SceneNode->getRotation());
+	return Vector3Df(m_SceneNode->getRotation());
 }
 
-void SceneNode::Rotation::set(Vector3Df^ value)
+void SceneNode::Rotation::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_SceneNode->setRotation(*value->m_NativeValue);
+	m_SceneNode->setRotation(value);
 }
 
-Vector3Df^ SceneNode::Scale::get()
+Vector3Df SceneNode::Scale::get()
 {
-	return gcnew Vector3Df(m_SceneNode->getScale());
+	return Vector3Df(m_SceneNode->getScale());
 }
 
-void SceneNode::Scale::set(Vector3Df^ value)
+void SceneNode::Scale::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_SceneNode->setScale(*value->m_NativeValue);
+	m_SceneNode->setScale(value);
 }
 
 Scene::SceneManager^ SceneNode::SceneManager::get()

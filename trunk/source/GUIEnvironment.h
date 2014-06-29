@@ -93,11 +93,11 @@ public:
 	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent);
 	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel);
 	GUIImage^ AddImage(Recti^ rectangle);
-	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
-	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id);
-	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent);
-	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel);
-	GUIImage^ AddImage(Video::Texture^ image, Vector2Di^ pos);
+	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
+	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id);
+	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent);
+	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel);
+	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos);
 
 	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent, int id);
 	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent);

@@ -16,10 +16,10 @@ public:
 	void GetSize([Out] float% height, [Out] float% bottomWidth, [Out] float% topWidth);
 	void SetSize(float height, float bottomWidth, float topWidth);
 
-	property Video::Color^ BottomColor { Video::Color^ get(); void set(Video::Color^ value); }
+	property Video::Color BottomColor { Video::Color get(); void set(Video::Color value); }
 	property float BottomWidth { float get(); void set(float value); }
 	property float Height { float get(); void set(float value); }
-	property Video::Color^ TopColor { Video::Color^ get(); void set(Video::Color^ value); }
+	property Video::Color TopColor { Video::Color get(); void set(Video::Color value); }
 	property float TopWidth { float get(); void set(float value); }
 
 internal:

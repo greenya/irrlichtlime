@@ -103,7 +103,7 @@ namespace L13.FractalBrowser
 			return new Vector2Dd(x, y);
 		}
 
-		public float DrawAll(Vector2Di screenOffset = null)
+		public float DrawAll(Vector2Di? screenOffset = null)
 		{
 			Vector2Di zero = new Vector2Di(0);
 			int n = 0;

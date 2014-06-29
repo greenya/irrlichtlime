@@ -174,15 +174,6 @@
     <ClInclude Include="Vector.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D_template.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3D_template.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector_common_template.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatedMesh.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -642,6 +633,12 @@
     </ClInclude>
     <ClInclude Include="CursorIcon.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

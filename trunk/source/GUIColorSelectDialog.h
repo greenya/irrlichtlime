@@ -13,8 +13,8 @@ public ref class GUIColorSelectDialog : GUIElement
 {
 public:
 
-	property Video::Color^ Color { Video::Color^ get(); }
-	property Video::ColorHSL^ ColorHSL { Video::ColorHSL^ get(); }
+	property Video::Color Color { Video::Color get(); }
+	property Video::ColorHSL ColorHSL { Video::ColorHSL get(); }
 
 internal:
 

@@ -18,7 +18,7 @@ public:
 	property bool AffectY { bool get(); void set(bool value); }
 	property bool AffectZ { bool get(); void set(bool value); }
 	property bool Attract { bool get(); void set(bool value); }
-	property Vector3Df^ Point { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Point { Vector3Df get(); void set(Vector3Df value); }
 	property float Speed { float get(); void set(float value); }
 
 internal:

@@ -28,10 +28,9 @@ void TextSceneNode::SetText(String^ text)
 	m_TextSceneNode->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
-void TextSceneNode::SetTextColor(Video::Color^ color)
+void TextSceneNode::SetTextColor(Video::Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	m_TextSceneNode->setTextColor(*color->m_NativeValue);
+	m_TextSceneNode->setTextColor(color);
 }
 
 } // end namespace Scene

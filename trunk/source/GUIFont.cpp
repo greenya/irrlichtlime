@@ -24,101 +24,92 @@ GUIFont::GUIFont(gui::IGUIFont* ref)
 	m_GUIFont = ref;
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter, Recti^ clip)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color color, bool hcenter, bool vcenter, Recti^ clip)
 {
 	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
 		*position->m_NativeValue,
-		*color->m_NativeValue,
+		color,
 		hcenter,
 		vcenter,
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter, bool vcenter)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color color, bool hcenter, bool vcenter)
 {
 	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
 		*position->m_NativeValue,
-		*color->m_NativeValue,
+		color,
 		hcenter,
 		vcenter);
 }
 
-void GUIFont::Draw(String^ text, Recti^ position, Video::Color^ color, bool hcenter)
+void GUIFont::Draw(String^ text, Recti^ position, Video::Color color, bool hcenter)
 {
 	LIME_ASSERT(text != nullptr);
 	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
 		*position->m_NativeValue,
-		*color->m_NativeValue,
+		color,
 		hcenter);
 }
 
-void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color, Recti^ clip)
+void GUIFont::Draw(String^ text, Vector2Di position, Video::Color color, Recti^ clip)
 {
 	LIME_ASSERT(text != nullptr);
-	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
-		core::recti(*position->m_NativeValue, core::vector2di()),
-		*color->m_NativeValue,
+		core::recti(position, core::vector2di()),
+		color,
 		false,
 		false,
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, Vector2Di^ position, Video::Color^ color)
+void GUIFont::Draw(String^ text, Vector2Di position, Video::Color color)
 {
 	LIME_ASSERT(text != nullptr);
-	LIME_ASSERT(position != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
-		core::recti(*position->m_NativeValue, core::vector2di()),
-		*color->m_NativeValue);
+		core::recti(position, core::vector2di()),
+		color);
 }
 
-void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color, Recti^ clip)
+void GUIFont::Draw(String^ text, int x, int y, Video::Color color, Recti^ clip)
 {
 	LIME_ASSERT(text != nullptr);
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
 		core::recti(core::vector2di(x, y), core::vector2di()),
-		*color->m_NativeValue,
+		color,
 		false,
 		false,
 		clip->m_NativeValue);
 }
 
-void GUIFont::Draw(String^ text, int x, int y, Video::Color^ color)
+void GUIFont::Draw(String^ text, int x, int y, Video::Color color)
 {
 	LIME_ASSERT(text != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_GUIFont->draw(
 		Lime::StringToStringW(text),
 		core::recti(core::vector2di(x, y), core::vector2di()),
-		*color->m_NativeValue);
+		color);
 }
 
 int GUIFont::GetCharacterFromPos(String^ text, int pixel_x)

@@ -17,16 +17,18 @@ public:
 	static MeshBuffer^ Create(Video::VertexType vertexType, Video::IndexType indexType);
 
 	void Append(MeshBuffer^ other);
-	void Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned short>^ indices16bit);
+	/*void Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned short>^ indices16bit);
 	void Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array<unsigned short>^ indices16bit);
 	void Append(array<Video::Vertex3DTangents^>^ verticesTangents, array<unsigned short>^ indices16bit);
 	void Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned int>^ indices32bit);
 	void Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array<unsigned int>^ indices32bit);
-	void Append(array<Video::Vertex3DTangents^>^ verticesTangents, array<unsigned int>^ indices32bit);
+	void Append(array<Video::Vertex3DTangents^>^ verticesTangents, array<unsigned int>^ indices32bit);*/
+	generic<typename T> where T : Video::IVertex3D, value class void Append(array<T>^ vertices, array<unsigned short>^ indices16bit);
+	generic<typename T> where T : Video::IVertex3D, value class void Append(array<T>^ vertices, array<unsigned int>^ indices32bit);
 
-	Vector3Df^ GetNormal(int vertexIndex);
-	Vector3Df^ GetPosition(int vertexIndex);
-	Vector2Df^ GetTCoords(int vertexIndex);
+	Vector3Df GetNormal(int vertexIndex);
+	Vector3Df GetPosition(int vertexIndex);
+	Vector2Df GetTCoords(int vertexIndex);
 	Object^ GetVertex(int vertexIndex);
 
 	void RecalculateBoundingBox();
@@ -38,9 +40,9 @@ public:
 
 	void UpdateIndices(array<unsigned short>^ indices16bit, int startIndex);
 	void UpdateIndices(array<unsigned int>^ indices32bit, int startIndex);
-	void UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int startIndex);
-	void UpdateVertices(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, int startIndex);
-	void UpdateVertices(array<Video::Vertex3DTangents^>^ verticesTangents, int startIndex);
+	void UpdateVertices(array<Video::Vertex3D>^ verticesStandard, int startIndex);
+	void UpdateVertices(array<Video::Vertex3DTTCoords>^ verticesTTCoords, int startIndex);
+	void UpdateVertices(array<Video::Vertex3DTangents>^ verticesTangents, int startIndex);
 
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property HardwareMappingHint HardwareMappingHintForIndex { HardwareMappingHint get(); }

@@ -149,15 +149,14 @@ void Material::Type::set(Video::MaterialType value)
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;
 }
 
-Color^ Material::AmbientColor::get()
+Color Material::AmbientColor::get()
 {
-	return gcnew Color(m_NativeValue->AmbientColor);
+	return Color(m_NativeValue->AmbientColor);
 }
 
-void Material::AmbientColor::set(Color^ value)
+void Material::AmbientColor::set(Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_NativeValue->AmbientColor = *value->m_NativeValue;
+	m_NativeValue->AmbientColor = value;
 }
 
 Video::BlendOperation Material::BlendOperation::get()
@@ -191,35 +190,32 @@ void Material::PolygonOffsetFactor::set(unsigned char value)
 	m_NativeValue->PolygonOffsetFactor = value;
 }
 
-Color^ Material::DiffuseColor::get()
+Color Material::DiffuseColor::get()
 {
-	return gcnew Color(m_NativeValue->DiffuseColor);
+	return Color(m_NativeValue->DiffuseColor);
 }
-void Material::DiffuseColor::set(Color^ value)
+void Material::DiffuseColor::set(Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_NativeValue->DiffuseColor = *value->m_NativeValue;
-}
-
-Color^ Material::EmissiveColor::get()
-{
-	return gcnew Color(m_NativeValue->EmissiveColor);
-}
-void Material::EmissiveColor::set(Color^ value)
-{
-	LIME_ASSERT(value != nullptr);
-	m_NativeValue->EmissiveColor = *value->m_NativeValue;
+	m_NativeValue->DiffuseColor = value;
 }
 
-Color^ Material::SpecularColor::get()
+Color Material::EmissiveColor::get()
 {
-	return gcnew Color(m_NativeValue->SpecularColor);
+	return Color(m_NativeValue->EmissiveColor);
+}
+void Material::EmissiveColor::set(Color value)
+{
+	m_NativeValue->EmissiveColor = value;
 }
 
-void Material::SpecularColor::set(Color^ value)
+Color Material::SpecularColor::get()
 {
-	LIME_ASSERT(value != nullptr);
-	m_NativeValue->SpecularColor = *value->m_NativeValue;
+	return Color(m_NativeValue->SpecularColor);
+}
+
+void Material::SpecularColor::set(Color value)
+{
+	m_NativeValue->SpecularColor = value;
 }
 
 float Material::Shininess::get()

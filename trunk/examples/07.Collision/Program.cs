@@ -165,7 +165,7 @@ namespace _07.Collision
 				// trajectory or a sword's position, or create a ray from a mouse click position using
 				// ISceneCollisionManager::getRayFromScreenCoordinates()
 				Line3Df ray = new Line3Df();
-				ray.Start = new Vector3Df(camera.Position);
+				ray.Start = camera.Position;
 				ray.End = ray.Start + (camera.Target - ray.Start).Normalize() * 1000.0f;
 
 				// Tracks the current intersection point with the level or a mesh
@@ -190,7 +190,7 @@ namespace _07.Collision
 				// and draw the triangle that was hit.
 				if (selectedSceneNode != null)
 				{
-					bill.Position = new Vector3Df(intersection);
+					bill.Position = intersection;
 
 					// We need to reset the transform before doing our own rendering.
 					driver.SetTransform(TransformationState.World, Matrix.Identity);

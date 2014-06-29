@@ -14,8 +14,8 @@ public ref class ParticleRotationAffector : ParticleAffector
 {
 public:
 
-	property Vector3Df^ Pivot { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property Vector3Df^ Speed { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Pivot { Vector3Df get(); void set(Vector3Df value); }
+	property Vector3Df Speed { Vector3Df get(); void set(Vector3Df value); }
 
 internal:
 

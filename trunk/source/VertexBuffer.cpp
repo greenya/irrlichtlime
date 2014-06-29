@@ -29,24 +29,22 @@ VertexBuffer^ VertexBuffer::Create()
 	return gcnew VertexBuffer(v);
 }
 
-void VertexBuffer::Add(Video::Vertex3D^ vertex)
+void VertexBuffer::Add(Video::Vertex3D vertex)
 {
-	LIME_ASSERT(vertex != nullptr);
-	m_VertexBuffer->push_back(*vertex->m_NativeValue);
+	m_VertexBuffer->push_back(vertex);
 }
 
-Video::Vertex3D^ VertexBuffer::Get(int index)
+Video::Vertex3D VertexBuffer::Get(int index)
 {
 	LIME_ASSERT(index >= 0 && index < Count);
-	return gcnew Video::Vertex3D((*m_VertexBuffer)[index]);
+	return Video::Vertex3D((*m_VertexBuffer)[index]);
 }
 
-void VertexBuffer::Set(int index, Video::Vertex3D^ vertex)
+void VertexBuffer::Set(int index, Video::Vertex3D vertex)
 {
 	LIME_ASSERT(index >= 0 && index < Count);
-	LIME_ASSERT(vertex != nullptr);
 
-	(*m_VertexBuffer)[index] = *vertex->m_NativeValue;
+	(*m_VertexBuffer)[index] = vertex;
 }
 
 void VertexBuffer::Clear()
@@ -96,13 +94,13 @@ Video::VertexType VertexBuffer::Type::get()
 	return (Video::VertexType)m_VertexBuffer->getType();
 }
 
-array<Video::Vertex3D^>^ VertexBuffer::Vertices::get()
+array<Video::Vertex3D>^ VertexBuffer::Vertices::get()
 {
 	int c = m_VertexBuffer->size();
-	array<Video::Vertex3D^>^ a = gcnew array<Video::Vertex3D^>(c);
+	array<Video::Vertex3D>^ a = gcnew array<Video::Vertex3D>(c);
 
 	for (int i = 0; i < c; i++)
-		a[i] = gcnew Video::Vertex3D((*m_VertexBuffer)[i]);
+		a[i] = Video::Vertex3D((*m_VertexBuffer)[i]);
 
 	return a;
 }

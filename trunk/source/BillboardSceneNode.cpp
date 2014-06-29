@@ -42,20 +42,18 @@ void BillboardSceneNode::SetSize(float height, float bottomWidth, float topWidth
 	m_BillboardSceneNode->setSize(height, bottomWidth, topWidth);
 }
 
-Video::Color^ BillboardSceneNode::BottomColor::get()
+Video::Color BillboardSceneNode::BottomColor::get()
 {
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	return gcnew Video::Color(b);
+	return Video::Color(b);
 }
 
-void BillboardSceneNode::BottomColor::set(Video::Color^ value)
+void BillboardSceneNode::BottomColor::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	m_BillboardSceneNode->setColor(t, *value->m_NativeValue);
+	m_BillboardSceneNode->setColor(t, value);
 }
 
 float BillboardSceneNode::BottomWidth::get()
@@ -90,20 +88,18 @@ void BillboardSceneNode::Height::set(float value)
 	m_BillboardSceneNode->setSize(value, b, t);
 }
 
-Video::Color^ BillboardSceneNode::TopColor::get()
+Video::Color BillboardSceneNode::TopColor::get()
 {
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	return gcnew Video::Color(t);
+	return Video::Color(t);
 }
 
-void BillboardSceneNode::TopColor::set(Video::Color^ value)
+void BillboardSceneNode::TopColor::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	m_BillboardSceneNode->setColor(*value->m_NativeValue, b);
+	m_BillboardSceneNode->setColor(value, b);
 }
 
 float BillboardSceneNode::TopWidth::get()

@@ -15,7 +15,7 @@ namespace L13.FractalBrowser
 	{
 		static IrrlichtDevice device;
 		static FractalGenerator fGen;
-		static Vector2Di mouseMoveStart = null;
+		static Vector2Di? mouseMoveStart = null;
 		static bool showHelp = false;
 
 		static void Main(string[] args)
@@ -49,7 +49,7 @@ namespace L13.FractalBrowser
 			{
 				driver.BeginScene(false);
 
-				Vector2Di o = null;
+				Vector2Di? o = null;
 				if (mouseMoveStart != null)
 					o = device.CursorControl.Position - mouseMoveStart;
 
@@ -145,7 +145,7 @@ namespace L13.FractalBrowser
 				if (evnt.Mouse.Type == MouseEventType.LeftUp)
 				{
 					Vector2Dd p1 = fGen.GetWindowCoord(evnt.Mouse.X, evnt.Mouse.Y);
-					Vector2Dd p2 = fGen.GetWindowCoord(mouseMoveStart.X, mouseMoveStart.Y);
+					Vector2Dd p2 = fGen.GetWindowCoord(mouseMoveStart.Value.X, mouseMoveStart.Value.Y);
 					Rectd r = fGen.GetWindow() + p2 - p1;
 
 					fGen.Generate(r);

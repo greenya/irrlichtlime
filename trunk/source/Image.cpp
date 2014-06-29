@@ -68,39 +68,36 @@ Image::Image(video::IImage* ref)
 	m_Image = ref;
 }
 
-void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect)
+void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Recti^ clipRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(targetPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		*targetPos->m_NativeValue,
+		targetPos,
 		*sourceRect->m_NativeValue,
 		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect)
+void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(targetPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		*targetPos->m_NativeValue,
+		targetPos,
 		*sourceRect->m_NativeValue);
 }
 
-void Image::CopyTo(Image^ target, Vector2Di^ targetPos)
+void Image::CopyTo(Image^ target, Vector2Di targetPos)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(targetPos != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		*targetPos->m_NativeValue);
+		targetPos);
 }
 
 void Image::CopyTo(Image^ target)
@@ -233,65 +230,58 @@ void Image::CopyToScalingBoxFilter(Image^ target)
 	m_Image->copyToScalingBoxFilter(target->m_Image);
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color, Recti^ clipRect)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color, Recti^ clipRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(targetPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
-		*targetPos->m_NativeValue,
+		targetPos,
 		*sourceRect->m_NativeValue,
-		*color->m_NativeValue,
+		color,
 		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(targetPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
-		*targetPos->m_NativeValue,
+		targetPos,
 		*sourceRect->m_NativeValue,
-		*color->m_NativeValue);
+		color);
 }
 
-void Image::Fill(Color^ color)
+void Image::Fill(Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	m_Image->fill(*color->m_NativeValue);
+	m_Image->fill(color);
 }
 
-Color^ Image::GetPixel(int x, int y)
+Color Image::GetPixel(int x, int y)
+{
+	LIME_ASSERT(x >= 0 && x < Dimension->Width);
+	LIME_ASSERT(y >= 0 && y < Dimension->Height);
+
+	return Color(m_Image->getPixel(x, y));
+}
+
+void Image::SetPixel(int x, int y, Color color, bool blend)
 {
 	LIME_ASSERT(x >= 0 && x < Dimension->Width);
 	LIME_ASSERT(y >= 0 && y < Dimension->Height);
 
-	return gcnew Color(m_Image->getPixel(x, y));
+	m_Image->setPixel(x, y, color, blend);
 }
 
-void Image::SetPixel(int x, int y, Color^ color, bool blend)
+void Image::SetPixel(int x, int y, Color color)
 {
 	LIME_ASSERT(x >= 0 && x < Dimension->Width);
 	LIME_ASSERT(y >= 0 && y < Dimension->Height);
-	LIME_ASSERT(color != nullptr);
 
-	m_Image->setPixel(x, y, *color->m_NativeValue, blend);
-}
-
-void Image::SetPixel(int x, int y, Color^ color)
-{
-	LIME_ASSERT(x >= 0 && x < Dimension->Width);
-	LIME_ASSERT(y >= 0 && y < Dimension->Height);
-	LIME_ASSERT(color != nullptr);
-
-	m_Image->setPixel(x, y, *color->m_NativeValue);
+	m_Image->setPixel(x, y, color);
 }
 
 int Image::BitsPerPixel::get()

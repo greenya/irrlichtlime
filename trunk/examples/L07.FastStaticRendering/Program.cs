@@ -259,7 +259,7 @@ namespace L07.FastStaticRendering
 						// add vertices
 						for (int l = 0; l < cubeVertices.Length; l++)
 						{
-							Vertex3D v = new Vertex3D(cubeVertices[l]);
+							Vertex3D v = cubeVertices[l];
 							v.Color = new Color(i * colorBase + l, j * colorBase + l, k * colorBase + l);
 							v.Position += new Vector3Df(i, j, k) * cubePosOffset;
 							vertices[verticesIndex++] = v;

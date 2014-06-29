@@ -25,20 +25,18 @@ public:
 		return !(v1 == v2);
 	}
 
-	static _REFCLASS_^ operator + (_REFCLASS_^ v1, _OTHERTYPE1_^ v2)
+	static _REFCLASS_^ operator + (_REFCLASS_^ v1, _OTHERTYPE1_ v2)
 	{
 		LIME_ASSERT(v1 != nullptr);
-		LIME_ASSERT(v2 != nullptr);
 
-		return gcnew _REFCLASS_((*v1->m_NativeValue) + (*v2->m_NativeValue));
+		return gcnew _REFCLASS_((*v1->m_NativeValue) + v2);
 	}
 
-	static _REFCLASS_^ operator - (_REFCLASS_^ v1, _OTHERTYPE1_^ v2)
+	static _REFCLASS_^ operator - (_REFCLASS_^ v1, _OTHERTYPE1_ v2)
 	{
 		LIME_ASSERT(v1 != nullptr);
-		LIME_ASSERT(v2 != nullptr);
 
-		return gcnew _REFCLASS_((*v1->m_NativeValue) - (*v2->m_NativeValue));
+		return gcnew _REFCLASS_((*v1->m_NativeValue) - v2);
 	}
 
 	_REFCLASS_()
@@ -53,24 +51,20 @@ public:
 		m_NativeValue = new _WRAPCLASS_(x1, y1, x2, y2);
 	}
 
-	_REFCLASS_(_OTHERTYPE1_^ pos, _OTHERTYPE2_^ size)
+	_REFCLASS_(_OTHERTYPE1_ pos, _OTHERTYPE2_^ size)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-		LIME_ASSERT(pos != nullptr);
 		LIME_ASSERT(size != nullptr);
 		LIME_ASSERT(size->Width >= 0);
 		LIME_ASSERT(size->Height >= 0);
 
-		m_NativeValue = new _WRAPCLASS_(*pos->m_NativeValue, *size->m_NativeValue);
+		m_NativeValue = new _WRAPCLASS_(pos, *size->m_NativeValue);
 	}
 
-	_REFCLASS_(_OTHERTYPE1_^ upperLeft, _OTHERTYPE1_^ lowerRight)
+	_REFCLASS_(_OTHERTYPE1_ upperLeft, _OTHERTYPE1_ lowerRight)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-		LIME_ASSERT(upperLeft != nullptr);
-		LIME_ASSERT(lowerRight != nullptr);
-
-		m_NativeValue = new _WRAPCLASS_(*upperLeft->m_NativeValue, *lowerRight->m_NativeValue);
+		m_NativeValue = new _WRAPCLASS_(upperLeft, lowerRight);
 	}
 
 	void Repair()
@@ -83,10 +77,9 @@ public:
 		m_NativeValue->addInternalPoint(x, y);
 	}
 
-	void AddInternalPoint(_OTHERTYPE1_^ point)
+	void AddInternalPoint(_OTHERTYPE1_ point)
 	{
-		LIME_ASSERT(point != nullptr);
-		m_NativeValue->addInternalPoint(*point->m_NativeValue);
+		m_NativeValue->addInternalPoint(point);
 	}
 
 	void Adjust(_WRAPTYPE_ x1, _WRAPTYPE_ y1, _WRAPTYPE_ x2, _WRAPTYPE_ y2)
@@ -120,10 +113,9 @@ public:
 		m_NativeValue->LowerRightCorner.Y += h2;
 	}
 
-	bool IsPointInside(_OTHERTYPE1_^ pos)
+	bool IsPointInside(_OTHERTYPE1_ pos)
 	{
-		LIME_ASSERT(pos != nullptr);
-		return m_NativeValue->isPointInside(*pos->m_NativeValue);
+		return m_NativeValue->isPointInside(pos);
 	}
 
 	bool IsPointInside(_WRAPTYPE_ x, _WRAPTYPE_ y)
@@ -165,21 +157,21 @@ public:
 		_WRAPTYPE_ get() { return m_NativeValue->getArea(); }
 	}
 
-	property _OTHERTYPE1_^ Center
+	property _OTHERTYPE1_ Center
 	{
-		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->getCenter()); }
+		_OTHERTYPE1_ get() { return _OTHERTYPE1_(m_NativeValue->getCenter()); }
 	}
 
-	property _OTHERTYPE1_^ UpperLeftCorner
+	property _OTHERTYPE1_ UpperLeftCorner
 	{
-		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->UpperLeftCorner); }
-		void set(_OTHERTYPE1_^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->UpperLeftCorner = *value->m_NativeValue; }
+		_OTHERTYPE1_ get() { return _OTHERTYPE1_(m_NativeValue->UpperLeftCorner); }
+		void set(_OTHERTYPE1_ value) { m_NativeValue->UpperLeftCorner = value; }
 	}
 
-	property _OTHERTYPE1_^ LowerRightCorner
+	property _OTHERTYPE1_ LowerRightCorner
 	{
-		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->LowerRightCorner); }
-		void set(_OTHERTYPE1_^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->LowerRightCorner = *value->m_NativeValue; }
+		_OTHERTYPE1_ get() { return _OTHERTYPE1_(m_NativeValue->LowerRightCorner); }
+		void set(_OTHERTYPE1_ value) { m_NativeValue->LowerRightCorner = value; }
 	}
 
 	virtual String^ ToString() override

@@ -384,9 +384,9 @@ bool IrrlichtDevice::WindowMinimized::get()
 	return m_IrrlichtDevice->isWindowMinimized();
 }
 
-Vector2Di^ IrrlichtDevice::WindowPosition::get()
+Vector2Di IrrlichtDevice::WindowPosition::get()
 {
-	return gcnew Vector2Di(m_IrrlichtDevice->getWindowPosition());
+	return Vector2Di(m_IrrlichtDevice->getWindowPosition());
 }
 
 void IrrlichtDevice::WindowSize::set(Dimension2Di^ value)

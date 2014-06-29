@@ -499,13 +499,11 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle)
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
+GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
 {
-	LIME_ASSERT(pos != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		LIME_SAFEREF(image, m_Texture),
-		*pos->m_NativeValue,
+		pos,
 		useAlphaChannel,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
@@ -514,13 +512,11 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent, int id)
+GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(pos != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		LIME_SAFEREF(image, m_Texture),
-		*pos->m_NativeValue,
+		pos,
 		useAlphaChannel,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
@@ -528,38 +524,32 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool u
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel, GUIElement^ parent)
+GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent)
 {
-	LIME_ASSERT(pos != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		LIME_SAFEREF(image, m_Texture),
-		*pos->m_NativeValue,
+		pos,
 		useAlphaChannel,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos, bool useAlphaChannel)
+GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel)
 {
-	LIME_ASSERT(pos != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		LIME_SAFEREF(image, m_Texture),
-		*pos->m_NativeValue,
+		pos,
 		useAlphaChannel);
 
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di^ pos)
+GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos)
 {
-	LIME_ASSERT(pos != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
 		LIME_SAFEREF(image, m_Texture),
-		*pos->m_NativeValue);
+		pos);
 
 	return GUIImage::Wrap(i);
 }

@@ -17,7 +17,7 @@ public:
 
 	static property Material^ Identity { Material^ get() { return gcnew Material(); } }
 	static property Material^ IdentityNoLighting { Material^ get() { Material^ m = gcnew Material(); m->Lighting = false; return m; } }
-	static property Material^ IdentityRedWireframe { Material^ get() { Material^ m = gcnew Material(); m->EmissiveColor = gcnew Color(255, 0, 0); m->ZBuffer = ComparisonFunc::Always; m->Wireframe = true; return m; } }
+	static property Material^ IdentityRedWireframe { Material^ get() { Material^ m = gcnew Material(); m->EmissiveColor = Color(255, 0, 0); m->ZBuffer = ComparisonFunc::Always; m->Wireframe = true; return m; } }
 
 	static property int MaxTextures { int get() { return video::MATERIAL_MAX_TEXTURES; } }
 
@@ -37,13 +37,13 @@ public:
 	void SetTextureMatrix(int index, Matrix^ mat);
 
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
-	property Color^ AmbientColor { Color^ get(); void set(Color^ value); }
+	property Color AmbientColor { Color get(); void set(Color value); }
 	property Video::BlendOperation BlendOperation { Video::BlendOperation get(); void set(Video::BlendOperation value); }
 	property Video::PolygonOffset PolygonOffsetDirection { Video::PolygonOffset get(); void set(Video::PolygonOffset value); }
 	property unsigned char PolygonOffsetFactor { unsigned char get(); void set(unsigned char value); }
-	property Color^ DiffuseColor { Color^ get(); void set(Color^ value); }
-	property Color^ EmissiveColor { Color^ get(); void set(Color^ value); }
-	property Color^ SpecularColor { Color^ get(); void set(Color^ value); }
+	property Color DiffuseColor { Color get(); void set(Color value); }
+	property Color EmissiveColor { Color get(); void set(Color value); }
+	property Color SpecularColor { Color get(); void set(Color value); }
 	property float Shininess { float get(); void set(float value); }
 	property float MaterialTypeParam { float get(); void set(float value); }
 	property float MaterialTypeParam2 { float get(); void set(float value); }

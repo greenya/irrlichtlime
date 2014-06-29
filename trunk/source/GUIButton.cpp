@@ -74,16 +74,14 @@ void GUIButton::SetPressedImage()
 	m_GUIButton->setImage();
 }
 
-void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color^ color, bool loop)
+void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color color, bool loop)
 {
-	LIME_ASSERT(color != nullptr);
-	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, *color->m_NativeValue, loop);
+	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, color, loop);
 }
 
-void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color^ color)
+void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, *color->m_NativeValue);
+	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, color);
 }
 
 void GUIButton::SetSprite(GUIButtonState state, int index)

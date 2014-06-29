@@ -24,15 +24,14 @@ ParticleRingEmitter::ParticleRingEmitter(scene::IParticleRingEmitter* ref)
 	m_ParticleRingEmitter = ref;
 }
 
-Vector3Df^ ParticleRingEmitter::Center::get()
+Vector3Df ParticleRingEmitter::Center::get()
 {
-	return gcnew Vector3Df(m_ParticleRingEmitter->getCenter());
+	return Vector3Df(m_ParticleRingEmitter->getCenter());
 }
 
-void ParticleRingEmitter::Center::set(Vector3Df^ value)
+void ParticleRingEmitter::Center::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_ParticleRingEmitter->setCenter(*value->m_NativeValue);
+	m_ParticleRingEmitter->setCenter(value);
 }
 
 float ParticleRingEmitter::Radius::get()

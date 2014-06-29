@@ -103,16 +103,15 @@ void GUITable::RemoveRow(int rowIndex)
 	m_GUITable->removeRow(rowIndex);
 }
 
-void GUITable::SetCellColor(int rowIndex, int columnIndex, Video::Color^ color)
+void GUITable::SetCellColor(int rowIndex, int columnIndex, Video::Color color)
 {
 	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
 	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
-	LIME_ASSERT(color != nullptr);
 
 	m_GUITable->setCellColor(
 		rowIndex,
 		columnIndex,
-		*color->m_NativeValue);
+		color);
 }
 
 void GUITable::SetCellData(int rowIndex, int columnIndex, int data)

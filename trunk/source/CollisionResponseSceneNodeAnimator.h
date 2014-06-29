@@ -22,13 +22,13 @@ public:
 	property bool AnimateTarget { bool get(); void set(bool value); }
 	property SceneNode^ CollisionNode { SceneNode^ get(); }
 	property bool CollisionOccurred { bool get(); }
-	property Vector3Df^ CollisionPoint { Vector3Df^ get(); }
-	property Vector3Df^ CollisionResultPosition { Vector3Df^ get(); }
+	property Vector3Df CollisionPoint { Vector3Df get(); }
+	property Vector3Df CollisionResultPosition { Vector3Df get(); }
 	property Triangle3Df^ CollisionTriangle { Triangle3Df^ get(); }
-	property Vector3Df^ EllipsoidRadius { Vector3Df^ get(); void set(Vector3Df^ value); }
-	property Vector3Df^ EllipsoidTranslation { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df EllipsoidRadius { Vector3Df get(); void set(Vector3Df value); }
+	property Vector3Df EllipsoidTranslation { Vector3Df get(); void set(Vector3Df value); }
 	property bool Falling { bool get(); }
-	property Vector3Df^ Gravity { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Gravity { Vector3Df get(); void set(Vector3Df value); }
 	property SceneNode^ TargetNode { SceneNode^ get(); void set(SceneNode^ value); }
 	property TriangleSelector^ World { TriangleSelector^ get(); void set(TriangleSelector^ value); }
 

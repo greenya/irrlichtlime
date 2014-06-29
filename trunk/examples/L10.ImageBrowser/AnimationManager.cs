@@ -19,7 +19,7 @@ namespace L10.ImageBrowser
 			this.irrDevice = irrDevice;
 		}
 
-		public void Add(SceneNode node, uint duration, Vector3Df targetPosition, Vector3Df targetRotation, Vector3Df targetScale)
+		public void Add(SceneNode node, uint duration, Vector3Df? targetPosition, Vector3Df? targetRotation, Vector3Df? targetScale)
 		{
 			Remove(node);
 
@@ -33,19 +33,19 @@ namespace L10.ImageBrowser
 			
 			if (targetPosition != null)
 			{
-				a.TargetPosition = targetPosition;
+				a.TargetPosition = (Vector3Df)targetPosition;
 				a.StartPosition = node.Position;
 			}
 
 			if (targetRotation != null)
 			{
-				a.TargetRotation = targetRotation;
+				a.TargetRotation = (Vector3Df)targetRotation;
 				a.StartRotation = node.Rotation;
 			}
 
 			if (targetScale != null)
 			{
-				a.TargetScale = targetScale;
+				a.TargetScale = (Vector3Df)targetScale;
 				a.StartScale = node.Scale;
 			}
 

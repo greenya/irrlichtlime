@@ -84,7 +84,7 @@ namespace L11.BulletSharpTest
 			bulletCollisionConfiguration.Dispose();
 		}
 
-		public void AddShape(Shape shape, SceneNode node, float mass = 0.0f, bool sleeping = true, Vector3Df startImpulse = null)
+		public void AddShape(Shape shape, SceneNode node, float mass = 0.0f, bool sleeping = true, Vector3Df? startImpulse = null)
 		{
 			CollisionShape collShape = bulletGetCollisionShape(shape, node);
 
@@ -103,7 +103,7 @@ namespace L11.BulletSharpTest
                     body.ForceActivationState(ActivationState.IslandSleeping);
 
                 if (startImpulse != null)
-                    body.ApplyCentralImpulse(new Vector3(startImpulse.X, startImpulse.Y, startImpulse.Z));
+                    body.ApplyCentralImpulse(new Vector3(startImpulse.Value.X, startImpulse.Value.Y, startImpulse.Value.Z));
 
                 body.SetSleepingThresholds(body.LinearSleepingThreshold * 20, body.AngularSleepingThreshold * 20);
 

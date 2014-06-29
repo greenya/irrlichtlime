@@ -44,29 +44,20 @@ public:
 		m_NativeValue = new core::triangle3df(copy->m_NativeValue->pointA, copy->m_NativeValue->pointB, copy->m_NativeValue->pointC);
 	}
 
-	Triangle3Df(Vector3Df^ point1, Vector3Df^ point2, Vector3Df^ point3)
+	Triangle3Df(Vector3Df point1, Vector3Df point2, Vector3Df point3)
 		: Lime::NativeValue<core::triangle3df>(true)
 	{
-		LIME_ASSERT(point1 != nullptr);
-		LIME_ASSERT(point2 != nullptr);
-		LIME_ASSERT(point3 != nullptr);
-
-		m_NativeValue = new core::triangle3df(*point1->m_NativeValue, *point2->m_NativeValue, *point3->m_NativeValue);
+		m_NativeValue = new core::triangle3df(point1, point2, point3);
 	}
 
-	void Set(Vector3Df^ point1, Vector3Df^ point2, Vector3Df^ point3)
+	void Set(Vector3Df point1, Vector3Df point2, Vector3Df point3)
 	{
-		LIME_ASSERT(point1 != nullptr);
-		LIME_ASSERT(point2 != nullptr);
-		LIME_ASSERT(point3 != nullptr);
-
-		m_NativeValue->set(*point1->m_NativeValue, *point2->m_NativeValue, *point3->m_NativeValue);
+		m_NativeValue->set(point1, point2, point3);
 	}
 
-	Vector3Df^ GetClosestPointOnTriangle(Vector3Df^ point)
+	Vector3Df GetClosestPointOnTriangle(Vector3Df point)
 	{
-		LIME_ASSERT(point != nullptr);
-		return gcnew Vector3Df(m_NativeValue->closestPointOnTriangle(*point->m_NativeValue));
+		return Vector3Df(m_NativeValue->closestPointOnTriangle(point));
 	}
 
 	bool IsTotalInsideBox(AABBox^ box)
@@ -81,42 +72,36 @@ public:
 		return m_NativeValue->isTotalOutsideBox(*box->m_NativeValue);
 	}
 
-	bool IsFrontFacing(Vector3Df^ lookDirection)
+	bool IsFrontFacing(Vector3Df lookDirection)
 	{
-		LIME_ASSERT(lookDirection != nullptr);
-		return m_NativeValue->isFrontFacing(*lookDirection->m_NativeValue);
+		return m_NativeValue->isFrontFacing(lookDirection);
 	}
 
-	bool IsPointInside(Vector3Df^ point)
+	bool IsPointInside(Vector3Df point)
 	{
-		LIME_ASSERT(point != nullptr);
-		return m_NativeValue->isPointInside(*point->m_NativeValue);
+		return m_NativeValue->isPointInside(point);
 	}
 
-	bool IsPointInsideFast(Vector3Df^ point)
+	bool IsPointInsideFast(Vector3Df point)
 	{
-		LIME_ASSERT(point != nullptr);
-		return m_NativeValue->isPointInsideFast(*point->m_NativeValue);
+		return m_NativeValue->isPointInsideFast(point);
 	}
 
-	bool GetIntersectionWithLine(Vector3Df^ linePoint, Vector3Df^ lineVect, [Out] Vector3Df^% intersection)
+	bool GetIntersectionWithLine(Vector3Df linePoint, Vector3Df lineVect, [Out] Vector3Df% intersection)
 	{
-		LIME_ASSERT(linePoint != nullptr);
-		LIME_ASSERT(lineVect != nullptr);
-
 		core::vector3df i;
 		bool b = m_NativeValue->getIntersectionWithLine(
-			*linePoint->m_NativeValue,
-			*lineVect->m_NativeValue,
+			linePoint,
+			lineVect,
 			i);
 
 		if (b)
-			intersection = gcnew Vector3Df(i);
+			intersection = Vector3Df(i);
 
 		return b;
 	}
 
-	bool GetIntersectionWithLimitedLine(Line3Df^ line, [Out] Vector3Df^% intersection)
+	bool GetIntersectionWithLimitedLine(Line3Df^ line, [Out] Vector3Df% intersection)
 	{
 		LIME_ASSERT(line != nullptr);
 
@@ -126,24 +111,21 @@ public:
 			i);
 
 		if (b)
-			intersection = gcnew Vector3Df(i);
+			intersection = Vector3Df(i);
 
 		return b;
 	}
 
-	bool GetIntersectionOfPlaneWithLine(Vector3Df^ linePoint, Vector3Df^ lineVect, [Out] Vector3Df^% intersection)
+	bool GetIntersectionOfPlaneWithLine(Vector3Df linePoint, Vector3Df lineVect, [Out] Vector3Df% intersection)
 	{
-		LIME_ASSERT(linePoint != nullptr);
-		LIME_ASSERT(lineVect != nullptr);
-
 		core::vector3df i;
 		bool b = m_NativeValue->getIntersectionOfPlaneWithLine(
-			*linePoint->m_NativeValue,
-			*lineVect->m_NativeValue,
+			linePoint,
+			lineVect,
 			i);
 
 		if (b)
-			intersection = gcnew Vector3Df(i);
+			intersection = Vector3Df(i);
 
 		return b;
 	}
@@ -158,27 +140,27 @@ public:
 		float get() { return m_NativeValue->getArea(); }
 	}
 
-	property Vector3Df^ Normal
+	property Vector3Df Normal
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNormal()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getNormal()); }
 	}
 
-	property Vector3Df^ A
+	property Vector3Df A
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointA); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointA = *value->m_NativeValue; }
+		Vector3Df get() { return Vector3Df(m_NativeValue->pointA); }
+		void set(Vector3Df value) { m_NativeValue->pointA = value; }
 	}
 
-	property Vector3Df^ B
+	property Vector3Df B
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointB); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointB = *value->m_NativeValue; }
+		Vector3Df get() { return Vector3Df(m_NativeValue->pointB); }
+		void set(Vector3Df value) { m_NativeValue->pointB = value; }
 	}
 
-	property Vector3Df^ C
+	property Vector3Df C
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointC); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointC = *value->m_NativeValue; }
+		Vector3Df get() { return Vector3Df(m_NativeValue->pointC); }
+		void set(Vector3Df value) { m_NativeValue->pointC = value; }
 	}
 
 	virtual String^ ToString() override

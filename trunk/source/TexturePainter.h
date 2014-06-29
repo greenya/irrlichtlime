@@ -15,14 +15,14 @@ public ref class TexturePainter
 {
 public:
 
-	Color^ GetPixel(int x, int y);
+	Color GetPixel(int x, int y);
 	
 	bool Lock(TextureLockMode lockMode, int mipmapLevel);
 	bool Lock(TextureLockMode lockMode);
 	bool Lock();
 
-	void SetLine(int x1, int y1, int x2, int y2, Color^ color);
-	void SetPixel(int x, int y, Color^ color);
+	void SetLine(int x1, int y1, int x2, int y2, Color color);
+	void SetPixel(int x, int y, Color color);
 
 	void Unlock(bool alsoRegenerateMipMapLevels);
 	void Unlock();

@@ -100,21 +100,19 @@ Matrix^ CameraSceneNode::ProjectionMatrix::get()
 	return gcnew Matrix(m_CameraSceneNode->getProjectionMatrix());
 }
 
-void CameraSceneNode::Rotation::set(Vector3Df^ value)
+void CameraSceneNode::Rotation::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CameraSceneNode->setRotation(*value->m_NativeValue);
+	m_CameraSceneNode->setRotation(value);
 }
 
-Vector3Df^ CameraSceneNode::Target::get()
+Vector3Df CameraSceneNode::Target::get()
 {
-	return gcnew Vector3Df(m_CameraSceneNode->getTarget());
+	return Vector3Df(m_CameraSceneNode->getTarget());
 }
 
-void CameraSceneNode::Target::set(Vector3Df^ value)
+void CameraSceneNode::Target::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CameraSceneNode->setTarget(*value->m_NativeValue);
+	m_CameraSceneNode->setTarget(value);
 }
 
 bool CameraSceneNode::TargetAndRotationBinding::get()
@@ -127,15 +125,14 @@ void CameraSceneNode::TargetAndRotationBinding::set(bool value)
 	m_CameraSceneNode->bindTargetAndRotation(value);
 }
 
-Vector3Df^ CameraSceneNode::UpVector::get()
+Vector3Df CameraSceneNode::UpVector::get()
 {
-	return gcnew Vector3Df(m_CameraSceneNode->getUpVector());
+	return Vector3Df(m_CameraSceneNode->getUpVector());
 }
 
-void CameraSceneNode::UpVector::set(Vector3Df^ value)
+void CameraSceneNode::UpVector::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CameraSceneNode->setUpVector(*value->m_NativeValue);
+	m_CameraSceneNode->setUpVector(value);
 }
 
 Scene::ViewFrustum^ CameraSceneNode::ViewFrustum::get()
