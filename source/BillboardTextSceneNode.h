@@ -14,7 +14,7 @@ public ref class BillboardTextSceneNode : BillboardSceneNode
 public:
 
 	void SetText(String^ text);
-	void SetTextColor(Video::Color^ color);
+	void SetTextColor(Video::Color color);
 
 internal:
 

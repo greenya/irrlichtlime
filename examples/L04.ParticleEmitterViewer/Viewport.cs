@@ -33,7 +33,7 @@ namespace L04.ParticleEmitterViewer
 
 			IrrlichtCreationParameters p = new IrrlichtCreationParameters();
 			//p.AntiAliasing = 4;
-			p.DriverType = DriverType.Direct3D8;
+			p.DriverType = DriverType.Direct3D9;
 			p.WindowID = windowHandle;
 
 			irrThread.Start(p);

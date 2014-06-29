@@ -24,15 +24,14 @@ ParticleGravityAffector::ParticleGravityAffector(scene::IParticleGravityAffector
 	m_ParticleGravityAffector = ref;
 }
 
-Vector3Df^ ParticleGravityAffector::Gravity::get()
+Vector3Df ParticleGravityAffector::Gravity::get()
 {
-	return gcnew Vector3Df(m_ParticleGravityAffector->getGravity());
+	return Vector3Df(m_ParticleGravityAffector->getGravity());
 }
 
-void ParticleGravityAffector::Gravity::set(Vector3Df^ value)
+void ParticleGravityAffector::Gravity::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_ParticleGravityAffector->setGravity(*value->m_NativeValue);
+	m_ParticleGravityAffector->setGravity(value);
 }
 
 float ParticleGravityAffector::TimeForceLost::get()

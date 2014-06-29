@@ -63,15 +63,15 @@ int GUIListBox::GetItemAt(int xpos, int ypos)
 	return m_GUIListBox->getItemAt(xpos, ypos);
 }
 
-Video::Color^ GUIListBox::GetItemDefaultColor(GUIListBoxColor colorType)
+Video::Color GUIListBox::GetItemDefaultColor(GUIListBoxColor colorType)
 {
-	return gcnew Video::Color(m_GUIListBox->getItemDefaultColor((gui::EGUI_LISTBOX_COLOR)colorType));
+	return Video::Color(m_GUIListBox->getItemDefaultColor((gui::EGUI_LISTBOX_COLOR)colorType));
 }
 
-Video::Color^ GUIListBox::GetItemColor(int index, GUIListBoxColor colorType)
+Video::Color GUIListBox::GetItemColor(int index, GUIListBoxColor colorType)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
-	return gcnew Video::Color(m_GUIListBox->getItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType));
+	return Video::Color(m_GUIListBox->getItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType));
 }
 
 int GUIListBox::GetItemIcon(int index)
@@ -121,12 +121,11 @@ void GUIListBox::SetItem(int index, String^ text)
 	m_GUIListBox->setItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), -1);
 }
 
-void GUIListBox::SetItemColor(int index, GUIListBoxColor colorType, Video::Color^ color)
+void GUIListBox::SetItemColor(int index, GUIListBoxColor colorType, Video::Color color)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
-	LIME_ASSERT(color != nullptr);
 
-	m_GUIListBox->setItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType, *color->m_NativeValue);
+	m_GUIListBox->setItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType, color);
 }
 
 void GUIListBox::SetItemHeight(int height)

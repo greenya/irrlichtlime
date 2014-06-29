@@ -20,9 +20,9 @@ namespace L02.WinFormsWindow
 		// we are extending IrrlichtCreationParameters with our custom settings
 		class DeviceSettings : IrrlichtCreationParameters
 		{
-			public Color BackColor; // "null" for skybox
+			public Color? BackColor; // "null" for skybox
 			
-			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color bc, bool vs)
+			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color? bc, bool vs)
 			{
 				WindowID = hh;
 				DriverType = dt;
@@ -70,12 +70,14 @@ namespace L02.WinFormsWindow
 			}
 
 			// collect settings and start background worker with these settings
-
+            Color? backcolor = null;
+            if (comboBoxBackground.SelectedIndex != 0)
+                backcolor = new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF);
 			DeviceSettings s = new DeviceSettings(
 				checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panelRenderingWindow.Handle,
 				(DriverType)comboBoxVideoDriver.SelectedItem,
 				(byte)(comboBoxAntiAliasing.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBoxAntiAliasing.SelectedIndex)),
-				comboBoxBackground.SelectedIndex == 0 ? null : new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF),
+				backcolor,
 				checkBoxUseVSync.Checked
 			);
 
@@ -138,7 +140,7 @@ namespace L02.WinFormsWindow
 					// indeed, we do not need to spend time on cleaning color buffer if we use skybox
 					drv.BeginScene(false);
 				else
-					drv.BeginScene(true, true, settings.BackColor);
+					drv.BeginScene(true, true, (Color)settings.BackColor);
 
 				smgr.DrawAll();
 				dev.GUIEnvironment.DrawAll();

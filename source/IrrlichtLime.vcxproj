@@ -258,9 +258,8 @@
     <ClInclude Include="Rect_template.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="Vector2D_template.h" />
-    <ClInclude Include="Vector3D_template.h" />
-    <ClInclude Include="Vector_common_template.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Vector3D.h" />
     <ClInclude Include="AnimatedMesh.h" />
     <ClInclude Include="AnimatedMeshSceneNode.h" />
     <ClInclude Include="AnimatedMeshType.h" />

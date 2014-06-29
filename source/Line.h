@@ -52,13 +52,10 @@ public:
 		m_NativeValue = new core::line3df(startX, startY, startZ, endX, endY, endZ);
 	}
 
-	Line3Df(Vector3Df^ start, Vector3Df^ end)
+	Line3Df(Vector3Df start, Vector3Df end)
 		: Lime::NativeValue<core::line3df>(true)
 	{
-		LIME_ASSERT(start != nullptr);
-		LIME_ASSERT(end != nullptr);
-
-		m_NativeValue = new core::line3df(*start->m_NativeValue, *end->m_NativeValue);
+		m_NativeValue = new core::line3df(start, end);
 	}
 
 	void Set(float newStartX, float newStartY, float newStartZ, float newEndX, float newEndY, float newEndZ)
@@ -66,12 +63,9 @@ public:
 		m_NativeValue->setLine(newStartX, newStartY, newStartZ, newEndX, newEndY, newEndZ);
 	}
 
-	void Set(Vector3Df^ newStart, Vector3Df^ newEnd)
+	void Set(Vector3Df newStart, Vector3Df newEnd)
 	{
-		LIME_ASSERT(newStart != nullptr);
-		LIME_ASSERT(newEnd != nullptr);
-
-		m_NativeValue->setLine(*newStart->m_NativeValue, *newEnd->m_NativeValue);
+		m_NativeValue->setLine(newStart, newEnd);
 	}
 
 	void Set(Line3Df^ newLine)
@@ -80,25 +74,21 @@ public:
 		m_NativeValue->setLine(*newLine->m_NativeValue);
 	}
 
-	bool IsPointBetweenStartAndEnd(Vector3Df^ point)
+	bool IsPointBetweenStartAndEnd(Vector3Df point)
 	{
-		LIME_ASSERT(point != nullptr);
-		return m_NativeValue->isPointBetweenStartAndEnd(*point->m_NativeValue);
+		return m_NativeValue->isPointBetweenStartAndEnd(point);
 	}
 
-	Vector3Df^ GetClosestPoint(Vector3Df^ point)
+	Vector3Df GetClosestPoint(Vector3Df point)
 	{
-		LIME_ASSERT(point != nullptr);
-		return gcnew Vector3Df(m_NativeValue->getClosestPoint(*point->m_NativeValue));
+		return Vector3Df(m_NativeValue->getClosestPoint(point));
 	}
 
-	bool GetIntersectionWithSphere(Vector3Df^ sphereOrigin, float sphereRadius, [Out] double% distance)
+	bool GetIntersectionWithSphere(Vector3Df sphereOrigin, float sphereRadius, [Out] double% distance)
 	{
-		LIME_ASSERT(sphereOrigin != nullptr);
-
 		f64 d = 0.0f;
 		bool b = m_NativeValue->getIntersectionWithSphere(
-			*sphereOrigin->m_NativeValue,
+			sphereOrigin,
 			sphereRadius,
 			d);
 
@@ -118,26 +108,26 @@ public:
 		float get() { return m_NativeValue->getLengthSQ(); }
 	}
 
-	property Vector3Df^ Middle
+	property Vector3Df Middle
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getMiddle()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getMiddle()); }
 	}
 
-	property Vector3Df^ Vector
+	property Vector3Df Vector
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getVector()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getVector()); }
 	}
 
-	property Vector3Df^ Start
+	property Vector3Df Start
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->start); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->start = *value->m_NativeValue; }
+		Vector3Df get() { return Vector3Df(m_NativeValue->start); }
+		void set(Vector3Df value) { m_NativeValue->start = value; }
 	}
 
-	property Vector3Df^ End
+	property Vector3Df End
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->end); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->end = *value->m_NativeValue; }
+		Vector3Df get() { return Vector3Df(m_NativeValue->end); }
+		void set(Vector3Df value) { m_NativeValue->end = value; }
 	}
 
 	virtual String^ ToString() override

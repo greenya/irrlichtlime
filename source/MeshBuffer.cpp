@@ -57,6 +57,7 @@ void MeshBuffer::Append(MeshBuffer^ other)
 	m_MeshBuffer->append(LIME_SAFEREF(other, m_MeshBuffer));
 }
 
+/*
 void MeshBuffer::Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned short>^ indices16bit)
 {
 	LIME_ASSERT(this->VertexType == Video::VertexType::Standard);
@@ -192,23 +193,80 @@ void MeshBuffer::Append(array<Video::Vertex3DTangents^>^ verticesTangents, array
 	for (int i = 0; i < verticesTangents->Length; i++)
 		vb[i + vbSize] = *verticesTangents[i]->m_NativeValue;
 }
+*/
 
-Vector3Df^ MeshBuffer::GetNormal(int vertexIndex)
+generic<typename T>
+where T : Video::IVertex3D, value class
+void MeshBuffer::Append(array<T>^ vertices, array<unsigned short>^ indices16bit)
 {
-	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
-	return gcnew Vector3Df(m_MeshBuffer->getNormal(vertexIndex));
+	LIME_ASSERT(vertices != nullptr);
+	if (vertices->Length <= 0) return;
+	LIME_ASSERT(this->VertexType == vertices[0]->Type);
+	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);
+	LIME_ASSERT(indices16bit != nullptr);
+
+	int vc = vertices->Length;
+	pin_ptr<void> va = &vertices[0];
+	/*video::S3DVertex* va = new video::S3DVertex[vc];
+	for (int i = 0; i < vc; i++)
+		va[i] = *verticesStandard[i]->m_NativeValue;*/
+
+	pin_ptr<unsigned short> ia = &indices16bit[0];
+	/*unsigned short* ia = new unsigned short[indices16bit->Length];
+	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);*/
+
+	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
+
+	//delete[] ia;
+	//delete[] va;
 }
 
-Vector3Df^ MeshBuffer::GetPosition(int vertexIndex)
+generic<typename T>
+where T : Video::IVertex3D, value class
+void MeshBuffer::Append(array<T>^ vertices, array<unsigned int>^ indices32bit)
 {
-	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
-	return gcnew Vector3Df(m_MeshBuffer->getPosition(vertexIndex));
+	LIME_ASSERT(vertices != nullptr);
+	if (vertices->Length <= 0) return;
+	LIME_ASSERT(this->VertexType == vertices[0]->Type);
+	LIME_ASSERT(this->IndexType == Video::IndexType::_32Bit);
+	LIME_ASSERT(indices32bit != nullptr);
+
+	// as i know:
+	// 1) 32bit meshbuffers is only possible with IDynamicMeshBuffer, so i will cast to it
+	// 2) append() doesn't have ability to be used with 32 bit indices, so we are going to implement it here manually
+
+	scene::IDynamicMeshBuffer* mb = (scene::IDynamicMeshBuffer*)m_MeshBuffer;
+	scene::IIndexBuffer& ib = mb->getIndexBuffer();
+	scene::IVertexBuffer& vb = mb->getVertexBuffer();
+
+	unsigned int ibSize = ib.size();
+	unsigned int vbSize = vb.size();
+
+	ib.set_used(ibSize + indices32bit->Length);
+	for (int i = 0; i < indices32bit->Length; i++)
+		ib.setValue(i + ibSize, indices32bit[i] + vbSize); // simple "ib[i + ibSize] = ...;" leads to error C2106: '=' : left operand must be l-value
+
+	vb.set_used(vbSize + vertices->Length);
+	for (int i = 0; i < vertices->Length; i++)
+		vb[i + vbSize] = (S3DVertex)vertices[i];
 }
 
-Vector2Df^ MeshBuffer::GetTCoords(int vertexIndex)
+Vector3Df MeshBuffer::GetNormal(int vertexIndex)
 {
 	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
-	return gcnew Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
+	return Vector3Df(m_MeshBuffer->getNormal(vertexIndex));
+}
+
+Vector3Df MeshBuffer::GetPosition(int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
+	return Vector3Df(m_MeshBuffer->getPosition(vertexIndex));
+}
+
+Vector2Df MeshBuffer::GetTCoords(int vertexIndex)
+{
+	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
+	return Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
 }
 
 Object^ MeshBuffer::GetVertex(int vertexIndex)
@@ -220,13 +278,13 @@ Object^ MeshBuffer::GetVertex(int vertexIndex)
 	switch (m_MeshBuffer->getVertexType())
 	{
 	case video::EVT_STANDARD:
-		return gcnew Video::Vertex3D(((video::S3DVertex*)va)[vertexIndex]);
+		return Video::Vertex3D(((video::S3DVertex*)va)[vertexIndex]);
 
 	case video::EVT_2TCOORDS:
-		return gcnew Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[vertexIndex]);
+		return Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[vertexIndex]);
 
 	case video::EVT_TANGENTS:
-		return gcnew Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[vertexIndex]);
+		return Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[vertexIndex]);
 	}
 
 	LIME_ASSERT2(false, "Unexpected VertexType: " + this->VertexType.ToString());
@@ -274,7 +332,7 @@ void MeshBuffer::UpdateIndices(array<unsigned int>^ indices32bit, int startIndex
 	Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(p + startIndex), indices32bit->Length);
 }
 
-void MeshBuffer::UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int startIndex)
+void MeshBuffer::UpdateVertices(array<Video::Vertex3D>^ verticesStandard, int startIndex)
 {
 	LIME_ASSERT(this->VertexType == Video::VertexType::Standard);
 	LIME_ASSERT(verticesStandard != nullptr);
@@ -283,10 +341,10 @@ void MeshBuffer::UpdateVertices(array<Video::Vertex3D^>^ verticesStandard, int s
 	video::S3DVertex* p = (video::S3DVertex*)m_MeshBuffer->getVertices();
 
 	for (int i = 0; i < verticesStandard->Length; i++)
-		p[i + startIndex] = *verticesStandard[i]->m_NativeValue;
+		p[i + startIndex] = verticesStandard[i].ToNative();
 }
 
-void MeshBuffer::UpdateVertices(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, int startIndex)
+void MeshBuffer::UpdateVertices(array<Video::Vertex3DTTCoords>^ verticesTTCoords, int startIndex)
 {
 	LIME_ASSERT(this->VertexType == Video::VertexType::TTCoords);
 	LIME_ASSERT(verticesTTCoords != nullptr);
@@ -295,10 +353,10 @@ void MeshBuffer::UpdateVertices(array<Video::Vertex3DTTCoords^>^ verticesTTCoord
 	video::S3DVertex2TCoords* p = (video::S3DVertex2TCoords*)m_MeshBuffer->getVertices();
 
 	for (int i = 0; i < verticesTTCoords->Length; i++)
-		p[i + startIndex] = *verticesTTCoords[i]->m_NativeValue;
+		p[i + startIndex] = verticesTTCoords[i].ToNative();
 }
 
-void MeshBuffer::UpdateVertices(array<Video::Vertex3DTangents^>^ verticesTangents, int startIndex)
+void MeshBuffer::UpdateVertices(array<Video::Vertex3DTangents>^ verticesTangents, int startIndex)
 {
 	LIME_ASSERT(this->VertexType == Video::VertexType::Tangents);
 	LIME_ASSERT(verticesTangents != nullptr);
@@ -307,7 +365,7 @@ void MeshBuffer::UpdateVertices(array<Video::Vertex3DTangents^>^ verticesTangent
 	video::S3DVertexTangents* p = (video::S3DVertexTangents*)m_MeshBuffer->getVertices();
 
 	for (int i = 0; i < verticesTangents->Length; i++)
-		p[i + startIndex] = *verticesTangents[i]->m_NativeValue;
+		p[i + startIndex] = verticesTangents[i].ToNative();
 }
 
 AABBox^ MeshBuffer::BoundingBox::get()
@@ -395,27 +453,27 @@ Object^ MeshBuffer::Vertices::get()
 	{
 	case video::EVT_STANDARD:
 		{
-			array<Video::Vertex3D^>^ a = gcnew array<Video::Vertex3D^>(vc);
+			array<Video::Vertex3D>^ a = gcnew array<Video::Vertex3D>(vc);
 			for (int i = 0; i < vc; i++)
-				a[i] = gcnew Video::Vertex3D(((video::S3DVertex*)va)[i]);
+				a[i] = Video::Vertex3D(((video::S3DVertex*)va)[i]);
 
 			return a;
 		}
 
 	case video::EVT_2TCOORDS:
 		{
-			array<Video::Vertex3DTTCoords^>^ a = gcnew array<Video::Vertex3DTTCoords^>(vc);
+			array<Video::Vertex3DTTCoords>^ a = gcnew array<Video::Vertex3DTTCoords>(vc);
 			for (int i = 0; i < vc; i++)
-				a[i] = gcnew Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[i]);
+				a[i] = Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[i]);
 
 			return a;
 		}
 
 	case video::EVT_TANGENTS:
 		{
-			array<Video::Vertex3DTangents^>^ a = gcnew array<Video::Vertex3DTangents^>(vc);
+			array<Video::Vertex3DTangents>^ a = gcnew array<Video::Vertex3DTangents>(vc);
 			for (int i = 0; i < vc; i++)
-				a[i] = gcnew Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[i]);
+				a[i] = Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[i]);
 
 			return a;
 		}

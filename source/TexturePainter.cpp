@@ -28,17 +28,17 @@ TexturePainter::TexturePainter(Video::Texture^ texture)
 	m_mipmapLevelHeight = -1;
 }
 
-Color^ TexturePainter::GetPixel(int x, int y)
+Color TexturePainter::GetPixel(int x, int y)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::ReadOnly);
 	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
 	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
 
-	Color^ c = gcnew Color();
-	c->m_NativeValue->setData(
+	Color c = Color();
+	c.SetData(
 		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
-		m_format);
+		(ColorFormat)m_format);
 
 	return c;
 }
@@ -89,7 +89,7 @@ bool TexturePainter::Lock()
 	return true;
 }
 
-void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
+void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color color)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
@@ -97,7 +97,6 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
 	LIME_ASSERT(y1 >= 0 && y1 < MipMapLevelHeight);
 	LIME_ASSERT(x2 >= 0 && x2 < MipMapLevelWidth);
 	LIME_ASSERT(y2 >= 0 && y2 < MipMapLevelHeight);
-	LIME_ASSERT(color != nullptr);
 
 	bool t = abs(y2 - y1) > abs(x2 - x1);
 
@@ -124,13 +123,13 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
 	for (int x = x1; x <= x2; x++)
 	{
 		if (t)
-			color->m_NativeValue->getData(
+			color.GetData(
 				(unsigned char*)m_pointer + x * rs + y * m_pixelSize, // set pixel to y,x
-				m_format);
+				(ColorFormat)m_format);
 		else
-			color->m_NativeValue->getData(
+			color.GetData(
 				(unsigned char*)m_pointer + y * rs + x * m_pixelSize, // set pixel to x,y
-				m_format);
+				(ColorFormat)m_format);
 
 		e -= dy;
 		if (e < 0)
@@ -141,17 +140,16 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color^ color)
 	}
 }
 
-void TexturePainter::SetPixel(int x, int y, Color^ color)
+void TexturePainter::SetPixel(int x, int y, Color color)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
 	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
 	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
-	LIME_ASSERT(color != nullptr);
 
-	color->m_NativeValue->getData(
+	color.GetData(
 		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
-		m_format);
+		(ColorFormat)m_format);
 }
 
 void TexturePainter::Unlock(bool alsoRegenerateMipMapLevels)

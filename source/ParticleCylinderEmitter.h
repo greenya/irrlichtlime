@@ -14,9 +14,9 @@ public ref class ParticleCylinderEmitter : ParticleEmitter
 {
 public:
 
-	property Vector3Df^ Center { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Center { Vector3Df get(); void set(Vector3Df value); }
 	property float Length { float get(); void set(float value); }
-	property Vector3Df^ Normal { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Normal { Vector3Df get(); void set(Vector3Df value); }
 	property bool OutlineOnly { bool get(); void set(bool value); }
 	property float Radius { float get(); void set(float value); }
 

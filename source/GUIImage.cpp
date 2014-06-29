@@ -34,15 +34,14 @@ void GUIImage::AlphaChannel::set(bool value)
 	m_GUIImage->setUseAlphaChannel(value);
 }
 
-Video::Color^ GUIImage::Color::get()
+Video::Color GUIImage::Color::get()
 {
-	return gcnew Video::Color(m_GUIImage->getColor());
+	return Video::Color(m_GUIImage->getColor());
 }
 
-void GUIImage::Color::set(Video::Color^ value)
+void GUIImage::Color::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIImage->setColor(*value->m_NativeValue);
+	m_GUIImage->setColor(value);
 }
 
 Rectf^ GUIImage::DrawBounds::get()

@@ -49,12 +49,11 @@ public:
 		return gcnew Quaternion((*q1->m_NativeValue) * (*q2->m_NativeValue));
 	}
 
-	static Quaternion^ operator * (Quaternion^ q, Vector3Df^ v)
+	static Quaternion^ operator * (Quaternion^ q, Vector3Df v)
 	{
 		LIME_ASSERT(q != nullptr);
-		LIME_ASSERT(v != nullptr);
 
-		return gcnew Quaternion((*q->m_NativeValue) * (*v->m_NativeValue));
+		return gcnew Quaternion((*q->m_NativeValue) * (v));
 	}
 
 	static Quaternion^ operator * (Quaternion^ q, float a)
@@ -91,11 +90,10 @@ public:
 		m_NativeValue = new core::quaternion(*mat->m_NativeValue);
 	}
 
-	Quaternion(Vector3Df^ eulerAngles)
+	Quaternion(Vector3Df eulerAngles)
 		: Lime::NativeValue<core::quaternion>(true)
 	{
-		LIME_ASSERT(eulerAngles != nullptr);
-		m_NativeValue = new core::quaternion(*eulerAngles->m_NativeValue);
+		m_NativeValue = new core::quaternion(eulerAngles);
 	}
 
 	Quaternion(float eulerAngleX, float eulerAngleY, float eulerAngleZ)
@@ -110,10 +108,9 @@ public:
 		m_NativeValue->set(*newQuat->m_NativeValue);
 	}
 
-	void Set(Vector3Df^ eulerAngles)
+	void Set(Vector3Df eulerAngles)
 	{
-		LIME_ASSERT(eulerAngles != nullptr);
-		m_NativeValue->set(*eulerAngles->m_NativeValue);
+		m_NativeValue->set(eulerAngles);
 	}
 
 	void Set(float newX, float newY, float newZ, float newW)
@@ -143,23 +140,18 @@ public:
 		return gcnew Matrix(m_NativeValue->getMatrix());
 	}
 
-	Matrix^ GetMatrix(Vector3Df^ translation)
+	Matrix^ GetMatrix(Vector3Df translation)
 	{
-		LIME_ASSERT(translation != nullptr);
-
 		Matrix^ m = gcnew Matrix();
-		m_NativeValue->getMatrix(*m->m_NativeValue, *translation->m_NativeValue);
+		m_NativeValue->getMatrix(*m->m_NativeValue, translation);
 
 		return m;
 	}
 
-	Matrix^ GetMatrixCenter(Vector3Df^ center, Vector3Df^ translation)
+	Matrix^ GetMatrixCenter(Vector3Df center, Vector3Df translation)
 	{
-		LIME_ASSERT(center != nullptr);
-		LIME_ASSERT(translation != nullptr);
-
 		Matrix^ m = gcnew Matrix();
-		m_NativeValue->getMatrixCenter(*m->m_NativeValue, *center->m_NativeValue, *translation->m_NativeValue);
+		m_NativeValue->getMatrixCenter(*m->m_NativeValue, center, translation);
 
 		return m;
 	}
@@ -185,20 +177,15 @@ public:
 		return this;
 	}
 
-	Quaternion^ MakeRotation(Vector3Df^ from, Vector3Df^ to)
+	Quaternion^ MakeRotation(Vector3Df from, Vector3Df to)
 	{
-		LIME_ASSERT(from != nullptr);
-		LIME_ASSERT(to != nullptr);
-
-		m_NativeValue->rotationFromTo(*from->m_NativeValue, *to->m_NativeValue);
+		m_NativeValue->rotationFromTo(from, to);
 		return this;
 	}
 
-	Quaternion^ MakeRotation(float angle, Vector3Df^ axis)
+	Quaternion^ MakeRotation(float angle, Vector3Df axis)
 	{
-		LIME_ASSERT(axis != nullptr);
-
-		m_NativeValue->fromAngleAxis(angle, *axis->m_NativeValue);
+		m_NativeValue->fromAngleAxis(angle, axis);
 		return this;
 	}
 
@@ -226,21 +213,20 @@ public:
 		return this;
 	}
 
-	void ToAngleAxis([Out] float% angle, [Out] Vector3Df^% axis)
+	void ToAngleAxis([Out] float% angle, [Out] Vector3Df% axis)
 	{
-		LIME_ASSERT(axis != nullptr);
-
 		float a;
-		m_NativeValue->toAngleAxis(a, *axis->m_NativeValue);
+		pin_ptr<void> p = &axis;
+		m_NativeValue->toAngleAxis(a, *static_cast<core::vector3df*>(p));
 		angle = a;
 	}
 
-	Vector3Df^ ToEuler()
+	Vector3Df ToEuler()
 	{
 		core::vector3df v;
 		m_NativeValue->toEuler(v);
 
-		return gcnew Vector3Df(v);
+		return Vector3Df(v);
 	}
 
 	property float W
@@ -269,7 +255,7 @@ public:
 
 	virtual String^ ToString() override
 	{
-		return String::Format("({0}) W={1}", gcnew Vector3Df(X, Y, Z), W);
+		return String::Format("({0}) W={1}", Vector3Df(X, Y, Z), W);
 	}
 
 internal:

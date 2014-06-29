@@ -33,20 +33,16 @@ void GUIInOutFader::FadeOut(unsigned int time)
 	m_GUIInOutFader->fadeOut(time);
 }
 
-void GUIInOutFader::SetColor(Video::Color^ source, Video::Color^ dest)
+void GUIInOutFader::SetColor(Video::Color source, Video::Color dest)
 {
-	LIME_ASSERT(source != nullptr);
-	LIME_ASSERT(dest != nullptr);
-
 	m_GUIInOutFader->setColor(
-		*source->m_NativeValue,
-		*dest->m_NativeValue);
+		source,
+		dest);
 }
 
-void GUIInOutFader::SetColor(Video::Color^ bothAplhaIgnored)
+void GUIInOutFader::SetColor(Video::Color bothAplhaIgnored)
 {
-	LIME_ASSERT(bothAplhaIgnored != nullptr);
-	m_GUIInOutFader->setColor(*bothAplhaIgnored->m_NativeValue);
+	m_GUIInOutFader->setColor(bothAplhaIgnored);
 }
 
 bool GUIInOutFader::Ready::get()

@@ -149,27 +149,24 @@ Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
 	return Texture::Wrap(t);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color^ color, Video::ExposedVideoData^ videoData, Recti^ sourceRect)
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color color, Video::ExposedVideoData^ videoData, Recti^ sourceRect)
 {
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(videoData != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue, sourceRect->m_NativeValue);
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, color, *videoData->m_NativeValue, sourceRect->m_NativeValue);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color^ color, Video::ExposedVideoData^ videoData)
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color color, Video::ExposedVideoData^ videoData)
 {
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(videoData != nullptr);
 
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue);
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, color, *videoData->m_NativeValue);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color ^color)
+bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue);
+	return m_VideoDriver->beginScene(backBuffer, zBuffer, color);
 }
 
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer)
@@ -216,16 +213,15 @@ IO::Attributes^ VideoDriver::CreateAttributesFromMaterial(Material^ material, IO
 	return IO::Attributes::Wrap(a);
 }
 
-Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size)
+Image^ VideoDriver::CreateImage(Texture^ texture, Vector2Di pos, Dimension2Di^ size)
 {
-	LIME_ASSERT(pos != nullptr);
 	LIME_ASSERT(size != nullptr);
 	LIME_ASSERT(size->Width > 0);
 	LIME_ASSERT(size->Height > 0);
 
 	video::IImage* i = m_VideoDriver->createImage(
 		LIME_SAFEREF(texture, m_Texture),
-		*pos->m_NativeValue,
+		pos,
 		(core::dimension2du&)*size->m_NativeValue);
 
 	return Image::Wrap(i);
@@ -310,7 +306,7 @@ void VideoDriver::DisableFeature(VideoDriverFeature feature)
 	m_VideoDriver->disableFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color>^ colors, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(destRect != nullptr);
@@ -322,7 +318,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		LIME_ASSERT(colors->Count == 4);
 		colorList = new video::SColor[4];
 		for (int i = 0; i < 4; i++)
-			colorList[i] = *colors[i]->m_NativeValue;
+			colorList[i] = colors[i];
 	}
 
 	m_VideoDriver->draw2DImage(
@@ -337,7 +333,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		delete[] colorList;
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors)
+void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color>^ colors)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(destRect != nullptr);
@@ -349,7 +345,7 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		LIME_ASSERT(colors->Count == 4);
 		colorList = new video::SColor[4];
 		for (int i = 0; i < 4; i++)
-			colorList[i] = *colors[i]->m_NativeValue;
+			colorList[i] = colors[i];
 	}
 
 	m_VideoDriver->draw2DImage(
@@ -388,74 +384,67 @@ void VideoDriver::Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRe
 		*sourceRect->m_NativeValue);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect, Color color, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw2DImage(
 		texture->m_Texture,
-		*destPos->m_NativeValue,
+		destPos,
 		*sourceRect->m_NativeValue,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue,
+		color,
 		useAlphaChannelOfTexture);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect, Color color)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw2DImage(
 		texture->m_Texture,
-		*destPos->m_NativeValue,
+		destPos,
 		*sourceRect->m_NativeValue,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	m_VideoDriver->draw2DImage(
 		texture->m_Texture,
-		*destPos->m_NativeValue,
+		destPos,
 		*sourceRect->m_NativeValue,
 		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(destPos != nullptr);
 	LIME_ASSERT(sourceRect != nullptr);
 
 	m_VideoDriver->draw2DImage(
 		texture->m_Texture,
-		*destPos->m_NativeValue,
+		destPos,
 		*sourceRect->m_NativeValue);
 }
 
-void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di^ destPos)
+void VideoDriver::Draw2DImage(Texture^ texture, Vector2Di destPos)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(destPos != nullptr);
 
 	m_VideoDriver->draw2DImage(
 		texture->m_Texture,
-		*destPos->m_NativeValue);
+		destPos);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect,
-	Color^ color, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect,
+	Color color, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(positions != nullptr);
@@ -463,13 +452,11 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(positions->Count == sourceRects->Count);
-	LIME_ASSERT(color != nullptr);
 
 	core::array<core::vector2di> p;
 	for (int i = 0; i < positions->Count; i++)
 	{
-		LIME_ASSERT(positions[i] != nullptr);
-		p.push_back(*positions[i]->m_NativeValue);
+		p.push_back(positions[i]);
 	}
 
 	core::array<core::recti> s;
@@ -484,12 +471,12 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 		p,
 		s,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue,
+		color,
 		useAlphaChannelOfTexture);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect,
-	Color^ color)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect,
+	Color color)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(positions != nullptr);
@@ -497,13 +484,11 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(positions->Count == sourceRects->Count);
-	LIME_ASSERT(color != nullptr);
 
 	core::array<core::vector2di> p;
 	for (int i = 0; i < positions->Count; i++)
 	{
-		LIME_ASSERT(positions[i] != nullptr);
-		p.push_back(*positions[i]->m_NativeValue);
+		p.push_back(positions[i]);
 	}
 
 	core::array<core::recti> s;
@@ -518,10 +503,10 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 		p,
 		s,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(positions != nullptr);
@@ -533,8 +518,7 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 	core::array<core::vector2di> p;
 	for (int i = 0; i < positions->Count; i++)
 	{
-		LIME_ASSERT(positions[i] != nullptr);
-		p.push_back(*positions[i]->m_NativeValue);
+		p.push_back(positions[i]);
 	}
 
 	core::array<core::recti> s;
@@ -551,7 +535,7 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects)
 {
 	LIME_ASSERT(texture != nullptr);
 	LIME_ASSERT(positions != nullptr);
@@ -563,8 +547,7 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 	core::array<core::vector2di> p;
 	for (int i = 0; i < positions->Count; i++)
 	{
-		LIME_ASSERT(positions[i] != nullptr);
-		p.push_back(*positions[i]->m_NativeValue);
+		p.push_back(positions[i]);
 	}
 
 	core::array<core::recti> s;
@@ -580,16 +563,14 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions
 		s);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices,
-	int kerningWidth, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices,
+	int kerningWidth, Recti^ clipRect, Color color, bool useAlphaChannelOfTexture)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(indices != nullptr);
 	LIME_ASSERT(indices->Count > 0);
-	LIME_ASSERT(color != nullptr);
 
 	int sc = sourceRects->Count;
 
@@ -609,25 +590,23 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<R
 
 	m_VideoDriver->draw2DImageBatch(
 		texture->m_Texture,
-		*position->m_NativeValue,
+		position,
 		s,
 		j,
 		kerningWidth,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue,
+		color,
 		useAlphaChannelOfTexture);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices,
-	int kerningWidth, Recti^ clipRect, Color^ color)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices,
+	int kerningWidth, Recti^ clipRect, Color color)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(indices != nullptr);
 	LIME_ASSERT(indices->Count > 0);
-	LIME_ASSERT(color != nullptr);
 
 	int sc = sourceRects->Count;
 
@@ -647,19 +626,18 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<R
 
 	m_VideoDriver->draw2DImageBatch(
 		texture->m_Texture,
-		*position->m_NativeValue,
+		position,
 		s,
 		j,
 		kerningWidth,
 		LIME_SAFEREF(clipRect, m_NativeValue),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices,
+void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices,
 	int kerningWidth, Recti^ clipRect)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(indices != nullptr);
@@ -683,18 +661,17 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<R
 
 	m_VideoDriver->draw2DImageBatch(
 		texture->m_Texture,
-		*position->m_NativeValue,
+		position,
 		s,
 		j,
 		kerningWidth,
 		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices,
+void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices,
 	int kerningWidth)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(indices != nullptr);
@@ -718,16 +695,15 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<R
 
 	m_VideoDriver->draw2DImageBatch(
 		texture->m_Texture,
-		*position->m_NativeValue,
+		position,
 		s,
 		j,
 		kerningWidth);
 }
 
-void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices)
+void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices)
 {
 	LIME_ASSERT(texture != nullptr);
-	LIME_ASSERT(position != nullptr);
 	LIME_ASSERT(sourceRects != nullptr);
 	LIME_ASSERT(sourceRects->Count > 0);
 	LIME_ASSERT(indices != nullptr);
@@ -751,143 +727,121 @@ void VideoDriver::Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<R
 
 	m_VideoDriver->draw2DImageBatch(
 		texture->m_Texture,
-		*position->m_NativeValue,
+		position,
 		s,
 		j);
 }
 
-void VideoDriver::Draw2DLine(int x1, int y1, int x2, int y2, Color^ color)
+void VideoDriver::Draw2DLine(int x1, int y1, int x2, int y2, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw2DLine(
 		core::vector2di(x1, y1),
 		core::vector2di(x2, y2),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color)
+void VideoDriver::Draw2DLine(Vector2Di start, Vector2Di end, Color color)
 {
-	LIME_ASSERT(start != nullptr);
-	LIME_ASSERT(end != nullptr);
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw2DLine(
-		*start->m_NativeValue,
-		*end->m_NativeValue,
-		*color->m_NativeValue);
+		start,
+		end,
+		color);
 }
 
-void VideoDriver::Draw2DPolygon(int x, int y, float radius, Color^ color, int vertexCount)
+void VideoDriver::Draw2DPolygon(int x, int y, float radius, Color color, int vertexCount)
 {
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(vertexCount >= 2);
 
 	m_VideoDriver->draw2DPolygon(
 		core::vector2di(x, y),
 		radius,
-		*color->m_NativeValue,
+		color,
 		vertexCount);
 }
 
-void VideoDriver::Draw2DPolygon(Vector2Di^ center, float radius, Color^ color, int vertexCount)
+void VideoDriver::Draw2DPolygon(Vector2Di center, float radius, Color color, int vertexCount)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(vertexCount >= 2);
 
 	m_VideoDriver->draw2DPolygon(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*color->m_NativeValue,
+		color,
 		vertexCount);
 }
 
-void VideoDriver::Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown, Recti^ clip)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown, Recti^ clip)
 {
 	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(colorLeftUp != nullptr);
-	LIME_ASSERT(colorRightUp != nullptr);
-	LIME_ASSERT(colorLeftDown != nullptr);
-	LIME_ASSERT(colorRightDown != nullptr);
 	LIME_ASSERT(clip != nullptr);
 
 	m_VideoDriver->draw2DRectangle(
 		*pos->m_NativeValue,
-		*colorLeftUp->m_NativeValue,
-		*colorRightUp->m_NativeValue,
-		*colorLeftDown->m_NativeValue,
-		*colorRightDown->m_NativeValue,
+		colorLeftUp,
+		colorRightUp,
+		colorLeftDown,
+		colorRightDown,
 		clip->m_NativeValue);
 }
 
-void VideoDriver::Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown)
 {
 	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(colorLeftUp != nullptr);
-	LIME_ASSERT(colorRightUp != nullptr);
-	LIME_ASSERT(colorLeftDown != nullptr);
-	LIME_ASSERT(colorRightDown != nullptr);
 
 	m_VideoDriver->draw2DRectangle(
 		*pos->m_NativeValue,
-		*colorLeftUp->m_NativeValue,
-		*colorRightUp->m_NativeValue,
-		*colorLeftDown->m_NativeValue,
-		*colorRightDown->m_NativeValue);
+		colorLeftUp,
+		colorRightUp,
+		colorLeftDown,
+		colorRightDown);
 }
 
-void VideoDriver::Draw2DRectangle(Recti^ pos, Color^ color, Recti^ clip)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Color color, Recti^ clip)
 {
 	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(color != nullptr);
 	LIME_ASSERT(clip != nullptr);
 	
 	m_VideoDriver->draw2DRectangle(
-		*color->m_NativeValue,
+		color,
 		*pos->m_NativeValue,
 		clip->m_NativeValue);
 }
 
-void VideoDriver::Draw2DRectangle(Recti^ pos, Color^ color)
+void VideoDriver::Draw2DRectangle(Recti^ pos, Color color)
 {
 	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(color != nullptr);
 	
 	m_VideoDriver->draw2DRectangle(
-		*color->m_NativeValue,
+		color,
 		*pos->m_NativeValue);
 }
 
-void VideoDriver::Draw2DRectangle(int x1, int y1, int x2, int y2, Color^ color)
+void VideoDriver::Draw2DRectangle(int x1, int y1, int x2, int y2, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	
 	m_VideoDriver->draw2DRectangle(
-		*color->m_NativeValue,
+		color,
 		core::recti(x1, y1, x2, y2));
 }
 
-void VideoDriver::Draw2DRectangleOutline(Recti^ pos, Color^ color)
+void VideoDriver::Draw2DRectangleOutline(Recti^ pos, Color color)
 {
 	LIME_ASSERT(pos != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw2DRectangleOutline(
 		*pos->m_NativeValue,
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color^ color)
+void VideoDriver::Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw2DRectangleOutline(
 		core::recti(x1, y1, x2, y2),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Length <= 0xFFFF);
@@ -898,12 +852,14 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 
 	unsigned int primCount = calculatePrimitiveCount(indices16bit->Length, pType);
 
-	S3DVertex* vertexList = new S3DVertex[vertices->Length];
+	pin_ptr<void> vertexList = &vertices[0];
+	VertexType type = vertices->Length > 0 ? vertices[0]->Type : VertexType::Standard;
+	/*S3DVertex* vertexList = new S3DVertex[vertices->Length];
 	for (int i = 0; i < vertices->Length; i++)
 	{
 		LIME_ASSERT(vertices[i] != nullptr);
 		vertexList[i] = *vertices[i]->m_NativeValue;
-	}
+	}*/
 
 	pin_ptr<u16> indexList = &indices16bit[0];
 	//u16* indexList = new u16[indices16bit->Length];
@@ -914,20 +870,24 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		vertices->Length,
 		indexList,
 		primCount,
-		EVT_STANDARD,
+		(E_VERTEX_TYPE)type,
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_16BIT);
 
 	//delete[] indexList;
-	delete[] vertexList;
+	//delete[] vertexList;
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit)
 {
 	Draw2DVertexPrimitiveList(vertices, indices16bit, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(indices32bit != nullptr);
@@ -937,12 +897,14 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 
 	unsigned int primCount = calculatePrimitiveCount(indices32bit->Length, pType);
 
-	S3DVertex* vertexList = new S3DVertex[vertices->Length];
+	pin_ptr<void> vertexList = &vertices[0];
+	VertexType type = vertices->Length > 0 ? vertices[0]->Type : VertexType::Standard;
+	/*S3DVertex* vertexList = new S3DVertex[vertices->Length];
 	for (int i = 0; i < vertices->Length; i++)
 	{
 		LIME_ASSERT(vertices[i] != nullptr);
 		vertexList[i] = *vertices[i]->m_NativeValue;
-	}
+	}*/
 
 	pin_ptr<u32> indexList = &indices32bit[0];
 	//u32* indexList = new u32[indices32bit->Length];
@@ -953,15 +915,17 @@ void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<un
 		vertices->Length,
 		indexList,
 		primCount,
-		EVT_STANDARD,
+		(E_VERTEX_TYPE)type,
 		(scene::E_PRIMITIVE_TYPE)pType,
 		EIT_32BIT);
 
 	//delete[] indexList;
-	delete[] vertexList;
+	//delete[] vertexList;
 }
 
-void VideoDriver::Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit)
 {
 	Draw2DVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
 }
@@ -994,69 +958,55 @@ void VideoDriver::Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, S
 	Draw2DVertexPrimitiveList(vertexBuffer, indexBuffer, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::Draw3DBox(AABBox^ box, Color^ color)
+void VideoDriver::Draw3DBox(AABBox^ box, Color color)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw3DBox(
 		*box->m_NativeValue,
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color^ color)
+void VideoDriver::Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw3DLine(
 		core::vector3df(x1, y1, z1),
 		core::vector3df(x2, y2, z2),
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw3DLine(Vector3Df^ start, Vector3Df^ end, Color^ color)
+void VideoDriver::Draw3DLine(Vector3Df start, Vector3Df end, Color color)
 {
-	LIME_ASSERT(start != nullptr);
-	LIME_ASSERT(end != nullptr);
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw3DLine(
-		*start->m_NativeValue,
-		*end->m_NativeValue,
-		*color->m_NativeValue);
+		start,
+		end,
+		color);
 }
 
-void VideoDriver::Draw3DLine(Line3Df^ line, Color^ color)
+void VideoDriver::Draw3DLine(Line3Df^ line, Color color)
 {
 	LIME_ASSERT(line != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw3DLine(
 		line->m_NativeValue->start,
 		line->m_NativeValue->end,
-		*color->m_NativeValue);
+		color);
 }
 
-void VideoDriver::Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Color^ color)
+void VideoDriver::Draw3DTriangle(Vector3Df pointA, Vector3Df pointB, Vector3Df pointC, Color color)
 {
-	LIME_ASSERT(pointA != nullptr);
-	LIME_ASSERT(pointB != nullptr);
-	LIME_ASSERT(pointC != nullptr);
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->draw3DTriangle(
-		core::triangle3df(*pointA->m_NativeValue, *pointB->m_NativeValue, *pointC->m_NativeValue),
-		*color->m_NativeValue);
+		core::triangle3df(pointA, pointB, pointC),
+		color);
 }
 
-void VideoDriver::Draw3DTriangle(Triangle3Df^ triangle, Color^ color)
+void VideoDriver::Draw3DTriangle(Triangle3Df^ triangle, Color color)
 {
 	LIME_ASSERT(triangle != nullptr);
-	LIME_ASSERT(color != nullptr);
 
 	m_VideoDriver->draw3DTriangle(
 		*triangle->m_NativeValue,
-		*color->m_NativeValue);
+		color);
 }
 
 void VideoDriver::DrawMeshBuffer(Scene::MeshBuffer^ mb)
@@ -1064,14 +1014,12 @@ void VideoDriver::DrawMeshBuffer(Scene::MeshBuffer^ mb)
 	m_VideoDriver->drawMeshBuffer(LIME_SAFEREF(mb, m_MeshBuffer));
 }
 
-void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color^ color)
+void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-
 	m_VideoDriver->drawMeshBufferNormals(
 		LIME_SAFEREF(mb, m_MeshBuffer),
 		length,
-		*color->m_NativeValue);
+		color);
 }
 
 void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length)
@@ -1086,40 +1034,32 @@ void VideoDriver::DrawMeshBufferNormals(Scene::MeshBuffer^ mb)
 	m_VideoDriver->drawMeshBufferNormals(LIME_SAFEREF(mb, m_MeshBuffer));
 }
 
-void VideoDriver::DrawPixel(int x, int y, Color^ color)
+void VideoDriver::DrawPixel(int x, int y, Color color)
 {
 	LIME_ASSERT(x >= 0 && x < CurrentRenderTargetSize->Width);
 	LIME_ASSERT(y >= 0 && y < CurrentRenderTargetSize->Height);
-	LIME_ASSERT(color != nullptr);
 
-	m_VideoDriver->drawPixel((unsigned int)x, (unsigned int)y, *color->m_NativeValue);
+	m_VideoDriver->drawPixel((unsigned int)x, (unsigned int)y, color);
 }
 
-void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, Color^ rightUpEdge, Color^ leftDownEdge, Color^ rightDownEdge)
+void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color leftUpEdge, Color rightUpEdge, Color leftDownEdge, Color rightDownEdge)
 {
-	LIME_ASSERT(leftUpEdge != nullptr);
-	LIME_ASSERT(rightUpEdge != nullptr);
-	LIME_ASSERT(leftDownEdge != nullptr);
-	LIME_ASSERT(rightDownEdge != nullptr);
-
 	m_VideoDriver->drawStencilShadow(
 		clearStencilBuffer,
-		*leftUpEdge->m_NativeValue,
-		*rightUpEdge->m_NativeValue,
-		*leftDownEdge->m_NativeValue,
-		*rightDownEdge->m_NativeValue);
+		leftUpEdge,
+		rightUpEdge,
+		leftDownEdge,
+		rightDownEdge);
 }
 
-void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color^ allEdges)
+void VideoDriver::DrawStencilShadow(bool clearStencilBuffer, Color allEdges)
 {
-	LIME_ASSERT(allEdges != nullptr);
-
 	m_VideoDriver->drawStencilShadow(
 		clearStencilBuffer,
-		*allEdges->m_NativeValue,
-		*allEdges->m_NativeValue,
-		*allEdges->m_NativeValue,
-		*allEdges->m_NativeValue);
+		allEdges,
+		allEdges,
+		allEdges,
+		allEdges);
 }
 
 void VideoDriver::DrawStencilShadow(bool clearStencilBuffer)
@@ -1132,7 +1072,7 @@ void VideoDriver::DrawStencilShadow()
 	m_VideoDriver->drawStencilShadow();
 }
 
-void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible)
+void VideoDriver::DrawStencilShadowVolume(List<Vector3Df>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible)
 {
 	LIME_ASSERT(triangles != nullptr);
 	LIME_ASSERT(triangles->Count > 0);
@@ -1141,14 +1081,13 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfai
 	core::array<core::vector3df> t;
 	for (int i = 0; i < triangles->Count; i++)
 	{
-		LIME_ASSERT(triangles[i] != nullptr);
-		t.push_back(*triangles[i]->m_NativeValue);
+		t.push_back(triangles[i]);
 	}
 
 	m_VideoDriver->drawStencilShadowVolume(t, zfail, (scene::E_DEBUG_SCENE_TYPE)debugDataVisible);
 }
 
-void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail)
+void VideoDriver::DrawStencilShadowVolume(List<Vector3Df>^ triangles, bool zfail)
 {
 	LIME_ASSERT(triangles != nullptr);
 	LIME_ASSERT(triangles->Count > 0);
@@ -1157,14 +1096,13 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfai
 	core::array<core::vector3df> t;
 	for (int i = 0; i < triangles->Count; i++)
 	{
-		LIME_ASSERT(triangles[i] != nullptr);
-		t.push_back(*triangles[i]->m_NativeValue);
+		t.push_back(triangles[i]);
 	}
 
 	m_VideoDriver->drawStencilShadowVolume(t, zfail);
 }
 
-void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
+void VideoDriver::DrawStencilShadowVolume(List<Vector3Df>^ triangles)
 {
 	LIME_ASSERT(triangles != nullptr);
 	LIME_ASSERT(triangles->Count > 0);
@@ -1173,14 +1111,15 @@ void VideoDriver::DrawStencilShadowVolume(List<Vector3Df^>^ triangles)
 	core::array<core::vector3df> t;
 	for (int i = 0; i < triangles->Count; i++)
 	{
-		LIME_ASSERT(triangles[i] != nullptr);
-		t.push_back(*triangles[i]->m_NativeValue);
+		t.push_back(triangles[i]);
 	}
 
 	m_VideoDriver->drawStencilShadowVolume(t);
 }
 
-void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(vertices->Length <= 0xFFFF);
@@ -1191,30 +1130,36 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 
 	unsigned int primCount = calculatePrimitiveCount(indices16bit->Length, pType);
 
-	video::S3DVertex* vertexList = new S3DVertex[vertices->Length];
+	pin_ptr<void> vertexList = &vertices[0];
+	VertexType type = vertices[0]->Type;
+	/*video::S3DVertex* vertexList = new S3DVertex[vertices->Length];
 	for (int i = 0; i < vertices->Length; i++)
 	{
 		LIME_ASSERT(vertices[i] != nullptr);
 		vertexList[i] = *vertices[i]->m_NativeValue;
-	}
+	}*/
 
 	pin_ptr<u16> indexList = &indices16bit[0];
 	//u16* indexList = new u16[indices16bit->Length];
 	//Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(indexList), indices16bit->Length);
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
-		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_16BIT);
+		(E_VERTEX_TYPE)type, (scene::E_PRIMITIVE_TYPE)pType, EIT_16BIT);
 
 	//delete[] indexList;
-	delete[] vertexList;
+	//delete[] vertexList;
 }
 
-void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit)
 {
 	DrawVertexPrimitiveList(vertices, indices16bit, Scene::PrimitiveType::Triangles);
 }
 
-void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType)
 {
 	LIME_ASSERT(vertices != nullptr);
 	LIME_ASSERT(indices32bit != nullptr);
@@ -1224,25 +1169,29 @@ void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsi
 
 	unsigned int primCount = calculatePrimitiveCount(indices32bit->Length, pType);
 
-	video::S3DVertex* vertexList = new S3DVertex[vertices->Length];
+	pin_ptr<void> vertexList = &vertices[0];
+	VertexType type = vertices[0]->Type;
+	/*video::S3DVertex* vertexList = new S3DVertex[vertices->Length];
 	for (int i = 0; i < vertices->Length; i++)
 	{
 		LIME_ASSERT(vertices[i] != nullptr);
 		vertexList[i] = *vertices[i]->m_NativeValue;
-	}
+	}*/
 
 	pin_ptr<u32> indexList = &indices32bit[0];
 	//u32* indexList = new u32[indices32bit->Length];
 	//Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(indexList), indices32bit->Length);
 
 	m_VideoDriver->drawVertexPrimitiveList(vertexList, vertices->Length, indexList, primCount,
-		EVT_STANDARD, (scene::E_PRIMITIVE_TYPE)pType, EIT_32BIT);
+		(E_VERTEX_TYPE)type, (scene::E_PRIMITIVE_TYPE)pType, EIT_32BIT);
 
 	//delete[] indexList;
-	delete[] vertexList;
+	//delete[] vertexList;
 }
 
-void VideoDriver::DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit)
+generic<typename T>
+where T : IVertex3D, value class
+void VideoDriver::DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit)
 {
 	DrawVertexPrimitiveList(vertices, indices32bit, Scene::PrimitiveType::Triangles);
 }
@@ -1401,16 +1350,14 @@ Matrix^ VideoDriver::GetTransform(TransformationState state)
 	return gcnew Matrix(m_VideoDriver->getTransform((video::E_TRANSFORMATION_STATE)state));
 }
 
-void VideoDriver::MakeColorKeyTexture(Texture^ texture, Color^ color)
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *color->m_NativeValue);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), color);
 }
 
-void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos)
+void VideoDriver::MakeColorKeyTexture(Texture^ texture, Vector2Di colorKeyPixelPos)
 {
-	LIME_ASSERT(colorKeyPixelPos != nullptr);
-	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), *colorKeyPixelPos->m_NativeValue);
+	m_VideoDriver->makeColorKeyTexture(LIME_SAFEREF(texture, m_Texture), colorKeyPixelPos);
 }
 
 void VideoDriver::MakeNormalMapTexture(Texture^ texture, float amplitude)
@@ -1533,10 +1480,9 @@ void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color)
+bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, *color->m_NativeValue);
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, color);
 }
 
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer)
@@ -1554,10 +1500,9 @@ bool VideoDriver::SetRenderTarget(Texture^ texture)
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture));
 }
 
-bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color^ color)
+bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer, *color->m_NativeValue);
+	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer, color);
 }
 
 bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer)
@@ -1718,16 +1663,15 @@ Video::Fog^ VideoDriver::Fog::get()
 
 	m_VideoDriver->getFog(c, t, s, e, d, p, r);
 
-	return gcnew Video::Fog(gcnew Color(c), (FogType)t, s, e, d, p, r);
+	return gcnew Video::Fog(Color(c), (FogType)t, s, e, d, p, r);
 }
 
 void VideoDriver::Fog::set(Video::Fog^ value)
 {
 	LIME_ASSERT(value != nullptr);
-	LIME_ASSERT(value->Color != nullptr);
 
 	m_VideoDriver->setFog(
-		*value->Color->m_NativeValue,
+		value->Color,
 		(video::E_FOG_TYPE)value->Type,
 		value->Start,
 		value->End,

@@ -64,15 +64,14 @@ void ParticleAttractionAffector::Attract::set(bool value)
 	m_ParticleAttractionAffector->setAttract(value);
 }
 
-Vector3Df^ ParticleAttractionAffector::Point::get()
+Vector3Df ParticleAttractionAffector::Point::get()
 {
-	return gcnew Vector3Df(m_ParticleAttractionAffector->getPoint());
+	return Vector3Df(m_ParticleAttractionAffector->getPoint());
 }
 
-void ParticleAttractionAffector::Point::set(Vector3Df^ value)
+void ParticleAttractionAffector::Point::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_ParticleAttractionAffector->setPoint(*value->m_NativeValue);
+	m_ParticleAttractionAffector->setPoint(value);
 }
 
 float ParticleAttractionAffector::Speed::get()

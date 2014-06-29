@@ -47,17 +47,14 @@ void ParticleSystemSceneNode::ClearParticles()
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
@@ -65,14 +62,14 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -83,30 +80,27 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -115,30 +109,27 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
@@ -146,37 +137,33 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor)
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleAnimatedMeshSceneNodeEmitter::Wrap(e);
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex,
 	int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
@@ -185,7 +172,7 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
@@ -196,15 +183,14 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex)
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex);
@@ -213,15 +199,14 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier, int meshBufferIndex)
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier, int meshBufferIndex)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex);
 
@@ -229,28 +214,24 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction, float normalDirectionModifier)
+	bool useNormalDirection, Vector3Df direction, float normalDirectionModifier)
 {
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier);
 
 	return ParticleAnimatedMeshSceneNodeEmitter::Wrap(e);
 }
 
 ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMeshSceneNodeEmitter(AnimatedMeshSceneNode^ particleNode,
-	bool useNormalDirection, Vector3Df^ direction)
+	bool useNormalDirection, Vector3Df direction)
 {
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleAnimatedMeshSceneNodeEmitter* e = m_ParticleSystemSceneNode->createAnimatedMeshSceneNodeEmitter(
 		LIME_SAFEREF(particleNode, m_AnimatedMeshSceneNode),
 		useNormalDirection,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleAnimatedMeshSceneNodeEmitter::Wrap(e);
 }
@@ -273,12 +254,10 @@ ParticleAnimatedMeshSceneNodeEmitter^ ParticleSystemSceneNode::CreateAnimatedMes
 	return ParticleAnimatedMeshSceneNodeEmitter::Wrap(e);
 }
 
-ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df^ point, float speed, bool attract, bool affectX, bool affectY, bool affectZ)
+ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df point, float speed, bool attract, bool affectX, bool affectY, bool affectZ)
 {
-	LIME_ASSERT(point != nullptr);
-
 	scene::IParticleAttractionAffector* a = m_ParticleSystemSceneNode->createAttractionAffector(
-		*point->m_NativeValue,
+		point,
 		speed,
 		attract,
 		affectX,
@@ -288,61 +267,52 @@ ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Ve
 	return ParticleAttractionAffector::Wrap(a);
 }
 
-ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df^ point, float speed, bool attract)
+ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df point, float speed, bool attract)
 {
-	LIME_ASSERT(point != nullptr);
-
 	scene::IParticleAttractionAffector* a = m_ParticleSystemSceneNode->createAttractionAffector(
-		*point->m_NativeValue,
+		point,
 		speed,
 		attract);
 
 	return ParticleAttractionAffector::Wrap(a);
 }
 
-ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df^ point, float speed)
+ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df point, float speed)
 {
-	LIME_ASSERT(point != nullptr);
-
 	scene::IParticleAttractionAffector* a = m_ParticleSystemSceneNode->createAttractionAffector(
-		*point->m_NativeValue,
+		point,
 		speed);
 
 	return ParticleAttractionAffector::Wrap(a);
 }
 
-ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df^ point)
+ParticleAttractionAffector^ ParticleSystemSceneNode::CreateAttractionAffector(Vector3Df point)
 {
-	LIME_ASSERT(point != nullptr);
-
 	scene::IParticleAttractionAffector* a = m_ParticleSystemSceneNode->createAttractionAffector(
-		*point->m_NativeValue);
+		point);
 
 	return ParticleAttractionAffector::Wrap(a);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction, int minParticlesPerSecond,
-	int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction, int minParticlesPerSecond,
+	int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
 	int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -352,26 +322,23 @@ ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vecto
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction, int minParticlesPerSecond,
-	int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction, int minParticlesPerSecond,
+	int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
 	int maxAngleDegrees)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -379,79 +346,71 @@ ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vecto
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction, int minParticlesPerSecond,
-	int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction, int minParticlesPerSecond,
+	int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction, int minParticlesPerSecond,
-	int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor)
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction, int minParticlesPerSecond,
+	int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction, int minParticlesPerSecond,
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction, int minParticlesPerSecond,
 	int maxParticlesPerSecond)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond);
 
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df^ direction)
+ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter(AABBox^ box, Vector3Df direction)
 {
 	LIME_ASSERT(box != nullptr);
-	LIME_ASSERT(direction != nullptr);
 
 	scene::IParticleBoxEmitter* e = m_ParticleSystemSceneNode->createBoxEmitter(
 		*box->m_NativeValue,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleBoxEmitter::Wrap(e);
 }
@@ -470,33 +429,28 @@ ParticleBoxEmitter^ ParticleSystemSceneNode::CreateBoxEmitter()
 	return ParticleBoxEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
 
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -506,31 +460,26 @@ ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3D
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -538,152 +487,126 @@ ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3D
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor)
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond)
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
 
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly,
-	Vector3Df^ direction)
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly,
+	Vector3Df direction)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length, bool outlineOnly)
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length, bool outlineOnly)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length,
 		outlineOnly);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df^ center, float radius, Vector3Df^ normal, float length)
+ParticleCylinderEmitter^ ParticleSystemSceneNode::CreateCylinderEmitter(Vector3Df center, float radius, Vector3Df normal, float length)
 {
-	LIME_ASSERT(center != nullptr);
-	LIME_ASSERT(normal != nullptr);
-
 	scene::IParticleCylinderEmitter* e = m_ParticleSystemSceneNode->createCylinderEmitter(
-		*center->m_NativeValue,
+		center,
 		radius,
-		*normal->m_NativeValue,
+		normal,
 		length);
 
 	return ParticleCylinderEmitter::Wrap(e);
 }
 
-ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(Video::Color^ targetColor, float timeNeededToFadeOut)
+ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(Video::Color targetColor, float timeNeededToFadeOut)
 {
-	LIME_ASSERT(targetColor != nullptr);
 	LIME_ASSERT(timeNeededToFadeOut >= 0.0f);
 
 	scene::IParticleFadeOutAffector* a = m_ParticleSystemSceneNode->createFadeOutParticleAffector(
-		*targetColor->m_NativeValue,
+		targetColor,
 		(u32)(timeNeededToFadeOut * 1000)); // "* 1000" because it takes u32 (value in milliseconds), but scene::IParticleFadeOutAffector operates with float
 
 	return ParticleFadeOutAffector::Wrap(a);
 }
 
-ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(Video::Color^ targetColor)
+ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(Video::Color targetColor)
 {
-	LIME_ASSERT(targetColor != nullptr);
-
 	scene::IParticleFadeOutAffector* a = m_ParticleSystemSceneNode->createFadeOutParticleAffector(
-		*targetColor->m_NativeValue);
+		targetColor);
 
 	return ParticleFadeOutAffector::Wrap(a);
 }
@@ -694,23 +617,19 @@ ParticleFadeOutAffector^ ParticleSystemSceneNode::CreateFadeOutParticleAffector(
 	return ParticleFadeOutAffector::Wrap(a);
 }
 
-ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df^ gravity, unsigned int timeForceLost)
+ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df gravity, unsigned int timeForceLost)
 {
-	LIME_ASSERT(gravity != nullptr);
-
 	scene::IParticleGravityAffector* a = m_ParticleSystemSceneNode->createGravityAffector(
-		*gravity->m_NativeValue,
+		gravity,
 		timeForceLost);
 
 	return ParticleGravityAffector::Wrap(a);
 }
 
-ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df^ gravity)
+ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector(Vector3Df gravity)
 {
-	LIME_ASSERT(gravity != nullptr);
-
 	scene::IParticleGravityAffector* a = m_ParticleSystemSceneNode->createGravityAffector(
-		*gravity->m_NativeValue);
+		gravity);
 
 	return ParticleGravityAffector::Wrap(a);
 }
@@ -721,18 +640,15 @@ ParticleGravityAffector^ ParticleSystemSceneNode::CreateGravityAffector()
 	return ParticleGravityAffector::Wrap(a);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees,
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees,
 	Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
@@ -740,14 +656,14 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -757,30 +673,27 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -788,67 +701,60 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor)
+	Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex, int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
@@ -857,7 +763,7 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex,
@@ -867,16 +773,15 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex, bool everyMeshVertex)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex,
 		everyMeshVertex);
@@ -884,44 +789,39 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier, int meshBufferIndex)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(meshBufferIndex >= -1); // -1 is valid value here
 
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier,
 		meshBufferIndex);
 
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction,
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction,
 	float normalDirectionModifier)
 {
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue,
+		direction,
 		normalDirectionModifier);
 
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df^ direction)
+ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMesh, bool useNormalDirection, Vector3Df direction)
 {
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleMeshEmitter* e = m_ParticleSystemSceneNode->createMeshEmitter(
 		LIME_SAFEREF(particleMesh, m_Mesh),
 		useNormalDirection,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleMeshEmitter::Wrap(e);
 }
@@ -941,26 +841,23 @@ ParticleMeshEmitter^ ParticleSystemSceneNode::CreateMeshEmitter(Mesh^ particleMe
 	return ParticleMeshEmitter::Wrap(e);
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees,
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond,
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees,
 	Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
 
 	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -970,23 +867,20 @@ ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ directio
 	return ParticleEmitter::Wrap(e); // IParticlePointEmitter is synonim for IParticleEmitter
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond,
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -994,69 +888,60 @@ ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ directio
 	return ParticleEmitter::Wrap(e);
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond,
+	Video::Color minStartColor, Video::Color maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleEmitter::Wrap(e);
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond,
-	Video::Color^ minStartColor, Video::Color^ maxStartColor)
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond,
+	Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleEmitter::Wrap(e);
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction, int minParticlesPerSecond, int maxParticlesPerSecond)
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction, int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
 
 	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond);
 
 	return ParticleEmitter::Wrap(e);
 }
 
-ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df^ direction)
+ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter(Vector3Df direction)
 {
-	LIME_ASSERT(direction != nullptr);
-
-	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(*direction->m_NativeValue);
+	scene::IParticlePointEmitter* e = m_ParticleSystemSceneNode->createPointEmitter(direction);
 	return ParticleEmitter::Wrap(e);
 }
 
@@ -1066,30 +951,26 @@ ParticleEmitter^ ParticleSystemSceneNode::CreatePointEmitter()
 	return ParticleEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
 
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -1099,28 +980,24 @@ ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringC
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -1128,121 +1005,101 @@ ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringC
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor)
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction,
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction,
 	int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
 
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond);
 
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness, Vector3Df^ direction)
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness, Vector3Df direction)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df^ ringCenter, float ringRadius, float ringThickness)
+ParticleRingEmitter^ ParticleSystemSceneNode::CreateRingEmitter(Vector3Df ringCenter, float ringRadius, float ringThickness)
 {
-	LIME_ASSERT(ringCenter != nullptr);
-
 	scene::IParticleRingEmitter* e = m_ParticleSystemSceneNode->createRingEmitter(
-		*ringCenter->m_NativeValue,
+		ringCenter,
 		ringRadius,
 		ringThickness);
 
 	return ParticleRingEmitter::Wrap(e);
 }
 
-ParticleRotationAffector^ ParticleSystemSceneNode::CreateRotationAffector(Vector3Df^ speed, Vector3Df^ pivot)
+ParticleRotationAffector^ ParticleSystemSceneNode::CreateRotationAffector(Vector3Df speed, Vector3Df pivot)
 {
-	LIME_ASSERT(speed != nullptr);
-	LIME_ASSERT(pivot != nullptr);
-
 	scene::IParticleRotationAffector* a = m_ParticleSystemSceneNode->createRotationAffector(
-		*speed->m_NativeValue,
-		*pivot->m_NativeValue);
+		speed,
+		pivot);
 
 	return ParticleRotationAffector::Wrap(a);
 }
 
-ParticleRotationAffector^ ParticleSystemSceneNode::CreateRotationAffector(Vector3Df^ speed)
+ParticleRotationAffector^ ParticleSystemSceneNode::CreateRotationAffector(Vector3Df speed)
 {
-	LIME_ASSERT(speed != nullptr);
-
-	scene::IParticleRotationAffector* a = m_ParticleSystemSceneNode->createRotationAffector(*speed->m_NativeValue);
+	scene::IParticleRotationAffector* a = m_ParticleSystemSceneNode->createRotationAffector(speed);
 	return ParticleRotationAffector::Wrap(a);
 }
 
@@ -1266,29 +1123,25 @@ ParticleAffector^ ParticleSystemSceneNode::CreateScaleParticleAffector()
 	return ParticleAffector::Wrap(a);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees, Dimension2Df^ minStartSize, Dimension2Df^ maxStartSize)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 	LIME_ASSERT(minStartSize != nullptr);
 	LIME_ASSERT(maxStartSize != nullptr);
 
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees,
@@ -1298,27 +1151,23 @@ ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ s
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax, int maxAngleDegrees)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax,
 		maxAngleDegrees);
@@ -1326,94 +1175,79 @@ ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ s
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor,
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 	LIME_ASSERT(lifeTimeMin <= lifeTimeMax);
 
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue,
+		minStartColor,
+		maxStartColor,
 		lifeTimeMin,
 		lifeTimeMax);
 
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction,
-	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color^ minStartColor, Video::Color^ maxStartColor)
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction,
+	int minParticlesPerSecond, int maxParticlesPerSecond, Video::Color minStartColor, Video::Color maxStartColor)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
-	LIME_ASSERT(minStartColor != nullptr);
-	LIME_ASSERT(maxStartColor != nullptr);
 
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond,
-		*minStartColor->m_NativeValue,
-		*maxStartColor->m_NativeValue);
+		minStartColor,
+		maxStartColor);
 
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction,
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction,
 	int minParticlesPerSecond, int maxParticlesPerSecond)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
 	LIME_ASSERT(minParticlesPerSecond >= 0);
 	LIME_ASSERT(maxParticlesPerSecond >= 0);
 	LIME_ASSERT(minParticlesPerSecond <= maxParticlesPerSecond);
 
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue,
+		direction,
 		minParticlesPerSecond,
 		maxParticlesPerSecond);
 
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius, Vector3Df^ direction)
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius, Vector3Df direction)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-	LIME_ASSERT(direction != nullptr);
-
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius,
-		*direction->m_NativeValue);
+		direction);
 
 	return ParticleSphereEmitter::Wrap(e);
 }
 
-ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df^ sphereCenter, float sphereRadius)
+ParticleSphereEmitter^ ParticleSystemSceneNode::CreateSphereEmitter(Vector3Df sphereCenter, float sphereRadius)
 {
-	LIME_ASSERT(sphereCenter != nullptr);
-
 	scene::IParticleSphereEmitter* e = m_ParticleSystemSceneNode->createSphereEmitter(
-		*sphereCenter->m_NativeValue,
+		sphereCenter,
 		sphereRadius);
 
 	return ParticleSphereEmitter::Wrap(e);

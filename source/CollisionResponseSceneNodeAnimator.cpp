@@ -50,14 +50,14 @@ bool CollisionResponseSceneNodeAnimator::CollisionOccurred::get()
 	return m_CollisionResponseSceneNodeAnimator->collisionOccurred();
 }
 
-Vector3Df^ CollisionResponseSceneNodeAnimator::CollisionPoint::get()
+Vector3Df CollisionResponseSceneNodeAnimator::CollisionPoint::get()
 {
-	return gcnew Vector3Df(m_CollisionResponseSceneNodeAnimator->getCollisionPoint());
+	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getCollisionPoint());
 }
 
-Vector3Df^ CollisionResponseSceneNodeAnimator::CollisionResultPosition::get()
+Vector3Df CollisionResponseSceneNodeAnimator::CollisionResultPosition::get()
 {
-	return gcnew Vector3Df(m_CollisionResponseSceneNodeAnimator->getCollisionResultPosition());
+	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getCollisionResultPosition());
 }
 
 Triangle3Df^ CollisionResponseSceneNodeAnimator::CollisionTriangle::get()
@@ -65,26 +65,24 @@ Triangle3Df^ CollisionResponseSceneNodeAnimator::CollisionTriangle::get()
 	return gcnew Triangle3Df(m_CollisionResponseSceneNodeAnimator->getCollisionTriangle());
 }
 
-Vector3Df^ CollisionResponseSceneNodeAnimator::EllipsoidRadius::get()
+Vector3Df CollisionResponseSceneNodeAnimator::EllipsoidRadius::get()
 {
-	return gcnew Vector3Df(m_CollisionResponseSceneNodeAnimator->getEllipsoidRadius());
+	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getEllipsoidRadius());
 }
 
-void CollisionResponseSceneNodeAnimator::EllipsoidRadius::set(Vector3Df^ value)
+void CollisionResponseSceneNodeAnimator::EllipsoidRadius::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CollisionResponseSceneNodeAnimator->setEllipsoidRadius(*value->m_NativeValue);
+	m_CollisionResponseSceneNodeAnimator->setEllipsoidRadius(value);
 }
 
-Vector3Df^ CollisionResponseSceneNodeAnimator::EllipsoidTranslation::get()
+Vector3Df CollisionResponseSceneNodeAnimator::EllipsoidTranslation::get()
 {
-	return gcnew Vector3Df(m_CollisionResponseSceneNodeAnimator->getEllipsoidTranslation());
+	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getEllipsoidTranslation());
 }
 
-void CollisionResponseSceneNodeAnimator::EllipsoidTranslation::set(Vector3Df^ value)
+void CollisionResponseSceneNodeAnimator::EllipsoidTranslation::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CollisionResponseSceneNodeAnimator->setEllipsoidTranslation(*value->m_NativeValue);
+	m_CollisionResponseSceneNodeAnimator->setEllipsoidTranslation(value);
 }
 
 bool CollisionResponseSceneNodeAnimator::Falling::get()
@@ -92,15 +90,14 @@ bool CollisionResponseSceneNodeAnimator::Falling::get()
 	return m_CollisionResponseSceneNodeAnimator->isFalling();
 }
 
-Vector3Df^ CollisionResponseSceneNodeAnimator::Gravity::get()
+Vector3Df CollisionResponseSceneNodeAnimator::Gravity::get()
 {
-	return gcnew Vector3Df(m_CollisionResponseSceneNodeAnimator->getGravity());
+	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getGravity());
 }
 
-void CollisionResponseSceneNodeAnimator::Gravity::set(Vector3Df^ value)
+void CollisionResponseSceneNodeAnimator::Gravity::set(Vector3Df value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CollisionResponseSceneNodeAnimator->setGravity(*value->m_NativeValue);
+	m_CollisionResponseSceneNodeAnimator->setGravity(value);
 }
 
 SceneNode^ CollisionResponseSceneNodeAnimator::TargetNode::get()

@@ -49,20 +49,19 @@ void CursorControl::PlatformBehavior::set(CursorPlatformBehavior value)
 	m_CursorControl->setPlatformBehavior((gui::ECURSOR_PLATFORM_BEHAVIOR)value);
 }
 
-Vector2Di^ CursorControl::Position::get()
+Vector2Di CursorControl::Position::get()
 {
-	return gcnew Vector2Di(m_CursorControl->getPosition());
+	return Vector2Di(m_CursorControl->getPosition());
 }
 
-void CursorControl::Position::set(Vector2Di^ value)
+void CursorControl::Position::set(Vector2Di value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_CursorControl->setPosition(*value->m_NativeValue);
+	m_CursorControl->setPosition(value);
 }
 
-Vector2Df^ CursorControl::RelativePosition::get()
+Vector2Df CursorControl::RelativePosition::get()
 {
-	return gcnew Vector2Df(m_CursorControl->getRelativePosition());
+	return Vector2Df(m_CursorControl->getRelativePosition());
 }
 
 Dimension2Di^ CursorControl::SupportedIconSize::get()

@@ -94,57 +94,56 @@ public:
 		}
 	}
 
-	property Vector3Df^ CameraPosition
+	property Vector3Df CameraPosition
 	{
-		Vector3Df^ get()
+		Vector3Df get()
 		{
-			return gcnew Vector3Df(m_NativeValue->cameraPosition);
+			return Vector3Df(m_NativeValue->cameraPosition);
 		}
-		void set(Vector3Df^ value)
+		void set(Vector3Df value)
 		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->cameraPosition = *value->m_NativeValue;
+			m_NativeValue->cameraPosition = value;
 		}
 	}
 
-	property Vector3Df^ FarLeftUp
+	property Vector3Df FarLeftUp
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getFarLeftUp()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getFarLeftUp()); }
 	}
 
-	property Vector3Df^ FarLeftDown
+	property Vector3Df FarLeftDown
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getFarLeftDown()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getFarLeftDown()); }
 	}
 
-	property Vector3Df^ FarRightUp
+	property Vector3Df FarRightUp
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getFarRightUp()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getFarRightUp()); }
 	}
 
-	property Vector3Df^ FarRightDown
+	property Vector3Df FarRightDown
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getFarRightDown()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getFarRightDown()); }
 	}
 
-	property Vector3Df^ NearLeftUp
+	property Vector3Df NearLeftUp
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNearLeftUp()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getNearLeftUp()); }
 	}
 
-	property Vector3Df^ NearLeftDown
+	property Vector3Df NearLeftDown
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNearLeftDown()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getNearLeftDown()); }
 	}
 
-	property Vector3Df^ NearRightUp
+	property Vector3Df NearRightUp
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNearRightUp()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getNearRightUp()); }
 	}
 
-	property Vector3Df^ NearRightDown
+	property Vector3Df NearRightDown
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNearRightDown()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getNearRightDown()); }
 	}
 
 internal:

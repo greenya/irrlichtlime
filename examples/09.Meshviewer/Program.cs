@@ -642,7 +642,7 @@ namespace _09.Meshviewer
 			foreach (GUIDefaultColor i in Enum.GetValues(typeof(GUIDefaultColor)))
 			{
 				Color c = skin.GetColor(i);
-				c.Alpha = alpha;
+				c.Alpha = (uint)alpha;
 				skin.SetColor(c, i);
 			}
 		}

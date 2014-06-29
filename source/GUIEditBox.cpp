@@ -111,15 +111,14 @@ void GUIEditBox::MultiLine::set(bool value)
 	m_GUIEditBox->setMultiLine(value);
 }
 
-Video::Color^ GUIEditBox::OverrideColor::get()
+Video::Color GUIEditBox::OverrideColor::get()
 {
-	return gcnew Video::Color(m_GUIEditBox->getOverrideColor());
+	return Video::Color(m_GUIEditBox->getOverrideColor());
 }
 
-void GUIEditBox::OverrideColor::set(Video::Color^ value)
+void GUIEditBox::OverrideColor::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIEditBox->setOverrideColor(*value->m_NativeValue);
+	m_GUIEditBox->setOverrideColor(value);
 }
 
 bool GUIEditBox::OverrideColorEnabled::get()

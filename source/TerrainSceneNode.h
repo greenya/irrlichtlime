@@ -26,12 +26,12 @@ public:
 	DynamicMeshBuffer^ GetMeshBufferForLOD(int lodLevel);
 	DynamicMeshBuffer^ GetMeshBufferForLOD();
 
-	bool LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor, int smoothFactor);
-	bool LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor);
+	bool LoadHeightMap(IO::ReadFile^ file, Video::Color vertexColor, int smoothFactor);
+	bool LoadHeightMap(IO::ReadFile^ file, Video::Color vertexColor);
 	bool LoadHeightMap(IO::ReadFile^ file);
 
-	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color^ vertexColor, int smoothFactor);
-	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color^ vertexColor);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color vertexColor, int smoothFactor);
+	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight, Video::Color vertexColor);
 	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight);
 	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals);
 	bool LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData);
@@ -49,7 +49,7 @@ public:
 	property int IndexCount { int get(); }
 	property Scene::Mesh^ Mesh { Scene::Mesh^ get(); }
 	property MeshBuffer^ RenderBuffer { MeshBuffer^ get(); }
-	property Vector3Df^ TerrainCenter { Vector3Df^ get(); }
+	property Vector3Df TerrainCenter { Vector3Df get(); }
 
 internal:
 

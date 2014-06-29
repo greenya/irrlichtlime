@@ -14,7 +14,7 @@ public ref class ParticleGravityAffector : ParticleAffector
 {
 public:
 
-	property Vector3Df^ Gravity { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Gravity { Vector3Df get(); void set(Vector3Df value); }
 	property float TimeForceLost { float get(); void set(float value); }
 
 internal:

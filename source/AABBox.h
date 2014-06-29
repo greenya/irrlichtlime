@@ -58,20 +58,16 @@ public:
 		m_NativeValue = new core::aabbox3df(x, y, z, x, y, z);
 	}
 
-	AABBox(Vector3Df^ min, Vector3Df^ max)
+	AABBox(Vector3Df min, Vector3Df max)
 		: Lime::NativeValue<core::aabbox3df>(true)
 	{
-		LIME_ASSERT(min != nullptr);
-		LIME_ASSERT(max != nullptr);
-
-		m_NativeValue = new core::aabbox3df(*min->m_NativeValue, *max->m_NativeValue);
+		m_NativeValue = new core::aabbox3df(min, max);
 	}
 
-	AABBox(Vector3Df^ point)
+	AABBox(Vector3Df point)
 		: Lime::NativeValue<core::aabbox3df>(true)
 	{
-		LIME_ASSERT(point != nullptr);
-		m_NativeValue = new core::aabbox3df(*point->m_NativeValue);
+		m_NativeValue = new core::aabbox3df(point);
 	}
 
 	void Set(float minx, float miny, float minz, float maxx, float maxy, float maxz)
@@ -85,19 +81,15 @@ public:
 		m_NativeValue->reset(x, y, z);
 	}
 
-	void Set(Vector3Df^ min, Vector3Df^ max)
+	void Set(Vector3Df min, Vector3Df max)
 	{
-		LIME_ASSERT(min != nullptr);
-		LIME_ASSERT(max != nullptr);
-
-		m_NativeValue->MinEdge = *min->m_NativeValue;
-		m_NativeValue->MaxEdge = *max->m_NativeValue;
+		m_NativeValue->MinEdge = min;
+		m_NativeValue->MaxEdge = max;
 	}
 
-	void Set(Vector3Df^ newPoint)
+	void Set(Vector3Df newPoint)
 	{
-		LIME_ASSERT(newPoint != nullptr);
-		m_NativeValue->reset(*newPoint->m_NativeValue);
+		m_NativeValue->reset(newPoint);
 	}
 
 	void Set(AABBox^ newBox)
@@ -111,10 +103,9 @@ public:
 		m_NativeValue->addInternalPoint(x, y, z);
 	}
 
-	void AddInternalPoint(Vector3Df^ p)
+	void AddInternalPoint(Vector3Df p)
 	{
-		LIME_ASSERT(p != nullptr);
-		m_NativeValue->addInternalPoint(*p->m_NativeValue);
+		m_NativeValue->addInternalPoint(p);
 	}
 
 	void AddInternalBox(AABBox^ b)
@@ -139,16 +130,14 @@ public:
 			return nullptr;
 	}
 
-	bool IsInside(Vector3Df^ p)
+	bool IsInside(Vector3Df p)
 	{
-		LIME_ASSERT(p != nullptr);
-		return m_NativeValue->isPointInside(*p->m_NativeValue);
+		return m_NativeValue->isPointInside(p);
 	}
 
-	bool IsInsideFully(Vector3Df^ p)
+	bool IsInsideFully(Vector3Df p)
 	{
-		LIME_ASSERT(p != nullptr);
-		return m_NativeValue->isPointTotalInside(*p->m_NativeValue);
+		return m_NativeValue->isPointTotalInside(p);
 	}
 
 	bool IsInside(AABBox^ b)
@@ -167,21 +156,21 @@ public:
 		float get() { return m_NativeValue->getArea(); }
 	}
 
-	property Vector3Df^ Center
+	property Vector3Df Center
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getCenter()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getCenter()); }
 	}
 
-	property array<Vector3Df^>^ Edges
+	property array<Vector3Df>^ Edges
 	{
-		array<Vector3Df^>^ get()
+		array<Vector3Df>^ get()
 		{
 			core::vector3df v[8];
 			m_NativeValue->getEdges(v);
 
-			array<Vector3Df^>^ a = gcnew array<Vector3Df^>(8);
+			array<Vector3Df>^ a = gcnew array<Vector3Df>(8);
 			for (int i = 0; i < 8; i++)
-				a[i] = gcnew Vector3Df(v[i]);
+				a[i] = Vector3Df(v[i]);
 			
 			return a;
 		}
@@ -192,34 +181,32 @@ public:
 		bool get() { return m_NativeValue->isEmpty(); }
 	}
 
-	property Vector3Df^ Extent
+	property Vector3Df Extent
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getExtent()); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getExtent()); }
 	}
 
-	property Vector3Df^ MaxEdge
+	property Vector3Df MaxEdge
 	{
-		Vector3Df^ get()
+		Vector3Df get()
 		{
-			return gcnew Vector3Df(m_NativeValue->MaxEdge);
+			return Vector3Df(m_NativeValue->MaxEdge);
 		}
-		void set(Vector3Df^ value)
+		void set(Vector3Df value)
 		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->MaxEdge = *value->m_NativeValue;
+			m_NativeValue->MaxEdge = value;
 		}
 	}
 
-	property Vector3Df^ MinEdge
+	property Vector3Df MinEdge
 	{
-		Vector3Df^ get()
+		Vector3Df get()
 		{
-			return gcnew Vector3Df(m_NativeValue->MinEdge);
+			return Vector3Df(m_NativeValue->MinEdge);
 		}
-		void set(Vector3Df^ value)
+		void set(Vector3Df value)
 		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->MinEdge = *value->m_NativeValue;
+			m_NativeValue->MinEdge = value;
 		}
 	}
 

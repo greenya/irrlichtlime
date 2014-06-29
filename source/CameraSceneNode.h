@@ -26,10 +26,10 @@ public:
 	property float NearValue { float get(); void set(float value); }
 	property bool Orthogonal { bool get(); }
 	property Matrix^ ProjectionMatrix { Matrix^ get(); }
-	property Vector3Df^ Rotation { virtual void set(Vector3Df^ value) override; }
-	property Vector3Df^ Target { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Rotation { virtual void set(Vector3Df value) override; }
+	property Vector3Df Target { Vector3Df get(); void set(Vector3Df value); }
 	property bool TargetAndRotationBinding { bool get(); void set(bool value); }
-	property Vector3Df^ UpVector { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df UpVector { Vector3Df get(); void set(Vector3Df value); }
 	property Scene::ViewFrustum^ ViewFrustum { Scene::ViewFrustum^ get(); }
 	property Matrix^ ViewMatrix { Matrix^ get(); }
 	property Matrix^ ViewMatrixAffector { Matrix^ get(); void set(Matrix^ value); }

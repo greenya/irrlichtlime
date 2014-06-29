@@ -88,7 +88,7 @@ namespace _05.UserInterface
 							foreach (GUIDefaultColor which in Enum.GetValues(typeof(GUIDefaultColor)))
 							{
 								Color color = env.Skin.GetColor(which);
-								color.Alpha = pos;
+								color.Alpha = (uint)pos;
 								env.Skin.SetColor(color, which);
 							}
 						}

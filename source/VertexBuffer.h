@@ -19,9 +19,9 @@ public:
 
 	static VertexBuffer^ Create();
 
-	void Add(Video::Vertex3D^ vertex);
-	Video::Vertex3D^ Get(int index);
-	void Set(int index, Video::Vertex3D^ vertex);
+	void Add(Video::Vertex3D vertex);
+	Video::Vertex3D Get(int index);
+	void Set(int index, Video::Vertex3D vertex);
 
 	void Clear();
 	void Reallocate(int newAllocatedCount);
@@ -32,7 +32,7 @@ public:
 	property int Count { int get(); }
 	property Scene::HardwareMappingHint HardwareMappingHint { Scene::HardwareMappingHint get(); void set(Scene::HardwareMappingHint value); }
 	property Video::VertexType Type { Video::VertexType get(); }
-	property array<Video::Vertex3D^>^ Vertices { array<Video::Vertex3D^>^ get(); }
+	property array<Video::Vertex3D>^ Vertices { array<Video::Vertex3D>^ get(); }
 
 	virtual String^ ToString() override;
 

@@ -25,8 +25,8 @@ public:
 
 	String^ GetItem(int index);
 	int GetItemAt(int xpos, int ypos);
-	Video::Color^ GetItemDefaultColor(GUIListBoxColor colorType);
-	Video::Color^ GetItemColor(int index, GUIListBoxColor colorType);
+	Video::Color GetItemDefaultColor(GUIListBoxColor colorType);
+	Video::Color GetItemColor(int index, GUIListBoxColor colorType);
 	int GetItemIcon(int index);
 
 	int InsertItem(int index, String^ text, int icon);
@@ -40,7 +40,7 @@ public:
 
 	void SetItem(int index, String^ text, int icon);
 	void SetItem(int index, String^ text);
-	void SetItemColor(int index, GUIListBoxColor colorType, Video::Color^ color);
+	void SetItemColor(int index, GUIListBoxColor colorType, Video::Color color);
 	void SetItemHeight(int height);
 
 	void SetSpriteBank(GUISpriteBank^ bank);

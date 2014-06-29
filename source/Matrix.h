@@ -76,77 +76,54 @@ public:
 		m_NativeValue = new core::matrix4(*copy->m_NativeValue);
 	}
 
-	Matrix(Vector3Df^ translation, Vector3Df^ rotation, Vector3Df^ scale)
+	Matrix(Vector3Df translation, Vector3Df rotation, Vector3Df scale)
 		: Lime::NativeValue<core::matrix4>(true)
 	{
-		LIME_ASSERT(translation != nullptr);
-		LIME_ASSERT(rotation != nullptr);
-		LIME_ASSERT(scale != nullptr);
-
 		m_NativeValue = new core::matrix4();
-		m_NativeValue->setTranslation(*translation->m_NativeValue);
-		m_NativeValue->setRotationDegrees(*rotation->m_NativeValue);
-		m_NativeValue->setScale(*scale->m_NativeValue);
+		m_NativeValue->setTranslation(translation);
+		m_NativeValue->setRotationDegrees(rotation);
+		m_NativeValue->setScale(scale);
 	}
 
-	Matrix(Vector3Df^ translation, Vector3Df^ rotation)
+	Matrix(Vector3Df translation, Vector3Df rotation)
 		: Lime::NativeValue<core::matrix4>(true)
 	{
-		LIME_ASSERT(translation != nullptr);
-		LIME_ASSERT(rotation != nullptr);
-
 		m_NativeValue = new core::matrix4();
-		m_NativeValue->setTranslation(*translation->m_NativeValue);
-		m_NativeValue->setRotationDegrees(*rotation->m_NativeValue);
+		m_NativeValue->setTranslation(translation);
+		m_NativeValue->setRotationDegrees(rotation);
 	}
 
-	Matrix(Vector3Df^ translation)
+	Matrix(Vector3Df translation)
 		: Lime::NativeValue<core::matrix4>(true)
 	{
-		LIME_ASSERT(translation != nullptr);
-
 		m_NativeValue = new core::matrix4();
-		m_NativeValue->setTranslation(*translation->m_NativeValue);
+		m_NativeValue->setTranslation(translation);
 	}
 
-	void BuildAxisAlignedBillboard(Vector3Df^ camPos, Vector3Df^ center, Vector3Df^ translation, Vector3Df^ axis, Vector3Df^ from)
+	void BuildAxisAlignedBillboard(Vector3Df camPos, Vector3Df center, Vector3Df translation, Vector3Df axis, Vector3Df from)
 	{
-		LIME_ASSERT(camPos != nullptr);
-		LIME_ASSERT(center != nullptr);
-		LIME_ASSERT(translation != nullptr);
-		LIME_ASSERT(axis != nullptr);
-		LIME_ASSERT(from != nullptr);
-
 		m_NativeValue->buildAxisAlignedBillboard(
-			*camPos->m_NativeValue,
-			*center->m_NativeValue,
-			*translation->m_NativeValue,
-			*axis->m_NativeValue,
-			*from->m_NativeValue);
+			camPos,
+			center,
+			translation,
+			axis,
+			from);
 	}
 
-	Matrix^ BuildCameraLookAtMatrixLH(Vector3Df^ position, Vector3Df^ target, Vector3Df^ upVector)
+	Matrix^ BuildCameraLookAtMatrixLH(Vector3Df position, Vector3Df target, Vector3Df upVector)
 	{
-		LIME_ASSERT(position != nullptr);
-		LIME_ASSERT(target != nullptr);
-		LIME_ASSERT(upVector != nullptr);
-
 		return gcnew Matrix(m_NativeValue->buildCameraLookAtMatrixLH(
-			*position->m_NativeValue,
-			*target->m_NativeValue,
-			*upVector->m_NativeValue));
+			position,
+			target,
+			upVector));
 	}
 
-	Matrix^ BuildCameraLookAtMatrixRH(Vector3Df^ position, Vector3Df^ target, Vector3Df^ upVector)
+	Matrix^ BuildCameraLookAtMatrixRH(Vector3Df position, Vector3Df target, Vector3Df upVector)
 	{
-		LIME_ASSERT(position != nullptr);
-		LIME_ASSERT(target != nullptr);
-		LIME_ASSERT(upVector != nullptr);
-
 		return gcnew Matrix(m_NativeValue->buildCameraLookAtMatrixRH(
-			*position->m_NativeValue,
-			*target->m_NativeValue,
-			*upVector->m_NativeValue));
+			position,
+			target,
+			upVector));
 	}
 
 	Matrix^ BuildNDCToDCMatrix(Recti^ area, float zScale)
@@ -194,49 +171,40 @@ public:
 			widthOfViewVolume, heightOfViewVolume, zNear, zFar));
 	}
 
-	Matrix^ BuildRotateFromTo(Vector3Df^ from, Vector3Df^ to)
+	Matrix^ BuildRotateFromTo(Vector3Df from, Vector3Df to)
 	{
-		LIME_ASSERT(from != nullptr);
-		LIME_ASSERT(to != nullptr);
-
 		return gcnew Matrix(m_NativeValue->buildRotateFromTo(
-			*from->m_NativeValue,
-			*to->m_NativeValue));
+			from,
+			to));
 	}
 
-	Matrix^ BuildShadowMatrix(Vector3Df^ light, Plane3Df^ plane, float point)
+	Matrix^ BuildShadowMatrix(Vector3Df light, Plane3Df^ plane, float point)
 	{
-		LIME_ASSERT(light != nullptr);
 		LIME_ASSERT(plane != nullptr);
 		LIME_ASSERT(point >= 0.0f && point <= 1.0f);
 
 		return gcnew Matrix(m_NativeValue->buildShadowMatrix(
-			*light->m_NativeValue,
+			light,
 			*plane->m_NativeValue,
 			point));
 	}
 
-	Matrix^ BuildShadowMatrix(Vector3Df^ light, Plane3Df^ plane)
+	Matrix^ BuildShadowMatrix(Vector3Df light, Plane3Df^ plane)
 	{
-		LIME_ASSERT(light != nullptr);
 		LIME_ASSERT(plane != nullptr);
 
 		return gcnew Matrix(m_NativeValue->buildShadowMatrix(
-			*light->m_NativeValue,
+			light,
 			*plane->m_NativeValue));
 	}
 
-	Matrix^ BuildTextureTransform(float rotateRad, Vector2Df^ rotateCenter, Vector2Df^ translate, Vector2Df^ scale)
+	Matrix^ BuildTextureTransform(float rotateRad, Vector2Df rotateCenter, Vector2Df translate, Vector2Df scale)
 	{
-		LIME_ASSERT(rotateCenter != nullptr);
-		LIME_ASSERT(translate != nullptr);
-		LIME_ASSERT(scale != nullptr);
-
 		return gcnew Matrix(m_NativeValue->buildTextureTransform(
 			rotateRad,
-			*rotateCenter->m_NativeValue,
-			*translate->m_NativeValue,
-			*scale->m_NativeValue));
+			rotateCenter,
+			translate,
+			scale));
 	}
 
 	float GetElement(int row, int column)
@@ -281,22 +249,21 @@ public:
 		return nullptr;
 	}
 
-	Vector3Df^ GetRotationDegrees(Vector3Df^ scale)
+	Vector3Df GetRotationDegrees(Vector3Df scale)
 	{
-		LIME_ASSERT(scale != nullptr);
-		return gcnew Vector3Df(m_NativeValue->getRotationDegrees(*scale->m_NativeValue));
+		return Vector3Df(m_NativeValue->getRotationDegrees(scale));
 	}
 
-	void InverseRotateVector(Vector3Df^% vect)
+	void InverseRotateVector(Vector3Df% vect)
 	{
-		LIME_ASSERT(vect != nullptr);
-		m_NativeValue->inverseRotateVect(*vect->m_NativeValue);
+		pin_ptr<void> p = &vect;	//pin... UNTESTED!
+		m_NativeValue->inverseRotateVect(*static_cast<core::vector3df*>(p));	//Convert from Vector3Df% to vector3df&
 	}
 
-	void InverseTranslateVector(Vector3Df^% vect)
+	void InverseTranslateVector(Vector3Df% vect)
 	{
-		LIME_ASSERT(vect != nullptr);
-		m_NativeValue->inverseTranslateVect(*vect->m_NativeValue);
+		pin_ptr<void> p = &vect;
+		m_NativeValue->inverseTranslateVect(*static_cast<core::vector3df*>(p));
 	}
 
 	Matrix^ MakeIdentity()
@@ -325,13 +292,11 @@ public:
 		m1x4[3] = f[3];
 	}
 
-	Vector3Df^ RotateVector(Vector3Df^ vect)
+	Vector3Df RotateVector(Vector3Df vect)
 	{
-		LIME_ASSERT(vect != nullptr);
-
 		core::vector3df v;
-		m_NativeValue->rotateVect(v, *vect->m_NativeValue);
-		return gcnew Vector3Df(v);
+		m_NativeValue->rotateVect(v, vect);
+		return Vector3Df(v);
 	}
 
 	Matrix^ SetByProduct(Matrix^ otherA, Matrix^ otherB)
@@ -379,53 +344,40 @@ public:
 		m_NativeValue->setM(p);
 	}
 
-	Matrix^ SetInverseRotationDegrees(Vector3Df^ rotation)
+	Matrix^ SetInverseRotationDegrees(Vector3Df rotation)
 	{
-		LIME_ASSERT(rotation != nullptr);
-
-		m_NativeValue->setInverseRotationDegrees(*rotation->m_NativeValue);
+		m_NativeValue->setInverseRotationDegrees(rotation);
 		return this;
 	}
 
-	Matrix^ SetInverseRotationRadians(Vector3Df^ rotation)
+	Matrix^ SetInverseRotationRadians(Vector3Df rotation)
 	{
-		LIME_ASSERT(rotation != nullptr);
-
-		m_NativeValue->setInverseRotationRadians(*rotation->m_NativeValue);
+		m_NativeValue->setInverseRotationRadians(rotation);
 		return this;
 	}
 
-	Matrix^ SetInverseTranslation(Vector3Df^ translation)
+	Matrix^ SetInverseTranslation(Vector3Df translation)
 	{
-		LIME_ASSERT(translation != nullptr);
-
-		m_NativeValue->setInverseTranslation(*translation->m_NativeValue);
+		m_NativeValue->setInverseTranslation(translation);
 		return this;
 	}
 
-	void SetRotationCenter(Vector3Df^ center, Vector3Df^ translate)
+	void SetRotationCenter(Vector3Df center, Vector3Df translate)
 	{
-		LIME_ASSERT(center != nullptr);
-		LIME_ASSERT(translate != nullptr);
-
 		m_NativeValue->setRotationCenter(
-			*center->m_NativeValue,
-			*translate->m_NativeValue);
+			center,
+			translate);
 	}
 
-	Matrix^ SetRotationRadians(Vector3Df^ rotation)
+	Matrix^ SetRotationRadians(Vector3Df rotation)
 	{
-		LIME_ASSERT(rotation != nullptr);
-
-		m_NativeValue->setRotationRadians(*rotation->m_NativeValue);
+		m_NativeValue->setRotationRadians(rotation);
 		return this;
 	}
 
-	Matrix^ SetRotationAxisRadians(float angle, Vector3Df^ axis)
+	Matrix^ SetRotationAxisRadians(float angle, Vector3Df axis)
 	{
-		LIME_ASSERT(axis != nullptr);
-
-		m_NativeValue->setRotationAxisRadians(angle, *axis->m_NativeValue);
+		m_NativeValue->setRotationAxisRadians(angle, axis);
 		return this;
 	}
 
@@ -488,16 +440,16 @@ public:
 		m_NativeValue->transformPlane(*plane->m_NativeValue);
 	}
 
-	void TransformVector(Vector3Df^% vect)
+	void TransformVector(Vector3Df% vect)
 	{
-		LIME_ASSERT(vect != nullptr);
-		m_NativeValue->transformVect(*vect->m_NativeValue);
+		pin_ptr<void> p = &vect;
+		m_NativeValue->transformVect(*static_cast<core::vector3df*>(p));
 	}
 
-	void TranslateVector(Vector3Df^% vect)
+	void TranslateVector(Vector3Df% vect)
 	{
-		LIME_ASSERT(vect != nullptr);
-		m_NativeValue->translateVect(*vect->m_NativeValue);
+		pin_ptr<void> p = &vect;
+		m_NativeValue->translateVect(*static_cast<core::vector3df*>(p));
 	}
 
 	property bool DefinitelyIdentity
@@ -516,22 +468,22 @@ public:
 		bool get() { return m_NativeValue->isOrthogonal(); }
 	}
 
-	property Vector3Df^ Rotation
+	property Vector3Df Rotation
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getRotationDegrees()); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->setRotationDegrees(*value->m_NativeValue); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getRotationDegrees()); }
+		void set(Vector3Df value) { m_NativeValue->setRotationDegrees(value); }
 	}
 
-	property Vector3Df^ Scale
+	property Vector3Df Scale
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getScale()); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->setScale(*value->m_NativeValue); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getScale()); }
+		void set(Vector3Df value) { m_NativeValue->setScale(value); }
 	}
 
-	property Vector3Df^ Translation
+	property Vector3Df Translation
 	{
-		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getTranslation()); }
-		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->setTranslation(*value->m_NativeValue); }
+		Vector3Df get() { return Vector3Df(m_NativeValue->getTranslation()); }
+		void set(Vector3Df value) { m_NativeValue->setTranslation(value); }
 	}
 
 	property Matrix^ Transposed

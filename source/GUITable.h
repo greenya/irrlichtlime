@@ -35,7 +35,7 @@ public:
 	void RemoveColumn(int columnIndex);
 	void RemoveRow(int rowIndex);
 
-	void SetCellColor(int rowIndex, int columnIndex, Video::Color^ color);
+	void SetCellColor(int rowIndex, int columnIndex, Video::Color color);
 	void SetCellData(int rowIndex, int columnIndex, int data);
 	void SetCellText(int rowIndex, int columnIndex, String^ text);
 

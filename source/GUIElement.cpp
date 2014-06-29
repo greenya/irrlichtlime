@@ -205,10 +205,9 @@ GUIElement^ GUIElement::GetElementFromID(int id)
 	return Wrap(e);
 }
 
-GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
+GUIElement^ GUIElement::GetElementFromPoint(Vector2Di point)
 {
-	LIME_ASSERT(point != nullptr);
-	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*point->m_NativeValue);
+	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(point);
 	return Wrap(e);
 }
 
@@ -266,16 +265,14 @@ bool GUIElement::IsMyChild(GUIElement^ child)
 	return m_GUIElement->isMyChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
-bool GUIElement::IsPointInside(Vector2Di^ point)
+bool GUIElement::IsPointInside(Vector2Di point)
 {
-	LIME_ASSERT(point != nullptr);
-	return m_GUIElement->isPointInside(*point->m_NativeValue);
+	return m_GUIElement->isPointInside(point);
 }
 
-void GUIElement::Move(Vector2Di^ absoluteMovement)
+void GUIElement::Move(Vector2Di absoluteMovement)
 {
-	LIME_ASSERT(absoluteMovement != nullptr);
-	m_GUIElement->move(*absoluteMovement->m_NativeValue);
+	m_GUIElement->move(absoluteMovement);
 }
 
 void GUIElement::Remove()

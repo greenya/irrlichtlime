@@ -119,14 +119,13 @@ public:
 		void set(IntPtr value) { m_NativeValue->WindowId = value.ToPointer(); }
 	}
 
-	property Vector2Di^ WindowPosition
+	property Vector2Di WindowPosition
 	{
-		Vector2Di^ get() { return gcnew Vector2Di(m_NativeValue->WindowPosition); }
+		Vector2Di get() { return Vector2Di(m_NativeValue->WindowPosition); }
 
-		void set(Vector2Di^ value)
+		void set(Vector2Di value)
 		{
-			LIME_ASSERT(value != nullptr);
-			m_NativeValue->WindowPosition = *value->m_NativeValue;
+			m_NativeValue->WindowPosition = value;
 		}
 	}
 

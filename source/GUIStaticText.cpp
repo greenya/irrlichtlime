@@ -35,15 +35,14 @@ GUIFont^ GUIStaticText::ActiveFont::get()
 	return GUIFont::Wrap(f);
 }
 
-Video::Color^ GUIStaticText::BackgroundColor::get()
+Video::Color GUIStaticText::BackgroundColor::get()
 {
-	return gcnew Video::Color(m_GUIStaticText->getBackgroundColor());
+	return Video::Color(m_GUIStaticText->getBackgroundColor());
 }
 
-void GUIStaticText::BackgroundColor::set(Video::Color^ value)
+void GUIStaticText::BackgroundColor::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIStaticText->setBackgroundColor(*value->m_NativeValue);
+	m_GUIStaticText->setBackgroundColor(value);
 }
 
 bool GUIStaticText::DrawBackgroundEnabled::get()
@@ -66,15 +65,14 @@ void GUIStaticText::DrawBorderEnabled::set(bool value)
 	m_GUIStaticText->setDrawBorder(value);
 }
 
-Video::Color^ GUIStaticText::OverrideColor::get()
+Video::Color GUIStaticText::OverrideColor::get()
 {
-	return gcnew Video::Color(m_GUIStaticText->getOverrideColor());
+	return Video::Color(m_GUIStaticText->getOverrideColor());
 }
 
-void GUIStaticText::OverrideColor::set(Video::Color^ value)
+void GUIStaticText::OverrideColor::set(Video::Color value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIStaticText->setOverrideColor(*value->m_NativeValue);
+	m_GUIStaticText->setOverrideColor(value);
 }
 
 bool GUIStaticText::OverrideColorEnabled::get()

@@ -24,14 +24,14 @@ GUIColorSelectDialog::GUIColorSelectDialog(gui::IGUIColorSelectDialog* ref)
 }
 
 
-Video::Color^ GUIColorSelectDialog::Color::get()
+Video::Color GUIColorSelectDialog::Color::get()
 {
-	return gcnew Video::Color(m_GUIColorSelectDialog->getColor());
+	return Video::Color(m_GUIColorSelectDialog->getColor());
 }
 
-Video::ColorHSL^ GUIColorSelectDialog::ColorHSL::get()
+Video::ColorHSL GUIColorSelectDialog::ColorHSL::get()
 {
-	return gcnew Video::ColorHSL(m_GUIColorSelectDialog->getColorHSL());
+	return Video::ColorHSL(m_GUIColorSelectDialog->getColorHSL());
 }
 
 } // end namespace GUI

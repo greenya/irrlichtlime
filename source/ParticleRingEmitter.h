@@ -14,7 +14,7 @@ public ref class ParticleRingEmitter : ParticleEmitter
 {
 public:
 
-	property Vector3Df^ Center { Vector3Df^ get(); void set(Vector3Df^ value); }
+	property Vector3Df Center { Vector3Df get(); void set(Vector3Df value); }
 	property float Radius { float get(); void set(float value); }
 	property float Thickness { float get(); void set(float value); }
 

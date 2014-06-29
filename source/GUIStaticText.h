@@ -18,10 +18,10 @@ public:
 	void SetTextAlignment(GUIAlignment horizontal, GUIAlignment vertical);
 
 	property GUIFont^ ActiveFont { GUIFont^ get(); }
-	property Video::Color^ BackgroundColor { Video::Color^ get(); void set(Video::Color^ value); }
+	property Video::Color BackgroundColor { Video::Color get(); void set(Video::Color value); }
 	property bool DrawBackgroundEnabled { bool get(); void set(bool value); }
 	property bool DrawBorderEnabled { bool get(); void set(bool value); }
-	property Video::Color^ OverrideColor { Video::Color^ get(); void set(Video::Color^ value); }
+	property Video::Color OverrideColor { Video::Color get(); void set(Video::Color value); }
 	property bool OverrideColorEnabled { bool get(); void set(bool value); }
 	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property bool RightToLeft { bool get(); void set(bool value); }

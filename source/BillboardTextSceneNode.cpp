@@ -28,10 +28,9 @@ void BillboardTextSceneNode::SetText(String^ text)
 	m_BillboardTextSceneNode->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
-void BillboardTextSceneNode::SetTextColor(Video::Color^ color)
+void BillboardTextSceneNode::SetTextColor(Video::Color color)
 {
-	LIME_ASSERT(color != nullptr);
-	m_BillboardTextSceneNode->setTextColor(*color->m_NativeValue);
+	m_BillboardTextSceneNode->setTextColor(color);
 }
 
 } // end namespace Scene

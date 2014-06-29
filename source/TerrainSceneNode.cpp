@@ -106,23 +106,19 @@ DynamicMeshBuffer^ TerrainSceneNode::GetMeshBufferForLOD()
 	return DynamicMeshBuffer::Wrap(b);
 }
 
-bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor, int smoothFactor)
+bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color vertexColor, int smoothFactor)
 {
-	LIME_ASSERT(vertexColor != nullptr);
-
 	return m_TerrainSceneNode->loadHeightMap(
 		LIME_SAFEREF(file, m_ReadFile),
-		*vertexColor->m_NativeValue,
+		vertexColor,
 		smoothFactor);
 }
 
-bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color^ vertexColor)
+bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file, Video::Color vertexColor)
 {
-	LIME_ASSERT(vertexColor != nullptr);
-
 	return m_TerrainSceneNode->loadHeightMap(
 		LIME_SAFEREF(file, m_ReadFile),
-		*vertexColor->m_NativeValue);
+		vertexColor);
 }
 
 bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file)
@@ -132,10 +128,9 @@ bool TerrainSceneNode::LoadHeightMap(IO::ReadFile^ file)
 }
 
 bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight,
-	Video::Color^ vertexColor, int smoothFactor)
+	Video::Color vertexColor, int smoothFactor)
 {
 	LIME_ASSERT(widthAndHeight >= 0);
-	LIME_ASSERT(vertexColor != nullptr);
 
 	return m_TerrainSceneNode->loadHeightMapRAW(
 		LIME_SAFEREF(file, m_ReadFile),
@@ -143,15 +138,14 @@ bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bo
 		signedData,
 		floatVals,
 		widthAndHeight,
-		*vertexColor->m_NativeValue,
+		vertexColor,
 		smoothFactor);
 }
 
 bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight,
-	Video::Color^ vertexColor)
+	Video::Color vertexColor)
 {
 	LIME_ASSERT(widthAndHeight >= 0);
-	LIME_ASSERT(vertexColor != nullptr);
 
 	return m_TerrainSceneNode->loadHeightMapRAW(
 		LIME_SAFEREF(file, m_ReadFile),
@@ -159,7 +153,7 @@ bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bo
 		signedData,
 		floatVals,
 		widthAndHeight,
-		*vertexColor->m_NativeValue);
+		vertexColor);
 }
 
 bool TerrainSceneNode::LoadHeightMapRAW(IO::ReadFile^ file, int bitsPerPixel, bool signedData, bool floatVals, int widthAndHeight)
@@ -261,9 +255,9 @@ MeshBuffer^ TerrainSceneNode::RenderBuffer::get()
 	return MeshBuffer::Wrap(m);
 }
 
-Vector3Df^ TerrainSceneNode::TerrainCenter::get()
+Vector3Df TerrainSceneNode::TerrainCenter::get()
 {
-	return gcnew Vector3Df(m_TerrainSceneNode->getTerrainCenter());
+	return Vector3Df(m_TerrainSceneNode->getTerrainCenter());
 }
 
 } // end namespace Scene
