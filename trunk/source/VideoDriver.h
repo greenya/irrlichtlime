@@ -117,7 +117,7 @@ public:
 
 	void Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color color);
 	void Draw3DLine(Vector3Df start, Vector3Df end, Color color);
-	void Draw3DLine(Line3Df^ line, Color color);
+	void Draw3DLine(Line3Df line, Color color);
 
 	void Draw3DTriangle(Vector3Df pointA, Vector3Df pointB, Vector3Df pointC, Color color);
 	void Draw3DTriangle(Triangle3Df^ triangle, Color color);

@@ -8,126 +8,102 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Line3Df : Lime::NativeValue<core::line3df>
+[StructLayoutAttribute(LayoutKind::Sequential)]
+public value class Line3Df
 {
 public:
 
-	static bool operator == (Line3Df^ v1, Line3Df^ v2)
+	static property Line3Df Default { Line3Df get() { return Line3Df(0, 0, 0, 1, 1, 1); } }
+
+	static Line3Df operator + (Line3Df v1, Vector3Df v2)
 	{
-		bool v1n = Object::ReferenceEquals(v1, nullptr);
-		bool v2n = Object::ReferenceEquals(v2, nullptr);
-
-		if (v1n && v2n)
-			return true;
-
-		if (v1n || v2n)
-			return false;
-
-		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+		return Line3Df(v1.Start + v2, v1.End + v2);
 	}
 
-	static bool operator != (Line3Df^ v1, Line3Df^ v2)
+	static Line3Df operator - (Line3Df v1, Vector3Df v2)
 	{
-		return !(v1 == v2);
+		return Line3Df(v1.Start - v2, v1.End - v2);
 	}
 
-	Line3Df()
-		: Lime::NativeValue<core::line3df>(true)
-	{
-		m_NativeValue = new core::line3df();
-	}
-
-	Line3Df(Line3Df^ copy)
-		: Lime::NativeValue<core::line3df>(true)
-	{
-		LIME_ASSERT(copy != nullptr);
-
-		m_NativeValue = new core::line3df();
-		m_NativeValue->setLine(*copy->m_NativeValue);
-	}
+	Vector3Df Start;
+	Vector3Df End;
 
 	Line3Df(float startX, float startY, float startZ, float endX, float endY, float endZ)
-		: Lime::NativeValue<core::line3df>(true)
+		: Start(startX, startY, startZ), End(endX, endY, endZ)
 	{
-		m_NativeValue = new core::line3df(startX, startY, startZ, endX, endY, endZ);
 	}
 
 	Line3Df(Vector3Df start, Vector3Df end)
-		: Lime::NativeValue<core::line3df>(true)
+		: Start(start), End(end)
 	{
-		m_NativeValue = new core::line3df(start, end);
 	}
 
 	void Set(float newStartX, float newStartY, float newStartZ, float newEndX, float newEndY, float newEndZ)
 	{
-		m_NativeValue->setLine(newStartX, newStartY, newStartZ, newEndX, newEndY, newEndZ);
+		Start.Set(newStartX, newStartY, newStartZ);
+		End.Set(newEndX, newEndY, newEndZ);
 	}
 
 	void Set(Vector3Df newStart, Vector3Df newEnd)
 	{
-		m_NativeValue->setLine(newStart, newEnd);
-	}
-
-	void Set(Line3Df^ newLine)
-	{
-		LIME_ASSERT(newLine != nullptr);
-		m_NativeValue->setLine(*newLine->m_NativeValue);
+		Start = newStart;
+		End = newEnd;
 	}
 
 	bool IsPointBetweenStartAndEnd(Vector3Df point)
 	{
-		return m_NativeValue->isPointBetweenStartAndEnd(point);
+		return point.IsBetweenPoints(Start, End);
 	}
 
 	Vector3Df GetClosestPoint(Vector3Df point)
 	{
-		return Vector3Df(m_NativeValue->getClosestPoint(point));
+		Vector3Df c = point - Start;
+		Vector3Df v = End - Start;
+		float d = (float)v.Length;
+		v /= d;
+		float t = v.DotProduct(c);
+
+		if (t < (float)0.0)
+			return Start;
+		if (t > d)
+			return End;
+
+		v *= t;
+		return Start + v;
 	}
 
 	bool GetIntersectionWithSphere(Vector3Df sphereOrigin, float sphereRadius, [Out] double% distance)
 	{
-		f64 d = 0.0f;
-		bool b = m_NativeValue->getIntersectionWithSphere(
-			sphereOrigin,
-			sphereRadius,
-			d);
+		Vector3Df q = sphereOrigin - Start;
+		float c = q.Length;
+		float v = q.DotProduct(Vector.Normalize());
+		float d = sphereRadius * sphereRadius - (c*c - v*v);
 
-		if (b)
-			distance = d;
+		if (d < 0.0)
+			return false;
 
-		return b;
+		distance = v - core::squareroot ( d );
+		return true;
 	}
 
 	property float Length
 	{
-		float get() { return m_NativeValue->getLength(); }
+		float get() { return Start.GetDistanceFrom(End); }
 	}
 
 	property float LengthSQ
 	{
-		float get() { return m_NativeValue->getLengthSQ(); }
+		float get() { return Start.GetDistanceFromSQ(End); }
 	}
 
 	property Vector3Df Middle
 	{
-		Vector3Df get() { return Vector3Df(m_NativeValue->getMiddle()); }
+		Vector3Df get() { return (Start + End) / 2; }
 	}
 
 	property Vector3Df Vector
 	{
-		Vector3Df get() { return Vector3Df(m_NativeValue->getVector()); }
-	}
-
-	property Vector3Df Start
-	{
-		Vector3Df get() { return Vector3Df(m_NativeValue->start); }
-		void set(Vector3Df value) { m_NativeValue->start = value; }
-	}
-
-	property Vector3Df End
-	{
-		Vector3Df get() { return Vector3Df(m_NativeValue->end); }
-		void set(Vector3Df value) { m_NativeValue->end = value; }
+		Vector3Df get() { return End - Start; }
 	}
 
 	virtual String^ ToString() override
@@ -138,9 +114,19 @@ public:
 internal:
 
 	Line3Df(const core::line3df& value)
-		: Lime::NativeValue<core::line3df>(true)
 	{
-		m_NativeValue = new core::line3df(value);
+		Start = Vector3Df(value.start);
+		End = Vector3Df(value.end);
+	}
+
+	operator core::line3df()
+	{
+		return core::line3df(Start.ToNative(), End.ToNative());
+	}
+
+	core::line3df ToNative()
+	{
+		return (core::line3df)*this;
 	}
 };
 
