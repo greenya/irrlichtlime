@@ -983,13 +983,11 @@ void VideoDriver::Draw3DLine(Vector3Df start, Vector3Df end, Color color)
 		color);
 }
 
-void VideoDriver::Draw3DLine(Line3Df^ line, Color color)
+void VideoDriver::Draw3DLine(Line3Df line, Color color)
 {
-	LIME_ASSERT(line != nullptr);
-
 	m_VideoDriver->draw3DLine(
-		line->m_NativeValue->start,
-		line->m_NativeValue->end,
+		line.Start,
+		line.End,
 		color);
 }
 

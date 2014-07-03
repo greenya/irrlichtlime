@@ -101,13 +101,11 @@ public:
 		return b;
 	}
 
-	bool GetIntersectionWithLimitedLine(Line3Df^ line, [Out] Vector3Df% intersection)
+	bool GetIntersectionWithLimitedLine(Line3Df line, [Out] Vector3Df% intersection)
 	{
-		LIME_ASSERT(line != nullptr);
-
 		core::vector3df i;
 		bool b = m_NativeValue->getIntersectionWithLimitedLine(
-			*line->m_NativeValue,
+			line,
 			i);
 
 		if (b)

@@ -48,10 +48,10 @@ public:
 		m_NativeValue->setFrom(*mat->m_NativeValue);
 	}
 
-	bool ClipLine(Line3Df^% line)
+	bool ClipLine(Line3Df% line)
 	{
-		LIME_ASSERT(line != nullptr);
-		return m_NativeValue->clipLine(*line->m_NativeValue);
+		pin_ptr<void> p = &line;
+		return m_NativeValue->clipLine(*static_cast<core::line3df*>(p));
 	}
 
 	Plane3Df^ GetPlane(Plane plane)

@@ -172,7 +172,7 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 		return;
 
 	case AttributeType::Line3Df:
-		m_Attributes->addLine3d(n.c_str(), *((Line3Df^)value)->m_NativeValue);
+		m_Attributes->addLine3d(n.c_str(), ((Line3Df)value).ToNative());
 		return;
 
 	case AttributeType::StringArray:
@@ -464,7 +464,7 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 		return;
 
 	case AttributeType::Line3Df:
-		m_Attributes->setAttribute(attributeIndex, *((Line3Df^)value)->m_NativeValue);
+		m_Attributes->setAttribute(attributeIndex, ((Line3Df)value).ToNative());
 		return;
 
 	case AttributeType::StringArray:
