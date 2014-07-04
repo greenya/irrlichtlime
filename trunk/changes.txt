@@ -20,7 +20,7 @@ Changes in 1.5
 - GUIImage: properties DrawBounds and SourceRect added
 - GUISpriteBank: only a comment, will be continued in the future
 - IrrlichtDevice: property DoubleClickTime added, WindowSize added
-- Matrix: GetRotationDegrees(Vector3Df^ scale) added
+- Matrix: GetRotationDegrees(Vector3Df scale) added
 - MeshLoader: property MeshTextureLoader added
 - Class MeshTextureLoader added
 - ParticleAttractionAffector: property Speed added
@@ -57,7 +57,7 @@ Changes in 1.5
 - Example 03.CustomSceneNode: Node shows message when disposed in debug mode.
 - Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
 - MaterialRendererServices: float and int arrays are passed with pin_ptrs in Set|Vertex/Pixel|ShaderConstant(List)(...)
-- Some classes are now structs: Color, Vector3Di/f/d, Vertex3D(TTCoords/Tangents), Line3Df
+- Some classes are now structs: Color, Vector3Di/f/d, Vertex3D(TTCoords/Tangents), Line3Df, Triangle3Df
   Every class and example has been updated to use them correctly, but not all of them have been tested.
 - Line3Df: Operator + and - Vector3Df added
 

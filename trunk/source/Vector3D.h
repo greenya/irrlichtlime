@@ -8,13 +8,17 @@ public value class _REFCLASS_
 {
 public:
 
+	_WRAPTYPE_ X;
+	_WRAPTYPE_ Y;
+	_WRAPTYPE_ Z;
+
 	_REFCLASS_(_WRAPTYPE_ x, _WRAPTYPE_ y, _WRAPTYPE_ z)
-		: x(x), y(y), z(z)
+		: X(x), Y(y), Z(z)
 	{
 	}
 
 	explicit _REFCLASS_(_WRAPTYPE_ all)
-		: x(all), y(all), z(all)
+		: X(all), Y(all), Z(all)
 	{
 	}
 
@@ -22,17 +26,17 @@ public:
 
 	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2, _WRAPTYPE_ tolerance)
 	{
-		return core::equals(v1.x, v2.x, tolerance) &&
-			core::equals(v1.y, v2.y, tolerance) &&
-			core::equals(v1.z, v2.z, tolerance);
+		return core::equals(v1.X, v2.X, tolerance) &&
+			core::equals(v1.Y, v2.Y, tolerance) &&
+			core::equals(v1.Z, v2.Z, tolerance);
 	}
 
 	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2)
 	{
 		_WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
-		return core::equals(v1.x, v2.x, tolerance) &&
-			core::equals(v1.y, v2.y, tolerance) &&
-			core::equals(v1.z, v2.z, tolerance);
+		return core::equals(v1.X, v2.X, tolerance) &&
+			core::equals(v1.Y, v2.Y, tolerance) &&
+			core::equals(v1.Z, v2.Z, tolerance);
 	}
 
 	static bool operator == (_REFCLASS_ v1, _REFCLASS_ v2)
@@ -47,100 +51,100 @@ public:
 
 	static bool operator > (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x>v2.x && !core::equals(v1.x, v2.x)) ||
-			(core::equals(v1.x, v2.x) && v1.y>v2.y && !core::equals(v1.y, v2.y)) ||
-			(core::equals(v1.x, v2.x) && core::equals(v1.y, v2.y) && v1.z>v2.z && !core::equals(v1.z, v2.z));
+		return (v1.X>v2.X && !core::equals(v1.X, v2.X)) ||
+			(core::equals(v1.X, v2.X) && v1.Y>v2.Y && !core::equals(v1.Y, v2.Y)) ||
+			(core::equals(v1.X, v2.X) && core::equals(v1.Y, v2.Y) && v1.Z>v2.Z && !core::equals(v1.Z, v2.Z));
 	}
 
 	static bool operator >= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x>v2.x || core::equals(v1.x, v2.x)) ||
-			(core::equals(v1.x, v2.x) && (v1.y>v2.y || core::equals(v1.y, v2.y))) ||
-			(core::equals(v1.x, v2.x) && core::equals(v1.y, v2.y) && (v1.z>v2.z || core::equals(v1.z, v2.z)));
+		return (v1.X>v2.X || core::equals(v1.X, v2.X)) ||
+			(core::equals(v1.X, v2.X) && (v1.Y>v2.Y || core::equals(v1.Y, v2.Y))) ||
+			(core::equals(v1.X, v2.X) && core::equals(v1.Y, v2.Y) && (v1.Z>v2.Z || core::equals(v1.Z, v2.Z)));
 	}
 
 	static bool operator < (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x<v2.x && !core::equals(v1.x, v2.x)) ||
-			(core::equals(v1.x, v2.x) && v1.y<v2.y && !core::equals(v1.y, v2.y)) ||
-			(core::equals(v1.x, v2.x) && core::equals(v1.y, v2.y) && v1.z<v2.z && !core::equals(v1.z, v2.z));
+		return (v1.X<v2.X && !core::equals(v1.X, v2.X)) ||
+			(core::equals(v1.X, v2.X) && v1.Y<v2.Y && !core::equals(v1.Y, v2.Y)) ||
+			(core::equals(v1.X, v2.X) && core::equals(v1.Y, v2.Y) && v1.Z<v2.Z && !core::equals(v1.Z, v2.Z));
 	}
 
 	static bool operator <= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x<v2.x || core::equals(v1.x, v2.x)) ||
-			(core::equals(v1.x, v2.x) && (v1.y<v2.y || core::equals(v1.y, v2.y))) ||
-			(core::equals(v1.x, v2.x) && core::equals(v1.y, v2.y) && (v1.z<v2.z || core::equals(v1.z, v2.z)));
+		return (v1.X<v2.X || core::equals(v1.X, v2.X)) ||
+			(core::equals(v1.X, v2.X) && (v1.Y<v2.Y || core::equals(v1.Y, v2.Y))) ||
+			(core::equals(v1.X, v2.X) && core::equals(v1.Y, v2.Y) && (v1.Z<v2.Z || core::equals(v1.Z, v2.Z)));
 	}
 
 	static _REFCLASS_ operator + (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+		return _REFCLASS_(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
 	}
 
 	static _REFCLASS_ operator + (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x + v2, v1.y + v2, v1.z + v2);
+		return _REFCLASS_(v1.X + v2, v1.Y + v2, v1.Z + v2);
 	}
 
 	static _REFCLASS_ operator - (_REFCLASS_ v1)
 	{
-		return _REFCLASS_(-v1.x, -v1.y, -v1.z);
+		return _REFCLASS_(-v1.X, -v1.Y, -v1.Z);
 	}
 
 	static _REFCLASS_ operator - (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+		return _REFCLASS_(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
 	}
 
 	static _REFCLASS_ operator - (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x - v2, v1.y - v2, v1.z - v2);
+		return _REFCLASS_(v1.X - v2, v1.Y - v2, v1.Z - v2);
 	}
 
 	static _REFCLASS_ operator * (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+		return _REFCLASS_(v1.X * v2.X, v1.Y * v2.Y, v1.Z * v2.Z);
 	}
 
 	static _REFCLASS_ operator * (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x * v2, v1.y * v2, v1.z * v2);
+		return _REFCLASS_(v1.X * v2, v1.Y * v2, v1.Z * v2);
 	}
 
 	static _REFCLASS_ operator / (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
+		return _REFCLASS_(v1.X / v2.X, v1.Y / v2.Y, v1.Z / v2.Z);
 	}
 
 	static _REFCLASS_ operator / (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
 //Irrlicht has another implementation for floating point types, but I can't get it compile
 //#if _WRAPTYPE_ int
-		return _REFCLASS_(v1.x / v2, v1.y / v2, v1.z / v2);
+		return _REFCLASS_(v1.X / v2, v1.Y / v2, v1.Z / v2);
 //#else
 //		_WRAPTYPE_ i = (_WRAPTYPE)1.0/v2;
-//		return _REFCLASS_(v1.x * i, v1.y * i, v1.z * i);
+//		return _REFCLASS_(v1.X * i, v1.Y * i, v1.Z * i);
 //#endif
 	}
 
 	void Set(_WRAPTYPE_ nx, _WRAPTYPE_ ny, _WRAPTYPE_ nz)
 	{
-		x = nx;
-		y = ny;
-		z = nz;
+		X = nx;
+		Y = ny;
+		Z = nz;
 	}
 
 	void Set(_REFCLASS_ copy)
 	{
-		x = copy.x;
-		y = copy.y;
-		z = copy.z;
+		X = copy.X;
+		Y = copy.Y;
+		Z = copy.Z;
 	}
 
 	_REFCLASS_ CrossProduct(_REFCLASS_ other)
 	{
-		return _REFCLASS_(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
+		return _REFCLASS_(Y * other.Z - Z * other.Y, Z * other.X - X * other.Z, X * other.Y - Y * other.X);
 	}
 
 	bool EqualsTo(_REFCLASS_ other, _WRAPTYPE_ tolerance)
@@ -151,9 +155,9 @@ public:
 	array<_WRAPTYPE_>^ ToArray()
 	{
 		array<_WRAPTYPE_>^ a = gcnew array<_WRAPTYPE_>(4);
-		a[0] = x;
-		a[1] = y;
-		a[2] = z;
+		a[0] = X;
+		a[1] = Y;
+		a[2] = Z;
 		a[3] = 0;
 
 		return a;
@@ -161,9 +165,9 @@ public:
 
 	_REFCLASS_ Invert()
 	{
-		x *= -1;
-		y *= -1;
-		z *= -1;
+		X *= -1;
+		Y *= -1;
+		Z *= -1;
 		return *this;
 	}
 
@@ -172,11 +176,11 @@ public:
 		degrees *= DEGTORAD64;
 		f64 cs = cos(degrees);
 		f64 sn = sin(degrees);
-		x -= center.x;
-		y -= center.y;
-		Set((_WRAPTYPE_)(x*cs - y*sn), (_WRAPTYPE_)(x*sn + y*cs), z);
-		x += center.x;
-		y += center.y;
+		X -= center.X;
+		Y -= center.Y;
+		Set((_WRAPTYPE_)(X*cs - Y*sn), (_WRAPTYPE_)(X*sn + Y*cs), Z);
+		X += center.X;
+		Y += center.Y;
 	}
 
 	void RotateXYby(double degrees)
@@ -189,11 +193,11 @@ public:
 		degrees *= DEGTORAD64;
 		f64 cs = cos(degrees);
 		f64 sn = sin(degrees);
-		x -= center.x;
-		z -= center.z;
-		Set((_WRAPTYPE_)(x*cs - z*sn), y, (_WRAPTYPE_)(x*sn + z*cs));
-		x += center.x;
-		z += center.z;
+		X -= center.X;
+		Z -= center.Z;
+		Set((_WRAPTYPE_)(X*cs - Z*sn), Y, (_WRAPTYPE_)(X*sn + Z*cs));
+		X += center.X;
+		Z += center.Z;
 	}
 
 	void RotateXZby(double degrees)
@@ -206,11 +210,11 @@ public:
 		degrees *= DEGTORAD64;
 		f64 cs = cos(degrees);
 		f64 sn = sin(degrees);
-		z -= center.z;
-		y -= center.y;
-		Set(x, (_WRAPTYPE_)(y*cs - z*sn), (_WRAPTYPE_)(y*sn + z*cs));
-		z += center.z;
-		y += center.y;
+		Z -= center.Z;
+		Y -= center.Y;
+		Set(X, (_WRAPTYPE_)(Y*cs - Z*sn), (_WRAPTYPE_)(Y*sn + Z*cs));
+		Z += center.Z;
+		Y += center.Y;
 	}
 
 	void RotateYZby(double degrees)
@@ -220,12 +224,12 @@ public:
 
 	_REFCLASS_ RotationToDirection(_REFCLASS_ forwards)
 	{
-		const f64 cr = cos( core::DEGTORAD64 * x );
-		const f64 sr = sin( core::DEGTORAD64 * x );
-		const f64 cp = cos( core::DEGTORAD64 * y );
-		const f64 sp = sin( core::DEGTORAD64 * y );
-		const f64 cy = cos( core::DEGTORAD64 * z );
-		const f64 sy = sin( core::DEGTORAD64 * z );
+		const f64 cr = cos( core::DEGTORAD64 * X );
+		const f64 sr = sin( core::DEGTORAD64 * X );
+		const f64 cp = cos( core::DEGTORAD64 * Y );
+		const f64 sp = sin( core::DEGTORAD64 * Y );
+		const f64 cy = cos( core::DEGTORAD64 * Z );
+		const f64 sy = sin( core::DEGTORAD64 * Z );
 
 		const f64 srsp = sr*sp;
 		const f64 crsp = cr*sp;
@@ -236,15 +240,15 @@ public:
 			( crsp*cy+sr*sy ), ( crsp*sy-sr*cy ), ( cr*cp )};
 
 		return _REFCLASS_(
-			(_WRAPTYPE_)(forwards.x * pseudoMatrix[0] +
-						 forwards.y * pseudoMatrix[3] +
-						 forwards.z * pseudoMatrix[6]),
-			(_WRAPTYPE_)(forwards.x * pseudoMatrix[1] +
-						 forwards.y * pseudoMatrix[4] +
-						 forwards.z * pseudoMatrix[7]),
-			(_WRAPTYPE_)(forwards.x * pseudoMatrix[2] +
-						 forwards.y * pseudoMatrix[5] +
-						 forwards.z * pseudoMatrix[8]));
+			(_WRAPTYPE_)(forwards.X * pseudoMatrix[0] +
+						 forwards.Y * pseudoMatrix[3] +
+						 forwards.Z * pseudoMatrix[6]),
+			(_WRAPTYPE_)(forwards.X * pseudoMatrix[1] +
+						 forwards.Y * pseudoMatrix[4] +
+						 forwards.Z * pseudoMatrix[7]),
+			(_WRAPTYPE_)(forwards.X * pseudoMatrix[2] +
+						 forwards.Y * pseudoMatrix[5] +
+						 forwards.Z * pseudoMatrix[8]));
 	}
 
 	_REFCLASS_ RotationToDirection()
@@ -255,7 +259,7 @@ public:
 	
 	_WRAPTYPE_ DotProduct(_REFCLASS_ other)
 	{
-		return x*other.x + y*other.y + z*other.z;
+		return X*other.X + Y*other.Y + Z*other.Z;
 	}
 
 	bool EqualsTo(_REFCLASS_ other)
@@ -265,18 +269,18 @@ public:
 
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)
 	{
-		return _REFCLASS_(x - other.x, y - other.y, z - other.z).Length;
+		return _REFCLASS_(X - other.X, Y - other.Y, Z - other.Z).Length;
 	}
 
 	_WRAPTYPE_ GetDistanceFromSQ(_REFCLASS_ other)
 	{
-		return _REFCLASS_(x - other.x, y - other.y, z - other.z).LengthSQ;
+		return _REFCLASS_(X - other.X, Y - other.Y, Z - other.Z).LengthSQ;
 	}
 
 	_REFCLASS_ GetInterpolated(_REFCLASS_ other, double d)
 	{
 		const f64 inv = 1.0 - d;
-		return _REFCLASS_((_WRAPTYPE_)(other.x*inv + x*d), (_WRAPTYPE_)(other.y*inv + y*d), (_WRAPTYPE_)(other.z*inv + z*d));
+		return _REFCLASS_((_WRAPTYPE_)(other.X*inv + X*d), (_WRAPTYPE_)(other.Y*inv + Y*d), (_WRAPTYPE_)(other.Z*inv + Z*d));
 	}
 
 	_REFCLASS_ GetInterpolatedQuadratic(_REFCLASS_ other1, _REFCLASS_ other2, double d)
@@ -286,16 +290,16 @@ public:
 		const f64 mul1 = (_WRAPTYPE_) 2.0 * d * inv;
 		const f64 mul2 = d * d;
 
-		return _REFCLASS_((_WRAPTYPE_)(x * mul0 + other1.x * mul1 + other2.x * mul2),
-				(_WRAPTYPE_)(y * mul0 + other1.y * mul1 + other2.y * mul2),
-				(_WRAPTYPE_)(z * mul0 + other1.z * mul1 + other2.z * mul2));
+		return _REFCLASS_((_WRAPTYPE_)(X * mul0 + other1.X * mul1 + other2.X * mul2),
+				(_WRAPTYPE_)(Y * mul0 + other1.Y * mul1 + other2.Y * mul2),
+				(_WRAPTYPE_)(Z * mul0 + other1.Z * mul1 + other2.Z * mul2));
 	}
 
 	_REFCLASS_ Interpolate(_REFCLASS_ other1, _REFCLASS_ other2, double d)
 	{
-		x = (_WRAPTYPE_)((f64)other2.x + ( ( other1.x - other2.x ) * d ));
-		y = (_WRAPTYPE_)((f64)other2.y + ( ( other1.y - other2.y ) * d ));
-		z = (_WRAPTYPE_)((f64)other2.z + ( ( other1.z - other2.z ) * d ));
+		X = (_WRAPTYPE_)((f64)other2.X + ( ( other1.X - other2.X ) * d ));
+		Y = (_WRAPTYPE_)((f64)other2.Y + ( ( other1.Y - other2.Y ) * d ));
+		Z = (_WRAPTYPE_)((f64)other2.Z + ( ( other1.Z - other2.Z ) * d ));
 		return *this;
 	}
 
@@ -308,14 +312,14 @@ public:
 
 	_REFCLASS_ Normalize()
 	{
-		f64 length = x*x + y*y + z*z;
+		f64 length = X*X + Y*Y + Z*Z;
 		if (length == 0 ) // this check isn't an optimization but prevents getting NAN in the sqrt.
 			return *this;
 		length = core::reciprocal_squareroot(length);
 
-		x = (_WRAPTYPE_)(x * length);
-		y = (_WRAPTYPE_)(y * length);
-		z = (_WRAPTYPE_)(z * length);
+		X = (_WRAPTYPE_)(X * length);
+		Y = (_WRAPTYPE_)(Y * length);
+		Z = (_WRAPTYPE_)(Z * length);
 		return *this;
 	}
 
@@ -326,23 +330,23 @@ public:
 			_REFCLASS_ angle;
 
 			// tmp avoids some precision troubles on some compilers when working with T=s32
-			f64 tmp = (atan2((f64)x, (f64)z) * RADTODEG64);
-			angle.y = (_WRAPTYPE_)tmp;
+			f64 tmp = (atan2((f64)X, (f64)Z) * RADTODEG64);
+			angle.Y = (_WRAPTYPE_)tmp;
 
-			if (angle.y < 0)
-				angle.y += 360;
-			if (angle.y >= 360)
-				angle.y -= 360;
+			if (angle.Y < 0)
+				angle.Y += 360;
+			if (angle.Y >= 360)
+				angle.Y -= 360;
 
-			const f64 z1 = core::squareroot(x*x + z*z);
+			const f64 z1 = core::squareroot(X*X + Z*Z);
 
-			tmp = (atan2((f64)z1, (f64)y) * RADTODEG64 - 90.0);
-			angle.x = (_WRAPTYPE_)tmp;
+			tmp = (atan2((f64)z1, (f64)Y) * RADTODEG64 - 90.0);
+			angle.X = (_WRAPTYPE_)tmp;
 
-			if (angle.x < 0)
-				angle.x += 360;
-			if (angle.x >= 360)
-				angle.x -= 360;
+			if (angle.X < 0)
+				angle.X += 360;
+			if (angle.X >= 360)
+				angle.X -= 360;
 
 			return angle;
 		}
@@ -350,7 +354,7 @@ public:
 
 	property _WRAPTYPE_ Length
 	{
-		_WRAPTYPE_ get() { return core::squareroot( x*x + y*y + z*z ); }
+		_WRAPTYPE_ get() { return core::squareroot( X*X + Y*Y + Z*Z ); }
 		void set(_WRAPTYPE_ value)
 		{ 
 			Normalize();
@@ -360,7 +364,7 @@ public:
 
 	property _WRAPTYPE_ LengthSQ
 	{
-		_WRAPTYPE_ get() { return x*x + y*y + z*z; }
+		_WRAPTYPE_ get() { return X*X + Y*Y + Z*Z; }
 	}
 
 	property _REFCLASS_ SphericalCoordinateAngles
@@ -368,40 +372,40 @@ public:
 		_REFCLASS_ get() 
 		{
 			_REFCLASS_ angle;
-			const f64 length = x*x + y*y + z*z;
+			const f64 length = X*X + Y*Y + Z*Z;
 
 			if (length)
 			{
-				if (x!=0)
+				if (X!=0)
 				{
-					angle.y = (_WRAPTYPE_)(atan2((f64)z,(f64)x) * RADTODEG64);
+					angle.Y = (_WRAPTYPE_)(atan2((f64)Z,(f64)X) * RADTODEG64);
 				}
-				else if (z<0)
-					angle.y=180;
+				else if (Z<0)
+					angle.Y=180;
 
-				angle.x = (_WRAPTYPE_)(acos(y * core::reciprocal_squareroot(length)) * RADTODEG64);
+				angle.X = (_WRAPTYPE_)(acos(Y * core::reciprocal_squareroot(length)) * RADTODEG64);
 			}
 			return angle;
 		}
 	}
 	
-	property _WRAPTYPE_ X
+	/*property _WRAPTYPE_ X
 	{
-		_WRAPTYPE_ get() { return x; }
-		void set(_WRAPTYPE_ value) { x = value; }
+		_WRAPTYPE_ get() { return X; }
+		void set(_WRAPTYPE_ value) { X = value; }
 	}
 
 	property _WRAPTYPE_ Y
 	{
-		_WRAPTYPE_ get() { return y; }
-		void set(_WRAPTYPE_ value) { y = value; }
+		_WRAPTYPE_ get() { return Y; }
+		void set(_WRAPTYPE_ value) { Y = value; }
 	}
 
 	property _WRAPTYPE_ Z
 	{
-		_WRAPTYPE_ get() { return z; }
-		void set(_WRAPTYPE_ value) { z = value; }
-	}
+		_WRAPTYPE_ get() { return Z; }
+		void set(_WRAPTYPE_ value) { Z = value; }
+	}*/
 
 	virtual String^ ToString() override
 	{
@@ -412,25 +416,18 @@ internal:
 
 	_REFCLASS_(const _WRAPCLASS_& other)
 	{
-		x = other.X;
-		y = other.Y;
-		z = other.Z;
+		X = other.X;
+		Y = other.Y;
+		Z = other.Z;
 	}
 	
 	operator _WRAPCLASS_()
 	{
-		return _WRAPCLASS_(x, y, z);
+		return _WRAPCLASS_(X, Y, Z);
 	}
 
 	_WRAPCLASS_ ToNative()
 	{
 		return (_WRAPCLASS_)*this;
 	}
-
-private:
-
-	_WRAPTYPE_ x;
-	_WRAPTYPE_ y;
-	_WRAPTYPE_ z;
-
 };

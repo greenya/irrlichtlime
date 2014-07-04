@@ -26,7 +26,7 @@ SceneCollisionManager::SceneCollisionManager(scene::ISceneCollisionManager* ref)
 }
 
 bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint,
-	[Out] Triangle3Df^% collisionTriangle, [Out] SceneNode^% collisionNode)
+	[Out] Triangle3Df% collisionTriangle, [Out] SceneNode^% collisionNode)
 {
 	core::vector3df cp;
 	core::triangle3df ct;
@@ -40,7 +40,7 @@ bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ sel
 	if (b)
 	{
 		collisionPoint = Vector3Df(cp);
-		collisionTriangle = gcnew Triangle3Df(ct);
+		collisionTriangle = Triangle3Df(ct);
 		collisionNode = SceneNode::Wrap(cn);
 	}
 
@@ -48,7 +48,7 @@ bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ sel
 }
 
 Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius,
-	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df^% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
+	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
 	[Out] SceneNode^% collisionNode, float slidingSpeed, Vector3Df gravityDirectionAndSpeed)
 {
 	core::triangle3df ct;
@@ -65,7 +65,7 @@ Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ se
 		slidingSpeed,
 		gravityDirectionAndSpeed);
 
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 	collisionPosition = Vector3Df(cp);
 	falling = f;
 	collisionNode = SceneNode::Wrap(cn);
@@ -74,7 +74,7 @@ Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ se
 }
 
 Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius,
-	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df^% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
+	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
 	[Out] SceneNode^% collisionNode, float slidingSpeed)
 {
 	core::triangle3df ct;
@@ -90,7 +90,7 @@ Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ se
 		ct, cp, f, cn,
 		slidingSpeed);
 
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 	collisionPosition = Vector3Df(cp);
 	falling = f;
 	collisionNode = SceneNode::Wrap(cn);
@@ -99,7 +99,7 @@ Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ se
 }
 
 Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius,
-	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df^% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
+	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
 	[Out] SceneNode^% collisionNode)
 {
 	core::triangle3df ct;
@@ -114,7 +114,7 @@ Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ se
 		ellipsoidDirectionAndSpeed,
 		ct, cp, f, cn);
 
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 	collisionPosition = Vector3Df(cp);
 	falling = f;
 	collisionNode = SceneNode::Wrap(cn);
@@ -133,7 +133,7 @@ Line3Df SceneCollisionManager::GetRayFromScreenCoordinates(Vector2Di pos)
 }
 
 SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint,
-	[Out] Triangle3Df^% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode, bool noDebugObjects)
+	[Out] Triangle3Df% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode, bool noDebugObjects)
 {
 	core::vector3df cp;
 	core::triangle3df ct;
@@ -146,13 +146,13 @@ SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df r
 		noDebugObjects);
 
 	collisionPoint = Vector3Df(cp);
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 
 	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint,
-	[Out] Triangle3Df^% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode)
+	[Out] Triangle3Df% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode)
 {
 	core::vector3df cp;
 	core::triangle3df ct;
@@ -164,13 +164,13 @@ SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df r
 		LIME_SAFEREF(collisionRootNode, m_SceneNode));
 
 	collisionPoint = Vector3Df(cp);
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 
 	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint,
-	[Out] Triangle3Df^% collisionTriangle, int idBitMask)
+	[Out] Triangle3Df% collisionTriangle, int idBitMask)
 {
 	core::vector3df cp;
 	core::triangle3df ct;
@@ -181,13 +181,13 @@ SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df r
 		idBitMask);
 
 	collisionPoint = Vector3Df(cp);
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 
 	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint,
-	[Out] Triangle3Df^% collisionTriangle)
+	[Out] Triangle3Df% collisionTriangle)
 {
 	core::vector3df cp;
 	core::triangle3df ct;
@@ -197,7 +197,7 @@ SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df r
 		cp, ct);
 
 	collisionPoint = Vector3Df(cp);
-	collisionTriangle = gcnew Triangle3Df(ct);
+	collisionTriangle = Triangle3Df(ct);
 
 	return SceneNode::Wrap(n);
 }

@@ -40,102 +40,102 @@ TriangleSelector^ TriangleSelector::GetSelector(int selectorIndex)
 	return TriangleSelector::Wrap(s);
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount, Matrix^ transform)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(box != nullptr);
 	LIME_ASSERT(maxTriangleCount > 0);
 	LIME_ASSERT(transform != nullptr);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c, *box->m_NativeValue, transform->m_NativeValue);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(AABBox^ box, int maxTriangleCount)
 {
 	LIME_ASSERT(box != nullptr);
 	LIME_ASSERT(maxTriangleCount > 0);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c, *box->m_NativeValue);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df line, int maxTriangleCount, Matrix^ transform)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(Line3Df line, int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(maxTriangleCount > 0);
 	LIME_ASSERT(transform != nullptr);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c, line, transform->m_NativeValue);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(Line3Df line, int maxTriangleCount)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(Line3Df line, int maxTriangleCount)
 {
 	LIME_ASSERT(maxTriangleCount > 0);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c, line);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount, Matrix^ transform)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(int maxTriangleCount, Matrix^ transform)
 {
 	LIME_ASSERT(maxTriangleCount > 0);
 	LIME_ASSERT(transform != nullptr);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c, transform->m_NativeValue);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;
 }
 
-List<Triangle3Df^>^ TriangleSelector::GetTriangles(int maxTriangleCount)
+List<Triangle3Df>^ TriangleSelector::GetTriangles(int maxTriangleCount)
 {
 	LIME_ASSERT(maxTriangleCount > 0);
 
-	List<Triangle3Df^>^ l = gcnew List<Triangle3Df^>();
+	List<Triangle3Df>^ l = gcnew List<Triangle3Df>();
 	core::triangle3df* t = new core::triangle3df[maxTriangleCount];
 	int c;
 
 	m_TriangleSelector->getTriangles(t, maxTriangleCount, c);
 	for (int i = 0; i < c; i++)
-		l->Add(gcnew Triangle3Df(t[i]));
+		l->Add(Triangle3Df(t[i]));
 
 	delete[] t;
 	return l;

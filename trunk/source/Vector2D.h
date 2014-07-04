@@ -9,13 +9,16 @@ public value class _REFCLASS_
 
 public:
 
+	_WRAPTYPE_ X;
+	_WRAPTYPE_ Y;
+
 	_REFCLASS_(_WRAPTYPE_ x, _WRAPTYPE_ y)
-		: x(x), y(y)
+		: X(x), Y(y)
 	{
 	}
 
 	explicit _REFCLASS_(_WRAPTYPE_ all)
-		: x(all), y(all)
+		: X(all), Y(all)
 	{
 	}
 
@@ -23,13 +26,13 @@ public:
 
 	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2, _WRAPTYPE_ tolerance)
 	{
-		return core::equals(v1.x, v2.x, tolerance) && core::equals(v1.y, v2.y, tolerance);
+		return core::equals(v1.X, v2.X, tolerance) && core::equals(v1.Y, v2.Y, tolerance);
 	}
 
 	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2)
 	{
 		_WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
-		return core::equals(v1.x, v2.x, tolerance) && core::equals(v1.y, v2.y, tolerance);
+		return core::equals(v1.X, v2.X, tolerance) && core::equals(v1.Y, v2.Y, tolerance);
 	}
 
 	static bool operator == (_REFCLASS_ v1, _REFCLASS_ v2)
@@ -44,89 +47,89 @@ public:
 
 	static bool operator > (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x>v2.x && !core::equals(v1.x, v2.x)) ||
-				(core::equals(v1.x, v2.x) && v1.y>v2.y && !core::equals(v1.y, v2.y));
+		return (v1.X>v2.X && !core::equals(v1.X, v2.X)) ||
+				(core::equals(v1.X, v2.X) && v1.Y>v2.Y && !core::equals(v1.Y, v2.Y));
 	}
 
 	static bool operator >= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x>v2.x || core::equals(v1.x, v2.x)) ||
-				(core::equals(v1.x, v2.x) && (v1.y>v2.y || core::equals(v1.y, v2.y)));
+		return (v1.X>v2.X || core::equals(v1.X, v2.X)) ||
+				(core::equals(v1.X, v2.X) && (v1.Y>v2.Y || core::equals(v1.Y, v2.Y)));
 	}
 
 	static bool operator < (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x<v2.x && !core::equals(v1.x, v2.x)) ||
-				(core::equals(v1.x, v2.x) && v1.y<v2.y && !core::equals(v1.y, v2.y));
+		return (v1.X<v2.X && !core::equals(v1.X, v2.X)) ||
+				(core::equals(v1.X, v2.X) && v1.Y<v2.Y && !core::equals(v1.Y, v2.Y));
 	}
 
 	static bool operator <= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.x<v2.x || core::equals(v1.x, v2.x)) ||
-				(core::equals(v1.x, v2.x) && (v1.y<v2.y || core::equals(v1.y, v2.y)));
+		return (v1.X<v2.X || core::equals(v1.X, v2.X)) ||
+				(core::equals(v1.X, v2.X) && (v1.Y<v2.Y || core::equals(v1.Y, v2.Y)));
 	}
 
 	static _REFCLASS_ operator + (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x + v2.x, v1.y + v2.y);
+		return _REFCLASS_(v1.X + v2.X, v1.Y + v2.Y);
 	}
 
 	static _REFCLASS_ operator + (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x + v2, v1.y + v2);
+		return _REFCLASS_(v1.X + v2, v1.Y + v2);
 	}
 
 	static _REFCLASS_ operator - (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
 
-		return _REFCLASS_(v1.x - v2.x, v1.y - v2.y);
+		return _REFCLASS_(v1.X - v2.X, v1.Y - v2.Y);
 	}
 
 	static _REFCLASS_ operator - (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x - v2, v1.y - v2);
+		return _REFCLASS_(v1.X - v2, v1.Y - v2);
 	}
 
 	static _REFCLASS_ operator * (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x * v2.x, v1.y * v2.y);
+		return _REFCLASS_(v1.X * v2.X, v1.Y * v2.Y);
 	}
 
 	static _REFCLASS_ operator * (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x * v2, v1.y * v2);
+		return _REFCLASS_(v1.X * v2, v1.Y * v2);
 	}
 
 	static _REFCLASS_ operator / (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return _REFCLASS_(v1.x / v2.x, v1.y / v2.y);
+		return _REFCLASS_(v1.X / v2.X, v1.Y / v2.Y);
 	}
 
 	static _REFCLASS_ operator / (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-		return _REFCLASS_(v1.x / v2, v1.y / v2);
+		return _REFCLASS_(v1.X / v2, v1.Y / v2);
 	}
 
 	void Set(_WRAPTYPE_ nx, _WRAPTYPE_ ny)
 	{
-		x = nx;
-		y = ny;
+		X = nx;
+		Y = ny;
 	}
 
 	void Set(_REFCLASS_ copy)
 	{
-		x = copy.x;
-		y = copy.y;
+		X = copy.X;
+		Y = copy.Y;
 	}
 
 	double GetAngleWith(_REFCLASS_ other)
 	{
-		double tmp = (double)(x*other.x + y*other.y);
+		double tmp = (double)(X*other.X + Y*other.Y);
 
 		if (tmp == 0.0)
 			return 90.0;
 
-		tmp = tmp / core::squareroot((double)((x*x + y*y) * (other.x*other.x + other.y*other.y)));
+		tmp = tmp / core::squareroot((double)((X*X + Y*Y) * (other.X*other.X + other.Y*other.Y)));
 		if (tmp < 0.0)
 			tmp = -tmp;
 		if ( tmp > 1.0 ) //   avoid floating-point trouble
@@ -141,13 +144,13 @@ public:
 		const f64 cs = cos(degrees);
 		const f64 sn = sin(degrees);
 
-		x -= center.x;
-		y -= center.y;
+		X -= center.X;
+		Y -= center.Y;
 
-		Set((_WRAPTYPE_)(x*cs - y*sn), (_WRAPTYPE_)(x*sn + y*cs));
+		Set((_WRAPTYPE_)(X*cs - Y*sn), (_WRAPTYPE_)(X*sn + Y*cs));
 
-		x += center.x;
-		y += center.y;
+		X += center.X;
+		Y += center.Y;
 		return *this;
 	}
 
@@ -160,26 +163,26 @@ public:
 	{
 		double get()
 		{
-			if (y == 0) // corrected thanks to a suggestion by Jox
-				return x < 0 ? 180 : 0;
-			else if (x == 0)
-				return y < 0 ? 90 : 270;
+			if (Y == 0) // corrected thanks to a suggestion by Jox
+				return X < 0 ? 180 : 0;
+			else if (X == 0)
+				return Y < 0 ? 90 : 270;
 
 			// don't use getLength here to avoid precision loss with s32 vectors
-			// avoid floating-point trouble as sqrt(y*y) is occasionally larger than y, so clamp
-			const f64 tmp = core::clamp(y / sqrt((f64)(x*x + y*y)), -1.0, 1.0);
+			// avoid floating-point trouble as sqrt(Y*Y) is occasionally larger than Y, so clamp
+			const f64 tmp = core::clamp(Y / sqrt((f64)(X*X + Y*Y)), -1.0, 1.0);
 			const f64 angle = atan( core::squareroot(1 - tmp*tmp) / tmp) * RADTODEG64;
 
-			if (x>0 && y>0)
+			if (X>0 && Y>0)
 				return angle + 270;
 			else
-			if (x>0 && y<0)
+			if (X>0 && Y<0)
 				return angle + 90;
 			else
-			if (x<0 && y<0)
+			if (X<0 && Y<0)
 				return 90 - angle;
 			else
-			if (x<0 && y>0)
+			if (X<0 && Y>0)
 				return 270 - angle;
 
 			return angle;
@@ -190,34 +193,34 @@ public:
 	{
 		double get() 
 		{
-			if (y == 0)
-				return x < 0 ? 180 : 0;
+			if (Y == 0)
+				return X < 0 ? 180 : 0;
 			else
-			if (x == 0)
-				return y < 0 ? 270 : 90;
+			if (X == 0)
+				return Y < 0 ? 270 : 90;
 
-			if (y > 0)
-				if (x > 0)
-					return atan((irr::f64)y/(irr::f64)x) * RADTODEG64;
+			if (Y > 0)
+				if (X > 0)
+					return atan((irr::f64)Y/(irr::f64)X) * RADTODEG64;
 				else
-					return 180.0-atan((irr::f64)y/-(irr::f64)x) * RADTODEG64;
+					return 180.0-atan((irr::f64)Y/-(irr::f64)X) * RADTODEG64;
 			else
-				if (x > 0)
-					return 360.0-atan(-(irr::f64)y/(irr::f64)x) * RADTODEG64;
+				if (X > 0)
+					return 360.0-atan(-(irr::f64)Y/(irr::f64)X) * RADTODEG64;
 				else
-					return 180.0+atan(-(irr::f64)y/-(irr::f64)x) * RADTODEG64;
+					return 180.0+atan(-(irr::f64)Y/-(irr::f64)X) * RADTODEG64;
 		}
 	}
 
 	property _WRAPTYPE_ Length
 	{
-		_WRAPTYPE_ get() {  return core::squareroot(x*x + y*y); }
+		_WRAPTYPE_ get() {  return core::squareroot(X*X + Y*Y); }
 	}
 
 
 	_WRAPTYPE_ DotProduct(_REFCLASS_ other)
 	{
-		return x*other.x + y*other.y;
+		return X*other.X + Y*other.Y;
 	}
 
 	bool EqualsTo(_REFCLASS_ other)
@@ -227,18 +230,18 @@ public:
 
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)
 	{
-		return _REFCLASS_(x - other.x, y - other.y).Length;
+		return _REFCLASS_(X - other.X, Y - other.Y).Length;
 	}
 
 	_WRAPTYPE_ GetDistanceFromSQ(_REFCLASS_ other)
 	{
-		return _REFCLASS_(x - other.x, y - other.y).LengthSQ;
+		return _REFCLASS_(X - other.X, Y - other.Y).LengthSQ;
 	}
 
 	_REFCLASS_ GetInterpolated(_REFCLASS_ other, double d)
 	{
 		f64 inv = 1.0f - d;
-		return _REFCLASS_((_WRAPTYPE_)(other.x*inv + x*d), (_WRAPTYPE_)(other.y*inv + y*d));
+		return _REFCLASS_((_WRAPTYPE_)(other.X*inv + X*d), (_WRAPTYPE_)(other.Y*inv + Y*d));
 	}
 
 	_REFCLASS_ GetInterpolatedQuadratic(_REFCLASS_ other1, _REFCLASS_ other2, double d)
@@ -248,39 +251,39 @@ public:
 		const f64 mul1 = 2.0f * d * inv;
 		const f64 mul2 = d * d;
 
-		return _REFCLASS_( (_WRAPTYPE_)(x * mul0 + other1.x * mul1 + other2.x * mul2),
-					(_WRAPTYPE_)(y * mul0 + other1.y * mul1 + other2.y * mul2));
+		return _REFCLASS_( (_WRAPTYPE_)(X * mul0 + other1.X * mul1 + other2.X * mul2),
+					(_WRAPTYPE_)(Y * mul0 + other1.Y * mul1 + other2.Y * mul2));
 	}
 
 	_REFCLASS_ Interpolate(_REFCLASS_ other1, _REFCLASS_ other2, double d)
 	{
-		x = (_WRAPTYPE_)((f64)other1.x + ( ( other1.x - other2.x ) * d ));
-		y = (_WRAPTYPE_)((f64)other2.y + ( ( other1.y - other2.y ) * d ));
+		X = (_WRAPTYPE_)((f64)other1.X + ( ( other1.X - other2.X ) * d ));
+		Y = (_WRAPTYPE_)((f64)other2.Y + ( ( other1.Y - other2.Y ) * d ));
 		return *this;
 	}
 
 	bool IsBetweenPoints(_REFCLASS_ begin, _REFCLASS_ end)
 	{
-		if (begin.x != end.x)
+		if (begin.X != end.X)
 		{
-			return ((begin.x <= x && x <= end.x) ||
-				(begin.x >= x && x >= end.x));
+			return ((begin.X <= X && X <= end.X) ||
+				(begin.X >= X && X >= end.X));
 		}
 		else
 		{
-			return ((begin.y <= y && y <= end.y) ||
-				(begin.y >= y && y >= end.y));
+			return ((begin.Y <= Y && Y <= end.Y) ||
+				(begin.Y >= Y && Y >= end.Y));
 		}
 	}
 
 	_REFCLASS_ Normalize()
 	{
-		f32 length = (f32)(x*x + y*y);
+		f32 length = (f32)(X*X + Y*Y);
 		if ( length == 0 )
 			return *this;
 		length = core::reciprocal_squareroot ( length );
-		x = (_WRAPTYPE_)(x * length);
-		y = (_WRAPTYPE_)(y * length);
+		X = (_WRAPTYPE_)(X * length);
+		Y = (_WRAPTYPE_)(Y * length);
 		return *this;
 	}
 
@@ -288,19 +291,7 @@ public:
 
 	property _WRAPTYPE_ LengthSQ
 	{
-		_WRAPTYPE_ get() { return x*x + y*y; }
-	}
-
-	property _WRAPTYPE_ X
-	{
-		_WRAPTYPE_ get() { return x; }
-		void set(_WRAPTYPE_ value) { x = value; }
-	}
-
-	property _WRAPTYPE_ Y
-	{
-		_WRAPTYPE_ get() { return y; }
-		void set(_WRAPTYPE_ value) { y = value; }
+		_WRAPTYPE_ get() { return X*X + Y*Y; }
 	}
 
 	virtual String^ ToString() override
@@ -312,23 +303,17 @@ internal:
 
 	_REFCLASS_(const _WRAPCLASS_& other)
 	{
-		x = other.X;
-		y = other.Y;
+		X = other.X;
+		Y = other.Y;
 	}
 	
 	operator _WRAPCLASS_()
 	{
-		return _WRAPCLASS_(x, y);
+		return _WRAPCLASS_(X, Y);
 	}
 
 	_WRAPCLASS_ ToNative()
 	{
 		return (_WRAPCLASS_)*this;
 	}
-
-private:
-	
-	_WRAPTYPE_ x;
-	_WRAPTYPE_ y;
-
 };

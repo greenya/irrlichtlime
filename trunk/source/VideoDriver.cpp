@@ -998,12 +998,10 @@ void VideoDriver::Draw3DTriangle(Vector3Df pointA, Vector3Df pointB, Vector3Df p
 		color);
 }
 
-void VideoDriver::Draw3DTriangle(Triangle3Df^ triangle, Color color)
+void VideoDriver::Draw3DTriangle(Triangle3Df triangle, Color color)
 {
-	LIME_ASSERT(triangle != nullptr);
-
 	m_VideoDriver->draw3DTriangle(
-		*triangle->m_NativeValue,
+		triangle,
 		color);
 }
 
