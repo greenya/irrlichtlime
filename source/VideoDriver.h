@@ -120,7 +120,7 @@ public:
 	void Draw3DLine(Line3Df line, Color color);
 
 	void Draw3DTriangle(Vector3Df pointA, Vector3Df pointB, Vector3Df pointC, Color color);
-	void Draw3DTriangle(Triangle3Df^ triangle, Color color);
+	void Draw3DTriangle(Triangle3Df triangle, Color color);
 
 	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
 

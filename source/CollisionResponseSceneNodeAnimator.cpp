@@ -60,9 +60,9 @@ Vector3Df CollisionResponseSceneNodeAnimator::CollisionResultPosition::get()
 	return Vector3Df(m_CollisionResponseSceneNodeAnimator->getCollisionResultPosition());
 }
 
-Triangle3Df^ CollisionResponseSceneNodeAnimator::CollisionTriangle::get()
+Triangle3Df CollisionResponseSceneNodeAnimator::CollisionTriangle::get()
 {
-	return gcnew Triangle3Df(m_CollisionResponseSceneNodeAnimator->getCollisionTriangle());
+	return Triangle3Df(m_CollisionResponseSceneNodeAnimator->getCollisionTriangle());
 }
 
 Vector3Df CollisionResponseSceneNodeAnimator::EllipsoidRadius::get()
