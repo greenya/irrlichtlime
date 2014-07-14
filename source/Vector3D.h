@@ -4,7 +4,7 @@
 
 #include "irrMath.h"
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class _REFCLASS_
+public value class _REFCLASS_ : public IComparable<_REFCLASS_>
 {
 public:
 
@@ -20,6 +20,16 @@ public:
 	explicit _REFCLASS_(_WRAPTYPE_ all)
 		: X(all), Y(all), Z(all)
 	{
+	}
+
+	virtual int CompareTo(_REFCLASS_ other) 
+	{
+		if (*this == other)
+			return 0;
+		else if (*this < other)
+			return -1;
+		else
+			return +1;
 	}
 
 	// operators
