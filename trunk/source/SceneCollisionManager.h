@@ -19,6 +19,7 @@ public ref class SceneCollisionManager : ReferenceCounted
 public:
 
 	bool GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle, [Out] SceneNode^% collisionNode);
+	bool GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle);
 
 	Vector3Df GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius, Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling, [Out] SceneNode^% collisionNode, float slidingSpeed, Vector3Df gravityDirectionAndSpeed);
 	Vector3Df GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius, Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling, [Out] SceneNode^% collisionNode, float slidingSpeed);

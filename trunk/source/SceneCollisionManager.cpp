@@ -47,6 +47,27 @@ bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ sel
 	return b;
 }
 
+bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint,
+	[Out] Triangle3Df% collisionTriangle)
+{
+	core::vector3df cp;
+	core::triangle3df ct;
+	scene::ISceneNode* cn;
+
+	bool b = m_SceneCollisionManager->getCollisionPoint(
+		ray,
+		LIME_SAFEREF(selector, m_TriangleSelector),
+		cp, ct, cn);
+
+	if (b)
+	{
+		collisionPoint = Vector3Df(cp);
+		collisionTriangle = Triangle3Df(ct);
+	}
+
+	return b;
+}
+
 Vector3Df SceneCollisionManager::GetCollisionResultPosition(TriangleSelector^ selector, Vector3Df ellipsoidPosition, Vector3Df ellipsoidRadius,
 	Vector3Df ellipsoidDirectionAndSpeed, [Out] Triangle3Df% collisionTriangle, [Out] Vector3Df% collisionPosition, [Out] bool% falling,
 	[Out] SceneNode^% collisionNode, float slidingSpeed, Vector3Df gravityDirectionAndSpeed)
