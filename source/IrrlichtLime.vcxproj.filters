@@ -640,6 +640,9 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="ReadFileStream.h">
+      <Filter>IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -944,6 +947,9 @@
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadFileStream.cpp">
+      <Filter>IO</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

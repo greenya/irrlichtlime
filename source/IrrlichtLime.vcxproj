@@ -231,6 +231,7 @@
     <ClInclude Include="PixelShaderType.h" />
     <ClInclude Include="PolygonOffset.h" />
     <ClInclude Include="Randomizer.h" />
+    <ClInclude Include="ReadFileStream.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="SceneNodeAnimatorInheritor.h" />
     <ClInclude Include="SceneParameters.h" />
@@ -423,6 +424,7 @@
     <ClCompile Include="MaterialRendererServices.cpp" />
     <ClCompile Include="MeshTextureLoader.cpp" />
     <ClCompile Include="Randomizer.cpp" />
+    <ClCompile Include="ReadFileStream.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
     <ClCompile Include="VideoDriver.cpp" />
