@@ -63,6 +63,8 @@ Changes in 1.5
 - Vector2/3D now inherits IComparable, can be sorted, etc
 - SceneCollisionManager.GetCollisionPoint() now optionally doesn't return a SceneNode.
 - Class ReadFileStream added: Allows .Net like reading from ReadFiles. Can be used with XMLReaders, etc.
+- Color: Bug in GetInterpolated solved (wrong channel order)
+- SceneManager: CreateFollowSplineAnimator and CreateTextureAnimator now take ICollections instead of Lists
 
 ============================
 Changes in 1.4 (19-May-2013)

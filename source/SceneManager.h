@@ -271,12 +271,12 @@ public:
 	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df startPoint, Vector3Df endPoint, float timeForWay, bool loop);
 	SceneNodeAnimator^ CreateFlyStraightAnimator(Vector3Df startPoint, Vector3Df endPoint, float timeForWay);
 
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop, bool pingpong);
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop);
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness);
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed);
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime);
-	SceneNodeAnimator^ CreateFollowSplineAnimator(List<Vector3Df>^ points);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop, bool pingpong);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime);
+	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points);
 
 	MetaTriangleSelector^ CreateMetaTriangleSelector();
 
@@ -296,8 +296,8 @@ public:
 	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node, int lodLevel);
 	TriangleSelector^ CreateTerrainTriangleSelector(TerrainSceneNode^ node);
 
-	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop);
-	SceneNodeAnimator^ CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame);
+	SceneNodeAnimator^ CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame, bool loop);
+	SceneNodeAnimator^ CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame);
 
 	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node);
 	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node);
