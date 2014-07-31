@@ -101,10 +101,11 @@ public:
 	{
 		d = core::clamp(d, 0.f, 1.f);
 		const f32 inv = 1.0f - d;
-		return Color((u32)core::round32(other.Alpha*inv + Alpha*d),
+		return Color(
 			(u32)core::round32(other.Red*inv + Red*d),
 			(u32)core::round32(other.Green*inv + Green*d),
-			(u32)core::round32(other.Blue*inv + Blue*d));
+			(u32)core::round32(other.Blue*inv + Blue*d),
+			(u32)core::round32(other.Alpha*inv + Alpha*d));
 	}
 
 	void SetData(const void* data, ColorFormat format)

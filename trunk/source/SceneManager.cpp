@@ -2481,14 +2481,14 @@ SceneNodeAnimator^ SceneManager::CreateFlyStraightAnimator(Vector3Df startPoint,
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop, bool pingpong)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop, bool pingpong)
 {
 	LIME_ASSERT(points != nullptr);
-	LIME_ASSERT(points->Count >= 2);
-	
+	LIME_ASSERT(points->Count >= 2);	
+
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 		
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		(int)(startTime * 1000),
@@ -2501,14 +2501,14 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ poi
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness, bool loop)
 {
 	LIME_ASSERT(points != nullptr);
 	LIME_ASSERT(points->Count >= 2);
 	
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		(int)(startTime * 1000),
@@ -2520,14 +2520,14 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ poi
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed, float tightness)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed, float tightness)
 {
 	LIME_ASSERT(points != nullptr);
 	LIME_ASSERT(points->Count >= 2);
 	
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		(int)(startTime * 1000),
@@ -2538,14 +2538,14 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ poi
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime, float speed)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed)
 {
 	LIME_ASSERT(points != nullptr);
 	LIME_ASSERT(points->Count >= 2);
 	
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		(int)(startTime * 1000),
@@ -2555,14 +2555,14 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ poi
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points, float startTime)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime)
 {
 	LIME_ASSERT(points != nullptr);
 	LIME_ASSERT(points->Count >= 2);
 	
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		(int)(startTime * 1000),
@@ -2571,14 +2571,14 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ poi
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(List<Vector3Df>^ points)
+SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3Df>^ points)
 {
 	LIME_ASSERT(points != nullptr);
 	LIME_ASSERT(points->Count >= 2);
 	
 	core::array<core::vector3df> p;
-	for (int i = 0; i < points->Count; i++)
-		p.push_back(points[i]);
+	for each(Vector3Df point in points)
+		p.push_back(point);
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createFollowSplineAnimator(
 		0,
@@ -2676,16 +2676,16 @@ TriangleSelector^ SceneManager::CreateTerrainTriangleSelector(TerrainSceneNode^ 
 	return TriangleSelector::Wrap(s);
 }
 
-SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame, bool loop)
+SceneNodeAnimator^ SceneManager::CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame, bool loop)
 {
 	LIME_ASSERT(textures != nullptr);
 	LIME_ASSERT(textures->Count > 0);
 
 	core::array<video::ITexture*> r;
-	for (int i = 0; i < textures->Count; i++)
+	for each(Video::Texture^ texture in textures)
 	{
-		LIME_ASSERT(textures[i] != nullptr);
-		r.push_back(LIME_SAFEREF(textures[i], m_Texture));
+		LIME_ASSERT(texture != nullptr);
+		r.push_back(LIME_SAFEREF(texture, m_Texture));
 	}
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createTextureAnimator(
@@ -2696,16 +2696,16 @@ SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ te
 	return SceneNodeAnimator::Wrap(a);
 }
 
-SceneNodeAnimator^ SceneManager::CreateTextureAnimator(List<Video::Texture^>^ textures, float timePerFrame)
+SceneNodeAnimator^ SceneManager::CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame)
 {
 	LIME_ASSERT(textures != nullptr);
 	LIME_ASSERT(textures->Count > 0);
 
 	core::array<video::ITexture*> r;
-	for (int i = 0; i < textures->Count; i++)
+	for each(Video::Texture^ texture in textures)
 	{
-		LIME_ASSERT(textures[i] != nullptr);
-		r.push_back(LIME_SAFEREF(textures[i], m_Texture));
+		LIME_ASSERT(texture != nullptr);
+		r.push_back(LIME_SAFEREF(texture, m_Texture));
 	}
 
 	scene::ISceneNodeAnimator* a = m_SceneManager->createTextureAnimator(
