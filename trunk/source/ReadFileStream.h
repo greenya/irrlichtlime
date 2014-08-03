@@ -33,7 +33,7 @@ public:
 	virtual int Read(array<Byte>^ buffer, int offset, int count) override;
 #pragma warning (push)
 #pragma warning (disable: 4100)
-	virtual void Write(array<Byte>^ buffer, int offset, int count) override { throw gcnew InvalidOperationException(); }
+	virtual void Write(array<Byte>^ buffer, int offset, int count) override { throw gcnew NotSupportedException(); }
 #pragma warning (pop)
 	virtual void Flush() override { }	//Not implemented
 

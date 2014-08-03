@@ -1835,7 +1835,10 @@ This is a function often used for texture dimension calculations. The function r
 		<member name="T:IrrlichtLime.Core.Line3Df">
 			<summary>3D line between two points with intersection methods.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Line3Df.End">
+		<member name="P:IrrlichtLime.Core.Line3Df.Default">
+			<summary>Get a line from (0, 0, 0) to (1, 1, 1).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Core.Line3Df.End">
 			<summary>End point of line.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Line3Df.GetClosestPoint(IrrlichtLime.Core.Vector3Df)">
@@ -1863,13 +1866,6 @@ Assumes that the point is already somewhere on the line.</summary>
 		<member name="P:IrrlichtLime.Core.Line3Df.LengthSQ">
 			<summary>Squared length of line: Length^2.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Line3Df.#ctor">
-			<summary>Default constructor. Line from (0,0,0) to (1,1,1).</summary>
-		</member>
-		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(IrrlichtLime.Core.Line3Df)">
-			<summary>Creates separete copy.</summary>
-			<param name="copy">Value to copy.</param>
-		</member>
 		<member name="M:IrrlichtLime.Core.Line3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Constructor with two points as vectors.</summary>
 			<param name="start">Start point.</param>
@@ -1887,10 +1883,6 @@ Assumes that the point is already somewhere on the line.</summary>
 		<member name="P:IrrlichtLime.Core.Line3Df.Middle">
 			<summary>Center of line.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Line3Df.Set(IrrlichtLime.Core.Line3Df)">
-			<summary>Set this line to new line given as parameter.</summary>
-			<param name="newLine">Line to copy.</param>
-		</member>
 		<member name="M:IrrlichtLime.Core.Line3Df.Set(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Set this line to a new line going through the two points as vectors.</summary>
 			<param name="newStart">Start point.</param>
@@ -1905,7 +1897,7 @@ Assumes that the point is already somewhere on the line.</summary>
 			<param name="newEndY">New end point Y coord.</param>
 			<param name="newEndZ">New end point Z coord.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Line3Df.Start">
+		<member name="F:IrrlichtLime.Core.Line3Df.Start">
 			<summary>Start point of line.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Line3Df.Vector">
@@ -2785,17 +2777,17 @@ Note: use Repair() to make it valid.</summary>
 		<member name="T:IrrlichtLime.Core.Triangle3Df">
 			<summary>3d triangle class for doing collision detection and other things.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Triangle3Df.A">
-			<summary>Point A of the triangle.</summary>
+		<member name="F:IrrlichtLime.Core.Triangle3Df.A">
+			<summary>Point A.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Triangle3Df.Area">
 			<summary>Get the area of the triangle.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Triangle3Df.B">
-			<summary>Point B of the triangle.</summary>
+		<member name="F:IrrlichtLime.Core.Triangle3Df.B">
+			<summary>Point B.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Triangle3Df.C">
-			<summary>Point C of the triangle.</summary>
+		<member name="F:IrrlichtLime.Core.Triangle3Df.C">
+			<summary>Point C.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.GetClosestPointOnTriangle(IrrlichtLime.Core.Vector3Df)">
 			<summary>Get the closest point on a triangle to a point on the same plane.</summary>
@@ -2865,13 +2857,6 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 			<param name="point2">Point B.</param>
 			<param name="point3">Point C.</param>
 		</member>
-		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor">
-			<summary>Creates empty triangle (each point will be 0,0,0).</summary>
-		</member>
-		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor(IrrlichtLime.Core.Triangle3Df)">
-			<summary>Creates separete copy.</summary>
-			<param name="copy">Value to copy.</param>
-		</member>
 		<member name="M:IrrlichtLime.Core.Triangle3Df.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
 			<summary>Creates triangle using given three points.</summary>
 			<param name="point1">Point A.</param>
@@ -2881,11 +2866,26 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 		<member name="T:IrrlichtLime.Core.Vector2Dd">
 			<summary>2d vector class with lots of operators and methods.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.equals(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.equals(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd,System.Double)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
+		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Dd.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Dd.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.CompareTo(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.DotProduct(IrrlichtLime.Core.Vector2Dd)">
 			<summary>Get the dot product of this vector with another.</summary>
@@ -2975,39 +2975,47 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.Set(System.Double,System.Double)">
 			<summary>Set value of this vector using provided coordinates.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor">
-			<summary>Default constructor (null vector).</summary>
+			<param name="nx">The new X coordinate.</param>
+			<param name="ny">The new Y coordinate.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(System.Double)">
 			<summary>Constructor with the same value for both members.</summary>
 			<param name="all">Coordinate for X and Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(IrrlichtLime.Core.Vector2Dd)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.#ctor(System.Double,System.Double)">
 			<summary>Constructor with two different values.</summary>
 			<param name="x">X coordinate.</param>
 			<param name="y">Y coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Dd.X">
+		<member name="F:IrrlichtLime.Core.Vector2Dd.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Dd.Y">
+		<member name="F:IrrlichtLime.Core.Vector2Dd.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector2Df">
 			<summary>2d vector class with lots of operators and methods.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.equals(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.equals(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df,System.Single)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.CompareTo(IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.DotProduct(IrrlichtLime.Core.Vector2Df)">
 			<summary>Get the dot product of this vector with another.</summary>
@@ -3097,39 +3105,47 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.Set(System.Single,System.Single)">
 			<summary>Set value of this vector using provided coordinates.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor">
-			<summary>Default constructor (null vector).</summary>
+			<param name="nx">The new X coordinate.</param>
+			<param name="ny">The new Y coordinate.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single)">
 			<summary>Constructor with the same value for both members.</summary>
 			<param name="all">Coordinate for X and Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(IrrlichtLime.Core.Vector2Df)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.#ctor(System.Single,System.Single)">
 			<summary>Constructor with two different values.</summary>
 			<param name="x">X coordinate.</param>
 			<param name="y">Y coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Df.X">
+		<member name="F:IrrlichtLime.Core.Vector2Df.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Df.Y">
+		<member name="F:IrrlichtLime.Core.Vector2Df.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector2Di">
 			<summary>2d vector class with lots of operators and methods.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.equals(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.equals(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,System.Int32)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.CompareTo(IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.DotProduct(IrrlichtLime.Core.Vector2Di)">
 			<summary>Get the dot product of this vector with another.</summary>
@@ -3219,35 +3235,43 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.Set(System.Int32,System.Int32)">
 			<summary>Set value of this vector using provided coordinates.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor">
-			<summary>Default constructor (null vector).</summary>
+			<param name="nx">The new X coordinate.</param>
+			<param name="ny">The new Y coordinate.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32)">
 			<summary>Constructor with the same value for both members.</summary>
 			<param name="all">Coordinate for X and Y.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(IrrlichtLime.Core.Vector2Di)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.#ctor(System.Int32,System.Int32)">
 			<summary>Constructor with two different values.</summary>
 			<param name="x">X coordinate.</param>
 			<param name="y">Y coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Di.X">
+		<member name="F:IrrlichtLime.Core.Vector2Di.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector2Di.Y">
+		<member name="F:IrrlichtLime.Core.Vector2Di.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector3Dd">
 			<summary>3d vector class with lots of operators and methods.
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.equals(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.equals(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd,System.Double)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.CompareTo(IrrlichtLime.Core.Vector3Dd)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.CrossProduct(IrrlichtLime.Core.Vector3Dd)">
 			<summary>Calculates the cross product with another vector.</summary>
@@ -3381,9 +3405,9 @@ This vector is assumed to be a rotation vector composed of 3 Euler angle rotatio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.Set(System.Double,System.Double,System.Double)">
 			<summary>Sets new value of this vector.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-			<param name="z">New Z.</param>
+			<param name="nx">The new X coordinate.</param>
+			<param name="ny">The new Y coordinate.</param>
+			<param name="nz">The new Z coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Dd.SphericalCoordinateAngles">
 			<summary>The spherical coordinate angles.
@@ -3395,16 +3419,9 @@ This returns Euler degrees for the point represented by this vector. The calcula
 
 The fourth value will always be 0.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor">
-			<summary>Default constructor (null vector).</summary>
-		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(System.Double)">
 			<summary>Constructor with the same value for all three elements.</summary>
 			<param name="all">Coordinate for X, Y and Z.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(IrrlichtLime.Core.Vector3Dd)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.#ctor(System.Double,System.Double,System.Double)">
 			<summary>Constructor with three different values.</summary>
@@ -3412,19 +3429,34 @@ The fourth value will always be 0.</summary>
 			<param name="y">Y coordinate.</param>
 			<param name="z">Z coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Dd.X">
+		<member name="F:IrrlichtLime.Core.Vector3Dd.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Dd.Y">
+		<member name="F:IrrlichtLime.Core.Vector3Dd.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Dd.Z">
+		<member name="F:IrrlichtLime.Core.Vector3Dd.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector3Df">
 			<summary>3d vector class with lots of operators and methods.
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.equals(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.equals(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.CompareTo(IrrlichtLime.Core.Vector3Df)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.CrossProduct(IrrlichtLime.Core.Vector3Df)">
 			<summary>Calculates the cross product with another vector.</summary>
@@ -3558,9 +3590,9 @@ This vector is assumed to be a rotation vector composed of 3 Euler angle rotatio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.Set(System.Single,System.Single,System.Single)">
 			<summary>Sets new value of this vector.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-			<param name="z">New Z.</param>
+			<param name="nx">The new X coordinate.</param>
+			<param name="ny">The new Y coordinate.</param>
+			<param name="nz">The new Z coordinate.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Df.SphericalCoordinateAngles">
 			<summary>The spherical coordinate angles.
@@ -3572,16 +3604,9 @@ This returns Euler degrees for the point represented by this vector. The calcula
 
 Useful for setting in shader constants for example. The fourth value will always be 0.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor">
-			<summary>Default constructor (null vector).</summary>
-		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single)">
 			<summary>Constructor with the same value for all three elements.</summary>
 			<param name="all">Coordiante for X, Y and Z.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(IrrlichtLime.Core.Vector3Df)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.#ctor(System.Single,System.Single,System.Single)">
 			<summary>Constructor with three different values.</summary>
@@ -3589,19 +3614,34 @@ Useful for setting in shader constants for example. The fourth value will always
 			<param name="y">Y coordinate.</param>
 			<param name="z">Z coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Df.X">
+		<member name="F:IrrlichtLime.Core.Vector3Df.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Df.Y">
+		<member name="F:IrrlichtLime.Core.Vector3Df.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Df.Z">
+		<member name="F:IrrlichtLime.Core.Vector3Df.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector3Di">
 			<summary>3d vector class with lots of operators and methods.
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.equals(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.equals(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di,System.Int32)">
+			<summary>Returns whether this vector is equal to another one.</summary>
+			<param name="v1">The first vector.</param>
+			<param name="v2">The second vector.</param>
+			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.CompareTo(IrrlichtLime.Core.Vector3Di)">
+			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
+			<param name="other">The vector to compare with.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.CrossProduct(IrrlichtLime.Core.Vector3Di)">
 			<summary>Calculates the cross product with another vector.</summary>
@@ -3700,6 +3740,7 @@ In case of the 0 vector the result is still 0, otherwise the length of the vecto
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXZby(System.Double)">
 			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
+			<param name="degrees">Number of degrees to rotate around the Y axis.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.RotateXZby(System.Double,IrrlichtLime.Core.Vector3Di)">
 			<summary>Rotates the vector by a specified number of degrees around the Y axis and the specified center.</summary>
@@ -3734,9 +3775,9 @@ This vector is assumed to be a rotation vector composed of 3 Euler angle rotatio
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.Set(System.Int32,System.Int32,System.Int32)">
 			<summary>Sets new value of this vector.</summary>
-			<param name="x">New X.</param>
-			<param name="y">New Y.</param>
-			<param name="z">New Z.</param>
+			<param name="nx">The new X coordiante.</param>
+			<param name="ny">The new Y coordiante.</param>
+			<param name="nz">The new Z coordiante.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector3Di.SphericalCoordinateAngles">
 			<summary>The spherical coordinate angles.
@@ -3748,16 +3789,9 @@ This returns Euler degrees for the point represented by this vector. The calcula
 
 Useful for setting in shader constants for example. The fourth value will always be 0.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor">
-			<summary>Default constructor (null vector).</summary>
-		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32)">
 			<summary>Constructor with the same value for all three elements.</summary>
 			<param name="all">Coordinate for X, Y and Z.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(IrrlichtLime.Core.Vector3Di)">
-			<summary>Copy constructor.</summary>
-			<param name="copy">Vector to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.#ctor(System.Int32,System.Int32,System.Int32)">
 			<summary>Constructor with three different values.</summary>
@@ -3765,13 +3799,13 @@ Useful for setting in shader constants for example. The fourth value will always
 			<param name="y">Y coordinate.</param>
 			<param name="z">Z coordinate.</param>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Di.X">
+		<member name="F:IrrlichtLime.Core.Vector3Di.X">
 			<summary>X coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Di.Y">
+		<member name="F:IrrlichtLime.Core.Vector3Di.Y">
 			<summary>Y coordinate of the vector.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Vector3Di.Z">
+		<member name="F:IrrlichtLime.Core.Vector3Di.Z">
 			<summary>Z coordinate of the vector.</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.CursorControl">
@@ -7905,6 +7939,59 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 		<member name="P:IrrlichtLime.IO.ReadFile.Size">
 			<summary>Size of the file in bytes.</summary>
 		</member>
+		<member name="T:IrrlichtLime.IO.ReadFileStream">
+			<summary>Provides .Net like read access to a file.
+You should use this class with a using syntax.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.CanRead">
+			<summary>True, if you can currently read.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.CanSeek">
+			<summary>True, if you can currently seek.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.CanWrite">
+			<summary>True, if you can currently write.
+Always false.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.File">
+			<summary>The ReadFile, which is used.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.Flush">
+			<summary>Does nothing in this implementation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.Length">
+			<summary>The length of the stream.</summary>
+		</member>
+		<member name="P:IrrlichtLime.IO.ReadFileStream.Position">
+			<summary>The current position in the stream.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.Read(System.Byte[],System.Int32,System.Int32)">
+			<summary>Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.</summary>
+			<param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.</param>
+			<param name="offset">The zero-based byte offset in buffer at which to begin storing the data read from the current stream.</param>
+			<param name="count">The maximum number of bytes to be read from the current stream.</param>
+			<returns>The total number of bytes read into the buffer.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.#ctor">
+			<summary>Creates a new ReadFileStream, which is assigned to no ReadFile.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.#ctor(IrrlichtLime.IO.ReadFile)">
+			<summary>Creates a new ReadFileStream, which is assigned to the passed ReadFile.
+If you've created the ReadFile, you can drop it, if you don't need it anymore. The ReadFileStream will take care of it.</summary>
+			<param name="readFile">The ReadFile to use.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.Seek(System.Int64,System.IO.SeekOrigin)">
+			<summary>Sets the position within the current stream.</summary>
+			<param name="offset">A byte offset relative to the origin parameter.</param>
+			<param name="origin">A value of type SeekOrigin indicating the reference point used to obtain the new position.</param>
+			<returns>The new position within the current stream.</returns>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.SetLength(System.Int64)">
+			<summary>Doesn't do anything.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.ReadFileStream.Write(System.Byte[],System.Int32,System.Int32)">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
 		<member name="T:IrrlichtLime.IO.WriteFile">
 			<summary>Provides write acess to a file.</summary>
 		</member>
@@ -9043,41 +9130,17 @@ Since mesh buffers are used for drawing, and hence will be exposed to the driver
 			<summary>Appends another mesh buffer to this one.</summary>
 			<param name="other">Mesh buffer to append.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append``1(``0[],System.UInt16[])">
 			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesStandard">Vertices to append.</param>
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer.</summary>
+			<param name="vertices">Vertices to append.</param>
 			<param name="indices16bit">Indices to append.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3D[],System.UInt32[])">
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append``1(``0[],System.UInt32[])">
 			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesStandard">Vertices to append.</param>
-			<param name="indices32bit">Indices to append.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTangents[],System.UInt16[])">
-			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesTangents">Vertices to append.</param>
-			<param name="indices16bit">Indices to append.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTangents[],System.UInt32[])">
-			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesTangents">Vertices to append.</param>
-			<param name="indices32bit">Indices to append.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTTCoords[],System.UInt16[])">
-			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesTTCoords">Vertices to append.</param>
-			<param name="indices16bit">Indices to append.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(IrrlichtLime.Video.Vertex3DTTCoords[],System.UInt32[])">
-			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer'.</summary>
-			<param name="verticesTTCoords">Vertices to append.</param>
-			<param name="indices32bit">Indices to append.</param>
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer.</summary>
+			<param name="vertices">Vertices to append.</param>
+			<param name="indices32bit">Vertices to append.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.BoundingBox">
 			<summary>Axis aligned bounding box of this mesh buffer.</summary>
@@ -10707,6 +10770,14 @@ If they are, the particles are affected by the movement of the particle system s
 		</member>
 		<member name="T:IrrlichtLime.Scene.SceneCollisionManager">
 			<summary>The Scene Collision Manager provides methods for performing collision tests and picking on scene nodes.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionPoint(IrrlichtLime.Core.Line3Df,IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@)">
+			<summary>Finds the nearest collision point of a line and lots of triangles, if there is one.</summary>
+			<param name="ray">Line with which collisions are tested.</param>
+			<param name="selector">The source of triangles.</param>
+			<param name="collisionPoint">If a collision is detected, this will contain the position of the nearest collision to the line-start.</param>
+			<param name="collisionTriangle">If a collision is detected, this will contain the triangle with which the ray collided.</param>
+			<returns>True if a collision was detected and false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneCollisionManager.GetCollisionPoint(IrrlichtLime.Core.Line3Df,IrrlichtLime.Scene.TriangleSelector,IrrlichtLime.Core.Vector3Df@,IrrlichtLime.Core.Triangle3Df@,IrrlichtLime.Scene.SceneNode@)">
 			<summary>Finds the nearest collision point of a line and lots of triangles, if there is one.</summary>
@@ -12678,7 +12749,7 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is false.</param>
 			<param name="pingpong">Whether the node should fly back from end to start again. Default is false.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df})">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df})">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12686,7 +12757,7 @@ The animator modifies the position of the attached scene node to make it follow 
 Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
 			<param name="points">List of control points which forms the spline.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single)">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df},System.Single)">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12695,7 +12766,7 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="points">List of control points which forms the spline.</param>
 			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single)">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df},System.Single,System.Single)">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12705,7 +12776,7 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="startTime">Start time in seconds. Default is 0.0f.</param>
 			<param name="speed">Movement speed. Default is 1.0f.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single)">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single)">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12716,7 +12787,7 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="speed">Movement speed. Default is 1.0f.</param>
 			<param name="tightness">Tightness of the spline. Default is 0.5f.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean)">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean)">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12728,7 +12799,7 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="tightness">Tightness of the spline. Default is 0.5f.</param>
 			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is true.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.List{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateFollowSplineAnimator(System.Collections.Generic.ICollection{IrrlichtLime.Core.Vector3Df},System.Single,System.Single,System.Single,System.Boolean,System.Boolean)">
 			<summary>Creates a follow spline animator.
 
 The animator modifies the position of the attached scene node to make it follow a hermite spline. It uses a subset of hermite splines: either cardinal splines (tightness != 0.5) or catmull-rom-splines (tightness == 0.5). The animator moves from one control point to the next in 1/speed seconds. This code was sent in by Matthias Gall.
@@ -12826,21 +12897,6 @@ Please note that the created triangle selector is not automaticly attached to th
 If you no longer need the selector, you should call TriangleSelector.Drop().</summary>
 			<param name="node">The terrain scene node.</param>
 			<param name="lodLevel">Level of detail, 0 for highest detail. Default is 0.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTextureAnimator(System.Collections.Generic.List{IrrlichtLime.Video.Texture},System.Single)">
-			<summary>Creates a texture animator, which switches the textures of the target scene node based on a list of textures.
-
-Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
-			<param name="textures">List of textures to use.</param>
-			<param name="timePerFrame">Time in milliseconds, how long any texture in the list should be used.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTextureAnimator(System.Collections.Generic.List{IrrlichtLime.Video.Texture},System.Single,System.Boolean)">
-			<summary>Creates a texture animator, which switches the textures of the target scene node based on a list of textures.
-
-Attach it to a scene node with SceneNode.AddAnimator() and the animator will animate it. If you no longer need the animator, you should call SceneNodeAnimator.Drop().</summary>
-			<param name="textures">List of textures to use.</param>
-			<param name="timePerFrame">Time in milliseconds, how long any texture in the list should be used.</param>
-			<param name="loop">If true, the animation restarts with the first texture. If false, the last texture remains set, and the animation stops. Default is true.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateTriangleSelector(IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.SceneNode)">
 			<summary>Creates a simple TriangleSelector, based on a mesh.
@@ -14472,16 +14528,9 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 		<member name="P:IrrlichtLime.Video.Color.Blue">
 			<summary>Blue component of the color.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Color.#ctor">
-			<summary>Creates a color without initialization. Value of the color will be random.</summary>
-		</member>
 		<member name="M:IrrlichtLime.Video.Color.#ctor(System.UInt32)">
 			<summary>Creates a color using ARGB value.</summary>
 			<param name="argb">Value from 0 to 0xffffffff.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.Color.#ctor(IrrlichtLime.Video.Color)">
-			<summary>Creates a copy of color.</summary>
-			<param name="copy">Color to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.#ctor(System.Int32,System.Int32,System.Int32)">
 			<summary>Creates a color using red, green, blue and alpha values.</summary>
@@ -14495,6 +14544,16 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 			<param name="g">Green component. Must be value between 0 and 255.</param>
 			<param name="b">Blue component. Must be value between 0 and 255.</param>
 			<param name="a">Alpha component. Must be value between 0 and 255. Default: 255 (fully opaque).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.GetData(System.Void*,IrrlichtLime.Video.ColorFormat)">
+			<summary>Write the color to data in the defined format.</summary>
+			<param name="data">Target to write the color. Must contain sufficiently large memory to receive the number of bytes neede for format.</param>
+			<param name="format">Tells the format used to write the color into data.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.GetInterpolated(IrrlichtLime.Video.Color,System.Single)">
+			<summary>Gets an interpolated color.</summary>
+			<param name="other">The color to interplate with.</param>
+			<param name="d">The interpolation factor.</param>
 		</member>
 		<member name="P:IrrlichtLime.Video.Color.Green">
 			<summary>Green component of the color.</summary>
@@ -14510,17 +14569,6 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(System.UInt32)">
 			<summary>Sets the color value using ARGB value.</summary>
-			<param name="argb">Value from 0 to 0xffffffff.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.Color.Set(IrrlichtLime.Video.Color)">
-			<summary>Sets value of the color to provided copy.</summary>
-			<param name="copy">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32)">
-			<summary>Sets the color value using red, green, blue and alpha values.</summary>
-			<param name="r">Red component. Must be value between 0 and 255.</param>
-			<param name="g">Green component. Must be value between 0 and 255.</param>
-			<param name="b">Blue component. Must be value between 0 and 255.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Color.Set(System.Int32,System.Int32,System.Int32,System.Int32)">
 			<summary>Sets the color value using red, green, blue and alpha values.</summary>
@@ -14528,6 +14576,11 @@ Another way is using the class Colorf, which stores the color values in 4 floats
 			<param name="g">Green component. Must be value between 0 and 255.</param>
 			<param name="b">Blue component. Must be value between 0 and 255.</param>
 			<param name="a">Alpha component. Must be value between 0 and 255. Default: 255 (fully opaque).</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Color.SetData(System.Void*,IrrlichtLime.Video.ColorFormat)">
+			<summary>Set the color by expecting data in the given format.</summary>
+			<param name="data">Must point to valid memory containing color information in the given format.</param>
+			<param name="format">Tells the format in which data is available.</param>
 		</member>
 		<member name="T:IrrlichtLime.Video.Colorf">
 			<summary>Class representing a 128 bit color (using 4 floats).
@@ -14540,16 +14593,9 @@ The color values for red, green, blue and alpha are each stored in a 32 bit floa
 		<member name="P:IrrlichtLime.Video.Colorf.Blue">
 			<summary>Blue component of the color.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Colorf.#ctor">
-			<summary>Creates a default color. Sets red, green and blue to 0.0f and alpha to 1.0f.</summary>
-		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.#ctor(IrrlichtLime.Video.Color)">
 			<summary>Creates a copy of 32 bit color.</summary>
 			<param name="copyColor">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.Colorf.#ctor(IrrlichtLime.Video.Colorf)">
-			<summary>Creates a copy of 128 bit color.</summary>
-			<param name="copyColorf">Color to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.#ctor(System.Single,System.Single,System.Single)">
 			<summary>Creates a color using red, green, blue and alpha values.</summary>
@@ -14570,26 +14616,18 @@ The color values for red, green, blue and alpha are each stored in a 32 bit floa
 		<member name="P:IrrlichtLime.Video.Colorf.Red">
 			<summary>Red component of the color.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Colorf.Set(IrrlichtLime.Video.Color)">
-			<summary>Sets value of the color to provided 32 bit copy.</summary>
-			<param name="copyColor">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.Colorf.Set(IrrlichtLime.Video.Colorf)">
-			<summary>Sets value of the color to provided 128 bit copy.</summary>
-			<param name="copyColorf">Color to copy.</param>
-		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single)">
 			<summary>Sets the color value using red, green, blue and alpha values.</summary>
-			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
-			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
-			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
+			<param name="rr">The new red value.</param>
+			<param name="gg">The new green value.</param>
+			<param name="bb">The new blue value.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.Set(System.Single,System.Single,System.Single,System.Single)">
 			<summary>Sets the color value using red, green, blue and alpha values.</summary>
-			<param name="r">Red component. Must be value between 0.0f and 1.0f.</param>
-			<param name="g">Green component. Must be value between 0.0f and 1.0f.</param>
-			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
-			<param name="a">Alpha component. Must be value between 0.0f and 1.0f. Default: 1.0f (fully opaque).</param>
+			<param name="rr">The new red value.</param>
+			<param name="gg">The new green value.</param>
+			<param name="bb">The new blue value.</param>
+			<param name="aa">The new alpha value.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Colorf.ToArray">
 			<summary>Returns array of 4 floats, which contains red, green, blue and alpha components.</summary>
@@ -14667,9 +14705,6 @@ Note: this format may only be used for render target textures.</summary>
 
 The color values for hue, saturation and luminance are stored in 32 bit floating point variables. Hue is in range [0,360], Luminance and Saturation are in percent [0,100].</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor">
-			<summary>Creates a default color. Sets hue, saturation and luminance to 0.0f.</summary>
-		</member>
 		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.Color)">
 			<summary>Creates a copy of 32 bit color.</summary>
 			<param name="copyColor">Color to copy.</param>
@@ -14677,10 +14712,6 @@ The color values for hue, saturation and luminance are stored in 32 bit floating
 		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.Colorf)">
 			<summary>Creates a copy of 128 bit color.</summary>
 			<param name="copyColorf">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(IrrlichtLime.Video.ColorHSL)">
-			<summary>Creates a copy of HSL color.</summary>
-			<param name="copyColorHSL">Color to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.ColorHSL.#ctor(System.Single,System.Single,System.Single)">
 			<summary>Creates a color using hue, saturation and luminance.</summary>
@@ -14697,23 +14728,11 @@ The color values for hue, saturation and luminance are stored in 32 bit floating
 		<member name="P:IrrlichtLime.Video.ColorHSL.Saturation">
 			<summary>Saturation value.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.Color)">
-			<summary>Sets value of the color to provided 32 bit color.</summary>
-			<param name="copyColor">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.Colorf)">
-			<summary>Sets value of the color to provided 128 bit color.</summary>
-			<param name="copyColorf">Color to copy.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.ColorHSL.Set(IrrlichtLime.Video.ColorHSL)">
-			<summary>Sets value of the color to provided HSL color.</summary>
-			<param name="copyColorHSL">Color to copy.</param>
-		</member>
 		<member name="M:IrrlichtLime.Video.ColorHSL.Set(System.Single,System.Single,System.Single)">
 			<summary>Sets the color using hue, saturation and luminance.</summary>
-			<param name="hue">Hue value. Must be value between 0.0f and 360.0f.</param>
-			<param name="saturation">Saturation value. Must be value between 0.0f and 100.0f.</param>
-			<param name="luminance">Luminance value. Must be value between 0.0f and 100.0f.</param>
+			<param name="h">Hue</param>
+			<param name="s">Saturation</param>
+			<param name="l">Luminance</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.ColorHSL.ToColor">
 			<summary>Creates 32 bit color.</summary>
@@ -15748,6 +15767,12 @@ Check might look into the file.</summary>
 		<member name="F:IrrlichtLime.Video.IndexType._32Bit">
 			<summary>32 bit indexes.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.IVertex3D">
+			<summary>Vertex Interface. Please do not implement.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.IVertex3D.Type">
+			<summary>The type of a vertex.</summary>
+		</member>
 		<member name="T:IrrlichtLime.Video.Light">
 			<summary>Describes a dynamic point light.
 
@@ -16685,8 +16710,8 @@ Note: if MipMapLevel == 0, then real width of the texture is stored here.</summa
 		<member name="T:IrrlichtLime.Video.Vertex3D">
 			<summary>Standard vertex with a position, normal, color and texture coordinates.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3D.Color">
-			<summary>Color of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3D.Color">
+			<summary>The vertex color.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3D.GetInterpolated(IrrlichtLime.Video.Vertex3D,System.Single)">
 			<summary>Gets interpolated vertex from other to this one.</summary>
@@ -16694,26 +16719,19 @@ Note: if MipMapLevel == 0, then real width of the texture is stored here.</summa
 			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
 			<returns>Interpolated vertex. This vertex is not modified.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3D.Normal">
-			<summary>Normal vector of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3D.Normal">
+			<summary>The vertex normal.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3D.Position">
-			<summary>Position of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3D.Position">
+			<summary>The vertex position.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3D.TCoords">
-			<summary>Texture coordinates (U, V) of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3D.TCoords">
+			<summary>The texture coordinates.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Vertex3D.Type">
 			<summary>Type of the vertex.
 
 Note: for this class, this property always equals to VertexType.Standard.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor">
-			<summary>Creates default vertex (with uninitialized values).</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Video.Vertex3D)">
-			<summary>Creates a copy of provided vertex.</summary>
-			<param name="copy">Vertex to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3D.#ctor(IrrlichtLime.Core.Vector3Df)">
 			<summary>Creates vertex using provided values.</summary>
@@ -16779,11 +16797,11 @@ Note: for this class, this property always equals to VertexType.Standard.</summa
 
 Usually used for tangent space normal mapping.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Binormal">
-			<summary>Binormal vector of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.Binormal">
+			<summary>The binormal of the vertex.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Color">
-			<summary>Color of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.Color">
+			<summary>The vertex color.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3DTangents.GetInterpolated(IrrlichtLime.Video.Vertex3DTangents,System.Single)">
 			<summary>Gets interpolated vertex from other to this one.</summary>
@@ -16791,29 +16809,26 @@ Usually used for tangent space normal mapping.</summary>
 			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
 			<returns>Interpolated vertex. This vertex is not modified.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Normal">
-			<summary>Normal vector of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.Normal">
+			<summary>The vertex normal.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Position">
-			<summary>Position of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.Position">
+			<summary>The vertex position.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Tangent">
-			<summary>Tangent vector of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.Tangent">
+			<summary>The tangent of the vertex.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTangents.TCoords">
-			<summary>Texture coordinates (U, V) of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTangents.TCoords">
+			<summary>The texture coordinates.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Vertex3DTangents.Type">
 			<summary>Type of the vertex.
 
 Note: for this class, this property always equals to VertexType.Tangents.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor">
-			<summary>Creates default vertex (with uninitialized values).</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Video.Vertex3DTangents)">
-			<summary>Creates a copy of provided vertex.</summary>
-			<param name="copy">Vertex to copy.</param>
+		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Video.Vertex3D)">
+			<summary>Creates vertex using another one.</summary>
+			<param name="other">The vertex to copy from.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3DTangents.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df)">
 			<summary>Creates vertex using provided values.</summary>
@@ -16914,8 +16929,8 @@ Note: for this class, this property always equals to VertexType.Tangents.</summa
 
 Usually used for geometry with lightmaps or other special materials.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Color">
-			<summary>Color of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTTCoords.Color">
+			<summary>The vertex color.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.GetInterpolated(IrrlichtLime.Video.Vertex3DTTCoords,System.Single)">
 			<summary>Gets interpolated vertex from other to this one.</summary>
@@ -16923,29 +16938,26 @@ Usually used for geometry with lightmaps or other special materials.</summary>
 			<param name="d">Interpolation value between 0.0f (all the other vertex) and 1.0f (all this vertex).</param>
 			<returns>Interpolated vertex. This vertex is not modified.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Normal">
-			<summary>Normal vector of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTTCoords.Normal">
+			<summary>The vertex normal.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Position">
-			<summary>Position of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTTCoords.Position">
+			<summary>The vertex position.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.TCoords">
-			<summary>Fisrt texture coordinates (U, V) of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTTCoords.TCoords">
+			<summary>The texure coordinates.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.TCoords2">
-			<summary>Second texture coordinates (U, V) of the vertex.</summary>
+		<member name="F:IrrlichtLime.Video.Vertex3DTTCoords.TCoords2">
+			<summary>The second texure coordinates.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.Vertex3DTTCoords.Type">
 			<summary>Type of the vertex.
 
 Note: for this class, this property always equals to VertexType.TTCoords.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor">
-			<summary>Creates default vertex (with uninitialized values).</summary>
-		</member>
-		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Video.Vertex3DTTCoords)">
-			<summary>Creates a copy of provided vertex.</summary>
-			<param name="copy">Vertex to copy.</param>
+		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Video.Vertex3D)">
+			<summary>Creates vertex using another one.</summary>
+			<param name="other">The vertex to copy from.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.Vertex3DTTCoords.#ctor(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Video.Color,IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
 			<summary>Creates vertex using provided values.</summary>
@@ -17545,44 +17557,6 @@ This method is not available for the software drivers.</summary>
 			<param name="indexBuffer">Indices.</param>
 			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
-			<summary>Draws a vertex primitive list in 2d.
-
-Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
-
-This method is not available for the software drivers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices16bit">List of 16-bit indices.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[],IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws a vertex primitive list in 2d.
-
-Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
-
-This method is not available for the software drivers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices16bit">List of 16-bit indices.</param>
-			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt32[])">
-			<summary>Draws a vertex primitive list in 2d.
-
-Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
-
-This method is not available for the software drivers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices32bit">List of 32-bit indices.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt32[],IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws a vertex primitive list in 2d.
-
-Compared to the general (3d) version of this method, this one sets up a 2d render mode, and uses only X and Y of vectors. Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renders.
-
-This method is not available for the software drivers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices32bit">List of 32-bit indices.</param>
-			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
-		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.Draw3DBox(IrrlichtLime.Core.AABBox,IrrlichtLime.Video.Color)">
 			<summary>Draws a 3d axis aligned box.
 
@@ -17720,36 +17694,6 @@ Please note that currently not all primitives are available for all drivers, and
 Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
 			<param name="vertexBuffer">Vertices.</param>
 			<param name="indexBuffer">Indices.</param>
-			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[])">
-			<summary>Draws a vertex primitive list.
-
-Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices16bit">List of 16-bit indices.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt16[],IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws a vertex primitive list.
-
-Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices16bit">List of 16-bit indices.</param>
-			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt32[])">
-			<summary>Draws a vertex primitive list.
-
-Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices32bit">List of 32-bit indices.</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.DrawVertexPrimitiveList(IrrlichtLime.Video.Vertex3D[],System.UInt32[],IrrlichtLime.Scene.PrimitiveType)">
-			<summary>Draws a vertex primitive list.
-
-Please note that currently not all primitives are available for all drivers, and some might be emulated via triangle renderers.</summary>
-			<param name="vertices">List of vertices.</param>
-			<param name="indices32bit">List of 32-bit indices.</param>
 			<param name="pType">Type of primitives to draw. Default: PrimitiveType.Triangles.</param>
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoDriver.DriverType">

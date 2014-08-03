@@ -574,24 +574,6 @@ public:
 			);
 	}
 
-	// algorithm from Foley/Van-Dam
-	inline float toRGB1(f32 rm1, f32 rm2, f32 rh) 
-	{
-		if (rh<0)
-			rh += 1;
-		if (rh>1)
-			rh -= 1;
-
-		if (rh < 1.f/6.f)
-			rm1 = rm1 + (rm2 - rm1) * rh*6.f;
-		else if (rh < 0.5f)
-			rm1 = rm2;
-		else if (rh < 2.f/3.f)
-			rm1 = rm1 + (rm2 - rm1) * ((2.f/3.f)-rh)*6.f;
-
-		return rm1;
-	}
-
 	property float Hue
 	{
 		float get() { return hue; }
@@ -634,6 +616,24 @@ private:
 	float hue;
 	float saturation;
 	float luminance;
+
+	// algorithm from Foley/Van-Dam
+	inline float toRGB1(f32 rm1, f32 rm2, f32 rh)
+	{
+		if (rh<0)
+			rh += 1;
+		if (rh>1)
+			rh -= 1;
+
+		if (rh < 1.f/6.f)
+			rm1 = rm1 + (rm2 - rm1) * rh*6.f;
+		else if (rh < 0.5f)
+			rm1 = rm2;
+		else if (rh < 2.f/3.f)
+			rm1 = rm1 + (rm2 - rm1) * ((2.f/3.f)-rh)*6.f;
+
+		return rm1;
+	}
 
 	static ColorHSL fromRGB(Colorf copyColor)
 	{
