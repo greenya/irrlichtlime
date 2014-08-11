@@ -147,7 +147,7 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 		return;
 
 	case AttributeType::Quaternion:
-		m_Attributes->addQuaternion(n.c_str(), *((Quaternion^)value)->m_NativeValue);
+		m_Attributes->addQuaternion(n.c_str(), ((Quaternion)value).ToNative());
 		return;
 
 	case AttributeType::AABBox:
@@ -430,7 +430,7 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 		return;
 
 	case AttributeType::Quaternion:
-		m_Attributes->setAttribute(attributeIndex, *((Quaternion^)value)->m_NativeValue);
+		m_Attributes->setAttribute(attributeIndex, ((Quaternion)value).ToNative());
 		return;
 
 	case AttributeType::AABBox:

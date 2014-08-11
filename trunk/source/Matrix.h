@@ -256,14 +256,16 @@ public:
 
 	void InverseRotateVector(Vector3Df% vect)
 	{
-		pin_ptr<void> p = &vect;	//pin... UNTESTED!
-		m_NativeValue->inverseRotateVect(*static_cast<core::vector3df*>(p));	//Convert from Vector3Df% to vector3df&
+		core::vector3df v = vect.ToNative();
+		m_NativeValue->inverseRotateVect(v);
+		vect = Vector3Df(v);
 	}
 
 	void InverseTranslateVector(Vector3Df% vect)
 	{
-		pin_ptr<void> p = &vect;
-		m_NativeValue->inverseTranslateVect(*static_cast<core::vector3df*>(p));
+		core::vector3df v = vect.ToNative();
+		m_NativeValue->inverseTranslateVect(v);
+		vect = Vector3Df(v);
 	}
 
 	Matrix^ MakeIdentity()
@@ -442,14 +444,16 @@ public:
 
 	void TransformVector(Vector3Df% vect)
 	{
-		pin_ptr<void> p = &vect;
-		m_NativeValue->transformVect(*static_cast<core::vector3df*>(p));
+		core::vector3df v = vect.ToNative();
+		m_NativeValue->transformVect(v);
+		vect = Vector3Df(v);
 	}
 
 	void TranslateVector(Vector3Df% vect)
 	{
-		pin_ptr<void> p = &vect;
-		m_NativeValue->translateVect(*static_cast<core::vector3df*>(p));
+		core::vector3df v = vect.ToNative();
+		m_NativeValue->translateVect(v);
+		vect = Vector3Df(v);
 	}
 
 	property bool DefinitelyIdentity
