@@ -57,10 +57,11 @@ Changes in 1.5
 - Example 03.CustomSceneNode: Node shows message when disposed in debug mode.
 - Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
 - MaterialRendererServices: float and int arrays are passed with pin_ptrs in Set|Vertex/Pixel|ShaderConstant(List)(...)
-- Some classes are now structs: Color, Vector3Di/f/d, Vertex3D(TTCoords/Tangents), Line3Df, Triangle3Df
+- Some classes are now structs: Color, Vector3Di/f/d, Vertex3D(TTCoords/Tangents), Line3Df, Triangle3Df, Quaternion
   Every class and example has been updated to use them correctly, but not all of them have been tested.
 - Line3Df: Operator + and - Vector3Df added
-- Vector2/3D now inherits IComparable, can be sorted, etc
+- Vector2/3D now inherits IComparable<T>, can be sorted, etc
+- Vector2/3D and Quaternion inherit IEquatable<T>, makes comparing consistent
 - SceneCollisionManager.GetCollisionPoint() now optionally doesn't return a SceneNode.
 - Class ReadFileStream added: Allows .Net like reading from ReadFiles. Can be used with XMLReaders, etc.
 - Color: Bug in GetInterpolated solved (wrong channel order)

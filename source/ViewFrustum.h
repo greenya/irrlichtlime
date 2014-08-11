@@ -50,8 +50,11 @@ public:
 
 	bool ClipLine(Line3Df% line)
 	{
-		pin_ptr<void> p = &line;
-		return m_NativeValue->clipLine(*static_cast<core::line3df*>(p));
+		core::line3df l = line.ToNative();
+		bool ret = m_NativeValue->clipLine(l);
+		line = Line3Df(l);
+		return ret;
+		
 	}
 
 	Plane3Df^ GetPlane(Plane plane)

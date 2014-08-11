@@ -4,7 +4,7 @@
 
 #include "irrMath.h"
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class _REFCLASS_ : public IComparable<_REFCLASS_>
+public value class _REFCLASS_ : public IComparable<_REFCLASS_>, public IEquatable<_REFCLASS_>
 {
 
 public:
@@ -233,9 +233,25 @@ public:
 		return X*other.X + Y*other.Y;
 	}
 
-	bool EqualsTo(_REFCLASS_ other)
+	virtual bool Equals(_REFCLASS_ other)
 	{
 		return equals(*this, other);
+	}
+
+	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
+	{
+		return equals(*this, other, tolerance);
+	}
+
+	virtual bool Equals(Object^ other) override
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == _REFCLASS_::typeid)
+			return Equals((_REFCLASS_)other);
+		else
+			return false;
 	}
 
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)
