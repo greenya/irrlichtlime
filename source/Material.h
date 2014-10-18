@@ -11,9 +11,28 @@ namespace Video {
 ref class MaterialLayer;
 ref class Texture;
 
-public ref class Material : Lime::NativeValue<video::SMaterial>
+public ref class Material : Lime::NativeValue<video::SMaterial>, public IEquatable<Material^>
 {
 public:
+
+	static bool operator == (Material^ v1, Material^ v2)
+	{
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
+
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
+			return false;
+
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+	}
+
+	static bool operator != (Material^ v1, Material^ v2)
+	{
+		return !(v1 == v2);
+	}
 
 	static property Material^ Identity { Material^ get() { return gcnew Material(); } }
 	static property Material^ IdentityNoLighting { Material^ get() { Material^ m = gcnew Material(); m->Lighting = false; return m; } }
@@ -66,6 +85,8 @@ public:
 
 	property List<MaterialLayer^>^ Layer { List<MaterialLayer^>^ get(); }
 
+	virtual bool Equals(Object^ other) override;
+	virtual bool Equals(Material^ other);
 	virtual String^ ToString() override;
 
 internal:

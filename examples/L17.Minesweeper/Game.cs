@@ -196,7 +196,7 @@ namespace L17.Minesweeper
 				return;
 
 			cell.flagged = !cell.flagged;
-			m_root.Children[cell.i + cell.j * m_boardDimWidth].Children[0].Visible = cell.flagged;
+			m_root.Children.ElementAt(cell.i + cell.j * m_boardDimWidth).Children.ElementAt(0).Visible = cell.flagged;
 			m_device.Logger.Log("flagCell: (" + cell.i + "," + cell.j + ") now " + (cell.flagged ? "flagged" : "unflagged"));
 
 			checkVictory();
@@ -214,7 +214,7 @@ namespace L17.Minesweeper
 
 			if (cell.IsBomb)
 			{
-				m_root.Children[cell.i + cell.j * m_boardDimWidth].Children[1].Visible = true;
+				m_root.Children.ElementAt(cell.i + cell.j * m_boardDimWidth).Children.ElementAt(1).Visible = true;
 
 				m_state = State.Lost;
 				m_device.Logger.Log("game lost");
@@ -227,7 +227,7 @@ namespace L17.Minesweeper
 
 			// this is normal cell
 
-			m_root.Children[cell.i + cell.j * m_boardDimWidth].SetMaterialTexture(0, m_device.VideoDriver.GetTexture("TEXTURE-num-" + cell.number + ".jpg"));
+			m_root.Children.ElementAt(cell.i + cell.j * m_boardDimWidth).SetMaterialTexture(0, m_device.VideoDriver.GetTexture("TEXTURE-num-" + cell.number + ".jpg"));
 
 			if (cell.number == 0)
 			{

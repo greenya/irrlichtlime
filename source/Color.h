@@ -10,7 +10,7 @@ namespace IrrlichtLime {
 namespace Video {
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Color
+public value class Color : public IEquatable<Color>, public IEquatable<unsigned int>
 {
 public:
 
@@ -22,6 +22,27 @@ public:
 	static property Color OpaqueRed { Color get() { return Color(255, 0, 0); } }
 	static property Color OpaqueWhite { Color get() { return Color(255, 255, 255); } }
 	static property Color OpaqueYellow { Color get() { return Color(255, 255, 0); } }
+
+	virtual bool Equals(Color other) sealed
+	{
+		return (color == other.color);
+	}
+
+	virtual bool Equals(unsigned int other) sealed
+	{
+		return (color == other);
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Color::typeid)
+			return Equals((Color)other);
+		else
+			return false;
+	}
 
 	static bool operator == (Color v1, Color v2)
 	{

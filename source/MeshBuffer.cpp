@@ -195,39 +195,211 @@ void MeshBuffer::Append(array<Video::Vertex3DTangents^>^ verticesTangents, array
 }
 */
 
-generic<typename T>
-where T : Video::IVertex3D, value class
-void MeshBuffer::Append(array<T>^ vertices, array<unsigned short>^ indices16bit)
+//generic<typename T>
+//where T : Video::IVertex3D, value class
+//void MeshBuffer::Append(ICollection<T>^ vertices, array<unsigned short>^ indices16bit)
+//{
+//	LIME_ASSERT(vertices != nullptr);
+//	if (vertices->Count <= 0) return;
+//	LIME_ASSERT(this->VertexType == T()->Type);
+//	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);
+//	LIME_ASSERT(indices16bit != nullptr);
+//
+//	int vc = vertices->Count;
+//
+//	pin_ptr<void> vpin;	//pin pointer for .net arrays
+//	void* va;
+//
+//	{	//test if it is a .net array
+//		try
+//		{
+//			array<T>^ castResult = safe_cast<array<T>^>(vertices);
+//			if (castResult != nullptr)
+//			{
+//				vpin = &castResult[0];
+//				va = vpin;
+//			}
+//		} catch (...) {}
+//	}
+//	
+//	if (va == 0)	//no .net array! test for our VertexArray class
+//	{
+//		NativeArray<T>^ castResult = dynamic_cast<NativeArray<T>^>(vertices);
+//		if (castResult != nullptr)
+//		{
+//			void* ptr = castResult->GetPointer();
+//			if (ptr != 0)
+//				va = ptr;
+//		}
+//	}
+//
+//	bool va_delete = false;
+//	if (va == 0)	//no .net array and no VertexArray?
+//	{
+//		va_delete = true;
+//		if (T::typeid == Video::Vertex3D::typeid)
+//		{
+//			Video::Vertex3D* va_typed = (Video::Vertex3D*)new video::S3DVertex[vc];
+//			va = va_typed;
+//
+//			int i = 0;
+//			for each(Video::Vertex3D vert in vertices)
+//				va_typed[i] = vert;
+//		} else if (T::typeid == Video::Vertex3DTTCoords::typeid)
+//		{
+//			Video::Vertex3DTTCoords* va_typed = (Video::Vertex3DTTCoords*)new video::S3DVertex2TCoords[vc];
+//			va = va_typed;
+//
+//			int i = 0;
+//			for each(Video::Vertex3DTTCoords vert in vertices)
+//				va_typed[i] = vert;
+//		} else if (T::typeid == Video::Vertex3DTangents::typeid)
+//		{
+//			Video::Vertex3DTangents* va_typed = (Video::Vertex3DTangents*)new video::S3DVertexTangents[vc];
+//			va = va_typed;
+//
+//			int i = 0;
+//			for each(Video::Vertex3DTangents vert in vertices)
+//				va_typed[i] = vert;
+//		} else
+//			throw gcnew Exception("Unexpected vertex format");
+//	}
+//
+//	/*video::S3DVertex* va = new video::S3DVertex[vc];
+//	for (int i = 0; i < vc; i++)
+//		va[i] = *verticesStandard[i]->m_NativeValue;*/
+//
+//	pin_ptr<unsigned short> ia = &indices16bit[0];
+//	/*unsigned short* ia = new unsigned short[indices16bit->Length];
+//	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);*/
+//
+//	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
+//
+//	if (va_delete)
+//		delete[] va;
+//}
+
+template <typename LimeT, typename NativeT>
+void MeshBuffer::AppendInternal(ICollection<LimeT>^ vertices, ICollection<unsigned short>^ indices16bit)
 {
+	if (vertices->Count <= 0) return;
 	LIME_ASSERT(vertices != nullptr);
-	if (vertices->Length <= 0) return;
-	LIME_ASSERT(this->VertexType == vertices[0]->Type);
+	LIME_ASSERT(this->VertexType == LimeT().Type);
 	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);
 	LIME_ASSERT(indices16bit != nullptr);
 
-	int vc = vertices->Length;
-	pin_ptr<void> va = &vertices[0];
-	/*video::S3DVertex* va = new video::S3DVertex[vc];
-	for (int i = 0; i < vc; i++)
-		va[i] = *verticesStandard[i]->m_NativeValue;*/
+	//Get vertex pointer
 
-	pin_ptr<unsigned short> ia = &indices16bit[0];
-	/*unsigned short* ia = new unsigned short[indices16bit->Length];
-	Marshal::Copy((array<short>^)indices16bit, 0, IntPtr(ia), indices16bit->Length);*/
+	int vc = vertices->Count;
+	pin_ptr<LimeT> vpin;	//pin pointer for .net arrays
+	NativeT* va = 0;
 
-	m_MeshBuffer->append(va, vc, ia, indices16bit->Length);
+	{	//test if it is a .net array
+		try
+		{
+			array<LimeT>^ castResult = safe_cast<array<LimeT>^>(vertices);
+			if (castResult != nullptr)
+			{
+				vpin = &castResult[0];
+				va = (NativeT*)vpin;
+			}
+		} catch (...) {}
+	}
+	
+	if (va == 0)	//no .net array! test for our VertexArray class (or another class which can return a pointer)
+	{
+		NativeArray<LimeT>^ castResult = dynamic_cast<NativeArray<LimeT>^>(vertices);
+		if (castResult != nullptr)
+		{
+			void* ptr = castResult->GetPointer();
+			if (ptr != 0)
+				va = (NativeT*)ptr;
+		}
+	}
 
-	//delete[] ia;
-	//delete[] va;
+	bool va_delete = false;	//deleta va in the end?
+	if (va == 0)	//no .net array and no VertexArray? copy into a new native array
+	{
+		va_delete = true;
+
+		LimeT* va_typed = (LimeT*)new NativeT[vc];
+		va = (NativeT*)va_typed;
+
+		int i = 0;
+		for each (LimeT vert in vertices)
+			va_typed[i++] = vert;
+	}
+
+	//Get index pointer
+
+	int ic = indices16bit->Count;
+	pin_ptr<unsigned short> ipin;
+	unsigned short* ia = 0;
+
+	{
+		try
+		{
+			array<unsigned short>^ castResult = safe_cast<array<unsigned short>^>(indices16bit);
+			if (castResult != nullptr)
+			{
+				ipin = &castResult[0];
+				ia = ipin;
+			}
+		} catch (...) {}
+	}
+
+	if (ia == 0)
+	{
+		NativeArray<unsigned short>^ castResult = dynamic_cast<NativeArray<unsigned short>^>(indices16bit);
+		if (castResult != nullptr)
+		{
+			void* ptr = castResult->GetPointer();
+			if (ptr != 0)
+				ia = (unsigned short*)ptr;
+		}
+	}
+
+	bool ia_delete = false;
+	if (ia == 0)
+	{
+		ia_delete = true;
+
+		ia = new unsigned short[ic];
+		
+		int i = 0;
+		for each (unsigned short index in indices16bit)
+			ia[i++] = index;
+	}
+
+	m_MeshBuffer->append(va, vc, ia, ic);
+
+	if (va_delete)
+		delete[] va;
+	if (ia_delete)
+		delete[] ia;
 }
 
-generic<typename T>
-where T : Video::IVertex3D, value class
-void MeshBuffer::Append(array<T>^ vertices, array<unsigned int>^ indices32bit)
+void MeshBuffer::Append(ICollection<Video::Vertex3D>^ verticesStandard, ICollection<unsigned short>^ indices16bit)
 {
+	AppendInternal<Video::Vertex3D, video::S3DVertex>(verticesStandard, indices16bit);
+}
+
+void MeshBuffer::Append(ICollection<Video::Vertex3DTTCoords>^ verticesTTCoords, ICollection<unsigned short>^ indices16bit)
+{
+	AppendInternal<Video::Vertex3DTTCoords, video::S3DVertex2TCoords>(verticesTTCoords, indices16bit);
+}
+
+void MeshBuffer::Append(ICollection<Video::Vertex3DTangents>^ verticesTangents, ICollection<unsigned short>^ indices16bit)
+{
+	AppendInternal<Video::Vertex3DTangents, video::S3DVertexTangents>(verticesTangents, indices16bit);
+}
+
+template <typename LimeT, typename NativeT>
+void MeshBuffer::AppendInternal(ICollection<LimeT>^ vertices, ICollection<unsigned int>^ indices32bit)
+{
+	if (vertices->Count <= 0) return;
 	LIME_ASSERT(vertices != nullptr);
-	if (vertices->Length <= 0) return;
-	LIME_ASSERT(this->VertexType == vertices[0]->Type);
+	LIME_ASSERT(this->VertexType == LimeT().Type);
 	LIME_ASSERT(this->IndexType == Video::IndexType::_32Bit);
 	LIME_ASSERT(indices32bit != nullptr);
 
@@ -242,14 +414,97 @@ void MeshBuffer::Append(array<T>^ vertices, array<unsigned int>^ indices32bit)
 	unsigned int ibSize = ib.size();
 	unsigned int vbSize = vb.size();
 
-	ib.set_used(ibSize + indices32bit->Length);
-	for (int i = 0; i < indices32bit->Length; i++)
-		ib.setValue(i + ibSize, indices32bit[i] + vbSize); // simple "ib[i + ibSize] = ...;" leads to error C2106: '=' : left operand must be l-value
+	//This implementation should already be nearly as fast as possible
 
-	vb.set_used(vbSize + vertices->Length);
-	for (int i = 0; i < vertices->Length; i++)
-		vb[i + vbSize] = (S3DVertex)vertices[i];
+	ib.set_used(ibSize + indices32bit->Count);
+	{
+		int i = 0;
+		for each (unsigned int index in indices32bit)
+		{
+			ib.setValue(i + ibSize, index + vbSize); // simple "ib[i + ibSize] = ...;" leads to error C2106: '=' : left operand must be l-value
+			i++;
+		}
+	}
+
+	vb.set_used(vbSize + vertices->Count);
+	{
+		int i = 0;
+		LimeT* vertDst = (LimeT*)vb.pointer();
+		for each (LimeT vertex in vertices)
+		{
+			vertDst[i + vbSize] = vertex;
+			i++;
+		}
+	}
 }
+
+void MeshBuffer::Append(ICollection<Video::Vertex3D>^ verticesStandard, ICollection<unsigned int>^ indices32bit)
+{
+	AppendInternal<Video::Vertex3D, video::S3DVertex>(verticesStandard, indices32bit);
+}
+
+void MeshBuffer::Append(ICollection<Video::Vertex3DTTCoords>^ verticesTTCoords, ICollection<unsigned int>^ indices32bit)
+{
+	AppendInternal<Video::Vertex3DTTCoords, video::S3DVertex2TCoords>(verticesTTCoords, indices32bit);
+}
+
+void MeshBuffer::Append(ICollection<Video::Vertex3DTangents>^ verticesTangents, ICollection<unsigned int>^ indices32bit)
+{
+	AppendInternal<Video::Vertex3DTangents, video::S3DVertexTangents>(verticesTangents, indices32bit);
+}
+
+//generic<typename T>
+//where T : Video::IVertex3D, value class
+//void MeshBuffer::Append(array<T>^ vertices, array<unsigned int>^ indices32bit)
+//{
+//	LIME_ASSERT(vertices != nullptr);
+//	if (vertices->Length <= 0) return;
+//	LIME_ASSERT(this->VertexType == vertices[0]->Type);
+//	LIME_ASSERT(this->IndexType == Video::IndexType::_32Bit);
+//	LIME_ASSERT(indices32bit != nullptr);
+//
+//	// as i know:
+//	// 1) 32bit meshbuffers is only possible with IDynamicMeshBuffer, so i will cast to it
+//	// 2) append() doesn't have ability to be used with 32 bit indices, so we are going to implement it here manually
+//
+//	scene::IDynamicMeshBuffer* mb = (scene::IDynamicMeshBuffer*)m_MeshBuffer;
+//	scene::IIndexBuffer& ib = mb->getIndexBuffer();
+//	scene::IVertexBuffer& vb = mb->getVertexBuffer();
+//
+//	unsigned int ibSize = ib.size();
+//	unsigned int vbSize = vb.size();
+//
+//	ib.set_used(ibSize + indices32bit->Length);
+//	for (int i = 0; i < indices32bit->Length; i++)
+//		ib.setValue(i + ibSize, indices32bit[i] + vbSize); // simple "ib[i + ibSize] = ...;" leads to error C2106: '=' : left operand must be l-value
+//
+//	vb.set_used(vbSize + vertices->Length);
+//
+//	pin_ptr<T> vertScrPin = &vertices[0];
+//
+//	if (T::typeid == Video::Vertex3D::typeid)
+//	{
+//		S3DVertex* vertScr = (S3DVertex*)vertScrPin;
+//		S3DVertex* vertDst = (S3DVertex*)vb.pointer();
+//		for (int i = 0; i < vertices->Length; i++)
+//			vertDst[i + vbSize] = vertScr[i];
+//	}
+//	else if (T::typeid == Video::Vertex3DTTCoords::typeid)
+//	{
+//		S3DVertex2TCoords* vertScr = (S3DVertex2TCoords*)vertScrPin;
+//		S3DVertex2TCoords* vertDst = (S3DVertex2TCoords*)vb.pointer();
+//		for (int i = 0; i < vertices->Length; i++)
+//			vertDst[i + vbSize] = vertScr[i];
+//	}
+//	else if (T::typeid == Video::Vertex3DTangents::typeid)
+//	{
+//		S3DVertexTangents* vertScr = (S3DVertexTangents*)vertScrPin;
+//		S3DVertexTangents* vertDst = (S3DVertexTangents*)vb.pointer();
+//		for (int i = 0; i < vertices->Length; i++)
+//			vertDst[i + vbSize] = vertScr[i];
+//	}
+//	else LIME_ASSERT2(false, "Unexpected VertexType: " + T::typeid->ToString());
+//}
 
 Vector3Df MeshBuffer::GetNormal(int vertexIndex)
 {
@@ -269,7 +524,7 @@ Vector2Df MeshBuffer::GetTCoords(int vertexIndex)
 	return Vector2Df(m_MeshBuffer->getTCoords(vertexIndex));
 }
 
-Object^ MeshBuffer::GetVertex(int vertexIndex)
+Video::IVertex3D^ MeshBuffer::GetVertex(int vertexIndex)
 {
 	LIME_ASSERT(vertexIndex >= 0 && vertexIndex < VertexCount);
 
@@ -312,7 +567,7 @@ void MeshBuffer::SetMaterial(Video::Material^ newMaterialToCopyFrom)
 	m_MeshBuffer->getMaterial() = *newMaterialToCopyFrom->m_NativeValue;
 }
 
-void MeshBuffer::UpdateIndices(array<unsigned short>^ indices16bit, int startIndex)
+/*void MeshBuffer::UpdateIndices(array<unsigned short>^ indices16bit, int startIndex)
 {
 	LIME_ASSERT(this->IndexType == Video::IndexType::_16Bit);
 	LIME_ASSERT(indices16bit != nullptr);
@@ -330,43 +585,7 @@ void MeshBuffer::UpdateIndices(array<unsigned int>^ indices32bit, int startIndex
 
 	unsigned int* p = (unsigned int*)m_MeshBuffer->getIndices();
 	Marshal::Copy((array<int>^)indices32bit, 0, IntPtr(p + startIndex), indices32bit->Length);
-}
-
-void MeshBuffer::UpdateVertices(array<Video::Vertex3D>^ verticesStandard, int startIndex)
-{
-	LIME_ASSERT(this->VertexType == Video::VertexType::Standard);
-	LIME_ASSERT(verticesStandard != nullptr);
-	LIME_ASSERT(startIndex + verticesStandard->Length <= this->VertexCount);
-
-	video::S3DVertex* p = (video::S3DVertex*)m_MeshBuffer->getVertices();
-
-	for (int i = 0; i < verticesStandard->Length; i++)
-		p[i + startIndex] = verticesStandard[i].ToNative();
-}
-
-void MeshBuffer::UpdateVertices(array<Video::Vertex3DTTCoords>^ verticesTTCoords, int startIndex)
-{
-	LIME_ASSERT(this->VertexType == Video::VertexType::TTCoords);
-	LIME_ASSERT(verticesTTCoords != nullptr);
-	LIME_ASSERT(startIndex + verticesTTCoords->Length <= this->VertexCount);
-
-	video::S3DVertex2TCoords* p = (video::S3DVertex2TCoords*)m_MeshBuffer->getVertices();
-
-	for (int i = 0; i < verticesTTCoords->Length; i++)
-		p[i + startIndex] = verticesTTCoords[i].ToNative();
-}
-
-void MeshBuffer::UpdateVertices(array<Video::Vertex3DTangents>^ verticesTangents, int startIndex)
-{
-	LIME_ASSERT(this->VertexType == Video::VertexType::Tangents);
-	LIME_ASSERT(verticesTangents != nullptr);
-	LIME_ASSERT(startIndex + verticesTangents->Length <= this->VertexCount);
-
-	video::S3DVertexTangents* p = (video::S3DVertexTangents*)m_MeshBuffer->getVertices();
-
-	for (int i = 0; i < verticesTangents->Length; i++)
-		p[i + startIndex] = verticesTangents[i].ToNative();
-}
+}*/
 
 AABBox^ MeshBuffer::BoundingBox::get()
 {
@@ -399,33 +618,92 @@ Video::IndexType MeshBuffer::IndexType::get()
 	return (Video::IndexType)m_MeshBuffer->getIndexType();
 }
 
-Object^ MeshBuffer::Indices::get()
+template <typename T>
+private ref class IndexArray sealed : public NativeArray<T>
 {
-	int ic = m_MeshBuffer->getIndexCount();
-	void* ia = m_MeshBuffer->getIndices();
+	
+internal:
 
-	switch (m_MeshBuffer->getIndexType())
+	IndexArray(IMeshBuffer* meshBuffer)
 	{
-	case video::EIT_16BIT:
-		{
-			array<unsigned short>^ a = gcnew array<unsigned short>(ic);
-			for (int i = 0; i < ic; i++)
-				a[i] = ((unsigned short*)ia)[i];
+		this->meshBuffer = meshBuffer;
+		indexPointer = (T*)meshBuffer->getIndices();
+#ifdef DEBUG
+		if (T::typeid == (unsigned short)::typeid)
+			indexType = Video::IndexType::_16Bit;
+		else if (T::typeid == (unsigned int)::typeid)
+			indexType = Video::IndexType::_32Bit;
+		else
+			LIME_ASSERT2(false, "Unexpected IndexType");
+#endif
+	}
 
-			return a;
+	virtual void* GetPointer() override sealed
+	{
+		return indexPointer;
+	}
+
+public:
+
+	property T default [int]
+	{
+		virtual T get(int index) override sealed
+		{
+#ifdef DEBUG	//doesn't make any sense, as LIME_ASSERT is compiled, only if debug is enabled. but the compiler doesn't accept it. weird
+			LIME_ASSERT(indexType == (Video::IndexType)meshBuffer->getIndexType());
+#endif
+			LIME_ASSERT(index >= 0 && index < Count);
+			return indexPointer[index];
 		}
 
-	case video::EIT_32BIT:
+		virtual void set(int index, T value) override sealed
 		{
-			array<unsigned int>^ a = gcnew array<unsigned int>(ic);
-			for (int i = 0; i < ic; i++)
-				a[i] = ((unsigned int*)ia)[i];
-
-			return a;
+#ifdef DEBUG
+			LIME_ASSERT(indexType == (Video::IndexType)meshBuffer->getIndexType());
+#endif
+			LIME_ASSERT(index >= 0 && index < Count);
+			indexPointer[index] = value;
 		}
 	}
 
-	LIME_ASSERT2(false, "Unexpected IndexType: " + this->IndexType.ToString());
+	property int Count
+	{
+		virtual int get() override sealed
+		{
+			return meshBuffer->getIndexCount();
+		}
+	}
+
+	property bool IsReadOnly
+	{
+		virtual bool get() override sealed
+		{
+			return false;
+		}
+	}
+
+internal:
+	
+	IMeshBuffer* meshBuffer;
+	T* indexPointer;
+#ifdef DEBUG
+	Video::IndexType indexType;
+#endif
+};
+
+NativeArray<unsigned short>^ MeshBuffer::GetIndices16Bit()
+{
+	if (m_MeshBuffer->getIndexType() == video::EIT_16BIT)
+		return gcnew IndexArray<unsigned short>(m_MeshBuffer);
+
+	return nullptr;
+}
+
+NativeArray<unsigned int>^ MeshBuffer::GetIndices32Bit()
+{
+	if (m_MeshBuffer->getIndexType() == video::EIT_32BIT)
+		return gcnew IndexArray<unsigned int>(m_MeshBuffer);
+
 	return nullptr;
 }
 
@@ -444,38 +722,114 @@ Video::VertexType MeshBuffer::VertexType::get()
 	return (Video::VertexType)m_MeshBuffer->getVertexType();
 }
 
-Object^ MeshBuffer::Vertices::get()
+//This class provides direct access to the vertices of a mesh buffer
+//In debug builds, it checks, whether the vertex type changed and performs range checks
+template <typename T>
+private ref class VertexArray sealed : public NativeArray<T>
 {
-	int vc = m_MeshBuffer->getVertexCount();
-	void* va = m_MeshBuffer->getVertices();
 
+internal:
+
+	VertexArray(IMeshBuffer* meshBuffer)
+	{
+		this->meshBuffer = meshBuffer;
+		vertexPointer = (T*)meshBuffer->getVertices();
+#ifdef DEBUG
+		if (T::typeid == Video::Vertex3D::typeid)
+			vertexType = Video::VertexType::Standard;
+		else if (T::typeid == Video::Vertex3DTTCoords::typeid)
+			vertexType = Video::VertexType::TTCoords;
+		else if (T::typeid == Video::Vertex3DTangents::typeid)
+			vertexType = Video::VertexType::Tangents;
+		else
+			LIME_ASSERT2(false, "Unexpected VertexType");
+#endif
+	}
+
+	virtual void* GetPointer() override sealed
+	{
+		return vertexPointer;
+	}
+
+public:
+
+	property T default [int]
+	{
+		virtual T get(int index) override sealed
+		{
+#ifdef DEBUG	//doesn't make any sense, as LIME_ASSERT is compiled, only if debug is enabled. but the compiler doesn't accept it. weird
+			LIME_ASSERT(vertexType == (Video::VertexType)meshBuffer->getVertexType());
+#endif
+			LIME_ASSERT(index >= 0 && index < Count);
+			return vertexPointer[index];
+		}
+
+		virtual void set(int index, T value) override sealed
+		{
+#ifdef DEBUG
+			LIME_ASSERT(vertexType == (Video::VertexType)meshBuffer->getVertexType());
+#endif
+			LIME_ASSERT(index >= 0 && index < Count);
+			vertexPointer[index] = value;
+		}
+	}
+
+	property int Count
+	{
+		virtual int get() override sealed
+		{
+			return meshBuffer->getVertexCount();
+		}
+	}
+
+	property bool IsReadOnly
+	{
+		virtual bool get() override sealed
+		{
+			return false;
+		}
+	}
+
+internal:
+	
+	IMeshBuffer* meshBuffer;
+	T* vertexPointer;
+#ifdef DEBUG
+	Video::VertexType vertexType;
+#endif
+
+};
+generic<typename T>
+where T : Video::IVertex3D, value class
+NativeArray<T>^ MeshBuffer::GetVertices()
+{
 	switch (m_MeshBuffer->getVertexType())
 	{
 	case video::EVT_STANDARD:
 		{
-			array<Video::Vertex3D>^ a = gcnew array<Video::Vertex3D>(vc);
-			for (int i = 0; i < vc; i++)
-				a[i] = Video::Vertex3D(((video::S3DVertex*)va)[i]);
+			if (T::typeid != Video::Vertex3D::typeid)
+				return nullptr;
 
-			return a;
+			VertexArray<Video::Vertex3D>^ v = gcnew VertexArray<Video::Vertex3D>(m_MeshBuffer);
+			return (NativeArray<T>^)v;
 		}
 
 	case video::EVT_2TCOORDS:
 		{
-			array<Video::Vertex3DTTCoords>^ a = gcnew array<Video::Vertex3DTTCoords>(vc);
-			for (int i = 0; i < vc; i++)
-				a[i] = Video::Vertex3DTTCoords(((video::S3DVertex2TCoords*)va)[i]);
+			if (T::typeid != Video::Vertex3DTTCoords::typeid)
+				return nullptr;
 
-			return a;
+			VertexArray<Video::Vertex3DTTCoords>^ v = gcnew VertexArray<Video::Vertex3DTTCoords>(m_MeshBuffer);
+			return (NativeArray<T>^)v;
 		}
 
 	case video::EVT_TANGENTS:
 		{
-			array<Video::Vertex3DTangents>^ a = gcnew array<Video::Vertex3DTangents>(vc);
-			for (int i = 0; i < vc; i++)
-				a[i] = Video::Vertex3DTangents(((video::S3DVertexTangents*)va)[i]);
+			if (T::typeid != Video::Vertex3DTangents::typeid)
+				return nullptr;
 
-			return a;
+			VertexArray<Video::Vertex3DTangents>^ v = gcnew VertexArray<Video::Vertex3DTangents>(m_MeshBuffer);
+			return (NativeArray<T>^)v;
 		}
 	}
 

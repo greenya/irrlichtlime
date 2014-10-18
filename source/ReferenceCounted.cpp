@@ -25,6 +25,27 @@ bool ReferenceCounted::operator != (ReferenceCounted^ v1, ReferenceCounted^ v2)
 	return !(v1 == v2);
 }
 
+bool ReferenceCounted::Equals(ReferenceCounted^ other)
+{
+	return (this == other);
+}
+
+bool ReferenceCounted::Equals(Object^ other)
+{
+	if (other == nullptr)
+		return false;
+	ReferenceCounted^ otherCasted = dynamic_cast<ReferenceCounted^>(other);
+	if (otherCasted != nullptr)
+		return Equals(otherCasted);
+	else
+		return false;
+}
+
+int ReferenceCounted::GetHashCode()
+{
+	return (int)m_ReferenceCounted;	//returns the first four bytes of the pointer
+}
+
 ReferenceCounted::ReferenceCounted(irr::IReferenceCounted* referenceCounted_or_null)
 {
 	m_ReferenceCounted = referenceCounted_or_null;

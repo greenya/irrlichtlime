@@ -22,37 +22,61 @@ public:
 	{
 	}
 
-	virtual int CompareTo(_REFCLASS_ other) 
+	virtual int CompareTo(_REFCLASS_ other) sealed
 	{
-		if (*this == other)
+		/*if (*this == other)
 			return 0;
 		else if (*this < other)
 			return -1;
 		else
 			return +1;
+		*/
+		if (core::equals(X, other.X))
+			if (core::equals(Y, other.Y))
+				return 0;
+			else
+				if (Y > other.Y)
+					return +1;
+				else
+					return -1;
+		else
+			if (X > other.X)
+				return +1;
+			else
+				return -1;
+
 	}
 
-	// operators
-
-	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2, _WRAPTYPE_ tolerance)
+	virtual bool Equals(_REFCLASS_ other) sealed
 	{
-		return core::equals(v1.X, v2.X, tolerance) && core::equals(v1.Y, v2.Y, tolerance);
+		const _WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
+		return core::equals(X, other.X, tolerance) && core::equals(Y, other.Y, tolerance);
 	}
 
-	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2)
+	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
 	{
-		_WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
-		return core::equals(v1.X, v2.X, tolerance) && core::equals(v1.Y, v2.Y, tolerance);
+		return core::equals(X, other.X, tolerance) && core::equals(Y, other.Y, tolerance);
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == _REFCLASS_::typeid)
+			return Equals((_REFCLASS_)other);
+		else
+			return false;
 	}
 
 	static bool operator == (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return equals(v1, v2);
+		return v1.Equals(v2);
 	}
 
 	static bool operator != (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return !equals(v1, v2);
+		return !v1.Equals(v2);
 	}
 
 	static bool operator > (_REFCLASS_ v1, _REFCLASS_ v2)
@@ -231,27 +255,6 @@ public:
 	_WRAPTYPE_ DotProduct(_REFCLASS_ other)
 	{
 		return X*other.X + Y*other.Y;
-	}
-
-	virtual bool Equals(_REFCLASS_ other)
-	{
-		return equals(*this, other);
-	}
-
-	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
-	{
-		return equals(*this, other, tolerance);
-	}
-
-	virtual bool Equals(Object^ other) override
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == _REFCLASS_::typeid)
-			return Equals((_REFCLASS_)other);
-		else
-			return false;
 	}
 
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)

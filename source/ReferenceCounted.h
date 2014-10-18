@@ -8,12 +8,17 @@ using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 
-public ref class ReferenceCounted
+public ref class ReferenceCounted : IEquatable<ReferenceCounted^>
 {
 public:
 
 	static bool operator == (ReferenceCounted^ v1, ReferenceCounted^ v2);
 	static bool operator != (ReferenceCounted^ v1, ReferenceCounted^ v2);
+
+	virtual bool Equals(ReferenceCounted^ other);
+	virtual bool Equals(Object^ other) override;
+
+	virtual int GetHashCode() override;
 
 	bool Drop();
 	void Grab();

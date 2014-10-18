@@ -7,6 +7,7 @@ using System.Threading;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
+using IrrlichtLime;
 
 using BulletSharp;
 
@@ -201,13 +202,13 @@ namespace L11.BulletSharpTest
 						for (int i = 0; i < meshNode.Mesh.MeshBufferCount; i++)
 						{
 							MeshBuffer b = meshNode.Mesh.GetMeshBuffer(i);
-							ushort[] inds = b.Indices as ushort[];
-							Vertex3DTTCoords[] verts = b.Vertices as Vertex3DTTCoords[];
+							NativeArray<ushort> inds = b.GetIndices16Bit();
+							NativeArray<Vertex3DTTCoords> verts = b.GetVertices<Vertex3DTTCoords>();
 
 							if (inds == null || verts == null)
 								throw new ArgumentException();
 
-							for (int j = 0; j < inds.Length; j += 3)
+							for (int j = 0; j < inds.Count; j += 3)
 							{
 								Vector3Df v0 = verts[inds[j + 0]].Position;
 								Vector3Df v1 = verts[inds[j + 1]].Position;

@@ -403,6 +403,25 @@ bool Material::Transparent::get()
 	return m_NativeValue->isTransparent();
 }
 
+bool Material::Equals(Object^ other)
+{
+	if (other == nullptr)
+		return false;
+
+	if (other->GetType() == Material::typeid)
+		return *m_NativeValue == *((Material^)other)->m_NativeValue;
+	else
+		return false;
+}
+
+bool Material::Equals(Material^ other)
+{
+	if (other == nullptr)
+		return false;
+	
+	return *m_NativeValue == *other->m_NativeValue;
+}
+
 String^ Material::ToString()
 {
 	return String::Format("Material: Type={0}", Type);

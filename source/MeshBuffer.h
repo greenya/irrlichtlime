@@ -23,13 +23,22 @@ public:
 	void Append(array<Video::Vertex3D^>^ verticesStandard, array<unsigned int>^ indices32bit);
 	void Append(array<Video::Vertex3DTTCoords^>^ verticesTTCoords, array<unsigned int>^ indices32bit);
 	void Append(array<Video::Vertex3DTangents^>^ verticesTangents, array<unsigned int>^ indices32bit);*/
-	generic<typename T> where T : Video::IVertex3D, value class void Append(array<T>^ vertices, array<unsigned short>^ indices16bit);
-	generic<typename T> where T : Video::IVertex3D, value class void Append(array<T>^ vertices, array<unsigned int>^ indices32bit);
+	//generic<typename T> where T : Video::IVertex3D, value class void Append(ICollection<T>^ vertices, array<unsigned short>^ indices16bit);
+	void Append(ICollection<Video::Vertex3D>^ verticesStandard, ICollection<unsigned short>^ indices16bit);
+	void Append(ICollection<Video::Vertex3DTTCoords>^ verticesTTCoords, ICollection<unsigned short>^ indices16bit);
+	void Append(ICollection<Video::Vertex3DTangents>^ verticesTangents, ICollection<unsigned short>^ indices16bit);
+	//generic<typename T> where T : Video::IVertex3D, value class void Append(array<T>^ vertices, array<unsigned int>^ indices32bit);
+	void Append(ICollection<Video::Vertex3D>^ verticesStandard, ICollection<unsigned int>^ indices32bit);
+	void Append(ICollection<Video::Vertex3DTTCoords>^ verticesTTCoords, ICollection<unsigned int>^ indices32bit);
+	void Append(ICollection<Video::Vertex3DTangents>^ verticesTangents, ICollection<unsigned int>^ indices32bit);
 
+	NativeArray<unsigned short>^ GetIndices16Bit();
+	NativeArray<unsigned int>^ GetIndices32Bit();
 	Vector3Df GetNormal(int vertexIndex);
 	Vector3Df GetPosition(int vertexIndex);
 	Vector2Df GetTCoords(int vertexIndex);
-	Object^ GetVertex(int vertexIndex);
+	Video::IVertex3D^ GetVertex(int vertexIndex);
+	generic<typename T> where T : Video::IVertex3D, value class NativeArray<T>^ GetVertices();
 
 	void RecalculateBoundingBox();
 
@@ -38,24 +47,27 @@ public:
 
 	void SetMaterial(Video::Material^ newMaterialToCopyFrom);
 
-	void UpdateIndices(array<unsigned short>^ indices16bit, int startIndex);
-	void UpdateIndices(array<unsigned int>^ indices32bit, int startIndex);
-	void UpdateVertices(array<Video::Vertex3D>^ verticesStandard, int startIndex);
-	void UpdateVertices(array<Video::Vertex3DTTCoords>^ verticesTTCoords, int startIndex);
-	void UpdateVertices(array<Video::Vertex3DTangents>^ verticesTangents, int startIndex);
+	//void UpdateIndices(array<unsigned short>^ indices16bit, int startIndex);
+	//void UpdateIndices(array<unsigned int>^ indices32bit, int startIndex);
 
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property HardwareMappingHint HardwareMappingHintForIndex { HardwareMappingHint get(); }
 	property HardwareMappingHint HardwareMappingHintForVertex { HardwareMappingHint get(); }
 	property int IndexCount { int get(); }
 	property Video::IndexType IndexType { Video::IndexType get(); }
-	property Object^ Indices { Object^ get(); }
+	//property Object^ Indices { Object^ get(); }
 	property Video::Material^ Material { Video::Material^ get(); }
 	property int VertexCount { int get(); }
 	property Video::VertexType VertexType { Video::VertexType get(); }
-	property Object^ Vertices { Object^ get(); }
 
 	virtual String^ ToString() override;
+
+private:
+
+	template <typename LimeT, typename NativeT>
+	void AppendInternal(ICollection<LimeT>^ vertices, ICollection<unsigned short>^ indices16bit);
+	template <typename LimeT, typename NativeT>
+	void AppendInternal(ICollection<LimeT>^ vertices, ICollection<unsigned int>^ indices32bit);
 
 internal:
 

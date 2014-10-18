@@ -21,6 +21,39 @@ public:
 
 	static property Quaternion^ Identity { Quaternion^ get() { return gcnew Quaternion(0, 0, 0, 1); } }
 
+	
+	static bool operator == (Quaternion v1, Quaternion v2)
+	{
+		return v1.Equals(v2);
+	}
+
+	virtual bool Equals(Quaternion other) sealed
+	{
+		return core::equals(X, other.X, ROUNDING_ERROR_f32) &&
+			core::equals(Y, other.Y, ROUNDING_ERROR_f32) &&
+			core::equals(Z, other.Z, ROUNDING_ERROR_f32) &&
+			core::equals(W, other.W, ROUNDING_ERROR_f32);
+	}
+
+	bool Equals(Quaternion other, float tolerance)
+	{
+		return core::equals(X, other.X, tolerance) &&
+			core::equals(Y, other.Y, tolerance) &&
+			core::equals(Z, other.Z, tolerance) &&
+			core::equals(W, other.W, tolerance);
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Quaternion::typeid)
+			return Equals((Quaternion)other);
+		else
+			return false;
+	}
+
 	static Quaternion operator + (Quaternion q1, Quaternion q2)
 	{
 		return Quaternion(q1.X + q2.X, q1.Y + q2.Y, q1.Z + q2.Z, q1.W + q2.W);
@@ -189,33 +222,6 @@ public:
 		return (X * other.X) + (Y * other.Y) + (Z * other.Z) + (W * other.W);
 	}
 
-	virtual bool Equals(Quaternion other)
-	{
-		return core::equals(X, other.X, ROUNDING_ERROR_f32) &&
-			core::equals(Y, other.Y, ROUNDING_ERROR_f32) &&
-			core::equals(Z, other.Z, ROUNDING_ERROR_f32) &&
-			core::equals(W, other.W, ROUNDING_ERROR_f32);
-	}
-
-	bool Equals(Quaternion other, float tolerance)
-	{
-		return core::equals(X, other.X, tolerance) &&
-			core::equals(Y, other.Y, tolerance) &&
-			core::equals(Z, other.Z, tolerance) &&
-			core::equals(W, other.W, tolerance);
-	}
-
-	virtual bool Equals(Object^ other) override
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == Quaternion::typeid)
-			return Equals((Quaternion)other);
-		else
-			return false;
-	}
-
 	Matrix^ GetMatrix()
 	{
 		Matrix^ m = gcnew Matrix();
@@ -328,10 +334,15 @@ public:
 		dest.setDefinitelyIdentityMatrix(false);
 	}
 
-	Quaternion Lerp(Quaternion q1, Quaternion q2, float time)
+	Quaternion Lerp(Quaternion other, float time)
 	{
 		const f32 scale = 1.0f - time;
-		return (*this = (q1*scale) + (q2*time));
+		return (*this = (*this*scale) + (other*time));
+	}
+
+	static Quaternion Lerp(Quaternion q1, Quaternion q2, float time)
+	{
+		return q1.Lerp(q2, time);	//q1 is already a copy, so we can override it
 	}
 
 	Quaternion MakeIdentity()
@@ -406,19 +417,24 @@ public:
 		return (*this *= core::reciprocal_squareroot ( n ));
 	}
 
-	Quaternion Slerp(Quaternion q1, Quaternion q2, float time)
+	Quaternion Slerp(Quaternion other, float time)
 	{
-		return Slerp(q1, q2, time, .05f);
+		return Slerp(other, time, .05f);
 	}
 
-	Quaternion Slerp(Quaternion q1, Quaternion q2, float time, float threshold)
+	static Quaternion Slerp(Quaternion q1, Quaternion q2, float time)
 	{
-		f32 angle = q1.DotProduct(q2);
+		return q1.Slerp(q2, time);	//q1 is already a copy, so we can override it
+	}
+
+	Quaternion Slerp(Quaternion other, float time, float threshold)
+	{
+		f32 angle = DotProduct(other);
 
 		// make sure we use the short rotation
 		if (angle < 0.0f)
 		{
-			q1 *= -1.0f;
+			*this *= -1.0f;
 			angle *= -1.0f;
 		}
 
@@ -428,10 +444,15 @@ public:
 			const f32 invsintheta = core::reciprocal(sinf(theta));
 			const f32 scale = sinf(theta * (1.0f-time)) * invsintheta;
 			const f32 invscale = sinf(theta * time) * invsintheta;
-			return (*this = (q1*scale) + (q2*invscale));
+			return (*this = (*this*scale) + (other*invscale));
 		}
 		else // linear interploation
-			return Lerp(q1,q2,time);
+			return Lerp(other, time);
+	}
+
+	static Quaternion Slerp(Quaternion q1, Quaternion q2, float time, float threshold)
+	{
+		return q1.Slerp(q2, time, threshold);	//q1 is already a copy, so we can override it
 	}
 
 	void ToAngleAxis([Out] float% angle, [Out] Vector3Df% axis)

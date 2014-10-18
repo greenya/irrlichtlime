@@ -103,9 +103,16 @@ namespace L07.FastStaticRendering
 			return true;
 		}
 
+		//Cache the process object as it is quite heavy...
+		readonly static System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+
 		static public string MemUsageText
 		{
-			get { return System.Diagnostics.Process.GetCurrentProcess().WorkingSet64 / (1024 * 1024) + " Mb"; }
+			get
+			{
+				currentProcess.Refresh();
+				return currentProcess.WorkingSet64 / (1024 * 1024) + " Mb";
+			}
 		}
 	}
 
@@ -183,15 +190,16 @@ namespace L07.FastStaticRendering
 					// we create meshbuffer and add it to the main mesh
 					MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
 					mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
-					mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());
+					//mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());
+					mb.Append(verticesChunk, indicesChunk);
 					mb.RecalculateBoundingBox();
 					mesh.AddMeshBuffer(mb);
 					mb.Drop();
 
 					// clean up vertex and index chunks
 					verticesIndexOffset += verticesChunk.Count;
-					verticesChunk = new List<Vertex3D>();
-					indicesChunk = new List<ushort>();
+					verticesChunk.Clear();
+					indicesChunk.Clear();
 
 					device.Logger.Log(
 						(((cubeIndex + 1) * 100) / totalCubes) + "%: " +
@@ -229,20 +237,19 @@ namespace L07.FastStaticRendering
 			// ask Irrlicht to generate cube mesh for us (we use it like a template)
 
 			Mesh cubeMesh = device.SceneManager.GeometryCreator.CreateCubeMesh(new Vector3Df(cubeSide));
-			ushort[] cubeIndices = cubeMesh.GetMeshBuffer(0).Indices as ushort[];
-			Vertex3D[] cubeVertices = cubeMesh.GetMeshBuffer(0).Vertices as Vertex3D[];
-			cubeMesh.Drop();
+			NativeArray<ushort> cubeIndices = cubeMesh.GetMeshBuffer(0).GetIndices16Bit();
+			NativeArray<Vertex3D> cubeVertices = cubeMesh.GetMeshBuffer(0).GetVertices<Vertex3D>();
 
 			// generate cubes
 
 			device.Logger.Log("Generating " + N * N * N + " cubes...");
 
-			vertices = new Vertex3D[N * N * N * cubeVertices.Length];
-			indices = new uint[N * N * N * cubeIndices.Length];
+			vertices = new Vertex3D[N * N * N * cubeVertices.Count];
+			indices = new uint[N * N * N * cubeIndices.Count];
 
 			int verticesIndex = 0;
 			int indicesIndex = 0;
-			int colorBase = (255 - cubeVertices.Length) / N;
+			int colorBase = (255 - cubeVertices.Count) / N;
 			float cubePosOffset = 2.0f * cubeSide;
 
 			for (int i = 0; i < N; i++)
@@ -253,11 +260,11 @@ namespace L07.FastStaticRendering
 					{
 						// add indices
 						uint firstfreeIndex = (uint)verticesIndex;
-						for (int l = 0; l < cubeIndices.Length; l++)
+						for (int l = 0; l < cubeIndices.Count; l++)
 							indices[indicesIndex++] = firstfreeIndex + cubeIndices[l];
 
 						// add vertices
-						for (int l = 0; l < cubeVertices.Length; l++)
+						for (int l = 0; l < cubeVertices.Count; l++)
 						{
 							Vertex3D v = cubeVertices[l];
 							v.Color = new Color(i * colorBase + l, j * colorBase + l, k * colorBase + l);
@@ -275,6 +282,8 @@ namespace L07.FastStaticRendering
 				if ((i & 0xf) == 0xf)
 					GC.Collect();
 			}
+
+			cubeMesh.Drop();	//free now, because we don't access cubeVertices and cubeIndices anymore
 		}
 	}
 }

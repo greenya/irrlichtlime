@@ -1283,6 +1283,102 @@ Default value: LogLevel.Warning.</summary>
 		<member name="F:IrrlichtLime.MouseEventType.Wheel">
 			<summary>The mouse wheel was moved. Use Wheel value in event data to find out in what direction and how fast.</summary>
 		</member>
+		<member name="T:IrrlichtLime.NativeArray`1">
+			<summary>A NativeArray behaves similiar a usual array, but it keeps connected to the native object.
+Write access is possible, see IsReadOnly.
+Make sure you only use a NativeArray, while the native object is still 'alive'.
+If you want to have a separate copy, use ToArray()</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.Add``0(``0[])">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.Clear``0">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.Contains``0(``0[])">
+			<summary>Determines whether the NativeArray&lt;T&gt; contains a specific value.</summary>
+			<param name="item">The object to locate in the NativeArray&lt;T&gt;.</param>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.CopyTo``0(``0[],System.Int32)">
+			<summary>Copies the elements of the NativeArray&lt;T&gt; to an Array, starting at a particular Array index.</summary>
+			<param name="array">The one-dimensional Array that is the destination of the elements copied from NativeArray&lt;T&gt;. The Array must have zero-based indexing.</param>
+			<param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+		</member>
+		<member name="P:IrrlichtLime.NativeArray`1.Count">
+			<summary>The number of elements contained in the NativeArray&lt;T&gt;.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.GetEnumerator``0">
+			<summary>Returns an enumerator that iterates through the collection.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.IndexOf``0(``0[])">
+			<summary>Determines the index of a specific item in the NativeArray&lt;T&gt;.</summary>
+			<param name="item">The object to locate in the NativeArray&lt;T&gt;.</param>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.Insert``0(System.Int32,``0[])">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
+		<member name="P:IrrlichtLime.NativeArray`1.IsReadOnly">
+			<summary>Gets a value indicating whether the NativeArray&lt;T&gt; is read-only.</summary>
+		</member>
+		<member name="P:IrrlichtLime.NativeArray`1.Item">
+			<summary>Gets or sets the element at the specified index.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.Remove``0(``0[])">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.RemoveAt``0(System.Int32)">
+			<summary>Throws a NotSupportedException.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeArray`1.ToArray``0">
+			<summary>Copies this NativeArray&lt;T&gt; to an array T[].</summary>
+		</member>
+		<member name="T:IrrlichtLime.NativeCollection`1">
+			<summary>NativeCollection behaves similiar to the ICollection&lt;T&gt; interface, but it keeps connected to the native object.
+It is always read only.
+Make sure you only use a NativeCollection, while the native object is still 'alive'.
+If you want to have a separate copy, use ToArray() from System.Linq.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeCollection`1.Contains``0(``0[])">
+			<summary>Determines whether the NativeCollection&lt;T&gt; contains a specific value.</summary>
+			<param name="item">The object to locate in the NativeCollection&lt;T&gt;.</param>
+		</member>
+		<member name="M:IrrlichtLime.NativeCollection`1.CopyTo``0(``0[],System.Int32)">
+			<summary>Copies the elements of the NativeArray&lt;T&gt; to an Array, starting at a particular Array index.</summary>
+			<param name="array">The one-dimensional Array that is the destination of the elements copied from NativeArray&lt;T&gt;. The Array must have zero-based indexing.</param>
+			<param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+		</member>
+		<member name="P:IrrlichtLime.NativeCollection`1.Count">
+			<summary>The number of elements contained in the NativeCollection&lt;T&gt;.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeCollection`1.GetIterator``0">
+			<summary>Returns an itertator that iterates (forwards or backwards) through the collection.</summary>
+		</member>
+		<member name="P:IrrlichtLime.NativeCollection`1.IsReadOnly">
+			<summary>Gets a value indicating whether the NativeArray&lt;T&gt; is read-only.
+Always returns true.</summary>
+		</member>
+		<member name="T:IrrlichtLime.NativeIterator`1">
+			<summary>A class, which allows to iterate trough a NativeCollection&lt;T&gt; forwards and backwards.
+You can only use this class under the same conditions as a NativeCollection&lt;T&gt;.</summary>
+		</member>
+		<member name="P:IrrlichtLime.NativeIterator`1.Current">
+			<summary>Gets the element in the collection at the current position of the enumerator.
+May be invalid before the first call of MoveNext() or MovePrevious()</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeIterator`1.Dispose``0">
+			<summary>Frees resources used by the iterator.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeIterator`1.MoveNext``0">
+			<summary>Advances the enumerator to the next element of the collection.
+true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeIterator`1.MovePrevious``0">
+			<summary>Advances the enumerator to the previous element of the collection.
+true if the enumerator was successfully advanced to the previous element; false if the enumerator has passed the begin of the collection.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeIterator`1.Reset``0">
+			<summary>Sets the enumerator to its initial position, which is before the first element in the collection or behind the last.</summary>
+		</member>
 		<member name="T:IrrlichtLime.OSOperator">
 			<summary>The Operating system operator provides operation system specific methods and informations.</summary>
 		</member>
@@ -2309,6 +2405,28 @@ IMPORTANT: The default constructor (without parameters) creates an invalid quate
 Equal to "new Quaternion(0, 0, 0, 1)"
 This is NOT the same as new Quaternion().</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Returns the result of the linear interpolation between two quaternions.</summary>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Returns the result of the spherical interpolation between two quaternions.</summary>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
+			<returns>This quaternion.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single,System.Single)">
+			<summary>Returns the result of the spherical interpolation between two quaternions.</summary>
+			<param name="q1">First quaternion to be interpolated.</param>
+			<param name="q2">Second quaternion to be interpolated.</param>
+			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
+			<param name="threshold">To avoid inaccuracies at the end (time=1) the interpolation switches to linear interpolation at some point. This value defines how much of the remaining interpolation will be calculated with Lerp(). Everything from 1-threshold up will be linear interpolation. Default: 0.05f.</param>
+			<returns>This quaternion.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.DotProduct(IrrlichtLime.Core.Quaternion)">
 			<summary>Calculates the dot product.</summary>
 			<param name="other">Other quaternion.</param>
@@ -2348,12 +2466,10 @@ This is NOT the same as new Quaternion().</summary>
 			<summary>Same as GetMatrixTransposed(), but it does write to an existing matrix and allows the reuse of a matrix.</summary>
 			<param name="m">The matrix, to write to.</param>
 		</member>
-		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
-			<summary>Sets this quaternion to the result of the linear interpolation between two quaternions.</summary>
-			<param name="q1">First quaternion to be interpolated.</param>
-			<param name="q2">Second quaternion to be interpolated.</param>
+		<member name="M:IrrlichtLime.Core.Quaternion.Lerp(IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Sets this quaternion to the result of the linear interpolation between this and another quaternion.</summary>
+			<param name="other">The other quaternion.</param>
 			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
-			<returns>This quaternion.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.MakeIdentity">
 			<summary>Sets this quaternion to identity.</summary>
@@ -2426,20 +2542,16 @@ The rotation is q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k).</summary>
 			<param name="newZ">Z value of vectorial (imaginary) part.</param>
 			<param name="newW">W value (real part).</param>
 		</member>
-		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single)">
-			<summary>Sets this quaternion to the result of the spherical interpolation between two quaternions.</summary>
-			<param name="q1">First quaternion to be interpolated.</param>
-			<param name="q2">Second quaternion to be interpolated.</param>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,System.Single)">
+			<summary>Sets this quaternion to the result of the spherical interpolation between this and another quaternion.</summary>
+			<param name="other">The other quaternion.</param>
 			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
-			<returns>This quaternion.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,IrrlichtLime.Core.Quaternion,System.Single,System.Single)">
-			<summary>Sets this quaternion to the result of the spherical interpolation between two quaternions.</summary>
-			<param name="q1">First quaternion to be interpolated.</param>
-			<param name="q2">Second quaternion to be interpolated.</param>
+		<member name="M:IrrlichtLime.Core.Quaternion.Slerp(IrrlichtLime.Core.Quaternion,System.Single,System.Single)">
+			<summary>Sets this quaternion to the result of the spherical interpolation between this and another quaternion.</summary>
+			<param name="other">The other quaternion.</param>
 			<param name="time">Progress of interpolation. For time=0 the result is q1, for time=1 the result is q2. Otherwise interpolation between q1 and q2.</param>
 			<param name="threshold">To avoid inaccuracies at the end (time=1) the interpolation switches to linear interpolation at some point. This value defines how much of the remaining interpolation will be calculated with Lerp(). Everything from 1-threshold up will be linear interpolation. Default: 0.05f.</param>
-			<returns>This quaternion.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.ToAngleAxis(System.Single@,IrrlichtLime.Core.Vector3Df@)">
 			<summary>Calculaters an angle (in radians) and around axis (unit vector).</summary>
@@ -2884,17 +2996,6 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 		<member name="T:IrrlichtLime.Core.Vector2Dd">
 			<summary>2d vector class with lots of operators and methods.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Dd.equals(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Dd.equals(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd,System.Double)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
-		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Dd.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
 		</member>
@@ -3007,17 +3108,6 @@ The null vector is left untouched.</summary>
 		<member name="T:IrrlichtLime.Core.Vector2Df">
 			<summary>2d vector class with lots of operators and methods.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Df.equals(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Df.equals(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df,System.Single)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
-		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
 		</member>
@@ -3129,17 +3219,6 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Core.Vector2Di">
 			<summary>2d vector class with lots of operators and methods.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Di.equals(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector2Di.equals(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di,System.Int32)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.Angle">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the counter trigonometric sense. 0 is to the right (3 o'clock), values increase clockwise.</summary>
@@ -3254,17 +3333,6 @@ The null vector is left untouched.</summary>
 			<summary>3d vector class with lots of operators and methods.
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Dd.equals(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Dd.equals(IrrlichtLime.Core.Vector3Dd,IrrlichtLime.Core.Vector3Dd,System.Double)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.CompareTo(IrrlichtLime.Core.Vector3Dd)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
@@ -3429,17 +3497,6 @@ The fourth value will always be 0.</summary>
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
 		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Df.equals(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Df.equals(IrrlichtLime.Core.Vector3Df,IrrlichtLime.Core.Vector3Df,System.Single)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
-		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.CompareTo(IrrlichtLime.Core.Vector3Df)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
 			<param name="other">The vector to compare with.</param>
@@ -3602,17 +3659,6 @@ Useful for setting in shader constants for example. The fourth value will always
 			<summary>3d vector class with lots of operators and methods.
 
 The Vector3D class is used in Irrlicht for three main purposes: 1) As a direction vector (most of the methods assume this). 2) As a position in 3d space (which is synonymous with a direction vector from the origin to this position). 3) To hold three Euler rotations, where X is pitch, Y is yaw and Z is roll.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Di.equals(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Vector3Di.equals(IrrlichtLime.Core.Vector3Di,IrrlichtLime.Core.Vector3Di,System.Int32)">
-			<summary>Returns whether this vector is equal to another one.</summary>
-			<param name="v1">The first vector.</param>
-			<param name="v2">The second vector.</param>
-			<param name="tolerance">The maximum difference beteween two vectors to be equal.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.CompareTo(IrrlichtLime.Core.Vector3Di)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
@@ -4655,7 +4701,9 @@ Note: setting this value will also set OverrideColorEnabled to true.</summary>
 			<returns>True if successful, false if not.</returns>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUIElement.Children">
-			<summary>Array of all children added to this element.</summary>
+			<summary>Collection of all children added to this element.
+IMPORTANT: The returned object is a NativeCollection. It keeps connected to GUIElement. Do not drop the GUIElement, until you finished working with it.
+For a seperate copy, please use ToArray().</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUIElement.Clipped">
 			<summary>If true, the element will not be clipped by its parent's clipping rectangle.</summary>
@@ -6211,6 +6259,9 @@ In the beginning everything is visible, and at the end of the time only the set 
 		<member name="P:IrrlichtLime.GUI.GUIProfiler.ActiveFont">
 			<summary>The font which is used right now for drawing.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.DrawBackground">
+			<summary>Whether to draw the background. By default disabled.</summary>
+		</member>
 		<member name="M:IrrlichtLime.GUI.GUIProfiler.FirstPage">
 			<summary>Show first page of profile data.</summary>
 		</member>
@@ -6218,8 +6269,9 @@ In the beginning everything is visible, and at the end of the time only the set 
 			<summary>Show first page of profile data.</summary>
 			<param name="includeOverview">When true show the group-overview page, when false show the profile data of the first group. Default: true.</param>
 		</member>
-		<member name="P:IrrlichtLime.GUI.GUIProfiler.IgnoreUncalled">
-			<summary>If true, don't display stats for data which never got called.</summary>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.Frozen">
+			<summary>Allows to freeze updates which makes it easier to read the numbers.
+Numbers are updated once when you switch pages.</summary>
 		</member>
 		<member name="M:IrrlichtLime.GUI.GUIProfiler.NextPage">
 			<summary>Show next page of profile data.</summary>
@@ -6237,6 +6289,16 @@ In the beginning everything is visible, and at the end of the time only the set 
 		<member name="M:IrrlichtLime.GUI.GUIProfiler.PreviousPage(System.Boolean)">
 			<summary>Show previous page of profile data.</summary>
 			<param name="includeOverview">Include the group-overview page. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIProfiler.SetFilters(System.UInt32,System.UInt32,System.Single,System.UInt32)">
+			<summary>Filters prevents data that doesn't achieve the conditions from being displayed.</summary>
+			<param name="minCalls">Minimum count of calls needed.</param>
+			<param name="minTimeSum">Minimum time sum of calls needed.</param>
+			<param name="minTimeAverage">Minimum average time of a call needed.</param>
+			<param name="minTimeMax">Minimum peak call length needed.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIProfiler.ShowGroupsTogether">
+			<summary>Can several groups be displayed per page?</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.GUIScrollBar">
 			<summary>Default scroll bar GUI element.</summary>
@@ -6761,6 +6823,9 @@ If columnIndex is outside the current range, do push new colum at the end.</summ
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUITable.ColumnCount">
 			<summary>Amount of columns in the tab control.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITable.DrawBackground">
+			<summary>Background drawing enabled?</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUITable.DrawFlags">
 			<summary>Drawing flag which influence the layout.</summary>
@@ -9094,20 +9159,56 @@ Since mesh buffers are used for drawing, and hence will be exposed to the driver
 			<summary>Appends another mesh buffer to this one.</summary>
 			<param name="other">Mesh buffer to append.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append``1(``0[],System.UInt16[])">
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.ICollection{System.UInt16})">
 			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer.</summary>
-			<param name="vertices">Vertices to append.</param>
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesStandard">Vertices to append.</param>
 			<param name="indices16bit">Indices to append.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append``1(``0[],System.UInt32[])">
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3D},System.Collections.Generic.ICollection{System.UInt32})">
 			<summary>Appends the vertices and indices to this mesh buffer.
-Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer.</summary>
-			<param name="vertices">Vertices to append.</param>
-			<param name="indices32bit">Vertices to append.</param>
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesStandard">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3DTangents},System.Collections.Generic.ICollection{System.UInt16})">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesTangents">Vertices to append.</param>
+			<param name="indices16bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3DTangents},System.Collections.Generic.ICollection{System.UInt32})">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesTangents">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3DTTCoords},System.Collections.Generic.ICollection{System.UInt16})">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesTTCoords">Vertices to append.</param>
+			<param name="indices16bit">Indices to append.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.Append(System.Collections.Generic.ICollection{IrrlichtLime.Video.Vertex3DTTCoords},System.Collections.Generic.ICollection{System.UInt32})">
+			<summary>Appends the vertices and indices to this mesh buffer.
+Note: Only works for compatible vertex and index types. Type of vertices and indices you add must match the mesh buffer's.</summary>
+			<param name="verticesTTCoords">Vertices to append.</param>
+			<param name="indices32bit">Indices to append.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.BoundingBox">
 			<summary>Axis aligned bounding box of this mesh buffer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetIndices16Bit">
+			<summary>The indices of this mesh buffer. Works with correct index type only.
+IMPORTANT: The returned object is a NativeArray. It keeps connected to the mesh buffer. Do not drop the mesh buffer, until you finished working with it.
+Writing is also possible with this object.
+For a seperate copy, please use ToArray().</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetIndices32Bit">
+			<summary>The indices of this mesh buffer. Works with correct index type only.
+IMPORTANT: The returned object is a NativeArray. It keeps connected to the mesh buffer. Do not drop the mesh buffer, until you finished working with it.
+Writing is also possible with this object.
+For a seperate copy, please use ToArray().</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetNormal(System.Int32)">
 			<summary>Gets normal vector of the vertex.</summary>
@@ -9125,6 +9226,12 @@ Note: Only works for compatible vertex and index types. Type of vertices and ind
 			<summary>Gets the vertex.</summary>
 			<param name="vertexIndex">Index of the vertex. Must be from 0 to VertexCount-1.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.MeshBuffer.GetVertices``1">
+			<summary>The vertices of this mesh buffer. Works with correct vertex type only.
+IMPORTANT: The returned object is a NativeArray. It keeps connected to the mesh buffer. Do not drop the mesh buffer, until you finished working with it.
+Writing is also possible with this object.
+For a seperate copy, please use ToArray().</summary>
+		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.HardwareMappingHintForIndex">
 			<summary>The current hardware mapping hint for indices.</summary>
 		</member>
@@ -9136,9 +9243,6 @@ Note: Only works for compatible vertex and index types. Type of vertices and ind
 		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.IndexType">
 			<summary>The type of index data which is stored in this mesh buffer.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Scene.MeshBuffer.Indices">
-			<summary>Array of all indices in this mesh buffer.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.Material">
 			<summary>The material of this mesh buffer.</summary>
@@ -9163,44 +9267,11 @@ This methods allows to define optimization hints for the hardware. This enables,
 			<summary>Sets new material for this mesh buffer.</summary>
 			<param name="newMaterialToCopyFrom">New material.</param>
 		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateIndices(System.UInt16[],System.Int32)">
-			<summary>Updates continious set of indices of this mesh buffer.
-Note: Only works for compatible index types. Type of indices you provide must match the mesh buffer'.</summary>
-			<param name="indices16bit">New indices.</param>
-			<param name="startIndex">First index to update from. Must be: startIndex + indices16bit.Length &lt;= IndexCount.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateIndices(System.UInt32[],System.Int32)">
-			<summary>Updates continious set of indices of this mesh buffer.
-Note: Only works for compatible index types. Type of indices you provide must match the mesh buffer'.</summary>
-			<param name="indices32bit">New indices.</param>
-			<param name="startIndex">First index to update from. Must be: startIndex + indices32bit.Length &lt;= IndexCount.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3D[],System.Int32)">
-			<summary>Updates continious set of vertices of this mesh buffer.
-Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
-			<param name="verticesStandard">New vertices.</param>
-			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesStandard.Length &lt;= VertexCount.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3DTangents[],System.Int32)">
-			<summary>Updates continious set of vertices of this mesh buffer.
-Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
-			<param name="verticesTangents">New vertices.</param>
-			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesTangents.Length &lt;= VertexCount.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.MeshBuffer.UpdateVertices(IrrlichtLime.Video.Vertex3DTTCoords[],System.Int32)">
-			<summary>Updates continious set of vertices of this mesh buffer.
-Note: Only works for compatible vertex types. Type of vertices you provide must match the mesh buffer'.</summary>
-			<param name="verticesTTCoords">New vertices.</param>
-			<param name="startIndex">First vertex to update from. Must be: startIndex + verticesTTCoords.Length &lt;= VertexCount.</param>
-		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.VertexCount">
 			<summary>Amount of vertices in the mesh buffer.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.VertexType">
 			<summary>The type of vertex data which is stored in this mesh buffer.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Scene.MeshBuffer.Vertices">
-			<summary>Array of all vertices in this mesh buffer.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.MeshCache">
 			<summary>The mesh cache stores already loaded meshes and provides an interface to them.
@@ -9973,7 +10044,9 @@ A particle affector modifies the particles. For example, the FadeOut affector le
 			<param name="affector">New affector.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.ParticleSystemSceneNode.AffectorList">
-			<summary>The list of all particle affectors attached to this node.</summary>
+			<summary>The list of all particle affectors attached to this node.
+IMPORTANT: The returned object is a NativeCollection. It keeps connected to SceneNode. Do not drop the SceneNode, until you finished working with it.
+For a seperate copy, please use ToArray().</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.ParticleSystemSceneNode.ClearParticles">
 			<summary>Removes all currently visible particles.</summary>
@@ -13178,7 +13251,9 @@ Note: If you are implementing your own node you can handle OnAnimate event. Then
 			<param name="time">Current time in milliseconds.</param>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNode.AnimatorList">
-			<summary>The list of all animators attached to this node.</summary>
+			<summary>The list of all animators attached to this node.
+IMPORTANT: The returned object is a NativeCollection. It keeps connected to SceneNode. Do not drop the SceneNode, until you finished working with it.
+For a seperate copy, please use ToArray().</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNode.AutomaticCulling">
 			<summary>The automatic culling state. Enables or disables automatic culling based on the bounding box.
@@ -13203,7 +13278,9 @@ Note: The result is still an axis-aligned bounding box, so it's size changes wit
 Note: The result is _not_ identical to BoundingBoxTransformed.Edges, but getting an AABBox of these edges would then be identical.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNode.Children">
-			<summary>All children of this node.</summary>
+			<summary>All children of this node.
+IMPORTANT: The returned object is a NativeCollection. It keeps connected to SceneNode. Do not drop the SceneNode, until you finished working with it.
+For a seperate copy, please use ToArray().</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.SceneNode.DebugDataVisible">
 			<summary>If debug data like bounding boxes should be drawn. Please note that not all scene nodes support all debug data types.</summary>
@@ -14234,6 +14311,12 @@ The view frustum is enclosed by 6 planes. These six planes share eight points. A
 		<member name="P:IrrlichtLime.Scene.ViewFrustum.BoundingBox">
 			<summary>Bounding box enclosing the whole view frustum.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.BoundingCenter">
+			<summary>The bounding sphere's center (of an optimized sphere, not the AABB's)</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.ViewFrustum.BoundingRadius">
+			<summary>The bounding sphere's radius (of an optimized sphere, not the AABB's)</summary>
+		</member>
 		<member name="P:IrrlichtLime.Scene.ViewFrustum.CameraPosition">
 			<summary>The position of the camera.</summary>
 		</member>
@@ -14296,11 +14379,15 @@ The view frustum is enclosed by 6 planes. These six planes share eight points. A
 			<summary>Top plane of the frustum.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.ViewFrustum.RecalculateBoundingBox">
-			<summary>Recalculates the bounding box member based on the planes.</summary>
+			<summary>Recalculates the bounding box and sphere member based on the planes.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.ViewFrustum.Set(IrrlichtLime.Core.Matrix)">
 			<summary>Sets a view frustum based on a projection and/or view matrix.</summary>
 			<param name="mat">Projection and/or view matrix.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.ViewFrustum.SetFarNearDistance(System.Single)">
+			<summary>The cam should tell the frustum the distance between far and near.</summary>
+			<param name="distance">The new distance between far and near.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.ViewFrustum.SetPlane(IrrlichtLime.Scene.ViewFrustum.Plane,IrrlichtLime.Core.Plane3Df)">
 			<summary>Sets specific view frustum' plane.</summary>
@@ -15733,6 +15820,18 @@ Check might look into the file.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.IVertex3D">
 			<summary>Vertex Interface. Please do not implement.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.IVertex3D.Color">
+			<summary>The vertex color.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.IVertex3D.Normal">
+			<summary>The vertex normal.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.IVertex3D.Position">
+			<summary>The vertex position.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.IVertex3D.TCoords">
+			<summary>The texture coordinates.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.IVertex3D.Type">
 			<summary>The type of a vertex.</summary>

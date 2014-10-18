@@ -48,9 +48,10 @@ public:
 	property int ActiveColumnIndex { int get(); void set(int value); }
 	property GUIOrderingMode ActiveColumnOrdering { GUIOrderingMode get(); }
 	property int ColumnCount { int get(); }
+	property bool DrawBackground { bool get(); void set(bool value); }
 	property GUITableDrawFlag DrawFlags { GUITableDrawFlag get(); void set(GUITableDrawFlag value); }
 	property GUIScrollBar^ HorizontalScrollBar { GUIScrollBar^ get(); }
-	property __int32 ItemHeight { __int32 get(); }
+	property int ItemHeight { int get(); }
 	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property bool ResizableColumns { bool get(); void set(bool value); }
 	property int RowCount { int get(); }

@@ -59,8 +59,9 @@ namespace L18.LightningShots
 			s.node.SetMaterialFlag(MaterialFlag.Lighting, false);
 			sceneManager.MeshManipulator.SetVertexColors(((MeshSceneNode)s.node).Mesh, Color.OpaqueWhite);
 
-			s.node.AddAnimator(sceneManager.CreateFlyStraightAnimator(position, e, (s.deathTime - time) / 1000.0f));
-			s.node.AnimatorList[0].Drop();
+			var animator = sceneManager.CreateFlyStraightAnimator(position, e, (s.deathTime - time) / 1000.0f);
+			s.node.AddAnimator(animator);
+			animator.Drop();
 
 			sceneManager.AddLightSceneNode(s.node);
 
@@ -126,8 +127,9 @@ namespace L18.LightningShots
 					n.SetMaterialTexture(0, sceneManager.VideoDriver.GetTexture("../../media/particlewhite.bmp"));
 					n.Position = point;
 
-					n.AddAnimator(sceneManager.CreateDeleteAnimator(0.1f));
-					n.AnimatorList[0].Drop();
+					var animator = sceneManager.CreateDeleteAnimator(0.1f);
+					n.AddAnimator(animator);
+					animator.Drop();
 
 					Vertex3D v1 = new Vertex3D(point);
 					Vertex3D v2 = new Vertex3D();

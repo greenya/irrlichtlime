@@ -72,6 +72,11 @@ public:
 		m_NativeValue->recalculateBoundingBox();
 	}
 
+	void SetFarNearDistance(float distance)
+	{
+		m_NativeValue->setFarNearDistance(distance);
+	}
+
 	void SetPlane(Plane plane, Plane3Df^ value)
 	{
 		LIME_ASSERT(value != nullptr);
@@ -94,6 +99,22 @@ public:
 		{
 			LIME_ASSERT(value != nullptr);
 			m_NativeValue->boundingBox = *value->m_NativeValue;
+		}
+	}
+
+	property Vector3Df BoundingCenter
+	{
+		Vector3Df get()
+		{
+			return Vector3Df(m_NativeValue->getBoundingCenter());
+		}
+	}
+
+	property float BoundingRadius
+	{
+		float get()
+		{
+			return m_NativeValue->getBoundingRadius();
 		}
 	}
 

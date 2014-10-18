@@ -28,7 +28,7 @@ public:
 	template <class T>
 	ref class NativeValue
 	{
-	public:
+	public:		
 
 		~NativeValue()
 		{
@@ -39,6 +39,11 @@ public:
 		{
 			if (m_DeleteOnFinalize)
 				delete m_NativeValue;
+		}
+
+		virtual int GetHashCode() override
+		{
+			return *(int*)m_NativeValue;	//assumes our native value is at least four bytes long, needs to be overwritten for smaller types
 		}
 
 	internal:

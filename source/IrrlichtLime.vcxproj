@@ -227,6 +227,9 @@
     <ClInclude Include="MaterialType.h" />
     <ClInclude Include="MeshTextureLoader.h" />
     <ClInclude Include="ModulateFunc.h" />
+    <ClInclude Include="NativeArray.h" />
+    <ClInclude Include="NativeIterator.h" />
+    <ClInclude Include="NativeList.h" />
     <ClInclude Include="ParticleBehavior.h" />
     <ClInclude Include="PixelShaderType.h" />
     <ClInclude Include="PolygonOffset.h" />

@@ -334,20 +334,9 @@ Recti^ GUIElement::AbsolutePosition::get()
 	return gcnew Recti(m_GUIElement->getAbsolutePosition());
 }
 
-array<GUIElement^>^ GUIElement::Children::get()
+NativeCollection<GUIElement^>^ GUIElement::Children::get()
 {
-	array<GUIElement^>^ l = gcnew array<GUIElement^>(m_GUIElement->getChildren().size());
-	int li = 0;
-
-	core::list<IGUIElement*> u = m_GUIElement->getChildren();
-	for (core::list<gui::IGUIElement*>::ConstIterator i = u.begin(); i != u.end(); ++i)
-	{
-		GUIElement^ e = Wrap(*i);
-		if (e != nullptr)
-			l[li++] = e;
-	}
-
-	return l;
+	return gcnew CollectionIrrListTemplate<GUIElement^, GUIElement, gui::IGUIElement>(m_GUIElement->getChildren());
 }
 
 bool GUIElement::Clipped::get()
