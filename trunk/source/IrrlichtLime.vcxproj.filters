@@ -643,6 +643,9 @@
     <ClInclude Include="ReadFileStream.h">
       <Filter>IO</Filter>
     </ClInclude>
+    <ClInclude Include="NativeArray.h" />
+    <ClInclude Include="NativeList.h" />
+    <ClInclude Include="NativeIterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">

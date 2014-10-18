@@ -1,9 +1,10 @@
 SRC: https://irrlicht.svn.sourceforge.net/svnroot/irrlicht/trunk
-REV: 4886
+REV: 4973
 
 IrrCompileConfig.h
 	+ _IRR_COMPILE_WITH_DIRECT3D_8_
 	+ _IRR_WCHAR_FILESYSTEM
+	+ _IRR_COMPILE_WITH_CG_
 
 Irrlicht10.0.vcxproj
 	General -> Character Set = "Use Unicode Character Set"

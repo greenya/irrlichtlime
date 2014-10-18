@@ -23,41 +23,72 @@ public:
 	{
 	}
 
-	virtual int CompareTo(_REFCLASS_ other) 
+	virtual int CompareTo(_REFCLASS_ other) sealed
 	{
-		if (*this == other)
+		/*if (Equals(other))
 			return 0;
 		else if (*this < other)
 			return -1;
 		else
 			return +1;
+		*/
+		//New implementation without redundant calls
+		//Tested, returns the same values as the old version (and is faster)
+		if (core::equals(X, other.X))
+			if (core::equals(Y, other.Y))
+				if (core::equals(Z, other.Z))
+					return 0;
+				else
+					if (Z > other.Z)
+						return +1;
+					else
+						return -1;
+			else
+				if (Y > other.Y)
+					return +1;
+				else
+					return -1;
+		else
+			if (X > other.X)
+				return +1;
+			else
+				return -1;
 	}
 
-	// operators
-
-	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2, _WRAPTYPE_ tolerance)
+	virtual bool Equals(_REFCLASS_ other) sealed
 	{
-		return core::equals(v1.X, v2.X, tolerance) &&
-			core::equals(v1.Y, v2.Y, tolerance) &&
-			core::equals(v1.Z, v2.Z, tolerance);
+		const _WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
+		return core::equals(X, other.X, tolerance) &&
+			core::equals(Y, other.Y, tolerance) &&
+			core::equals(Z, other.Z, tolerance);
+	}
+	
+	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
+	{
+		return core::equals(X, other.X, tolerance) &&
+			core::equals(Y, other.Y, tolerance) &&
+			core::equals(Z, other.Z, tolerance);
 	}
 
-	static bool equals(_REFCLASS_ v1, _REFCLASS_ v2)
+	virtual bool Equals(Object^ other) override sealed
 	{
-		_WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
-		return core::equals(v1.X, v2.X, tolerance) &&
-			core::equals(v1.Y, v2.Y, tolerance) &&
-			core::equals(v1.Z, v2.Z, tolerance);
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == _REFCLASS_::typeid)
+			return Equals((_REFCLASS_)other);
+		else
+			return false;
 	}
 
 	static bool operator == (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return equals(v1, v2);
+		return v1.Equals(v2);
 	}
 
 	static bool operator != (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return !equals(v1, v2);
+		return !v1.Equals(v2);
 	}
 
 	static bool operator > (_REFCLASS_ v1, _REFCLASS_ v2)
@@ -266,27 +297,6 @@ public:
 	_WRAPTYPE_ DotProduct(_REFCLASS_ other)
 	{
 		return X*other.X + Y*other.Y + Z*other.Z;
-	}
-
-	virtual bool Equals(_REFCLASS_ other)
-	{
-		return equals(*this, other);
-	}
-	
-	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
-	{
-		return equals(*this, other, tolerance);
-	}
-
-	virtual bool Equals(Object^ other) override
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == _REFCLASS_::typeid)
-			return Equals((_REFCLASS_)other);
-		else
-			return false;
 	}
 
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)

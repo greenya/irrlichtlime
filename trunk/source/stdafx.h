@@ -7,6 +7,9 @@
 #pragma managed
 
 #include "Lime.h"
+#include "NativeArray.h"
+#include "NativeList.h"
+#include "NativeIterator.h"
 
 // enums
 #include "AlphaSource.h"

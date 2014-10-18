@@ -54,19 +54,34 @@ void GUIProfiler::PreviousPage()
 	m_GUIProfiler->previousPage();
 }
 
+void GUIProfiler::SetFilters(unsigned int minCalls, unsigned int minTimeSum, float minTimeAverage, unsigned int minTimeMax)
+{
+	m_GUIProfiler->setFilters(minCalls, minTimeSum, minTimeAverage, minTimeMax);
+}
+
 GUIFont^ GUIProfiler::ActiveFont::get()
 {
 	return GUIFont::Wrap(m_GUIProfiler->getActiveFont());
 }
 
-bool GUIProfiler::IgnoreUncalled::get()
+bool GUIProfiler::DrawBackground::get()
 {
-	return m_GUIProfiler->getIgnoreUncalled();
+	return m_GUIProfiler->isDrawBackgroundEnabled();
 }
 
-void GUIProfiler::IgnoreUncalled::set(bool value)
+void GUIProfiler::DrawBackground::set(bool value)
 {
-	m_GUIProfiler->setIgnoreUncalled(value);
+	m_GUIProfiler->setDrawBackground(value);
+}
+
+bool GUIProfiler::Frozen::get()
+{
+	return m_GUIProfiler->getFrozen();
+}
+
+void GUIProfiler::Frozen::set(bool value)
+{
+	m_GUIProfiler->setFrozen(value);
 }
 
 GUIFont^ GUIProfiler::OverrideFont::get()
@@ -77,6 +92,16 @@ GUIFont^ GUIProfiler::OverrideFont::get()
 void GUIProfiler::OverrideFont::set(GUIFont^ value)
 {
 	m_GUIProfiler->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
+}
+
+bool GUIProfiler::ShowGroupsTogether::get()
+{
+	return m_GUIProfiler->getShowGroupsTogether();
+}
+
+void GUIProfiler::ShowGroupsTogether::set(bool value)
+{
+	m_GUIProfiler->setShowGroupsTogether(value);
 }
 
 }

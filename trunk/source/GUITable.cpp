@@ -193,6 +193,16 @@ int GUITable::ColumnCount::get()
 	return m_GUITable->getColumnCount();
 }
 
+bool GUITable::DrawBackground::get()
+{
+	return m_GUITable->isDrawBackgroundEnabled();
+}
+
+void GUITable::DrawBackground::set(bool value)
+{
+	m_GUITable->setDrawBackground(value);
+}
+
 GUITableDrawFlag GUITable::DrawFlags::get()
 {
 	return (GUITableDrawFlag)m_GUITable->getDrawFlags();
@@ -208,7 +218,7 @@ GUIScrollBar^ GUITable::HorizontalScrollBar::get()
 	return GUIScrollBar::Wrap(m_GUITable->getHorizontalScrollBar());
 }
 
-__int32 GUITable::ItemHeight::get()
+int GUITable::ItemHeight::get()
 {
 	return m_GUITable->getItemHeight();
 }

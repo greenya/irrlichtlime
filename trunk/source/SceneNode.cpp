@@ -306,19 +306,9 @@ void SceneNode::AbsoluteTransformation::set(Matrix^ value)
 	i->AbsoluteTransformation_set(*value->m_NativeValue);
 }
 
-List<SceneNodeAnimator^>^ SceneNode::AnimatorList::get()
+NativeCollection<SceneNodeAnimator^>^ SceneNode::AnimatorList::get()
 {
-	List<SceneNodeAnimator^>^ l = gcnew List<SceneNodeAnimator^>();
-
-	core::list<scene::ISceneNodeAnimator*> a = m_SceneNode->getAnimators();
-	for (core::list<scene::ISceneNodeAnimator*>::ConstIterator i = a.begin(); i != a.end(); ++i)
-	{
-		SceneNodeAnimator^ n = SceneNodeAnimator::Wrap(*i);
-		if (n != nullptr)
-			l->Add(n);
-	}
-
-	return l;
+	return gcnew CollectionIrrListTemplate<SceneNodeAnimator^, SceneNodeAnimator, scene::ISceneNodeAnimator>(m_SceneNode->getAnimators());
 }
 
 CullingType SceneNode::AutomaticCulling::get()
@@ -385,20 +375,9 @@ array<Vector3Df>^ SceneNode::BoundingBoxTransformedEdges::get()
 	return m;
 }
 
-array<SceneNode^>^ SceneNode::Children::get()
+NativeCollection<SceneNode^>^ SceneNode::Children::get()
 {
-	array<SceneNode^>^ l = gcnew array<SceneNode^>(m_SceneNode->getChildren().size());
-	int li = 0;
-
-	core::list<scene::ISceneNode*> a = m_SceneNode->getChildren();
-	for (core::list<scene::ISceneNode*>::ConstIterator i = a.begin(); i != a.end(); ++i)
-	{
-		SceneNode^ n = Wrap(*i);
-		if (n != nullptr)
-			l[li++] = n;
-	}
-
-	return l;
+	return gcnew CollectionIrrListTemplate<SceneNode^, SceneNode, scene::ISceneNode>(m_SceneNode->getChildren());
 }
 
 DebugSceneType SceneNode::DebugDataVisible::get()

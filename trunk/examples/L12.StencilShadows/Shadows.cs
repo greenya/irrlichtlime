@@ -7,6 +7,7 @@ using System.Threading;
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
 using IrrlichtLime.Video;
+using IrrlichtLime;
 
 namespace L12.StencilShadows
 {
@@ -188,14 +189,14 @@ namespace L12.StencilShadows
 
 		void buildShadowVolume(List<Vector3Df> shadowVertices, MeshBuffer meshbuffer, Matrix matrix, Vector3Df light)
 		{
-			ushort[] indices = meshbuffer.Indices as ushort[];
+			NativeArray<ushort> indices = meshbuffer.GetIndices16Bit();
 
 			if (indices == null)
 				throw new ArgumentException();
 
 			Triangle3Df t123 = new Triangle3Df();
 
-			for (int i = 0; i < indices.Length; i += 3)
+			for (int i = 0; i < indices.Count; i += 3)
 			{
 				Vector3Df v1 = meshbuffer.GetPosition(indices[i]);
 				Vector3Df v2 = meshbuffer.GetPosition(indices[i + 1]);

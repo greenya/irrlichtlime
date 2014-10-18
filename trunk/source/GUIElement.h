@@ -52,7 +52,7 @@ public:
 
 	property Recti^ AbsoluteClippingRect { Recti^ get(); }
 	property Recti^ AbsolutePosition { Recti^ get(); }
-	property array<GUIElement^>^ Children { array<GUIElement^>^ get(); }
+	property NativeCollection<GUIElement^>^ Children { NativeCollection<GUIElement^>^ get(); }
 	property bool Clipped { bool get(); void set(bool value); }
 	property bool Enabled { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }

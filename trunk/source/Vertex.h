@@ -9,15 +9,18 @@ using namespace IrrlichtLime::Core;
 namespace IrrlichtLime {
 namespace Video {
 
-public interface class IVertex3D
+public interface class IVertex3D : public IEquatable<IVertex3D^>
 {
 	property VertexType Type { VertexType get(); }
-	operator video::S3DVertex();
+	property Vector3Df Position { Vector3Df get(); void set(Vector3Df value); }
+	property Vector3Df Normal { Vector3Df get(); void set(Vector3Df value); }
+	property Video::Color Color { Video::Color get(); void set(Video::Color value); }
+	property Vector2Df TCoords { Vector2Df get(); void set(Vector2Df value); }
 };
 
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Vertex3D : IVertex3D
+public value class Vertex3D : public IVertex3D, public IEquatable<Vertex3D>
 {
 
 #define _REFCLASS_ Vertex3D
@@ -27,6 +30,50 @@ public value class Vertex3D : IVertex3D
 #undef _REFCLASS_
 
 public:
+
+	virtual bool Equals(Vertex3D other) sealed
+	{
+		return (Position.Equals(other.Position)
+			&& Normal.Equals(other.Normal)
+			&& Color.Equals(other.Color)
+			&& TCoords.Equals(other.TCoords));
+	}
+
+	virtual bool Equals(IVertex3D^ other) sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Vertex3D::typeid)
+			return Equals((Vertex3D)other);
+		else
+			return (Position.Equals(other->Position) &&
+					Normal.Equals(other->Normal) &&
+					Color.Equals(other->Color) &&
+					TCoords.Equals(other->TCoords));
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
+		if (castResult != nullptr)
+			return Equals(castResult);
+		else
+			return false;
+	}
+
+	static bool operator == (Vertex3D v1, Vertex3D v2)
+	{
+		return v1.Equals(v2);
+	}
+
+	static bool operator != (Vertex3D v1, Vertex3D v2)
+	{
+		return !v1.Equals(v2);
+	}
 
 	Vertex3D(float x, float y, float z, float nx, float ny, float nz, Video::Color c, float tu, float tv)
 		: Position(x, y, z), Normal(nx, ny, nz), Color(c), TCoords(tu, tv)
@@ -79,12 +126,12 @@ public:
 
 	property VertexType Type
 	{
-		virtual VertexType get() { return VertexType::Standard; } 
+		virtual VertexType get() sealed { return VertexType::Standard; }
 	}
 
-	virtual operator video::S3DVertex()
+	operator video::S3DVertex()
 	{
-		return S3DVertex(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative());
+		return ToNative();
 	}
 
 internal:
@@ -99,13 +146,13 @@ internal:
 
 	video::S3DVertex ToNative()
 	{
-		return (S3DVertex)*this;
+		return S3DVertex(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative());
 	}
 
 };
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Vertex3DTTCoords : IVertex3D
+public value class Vertex3DTTCoords : public IVertex3D, public IEquatable<Vertex3DTTCoords>
 {
 
 #define _REFCLASS_ Vertex3DTTCoords
@@ -117,6 +164,51 @@ public value class Vertex3DTTCoords : IVertex3D
 public:
 
 	Vector2Df TCoords2;
+
+	virtual bool Equals(Vertex3DTTCoords other) sealed
+	{
+		return (Position.Equals(other.Position)
+			&& Normal.Equals(other.Normal)
+			&& Color.Equals(other.Color)
+			&& TCoords.Equals(other.TCoords)
+			&& TCoords2.Equals(other.TCoords2));
+	}
+
+	virtual bool Equals(IVertex3D^ other) sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Vertex3DTTCoords::typeid)
+			return Equals((Vertex3DTTCoords)other);
+		else
+			return (Position.Equals(other->Position) &&
+					Normal.Equals(other->Normal) &&
+					Color.Equals(other->Color) &&
+					TCoords.Equals(other->TCoords));
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
+		if (castResult != nullptr)
+			return Equals(castResult);
+		else
+			return false;
+	}
+
+	static bool operator == (Vertex3DTTCoords v1, Vertex3DTTCoords v2)
+	{
+		return v1.Equals(v2);
+	}
+
+	static bool operator != (Vertex3DTTCoords v1, Vertex3DTTCoords v2)
+	{
+		return !v1.Equals(v2);
+	}
 
 	Vertex3DTTCoords(Vertex3D other)
 	{
@@ -169,13 +261,13 @@ public:
 
 	property VertexType Type
 	{
-		virtual VertexType get() { return VertexType::TTCoords; }
+		virtual VertexType get() sealed { return VertexType::TTCoords; }
 	}
 
-	virtual operator video::S3DVertex()
+	/*virtual operator video::S3DVertex() sealed
 	{
 		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
-	}
+	}*/
 
 internal:
 
@@ -191,11 +283,12 @@ internal:
 	video::S3DVertex2TCoords ToNative()
 	{
 		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
+		//return *(S3DVertex2TCoords*)&*this;	//this line compiles, but I don't want to test it :)
 	}
 };
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Vertex3DTangents : IVertex3D
+public value class Vertex3DTangents : public IVertex3D, public IEquatable<Vertex3DTangents>
 {
 
 #define _REFCLASS_ Vertex3DTangents
@@ -208,6 +301,52 @@ public:
 
 	Vector3Df Tangent;
 	Vector3Df Binormal;
+
+	virtual bool Equals(Vertex3DTangents other) sealed
+	{
+		return (Position.Equals(other.Position)
+			&& Normal.Equals(other.Normal)
+			&& Color.Equals(other.Color)
+			&& TCoords.Equals(other.TCoords)
+			&& Tangent.Equals(other.Tangent)
+			&& Binormal.Equals(other.Binormal));
+	}
+
+	virtual bool Equals(IVertex3D^ other) sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Vertex3DTangents::typeid)
+			return Equals((Vertex3DTangents)other);
+		else
+			return (Position.Equals(other->Position) &&
+					Normal.Equals(other->Normal) &&
+					Color.Equals(other->Color) &&
+					TCoords.Equals(other->TCoords));
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
+		if (castResult != nullptr)
+			return Equals(castResult);
+		else
+			return false;
+	}
+
+	static bool operator == (Vertex3DTangents v1, Vertex3DTangents v2)
+	{
+		return v1.Equals(v2);
+	}
+
+	static bool operator != (Vertex3DTangents v1, Vertex3DTangents v2)
+	{
+		return !v1.Equals(v2);
+	}
 
 	Vertex3DTangents(Vertex3D other)
 	{
@@ -275,13 +414,13 @@ public:
 
 	property VertexType Type
 	{
-		virtual VertexType get() { return VertexType::Tangents; }
+		virtual VertexType get() sealed { return VertexType::Tangents; }
 	}
 
-	virtual operator video::S3DVertex()
+	/*virtual operator video::S3DVertex() sealed
 	{
 		return S3DVertexTangents(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), Tangent.ToNative(), Binormal.ToNative());
-	}
+	}*/
 
 internal:
 
