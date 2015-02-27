@@ -198,7 +198,11 @@ internal:
 
 	operator core::triangle3df()
 	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<core::triangle3df>)this;
+#else
 		return core::triangle3df(A.ToNative(), B.ToNative(), C.ToNative());
+#endif
 	}
 
 	core::triangle3df ToNative()

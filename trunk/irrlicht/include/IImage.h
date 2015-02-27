@@ -125,6 +125,20 @@ public:
 		case ECF_DXT4:
 		case ECF_DXT5:
 			return 32;
+		case ECF_D16:
+			return 16;
+		case ECF_D32:
+			return 32;
+		case ECF_D24S8:
+			return 32;
+		case ECF_R8:
+			return 8;
+		case ECF_R8G8:
+			return 16;
+		case ECF_R16:
+			return 16;
+		case ECF_R16G16:
+			return 32;
 		case ECF_R16F:
 			return 16;
 		case ECF_G16R16F:
@@ -158,6 +172,20 @@ public:
 		}
 	}
 
+	//! test if the color format is only viable for depth/stencil textures
+	static bool isDepthFormat(const ECOLOR_FORMAT format)
+	{
+		switch(format)
+		{
+			case ECF_D16:
+			case ECF_D32:
+			case ECF_D24S8:
+				return true;
+			default:
+				return false;
+		}
+	}
+
 	//! test if the color format is only viable for RenderTarget textures
 	/** Since we don't have support for e.g. floating point IImage formats
 	one should test if the color format can be used for arbitrary usage, or
@@ -170,6 +198,11 @@ public:
 			case ECF_R5G6B5:
 			case ECF_R8G8B8:
 			case ECF_A8R8G8B8:
+			case ECF_DXT1:
+			case ECF_DXT2:
+			case ECF_DXT3:
+			case ECF_DXT4:
+			case ECF_DXT5:
 				return false;
 			default:
 				return true;

@@ -158,7 +158,7 @@ namespace L15.AbstractTrace
 			if (l.Mesh != null)
 				l.Mesh.Drop();
 
-			l.Mesh = Mesh.Create();
+			l.Mesh = StaticMesh.Create();
 
 			if (gridCubeCount > 0)
 			{
@@ -369,7 +369,7 @@ namespace L15.AbstractTrace
 			public bool MeshIsReady = false;
 			public int Generation = -1;
 			public int CubeCount = -1;
-			public Mesh Mesh = null;
+			public StaticMesh Mesh = null;
 			public Matrix Transform = new Matrix();
 		}
 	}

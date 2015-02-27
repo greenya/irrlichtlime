@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "MeshBuffer.h"
 #include "MeshManipulator.h"
+#include "StaticMesh.h"
 
 using namespace irr;
 using namespace System;
@@ -46,10 +47,10 @@ Mesh^ MeshManipulator::CreateForsythOptimizedMesh(Mesh^ mesh)
 	return Mesh::Wrap(m);
 }
 
-Mesh^ MeshManipulator::CreateMeshCopy(Mesh^ mesh)
+StaticMesh^ MeshManipulator::CreateMeshCopy(Mesh^ mesh)
 {
-	scene::IMesh* m = m_MeshManipulator->createMeshCopy(LIME_SAFEREF(mesh, m_Mesh));
-	return Mesh::Wrap(m);
+	scene::SMesh* m = m_MeshManipulator->createMeshCopy(LIME_SAFEREF(mesh, m_Mesh));
+	return StaticMesh::Wrap(m);
 }
 
 Mesh^ MeshManipulator::CreateMeshUniquePrimitives(Mesh^ mesh)

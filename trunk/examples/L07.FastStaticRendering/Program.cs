@@ -121,7 +121,7 @@ namespace L07.FastStaticRendering
 		IrrlichtDevice device;
 		Material material;
 		Matrix matrix;
-		Mesh mesh;
+		StaticMesh mesh;
 
 		public MeshBuffersBatch(IrrlichtDevice device, int N, bool B)
 		{
@@ -130,7 +130,7 @@ namespace L07.FastStaticRendering
 			material.Lighting = false;
 			matrix = new Matrix();
 
-			mesh = Mesh.Create();
+			mesh = StaticMesh.Create();
 
 			if (B)
 				generateMultiple16bitMeshbuffers(N);

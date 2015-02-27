@@ -184,6 +184,7 @@ namespace L04.ParticleEmitterViewer
 			// Rendering loop
 
 			uint rs = 0, re = 0; // render frame time
+            int frameCount = 0;
 			while (irrDevice.Run())
 			{
 				if (irrDevice.VideoDriver.ScreenSize.Area != 0)
@@ -196,6 +197,11 @@ namespace L04.ParticleEmitterViewer
 						"Frame time: " + (irrDevice.VideoDriver.FPS > 1000 ? "< 1" : (re - rs).ToString()) + " ms");
 
 					irrDevice.VideoDriver.EndScene();
+                    if (frameCount++ > 5)
+                    {
+                        frameCount = 0;
+                        irrDevice.Yield();
+                    }
 				}
 				else
 				{

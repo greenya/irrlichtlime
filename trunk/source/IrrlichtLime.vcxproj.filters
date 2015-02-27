@@ -646,6 +646,9 @@
     <ClInclude Include="NativeArray.h" />
     <ClInclude Include="NativeList.h" />
     <ClInclude Include="NativeIterator.h" />
+    <ClInclude Include="StaticMesh.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -953,6 +956,9 @@
     </ClCompile>
     <ClCompile Include="ReadFileStream.cpp">
       <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

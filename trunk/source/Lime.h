@@ -7,6 +7,9 @@ using namespace System;
 using namespace System::Reflection; // for Assembly
 using namespace System::Runtime::InteropServices; // for Marshal
 
+//#define FAST_TO_NATIVE	//generates faster code when passing structs to native code, but untested (doesn't use the construtor, instead it generates a cpblk instruction)
+//maybe test it some day, but disabled for now, actually only generates the cpblk instruction for quaternion, not for others (don't know why, maybe because it's exactly 16 bytes)
+
 #ifdef _DEBUG
 #define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
 #define LIME_ASSERT2(condition, details) System::Diagnostics::Debug::Assert(condition, #condition, details);

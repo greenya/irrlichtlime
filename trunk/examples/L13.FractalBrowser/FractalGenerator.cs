@@ -54,7 +54,9 @@ namespace L13.FractalBrowser
 			foreach (Tile t in tiles)
 			{
 				t.MaxIterations = maxIterations;
-				t.TextureIsReady = false;
+				t.ImageIsReady = false;
+                driver.RemoveTexture(t.Texture);
+                t.Texture = null;
 				t.WindowRect = new Rectd(
 					GetWindowCoord(t.ScreenPos.X, t.ScreenPos.Y),
 					GetWindowCoord(t.ScreenPos.X + TileSize, t.ScreenPos.Y + TileSize));
@@ -110,8 +112,10 @@ namespace L13.FractalBrowser
 
 			foreach (Tile tile in tiles)
 			{
-				if (tile.TextureIsReady)
+				if (tile.ImageIsReady)
 				{
+                    if (tile.Texture == null)
+                        tile.Texture = driver.AddTexture(String.Format("Texture{0}{1}", tile.ScreenPos.X, tile.ScreenPos.Y), tile.Image);
 					driver.Draw2DImage(tile.Texture, tile.ScreenPos + (screenOffset ?? zero));
 					n++;
 				}
@@ -190,8 +194,12 @@ namespace L13.FractalBrowser
 
 		void clearTiles()
 		{
-			foreach (Tile t in tiles)
-				driver.RemoveTexture(t.Texture);
+            foreach (Tile t in tiles)
+            {
+                if (t.Texture != null)
+                    driver.RemoveTexture(t.Texture);
+                t.Image.Drop();
+            }
 
 			tiles.Clear();
 		}
@@ -234,18 +242,18 @@ namespace L13.FractalBrowser
 		{
 			Tile tile = tileObject as Tile;
 
-			if (!tile.TexturePainter.Lock(TextureLockMode.WriteOnly))
-				return;
+			//if (!tile.TexturePainter.Lock(TextureLockMode.WriteOnly))
+				//return;
 
 			try
 			{
 				// generate Mandelbrot set
 
-				int w = tile.TexturePainter.MipMapLevelWidth;
+                int w = tile.Image.Dimension.Width;
 				double rx = tile.WindowRect.UpperLeftCorner.X;
 				double rxu = tile.WindowRect.Width / w;
 
-				int h = tile.TexturePainter.MipMapLevelHeight;
+                int h = tile.Image.Dimension.Height;
 				double ry = tile.WindowRect.UpperLeftCorner.Y;
 				double ryu = tile.WindowRect.Height / h;
 
@@ -275,14 +283,14 @@ namespace L13.FractalBrowser
 						else
 							c.Set(0);
 
-						tile.TexturePainter.SetPixel(x, y, c);
+						tile.Image.SetPixel(x, y, c);
 					}
 				}
 			}
 			finally
 			{
-				tile.TexturePainter.Unlock();
-				tile.TextureIsReady = true;
+				//tile.TexturePainter.Unlock();
+				tile.ImageIsReady = true;
 			}
 		}
 
@@ -290,16 +298,16 @@ namespace L13.FractalBrowser
 		{
 			public Vector2Di ScreenPos;
 			public Rectd WindowRect;
-			public Texture Texture;
-			public TexturePainter TexturePainter;
-			public bool TextureIsReady;
+			public Image Image;
+            public Texture Texture;
+			public bool ImageIsReady;
 			public int MaxIterations;
 
 			public Tile(int screenX, int screenY, Dimension2Di screenDimension, VideoDriver driver)
 			{
 				ScreenPos = new Vector2Di(screenX, screenY);
-				Texture = driver.AddTexture(screenDimension, string.Format("TileTexture({0},{1})", screenX, screenY));
-				TexturePainter = Texture.Painter;
+                Image = driver.CreateImage(ColorFormat.A8R8G8B8, screenDimension);
+                Texture = null;
 			}
 		}
 	}

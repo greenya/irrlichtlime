@@ -239,6 +239,7 @@
     <ClInclude Include="SceneNodeAnimatorInheritor.h" />
     <ClInclude Include="SceneParameters.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
+    <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureClamp.h" />
     <ClInclude Include="TextureCreationFlag.h" />
@@ -428,6 +429,7 @@
     <ClCompile Include="MeshTextureLoader.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="ReadFileStream.cpp" />
+    <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
     <ClCompile Include="VideoDriver.cpp" />

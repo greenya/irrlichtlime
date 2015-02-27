@@ -525,16 +525,17 @@ public:
 internal:
 
 	Quaternion(const core::quaternion& value)
+		: X(value.X), Y(value.Y), Z(value.Z), W(value.W)
 	{
-		X = value.X;
-		Y = value.Y;
-		Z = value.Z;
-		W = value.W;
 	}
 
 	operator core::quaternion()
 	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<core::quaternion>)this;
+#else
 		return core::quaternion(X, Y, Z, W);
+#endif
 	}
 
 	core::quaternion ToNative()

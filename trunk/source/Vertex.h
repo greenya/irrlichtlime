@@ -39,32 +39,6 @@ public:
 			&& TCoords.Equals(other.TCoords));
 	}
 
-	virtual bool Equals(IVertex3D^ other) sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == Vertex3D::typeid)
-			return Equals((Vertex3D)other);
-		else
-			return (Position.Equals(other->Position) &&
-					Normal.Equals(other->Normal) &&
-					Color.Equals(other->Color) &&
-					TCoords.Equals(other->TCoords));
-	}
-
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
-		if (castResult != nullptr)
-			return Equals(castResult);
-		else
-			return false;
-	}
-
 	static bool operator == (Vertex3D v1, Vertex3D v2)
 	{
 		return v1.Equals(v2);
@@ -129,11 +103,6 @@ public:
 		virtual VertexType get() sealed { return VertexType::Standard; }
 	}
 
-	operator video::S3DVertex()
-	{
-		return ToNative();
-	}
-
 internal:
 
 	Vertex3D(const S3DVertex& other)
@@ -144,9 +113,18 @@ internal:
 		TCoords = Vector2Df(other.TCoords);
 	}
 
+	operator video::S3DVertex()
+	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<S3DVertex>)this;
+#else
+		return S3DVertex(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative());
+#endif
+	}
+
 	video::S3DVertex ToNative()
 	{
-		return S3DVertex(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative());
+		return (S3DVertex)*this;
 	}
 
 };
@@ -172,32 +150,6 @@ public:
 			&& Color.Equals(other.Color)
 			&& TCoords.Equals(other.TCoords)
 			&& TCoords2.Equals(other.TCoords2));
-	}
-
-	virtual bool Equals(IVertex3D^ other) sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == Vertex3DTTCoords::typeid)
-			return Equals((Vertex3DTTCoords)other);
-		else
-			return (Position.Equals(other->Position) &&
-					Normal.Equals(other->Normal) &&
-					Color.Equals(other->Color) &&
-					TCoords.Equals(other->TCoords));
-	}
-
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
-		if (castResult != nullptr)
-			return Equals(castResult);
-		else
-			return false;
 	}
 
 	static bool operator == (Vertex3DTTCoords v1, Vertex3DTTCoords v2)
@@ -264,11 +216,6 @@ public:
 		virtual VertexType get() sealed { return VertexType::TTCoords; }
 	}
 
-	/*virtual operator video::S3DVertex() sealed
-	{
-		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
-	}*/
-
 internal:
 
 	Vertex3DTTCoords(const S3DVertex2TCoords& other)
@@ -280,10 +227,18 @@ internal:
 		TCoords2 = Vector2Df(other.TCoords2);
 	}
 
+	operator video::S3DVertex2TCoords()
+	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<S3DVertex2TCoords>)this;
+#else
+		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
+#endif
+	}
+
 	video::S3DVertex2TCoords ToNative()
 	{
-		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
-		//return *(S3DVertex2TCoords*)&*this;	//this line compiles, but I don't want to test it :)
+		return (S3DVertex2TCoords)*this;
 	}
 };
 
@@ -310,32 +265,6 @@ public:
 			&& TCoords.Equals(other.TCoords)
 			&& Tangent.Equals(other.Tangent)
 			&& Binormal.Equals(other.Binormal));
-	}
-
-	virtual bool Equals(IVertex3D^ other) sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		if (other->GetType() == Vertex3DTangents::typeid)
-			return Equals((Vertex3DTangents)other);
-		else
-			return (Position.Equals(other->Position) &&
-					Normal.Equals(other->Normal) &&
-					Color.Equals(other->Color) &&
-					TCoords.Equals(other->TCoords));
-	}
-
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
-			return false;
-
-		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
-		if (castResult != nullptr)
-			return Equals(castResult);
-		else
-			return false;
 	}
 
 	static bool operator == (Vertex3DTangents v1, Vertex3DTangents v2)
@@ -417,11 +346,6 @@ public:
 		virtual VertexType get() sealed { return VertexType::Tangents; }
 	}
 
-	/*virtual operator video::S3DVertex() sealed
-	{
-		return S3DVertexTangents(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), Tangent.ToNative(), Binormal.ToNative());
-	}*/
-
 internal:
 
 	Vertex3DTangents(const S3DVertexTangents& other)
@@ -434,9 +358,18 @@ internal:
 		Binormal = Vector3Df(other.Binormal);
 	}
 
+	operator video::S3DVertexTangents()
+	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<S3DVertexTangents>)this;
+#else
+		return S3DVertexTangents(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), Tangent.ToNative(), Binormal.ToNative());
+#endif
+	}
+
 	video::S3DVertexTangents ToNative()
 	{
-		return S3DVertexTangents(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), Tangent.ToNative(), Binormal.ToNative());
+		return (video::S3DVertexTangents)*this;
 	}
 };
 

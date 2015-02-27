@@ -20,7 +20,7 @@ namespace L11.BulletSharpTest
 {
 	class Program
 	{
-		const float worldGravity = 200;
+		const float worldGravity = 981;
 		const float cubeMass = 1;
 		const float cubeSize = 40;
 		const float sphereMass = cubeMass * 5;
@@ -32,16 +32,45 @@ namespace L11.BulletSharpTest
 		static bool simPaused = false;
 		static bool useTrails = false;
 
+        static bool AskUserForDriver(out DriverType driverType)
+        {
+            driverType = DriverType.Null;
+
+            Console.Write("Please select the driver you want for this example:\n" +
+                        " (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
+                        " (d) Burning's Software Renderer\n (e) Software Renderer\n" +
+                        " (f) NullDevice\n (otherKey) exit\n\n");
+
+            ConsoleKeyInfo i = Console.ReadKey();
+
+            switch (i.Key)
+            {
+                case ConsoleKey.A: driverType = DriverType.OpenGL; break;
+                case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
+                case ConsoleKey.C: driverType = DriverType.Direct3D8; break;
+                case ConsoleKey.D: driverType = DriverType.BurningsVideo; break;
+                case ConsoleKey.E: driverType = DriverType.Software; break;
+                case ConsoleKey.F: driverType = DriverType.Null; break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+
 		static void Main(string[] args)
 		{
 			checkBulletSharpDllPresence();
 
 			// setup Irrlicht
-
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 768));
+            DriverType driverType;
+            if (!AskUserForDriver(out driverType))
+                return;
+			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(1024, 768));
 			if (device == null)
 				return;
 
+            device.SetWindowResizable(true);
 			device.SetWindowCaption("BulletSharp Test - Irrlicht Engine");
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
 

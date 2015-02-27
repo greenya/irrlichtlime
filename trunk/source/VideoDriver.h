@@ -210,6 +210,8 @@ public:
 	void SetMinHardwareBufferVertexCount(int count);
 
 	//bool setRenderTarget (const core::array< video::IRenderTarget > &texture, bool clearBackBuffer=true, bool clearZBuffer=true, SColor color=video::SColor(0, 0, 0, 0));
+	//bool SetRenderTarget(ICollection<RenderTarget^>^ textures, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil);	//render target class missing
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);

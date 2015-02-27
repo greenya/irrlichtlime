@@ -121,7 +121,11 @@ internal:
 
 	operator core::line3df()
 	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<core::line3df>)this;
+#else
 		return core::line3df(Start.ToNative(), End.ToNative());
+#endif
 	}
 
 	core::line3df ToNative()
