@@ -2100,6 +2100,16 @@ If you already know the scale then this function is faster than Rotation.
 NOTE: You will have the same end-rotation as set in Rotation, but it might not use the same axis values.</summary>
 			<param name="scale">The scale of the matrix.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetTextureScale(System.Single@,System.Single@)">
+			<summary>Get texture transformation scale.</summary>
+			<param name="sx">X-Axis scale factor.</param>
+			<param name="sy">Y-Axis scale factor.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetTextureTranslate(System.Single@,System.Single@)">
+			<summary>Get texture transformation translation.</summary>
+			<param name="x">Offset on x-Axis.</param>
+			<param name="y">Offset on y-Axis.</param>
+		</member>
 		<member name="P:IrrlichtLime.Core.Matrix.IdentityIntegerBase">
 			<summary>True if the matrix is the identity matrix.</summary>
 		</member>
@@ -2656,6 +2666,10 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="pos">Position.</param>
 			<param name="size">Size.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectd.#ctor(IrrlichtLime.Core.Dimension2Dd)">
+			<summary>Constructor with upper left at 0,0 and lower right using dimension.</summary>
+			<param name="size">Size.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Rectd.#ctor(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
 			<summary>Constructor with two corners.</summary>
 			<param name="upperLeft">Upper left corner.</param>
@@ -2766,6 +2780,10 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="pos">Position.</param>
 			<param name="size">Size.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Dimension2Df)">
+			<summary>Constructor with upper left at 0,0 and lower right using dimension.</summary>
+			<param name="size">Size.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
 			<summary>Constructor with two corners.</summary>
 			<param name="upperLeft">Upper left corner.</param>
@@ -2874,6 +2892,10 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
 			<summary>Constructor with upper left corner and dimension.</summary>
 			<param name="pos">Position.</param>
+			<param name="size">Size.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Dimension2Di)">
+			<summary>Constructor with upper left at 0,0 and lower right using dimension.</summary>
 			<param name="size">Size.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
@@ -9086,14 +9108,8 @@ Outside this radius the light won't lighten geometry and cast no shadows. Settin
 			<summary>True if the light should be enabled.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.Mesh">
-			<summary>Class which holds the geometry of an object.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.Mesh.Create">
-			<summary>Creates new Mesh object. You have to call Drop() after you don't need this object.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.Mesh.AddMeshBuffer(IrrlichtLime.Scene.MeshBuffer)">
-			<summary>Adds new mesh buffer to the mesh. The bounding box is not updated automatically.</summary>
-			<param name="buffer">Mesh buffer to add.</param>
+			<summary>Class which holds the geometry of an object.
+This is only a base class for actual mesh classes.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.Mesh.BoundingBox">
 			<summary>An axis aligned bounding box of the mesh.</summary>
@@ -9112,18 +9128,6 @@ Outside this radius the light won't lighten geometry and cast no shadows. Settin
 		</member>
 		<member name="P:IrrlichtLime.Scene.Mesh.MeshBuffers">
 			<summary>Array of all mesh buffers in this mesh.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.Mesh.RecalculateBoundingBox">
-			<summary>Recalculates the bounding box of the mesh.</summary>
-		</member>
-		<member name="M:IrrlichtLime.Scene.Mesh.RemoveMeshBuffer(System.Int32)">
-			<summary>Removes mesh buffers from the mesh.</summary>
-			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
-		</member>
-		<member name="M:IrrlichtLime.Scene.Mesh.RemoveMeshBuffer(System.Int32,System.Int32)">
-			<summary>Removes mesh buffers from the mesh.</summary>
-			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
-			<param name="count">Total number of mesh buffers to remove starting from index. Must be &gt;=1 and index + count &lt;= MeshBufferCount. Default is 1.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.Mesh.SetDirty(IrrlichtLime.Scene.HardwareBufferType)">
 			<summary>Flags the mesh as changed, reloads hardware buffers.
@@ -9386,7 +9390,8 @@ More information can be found at http://home.comcast.net/~tom_forsyth/papers/fas
 			<param name="mesh">Source mesh for the operation.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshCopy(IrrlichtLime.Scene.Mesh)">
-			<summary>Clones a mesh.</summary>
+			<summary>Clones a mesh.
+The copy will be static and can be modified.</summary>
 			<param name="mesh">Mesh to copy.</param>
 		</member>
 		<member name="M:IrrlichtLime.Scene.MeshManipulator.CreateMeshUniquePrimitives(IrrlichtLime.Scene.Mesh)">
@@ -13993,6 +13998,32 @@ The animation is linked (not copied) based on joint names so make sure they are 
 			<param name="mesh">The skinned mesh to use animation from.</param>
 			<returns>True if all joints in this mesh were matched up (empty names will not be matched, and it's case sensitive). Unmatched joints will not be animated.</returns>
 		</member>
+		<member name="T:IrrlichtLime.Scene.StaticMesh">
+			<summary>Class which holds the geometry of an object.
+This class can only hold static geometry.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.Create">
+			<summary>Creates new Mesh object. You have to call Drop() after you don't need this object.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.AddMeshBuffer(IrrlichtLime.Scene.MeshBuffer)">
+			<summary>Adds new mesh buffer to the mesh. The bounding box is not updated automatically.</summary>
+			<param name="buffer">Mesh buffer to add.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.Clear">
+			<summary>Removes all mesh buffers from this mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.RecalculateBoundingBox">
+			<summary>Recalculates the bounding box of the mesh.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.RemoveMeshBuffer(System.Int32)">
+			<summary>Removes mesh buffers from the mesh.</summary>
+			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
+		</member>
+		<member name="M:IrrlichtLime.Scene.StaticMesh.RemoveMeshBuffer(System.Int32,System.Int32)">
+			<summary>Removes mesh buffers from the mesh.</summary>
+			<param name="index">First index of the mesh buffer. Must be from 0 to MeshBufferCount-1.</param>
+			<param name="count">Total number of mesh buffers to remove starting from index. Must be &gt;=1 and index + count &lt;= MeshBufferCount. Default is 1./</param>
+		</member>
 		<member name="T:IrrlichtLime.Scene.TerrainPatchSize">
 			<summary>Enumeration for patch sizes specifying the size of patches in the TerrainSceneNode.</summary>
 		</member>
@@ -14707,6 +14738,21 @@ Note: this format may only be used for render target textures.</summary>
 		<member name="F:IrrlichtLime.Video.ColorFormat.A8R8G8B8">
 			<summary>Default 32 bit color format. 8 bits are used for every component: red, green, blue and alpha.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.D16">
+			<summary>16 bit format using 16 bits for depth.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.D24S8">
+			<summary>32 bit format using 24 bits for depth and 8 bits for stencil.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.D32">
+			<summary>32 bit format using 32 bits for depth.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.DXT1">
 			<summary>DXT1 compressed color format.</summary>
 		</member>
@@ -14732,8 +14778,18 @@ Note: this format may only be used for render target textures.</summary>
 
 Note: this format may only be used for render target textures.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R16">
+			<summary>16 bit format using 16 bits for the red channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.R16F">
 			<summary>16 bit floating point format using 16 bits for the red channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R16G16">
+			<summary>32 bit format using 16 bits for the red and green channels.
 
 Note: this format may only be used for render target textures.</summary>
 		</member>
@@ -14744,6 +14800,16 @@ Note: this format may only be used for render target textures.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.R5G6B5">
 			<summary>Standard 16 bit color format.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R8">
+			<summary>8 bit format using 8 bits for the red channel.
+
+Note: this format may only be used for render target textures.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ColorFormat.R8G8">
+			<summary>16 bit format using 8 bits for the red and green channels.
+
+Note: this format may only be used for render target textures.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.ColorFormat.R8G8B8">
 			<summary>24 bit color, no alpha channel, but 8 bit for red, green and blue.</summary>
@@ -15638,6 +15704,11 @@ Returns PixelFormat.Undefined if format cannot be translated.</summary>
 		<member name="M:IrrlichtLime.Video.Image.IsCompressedFormat(IrrlichtLime.Video.ColorFormat)">
 			<summary>Tests if this is compressed color format.</summary>
 			<param name="format">Color format to test.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.Image.IsDepthFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Tests if the color format is only viable for depth/stencil textures.</summary>
+			<param name="format">Color format to test.</param>
+			<returns>True if color format is only for depth/stencil textures.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.Image.IsRenderTargetOnlyFormat(IrrlichtLime.Video.ColorFormat)">
 			<summary>Tests if the color format is only viable for RTT (render target textures).</summary>
@@ -18108,6 +18179,18 @@ Please note that you cannot render 3d or 2d geometry with a render target as tex
 			<returns>True if sucessful and false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Sets a new render target.
+
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
+			<param name="clearBackBuffer">True for clearing the back buffer with the color parameter. Default: true.</param>
+			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
+			<param name="color">The color for the render target. Default: black.</param>
+			<returns>True if sucessful and false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.Texture)">
 			<summary>Sets a new render target.
 
 This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
