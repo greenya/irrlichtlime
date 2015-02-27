@@ -134,8 +134,12 @@ namespace L02.WinFormsWindow
 			// draw all
 
 			int lastFPS = -1;
+            int maxFPS = 50;
+            int averageFrameLenght = 1000 / maxFPS;
+
 			while (dev.Run())
 			{
+                long frameStart = dev.Timer.Time;
 				if (settings.BackColor == null)
 					// indeed, we do not need to spend time on cleaning color buffer if we use skybox
 					drv.BeginScene(false);
@@ -145,6 +149,13 @@ namespace L02.WinFormsWindow
 				smgr.DrawAll();
 				dev.GUIEnvironment.DrawAll();
 				drv.EndScene();
+
+                dev.Timer.Tick();
+                long frameEnd = dev.Timer.Time;
+                long frameLenght = frameEnd - frameStart;
+
+                if (frameLenght < averageFrameLenght)
+                    dev.Yield();
 
 				int fps = drv.FPS;
 				if (lastFPS != fps)

@@ -160,7 +160,7 @@ namespace L06.AnalogueClock
 
 			arrowSeconds.Rotation = new Vector3Df(0, 0, -t.Second * (360 / 60));
 			arrowMinutes.Rotation = new Vector3Df(0, 0, -t.Minute * (360 / 60));
-			arrowHours.Rotation = new Vector3Df(0, 0, -(t.Hour % 12) * (360 / 12));
+			arrowHours.Rotation = new Vector3Df(0, 0, -(((t.Minute + t.Hour * 60) % (12 * 60)) / 60f) * (360 / 12));
 		}
 	}
 }

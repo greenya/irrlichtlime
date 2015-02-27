@@ -1476,6 +1476,11 @@ void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
+bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil)
+{
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, color, LIME_SAFEREF(depthStencil, m_Texture));
+}
+
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color)
 {
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, color);

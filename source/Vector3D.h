@@ -455,7 +455,11 @@ internal:
 	
 	operator _WRAPCLASS_()
 	{
+#ifdef FAST_TO_NATIVE
+		return *(interior_ptr<_WRAPCLASS_>)this;
+#else
 		return _WRAPCLASS_(X, Y, Z);
+#endif
 	}
 
 	_WRAPCLASS_ ToNative()

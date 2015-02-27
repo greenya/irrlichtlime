@@ -81,6 +81,7 @@
     <ProjectReference Include="..\..\source\IrrlichtLime.vcxproj">
       <Project>{4F6EF8E3-F26F-49DB-867D-FD10FB083B0D}</Project>
       <Name>IrrlichtLime</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

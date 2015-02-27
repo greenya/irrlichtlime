@@ -51,6 +51,16 @@ public:
 		m_NativeValue = new _WRAPCLASS_(x1, y1, x2, y2);
 	}
 
+	_REFCLASS_(_OTHERTYPE2_^ size)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
+	{
+		LIME_ASSERT(size != nullptr);
+		LIME_ASSERT(size->Width >= 0);
+		LIME_ASSERT(size->Height >= 0);
+
+		m_NativeValue = new _WRAPCLASS_(*size->m_NativeValue);
+	}
+
 	_REFCLASS_(_OTHERTYPE1_ pos, _OTHERTYPE2_^ size)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{

@@ -16,6 +16,7 @@ public:
 
 	static int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsCompressedFormat(Video::ColorFormat format);
+	static bool IsDepthFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 	static System::Drawing::Imaging::PixelFormat GetPixelFormat(Video::ColorFormat format);
 

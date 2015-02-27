@@ -19,6 +19,11 @@ bool Image::IsCompressedFormat(Video::ColorFormat format)
 	return video::IImage::isCompressedFormat((ECOLOR_FORMAT)format);
 }
 
+bool Image::IsDepthFormat(Video::ColorFormat format)
+{
+	return video::IImage::isDepthFormat((ECOLOR_FORMAT)format);
+}
+
 bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
 {
 	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);

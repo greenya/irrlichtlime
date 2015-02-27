@@ -13,6 +13,7 @@ namespace Scene {
 ref class AnimatedMesh;
 ref class Mesh;
 ref class MeshBuffer;
+ref class StaticMesh;
 
 public ref class MeshManipulator : ReferenceCounted
 {
@@ -23,7 +24,7 @@ public:
 
 	Mesh^ CreateForsythOptimizedMesh(Mesh^ mesh);
 
-	Mesh^ CreateMeshCopy(Mesh^ mesh);
+	StaticMesh^ CreateMeshCopy(Mesh^ mesh);
 
 	Mesh^ CreateMeshUniquePrimitives(Mesh^ mesh);
 

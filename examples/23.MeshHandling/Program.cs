@@ -315,14 +315,14 @@ namespace _23.MeshHandling
 		int height;
 		float scale;
 
-		public Mesh Mesh { get; private set; }
+		public StaticMesh Mesh { get; private set; }
 
 		public HeightMesh()
 		{
 			width = 0;
 			height = 0;
 			scale = 1.0f;
-			Mesh = Mesh.Create();
+			Mesh = StaticMesh.Create();
 		}
 
 		public void Drop()

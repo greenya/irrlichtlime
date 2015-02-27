@@ -9,6 +9,32 @@ public:
 	Color Color;
 	Vector2Df TCoords;
 	
+	virtual bool Equals(IVertex3D^ other) sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == _REFCLASS_::typeid)
+			return Equals((_REFCLASS_)other);
+		else
+			return (Position.Equals(other->Position) &&
+					Normal.Equals(other->Normal) &&
+					Color.Equals(other->Color) &&
+					TCoords.Equals(other->TCoords));
+	}
+
+	virtual bool Equals(Object^ other) override sealed
+	{
+		if (other == nullptr)
+			return false;
+
+		IVertex3D^ castResult = dynamic_cast<IVertex3D^>(other);
+		if (castResult != nullptr)
+			return Equals(castResult);
+		else
+			return false;
+	}
+
 	virtual String^ ToString() override
 	{
 		return String::Format("Vertex3D: Type={0}; Position={1}", Type, Position);
