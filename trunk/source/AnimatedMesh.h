@@ -20,7 +20,6 @@ public:
 
 	property float AnimationSpeed { float get(); void set(float value); }
 	property int FrameCount { int get(); }
-	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 
 internal:
 

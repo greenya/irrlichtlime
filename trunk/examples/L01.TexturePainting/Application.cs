@@ -32,7 +32,7 @@ namespace L01.TexturePainting
 			device.SceneManager.DrawAll();
 			device.GUIEnvironment.DrawAll();
 
-			drv.SetRenderTarget(RenderTarget.FrameBuffer, true, true, new Color(40, 180, 240));
+			drv.SetRenderTarget(null, true, true, new Color(40, 180, 240));
 			sceneNodeRTT.Visible = true;
 			device.SceneManager.DrawAll();
 			device.GUIEnvironment.DrawAll();

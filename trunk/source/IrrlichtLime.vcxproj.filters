@@ -84,9 +84,6 @@
     <ClInclude Include="PixelShaderType.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTarget.h">
-      <Filter>Video</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderCallBackInheritor.h">
       <Filter>Video</Filter>
     </ClInclude>
@@ -649,6 +646,15 @@
     <ClInclude Include="StaticMesh.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="ZWriteFineControl.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTargetType.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTarget.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -959,6 +965,9 @@
     </ClCompile>
     <ClCompile Include="StaticMesh.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>Video</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

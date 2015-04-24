@@ -82,6 +82,7 @@ public:
 	property bool NormalizeNormals { bool get(); void set(bool value); }
 	property bool Mipmaps { bool get(); void set(bool value); }
 	property bool Transparent { bool get(); }
+	property Video::ZWriteFineControl ZWriteFineControl { Video::ZWriteFineControl get(); void set(Video::ZWriteFineControl value); }
 
 	property List<MaterialLayer^>^ Layer { List<MaterialLayer^>^ get(); }
 

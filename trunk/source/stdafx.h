@@ -77,7 +77,7 @@
 #include "PixelShaderType.h"
 #include "PolygonOffset.h"
 #include "PrimitiveType.h"
-#include "RenderTarget.h"
+#include "RenderTargetType.h"
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
@@ -92,6 +92,7 @@
 #include "VertexType.h"
 #include "VideoDriverFeature.h"
 #include "VideoModeAspectRatio.h"
+#include "ZWriteFineControl.h"
 
 // basic types
 #include "Vector.h"

@@ -66,6 +66,8 @@ namespace L01.TexturePainting
 			{
 				if (t == DriverType.Null)
 					continue;
+				if (t == DriverType.Direct3D8)	//D3D8 doesn't exist anymore
+					continue;
 
 				int i = guiDriverType.AddItem(t.ToString(), (int)t);
 
@@ -123,7 +125,7 @@ namespace L01.TexturePainting
 		}
 
 		// default settings {
-		DriverType driverType = DriverType.Direct3D8;
+		DriverType driverType = DriverType.Direct3D9;
 		VideoMode videoMode = new VideoMode(800, 600, 32);
 		bool fullscreen = false;
 		// }

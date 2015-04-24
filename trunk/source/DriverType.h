@@ -14,7 +14,8 @@ public enum class DriverType
 	Null = EDT_NULL,
 	Software = EDT_SOFTWARE,
 	BurningsVideo = EDT_BURNINGSVIDEO,
-	Direct3D8 = EDT_DIRECT3D8,
+	[Obsolete("The Direct3D8 driver doesn't exist anymore", false)]
+	Direct3D8 = DEPRECATED_EDT_DIRECT3D8_NO_LONGER_EXISTS,
 	Direct3D9 = EDT_DIRECT3D9,
 	OpenGL = EDT_OPENGL
 };

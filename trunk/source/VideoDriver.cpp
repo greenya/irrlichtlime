@@ -12,6 +12,7 @@
 #include "MeshManipulator.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
+#include "RenderTarget.h"
 #include "SceneNode.h"
 #include "Texture.h"
 #include "VertexBuffer.h"
@@ -69,6 +70,12 @@ void VideoDriver::AddOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh)
 void VideoDriver::AddOcclusionQuery(Scene::SceneNode^ node)
 {
 	m_VideoDriver->addOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+RenderTarget^ VideoDriver::AddRenderTarget()
+{
+	video::IRenderTarget* r = m_VideoDriver->addRenderTarget();
+	return RenderTarget::Wrap(r);
 }
 
 Texture^ VideoDriver::AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format)
@@ -189,9 +196,21 @@ bool VideoDriver::CheckDriverReset()
 	return m_VideoDriver->checkDriverReset();
 }
 
+void VideoDriver::ClearBuffers(bool backBuffer, bool depthBuffer, bool stencilBuffer, Color color)
+{
+	m_VideoDriver->clearBuffers(
+		backBuffer,
+		depthBuffer,
+		stencilBuffer,
+		color);
+}
+
 void VideoDriver::ClearZBuffer()
 {
+#pragma warning (push)
+#pragma warning (disable: 4996)	//marked as deprecated, we use a ObsoleteAttribute, so warning here is disabled
 	m_VideoDriver->clearZBuffer();
+#pragma warning (pop)
 }
 
 IO::Attributes^ VideoDriver::CreateAttributesFromMaterial(Material^ material)
@@ -282,7 +301,7 @@ Image^ VideoDriver::CreateScreenShot(Video::ColorFormat format)
 	return Image::Wrap(i);
 }
 
-Image^ VideoDriver::CreateScreenShot(Video::ColorFormat format, Video::RenderTarget target)
+Image^ VideoDriver::CreateScreenShot(Video::ColorFormat format, Video::RenderTargetType target)
 {
 	video::IImage* i = m_VideoDriver->createScreenShot(
 		(video::ECOLOR_FORMAT)format,
@@ -1381,6 +1400,11 @@ void VideoDriver::RemoveAllOcclusionQueries()
 	m_VideoDriver->removeAllOcclusionQueries();
 }
 
+void VideoDriver::RemoveAllRenderTargets()
+{
+	m_VideoDriver->removeAllRenderTargets();
+}
+
 void VideoDriver::RemoveAllTextures()
 {
 	m_VideoDriver->removeAllTextures();
@@ -1394,6 +1418,11 @@ void VideoDriver::RemoveHardwareBuffer(Scene::MeshBuffer^ mb)
 void VideoDriver::RemoveOcclusionQuery(Scene::SceneNode^ node)
 {
 	m_VideoDriver->removeOcclusionQuery(LIME_SAFEREF(node, m_SceneNode));
+}
+
+void VideoDriver::RemoveRenderTarget(RenderTarget^ target)
+{
+	m_VideoDriver->removeRenderTarget(LIME_SAFEREF(target, m_RenderTarget));
 }
 
 void VideoDriver::RemoveTexture(Texture^ texture)
@@ -1476,9 +1505,63 @@ void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil)
+bool VideoDriver::SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor)
 {
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, color, LIME_SAFEREF(depthStencil, m_Texture));
+	LIME_ASSERT(activeTextureIDs != nullptr);
+	core::array<u32> activeTextureIDsNative(activeTextureIDs->Length);
+	for (int i = 0; i < activeTextureIDs->Length; i++)
+	{
+		int value = activeTextureIDs[i];	//have to copy it out, won't compile
+		activeTextureIDsNative.push_back(value);
+	}
+
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(target, m_RenderTarget),
+		activeTextureIDsNative,
+		clearBackBuffer,
+		clearDepthBuffer,
+		clearStencilBuffer,
+		clearColor);
+	
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer)
+{
+	LIME_ASSERT(activeTextureIDs != nullptr);
+	core::array<u32> activeTextureIDsNative(activeTextureIDs->Length);
+	for (int i = 0; i < activeTextureIDs->Length; i++)
+	{
+		int value = activeTextureIDs[i];	//have to copy it out, won't compile
+		activeTextureIDsNative.push_back(value);
+	}
+
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(target, m_RenderTarget),
+		activeTextureIDsNative,
+		clearBackBuffer,
+		clearDepthBuffer,
+		clearStencilBuffer);
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor)
+{
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(target, m_RenderTarget),
+		activeTextureID,
+		clearBackBuffer,
+		clearDepthBuffer,
+		clearStencilBuffer,
+		clearColor);
+}
+
+bool VideoDriver::SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer)
+{
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(target, m_RenderTarget),
+		activeTextureID,
+		clearBackBuffer,
+		clearDepthBuffer,
+		clearStencilBuffer);
 }
 
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color)
@@ -1500,27 +1583,27 @@ bool VideoDriver::SetRenderTarget(Texture^ texture)
 {
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture));
 }
-
-bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color color)
+/*
+bool VideoDriver::SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer, Color color)
 {
 	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer, color);
 }
 
-bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer)
+bool VideoDriver::SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer)
 {
 	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer);
 }
 
-bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget)
+bool VideoDriver::SetRenderTarget(RenderTargetType target, bool clearTarget)
 {
 	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget);
 }
 
-bool VideoDriver::SetRenderTarget(RenderTarget target)
+bool VideoDriver::SetRenderTarget(RenderTargetType target)
 {
 	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target);
 }
-
+*/
 void VideoDriver::SetTextureCreationFlag(TextureCreationFlag flag, bool enabled)
 {
 	m_VideoDriver->setTextureCreationFlag((video::E_TEXTURE_CREATION_FLAG)flag, enabled);

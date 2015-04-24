@@ -49,7 +49,7 @@ namespace L02.WinFormsWindow
 
 			// fill combobox with all available video drivers, except Null
 			foreach (DriverType v in Enum.GetValues(typeof(DriverType)))
-				if (v != DriverType.Null)
+				if (v != DriverType.Null && v != DriverType.Direct3D8)
 					comboBoxVideoDriver.Items.Add(v);
 		}
 
