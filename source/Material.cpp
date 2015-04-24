@@ -403,6 +403,16 @@ bool Material::Transparent::get()
 	return m_NativeValue->isTransparent();
 }
 
+Video::ZWriteFineControl Material::ZWriteFineControl::get()
+{
+	return (Video::ZWriteFineControl)m_NativeValue->ZWriteFineControl;
+}
+
+void Material::ZWriteFineControl::set(Video::ZWriteFineControl value)
+{
+	m_NativeValue->ZWriteFineControl = (E_ZWRITE_FINE_CONTROL)value;
+}
+
 bool Material::Equals(Object^ other)
 {
 	if (other == nullptr)

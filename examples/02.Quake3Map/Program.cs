@@ -17,24 +17,8 @@ namespace _02.Quake3Map
 		{
 			DriverType driverType;
 
-			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
-						" (d) Burning's Software Renderer\n (e) Software Renderer\n" +
-						" (f) NullDevice\n (otherKey) exit\n\n");
-
-			ConsoleKeyInfo i = Console.ReadKey();
-
-			switch (i.Key)
-			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.Direct3D8; break;
-				case ConsoleKey.D: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.E: driverType = DriverType.Software; break;
-				case ConsoleKey.F: driverType = DriverType.Null; break;
-				default:
-					return;
-			}
+			if (!AskUserForDriver(out driverType))
+				return;
 
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
@@ -81,6 +65,31 @@ namespace _02.Quake3Map
 			}
 
 			device.Drop();
+		}
+
+		static bool AskUserForDriver(out DriverType driverType)
+		{
+			driverType = DriverType.Null;
+
+			Console.Write("Please select the driver you want for this example:\n" +
+						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
+						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
+						" (e) NullDevice\n (otherKey) exit\n\n");
+
+			ConsoleKeyInfo i = Console.ReadKey();
+
+			switch (i.Key)
+			{
+				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
+				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
+				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
+				case ConsoleKey.D: driverType = DriverType.Software; break;
+				case ConsoleKey.E: driverType = DriverType.Null; break;
+				default:
+					return false;
+			}
+
+			return true;
 		}
 	}
 }

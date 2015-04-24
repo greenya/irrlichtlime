@@ -647,7 +647,7 @@ Default value: false.</summary>
 		<member name="P:IrrlichtLime.IrrlichtDevice.VideoModeList">
 			<summary>List with all video modes available.
 
-There is no need to start up an Irrlicht Device with Direct3D, OpenGL or Software driver: you can use Null device for this property to use.</summary>
+You only need a null driver (ED_NULL) to access those video modes. So you can get the available modes before starting any other video driver.</summary>
 		</member>
 		<member name="P:IrrlichtLime.IrrlichtDevice.WindowActive">
 			<summary>Checks if the Irrlicht window is active.</summary>
@@ -2407,6 +2407,8 @@ Thus, this method assumes a camera position from which the triangle is definitel
 			<summary>Quaternion class for representing rotations.
 It provides cheap combinations and avoids gimbal locks.
 Also useful for interpolations.
+
+Be careful, unfortunately the operator order of the multiply operator (Quaternion*Quaternion) is opposite of that in Matrix.
 
 IMPORTANT: The default constructor (without parameters) creates an invalid quaternion. Use another constructor or the Identity property.</summary>
 		</member>
@@ -8099,9 +8101,6 @@ If you've created the ReadFile, you can drop it, if you don't need it anymore. T
 			<param name="startFrameLoop">Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. Default is -1.</param>
 			<param name="endFrameLoop">Because some animated meshes (.MD2) are blended between 2 static frames, and maybe animated in a loop, the startFrameLoop and the endFrameLoop have to be defined, to prevent the animation to be blended between frames which are outside of this loop. If startFrameLoop and endFrameLoop are both -1, they are ignored. Default is -1.</param>
 		</member>
-		<member name="P:IrrlichtLime.Scene.AnimatedMesh.MeshType">
-			<summary>The type of the animated mesh.</summary>
-		</member>
 		<member name="T:IrrlichtLime.Scene.AnimatedMeshSceneNode">
 			<summary>Scene node capable of displaying an animated mesh and its shadow.
 
@@ -8283,6 +8282,9 @@ The oct file format contains 3D geometry and lightmaps and can be loaded directl
 		</member>
 		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.Skinned">
 			<summary>Generic skinned mesh.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.Static">
+			<summary>Generic non-animated mesh.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Scene.AnimatedMeshType.Unknown">
 			<summary>Unknown animated mesh type.</summary>
@@ -8489,9 +8491,9 @@ The camera is moving relative to the target with the mouse, by pressing either o
 			<summary>The zoom speed.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.CameraSceneNode">
-			<summary>Scene Node which is a (controlable) camera.
+			<summary>Scene Node which is a (controllable) camera.
 
-The whole scene will be rendered from the cameras point of view. Because the CameraScenNode is a SceneNode, it can be attached to any other scene node, and will follow its parents movement, rotation and so on.</summary>
+The whole scene will be rendered from the cameras point of view. Because the CameraSceneNode is a SceneNode, it can be attached to any other scene node, and will follow its parents movement, rotation and so on.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CameraSceneNode.AspectRatio">
 			<summary>The aspect ratio of the camera.</summary>
@@ -9128,6 +9130,9 @@ This is only a base class for actual mesh classes.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.Mesh.MeshBuffers">
 			<summary>Array of all mesh buffers in this mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.Mesh.MeshType">
+			<summary>The type of the mesh.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.Mesh.SetDirty(IrrlichtLime.Scene.HardwareBufferType)">
 			<summary>Flags the mesh as changed, reloads hardware buffers.
@@ -14480,7 +14485,8 @@ Techniques supported are multisampling, geometry smoothing, and alpha to coverag
 			<summary>All typical anti-alias and smooth modes.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.AntiAliasingMode.LineSmooth">
-			<summary>Line smoothing.</summary>
+			<summary>Line smoothing.
+Be careful, this can lead to software emulation under OpenGL.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.AntiAliasingMode.Off">
 			<summary>Use to turn off anti-aliasing for this material.</summary>
@@ -14945,9 +14951,7 @@ Basically it can be described as the Irrlicht Software renderer on steroids. It 
 This renderer has been written entirely by Thomas Alten, thanks a lot for this huge contribution.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.DriverType.Direct3D8">
-			<summary>Direct3D8 device, only available on Win32 platforms.
-
-Performs hardware accelerated rendering of 3D and 2D primitives.</summary>
+			<summary>Direct3D8 device is longer supported in IrrlichtLime. You have to go back to IrrlichtLime 1.4 if you still need that.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Video.DriverType.Direct3D9">
 			<summary>Direct3D 9 device, only available on Win32 platforms.
@@ -16568,39 +16572,55 @@ This is typically used for rendering inner areas.</summary>
 This is typically used for polygons which should appear on top of other elements, such as decals.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.RenderTarget">
+			<summary>A render target.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.RenderTarget.DriverType">
+			<summary>Driver type of the render target.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.RenderTarget.SetTexture(IrrlichtLime.Video.Texture,IrrlichtLime.Video.Texture)">
+			<summary>Set one texture for the render target.</summary>
+			<param name="texture">The texture used for color output.</param>
+			<param name="depthStencil">Depth or packed depth-stencil texture. This texture is used as depth or depth-stencil buffer.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.RenderTarget.SetTexture(IrrlichtLime.Video.Texture[],IrrlichtLime.Video.Texture)">
+			<summary>Set multiple textures for the render target.</summary>
+			<param name="textures">Array of texture objects. These textures are used for a color outputs.</param>
+			<param name="depthStencil">Depth or packed depth-stencil texture. This texture is used as depth or depth-stencil buffer.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.RenderTargetType">
 			<summary>Special render targets, which usually map to dedicated hardware.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer0">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.AuxBuffer0">
 			<summary>Auxiliary buffer 0.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer1">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.AuxBuffer1">
 			<summary>Auxiliary buffer 1.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer2">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.AuxBuffer2">
 			<summary>Auxiliary buffer 2.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer3">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.AuxBuffer3">
 			<summary>Auxiliary buffer 3.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.AuxBuffer4">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.AuxBuffer4">
 			<summary>Auxiliary buffer 4.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.FrameBuffer">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.FrameBuffer">
 			<summary>Render target is the main color frame buffer.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.MultiRenderTexture">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.MultiRenderTexture">
 			<summary>Multi-Render target textures.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.RenderTexture">
-			<summary>Render target is a render texture.</summary>
+		<member name="F:IrrlichtLime.Video.RenderTargetType.RenderTexture">
+			<summary>Render target is a render textureType.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.StereoBothBuffers">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.StereoBothBuffers">
 			<summary>Render to both stereo buffers at once.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.StereoLeftBuffer">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.StereoLeftBuffer">
 			<summary>Render target is the main color frame buffer.</summary>
 		</member>
-		<member name="F:IrrlichtLime.Video.RenderTarget.StereoRightBuffer">
+		<member name="F:IrrlichtLime.Video.RenderTargetType.StereoRightBuffer">
 			<summary>Render target is the right color buffer (left is the main buffer).</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.Texture">
@@ -17228,6 +17248,9 @@ Use node for identification and mesh for occlusion test.</summary>
 			<param name="node">Node.</param>
 			<param name="mesh">Mesh. Default: null.</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTarget">
+			<summary>Create render target.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di)">
 			<summary>Adds a new render target texture to the texture cache.</summary>
 			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
@@ -17341,6 +17364,13 @@ This method can clear the back- and the z-buffer.</summary>
 For D3D devices you will need to recreate the RTTs if the driver was reset. Should be queried right after BeginScene().</summary>
 			<returns>True if driver was recently reset.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.ClearBuffers(System.Boolean,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Clear the color, depth and/or stencil buffers.</summary>
+			<param name="backBuffer">Clear the back buffer with color.</param>
+			<param name="depthBuffer">Clear the depth buffer.</param>
+			<param name="stencilBuffer">Clear the stencil buffer.</param>
+			<param name="color">The color to clear the back buffer with.</param>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.ClearZBuffer">
 			<summary>Clears the z-buffer.
 
@@ -17401,7 +17431,7 @@ No hardware texture will be created for this image. This method is useful for ex
 			<param name="format">Color format to use. Default: Unknown (which means "best suitable").</param>
 			<returns>Created image.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot(IrrlichtLime.Video.ColorFormat,IrrlichtLime.Video.RenderTarget)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.CreateScreenShot(IrrlichtLime.Video.ColorFormat,IrrlichtLime.Video.RenderTargetType)">
 			<summary>Make a screenshot of the last rendered frame.</summary>
 			<param name="format">Color format to use. Default: Unknown (which means "best suitable").</param>
 			<param name="target">Render target to use. Default: FrameBuffer.</param>
@@ -18033,6 +18063,9 @@ Returns true if the feature is available.</summary>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllOcclusionQueries">
 			<summary>Removes all occlusion queries.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllRenderTargets">
+			<summary>Removes all render targets.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllTextures">
 			<summary>Removes all textures from the texture cache and deletes them.
 
@@ -18045,6 +18078,10 @@ This method can free a lot of memory! Please note that after calling this, the p
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveOcclusionQuery(IrrlichtLime.Scene.SceneNode)">
 			<summary>Removes occlusion query.</summary>
 			<param name="node">Scene node.</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveRenderTarget(IrrlichtLime.Video.RenderTarget)">
+			<summary>Remove render target.</summary>
+			<param name="renderTarget">The render target to be removed.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveTexture(IrrlichtLime.Video.Texture)">
 			<summary>Removes a texture from the texture cache and deletes it.
@@ -18114,39 +18151,55 @@ Will have no effect on built-in material renderers.</summary>
 			<summary>Sets the minimum number of vertices for which a hardware buffer will be created.</summary>
 			<param name="count">Number of vertices to set as minimum.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget)">
-			<summary>Sets or resets special render targets.
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.UInt32,System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Sets a new render target.
 
-This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
-			<param name="target">Render target.</param>
-			<returns>True if sucessful and false if not.</returns>
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="target">The render target object.</param>
+			<param name="activeTextureID">Texture index which should be active during RTT proccess.</param>
+			<param name="clearBackBuffer">Clears the back buffer of the render target with the clearColor parameter.</param>
+			<param name="clearDepthBuffer">Clears the depth buffer of the render target.</param>
+			<param name="clearStencilBuffer">Clears the stencil buffer of the render target.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean)">
-			<summary>Sets or resets special render targets.
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.UInt32,System.Boolean,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Sets a new render target.
 
-This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
-			<param name="target">Render target.</param>
-			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
-			<returns>True if sucessful and false if not.</returns>
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="target">The render target object.</param>
+			<param name="activeTextureID">Texture index which should be active during RTT proccess.</param>
+			<param name="clearBackBuffer">Clears the back buffer of the render target with the clearColor parameter.</param>
+			<param name="clearDepthBuffer">Clears the depth buffer of the render target.</param>
+			<param name="clearStencilBuffer">Clears the stencil buffer of the render target.</param>
+			<param name="clearColor">The clear color for the render target. Default: solid black.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean,System.Boolean)">
-			<summary>Sets or resets special render targets.
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.UInt32[],System.Boolean,System.Boolean,System.Boolean)">
+			<summary>Sets a new render target.
 
-This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
-			<param name="target">Render target.</param>
-			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
-			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
-			<returns>True if sucessful and false if not.</returns>
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="target">The render target object.</param>
+			<param name="activeTextureIDs">Array of texture indices which should be active during RTT proccess. If more than one ID will be applied, this render target will work as a Multiple Render Target.</param>
+			<param name="clearBackBuffer">Clears the back buffer of the render target with the clearColor parameter.</param>
+			<param name="clearDepthBuffer">Clears the depth buffer of the render target.</param>
+			<param name="clearStencilBuffer">Clears the stencil buffer of the render target.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
-			<summary>Sets or resets special render targets.
+		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.RenderTarget,System.UInt32[],System.Boolean,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
+			<summary>Sets a new render target.
 
-This method enables access to special color buffers such as stereoscopic buffers or auxiliary buffers.</summary>
-			<param name="target">Render target.</param>
-			<param name="clearTarget">True for clearing the target buffer with the color parameter. Default: true.</param>
-			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
-			<param name="color">The color for the render target. Default: black.</param>
-			<returns>True if sucessful and false if not.</returns>
+This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
+
+Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
+			<param name="target">The render target object.</param>
+			<param name="activeTextureIDs">Array of texture indices which should be active during RTT proccess. If more than one ID will be applied, this render target will work as a Multiple Render Target.</param>
+			<param name="clearBackBuffer">Clears the back buffer of the render target with the clearColor parameter.</param>
+			<param name="clearDepthBuffer">Clears the depth buffer of the render target.</param>
+			<param name="clearStencilBuffer">Clears the stencil buffer of the render target.</param>
+			<param name="clearColor">The clear color for the render target. Default: solid black.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture)">
 			<summary>Sets a new render target.
@@ -18179,18 +18232,6 @@ Please note that you cannot render 3d or 2d geometry with a render target as tex
 			<returns>True if sucessful and false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean,IrrlichtLime.Video.Color)">
-			<summary>Sets a new render target.
-
-This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
-
-Please note that you cannot render 3d or 2d geometry with a render target as texture on it when you are rendering the scene into this render target at the same time. It is usually only possible to render into a texture between the BeginScene() and EndScene() method calls.</summary>
-			<param name="texture">New render target. Must be a texture created with AddRenderTargetTexture(). If set to null, it sets the previous render target which was set before the last SetRenderTarget() call.</param>
-			<param name="clearBackBuffer">True for clearing the back buffer with the color parameter. Default: true.</param>
-			<param name="clearZBuffer">True for clearing the z-buffer of the render target. Note that because the main frame buffer may share the z-buffer with the render target, its z-buffer might be partially cleared too by this. Default: true.</param>
-			<param name="color">The color for the render target. Default: black.</param>
-			<returns>True if sucessful and false if not.</returns>
-		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.SetRenderTarget(IrrlichtLime.Video.Texture,System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.Texture)">
 			<summary>Sets a new render target.
 
 This will only work if the driver supports the VideoDriverFeature.RenderToTarget feature, which can be queried with QueryFeature().
@@ -18474,9 +18515,9 @@ Common screen resolutions: 600x480, 640x512, 1280x1024, 1800x1440, 2560x2048.</s
 			<summary>Other aspect ratio which not listed in this enumeration.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Video.VideoModeList">
-			<summary>List of all available video modes.
+			<summary>A list of all available video modes.
 
-You can get a list via IrrlichtDevice.VideoModeList. There is no need to start up an Irrlicht Device with Direct3D8, OpenGL or even Software renderer: for this (and for lots of other reasons) the Null device exists.</summary>
+You can get a list via IrrlichtDevice.VideoModeList. You only need the null device (EDT_NULL) to get the video-modes..</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoModeList.Desktop">
 			<summary>Current desktop video mode.</summary>
@@ -18489,6 +18530,16 @@ You can get a list via IrrlichtDevice.VideoModeList. There is no need to start u
 		</member>
 		<member name="P:IrrlichtLime.Video.VideoModeList.ModeList">
 			<summary>List of all available video modes.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ZWriteFineControl">
+			<summary>Fine-tuning for Material.ZWriteFineControl.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZWriteFineControl.OnlyNonTransparent">
+			<summary>Default. Only write zbuffer when Material.ZBuffer is true and Material.Transparent returns false.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Video.ZWriteFineControl.ZBufferFlag">
+			<summary>Writing will just be based on Material.ZBuffer value, transparency is ignored.
+Needed mostly for certain shader materials as Material.Transperant will always return false for those.</summary>
 		</member>
 	</members>
 </doc>

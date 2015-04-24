@@ -61,10 +61,5 @@ int AnimatedMesh::FrameCount::get()
 	return m_AnimatedMesh->getFrameCount();
 }
 
-AnimatedMeshType AnimatedMesh::MeshType::get()
-{
-	return (AnimatedMeshType)m_AnimatedMesh->getMeshType();
-}
-
 } // end namespace Scene
 } // end namespace IrrlichtLime

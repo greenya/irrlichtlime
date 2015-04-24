@@ -3,25 +3,31 @@
 #include "stdafx.h"
 
 using namespace irr;
-using namespace video;
 using namespace System;
+using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class RenderTarget
+ref class Texture;
+
+public ref class RenderTarget : ReferenceCounted
 {
-	FrameBuffer = ERT_FRAME_BUFFER,
-	RenderTexture = ERT_RENDER_TEXTURE,
-	MultiRenderTexture = ERT_MULTI_RENDER_TEXTURES,
-	StereoLeftBuffer = ERT_STEREO_LEFT_BUFFER,
-	StereoRightBuffer = ERT_STEREO_RIGHT_BUFFER,
-	StereoBothBuffers = ERT_STEREO_BOTH_BUFFERS,
-	AuxBuffer0 = ERT_AUX_BUFFER0,
-	AuxBuffer1 = ERT_AUX_BUFFER1,
-	AuxBuffer2 = ERT_AUX_BUFFER2,
-	AuxBuffer3 = ERT_AUX_BUFFER3,
-	AuxBuffer4 = ERT_AUX_BUFFER4
+public:
+
+	void SetTexture(array<Texture^>^ textures, Texture^ depthStencil);
+	void SetTexture(Texture^ texture, Texture^ depthStencil);
+
+	property Video::DriverType DriverType { Video::DriverType get(); }
+
+	virtual String^ ToString() override;
+
+internal:
+
+	static RenderTarget^ Wrap(video::IRenderTarget* ref);
+	RenderTarget(video::IRenderTarget* ref);
+
+	video::IRenderTarget* m_RenderTarget;
 };
 
 } // end namespace Video

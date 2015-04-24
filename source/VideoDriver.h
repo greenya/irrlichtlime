@@ -18,6 +18,7 @@ ref class ImageLoader;
 ref class Light;
 ref class Material;
 ref class MaterialRenderer;
+ref class RenderTarget;
 ref class Texture;
 
 public ref class VideoDriver : ReferenceCounted
@@ -31,6 +32,8 @@ public:
 
 	void AddOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void AddOcclusionQuery(Scene::SceneNode^ node);
+
+	RenderTarget^ AddRenderTarget();
 
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
@@ -49,6 +52,9 @@ public:
 
 	bool CheckDriverReset();
 
+	void ClearBuffers(bool backBuffer, bool depthBuffer, bool stencilBuffer, Color color);
+
+	[Obsolete("Obsolete method. Use ClearBuffers() instead.", false)]
 	void ClearZBuffer();
 
 	IO::Attributes^ CreateAttributesFromMaterial(Material^ material);
@@ -63,7 +69,7 @@ public:
 
 	Image^ CreateScreenShot();
 	Image^ CreateScreenShot(Video::ColorFormat format);
-	Image^ CreateScreenShot(Video::ColorFormat format, Video::RenderTarget target);
+	Image^ CreateScreenShot(Video::ColorFormat format, Video::RenderTargetType target);
 
 	void DeleteAllDynamicLights();
 
@@ -186,9 +192,11 @@ public:
 
 	void RemoveAllHardwareBuffers();
 	void RemoveAllOcclusionQueries();
+	void RemoveAllRenderTargets();
 	void RemoveAllTextures();
 	void RemoveHardwareBuffer(Scene::MeshBuffer^ mb);
 	void RemoveOcclusionQuery(Scene::SceneNode^ node);
+	void RemoveRenderTarget(RenderTarget^ renderTarget);
 	void RemoveTexture(Texture^ texture);
 
 	void RenameTexture(Texture^ texture, String^ newName);
@@ -208,18 +216,23 @@ public:
 	void SetMaterialRendererName(MaterialType materialType, String^ name);
 
 	void SetMinHardwareBufferVertexCount(int count);
-
-	//bool setRenderTarget (const core::array< video::IRenderTarget > &texture, bool clearBackBuffer=true, bool clearZBuffer=true, SColor color=video::SColor(0, 0, 0, 0));
-	//bool SetRenderTarget(ICollection<RenderTarget^>^ textures, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil);	//render target class missing
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color, Texture^ depthStencil);
+	
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
 	bool SetRenderTarget(Texture^ texture);
-	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color color);
-	bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
-	bool SetRenderTarget(RenderTarget target, bool clearTarget);
-	bool SetRenderTarget(RenderTarget target);
+
+
+	bool SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor);
+	bool SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer);
+	bool SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor);
+	bool SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer);
+
+	//These were removed, but it looks like it's not possible to access e.g. the stereoBuffers now, so I'll just keep them commented out. If they don't get added again, please remove
+	/*bool SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer, Color color);
+	//bool SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer);
+	//bool SetRenderTarget(RenderTargetType target, bool clearTarget);
+	bool SetRenderTarget(RenderTargetType target);*/
 
 	void SetTextureCreationFlag(TextureCreationFlag flag, bool enabled);
 

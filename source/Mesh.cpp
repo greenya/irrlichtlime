@@ -56,6 +56,11 @@ void Mesh::SetMaterialFlag(Video::MaterialFlag flag, bool newvalue)
 	m_Mesh->setMaterialFlag((video::E_MATERIAL_FLAG)flag, newvalue);
 }
 
+AnimatedMeshType Mesh::MeshType::get()
+{
+	return (AnimatedMeshType)m_Mesh->getMeshType();
+}
+
 AABBox^ Mesh::BoundingBox::get()
 {
 	return gcnew AABBox(m_Mesh->getBoundingBox());

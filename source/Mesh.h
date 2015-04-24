@@ -23,6 +23,7 @@ public:
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
 
+	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property int MeshBufferCount { int get(); }
 	property NativeArray<MeshBuffer^>^ MeshBuffers { NativeArray<MeshBuffer^>^ get(); }

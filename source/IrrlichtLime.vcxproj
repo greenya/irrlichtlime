@@ -236,6 +236,7 @@
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="ReadFileStream.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="RenderTargetType.h" />
     <ClInclude Include="SceneNodeAnimatorInheritor.h" />
     <ClInclude Include="SceneParameters.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
@@ -414,6 +415,7 @@
     <ClInclude Include="ReferenceCounted.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="ZWriteFineControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp" />
@@ -429,6 +431,7 @@
     <ClCompile Include="MeshTextureLoader.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="ReadFileStream.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />

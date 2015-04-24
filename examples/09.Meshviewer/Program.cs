@@ -821,9 +821,9 @@ namespace _09.Meshviewer
 			driverType = DriverType.Null;
 
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n (c) Direct3D 8.1\n" +
-						" (d) Burning's Software Renderer\n (e) Software Renderer\n" +
-						" (f) NullDevice\n (otherKey) exit\n\n");
+						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
+						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
+						" (e) NullDevice\n (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
@@ -831,10 +831,9 @@ namespace _09.Meshviewer
 			{
 				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
 				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.Direct3D8; break;
-				case ConsoleKey.D: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.E: driverType = DriverType.Software; break;
-				case ConsoleKey.F: driverType = DriverType.Null; break;
+				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
+				case ConsoleKey.D: driverType = DriverType.Software; break;
+				case ConsoleKey.E: driverType = DriverType.Null; break;
 				default:
 					return false;
 			}
