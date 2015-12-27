@@ -18,38 +18,38 @@ public ref class GUISkin : IO::AttributeExchangingObject
 {
 public:
 
-	void Draw2DRectangle(GUIElement^ element, Video::Color color, Recti^ pos, Recti^ clip);
-	void Draw2DRectangle(GUIElement^ element, Video::Color color, Recti^ pos);
+	void Draw2DRectangle(GUIElement^ element, Video::Color color, Recti pos, Nullable<Recti> clip);
+	void Draw2DRectangle(GUIElement^ element, Video::Color color, Recti pos);
 
-	void Draw3DButtonPanePressed(GUIElement^ element, Recti^ rect, Recti^ clip);
-	void Draw3DButtonPanePressed(GUIElement^ element, Recti^ rect);
+	void Draw3DButtonPanePressed(GUIElement^ element, Recti rect, Nullable<Recti> clip);
+	void Draw3DButtonPanePressed(GUIElement^ element, Recti rect);
 
-	void Draw3DButtonPaneStandard(GUIElement^ element, Recti^ rect, Recti^ clip);
-	void Draw3DButtonPaneStandard(GUIElement^ element, Recti^ rect);
+	void Draw3DButtonPaneStandard(GUIElement^ element, Recti rect, Nullable<Recti> clip);
+	void Draw3DButtonPaneStandard(GUIElement^ element, Recti rect);
 
-	void Draw3DMenuPane(GUIElement^ element, Recti^ rect, Recti^ clip);
-	void Draw3DMenuPane(GUIElement^ element, Recti^ rect);
+	void Draw3DMenuPane(GUIElement^ element, Recti rect, Nullable<Recti> clip);
+	void Draw3DMenuPane(GUIElement^ element, Recti rect);
 
-	void Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti^ rect, Recti^ clip);
-	void Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti^ rect);
+	void Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti rect, Nullable<Recti> clip);
+	void Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti rect);
 
-	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip, int tabHeight, GUIAlignment alignment);
-	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip, int tabHeight);
-	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip);
-	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect);
+	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip, int tabHeight, GUIAlignment alignment);
+	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip, int tabHeight);
+	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip);
+	void Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect);
 
-	void Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect, Recti^ clip, GUIAlignment alignment);
-	void Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect, Recti^ clip);
-	void Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect);
+	void Draw3DTabButton(GUIElement^ element, bool active, Recti rect, Nullable<Recti> clip, GUIAlignment alignment);
+	void Draw3DTabButton(GUIElement^ element, bool active, Recti rect, Nullable<Recti> clip);
+	void Draw3DTabButton(GUIElement^ element, bool active, Recti rect);
 
-	void Draw3DToolBar(GUIElement^ element, Recti^ rect, Recti^ clip);
-	void Draw3DToolBar(GUIElement^ element, Recti^ rect);
+	void Draw3DToolBar(GUIElement^ element, Recti rect, Nullable<Recti> clip);
+	void Draw3DToolBar(GUIElement^ element, Recti rect);
 
-	Recti^ Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti^ rect, Recti^ clip, [Out] Recti^ checkClientArea);
-	Recti^ Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti^ rect, Recti^ clip);
-	Recti^ Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti^ rect);
+	Recti Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect, Nullable<Recti> clip, [Out] Recti% checkClientArea);
+	Recti Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect, Nullable<Recti> clip);
+	Recti Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect);
 
-	void DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime, bool loop, Recti^ clip);
+	void DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime, bool loop, Nullable<Recti> clip);
 	void DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime, bool loop);
 	void DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime);
 	void DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime);

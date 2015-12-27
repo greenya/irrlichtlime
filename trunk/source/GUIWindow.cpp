@@ -24,9 +24,9 @@ GUIWindow::GUIWindow(gui::IGUIWindow* ref)
 	m_GUIWindow = ref;
 }
 
-Recti^ GUIWindow::ClientRect::get()
+Recti GUIWindow::ClientRect::get()
 {
-	return gcnew Recti(m_GUIWindow->getClientRect());
+	return Recti(m_GUIWindow->getClientRect());
 }
 
 GUIButton^ GUIWindow::CloseButton::get()

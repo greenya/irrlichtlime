@@ -32,6 +32,11 @@ void GUITreeView::SetIconFont(GUIFont^ font)
 	m_GUITreeView->setIconFont(LIME_SAFEREF(font, m_GUIFont));
 }
 
+GUIFont^ GUITreeView::ActiveFont::get()
+{
+	return GUIFont::Wrap(m_GUITreeView->getActiveFont());
+}
+
 GUIScrollBar^ GUITreeView::HorizontalScrollBar::get()
 {
 	return GUIScrollBar::Wrap(m_GUITreeView->getHorizontalScrollBar());
@@ -72,6 +77,16 @@ bool GUITreeView::LinesVisible::get()
 void GUITreeView::LinesVisible::set(bool value)
 {
 	m_GUITreeView->setLinesVisible(value);
+}
+
+GUIFont^ GUITreeView::OverrideFont::get()
+{
+	return GUIFont::Wrap(m_GUITreeView->getOverrideFont());
+}
+
+void GUITreeView::OverrideFont::set(GUIFont^ value)
+{
+	m_GUITreeView->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
 GUITreeViewNode^ GUITreeView::RootNode::get()

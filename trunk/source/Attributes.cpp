@@ -139,7 +139,7 @@ void Attributes::AddValue(String^ attributeName, Object^ value)
 		return;
 
 	case AttributeType::Recti:
-		m_Attributes->addRect(n.c_str(), *((Recti^)value)->m_NativeValue);
+		m_Attributes->addRect(n.c_str(), ((Recti)value).ToNative());
 		return;
 
 	case AttributeType::Matrix:
@@ -422,7 +422,7 @@ void Attributes::SetValue(int attributeIndex, Object^ value)
 		return;
 
 	case AttributeType::Recti:
-		m_Attributes->setAttribute(attributeIndex, *((Recti^)value)->m_NativeValue);
+		m_Attributes->setAttribute(attributeIndex, ((Recti)value).ToNative());
 		return;
 
 	case AttributeType::Matrix:

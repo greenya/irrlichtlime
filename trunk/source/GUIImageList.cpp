@@ -23,15 +23,14 @@ GUIImageList::GUIImageList(gui::IGUIImageList* ref)
 	m_GUIImageList = ref;
 }
 
-void GUIImageList::Draw(int index, Vector2Di destPos, Recti^ clip)
+void GUIImageList::Draw(int index, Vector2Di destPos, Nullable<Recti> clip)
 {
 	LIME_ASSERT(index >= 0 && index < ImageCount);
-	LIME_ASSERT(clip != nullptr);
 
 	m_GUIImageList->draw(
 		index,
 		destPos,
-		clip->m_NativeValue);
+		LIME_NULLABLE(clip));
 }
 
 void GUIImageList::Draw(int index, Vector2Di destPos)

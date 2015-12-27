@@ -18,9 +18,22 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #define LIME_ASSERT2(condition, details) 
 #endif
 
+//Purpose of these: make code easier-to-read and shorter.
+//They are espacially useful for passing variables to native code.
+//
+//LIME_SAFEREF: makes sure the object is not null before trying to access the member.
+//
+//LIME_NULLABLE: Takes a nullable and returns a pointer to its value (and calls ToNative()). If it has no value it returns null.
+//BUT IT CAUSES A C4238 WARNING! Because we return a pointer to a temporary variable. But it works as expected because the variables live long enough.
+//May cause problems with other compiler versions, which don't support this. For now, I've disabled this warning in the project settings.
+//Tested with VS 2010
+
 #define LIME_SAFEREF(object, member) ((object) == nullptr ? nullptr : (object)->member)
+#define LIME_NULLABLE(nullable) (((nullable).HasValue ? &(nullable).Value.ToNative() : nullptr))
 #define LIME_SAFESTRINGTOSTRINGC_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringC(string).c_str())
 #define LIME_SAFESTRINGTOSTRINGW_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringW(string).c_str())
+
+//Note: Warning 4714 is disabled. It shows up, when something could not be inlined. Happens when using Irrlicht math.
 
 namespace IrrlichtLime {
 

@@ -43,16 +43,16 @@ public ref class GUIEnvironment : ReferenceCounted
 {
 public:
 
-	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext);
-	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
-	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIButton^ AddButton(Recti^ rectangle, GUIElement^ parent);
-	GUIButton^ AddButton(Recti^ rectangle);
+	GUIButton^ AddButton(Recti rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext);
+	GUIButton^ AddButton(Recti rectangle, GUIElement^ parent, int id, String^ text);
+	GUIButton^ AddButton(Recti rectangle, GUIElement^ parent, int id);
+	GUIButton^ AddButton(Recti rectangle, GUIElement^ parent);
+	GUIButton^ AddButton(Recti rectangle);
 
-	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent, int id);
-	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent);
-	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle, String^ text);
-	GUICheckBox^ AddCheckBox(bool checkedState, Recti^ rectangle);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti rectangle, String^ text, GUIElement^ parent, int id);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti rectangle, String^ text, GUIElement^ parent);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti rectangle, String^ text);
+	GUICheckBox^ AddCheckBox(bool checkedState, Recti rectangle);
 
 	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent, int id);
 	GUIColorSelectDialog^ AddColorSelectDialog(String^ title, bool modal, GUIElement^ parent);
@@ -60,18 +60,18 @@ public:
 	GUIColorSelectDialog^ AddColorSelectDialog(String^ title);
 	GUIColorSelectDialog^ AddColorSelectDialog();
 
-	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIComboBox^ AddComboBox(Recti^ rectangle, GUIElement^ parent);
-	GUIComboBox^ AddComboBox(Recti^ rectangle);
+	GUIComboBox^ AddComboBox(Recti rectangle, GUIElement^ parent, int id);
+	GUIComboBox^ AddComboBox(Recti rectangle, GUIElement^ parent);
+	GUIComboBox^ AddComboBox(Recti rectangle);
 
-	GUIContextMenu^ AddContextMenu(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIContextMenu^ AddContextMenu(Recti^ rectangle, GUIElement^ parent);
-	GUIContextMenu^ AddContextMenu(Recti^ rectangle);
+	GUIContextMenu^ AddContextMenu(Recti rectangle, GUIElement^ parent, int id);
+	GUIContextMenu^ AddContextMenu(Recti rectangle, GUIElement^ parent);
+	GUIContextMenu^ AddContextMenu(Recti rectangle);
 
-	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id);
-	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent);
-	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle, bool border);
-	GUIEditBox^ AddEditBox(String^ text, Recti^ rectangle);
+	GUIEditBox^ AddEditBox(String^ text, Recti rectangle, bool border, GUIElement^ parent, int id);
+	GUIEditBox^ AddEditBox(String^ text, Recti rectangle, bool border, GUIElement^ parent);
+	GUIEditBox^ AddEditBox(String^ text, Recti rectangle, bool border);
+	GUIEditBox^ AddEditBox(String^ text, Recti rectangle);
 
 	GUISpriteBank^ AddEmptySpriteBank(String^ name);
 
@@ -88,35 +88,35 @@ public:
 	GUIElement^ AddGUIElement(String^ elementName, GUIElement^ parent);
 	GUIElement^ AddGUIElement(String^ elementName);
 
-	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
-	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id);
-	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent);
-	GUIImage^ AddImage(Recti^ rectangle, bool useAlphaChannel);
-	GUIImage^ AddImage(Recti^ rectangle);
+	GUIImage^ AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
+	GUIImage^ AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent, int id);
+	GUIImage^ AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent);
+	GUIImage^ AddImage(Recti rectangle, bool useAlphaChannel);
+	GUIImage^ AddImage(Recti rectangle);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id, String^ text);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent, int id);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel, GUIElement^ parent);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos, bool useAlphaChannel);
 	GUIImage^ AddImage(Video::Texture^ image, Vector2Di pos);
 
-	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIInOutFader^ AddInOutFader(Recti^ rectangle, GUIElement^ parent);
-	GUIInOutFader^ AddInOutFader(Recti^ rectangle);
+	GUIInOutFader^ AddInOutFader(Nullable<Recti> rectangle, GUIElement^ parent, int id);
+	GUIInOutFader^ AddInOutFader(Nullable<Recti> rectangle, GUIElement^ parent);
+	GUIInOutFader^ AddInOutFader(Nullable<Recti> rectangle);
 	GUIInOutFader^ AddInOutFader();
 
-	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
-	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIListBox^ AddListBox(Recti^ rectangle, GUIElement^ parent);
-	GUIListBox^ AddListBox(Recti^ rectangle);
+	GUIListBox^ AddListBox(Recti rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUIListBox^ AddListBox(Recti rectangle, GUIElement^ parent, int id);
+	GUIListBox^ AddListBox(Recti rectangle, GUIElement^ parent);
+	GUIListBox^ AddListBox(Recti rectangle);
 
 	GUIContextMenu^ AddMenu(GUIElement^ parent, int id);
 	GUIContextMenu^ AddMenu(GUIElement^ parent);
 	GUIContextMenu^ AddMenu();
 
-	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id, String^ text);
-	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle, GUIElement^ parent);
-	GUIMeshViewer^ AddMeshViewer(Recti^ rectangle);
+	GUIMeshViewer^ AddMeshViewer(Recti rectangle, GUIElement^ parent, int id, String^ text);
+	GUIMeshViewer^ AddMeshViewer(Recti rectangle, GUIElement^ parent, int id);
+	GUIMeshViewer^ AddMeshViewer(Recti rectangle, GUIElement^ parent);
+	GUIMeshViewer^ AddMeshViewer(Recti rectangle);
 
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id, Video::Texture^ image);
 	GUIWindow^ AddMessageBox(String^ caption, String^ text, bool modal, GUIMessageBoxFlag flags, GUIElement^ parent, int id);
@@ -127,56 +127,56 @@ public:
 
 	GUIElement^ AddModalScreen(GUIElement^ parent);
 
-	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent, int id);
-	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent);
-	GUIProfiler^ AddProfilerDisplay(Recti^ rectangle);
+	GUIProfiler^ AddProfilerDisplay(Recti rectangle, GUIElement^ parent, int id);
+	GUIProfiler^ AddProfilerDisplay(Recti rectangle, GUIElement^ parent);
+	GUIProfiler^ AddProfilerDisplay(Recti rectangle);
 
-	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id);
-	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent);
-	GUIScrollBar^ AddScrollBar(bool horizontal, Recti^ rectangle);
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti rectangle, GUIElement^ parent, int id);
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti rectangle, GUIElement^ parent);
+	GUIScrollBar^ AddScrollBar(bool horizontal, Recti rectangle);
 
-	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id);
-	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent);
-	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle, bool border);
-	GUISpinBox^ AddSpinBox(String^ text, Recti^ rectangle);
+	GUISpinBox^ AddSpinBox(String^ text, Recti rectangle, bool border, GUIElement^ parent, int id);
+	GUISpinBox^ AddSpinBox(String^ text, Recti rectangle, bool border, GUIElement^ parent);
+	GUISpinBox^ AddSpinBox(String^ text, Recti rectangle, bool border);
+	GUISpinBox^ AddSpinBox(String^ text, Recti rectangle);
 
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id, bool fillBackground);
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent, int id);
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent);
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap);
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle, bool border);
-	GUIStaticText^ AddStaticText(String^ text, Recti^ rectangle);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent, int id, bool fillBackground);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent, int id);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle, bool border);
+	GUIStaticText^ AddStaticText(String^ text, Recti rectangle);
 
-	GUITab^ AddTab(Recti^ rectangle, GUIElement^ parent, int id);
-	GUITab^ AddTab(Recti^ rectangle, GUIElement^ parent);
-	GUITab^ AddTab(Recti^ rectangle);
+	GUITab^ AddTab(Recti rectangle, GUIElement^ parent, int id);
+	GUITab^ AddTab(Recti rectangle, GUIElement^ parent);
+	GUITab^ AddTab(Recti rectangle);
 
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground, bool border);
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground);
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent, int id);
-	GUITabControl^ AddTabControl(Recti^ rectangle, GUIElement^ parent);
-	GUITabControl^ AddTabControl(Recti^ rectangle);
+	GUITabControl^ AddTabControl(Recti rectangle, GUIElement^ parent, int id, bool fillBackground, bool border);
+	GUITabControl^ AddTabControl(Recti rectangle, GUIElement^ parent, int id, bool fillBackground);
+	GUITabControl^ AddTabControl(Recti rectangle, GUIElement^ parent, int id);
+	GUITabControl^ AddTabControl(Recti rectangle, GUIElement^ parent);
+	GUITabControl^ AddTabControl(Recti rectangle);
 
-	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
-	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent, int id);
-	GUITable^ AddTable(Recti^ rectangle, GUIElement^ parent);
-	GUITable^ AddTable(Recti^ rectangle);
+	GUITable^ AddTable(Recti rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUITable^ AddTable(Recti rectangle, GUIElement^ parent, int id);
+	GUITable^ AddTable(Recti rectangle, GUIElement^ parent);
+	GUITable^ AddTable(Recti rectangle);
 
 	GUIToolBar^ AddToolBar(GUIElement^ parent, int id);
 	GUIToolBar^ AddToolBar(GUIElement^ parent);
 	GUIToolBar^ AddToolBar();
 
-	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal);
-	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground);
-	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent, int id);
-	GUITreeView^ AddTreeView(Recti^ rectangle, GUIElement^ parent);
-	GUITreeView^ AddTreeView(Recti^ rectangle);
+	GUITreeView^ AddTreeView(Recti rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal);
+	GUITreeView^ AddTreeView(Recti rectangle, GUIElement^ parent, int id, bool drawBackground);
+	GUITreeView^ AddTreeView(Recti rectangle, GUIElement^ parent, int id);
+	GUITreeView^ AddTreeView(Recti rectangle, GUIElement^ parent);
+	GUITreeView^ AddTreeView(Recti rectangle);
 
-	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id);
-	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent);
-	GUIWindow^ AddWindow(Recti^ rectangle, bool modal, String^ text);
-	GUIWindow^ AddWindow(Recti^ rectangle, bool modal);
-	GUIWindow^ AddWindow(Recti^ rectangle);
+	GUIWindow^ AddWindow(Recti rectangle, bool modal, String^ text, GUIElement^ parent, int id);
+	GUIWindow^ AddWindow(Recti rectangle, bool modal, String^ text, GUIElement^ parent);
+	GUIWindow^ AddWindow(Recti rectangle, bool modal, String^ text);
+	GUIWindow^ AddWindow(Recti rectangle, bool modal);
+	GUIWindow^ AddWindow(Recti rectangle);
 
 	void Clear();
 

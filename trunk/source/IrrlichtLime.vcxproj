@@ -91,6 +91,7 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\Debug\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -116,6 +117,7 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\Debug-x64\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -140,6 +142,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>Full</Optimization>
+      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\Release\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -162,6 +165,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>Full</Optimization>
+      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\Release-x64\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,6 +216,8 @@
     <ClInclude Include="GUIElementInheritor.h" />
     <ClInclude Include="GUIProfiler.h" />
     <ClInclude Include="GUISpinBoxValidation.h" />
+    <ClInclude Include="GUISprite.h" />
+    <ClInclude Include="GUISpriteFrame.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IndexType.h" />
@@ -226,6 +232,9 @@
     <ClInclude Include="MaterialRendererServices.h" />
     <ClInclude Include="MaterialType.h" />
     <ClInclude Include="MeshTextureLoader.h" />
+    <ClInclude Include="MeshWriter.h" />
+    <ClInclude Include="MeshWriterFlag.h" />
+    <ClInclude Include="MeshWriterType.h" />
     <ClInclude Include="ModulateFunc.h" />
     <ClInclude Include="NativeArray.h" />
     <ClInclude Include="NativeIterator.h" />
@@ -429,6 +438,7 @@
     <ClCompile Include="MaterialRenderer.cpp" />
     <ClCompile Include="MaterialRendererServices.cpp" />
     <ClCompile Include="MeshTextureLoader.cpp" />
+    <ClCompile Include="MeshWriter.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="ReadFileStream.cpp" />
     <ClCompile Include="RenderTarget.cpp" />

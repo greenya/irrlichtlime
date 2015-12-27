@@ -655,6 +655,21 @@
     <ClInclude Include="RenderTarget.h">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="MeshWriter.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshWriterType.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshWriterFlag.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GUISpriteFrame.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUISprite.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -968,6 +983,9 @@
     </ClCompile>
     <ClCompile Include="RenderTarget.cpp">
       <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshWriter.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

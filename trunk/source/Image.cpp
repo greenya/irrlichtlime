@@ -73,27 +73,33 @@ Image::Image(video::IImage* ref)
 	m_Image = ref;
 }
 
-void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Recti^ clipRect)
+void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect, Nullable<Recti> clipRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(sourceRect != nullptr);
+
+	core::rect<s32>* clipRectNP = nullptr;
+	core::rect<s32> clipRectN;
+	if (clipRect.HasValue)
+	{
+		clipRectN = clipRect.Value;
+		clipRectNP = &clipRectN;
+	}
 
 	m_Image->copyTo(
 		target->m_Image,
 		targetPos,
-		*sourceRect->m_NativeValue,
-		LIME_SAFEREF(clipRect, m_NativeValue));
+		sourceRect,
+		clipRectNP);
 }
 
-void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect)
+void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
 		targetPos,
-		*sourceRect->m_NativeValue);
+		sourceRect);
 }
 
 void Image::CopyTo(Image^ target, Vector2Di targetPos)
@@ -235,28 +241,34 @@ void Image::CopyToScalingBoxFilter(Image^ target)
 	m_Image->copyToScalingBoxFilter(target->m_Image);
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color, Recti^ clipRect)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color, Nullable<Recti> clipRect)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(sourceRect != nullptr);
+
+	core::rect<s32>* clipRectNP = nullptr;
+	core::rect<s32> clipRectN;
+	if (clipRect.HasValue)
+	{
+		clipRectN = clipRect.Value;
+		clipRectNP = &clipRectN;
+	}
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
 		targetPos,
-		*sourceRect->m_NativeValue,
+		sourceRect,
 		color,
-		LIME_SAFEREF(clipRect, m_NativeValue));
+		clipRectNP);
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color)
 {
 	LIME_ASSERT(target != nullptr);
-	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
 		targetPos,
-		*sourceRect->m_NativeValue,
+		sourceRect,
 		color);
 }
 

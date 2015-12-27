@@ -20,11 +20,13 @@ public:
 
 	void SetIconFont(GUIFont^ font);
 
+	property GUIFont^ ActiveFont { GUIFont^ get(); }
 	property GUIScrollBar^ HorizontalScrollBar { GUIScrollBar^ get(); }
 	property bool ImageLeftOfIcon { bool get(); void set(bool value); }
 	property GUIImageList^ ImageList { GUIImageList^ get(); void set(GUIImageList^ value); }
 	property GUITreeViewNode^ LastEventNode { GUITreeViewNode^ get(); }
 	property bool LinesVisible { bool get(); void set(bool value); }
+	property GUIFont^ OverrideFont { GUIFont^ get(); void set(GUIFont^ value); }
 	property GUITreeViewNode^ RootNode { GUITreeViewNode^ get(); }
 	property GUITreeViewNode^ SelectedNode { GUITreeViewNode^ get(); }
 	property GUIScrollBar^ VerticalScrollBar { GUIScrollBar^ get(); }

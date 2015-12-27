@@ -7,9 +7,9 @@
 #pragma managed
 
 #include "Lime.h"
+#include "NativeIterator.h"
 #include "NativeArray.h"
 #include "NativeList.h"
-#include "NativeIterator.h"
 
 // enums
 #include "AlphaSource.h"
@@ -69,6 +69,8 @@
 #include "LogLevel.h"
 #include "MaterialFlag.h"
 #include "MaterialType.h"
+#include "MeshWriterFlag.h"
+#include "MeshWriterType.h"
 #include "ModulateFunc.h"
 #include "MouseEventType.h"
 #include "ParticleAffectorType.h"
@@ -113,6 +115,8 @@
 #include "ExposedVideoData.h"
 #include "NamedPath.h"
 #include "AttributeReadWriteOptions.h"
+#include "GUISpriteFrame.h"
+#include "GUISprite.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"

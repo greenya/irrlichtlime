@@ -15,7 +15,7 @@ public ref class GUIWindow : GUIElement
 {
 public:
 
-	property Recti^ ClientRect { Recti^ get(); }
+	property Recti ClientRect { Recti get(); }
 	property GUIButton^ CloseButton { GUIButton^ get(); }
 	property bool Draggable { bool get(); void set(bool value); }
 	property bool DrawBackground { bool get(); void set(bool value); }

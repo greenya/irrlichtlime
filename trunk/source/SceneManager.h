@@ -28,6 +28,7 @@ ref class MeshCache;
 ref class MeshLoader;
 ref class MeshManipulator;
 ref class MeshSceneNode;
+ref class MeshWriter;
 ref class MetaTriangleSelector;
 ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
@@ -277,6 +278,8 @@ public:
 	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime, float speed);
 	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points, float startTime);
 	SceneNodeAnimator^ CreateFollowSplineAnimator(ICollection<Vector3Df>^ points);
+
+	MeshWriter^ CreateMeshWriter(MeshWriterType type);
 
 	MetaTriangleSelector^ CreateMetaTriangleSelector();
 

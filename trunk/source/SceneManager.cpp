@@ -21,6 +21,7 @@
 #include "MeshManipulator.h"
 #include "MeshSceneNode.h"
 #include "MetaTriangleSelector.h"
+#include "MeshWriter.h"
 #include "ParticleSystemSceneNode.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
@@ -2585,6 +2586,11 @@ SceneNodeAnimator^ SceneManager::CreateFollowSplineAnimator(ICollection<Vector3D
 		p);
 
 	return SceneNodeAnimator::Wrap(a);
+}
+
+MeshWriter^ SceneManager::CreateMeshWriter(MeshWriterType type)
+{
+	return MeshWriter::Wrap(m_SceneManager->createMeshWriter((EMESH_WRITER_TYPE)type));
 }
 
 MetaTriangleSelector^ SceneManager::CreateMetaTriangleSelector()

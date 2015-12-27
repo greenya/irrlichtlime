@@ -9,7 +9,7 @@ namespace IrrlichtLime {
 namespace Core {
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Triangle3Df
+public value class Triangle3Df : public IEquatable<Triangle3Df>
 {
 public:
 
@@ -17,24 +17,31 @@ public:
 	Vector3Df B;
 	Vector3Df C;
 
-	/*static bool operator == (Triangle3Df^ v1, Triangle3Df^ v2)
+	virtual bool Equals(Triangle3Df other) sealed
 	{
-		bool v1n = Object::ReferenceEquals(v1, nullptr);
-		bool v2n = Object::ReferenceEquals(v2, nullptr);
-
-		if (v1n && v2n)
-			return true;
-
-		if (v1n || v2n)
-			return false;
-
-		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
+		return A == other.A && B == other.B && C == other.C;
 	}
 
-	static bool operator != (Triangle3Df^ v1, Triangle3Df^ v2)
+	virtual bool Equals(Object^ other) override sealed
 	{
-		return !(v1 == v2);
-	}*/
+		if (other == nullptr)
+			return false;
+
+		if (other->GetType() == Triangle3Df::typeid)
+			return Equals((Triangle3Df)other);
+		else
+			return false;
+	}
+
+	static bool operator == (Triangle3Df v1, Triangle3Df v2)
+	{
+		return v1.Equals(v2);
+	}
+
+	static bool operator != (Triangle3Df v1, Triangle3Df v2)
+	{
+		return !v1.Equals(v2);
+	}
 
 	Triangle3Df(Vector3Df point1, Vector3Df point2, Vector3Df point3)
 		: A(point1), B(point2), C(point3)
