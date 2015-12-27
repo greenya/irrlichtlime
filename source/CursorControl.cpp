@@ -24,9 +24,9 @@ CursorControl::CursorControl(gui::ICursorControl* ref)
 	m_CursorControl = ref;
 }
 
-void CursorControl::SetReferenceRect(Recti^ rect_or_null)
+void CursorControl::SetReferenceRect(Nullable<Recti> rect_or_null)
 {
-	m_CursorControl->setReferenceRect(LIME_SAFEREF(rect_or_null, m_NativeValue));
+	m_CursorControl->setReferenceRect(LIME_NULLABLE(rect_or_null));
 }
 
 CursorIcon CursorControl::ActiveIcon::get()

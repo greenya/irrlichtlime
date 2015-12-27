@@ -44,15 +44,14 @@ void GUIImage::Color::set(Video::Color value)
 	m_GUIImage->setColor(value);
 }
 
-Rectf^ GUIImage::DrawBounds::get()
+Rectf GUIImage::DrawBounds::get()
 {
-	return gcnew Rectf(m_GUIImage->getDrawBounds());
+	return Rectf(m_GUIImage->getDrawBounds());
 }
 
-void GUIImage::DrawBounds::set(Rectf^ value)
+void GUIImage::DrawBounds::set(Rectf value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIImage->setDrawBounds(*value->m_NativeValue);
+	m_GUIImage->setDrawBounds(value);
 }
 
 Video::Texture^ GUIImage::Image::get()
@@ -76,15 +75,14 @@ void GUIImage::ScaleImage::set(bool value)
 	m_GUIImage->setScaleImage(value);
 }
 
-Recti^ GUIImage::SourceRect::get()
+Recti GUIImage::SourceRect::get()
 {
-	return gcnew Recti(m_GUIImage->getSourceRect());
+	return Recti(m_GUIImage->getSourceRect());
 }
 
-void GUIImage::SourceRect::set(Recti^ value)
+void GUIImage::SourceRect::set(Recti value)
 {
-	LIME_ASSERT(value != nullptr);
-	m_GUIImage->setSourceRect(*value->m_NativeValue);
+	m_GUIImage->setSourceRect(value);
 }
 
 } // end namespace GUI

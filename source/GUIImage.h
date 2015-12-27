@@ -16,10 +16,10 @@ public:
 
 	property bool AlphaChannel { bool get(); void set(bool value); }
 	property Video::Color Color { Video::Color get(); void set(Video::Color value); }
-	property Rectf^ DrawBounds { Rectf^ get(); void set(Rectf^ value); }
+	property Rectf DrawBounds { Rectf get(); void set(Rectf value); }
 	property Video::Texture^ Image { Video::Texture^ get(); void set(Video::Texture^ value); }
 	property bool ScaleImage { bool get(); void set(bool value); }
-	property Recti^ SourceRect { Recti^ get(); void set(Recti^ value); }
+	property Recti SourceRect { Recti get(); void set(Recti value); }
 
 internal:
 

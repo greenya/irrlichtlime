@@ -126,12 +126,10 @@ public:
 			upVector));
 	}
 
-	Matrix^ BuildNDCToDCMatrix(Recti^ area, float zScale)
+	Matrix^ BuildNDCToDCMatrix(Recti area, float zScale)
 	{
-		LIME_ASSERT(area != nullptr);
-
 		return gcnew Matrix(m_NativeValue->buildNDCToDCMatrix(
-			*area->m_NativeValue,
+			area,
 			zScale));
 	}
 

@@ -58,12 +58,11 @@ GUIEnvironment::GUIEnvironment(gui::IGUIEnvironment* ref)
 	m_GUIEnvironment = ref;
 }
 
-GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext)
+GUIButton^ GUIEnvironment::AddButton(Recti rectangle, GUIElement^ parent, int id, String^ text, String^ tooltiptext)
 {
-	LIME_ASSERT(rectangle != nullptr);
 
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
@@ -72,12 +71,10 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 	return GUIButton::Wrap(b);
 }
 
-GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+GUIButton^ GUIEnvironment::AddButton(Recti rectangle, GUIElement^ parent, int id, String^ text)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
@@ -85,46 +82,38 @@ GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int i
 	return GUIButton::Wrap(b);
 }
 
-GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent, int id)
+GUIButton^ GUIEnvironment::AddButton(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIButton::Wrap(b);
 }
 
-GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle, GUIElement^ parent)
+GUIButton^ GUIEnvironment::AddButton(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIButton::Wrap(b);
 }
 
-GUIButton^ GUIEnvironment::AddButton(Recti^ rectangle)
+GUIButton^ GUIEnvironment::AddButton(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIButton* b = m_GUIEnvironment->addButton(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIButton::Wrap(b);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent, int id)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti rectangle, String^ text, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
 		checkedState,
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
@@ -132,13 +121,11 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text, GUIElement^ parent)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti rectangle, String^ text, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
 		checkedState,
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		-1,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
@@ -146,13 +133,11 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, String^ text)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti rectangle, String^ text)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
 		checkedState,
-		*rectangle->m_NativeValue,
+		rectangle,
 		nullptr,
 		-1,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
@@ -160,13 +145,11 @@ GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle, St
 	return GUICheckBox::Wrap(c);
 }
 
-GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti^ rectangle)
+GUICheckBox^ GUIEnvironment::AddCheckBox(bool checkedState, Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUICheckBox* c = m_GUIEnvironment->addCheckBox(
 		checkedState,
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUICheckBox::Wrap(c);
 }
@@ -215,79 +198,65 @@ GUIColorSelectDialog^ GUIEnvironment::AddColorSelectDialog()
 	return GUIColorSelectDialog::Wrap(d);
 }
 
-GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle, GUIElement^ parent, int id)
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIComboBox::Wrap(c);
 }
 
-GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle, GUIElement^ parent)
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIComboBox::Wrap(c);
 }
 
-GUIComboBox^ GUIEnvironment::AddComboBox(Recti^ rectangle)
+GUIComboBox^ GUIEnvironment::AddComboBox(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIComboBox* c = m_GUIEnvironment->addComboBox(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIComboBox::Wrap(c);
 }
 
-GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle, GUIElement^ parent, int id)
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIContextMenu::Wrap(m);
 }
 
-GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle, GUIElement^ parent)
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIContextMenu::Wrap(m);
 }
 
-GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti^ rectangle)
+GUIContextMenu^ GUIEnvironment::AddContextMenu(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIContextMenu* m = m_GUIEnvironment->addContextMenu(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIContextMenu::Wrap(m);
 }
 
-GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id)
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti rectangle, bool border, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
@@ -295,38 +264,32 @@ GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool bord
 	return GUIEditBox::Wrap(b);
 }
 
-GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent)
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti rectangle, bool border, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIEditBox::Wrap(b);
 }
 
-GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle, bool border)
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti rectangle, bool border)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border);
 
 	return GUIEditBox::Wrap(b);
 }
 
-GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti^ rectangle)
+GUIEditBox^ GUIEnvironment::AddEditBox(String^ text, Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIEditBox* b = m_GUIEnvironment->addEditBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIEditBox::Wrap(b);
 }
@@ -435,12 +398,10 @@ GUIElement^ GUIEnvironment::AddGUIElement(String^ elementName)
 	return GUIElement::Wrap(e);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
+GUIImage^ GUIEnvironment::AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent, int id, String^ text)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
@@ -449,12 +410,10 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIEl
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent, int id)
+GUIImage^ GUIEnvironment::AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		0,
@@ -463,12 +422,10 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIEl
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIElement^ parent)
+GUIImage^ GUIEnvironment::AddImage(Recti rectangle, bool useAlphaChannel, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		-1,
 		0,
@@ -477,12 +434,10 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel, GUIEl
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel)
+GUIImage^ GUIEnvironment::AddImage(Recti rectangle, bool useAlphaChannel)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIImage* i = m_GUIEnvironment->addImage(
-		*rectangle->m_NativeValue,
+		rectangle,
 		0,
 		-1,
 		0,
@@ -491,11 +446,9 @@ GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle, bool useAlphaChannel)
 	return GUIImage::Wrap(i);
 }
 
-GUIImage^ GUIEnvironment::AddImage(Recti^ rectangle)
+GUIImage^ GUIEnvironment::AddImage(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUIImage* i = m_GUIEnvironment->addImage(*rectangle->m_NativeValue);
+	gui::IGUIImage* i = m_GUIEnvironment->addImage(rectangle);
 	return GUIImage::Wrap(i);
 }
 
@@ -554,34 +507,28 @@ GUIImage^ GUIEnvironment::AddImage(Video::Texture^ image, Vector2Di pos)
 	return GUIImage::Wrap(i);
 }
 
-GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle, GUIElement^ parent, int id)
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Nullable<Recti> rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(
-		rectangle->m_NativeValue,
+		LIME_NULLABLE(rectangle),
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIInOutFader::Wrap(f);
 }
 
-GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle, GUIElement^ parent)
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Nullable<Recti> rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(
-		rectangle->m_NativeValue,
+		LIME_NULLABLE(rectangle),
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIInOutFader::Wrap(f);
 }
 
-GUIInOutFader^ GUIEnvironment::AddInOutFader(Recti^ rectangle)
+GUIInOutFader^ GUIEnvironment::AddInOutFader(Nullable<Recti> rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(rectangle->m_NativeValue);
+	gui::IGUIInOutFader* f = m_GUIEnvironment->addInOutFader(LIME_NULLABLE(rectangle));
 	return GUIInOutFader::Wrap(f);
 }
 
@@ -591,12 +538,10 @@ GUIInOutFader^ GUIEnvironment::AddInOutFader()
 	return GUIInOutFader::Wrap(f);
 }
 
-GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+GUIListBox^ GUIEnvironment::AddListBox(Recti rectangle, GUIElement^ parent, int id, bool drawBackground)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		drawBackground);
@@ -604,35 +549,29 @@ GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int
 	return GUIListBox::Wrap(b);
 }
 
-GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent, int id)
+GUIListBox^ GUIEnvironment::AddListBox(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIListBox::Wrap(b);
 }
 
-GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle, GUIElement^ parent)
+GUIListBox^ GUIEnvironment::AddListBox(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIListBox::Wrap(b);
 }
 
-GUIListBox^ GUIEnvironment::AddListBox(Recti^ rectangle)
+GUIListBox^ GUIEnvironment::AddListBox(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIListBox* b = m_GUIEnvironment->addListBox(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIListBox::Wrap(b);
 }
@@ -660,12 +599,10 @@ GUIContextMenu^ GUIEnvironment::AddMenu()
 	return GUIContextMenu::Wrap(m);
 }
 
-GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id, String^ text)
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti rectangle, GUIElement^ parent, int id, String^ text)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
@@ -673,34 +610,28 @@ GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ paren
 	return GUIMeshViewer::Wrap(v);
 }
 
-GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent, int id)
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIMeshViewer::Wrap(v);
 }
 
-GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle, GUIElement^ parent)
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIMeshViewer::Wrap(v);
 }
 
-GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti^ rectangle)
+GUIMeshViewer^ GUIEnvironment::AddMeshViewer(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(*rectangle->m_NativeValue);
+	gui::IGUIMeshViewer* v = m_GUIEnvironment->addMeshViewer(rectangle);
 	return GUIMeshViewer::Wrap(v);
 }
 
@@ -779,82 +710,68 @@ GUIElement^ GUIEnvironment::AddModalScreen(GUIElement^ parent)
 	return GUIElement::Wrap(e);
 }
 
-GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent, int id)
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIProfiler::Wrap(p);
 }
 
-GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle, GUIElement^ parent)
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIProfiler::Wrap(p);
 }
 
-GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti^ rectangle)
+GUIProfiler^ GUIEnvironment::AddProfilerDisplay(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIProfiler* p = m_GUIEnvironment->addProfilerDisplay(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIProfiler::Wrap(p);
 }
 
-GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent, int id)
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
 		horizontal,
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUIScrollBar::Wrap(s);
 }
 
-GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle, GUIElement^ parent)
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
 		horizontal,
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUIScrollBar::Wrap(s);
 }
 
-GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti^ rectangle)
+GUIScrollBar^ GUIEnvironment::AddScrollBar(bool horizontal, Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIScrollBar* s = m_GUIEnvironment->addScrollBar(
 		horizontal,
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIScrollBar::Wrap(s);
 }
 
-GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent, int id)
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti rectangle, bool border, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
@@ -862,50 +779,42 @@ GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool bord
 	return GUISpinBox::Wrap(b);
 }
 
-GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border, GUIElement^ parent)
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti rectangle, bool border, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUISpinBox::Wrap(b);
 }
 
-GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle, bool border)
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti rectangle, bool border)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border);
 
 	return GUISpinBox::Wrap(b);
 }
 
-GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti^ rectangle)
+GUISpinBox^ GUIEnvironment::AddSpinBox(String^ text, Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUISpinBox* b = m_GUIEnvironment->addSpinBox(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUISpinBox::Wrap(b);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent,
 	int id, bool fillBackground)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		wordWrap,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -915,14 +824,12 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	return GUIStaticText::Wrap(t);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent,
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent,
 	int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		wordWrap,
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -931,13 +838,11 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	return GUIStaticText::Wrap(t);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap, GUIElement^ parent)
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		wordWrap,
 		LIME_SAFEREF(parent, m_GUIElement));
@@ -945,79 +850,65 @@ GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, boo
 	return GUIStaticText::Wrap(t);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border, bool wordWrap)
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle, bool border, bool wordWrap)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border,
 		wordWrap);
 
 	return GUIStaticText::Wrap(t);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle, bool border)
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle, bool border)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue,
+		rectangle,
 		border);
 
 	return GUIStaticText::Wrap(t);
 }
 
-GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti^ rectangle)
+GUIStaticText^ GUIEnvironment::AddStaticText(String^ text, Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIStaticText* t = m_GUIEnvironment->addStaticText(
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIStaticText::Wrap(t);
 }
 
-GUITab^ GUIEnvironment::AddTab(Recti^ rectangle, GUIElement^ parent, int id)
+GUITab^ GUIEnvironment::AddTab(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITab* t = m_GUIEnvironment->addTab(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUITab::Wrap(t);
 }
 
-GUITab^ GUIEnvironment::AddTab(Recti^ rectangle, GUIElement^ parent)
+GUITab^ GUIEnvironment::AddTab(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITab* t = m_GUIEnvironment->addTab(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUITab::Wrap(t);
 }
 
-GUITab^ GUIEnvironment::AddTab(Recti^ rectangle)
+GUITab^ GUIEnvironment::AddTab(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUITab* t = m_GUIEnvironment->addTab(*rectangle->m_NativeValue);
+	gui::IGUITab* t = m_GUIEnvironment->addTab(rectangle);
 	return GUITab::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground, bool border)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti rectangle, GUIElement^ parent, int id, bool fillBackground, bool border)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		fillBackground,
 		border,
@@ -1026,12 +917,10 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ paren
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id, bool fillBackground)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti rectangle, GUIElement^ parent, int id, bool fillBackground)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		fillBackground,
 		true,
@@ -1040,12 +929,10 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ paren
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent, int id)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		false,
 		true,
@@ -1054,31 +941,25 @@ GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ paren
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle, GUIElement^ parent)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUITabControl::Wrap(t);
 }
 
-GUITabControl^ GUIEnvironment::AddTabControl(Recti^ rectangle)
+GUITabControl^ GUIEnvironment::AddTabControl(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(*rectangle->m_NativeValue);
+	gui::IGUITabControl* t = m_GUIEnvironment->addTabControl(rectangle);
 	return GUITabControl::Wrap(t);
 }
 
-GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+GUITable^ GUIEnvironment::AddTable(Recti rectangle, GUIElement^ parent, int id, bool drawBackground)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITable* t = m_GUIEnvironment->addTable(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		drawBackground);
@@ -1086,34 +967,28 @@ GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent, int id,
 	return GUITable::Wrap(t);
 }
 
-GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent, int id)
+GUITable^ GUIEnvironment::AddTable(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITable* t = m_GUIEnvironment->addTable(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUITable::Wrap(t);
 }
 
-GUITable^ GUIEnvironment::AddTable(Recti^ rectangle, GUIElement^ parent)
+GUITable^ GUIEnvironment::AddTable(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITable* t = m_GUIEnvironment->addTable(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUITable::Wrap(t);
 }
 
-GUITable^ GUIEnvironment::AddTable(Recti^ rectangle)
+GUITable^ GUIEnvironment::AddTable(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUITable* t = m_GUIEnvironment->addTable(*rectangle->m_NativeValue);
+	gui::IGUITable* t = m_GUIEnvironment->addTable(rectangle);
 	return GUITable::Wrap(t);
 }
 
@@ -1140,12 +1015,10 @@ GUIToolBar^ GUIEnvironment::AddToolBar()
 	return GUIToolBar::Wrap(b);
 }
 
-GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal)
+GUITreeView^ GUIEnvironment::AddTreeView(Recti rectangle, GUIElement^ parent, int id, bool drawBackground, bool scrollBarVertical, bool scrollBarHorizontal)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		drawBackground,
@@ -1155,12 +1028,10 @@ GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, i
 	return GUITreeView::Wrap(v);
 }
 
-GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id, bool drawBackground)
+GUITreeView^ GUIEnvironment::AddTreeView(Recti rectangle, GUIElement^ parent, int id, bool drawBackground)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
 		drawBackground);
@@ -1168,43 +1039,35 @@ GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, i
 	return GUITreeView::Wrap(v);
 }
 
-GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent, int id)
+GUITreeView^ GUIEnvironment::AddTreeView(Recti rectangle, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement),
 		id);
 
 	return GUITreeView::Wrap(v);
 }
 
-GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle, GUIElement^ parent)
+GUITreeView^ GUIEnvironment::AddTreeView(Recti rectangle, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(
-		*rectangle->m_NativeValue,
+		rectangle,
 		LIME_SAFEREF(parent, m_GUIElement));
 
 	return GUITreeView::Wrap(v);
 }
 
-GUITreeView^ GUIEnvironment::AddTreeView(Recti^ rectangle)
+GUITreeView^ GUIEnvironment::AddTreeView(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
-	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(*rectangle->m_NativeValue);
+	gui::IGUITreeView* v = m_GUIEnvironment->addTreeView(rectangle);
 	return GUITreeView::Wrap(v);
 }
 
-GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent, int id)
+GUIWindow^ GUIEnvironment::AddWindow(Recti rectangle, bool modal, String^ text, GUIElement^ parent, int id)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
-		*rectangle->m_NativeValue,
+		rectangle,
 		modal,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_GUIElement),
@@ -1213,12 +1076,10 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text,
 	return GUIWindow::Wrap(w);
 }
 
-GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text, GUIElement^ parent)
+GUIWindow^ GUIEnvironment::AddWindow(Recti rectangle, bool modal, String^ text, GUIElement^ parent)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
-		*rectangle->m_NativeValue,
+		rectangle,
 		modal,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text),
 		LIME_SAFEREF(parent, m_GUIElement));
@@ -1226,35 +1087,29 @@ GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text,
 	return GUIWindow::Wrap(w);
 }
 
-GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal, String^ text)
+GUIWindow^ GUIEnvironment::AddWindow(Recti rectangle, bool modal, String^ text)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
-		*rectangle->m_NativeValue,
+		rectangle,
 		modal,
 		LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 
 	return GUIWindow::Wrap(w);
 }
 
-GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle, bool modal)
+GUIWindow^ GUIEnvironment::AddWindow(Recti rectangle, bool modal)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
-		*rectangle->m_NativeValue,
+		rectangle,
 		modal);
 
 	return GUIWindow::Wrap(w);
 }
 
-GUIWindow^ GUIEnvironment::AddWindow(Recti^ rectangle)
+GUIWindow^ GUIEnvironment::AddWindow(Recti rectangle)
 {
-	LIME_ASSERT(rectangle != nullptr);
-
 	gui::IGUIWindow* w = m_GUIEnvironment->addWindow(
-		*rectangle->m_NativeValue);
+		rectangle);
 
 	return GUIWindow::Wrap(w);
 }

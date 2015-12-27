@@ -1379,6 +1379,36 @@ true if the enumerator was successfully advanced to the previous element; false 
 		<member name="M:IrrlichtLime.NativeIterator`1.Reset``0">
 			<summary>Sets the enumerator to its initial position, which is before the first element in the collection or behind the last.</summary>
 		</member>
+		<member name="T:IrrlichtLime.NativeList`1">
+			<summary>A read- and writeable list.
+Note: Not all methods are supported!</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeList`1.Add``0(``0[])">
+			<summary>Adds a new element to the end of the list.</summary>
+			<param name="item">The element to add.</param>
+		</member>
+		<member name="M:IrrlichtLime.NativeList`1.Clear``0">
+			<summary>Removes all elements from the list.</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeList`1.Insert``0(System.Int32,``0[])">
+			<summary>Adds an element at a certain position.
+!!! Checks for bounds only in debug build!</summary>
+			<param name="index">Where to add the new element.</param>
+			<param name="item">The new element.</param>
+		</member>
+		<member name="P:IrrlichtLime.NativeList`1.IsReadOnly">
+			<summary>Always returns false.
+Lists are writeable.</summary>
+		</member>
+		<member name="P:IrrlichtLime.NativeList`1.Item">
+			<summary>The element at a certain index.
+!!! Checks for bounds only in debug build!</summary>
+		</member>
+		<member name="M:IrrlichtLime.NativeList`1.RemoveAt``0(System.Int32)">
+			<summary>Remove an element from a position.
+!!! Checks for bounds only in debug build!</summary>
+			<param name="index">The index of the element to remove.</param>
+		</member>
 		<member name="T:IrrlichtLime.OSOperator">
 			<summary>The Operating system operator provides operation system specific methods and informations.</summary>
 		</member>
@@ -2652,16 +2682,13 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="other">Other rectangle.</param>
 			<returns>True if the rectangles collide.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Core.Rectd.LowerRightCorner">
+		<member name="F:IrrlichtLime.Core.Rectd.LowerRightCorner">
 			<summary>Lower right corner of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectd.Offset(System.Double,System.Double)">
 			<summary>Offsets position of this rect by the specified amount.</summary>
 			<param name="x">Horizontal offset.</param>
 			<param name="y">Vertical offset.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Rectd.#ctor">
-			<summary>Default constructor creating empty rectangle at (0,0).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectd.#ctor(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Dimension2Dd)">
 			<summary>Constructor with upper left corner and dimension.</summary>
@@ -2687,7 +2714,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="M:IrrlichtLime.Core.Rectd.Repair">
 			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Rectd.UpperLeftCorner">
+		<member name="F:IrrlichtLime.Core.Rectd.UpperLeftCorner">
 			<summary>Upper left corner of the rectangle.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Rectd.Valid">
@@ -2766,16 +2793,13 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="other">Other rectangle.</param>
 			<returns>True if the rectangles collide.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Core.Rectf.LowerRightCorner">
+		<member name="F:IrrlichtLime.Core.Rectf.LowerRightCorner">
 			<summary>Lower right corner of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.Offset(System.Single,System.Single)">
 			<summary>Offsets position of this rect by the specified amount.</summary>
 			<param name="x">Horizontal offset.</param>
 			<param name="y">Vertical offset.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Rectf.#ctor">
-			<summary>Default constructor creating empty rectangle at (0,0).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Rectf.#ctor(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Dimension2Df)">
 			<summary>Constructor with upper left corner and dimension.</summary>
@@ -2801,7 +2825,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="M:IrrlichtLime.Core.Rectf.Repair">
 			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Rectf.UpperLeftCorner">
+		<member name="F:IrrlichtLime.Core.Rectf.UpperLeftCorner">
 			<summary>Upper left corner of the rectangle.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Rectf.Valid">
@@ -2880,16 +2904,13 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 			<param name="other">Other rectangle.</param>
 			<returns>True if the rectangles collide.</returns>
 		</member>
-		<member name="P:IrrlichtLime.Core.Recti.LowerRightCorner">
+		<member name="F:IrrlichtLime.Core.Recti.LowerRightCorner">
 			<summary>Lower right corner of the rectangle.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.Offset(System.Int32,System.Int32)">
 			<summary>Offsets position of this rect by the specified amount.</summary>
 			<param name="x">Horizontal offset.</param>
 			<param name="y">Vertical offset.</param>
-		</member>
-		<member name="M:IrrlichtLime.Core.Recti.#ctor">
-			<summary>Default constructor creating empty rectangle at (0,0).</summary>
 		</member>
 		<member name="M:IrrlichtLime.Core.Recti.#ctor(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Dimension2Di)">
 			<summary>Constructor with upper left corner and dimension.</summary>
@@ -2915,7 +2936,7 @@ Causes the rectangle to grow bigger if point is outside of the box.</summary>
 		<member name="M:IrrlichtLime.Core.Recti.Repair">
 			<summary>If the lower right corner of the rect is smaller then the upper left, the points are swapped.</summary>
 		</member>
-		<member name="P:IrrlichtLime.Core.Recti.UpperLeftCorner">
+		<member name="F:IrrlichtLime.Core.Recti.UpperLeftCorner">
 			<summary>Upper left corner of the rectangle.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Recti.Valid">
@@ -3857,7 +3878,7 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="P:IrrlichtLime.GUI.CursorControl.RelativePosition">
 			<summary>Returns the current position of the cursor. The returned position is a value between (0.0f, 0.0f) and (1.0f, 1.0f), where (0.0f, 0.0f) is the top left corner and (1.0f, 1.0f) is the bottom right corner of the render window. Use SetReferenceRect() to set custom rect.</summary>
 		</member>
-		<member name="M:IrrlichtLime.GUI.CursorControl.SetReferenceRect(IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.CursorControl.SetReferenceRect(System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Sets an absolute reference rect for setting and retrieving the cursor position.
 
 If this rect is set, the cursor position is not being calculated relative to the rendering window but to this rect. You can set the rect pointer to null to disable this feature again. This feature is useful when rendering into parts of foreign windows for example in an editor.</summary>
@@ -5268,16 +5289,16 @@ Supports unicode input from every keyboard around the world, scrolling, copying 
 		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader">
 			<summary>Adds an element for fading in or out.</summary>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Adds an element for fading in or out.</summary>
 			<param name="rectangle">Rectangle specifying the borders of the fader. If null, the whole screen is used. Default is null.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement)">
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.GUI.GUIElement)">
 			<summary>Adds an element for fading in or out.</summary>
 			<param name="rectangle">Rectangle specifying the borders of the fader. If null, the whole screen is used. Default is null.</param>
 			<param name="parent">Parent GUI element of the in-out-fader. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIElement,System.Int32)">
+		<member name="M:IrrlichtLime.GUI.GUIEnvironment.AddInOutFader(System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.GUI.GUIElement,System.Int32)">
 			<summary>Adds an element for fading in or out.</summary>
 			<param name="rectangle">Rectangle specifying the borders of the fader. If null, the whole screen is used. Default is null.</param>
 			<param name="parent">Parent GUI element of the in-out-fader. If set to null, the RootElement of the GUI environment will be the parent. Default is null.</param>
@@ -5935,7 +5956,7 @@ Note: when the user selects a folder this does change the current working direct
 			<param name="position">Rectangle specifying position where to draw the text.</param>
 			<param name="color">Color of the text.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Video.Color,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws some text and clips it to the specified rectangle if wanted.</summary>
 			<param name="text">Text to draw.</param>
 			<param name="position">Rectangle specifying position where to draw the text.</param>
@@ -5957,7 +5978,7 @@ Note: when the user selects a folder this does change the current working direct
 			<param name="hcenter">Specifies if the text should be centered horizontally into the rectangle. Default is false.</param>
 			<param name="vcenter">Specifies if the text should be centered vertically into the rectangle. Default is false.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws some text and clips it to the specified rectangle if wanted.</summary>
 			<param name="text">Text to draw.</param>
 			<param name="position">Rectangle specifying position where to draw the text.</param>
@@ -5973,7 +5994,7 @@ Note: when the user selects a folder this does change the current working direct
 			<param name="y">Y coordinate where to draw the text.</param>
 			<param name="color">Color of the text.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,System.Int32,System.Int32,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUIFont.Draw(System.String,System.Int32,System.Int32,IrrlichtLime.Video.Color,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws some text and clips it to the specified rectangle if wanted.</summary>
 			<param name="text">Text to draw.</param>
 			<param name="x">X coordinate where to draw the text.</param>
@@ -6071,7 +6092,7 @@ Base for area is the image, which means:
 			<param name="index">Index of the image. Must be from 0 to ImageCount-1.</param>
 			<param name="destPos">Position of the image to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUIImageList.Draw(System.Int32,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUIImageList.Draw(System.Int32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws an image and clips it to the specified rectangle if wanted.</summary>
 			<param name="index">Index of the image. Must be from 0 to ImageCount-1.</param>
 			<param name="destPos">Position of the image to draw.</param>
@@ -6355,7 +6376,7 @@ This is the amount that the value changes by when clicking on the buttons or usi
 			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle will be.</param>
 			<param name="pos">Position of the rectangle.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw2DRectangle(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw2DRectangle(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a 2d rectangle.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="color">Color of the rectangle to draw. The alpha component specifies how transparent the rectangle will be.</param>
@@ -6368,7 +6389,7 @@ Used for drawing for example buttons in pressed state.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPanePressed(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPanePressed(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a pressed 3d button pane.
 Used for drawing for example buttons in pressed state.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6381,7 +6402,7 @@ Used for drawing for example buttons in normal state.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPaneStandard(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DButtonPaneStandard(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a standard 3d button pane.
 Used for drawing for example buttons in normal state.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6394,7 +6415,7 @@ Used for drawing for menus and context menus.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DMenuPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DMenuPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a standard 3d menu pane.
 Used for drawing for menus and context menus.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6410,7 +6431,7 @@ Used for drawing the background of edit, combo or check boxes.</summary>
 			<param name="fillBackGround">Specifies if the background should be filled with the background color or not be drawn at all.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DSunkenPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DSunkenPane(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Video.Color,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a sunken 3d pane.
 Used for drawing the background of edit, combo or check boxes.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6427,7 +6448,7 @@ Used for drawing the background of edit, combo or check boxes.</summary>
 			<param name="background">Specifies if the background should be drawn.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a tab control body.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="border">Specifies if the border should be drawn.</param>
@@ -6435,7 +6456,7 @@ Used for drawing the background of edit, combo or check boxes.</summary>
 			<param name="rect">Defining area where to draw.</param>
 			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Int32)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Int32)">
 			<summary>Draws a tab control body.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="border">Specifies if the border should be drawn.</param>
@@ -6444,7 +6465,7 @@ Used for drawing the background of edit, combo or check boxes.</summary>
 			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
 			<param name="tabHeight">Height of tab. If -1 it will be chosen automatically. Default is -1.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Int32,IrrlichtLime.GUI.GUIAlignment)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabBody(IrrlichtLime.GUI.GUIElement,System.Boolean,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Int32,IrrlichtLime.GUI.GUIAlignment)">
 			<summary>Draws a tab control body.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="border">Specifies if the border should be drawn.</param>
@@ -6461,7 +6482,7 @@ Used for drawing for tab buttons on top of tabs.</summary>
 			<param name="active">Specifies if the tab is currently active.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a tab button.
 Used for drawing for tab buttons on top of tabs.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6469,7 +6490,7 @@ Used for drawing for tab buttons on top of tabs.</summary>
 			<param name="rect">Defining area where to draw.</param>
 			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.GUI.GUIAlignment)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DTabButton(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.GUI.GUIAlignment)">
 			<summary>Draws a tab button.
 Used for drawing for tab buttons on top of tabs.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6484,7 +6505,7 @@ Used for drawing for toolbars and menus.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="rect">Defining area where to draw.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DToolBar(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DToolBar(IrrlichtLime.GUI.GUIElement,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a standard 3d tool bar.
 Used for drawing for toolbars and menus.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6500,7 +6521,7 @@ Used for drawing the background of dialogs and windows.</summary>
 			<param name="rect">Defining area where to draw.</param>
 			<returns>Rect where it would be good to draw title bar text. This will work even when checkClientArea is set to a non-null value.</returns>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a window background.
 Used for drawing the background of dialogs and windows.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6510,7 +6531,7 @@ Used for drawing the background of dialogs and windows.</summary>
 			<param name="clip">Clip area. If null no clipping will be done. Default is null.</param>
 			<returns>Rect where it would be good to draw title bar text. This will work even when checkClientArea is set to a non-null value.</returns>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.Draw3DWindowBackground(IrrlichtLime.GUI.GUIElement,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti@)">
 			<summary>Draws a window background.
 Used for drawing the background of dialogs and windows.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
@@ -6551,7 +6572,7 @@ Used for drawing the background of dialogs and windows.</summary>
 			<param name="currenttime">The present time, used to calculate the frame number. Default is 0.</param>
 			<param name="loop">Whether the animation should loop or not. Default is false.</param>
 		</member>
-		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32,System.UInt32,System.Boolean,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.GUI.GUISkin.DrawIcon(IrrlichtLime.GUI.GUIElement,IrrlichtLime.GUI.GUIDefaultIcon,IrrlichtLime.Core.Vector2Di,System.UInt32,System.UInt32,System.Boolean,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws an icon, usually from the skin's sprite bank.</summary>
 			<param name="element">The element which wishes to draw this. This parameter is usually not used by GUISkin, but can be used for example by more complex implementations to find out how to draw the part exactly.</param>
 			<param name="icon">Specifies the icon to be drawn.</param>
@@ -6680,8 +6701,213 @@ Default used by Irrlicht is "Enter | LostFocus".</summary>
 		<member name="F:IrrlichtLime.GUI.GUISpinBoxValidation.Never">
 			<summary>Does not validate typed text, probably a bad idea setting this usually.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUISprite">
+			<summary>A sprite composed of several frames.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISprite.Frames">
+			<summary>Get access to the frames of this sprite.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISprite.#ctor(IrrlichtLime.GUI.GUISpriteFrame)">
+			<summary>Creates a new sprite with one single frame.</summary>
+			<param name="firstFrame">The first frame to add.</param>
+		</member>
 		<member name="T:IrrlichtLime.GUI.GUISpriteBank">
-			<summary>Sprite bank.</summary>
+			<summary>Sprite bank.
+See &lt;http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=25742&amp;highlight=spritebank&gt; for more information how to use the spritebank.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.AddTexture(IrrlichtLime.Video.Texture)">
+			<summary>Adds a texture to the sprite bank.</summary>
+			<param name="texure">The texture to be added.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.AddTextureAsSprite(IrrlichtLime.Video.Texture)">
+			<summary>Add the texture and use it for a single non-animated sprite.
+The texture and the corresponding rectangle and sprite will all be added to the end of each array.
+
+Returns the index of the sprite or -1 on failure.</summary>
+			<param name="texture">The texture to be added.</param>
+			<returns>Returns the index of the sprite or -1 on failure.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Clear">
+			<summary>Clears sprites, rectangles and textures.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Recti)">
+			<summary>Draws a sprite in 2d with destination rectangle and colors.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="destRect">The sprite will be scaled to fit this target rectangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
+			<summary>Draws a sprite in 2d with destination rectangle and colors.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="destRect">The sprite will be scaled to fit this target rectangle.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Collections.Generic.IList{IrrlichtLime.Video.Color})">
+			<summary>Draws a sprite in 2d with destination rectangle and colors.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="destRect">The sprite will be scaled to fit this target rectangle.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="colors">Array of 4 colors denoting the color values of the corners of the destRect. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Collections.Generic.IList{IrrlichtLime.Video.Color},System.UInt32)">
+			<summary>Draws a sprite in 2d with destination rectangle and colors.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="destRect">The sprite will be scaled to fit this target rectangle.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="colors">Array of 4 colors denoting the color values of the corners of the destRect. Default: null.</param>
+			<param name="timeTicks">Current frame for animated sprites. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Collections.Generic.IList{IrrlichtLime.Video.Color},System.UInt32,System.Boolean)">
+			<summary>Draws a sprite in 2d with destination rectangle and colors.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="destRect">The sprite will be scaled to fit this target rectangle.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="colors">Array of 4 colors denoting the color values of the corners of the destRect. Default: null.</param>
+			<param name="timeTicks">Current frame for animated sprites. Default: 0.</param>
+			<param name="loop">When true animations are looped. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti})">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Boolean)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+			<param name="loop">When true animations are looped. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSprite(System.UInt32,IrrlichtLime.Core.Vector2Di,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Boolean,System.Boolean)">
+			<summary>Draws a sprite in 2d with position and color.</summary>
+			<param name="index">Index of GUISprite to draw.</param>
+			<param name="pos">Target position - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent.Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+			<param name="loop">When true animations are looped. Default: true.</param>
+			<param name="center">When true pivot is set to the sprite-center. So it affects pos. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di})">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti})">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color)">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32)">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32)">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Boolean)">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+			<param name="loop">When true animations are looped. Default: true.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.Draw2DSpriteBatch(System.Collections.Generic.IList{System.UInt32},System.Collections.Generic.IList{IrrlichtLime.Core.Vector2Di},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.UInt32,System.UInt32,System.Boolean,System.Boolean)">
+			<summary>Draws a sprite batch in 2d using an array of positions and a color.</summary>
+			<param name="indices">Indices of GUISprites to draw.</param>
+			<param name="pos">Target positions - depending on center value either the left-top or the sprite center is used as pivot.</param>
+			<param name="clip">Clipping rectangle, can be null when clipping is not wanted. Default: null.</param>
+			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: white.</param>
+			<param name="starttime">Tick when the first frame was drawn (only difference currenttime-starttime matters). Default: 0.</param>
+			<param name="currenttime">To calculate the frame of animated sprites. Default: 0.</param>
+			<param name="loop">When true animations are looped. Default: true.</param>
+			<param name="center">When true pivot is set to the sprite-center. So it affects pos. Default: false.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.GetTexture(System.UInt32)">
+			<summary>Gets the texture with the specified index.</summary>
+			<param name="index">The texture index.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpriteBank.Positions">
+			<summary>The list of rectangles held by the sprite bank.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteBank.SetTexture(System.UInt32,IrrlichtLime.Video.Texture)">
+			<summary>Changes one of the textures in the sprite bank.</summary>
+			<param name="index">The texture index.</param>
+			<param name="texture">The texture to replace with.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpriteBank.Sprites">
+			<summary>The array of animated sprites within the sprite bank.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUISpriteBank.TextureCount">
+			<summary>The number of textures held by the sprite bank.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.GUISpriteFrame">
+			<summary>A single sprite frame.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUISpriteFrame.#ctor(System.UInt32,System.UInt32)">
+			<summary>Creates a new sprite frame.</summary>
+			<param name="TextureNumber">Texture index in GUISpriteBank.</param>
+			<param name="RectNumber">Index in GUISpriteBank.Positions.</param>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpriteFrame.RectNumber">
+			<summary>Index in GUISpriteBank.Positions.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISpriteFrame.TextureNumber">
+			<summary>Texture index in GUISpriteBank.</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.GUIStaticText">
 			<summary>Multi or single line text label.</summary>
@@ -7020,6 +7246,10 @@ You need to explicitly tell the table to re order the rows when a new row is add
 
 Displays a windows like tree buttons to expand/collaps the child nodes of an node and optional tree lines. Each node consits of a text, an icon text and a int value for user data.</summary>
 		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.ActiveFont">
+			<summary>Get the font which is used for drawing.
+This is the override font when one is set and the font of the skin otherwise.</summary>
+		</member>
 		<member name="P:IrrlichtLime.GUI.GUITreeView.HorizontalScrollBar">
 			<summary>Access the horizontal scrollbar.</summary>
 		</member>
@@ -7035,6 +7265,10 @@ Warning: this value is only valid inside the OnEvent call!</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUITreeView.LinesVisible">
 			<summary>True if the tree lines are visible.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUITreeView.OverrideFont">
+			<summary>A skin independent font.
+New font to set or 0 to use the skin-font.</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUITreeView.RootNode">
 			<summary>The root node (not visible) from the tree.</summary>
@@ -9738,6 +9972,55 @@ Usually you do not have to use this method, it is used internally by IMeshLoader
 			<summary>Meshloaders will search paths relative to the meshFile.
 Usually you do not have to use this method, it is used internally by IMeshLoader's. Any values you set here will likely be overwritten internally.</summary>
 			<param name="meshFile">The mesh file.</param>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshWriter">
+			<summary>Interface for writing meshes.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshWriter.Type">
+			<summary>Get the type of the mesh writer.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.MeshWriter.WriteMesh(IrrlichtLime.IO.WriteFile,IrrlichtLime.Scene.Mesh,IrrlichtLime.Scene.MeshWriterFlag)">
+			<summary>Write a mesh.</summary>
+			<param name="file">The mesh to be written.</param>
+			<param name="mesh">Optional flags to set properties of the writer.</param>
+			<param name="flags">Optional flags to set properties of the writer.</param>
+			<returns>True if sucessful.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshWriterFlag">
+			<summary>Flags configuring mesh writing.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterFlag.None">
+			<summary>No writer flags.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterFlag.WriteBinary">
+			<summary>Write in binary format rather than text.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterFlag.WriteCompressed">
+			<summary>Write in a way that consumes less disk space.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterFlag.WriteLightmaps">
+			<summary>Write lightmap textures out if possible.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.MeshWriterType">
+			<summary>An enumeration for all supported types of built-in mesh writers.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.B3d">
+			<summary>B3D mesh writer, for static .b3d files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.Collada">
+			<summary>COLLADA mesh writer for .dae and .xml files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.IrrMesh">
+			<summary>Irrlicht native mesh writer, for static .irrmesh files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.Obj">
+			<summary>OBJ mesh writer for .obj files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.Ply">
+			<summary>PLY mesh writer for .ply files.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.MeshWriterType.Stl">
+			<summary>STL mesh writer for .stl files.</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.MetaTriangleSelector">
 			<summary>Interface for making multiple triangle selectors work as one big selector.
@@ -12859,6 +13142,13 @@ Attach it to a scene node with SceneNode.AddAnimator() and the animator will ani
 			<param name="loop">If true, the node begins again at the start. If set to false, the node stops when the end point is reached. Default is true.</param>
 			<param name="pingpong">Whether the node should fly back from end to start again. Default is false.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.CreateMeshWriter(IrrlichtLime.Scene.MeshWriterType)">
+			<summary>Get a mesh writer implementation if available.
+
+If you no longer need the mesh writer, you should call MeshWriter.Drop().</summary>
+			<param name="type">The type of the mesh writer.</param>
+			<returns>The newly created mesh writer or null on failure.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.CreateMetaTriangleSelector">
 			<summary>Creates a meta triangle selector.
 
@@ -15755,7 +16045,7 @@ Returns PixelFormat.Undefined if format cannot be translated.</summary>
 			<param name="targetPos">Target position.</param>
 			<param name="sourceRect">Source rectangle.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.Image.CopyTo(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Copies this image to the target.</summary>
 			<param name="target">Target image.</param>
 			<param name="targetPos">Target position.</param>
@@ -15806,7 +16096,7 @@ Returns PixelFormat.Undefined if format cannot be translated.</summary>
 			<param name="sourceRect">Source rectangle.</param>
 			<param name="color">Color to add with.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.Image.CopyToWithAlpha(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.Image.CopyToWithAlpha(IrrlichtLime.Video.Image,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Copies this image to the target, using the alpha mask, and clipping rectangle and a color to add with.</summary>
 			<param name="target">Target image.</param>
 			<param name="targetPos">Target position.</param>
@@ -17347,7 +17637,7 @@ This method can clear the back- and the z-buffer.</summary>
 			<param name="videoData">Handle of another window, if you want the bitmap to be displayed on another window. If this is an empty element, everything will be displayed in the default window. Note: This feature is not fully implemented for all devices. Default: new ExposedVideoData().</param>
 			<returns>False if failed.</returns>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.ExposedVideoData,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtLime.Video.Color,IrrlichtLime.Video.ExposedVideoData,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Applications must call this method before performing any rendering.
 
 This method can clear the back- and the z-buffer.</summary>
@@ -17469,14 +17759,14 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
 			<param name="sourceRect">Source rectangle in the image.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a 2d image using a color.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
 			<param name="sourceRect">Source rectangle in the image.</param>
 			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color)">
 			<summary>Draws a 2d image using a color.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
@@ -17484,7 +17774,7 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
 			<param name="color">Color with which the image is drawn. If the color equals 0xffffffff it is ignored. Note that the alpha component is used: if alpha is other than 255, the image will be transparent. Default: 0xffffffff (white opaque color).</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.Boolean)">
 			<summary>Draws a 2d image using a color.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destPos">Upper left 2d destination position where the image will be drawn.</param>
@@ -17499,14 +17789,14 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="destRect">Rectangle to draw into.</param>
 			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a part of the texture into the rectangle.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destRect">Rectangle to draw into.</param>
 			<param name="sourceRect">Rectangle denoting a part of the texture.</param>
 			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Collections.Generic.List{IrrlichtLime.Video.Color})">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Collections.Generic.List{IrrlichtLime.Video.Color})">
 			<summary>Draws a part of the texture into the rectangle.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destRect">Rectangle to draw into.</param>
@@ -17514,7 +17804,7 @@ Can also be used to enable the features again. It is not possible to enable unsu
 			<param name="clipRect">Clips the destination rectangle. Default: null.</param>
 			<param name="colors">List of four colors denoting the color values of the corners of the destRect. Default: null.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Collections.Generic.List{IrrlichtLime.Video.Color},System.Boolean)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImage(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Recti,IrrlichtLime.Core.Recti,System.Nullable{IrrlichtLime.Core.Recti},System.Collections.Generic.List{IrrlichtLime.Video.Color},System.Boolean)">
 			<summary>Draws a part of the texture into the rectangle.</summary>
 			<param name="texture">Texture to be drawn.</param>
 			<param name="destRect">Rectangle to draw into.</param>
@@ -17542,7 +17832,7 @@ The images are drawn beginning at given position and concatenated in one line. A
 			<param name="indices">List of indices which choose the actual rectangle used each time.</param>
 			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
@@ -17553,7 +17843,7 @@ The images are drawn beginning at given position and concatenated in one line. A
 			<param name="kerningWidth">Offset of each next position on X. Default: 0.</param>
 			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color)">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
@@ -17565,7 +17855,7 @@ The images are drawn beginning at given position and concatenated in one line. A
 			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
 			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,IrrlichtLime.Core.Vector2Di,System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Collections.Generic.List{System.Int32},System.Int32,System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.Boolean)">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 The images are drawn beginning at given position and concatenated in one line. All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are chosen by the indices given.</summary>
@@ -17586,7 +17876,7 @@ All drawings are clipped against clipRect (if its specified). The subtextures ar
 			<param name="positions">List of upper left 2d destinations where the images will be drawn.</param>
 			<param name="sourceRects">Source rectangles of the image.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
@@ -17595,7 +17885,7 @@ All drawings are clipped against clipRect (if its specified). The subtextures ar
 			<param name="sourceRects">Source rectangles of the image.</param>
 			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color)">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
@@ -17605,7 +17895,7 @@ All drawings are clipped against clipRect (if its specified). The subtextures ar
 			<param name="clipRect">Rectangle on the screen where the image is clipped to. Default: null.</param>
 			<param name="color">Color with which the image is drawn. Note that the alpha component is used. If alpha is other than 255, the image will be transparent. Default: opaque white.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Boolean)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DImageBatch(IrrlichtLime.Video.Texture,System.Collections.Generic.List{IrrlichtLime.Core.Vector2Di},System.Collections.Generic.List{IrrlichtLime.Core.Recti},System.Nullable{IrrlichtLime.Core.Recti},IrrlichtLime.Video.Color,System.Boolean)">
 			<summary>Draws a set of 2d images, using a color and the alpha channel of the texture.
 
 All drawings are clipped against clipRect (if its specified). The subtextures are defined by the list of sourceRects and are positioned using the list of positions.</summary>
@@ -17658,7 +17948,7 @@ This method can be used to draw circles, but also triangles, tetragons, pentagon
 			<param name="pos">Position of the rectangle.</param>
 			<param name="color">Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a 2d rectangle.</summary>
 			<param name="pos">Position of the rectangle.</param>
 			<param name="color">Color of the rectangle to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
@@ -17672,7 +17962,7 @@ This method can be used to draw circles, but also triangles, tetragons, pentagon
 			<param name="colorLeftDown">Color of the lower left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
 			<param name="colorRightDown">Color of the lower right corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Core.Recti)">
+		<member name="M:IrrlichtLime.Video.VideoDriver.Draw2DRectangle(IrrlichtLime.Core.Recti,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,IrrlichtLime.Video.Color,System.Nullable{IrrlichtLime.Core.Recti})">
 			<summary>Draws a 2d rectangle with a gradient.</summary>
 			<param name="pos">Position of the rectangle.</param>
 			<param name="colorLeftUp">Color of the upper left corner to draw. The alpha component will not be ignored and specifies how transparent the rectangle will be.</param>

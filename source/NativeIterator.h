@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 
+using namespace System::Collections::Generic;
+
 namespace IrrlichtLime
 {
 
@@ -130,7 +132,7 @@ public:
 
 	property bool IsReadOnly
 	{
-		virtual bool get() sealed
+		virtual bool get()
 		{
 			return true;
 		}
@@ -161,7 +163,7 @@ public:
 			array[index++] = listItem;
 	}
 
-private:
+protected:
 
 	virtual IEnumerator<T>^ GetEnumerator() sealed = IEnumerable<T>::GetEnumerator
 	{
@@ -173,20 +175,22 @@ private:
 		return GetIterator();
 	}
 	
+internal:	//for invisible methods
+
 #pragma warning (push)
 #pragma warning (disable: 4100)	//hide unused parameter warnings
-	virtual void Add(T item) sealed = ICollection<T>::Add
+	virtual void Add(T item) = ICollection<T>::Add
 	{
 		throw gcnew NotSupportedException();
 	}
 
-	virtual bool Remove(T item) sealed = ICollection<T>::Remove
+	virtual bool Remove(T item) = ICollection<T>::Remove
 	{
 		throw gcnew NotSupportedException();
 	}
 #pragma warning (pop)
 
-	virtual void Clear() sealed = ICollection<T>::Clear
+	virtual void Clear() = ICollection<T>::Clear
 	{
 		throw gcnew NotSupportedException();
 	}

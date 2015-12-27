@@ -43,7 +43,7 @@ public:
 	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
-	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData, Recti^ sourceRect);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData, Nullable<Recti> sourceRect);
 	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData);
 	bool BeginScene(bool backBuffer, bool zBuffer, Color color);
 	bool BeginScene(bool backBuffer, bool zBuffer);
@@ -76,26 +76,26 @@ public:
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
 
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color>^ colors, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color>^ colors);
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect);
-	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect, Color color);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect, Recti^ clipRect);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti^ sourceRect);
+	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect, List<Color>^ colors, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect, List<Color>^ colors);
+	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect);
+	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect);
+	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect, Color color);
+	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect);
+	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect);
 	void Draw2DImage(Texture^ texture, Vector2Di destPos);
 	
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color color);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti^>^ sourceRects);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect, Color color);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects);
 
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color color);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti^>^ sourceRects, List<int>^ indices);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect, Color color);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices);
 
 	void Draw2DLine(int x1, int y1, int x2, int y2, Color color);
 	void Draw2DLine(Vector2Di start, Vector2Di end, Color color);
@@ -103,13 +103,13 @@ public:
 	void Draw2DPolygon(int x, int y, float radius, Color color, int vertexCount);
 	void Draw2DPolygon(Vector2Di center, float radius, Color color, int vertexCount);
 
-	void Draw2DRectangle(Recti^ pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown, Recti^ clip);
-	void Draw2DRectangle(Recti^ pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown);
-	void Draw2DRectangle(Recti^ pos, Color color, Recti^ clip);
-	void Draw2DRectangle(Recti^ pos, Color color);
+	void Draw2DRectangle(Recti pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown, Nullable<Recti> clip);
+	void Draw2DRectangle(Recti pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown);
+	void Draw2DRectangle(Recti pos, Color color, Nullable<Recti> clip);
+	void Draw2DRectangle(Recti pos, Color color);
 	void Draw2DRectangle(int x1, int y1, int x2, int y2, Color color);
 
-	void Draw2DRectangleOutline(Recti^ pos, Color color);
+	void Draw2DRectangleOutline(Recti pos, Color color);
 	void Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color color);
 
 	generic<typename T> where T : IVertex3D, value class void Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
@@ -273,7 +273,7 @@ public:
 	property int TextureCount { int get(); }
 	property List<Texture^>^ TextureList { List<Texture^>^ get(); }
 	property String^ VendorInfo { String^ get(); }
-	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }
+	property Recti ViewPort { Recti get(); void set(Recti value); }
 
 	virtual String^ ToString() override;
 

@@ -59,7 +59,9 @@ namespace Core {
 #define _REFCLASS_ Vector3Di
 #define _WRAPCLASS_ core::vector3di
 #define _WRAPTYPE_ int
+#define _WRAPTYPE_INT_	//we have a special implementation for vectors with integers
 #include "Vector3D.h"
+#undef _WRAPTYPE_INT_
 #undef _WRAPTYPE_
 #undef _WRAPCLASS_
 #undef _REFCLASS_

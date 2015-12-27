@@ -161,13 +161,13 @@ public:
 
 	static _REFCLASS_ operator / (_REFCLASS_ v1, _WRAPTYPE_ v2)
 	{
-//Irrlicht has another implementation for floating point types, but I can't get it compile
-//#if _WRAPTYPE_ int
+		//Irrlicht has another implementation for floating point types
+#ifdef _WRAPTYPE_INT_
 		return _REFCLASS_(v1.X / v2, v1.Y / v2, v1.Z / v2);
-//#else
-//		_WRAPTYPE_ i = (_WRAPTYPE)1.0/v2;
-//		return _REFCLASS_(v1.X * i, v1.Y * i, v1.Z * i);
-//#endif
+#else
+		_WRAPTYPE_ i = (_WRAPTYPE_)1.0/v2;
+		return _REFCLASS_(v1.X * i, v1.Y * i, v1.Z * i);
+#endif
 	}
 
 	void Set(_WRAPTYPE_ nx, _WRAPTYPE_ ny, _WRAPTYPE_ nz)
@@ -403,6 +403,24 @@ public:
 	{
 		_REFCLASS_ get() 
 		{
+			//Irrlicht has a different implementation for int
+#ifdef _WRAPTYPE_INT_
+			_REFCLASS_ angle;
+			const f64 length = X*X + Y*Y + Z*Z;
+
+			if (length)
+			{
+				if (X!=0)
+				{
+					angle.Y = core::round32((f32)(atan2((f64)Z,(f64)X) * RADTODEG64));
+				}
+				else if (Z<0)
+					angle.Y=180;
+
+				angle.X = core::round32((f32)(acos(Y * core::reciprocal_squareroot(length)) * RADTODEG64));
+			}
+			return angle;
+#else
 			_REFCLASS_ angle;
 			const f64 length = X*X + Y*Y + Z*Z;
 
@@ -418,6 +436,7 @@ public:
 				angle.X = (_WRAPTYPE_)(acos(Y * core::reciprocal_squareroot(length)) * RADTODEG64);
 			}
 			return angle;
+#endif
 		}
 	}
 	

@@ -26,10 +26,9 @@ GUIButton::GUIButton(gui::IGUIButton* ref)
 	m_GUIButton = ref;
 }
 
-void GUIButton::SetImage(GUIButtonImageState state, Video::Texture^ image, Recti^ sourceRect)
+void GUIButton::SetImage(GUIButtonImageState state, Video::Texture^ image, Recti sourceRect)
 {
-	LIME_ASSERT(sourceRect != nullptr);
-	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state, LIME_SAFEREF(image, m_Texture), *sourceRect->m_NativeValue);
+	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state, LIME_SAFEREF(image, m_Texture), sourceRect);
 }
 
 void GUIButton::SetImage(GUIButtonImageState state, Video::Texture^ image)
@@ -42,10 +41,9 @@ void GUIButton::SetImage(GUIButtonImageState state)
 	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state);
 }
 
-void GUIButton::SetImage(Video::Texture^ image, Recti^ sourceRect)
+void GUIButton::SetImage(Video::Texture^ image, Recti sourceRect)
 {
-	LIME_ASSERT(sourceRect != nullptr);
-	m_GUIButton->setImage(LIME_SAFEREF(image, m_Texture), *sourceRect->m_NativeValue);
+	m_GUIButton->setImage(LIME_SAFEREF(image, m_Texture), sourceRect);
 }
 
 void GUIButton::SetImage(Video::Texture^ image)
@@ -58,10 +56,9 @@ void GUIButton::SetImage()
 	m_GUIButton->setImage();
 }
 
-void GUIButton::SetPressedImage(Video::Texture^ image, Recti^ sourceRect)
+void GUIButton::SetPressedImage(Video::Texture^ image, Recti sourceRect)
 {
-	LIME_ASSERT(sourceRect != nullptr);
-	m_GUIButton->setPressedImage(LIME_SAFEREF(image, m_Texture), *sourceRect->m_NativeValue);
+	m_GUIButton->setPressedImage(LIME_SAFEREF(image, m_Texture), sourceRect);
 }
 
 void GUIButton::SetPressedImage(Video::Texture^ image)

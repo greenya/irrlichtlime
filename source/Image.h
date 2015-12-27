@@ -20,8 +20,8 @@ public:
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 	static System::Drawing::Imaging::PixelFormat GetPixelFormat(Video::ColorFormat format);
 
-	void CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Recti^ clipRect);
-	void CopyTo(Image^ target, Vector2Di targetPos, Recti^ sourceRect);
+	void CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect, Nullable<Recti> clipRect);
+	void CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect);
 	void CopyTo(Image^ target, Vector2Di targetPos);
 	void CopyTo(Image^ target);
 	array<unsigned char>^ CopyTo();
@@ -37,8 +37,8 @@ public:
 	void CopyToScalingBoxFilter(Image^ target, int bias);
 	void CopyToScalingBoxFilter(Image^ target);
 
-	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color, Recti^ clipRect);
-	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti^ sourceRect, Color color);
+	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color, Nullable<Recti> clipRect);
+	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color);
 
 	void Fill(Color color);
 	Color GetPixel(int x, int y);
