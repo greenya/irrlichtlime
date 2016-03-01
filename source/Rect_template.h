@@ -67,6 +67,7 @@ public:
 		LIME_ASSERT(size->Width >= 0);
 		LIME_ASSERT(size->Height >= 0);
 
+		UpperLeftCorner = _OTHERTYPE1_(0, 0);
 		LowerRightCorner = _OTHERTYPE1_(size->Width, size->Height);
 	}
 
@@ -77,7 +78,7 @@ public:
 		LIME_ASSERT(size->Height >= 0);
 
 		UpperLeftCorner = pos;
-		LowerRightCorner = _OTHERTYPE1_(size->Width, size->Height);
+		LowerRightCorner = _OTHERTYPE1_(size->Width, size->Height) + pos;
 	}
 
 	void Repair()
