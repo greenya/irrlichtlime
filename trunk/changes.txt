@@ -111,22 +111,22 @@ Changes in 1.5
 - SceneManager: CreateMeshWriter(...) method added
 - Triangle is now IEquatable
 - Vector3Di now has separate implementations for some methods like in native Irrlicht
--CameraMayaSceneNodeAnimator: TargetMinDistance method added
--ClearBufferFlag enum added
--new ColorFormats added
--ContextManager class added
--GUIFileOpenDialog now uses wchar_t instead of path internally
--ImageLoader: LoadImages added
--IrrlichtDevice: ContextManager property added
--MaterialLayer: TextureWrapW property added
--Read-only NativeArray class added (internally)
--RenderTarget: GetTexture() and GetDepthStencil() methods added
--Texture: Type property added
--TextureCreationFlag "AllowMemoryCopy" added
--TextureType enum added
--VideoDriver: AddCubemap, CreateImagesFromFile and setRenderTargetEx added. Added Overloadings to use ClearBufferFlags
--new VideoDriverFeatures added
--WriteFile: Flush method added
+- CameraMayaSceneNodeAnimator: TargetMinDistance method added
+- ClearBufferFlag enum added
+- new ColorFormats added
+- ContextManager class added
+- GUIFileOpenDialog now uses wchar_t instead of path internally
+- ImageLoader: LoadImages added
+- IrrlichtDevice: ContextManager property added
+- MaterialLayer: TextureWrapW property added
+- Read-only NativeArray class added (internally)
+- RenderTarget: GetTexture() and GetDepthStencil() methods added
+- Texture: Type property added
+- TextureCreationFlag "AllowMemoryCopy" added
+- TextureType enum added
+- VideoDriver: AddCubemap, CreateImagesFromFile and setRenderTargetEx added. Added Overloadings to use ClearBufferFlags
+- new VideoDriverFeatures added
+- WriteFile: Flush method added
 - Examples updated to work with API changes
 
 ============================

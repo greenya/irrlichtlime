@@ -50,7 +50,7 @@ namespace L03.RGBSwirl
 			{
 				node.Rotation = new Vector3Df(device.Timer.Time / 1, device.Timer.Time / 2, device.Timer.Time / 3);
 
-				driver.BeginScene(ClearBufferFlag.None);
+				driver.BeginScene(ClearBufferFlag.Depth);
 				scene.DrawAll();
 				driver.EndScene();
 			}
