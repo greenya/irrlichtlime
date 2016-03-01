@@ -23,6 +23,11 @@ WriteFile::WriteFile(io::IWriteFile* ref)
 	m_WriteFile = ref;
 }
 
+bool WriteFile::Flush()
+{
+	return m_WriteFile->flush();
+}
+
 bool WriteFile::Seek(long position, bool relativeMovement)
 {
 #ifdef _DEBUG

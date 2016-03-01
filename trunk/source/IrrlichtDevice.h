@@ -12,7 +12,7 @@ namespace IrrlichtLime {
 namespace GUI { ref class CursorControl; ref class GUIEnvironment; }
 namespace IO { ref class FileSystem; }
 namespace Scene { ref class SceneManager; }
-namespace Video { ref class VideoDriver; ref class VideoModeList; }
+namespace Video { ref class ContextManager; ref class VideoDriver; ref class VideoModeList;}
 
 ref class Event;
 class EventReceiverInheritor;
@@ -69,6 +69,7 @@ public:
 	void Yield();
 
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
+	property Video::ContextManager^ ContextManager { Video::ContextManager^ get(); }
 	property GUI::CursorControl^ CursorControl { GUI::CursorControl^ get(); }
 	property unsigned __int32 DoubleClickTime { unsigned __int32 get(); void set(unsigned __int32 value); }
 	property IO::FileSystem^ FileSystem { IO::FileSystem^ get(); }

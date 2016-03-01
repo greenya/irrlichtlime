@@ -164,4 +164,60 @@ internal:
 	virtual void* GetPointer() = 0;	//should return a pointer to the first element, but can also return null if not possible
 
 };
+
+template <typename RefClass, typename WrapClass, typename NativeClass>
+public ref class NativeArrayReadOnlyTemplate sealed : public NativeArray<RefClass>
+{
+	
+internal:
+
+	NativeArrayReadOnlyTemplate(const core::array<NativeClass>* ar)
+	{
+		this->ar = ar;
+	}
+
+public:
+
+#pragma warning (push)
+#pragma warning (disable: 4100)	//hide unused parameter warnings
+	property RefClass default [int]
+	{
+		virtual RefClass get(int index) override sealed
+		{
+			return WrapClass::Wrap((*ar)[index]);
+		}
+
+		virtual void set(int index, RefClass value) override sealed
+		{
+			throw gcnew NotSupportedException();
+		}
+	}
+#pragma warning (pop)
+
+
+	property int Count
+	{
+		virtual int get() override sealed
+		{
+			return ar->size();
+		}
+	}
+
+	property bool IsReadOnly
+	{
+		virtual bool get() override sealed
+		{
+			return true;
+		}
+	}
+
+internal:
+	
+	virtual void* GetPointer() override sealed
+	{
+		return const_cast<core::array<NativeClass>*>(ar)->pointer();	//Note: make sure to read only on this one!
+	}
+
+	const core::array<NativeClass>* ar;
+};
 }

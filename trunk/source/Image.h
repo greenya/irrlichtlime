@@ -48,16 +48,17 @@ public:
 	property int BitsPerPixel { int get(); }
 	property int BytesPerPixel { int get(); }
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
+	[Obsolete("Use Image.IsCompressedFormat instead.", false)]
 	property bool Compressed { bool get(); }
 	property Dimension2Di^ Dimension { Dimension2Di^ get(); }
 	property int ImageDataSizeInBytes { int get(); }
 	property int ImageDataSizeInPixels { int get(); }
 	property bool MipMaps { bool get(); }
 
-	property int RedMask { int get(); }
-	property int GreenMask { int get(); }
-	property int BlueMask { int get(); }
-	property int AlphaMask { int get(); }
+	property unsigned int RedMask { unsigned int get(); }
+	property unsigned int GreenMask { unsigned int get(); }
+	property unsigned int BlueMask { unsigned int get(); }
+	property unsigned int AlphaMask { unsigned int get(); }
 	property int Pitch { int get(); }
 
 	virtual String^ ToString() override;

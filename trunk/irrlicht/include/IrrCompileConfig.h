@@ -173,6 +173,21 @@ define out. */
 #undef _IRR_COMPILE_WITH_OPENGL_
 #endif
 
+//! Define required options for OpenGL drivers.
+#if defined(_IRR_COMPILE_WITH_OPENGL_)
+#if defined(_IRR_COMPILE_WITH_WINDOWS_DEVICE_)
+#define _IRR_OPENGL_USE_EXTPOINTER_
+#define _IRR_COMPILE_WITH_WGL_MANAGER_
+#elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
+#define _IRR_OPENGL_USE_EXTPOINTER_
+#define _IRR_COMPILE_WITH_GLX_MANAGER_
+#elif defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
+#define _IRR_COMPILE_WITH_NSOGL_MANAGER_
+#elif defined(_IRR_SOLARIS_PLATFORM_)
+#define _IRR_COMPILE_WITH_GLX_MANAGER_
+#endif
+#endif
+
 //! Define _IRR_COMPILE_WITH_SOFTWARE_ to compile the Irrlicht engine with software driver
 /** If you do not need the software driver, or want to use Burning's Video instead,
 comment this define out */
@@ -195,13 +210,6 @@ define out. */
 #define _IRR_COMPILE_WITH_X11_
 #ifdef NO_IRR_COMPILE_WITH_X11_
 #undef _IRR_COMPILE_WITH_X11_
-#endif
-
-//! Define _IRR_OPENGL_USE_EXTPOINTER_ if the OpenGL renderer should use OpenGL extensions via function pointers.
-/** On some systems there is no support for the dynamic extension of OpenGL
-	via function pointers such that this has to be undef'ed. */
-#if !defined(_IRR_OSX_PLATFORM_) && !defined(_IRR_SOLARIS_PLATFORM_)
-#define _IRR_OPENGL_USE_EXTPOINTER_
 #endif
 
 //! On some Linux systems the XF86 vidmode extension or X11 RandR are missing. Use these flags
@@ -518,6 +526,11 @@ B3D, MS3D or X meshes */
 #define _IRR_COMPILE_WITH_PSD_LOADER_
 #ifdef NO_IRR_COMPILE_WITH_PSD_LOADER_
 #undef _IRR_COMPILE_WITH_PSD_LOADER_
+#endif
+//! Define _IRR_COMPILE_WITH_PVR_LOADER_ if you want to load .pvr files
+#define _IRR_COMPILE_WITH_PVR_LOADER_
+#ifdef NO_IRR_COMPILE_WITH_PVR_LOADER_
+#undef _IRR_COMPILE_WITH_PVR_LOADER_
 #endif
 //! Define _IRR_COMPILE_WITH_DDS_LOADER_ if you want to load compressed .dds files
 // Patent problem isn't related to this loader.

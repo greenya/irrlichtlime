@@ -53,6 +53,16 @@ void CameraMayaSceneNodeAnimator::RotateSpeed::set(float value)
 	m_CameraMayaSceneNodeAnimator->setRotateSpeed(value);
 }
 
+float CameraMayaSceneNodeAnimator::TargetMinDistance::get()
+{
+	return m_CameraMayaSceneNodeAnimator->getTargetMinDistance();
+}
+
+void CameraMayaSceneNodeAnimator::TargetMinDistance::set(float value)
+{
+	m_CameraMayaSceneNodeAnimator->setTargetMinDistance(value);
+}
+
 float CameraMayaSceneNodeAnimator::ZoomSpeed::get()
 {
 	return m_CameraMayaSceneNodeAnimator->getZoomSpeed();

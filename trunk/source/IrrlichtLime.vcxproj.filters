@@ -670,6 +670,15 @@
     <ClInclude Include="GUISprite.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="ContextManager.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearBufferFlag.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureType.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -986,6 +995,9 @@
     </ClCompile>
     <ClCompile Include="MeshWriter.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextManager.cpp">
+      <Filter>Video</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

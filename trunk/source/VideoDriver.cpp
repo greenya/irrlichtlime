@@ -156,6 +156,23 @@ Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
 	return Texture::Wrap(t);
 }
 
+Texture^ VideoDriver::AddTextureCubemap(String^ name, Image^ imagePosX, Image^ imageNegX, Image^ imagePosY, Image^ imageNegY, Image^ imagePosZ, Image^ imageNegZ)
+{
+	LIME_ASSERT(name != nullptr);
+
+	video::ITexture* t = m_VideoDriver->addTextureCubemap(
+		Lime::StringToPath(name),
+		LIME_SAFEREF(imagePosX, m_Image),
+		LIME_SAFEREF(imageNegX, m_Image),
+		LIME_SAFEREF(imagePosY, m_Image),
+		LIME_SAFEREF(imageNegY, m_Image),
+		LIME_SAFEREF(imagePosZ, m_Image),
+		LIME_SAFEREF(imageNegZ, m_Image));
+	return Texture::Wrap(t);
+}
+
+#pragma warning (push)	//hide the deprecated warning
+#pragma warning (disable: 4996)
 bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color color, Video::ExposedVideoData^ videoData, Nullable<Recti> sourceRect)
 {
 	LIME_ASSERT(videoData != nullptr);
@@ -187,10 +204,61 @@ bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer)
 {
 	return m_VideoDriver->beginScene(backBuffer, zBuffer);
 }
+#pragma warning (pop)
 
-bool VideoDriver::BeginScene(bool backBuffer)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, Video::ExposedVideoData^ videoData, Nullable<Recti> sourceRect)
 {
-	return m_VideoDriver->beginScene(backBuffer);
+	LIME_ASSERT(videoData != nullptr);
+
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		clearColor,
+		clearDepth,
+		clearStencil,
+		*videoData->m_NativeValue,
+		LIME_NULLABLE(sourceRect));
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, Video::ExposedVideoData^ videoData)
+{
+	LIME_ASSERT(videoData != nullptr);
+
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		clearColor,
+		clearDepth,
+		clearStencil,
+		*videoData->m_NativeValue);
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil)
+{
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		clearColor,
+		clearDepth,
+		clearStencil);
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth)
+{
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		clearColor,
+		clearDepth);
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color clearColor)
+{
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		clearColor);
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag)
+{
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag);
 }
 
 bool VideoDriver::BeginScene()
@@ -203,13 +271,46 @@ bool VideoDriver::CheckDriverReset()
 	return m_VideoDriver->checkDriverReset();
 }
 
+void VideoDriver::ClearBuffers(ClearBufferFlag flag, Color color, float depth, unsigned char stencil)
+{
+	m_VideoDriver->clearBuffers(
+		(u16)flag,
+		color,
+		depth,
+		stencil);
+}
+
+void VideoDriver::ClearBuffers(ClearBufferFlag flag, Color color, float depth)
+{
+	m_VideoDriver->clearBuffers(
+		(u16)flag,
+		color,
+		depth);
+}
+
+void VideoDriver::ClearBuffers(ClearBufferFlag flag, Color color)
+{
+	m_VideoDriver->clearBuffers(
+		(u16)flag,
+		color);
+}
+
+void VideoDriver::ClearBuffers(ClearBufferFlag flag)
+{
+	m_VideoDriver->clearBuffers(
+		(u16)flag);
+}
+
 void VideoDriver::ClearBuffers(bool backBuffer, bool depthBuffer, bool stencilBuffer, Color color)
 {
+#pragma warning (push)
+#pragma warning (disable: 4996)	//marked as deprecated, we use a ObsoleteAttribute, so warning here is disabled
 	m_VideoDriver->clearBuffers(
 		backBuffer,
 		depthBuffer,
 		stencilBuffer,
 		color);
+#pragma warning (pop)
 }
 
 void VideoDriver::ClearZBuffer()
@@ -292,6 +393,64 @@ Image^ VideoDriver::CreateImage(IO::ReadFile^ file)
 
 	video::IImage* i = m_VideoDriver->createImageFromFile(LIME_SAFEREF(file, m_ReadFile));
 	return Image::Wrap(i);
+}
+
+array<Image^>^ VideoDriver::CreateImagesFromFile(String^ filename, [Out] TextureType% type)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	E_TEXTURE_TYPE retType;
+
+	core::array<IImage*> imagesNative = m_VideoDriver->createImagesFromFile(Lime::StringToPath(filename), &retType);
+	type = (TextureType)retType;
+
+	array<Image^>^ images = gcnew array<Image^>(imagesNative.size());
+	for (unsigned int i = 0; i < imagesNative.size(); i++)
+		images[i] = Image::Wrap(imagesNative[i]);
+
+	return images;
+}
+
+array<Image^>^ VideoDriver::CreateImagesFromFile(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	core::array<IImage*> imagesNative = m_VideoDriver->createImagesFromFile(Lime::StringToPath(filename));
+
+	array<Image^>^ images = gcnew array<Image^>(imagesNative.size());
+	for (unsigned int i = 0; i < imagesNative.size(); i++)
+		images[i] = Image::Wrap(imagesNative[i]);
+
+	return images;
+}
+
+array<Image^>^ VideoDriver::CreateImagesFromFile(IO::ReadFile^ file, [Out] TextureType% type)
+{
+	LIME_ASSERT(file != nullptr);
+
+	E_TEXTURE_TYPE retType;
+
+	core::array<IImage*> imagesNative = m_VideoDriver->createImagesFromFile(file->m_ReadFile, &retType);
+	type = (TextureType)retType;
+
+	array<Image^>^ images = gcnew array<Image^>(imagesNative.size());
+	for (unsigned int i = 0; i < imagesNative.size(); i++)
+		images[i] = Image::Wrap(imagesNative[i]);
+
+	return images;
+}
+
+array<Image^>^ VideoDriver::CreateImagesFromFile(IO::ReadFile^ file)
+{
+	LIME_ASSERT(file != nullptr);
+
+	core::array<IImage*> imagesNative = m_VideoDriver->createImagesFromFile(file->m_ReadFile);
+
+	array<Image^>^ images = gcnew array<Image^>(imagesNative.size());
+	for (unsigned int i = 0; i < imagesNative.size(); i++)
+		images[i] = Image::Wrap(imagesNative[i]);
+
+	return images;
 }
 
 Image^ VideoDriver::CreateScreenShot()
@@ -1479,84 +1638,96 @@ void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
-bool VideoDriver::SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor)
-{
-	LIME_ASSERT(activeTextureIDs != nullptr);
-	core::array<u32> activeTextureIDsNative(activeTextureIDs->Length);
-	for (int i = 0; i < activeTextureIDs->Length; i++)
-	{
-		int value = activeTextureIDs[i];	//have to copy it out, won't compile
-		activeTextureIDsNative.push_back(value);
-	}
-
-	return m_VideoDriver->setRenderTarget(
-		LIME_SAFEREF(target, m_RenderTarget),
-		activeTextureIDsNative,
-		clearBackBuffer,
-		clearDepthBuffer,
-		clearStencilBuffer,
-		clearColor);
-	
-}
-
-bool VideoDriver::SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer)
-{
-	LIME_ASSERT(activeTextureIDs != nullptr);
-	core::array<u32> activeTextureIDsNative(activeTextureIDs->Length);
-	for (int i = 0; i < activeTextureIDs->Length; i++)
-	{
-		int value = activeTextureIDs[i];	//have to copy it out, won't compile
-		activeTextureIDsNative.push_back(value);
-	}
-
-	return m_VideoDriver->setRenderTarget(
-		LIME_SAFEREF(target, m_RenderTarget),
-		activeTextureIDsNative,
-		clearBackBuffer,
-		clearDepthBuffer,
-		clearStencilBuffer);
-}
-
-bool VideoDriver::SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor)
-{
-	return m_VideoDriver->setRenderTarget(
-		LIME_SAFEREF(target, m_RenderTarget),
-		activeTextureID,
-		clearBackBuffer,
-		clearDepthBuffer,
-		clearStencilBuffer,
-		clearColor);
-}
-
-bool VideoDriver::SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer)
-{
-	return m_VideoDriver->setRenderTarget(
-		LIME_SAFEREF(target, m_RenderTarget),
-		activeTextureID,
-		clearBackBuffer,
-		clearDepthBuffer,
-		clearStencilBuffer);
-}
-
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color)
 {
+#pragma warning (push)
+#pragma warning (disable: 4996)	//marked as deprecated, we use a ObsoleteAttribute, so warning here is disabled
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, color);
+#pragma warning (pop)
 }
 
 bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer)
 {
+#pragma warning (push)
+#pragma warning (disable: 4996)	//marked as deprecated, we use a ObsoleteAttribute, so warning here is disabled
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer);
+#pragma warning (pop)
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer)
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth, unsigned char clearStencil)
 {
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer);
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(texture, m_Texture),
+		(u16)clearFlag,
+		clearColor,
+		clearDepth,
+		clearStencil);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth)
+{
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(texture, m_Texture),
+		(u16)clearFlag,
+		clearColor,
+		clearDepth);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor)
+{
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(texture, m_Texture),
+		(u16)clearFlag,
+		clearColor);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag)
+{
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(texture, m_Texture),
+		(u16)clearFlag);
 }
 
 bool VideoDriver::SetRenderTarget(Texture^ texture)
 {
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture));
+	return m_VideoDriver->setRenderTarget(
+		LIME_SAFEREF(texture, m_Texture));
 }
+
+bool VideoDriver::SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil)
+{
+	return m_VideoDriver->setRenderTargetEx(
+		LIME_SAFEREF(target, m_RenderTarget),
+		(u16)clearFlag,
+		clearColor,
+		clearDepth,
+		clearStencil);
+}
+
+bool VideoDriver::SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth)
+{
+	return m_VideoDriver->setRenderTargetEx(
+		LIME_SAFEREF(target, m_RenderTarget),
+		(u16)clearFlag,
+		clearColor,
+		clearDepth);
+}
+
+bool VideoDriver::SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor)
+{
+	return m_VideoDriver->setRenderTargetEx(
+		LIME_SAFEREF(target, m_RenderTarget),
+		(u16)clearFlag,
+		clearColor);
+}
+
+bool VideoDriver::SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag)
+{
+	return m_VideoDriver->setRenderTargetEx(
+		LIME_SAFEREF(target, m_RenderTarget),
+		(u16)clearFlag);
+}
+
 /*
 bool VideoDriver::SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer, Color color)
 {

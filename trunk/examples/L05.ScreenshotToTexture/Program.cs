@@ -44,7 +44,7 @@ namespace L05.ScreenshotToTexture
 				Texture t = getDesktopTexture(device);
 				cube.SetMaterialTexture(0, t);
 
-				device.VideoDriver.BeginScene(false);
+				device.VideoDriver.BeginScene(ClearBufferFlag.None);
 
 				device.VideoDriver.Draw2DImage(t, device.VideoDriver.ViewPort, new Recti(new Vector2Di(0), t.Size));
 				device.VideoDriver.Draw2DRectangle(device.VideoDriver.ViewPort, new IrrlichtLime.Video.Color(0, 0, 0, 160));

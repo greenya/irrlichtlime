@@ -182,7 +182,7 @@ namespace _11.PerPixelLighting
 			{
 				if (device.WindowActive)
 				{
-					driver.BeginScene(true, true, new Color(0));
+					driver.BeginScene(ClearBufferFlag.All, new Color(0));
 
 					smgr.DrawAll();
 					env.DrawAll();

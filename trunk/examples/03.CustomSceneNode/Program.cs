@@ -39,7 +39,7 @@ namespace _03.CustomSceneNode
 			int frames = 0;
 			while (device.Run())
 			{
-				driver.BeginScene(true, true, new Color(100, 100, 100));
+				driver.BeginScene(ClearBufferFlag.All, new Color(100, 100, 100));
 				smgr.DrawAll();
 				driver.EndScene();
 

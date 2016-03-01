@@ -261,7 +261,7 @@ namespace _09.Meshviewer
 
 				if (device.WindowActive)
 				{
-					driver.BeginScene(true, true, new Color(50, 50, 50));
+					driver.BeginScene(ClearBufferFlag.All, new Color(50, 50, 50));
 					smgr.DrawAll();
 					env.DrawAll();
 					driver.EndScene();

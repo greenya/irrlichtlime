@@ -48,7 +48,7 @@ namespace _02.Quake3Map
 			{
 				if (device.WindowActive)
 				{
-					driver.BeginScene(true, true, new Color(200, 200, 200));
+					driver.BeginScene(ClearBufferFlag.All, new Color(200, 200, 200));
 					smgr.DrawAll();
 					driver.EndScene();
 

@@ -14,6 +14,8 @@ public ref class WriteFile : ReferenceCounted
 {
 public:
 
+	bool Flush();
+
 	bool Seek(long position, bool relativeMovement);
 	bool Seek(long position);
 

@@ -158,7 +158,7 @@ namespace L11.BulletSharpTest
 
 					// render scene
 
-					driver.BeginScene(true, true, new Color(40, 80, 160));
+					driver.BeginScene(ClearBufferFlag.All, new Color(40, 80, 160));
 					scene.DrawAll();
 
 					Material material = new Material();

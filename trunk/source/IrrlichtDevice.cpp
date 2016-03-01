@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "ContextManager.h"
 #include "CursorControl.h"
 #include "Event.h"
 #include "FileSystem.h"
@@ -277,6 +278,12 @@ void IrrlichtDevice::Yield()
 Video::ColorFormat IrrlichtDevice::ColorFormat::get()
 {
 	return (Video::ColorFormat)m_IrrlichtDevice->getColorFormat();
+}
+
+Video::ContextManager^ IrrlichtDevice::ContextManager::get()
+{
+	video::IContextManager* c = m_IrrlichtDevice->getContextManager();
+	return Video::ContextManager::Wrap(c);
 }
 
 GUI::CursorControl^ IrrlichtDevice::CursorControl::get()

@@ -33,7 +33,7 @@ namespace L01.TexturePainting
 
 			while (device.Run())
 			{
-				device.VideoDriver.BeginScene(true, false, new Color(40, 180, 80));
+				device.VideoDriver.BeginScene(ClearBufferFlag.All, new Color(40, 180, 80));
 				device.GUIEnvironment.DrawAll();
 				device.VideoDriver.EndScene();
 			}
