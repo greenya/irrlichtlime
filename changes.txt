@@ -2,7 +2,7 @@
 Changes in 1.5
 ============================
 
-- Updated Irrlicht SDK to trunk rev. 5104
+- Updated Irrlicht SDK to trunk rev. 5266
 - Added x64 support
 - Irrlicht compiled with CG (TODO: Doesn't compile anymore and will be removed)
 - AABBox: Intersect(AABBox^ other) added
@@ -103,7 +103,6 @@ Changes in 1.5
 - AnimatedMeshType: 'Static' added
 - Material: ZWriteFineControl property added
 - VideoDriver: AddRenderTarget, RemoveRenderTarget, RemoveAllRenderTargets and ClearBuffers added. ClearZBuffer marked obsolete.
-- Updated Irrlicht SDK to trunk rev. 5104
 - GUISpriteBank, GUISprite and GUISpriteFrame classes added
 - GUITreeView: ActiveFont and OverrideFont properties added
 - Warnings 4238 and 4714 disabled. One of them mentioned that some methods could not be inlined, the other is explained in Lime.h
@@ -112,6 +111,22 @@ Changes in 1.5
 - SceneManager: CreateMeshWriter(...) method added
 - Triangle is now IEquatable
 - Vector3Di now has separate implementations for some methods like in native Irrlicht
+-CameraMayaSceneNodeAnimator: TargetMinDistance method added
+-ClearBufferFlag enum added
+-new ColorFormats added
+-ContextManager class added
+-GUIFileOpenDialog now uses wchar_t instead of path internally
+-ImageLoader: LoadImages added
+-IrrlichtDevice: ContextManager property added
+-MaterialLayer: TextureWrapW property added
+-Read-only NativeArray class added (internally)
+-RenderTarget: GetTexture() and GetDepthStencil() methods added
+-Texture: Type property added
+-TextureCreationFlag "AllowMemoryCopy" added
+-TextureType enum added
+-VideoDriver: AddCubemap, CreateImagesFromFile and setRenderTargetEx added. Added Overloadings to use ClearBufferFlags
+-new VideoDriverFeatures added
+-WriteFile: Flush method added
 - Examples updated to work with API changes
 
 ============================

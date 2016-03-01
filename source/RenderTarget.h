@@ -15,6 +15,8 @@ public ref class RenderTarget : ReferenceCounted
 {
 public:
 
+	Texture^ GetDepthStencil();
+	NativeArray<Texture^>^ GetTexture();
 	void SetTexture(array<Texture^>^ textures, Texture^ depthStencil);
 	void SetTexture(Texture^ texture, Texture^ depthStencil);
 

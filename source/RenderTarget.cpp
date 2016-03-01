@@ -24,6 +24,16 @@ RenderTarget::RenderTarget(video::IRenderTarget* ref)
 	m_RenderTarget = ref;
 }
 
+Texture^ RenderTarget::GetDepthStencil()
+{
+	return Texture::Wrap(m_RenderTarget->getDepthStencil());
+}
+
+NativeArray<Texture^>^ RenderTarget::GetTexture()
+{
+	return gcnew NativeArrayReadOnlyTemplate<Texture^, Texture, video::ITexture*>(&m_RenderTarget->getTexture());
+}
+
 void RenderTarget::SetTexture(array<Texture^>^ textures, Texture^ depthStencil)
 {
 	video::ITexture* depthStencilNative = LIME_SAFEREF(depthStencil, m_Texture);	//I think it could also be null

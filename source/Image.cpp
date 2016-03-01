@@ -77,19 +77,11 @@ void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect, Nullabl
 {
 	LIME_ASSERT(target != nullptr);
 
-	core::rect<s32>* clipRectNP = nullptr;
-	core::rect<s32> clipRectN;
-	if (clipRect.HasValue)
-	{
-		clipRectN = clipRect.Value;
-		clipRectNP = &clipRectN;
-	}
-
 	m_Image->copyTo(
 		target->m_Image,
 		targetPos,
 		sourceRect,
-		clipRectNP);
+		LIME_NULLABLE(clipRect));
 }
 
 void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect)
@@ -122,16 +114,16 @@ array<unsigned char>^ Image::CopyTo()
 	int s = m_Image->getImageDataSizeInBytes();
 	array<unsigned char>^ r = gcnew array<unsigned char>(s);
 
-	unsigned char* a = (unsigned char*)m_Image->lock();
+	unsigned char* a = (unsigned char*)m_Image->getData();
 	Marshal::Copy(IntPtr(a), r, 0, s);
-	m_Image->unlock();
 	
 	return r;
 }
 
 System::Drawing::Bitmap^ Image::CopyToBitmap()
 {
-	LIME_ASSERT(GetPixelFormat(ColorFormat) != System::Drawing::Imaging::PixelFormat::Undefined);
+	if (GetPixelFormat(ColorFormat) == System::Drawing::Imaging::PixelFormat::Undefined)	//return null, if the format is not supported
+		return nullptr;
 
 	System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(
 		m_Image->getDimension().Width,
@@ -245,20 +237,12 @@ void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect
 {
 	LIME_ASSERT(target != nullptr);
 
-	core::rect<s32>* clipRectNP = nullptr;
-	core::rect<s32> clipRectN;
-	if (clipRect.HasValue)
-	{
-		clipRectN = clipRect.Value;
-		clipRectNP = &clipRectN;
-	}
-
 	m_Image->copyToWithAlpha(
 		target->m_Image,
 		targetPos,
 		sourceRect,
 		color,
-		clipRectNP);
+		LIME_NULLABLE(clipRect));
 }
 
 void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color)
@@ -341,22 +325,22 @@ bool Image::MipMaps::get()
 	return m_Image->hasMipMaps();
 }
 
-int Image::RedMask::get()
+unsigned int Image::RedMask::get()
 {
 	return m_Image->getRedMask();
 }
 
-int Image::GreenMask::get()
+unsigned int Image::GreenMask::get()
 {
 	return m_Image->getGreenMask();
 }
 
-int Image::BlueMask::get()
+unsigned int Image::BlueMask::get()
 {
 	return m_Image->getBlueMask();
 }
 
-int Image::AlphaMask::get()
+unsigned int Image::AlphaMask::get()
 {
 	return m_Image->getAlphaMask();
 }

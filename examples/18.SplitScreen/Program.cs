@@ -77,7 +77,7 @@ namespace _18.SplitScreen
 			{
 				// set the viewpoint to the whole screen and begin scene
 				driver.ViewPort = new Recti(0, 0, ResX, ResY);
-				driver.BeginScene(true, true, new Color(100, 100, 100));
+				driver.BeginScene(ClearBufferFlag.All, new Color(100, 100, 100));
 
 				if (splitScreen)
 				{

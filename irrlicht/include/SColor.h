@@ -13,7 +13,10 @@ namespace irr
 namespace video
 {
 	//! An enum for the color format of textures used by the Irrlicht Engine.
-	/** A color format specifies how color information is stored. */
+	/** A color format specifies how color information is stored. 
+	    NOTE: Byte order in memory is usually flipped (it's probably correct in bitmap files, but flipped on reading).
+	    So for example ECF_A8R8G8B8 is BGRA in memory same as in DX9's D3DFMT_A8R8G8B8 format.
+	*/
 	enum ECOLOR_FORMAT
 	{
 		//! 16 bit color format used by the software driver.
@@ -47,6 +50,33 @@ namespace video
 
 		//! DXT5 color format.
 		ECF_DXT5,
+
+		//! PVRTC RGB 2bpp.
+		ECF_PVRTC_RGB2,
+
+		//! PVRTC ARGB 2bpp.
+		ECF_PVRTC_ARGB2,
+
+		//! PVRTC RGB 4bpp.
+		ECF_PVRTC_RGB4,
+
+		//! PVRTC ARGB 4bpp.
+		ECF_PVRTC_ARGB4,
+
+		//! PVRTC2 ARGB 2bpp.
+		ECF_PVRTC2_ARGB2,
+
+		//! PVRTC2 ARGB 4bpp.
+		ECF_PVRTC2_ARGB4,
+
+		//! ETC1 RGB.
+		ECF_ETC1,
+
+		//! ETC2 RGB.
+		ECF_ETC2_RGB,
+
+		//! ETC2 ARGB.
+		ECF_ETC2_ARGB,
 
 		/** The following formats may only be used for render target textures. */
 

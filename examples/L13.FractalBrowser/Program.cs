@@ -75,7 +75,7 @@ namespace L13.FractalBrowser
 
 			while (device.Run())
 			{
-				driver.BeginScene(false);
+				driver.BeginScene(ClearBufferFlag.None);
 
 				Vector2Di? o = null;
 				if (mouseMoveStart != null)

@@ -197,11 +197,13 @@
     <ClInclude Include="AntiAliasingMode.h" />
     <ClInclude Include="BlendFactor.h" />
     <ClInclude Include="BlendOperation.h" />
+    <ClInclude Include="ClearBufferFlag.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorFormat.h" />
     <ClInclude Include="ColorMaterial.h" />
     <ClInclude Include="ColorPlane.h" />
     <ClInclude Include="ComparisonFunc.h" />
+    <ClInclude Include="ContextManager.h" />
     <ClInclude Include="CursorIcon.h" />
     <ClInclude Include="CursorPlatformBehavior.h" />
     <ClInclude Include="DriverType.h" />
@@ -256,6 +258,7 @@
     <ClInclude Include="TextureLockMode.h" />
     <ClInclude Include="TexturePainter.h" />
     <ClInclude Include="TextureSource.h" />
+    <ClInclude Include="TextureType.h" />
     <ClInclude Include="TransformationState.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Vertex_template.h" />
@@ -427,6 +430,7 @@
     <ClInclude Include="ZWriteFineControl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ContextManager.cpp" />
     <ClCompile Include="GPUProgrammingServices.cpp" />
     <ClCompile Include="GUIProfiler.cpp" />
     <ClCompile Include="Image.cpp" />

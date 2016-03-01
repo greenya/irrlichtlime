@@ -64,6 +64,7 @@
 #include "IBillboardTextSceneNode.h"
 #include "IBoneSceneNode.h"
 #include "ICameraSceneNode.h"
+#include "IContextManager.h"
 #include "ICursorControl.h"
 #include "IDummyTransformationSceneNode.h"
 #include "IDynamicMeshBuffer.h"
@@ -256,7 +257,7 @@
  *	// draw everything
  *	while(device->run() && driver)
  *	{
- *		driver->beginScene(true, true, video::SColor(255,0,0,255));
+ *		driver->beginScene(video::ECBF_COLOR | video::ECBF_DEPTH, video::SColor(255,0,0,255));
  *		scenemgr->drawAll();
  *		driver->endScene();
  *	}
@@ -328,9 +329,9 @@ namespace irr
 		video::E_DRIVER_TYPE deviceType = video::EDT_SOFTWARE,
 		// parantheses are necessary for some compilers
 		const core::dimension2d<u32>& windowSize = (core::dimension2d<u32>(640,480)),
-		u32 bits = 16,
+		u32 bits = 32,
 		bool fullscreen = false,
-		bool stencilbuffer = false,
+		bool stencilbuffer = true,
 		bool vsync = false,
 		IEventReceiver* receiver = 0);
 

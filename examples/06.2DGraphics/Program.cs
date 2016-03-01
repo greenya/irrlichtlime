@@ -44,7 +44,7 @@ namespace _06._2DGraphics
 				{
 					int time = (int)device.Timer.Time;
 
-					driver.BeginScene(true, true, new Color(120, 102, 136));
+					driver.BeginScene(ClearBufferFlag.All, new Color(120, 102, 136));
 
 					// draw fire & dragons background world
 					driver.Draw2DImage(images, new Vector2Di(50, 50),

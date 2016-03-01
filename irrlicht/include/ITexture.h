@@ -65,6 +65,12 @@ enum E_TEXTURE_CREATION_FLAG
 	/** BurningVideo can handle Non-Power-2 Textures in 2D (GUI), but not in 3D. */
 	ETCF_ALLOW_NON_POWER_2 = 0x00000040,
 
+	//! Allow the driver to keep a copy of the texture in memory
+	/** This makes calls to ITexture::lock a lot faster, but costs main memory.
+	Default is off, except for font-texture which always enable this flag.
+	Currently only used in combination with OpenGL drivers.	*/
+	ETCF_ALLOW_MEMORY_COPY = 0x00000080,
+
 	/** This flag is never used, it only forces the compiler to compile
 	these enumeration values to 32 bit. */
 	ETCF_FORCE_32_BIT_DO_NOT_USE = 0x7fffffff
@@ -113,8 +119,8 @@ class ITexture : public virtual IReferenceCounted
 public:
 
 	//! constructor
-	ITexture(const io::path& name) : NamedPath(name), DriverType(EDT_NULL), ColorFormat(ECF_UNKNOWN),
-		Pitch(0), HasMipMaps(false), HasAlpha(false), IsRenderTarget(false), Source(ETS_UNKNOWN)
+	ITexture(const io::path& name, E_TEXTURE_TYPE type) : NamedPath(name), DriverType(EDT_NULL), OriginalColorFormat(ECF_UNKNOWN),
+		ColorFormat(ECF_UNKNOWN), Pitch(0), HasMipMaps(false), IsRenderTarget(false), Source(ETS_UNKNOWN), Type(type)
 	{
 	}
 
@@ -147,12 +153,14 @@ public:
 
 	//! Regenerates the mip map levels of the texture.
 	/** Required after modifying the texture, usually after calling unlock().
-	\param mipmapData Optional parameter to pass in image data which will be
+	\param data Optional parameter to pass in image data which will be
 	used instead of the previously stored or automatically generated mipmap
 	data. The data has to be a continuous pixel data for all mipmaps until
 	1x1 pixel. Each mipmap has to be half the width and height of the previous
-	level. At least one pixel will be always kept.*/
-	virtual void regenerateMipMapLevels(void* mipmapData = 0) = 0;
+	level. At least one pixel will be always kept.
+	\param layer It informs a texture about layer which needs
+	mipmaps regeneration. */
+	virtual void regenerateMipMapLevels(void* data = 0, u32 layer = 0) = 0;
 
 	//! Get original size of the texture.
 	/** The texture is usually scaled, if it was created with an unoptimal
@@ -189,9 +197,6 @@ public:
 	/** \return True if texture has MipMaps, else false. */
 	bool hasMipMaps() const { return HasMipMaps; }
 
-	//! Returns if the texture has an alpha channel
-	bool hasAlpha() const { return HasAlpha; }
-
 	//! Check whether the texture is a render target
 	/** Render targets can be set as such in the video driver, in order to
 	render a scene into the texture. Once unbound as render target, they can
@@ -207,6 +212,34 @@ public:
 
 	//! Used internally by the engine to update Source status on IVideoDriver::getTexture calls.
 	void updateSource(E_TEXTURE_SOURCE source) { Source = source; }
+
+	//! Returns if the texture has an alpha channel
+	bool hasAlpha() const
+	{
+		bool status = false;
+
+		switch (ColorFormat)
+		{
+		case ECF_A8R8G8B8:
+		case ECF_A1R5G5B5:
+		case ECF_DXT1:
+		case ECF_DXT2:
+		case ECF_DXT3:
+		case ECF_DXT4:
+		case ECF_DXT5:
+		case ECF_A16B16G16R16F:
+		case ECF_A32B32G32R32F:
+			status = true;
+			break;
+		default:
+			break;
+		}
+
+		return status;
+	}
+
+	//! Returns the type of texture
+	E_TEXTURE_TYPE getType() const { return Type; }
 
 protected:
 
@@ -230,12 +263,13 @@ protected:
 	core::dimension2d<u32> OriginalSize;
 	core::dimension2d<u32> Size;
 	E_DRIVER_TYPE DriverType;
+	ECOLOR_FORMAT OriginalColorFormat;
 	ECOLOR_FORMAT ColorFormat;
 	u32 Pitch;
 	bool HasMipMaps;
-	bool HasAlpha;
 	bool IsRenderTarget;
 	E_TEXTURE_SOURCE Source;
+	E_TEXTURE_TYPE Type;
 };
 
 

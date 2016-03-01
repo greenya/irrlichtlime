@@ -91,6 +91,16 @@ void MaterialLayer::TextureWrapV::set(TextureClamp value)
 	m_NativeValue->TextureWrapV = (video::E_TEXTURE_CLAMP)value;
 }
 
+TextureClamp MaterialLayer::TextureWrapW::get()
+{
+	return (TextureClamp)m_NativeValue->TextureWrapW;
+}
+
+void MaterialLayer::TextureWrapW::set(TextureClamp value)
+{
+	m_NativeValue->TextureWrapW = (video::E_TEXTURE_CLAMP)value;
+}
+
 bool MaterialLayer::TrilinearFilter::get()
 {
 	return m_NativeValue->TrilinearFilter;

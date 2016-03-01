@@ -95,14 +95,14 @@ namespace _13.RenderToTexture
 			{
 				if (device.WindowActive)
 				{
-					driver.BeginScene(true, true, new Color(0));
+					driver.BeginScene(ClearBufferFlag.All, new Color(0));
 
 					if (rt != null)
 					{
 						// draw scene into render target
 
 						// set render target texture
-						driver.SetRenderTarget(rt, true, true, new Color(0, 0, 255));
+						driver.SetRenderTarget(rt, ClearBufferFlag.All, new Color(0, 0, 255));
 
 						// make cube invisible and set fixed camera as active camera
 						test.Visible = false;
@@ -113,7 +113,7 @@ namespace _13.RenderToTexture
 
 						// set back old render target
 						// The buffer might have been distorted, so clear it
-						driver.SetRenderTarget(null, true, true, new Color(0));
+						driver.SetRenderTarget(null, ClearBufferFlag.All, new Color(0));
 
 						// make the cube visible and set the user controlled camera as active one
 						test.Visible = true;

@@ -43,15 +43,34 @@ public:
 	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
+	Texture^ AddTextureCubemap(String^ name, Image^ imagePosX, Image^ imageNegX, Image^ imagePosY, Image^ imageNegY, Image^ imagePosZ, Image^ imageNegZ);
+
+	[Obsolete("Use the new BeginScene with a clear flag.", false)]
 	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData, Nullable<Recti> sourceRect);
+	[Obsolete("Use the new BeginScene with a clear flag.", false)]
 	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData);
+	[Obsolete("Use the new BeginScene with a clear flag.", false)]
 	bool BeginScene(bool backBuffer, bool zBuffer, Color color);
+	[Obsolete("Use the new BeginScene with a clear flag.", false)]
 	bool BeginScene(bool backBuffer, bool zBuffer);
-	bool BeginScene(bool backBuffer);
+
+	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, ExposedVideoData^ videoData, Nullable<Recti> sourceRect);
+	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, ExposedVideoData^ videoData);
+	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil);
+	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth);
+	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor);
+	bool BeginScene(ClearBufferFlag clearFlag);
+
 	bool BeginScene();
 
 	bool CheckDriverReset();
 
+	void ClearBuffers(ClearBufferFlag flag, Color color, float depth, unsigned char stencil);
+	void ClearBuffers(ClearBufferFlag flag, Color color, float depth);
+	void ClearBuffers(ClearBufferFlag flag, Color color);
+	void ClearBuffers(ClearBufferFlag flag);
+
+	[Obsolete("Use the new ClearBuffers with a clear flag.", false)]
 	void ClearBuffers(bool backBuffer, bool depthBuffer, bool stencilBuffer, Color color);
 
 	[Obsolete("Obsolete method. Use ClearBuffers() instead.", false)]
@@ -66,6 +85,12 @@ public:
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 	Image^ CreateImage(IO::ReadFile^ file);
+
+	array<Image^>^ CreateImagesFromFile(String^ filename, [Out] TextureType% type);
+	array<Image^>^ CreateImagesFromFile(String^ filename);
+
+	array<Image^>^ CreateImagesFromFile(IO::ReadFile^ file, [Out] TextureType% type);
+	array<Image^>^ CreateImagesFromFile(IO::ReadFile^ file);
 
 	Image^ CreateScreenShot();
 	Image^ CreateScreenShot(Video::ColorFormat format);
@@ -217,16 +242,21 @@ public:
 
 	void SetMinHardwareBufferVertexCount(int count);
 	
+	[Obsolete("Use the new SetRenderTarget with a clear flag.", false)]
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color);
+	[Obsolete("Use the new SetRenderTarget with a clear flag.", false)]
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
+
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth, unsigned char clearStencil);
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth);
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor);
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag);
 	bool SetRenderTarget(Texture^ texture);
 
-
-	bool SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor);
-	bool SetRenderTarget(RenderTarget^ target, array<unsigned int>^ activeTextureIDs, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer);
-	bool SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer, Color clearColor);
-	bool SetRenderTarget(RenderTarget^ target, unsigned int activeTextureID, bool clearBackBuffer, bool clearDepthBuffer, bool clearStencilBuffer);
+	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil);
+	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth);
+	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor);
+	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag);
 
 	//These were removed, but it looks like it's not possible to access e.g. the stereoBuffers now, so I'll just keep them commented out. If they don't get added again, please remove
 	/*bool SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer, Color color);

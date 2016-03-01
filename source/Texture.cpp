@@ -94,6 +94,11 @@ void Texture::Source::set(Video::TextureSource value)
 	m_Texture->updateSource((E_TEXTURE_SOURCE) value);
 }
 
+TextureType Texture::Type::get()
+{
+	return (TextureType)m_Texture->getType();
+}
+
 String^ Texture::ToString()
 {
 	return String::Format("Texture: Name={0}; Size={1}; ColorFormat={2}", Name->Path, Size, ColorFormat);

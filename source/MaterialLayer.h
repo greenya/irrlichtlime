@@ -23,6 +23,7 @@ public:
 	property Matrix^ TextureMatrix { Matrix^ get(); void set(Matrix^ value); }
 	property TextureClamp TextureWrapU { TextureClamp get(); void set(TextureClamp value); }
 	property TextureClamp TextureWrapV { TextureClamp get(); void set(TextureClamp value); }
+	property TextureClamp TextureWrapW { TextureClamp get(); void set(TextureClamp value); }
 	property bool TrilinearFilter { bool get(); void set(bool value); }
 
 	virtual String^ ToString() override;

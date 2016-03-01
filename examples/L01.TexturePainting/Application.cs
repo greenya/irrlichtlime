@@ -27,12 +27,12 @@ namespace L01.TexturePainting
 		{
 			VideoDriver drv = device.VideoDriver;
 
-			drv.SetRenderTarget(textureRTT, true, true, new Color(20, 80, 180));
+			drv.SetRenderTarget(textureRTT, ClearBufferFlag.All, new Color(20, 80, 180));
 			sceneNodeRTT.Visible = false;
 			device.SceneManager.DrawAll();
 			device.GUIEnvironment.DrawAll();
 
-			drv.SetRenderTarget(null, true, true, new Color(40, 180, 240));
+			drv.SetRenderTarget(null, ClearBufferFlag.All, new Color(40, 180, 240));
 			sceneNodeRTT.Visible = true;
 			device.SceneManager.DrawAll();
 			device.GUIEnvironment.DrawAll();
