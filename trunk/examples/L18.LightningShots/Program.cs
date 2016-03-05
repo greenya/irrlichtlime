@@ -45,7 +45,7 @@ namespace L18.LightningShots
 
 			while (device.Run())
 			{
-				driver.BeginScene(true, true, new Color(100, 80, 75));
+				driver.BeginScene(ClearBufferFlag.All, new Color(100, 80, 75));
 
 				smgr.DrawAll();
 

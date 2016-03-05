@@ -78,7 +78,7 @@ namespace _26.OcclusionQuery
 			{
 				plane.Visible = !IsKeyDown(KeyCode.Space);
 
-				driver.BeginScene(true, true, new Color(113, 113, 133));
+				driver.BeginScene(ClearBufferFlag.All, new Color(113, 113, 133));
 
 				// First, we draw the scene, possibly without the occluded element. This is necessary
 				// because we need the occluder to be drawn first. You can also use several scene

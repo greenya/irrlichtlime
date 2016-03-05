@@ -142,7 +142,7 @@ namespace L02.WinFormsWindow
                 long frameStart = dev.Timer.Time;
 				if (settings.BackColor == null)
 					// indeed, we do not need to spend time on cleaning color buffer if we use skybox
-					drv.BeginScene(ClearBufferFlag.None);
+					drv.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Stencil);
 				else
 					drv.BeginScene(ClearBufferFlag.All, (Color)settings.BackColor);
 

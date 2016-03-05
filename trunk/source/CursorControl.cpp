@@ -24,6 +24,20 @@ CursorControl::CursorControl(gui::ICursorControl* ref)
 	m_CursorControl = ref;
 }
 
+CursorIcon CursorControl::AddIcon(CursorSprite^ icon)
+{
+	LIME_ASSERT(icon != nullptr);
+
+	return (CursorIcon)m_CursorControl->addIcon(*icon->m_NativeValue);
+}
+
+void CursorControl::ChangeIcon(CursorIcon iconId, CursorSprite^ sprite)
+{
+	LIME_ASSERT(sprite != nullptr);
+
+	m_CursorControl->changeIcon((ECURSOR_ICON)iconId, *sprite->m_NativeValue);
+}
+
 void CursorControl::SetReferenceRect(Nullable<Recti> rect_or_null)
 {
 	m_CursorControl->setReferenceRect(LIME_NULLABLE(rect_or_null));

@@ -38,7 +38,7 @@ namespace L14.Pathfinding
 
 			while (device.Run())
 			{
-				driver.BeginScene(true, false);
+				driver.BeginScene(ClearBufferFlag.Color);
 
 				pathfinding.FindPath();
 				pathfinding.Draw(driver, pathfindingTexture);

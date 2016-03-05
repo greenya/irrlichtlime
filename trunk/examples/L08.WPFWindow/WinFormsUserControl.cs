@@ -142,7 +142,7 @@ namespace L08.WPFWindow
 
 			while (device.Run())
 			{
-				driver.BeginScene(ClearBufferFlag.None);
+				driver.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Stencil);
 				
 				smgr.DrawAll();
 				gui.DrawAll();

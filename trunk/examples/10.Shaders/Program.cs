@@ -15,7 +15,6 @@ namespace _10.Shaders
 	{
 		static IrrlichtDevice device = null;
 		static bool useHighLevelShaders = false;
-		static bool useCgShaders = false;
 
 		static bool shaderFirstUpdate = true;
 		static int shaderInvWorldId;
@@ -32,9 +31,6 @@ namespace _10.Shaders
 				return;
 
 			useHighLevelShaders = AskUserForHighLevelShaders(driverType);
-
-			if (useHighLevelShaders)
-				useCgShaders = AskUserForCgShaders(driverType);
 
 			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
 			if (device == null)
@@ -65,17 +61,8 @@ namespace _10.Shaders
 				case DriverType.OpenGL:
 					if (useHighLevelShaders)
 					{
-						if (useCgShaders)
-						{
-							// Use HLSL syntax for Cg
-							psFileName = "../../media/d3d9.hlsl";
-							vsFileName = psFileName; // both shaders are in the same file
-						}
-						else
-						{
-							psFileName = "../../media/opengl.frag";
-							vsFileName = "../../media/opengl.vert";
-						}
+						psFileName = "../../media/opengl.frag";
+						vsFileName = "../../media/opengl.vert";
 					}
 					else
 					{
@@ -99,24 +86,23 @@ namespace _10.Shaders
 			MaterialType newMaterialType1 = MaterialType.Solid;
 			MaterialType newMaterialType2 = MaterialType.TransparentAddColor;
 
+			ShaderCallBack shaderCallback1 = null;
+			ShaderCallBack shaderCallback2 = null;
+
 			if (gpu != null && psFileName != null && vsFileName != null)
 			{
-				gpu.OnSetConstants += new GPUProgrammingServices.SetConstantsHandler(gpu_OnSetConstants);
-
 				// create the shaders depending on if the user wanted high level or low level shaders
 
 				if (useHighLevelShaders)
 				{
-					GPUShadingLanguage shadingLanguage = useCgShaders
-						? GPUShadingLanguage.Cg
-						: GPUShadingLanguage.Default;
+					GPUShadingLanguage shadingLanguage = GPUShadingLanguage.Default;
 
-					newMaterialType1 = gpu.AddHighLevelShaderMaterialFromFiles(
+					shaderCallback1 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
 						MaterialType.Solid, 0, shadingLanguage);
 
-					newMaterialType2 = gpu.AddHighLevelShaderMaterialFromFiles(
+					shaderCallback2 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
 						MaterialType.TransparentAddColor, 0, shadingLanguage);
@@ -125,19 +111,27 @@ namespace _10.Shaders
 				{
 					// create material from low level shaders (asm or arb_asm)
 
-					newMaterialType1 = gpu.AddShaderMaterialFromFiles(vsFileName,
+					shaderCallback1 = gpu.AddShaderMaterialFromFiles(vsFileName,
 						psFileName, MaterialType.Solid);
 
-					newMaterialType2 = gpu.AddShaderMaterialFromFiles(vsFileName,
+					shaderCallback2 = gpu.AddShaderMaterialFromFiles(vsFileName,
 						psFileName, MaterialType.TransparentAddColor);
 				}
 			}
 
-			if ((int)newMaterialType1 == -1)
-				newMaterialType1 = MaterialType.Solid;
+			if (shaderCallback1 != null)	//if we got a shader callback (shader was created successfully)
+			{
+				shaderCallback1.OnSetConstants += gpu_OnSetConstants;	//add the event handler
+				newMaterialType1 = shaderCallback1;	//assign the new material type. ShaderCallback implicitly converts to MaterialType.
+			}
 
-			if ((int)newMaterialType2 == -1)
-				newMaterialType2 = MaterialType.TransparentAddColor;
+			if (shaderCallback2 != null)
+			{
+				shaderCallback2.OnSetConstants += gpu_OnSetConstants;
+				newMaterialType2 = shaderCallback2;
+			}
+
+
 
 			// create test scene node 1, with the new created material type 1
 
@@ -300,16 +294,6 @@ namespace _10.Shaders
 			{
 				services.SetVertexShaderConstant(10, transpWorld.ToArray());
 			}
-		}
-
-		static bool AskUserForCgShaders(DriverType driverType)
-		{
-			if (driverType != DriverType.Direct3D9 &&
-				driverType != DriverType.OpenGL)
-				return false;
-
-			Console.WriteLine("\nPlease press 'y' if you want to use Cg shaders.");
-			return Console.ReadKey().Key == ConsoleKey.Y;
 		}
 
 		static bool AskUserForHighLevelShaders(DriverType driverType)

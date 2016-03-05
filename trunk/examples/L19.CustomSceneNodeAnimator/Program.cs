@@ -50,7 +50,7 @@ namespace L19.CustomSceneNodeAnimator
 			int frames = 0;
 			while (device.Run())
 			{
-				driver.BeginScene(true, true, new Color(100, 100, 100));
+				driver.BeginScene(ClearBufferFlag.All, new Color(100, 100, 100));
 				smgr.DrawAll();
 				driver.EndScene();
 
@@ -128,6 +128,9 @@ namespace L19.CustomSceneNodeAnimator
 #if DEBUG   //Only compiles in debug mode
         public void Dispose()
 		{
+			//This method is called, when the scene node is being deleted. You can use it for cleanup purpose.
+			//It is called immediatly when the node's reference count is 0, unlike a finalizer, which is called after a random amount of time.
+			//It only works, if you inherit IDisposable.
             Console.WriteLine(ToString() + " disposed!");
             Console.ReadKey();
         }
