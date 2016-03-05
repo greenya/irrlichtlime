@@ -62,7 +62,7 @@ namespace L10.ImageBrowser
 			int lastFPS = -1;
 			while (irr.Device.Run())
 			{
-				irr.Driver.BeginScene(true, true, new Color(0x112233));
+				irr.Driver.BeginScene(ClearBufferFlag.All, new Color(0x112233));
 
 				irr.Scene.DrawAll();
 

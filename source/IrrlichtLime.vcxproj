@@ -129,7 +129,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Debug-x64\Irrlicht.dll" "..\bin\Debug-x64\Irrlicht.dll" &gt;nul</Command>
+      <Command>copy /y "..\irrlicht\dll\Debug-x64\Irrlicht.dll" "..\bin\Debug-x64\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug-x64\IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,7 +153,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Release\Irrlicht.dll" "..\bin\Release\Irrlicht.dll" &gt;nul</Command>
+      <Command>copy /y "..\irrlicht\dll\Release\Irrlicht.dll" "..\bin\Release\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release\IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,7 +176,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Release-x64\Irrlicht.dll" "..\bin\Release-x64\Irrlicht.dll" &gt;nul</Command>
+      <Command>copy /y "..\irrlicht\dll\Release-x64\Irrlicht.dll" "..\bin\Release-x64\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -206,6 +209,7 @@
     <ClInclude Include="ContextManager.h" />
     <ClInclude Include="CursorIcon.h" />
     <ClInclude Include="CursorPlatformBehavior.h" />
+    <ClInclude Include="CursorSprite.h" />
     <ClInclude Include="DriverType.h" />
     <ClInclude Include="ExposedVideoData.h" />
     <ClInclude Include="FocusFlag.h" />
@@ -250,6 +254,7 @@
     <ClInclude Include="RenderTargetType.h" />
     <ClInclude Include="SceneNodeAnimatorInheritor.h" />
     <ClInclude Include="SceneParameters.h" />
+    <ClInclude Include="ShaderCallBack.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="Texture.h" />

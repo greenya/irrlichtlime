@@ -3872,6 +3872,17 @@ Useful for setting in shader constants for example. The fourth value will always
 		<member name="P:IrrlichtLime.GUI.CursorControl.ActiveIcon">
 			<summary>The active cursor icon.</summary>
 		</member>
+		<member name="M:IrrlichtLime.GUI.CursorControl.AddIcon(IrrlichtLime.GUI.CursorSprite)">
+			<summary>Add a custom sprite as cursor icon.</summary>
+			<param name="icon">The sprite to be used as a cursor.</param>
+			<returns>Identification for the icon.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.CursorControl.ChangeIcon(IrrlichtLime.GUI.CursorIcon,IrrlichtLime.GUI.CursorSprite)">
+			<summary>Replace a cursor icon.
+Note that this only changes the icons within your application, system cursors outside your application will not be affected.</summary>
+			<param name="iconId">The icon to be replaced.</param>
+			<param name="sprite">The sprite to replace the icon with.</param>
+		</member>
 		<member name="P:IrrlichtLime.GUI.CursorControl.PlatformBehavior">
 			<summary>Platform specific behavior.</summary>
 		</member>
@@ -3945,6 +3956,32 @@ If this rect is set, the cursor position is not being calculated relative to the
 			<summary>On X11 try caching cursor updates as XQueryPointer calls can be expensive.
 
 Update cursor positions only when the irrlicht timer has been updated or the timer is stopped. This means you usually get one cursor update per device-&gt;run() which will be fine in most cases. See this forum-thread for a more detailed explanation: http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&amp;t=45525.</summary>
+		</member>
+		<member name="T:IrrlichtLime.GUI.CursorSprite">
+			<summary>Structure used to set sprites as cursors.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.CursorSprite.#ctor">
+			<summary>Creates a new empty cursor sprite.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.CursorSprite.#ctor(IrrlichtLime.GUI.GUISpriteBank,System.Int32)">
+			<summary>Creates a new cursor sprite.</summary>
+			<param name="spriteBank">The sprite bank, in which the sprite can be found.</param>
+			<param name="spriteID">The index of the sprite in the sprite bank.</param>
+		</member>
+		<member name="M:IrrlichtLime.GUI.CursorSprite.#ctor(IrrlichtLime.GUI.GUISpriteBank,System.Int32,IrrlichtLime.Core.Vector2Di)">
+			<summary>Creates a new cursor sprite.</summary>
+			<param name="spriteBank">The sprite bank, in which the sprite can be found.</param>
+			<param name="spriteID">The index of the sprite in the sprite bank.</param>
+			<param name="hotspot">The HotSpot is the point in the cursor that interacts with other elements on the screen.</param>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorSprite.HotSpot">
+			<summary>The HotSpot is the point in the cursor that interacts with other elements on the screen.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorSprite.SpriteBank">
+			<summary>The sprite bank, in which the sprite can be found.</summary>
+		</member>
+		<member name="P:IrrlichtLime.GUI.CursorSprite.SpriteID">
+			<summary>The index of the sprite in the sprite bank.</summary>
 		</member>
 		<member name="T:IrrlichtLime.GUI.FocusFlag">
 			<summary>Focus Flags.</summary>
@@ -6709,6 +6746,9 @@ Default used by Irrlicht is "Enter | LostFocus".</summary>
 		</member>
 		<member name="P:IrrlichtLime.GUI.GUISprite.Frames">
 			<summary>Get access to the frames of this sprite.</summary>
+		</member>
+		<member name="F:IrrlichtLime.GUI.GUISprite.FrameTime">
+			<summary>The length of one frame.</summary>
 		</member>
 		<member name="M:IrrlichtLime.GUI.GUISprite.#ctor(IrrlichtLime.GUI.GUISpriteFrame)">
 			<summary>Creates a new sprite with one single frame.</summary>
@@ -15477,7 +15517,8 @@ Object of this class returned by VideoDriver.Fog.</summary>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
 			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15485,7 +15526,8 @@ Object of this class returned by VideoDriver.Fog.</summary>
 Convenience function for use with many defaults, without geometry shader. All shader names are set to "main" and compile targets are shader type 1.1.</summary>
 			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15494,7 +15536,8 @@ Convenience function for use with many defaults, without geometry shader. All sh
 			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15504,7 +15547,8 @@ Convenience function for use with many defaults, without geometry shader. All sh
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15513,7 +15557,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
 			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15523,7 +15568,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
 			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15534,7 +15580,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15546,7 +15593,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15559,7 +15607,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.
@@ -15573,14 +15622,16 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
 			<param name="vertexShaderProgram">The source of the vertex shader program. This can be null if no vertex program shall be used.</param>
 			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderProgram. Default: "main".</param>
 			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15590,7 +15641,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderProgram">The source of the pixel shader program. This can be null if no pixel shader shall be used. Default: null.</param>
 			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15601,7 +15653,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderProgram. Default: "main".</param>
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15613,7 +15666,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32,IrrlichtLime.Video.GPUShadingLanguage)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15626,7 +15680,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
 			<param name="shadingLang">A type of shading language used in current shader. Default: GPUShadingLanguage.Default.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15639,7 +15694,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="geometryShaderProgram">The source of the geometry shader program. This can be null if no geometry shader shall be used. Default: null.</param>
 			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderProgram. Default: "main".</param>
 			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15654,7 +15710,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15670,7 +15727,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15687,7 +15745,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15705,7 +15764,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32,IrrlichtLime.Video.GPUShadingLanguage)">
 			<summary>Adds a new high-level shading material renderer to the VideoDriver.</summary>
@@ -15724,12 +15784,14 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
 			<param name="shadingLang">A type of shading language used in current shader. Default: GPUShadingLanguage.Default.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15737,7 +15799,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 Convenience function for use with many defaults, without geometry shader. All shader names are set to "main" and compile targets are shader type 1.1.</summary>
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15746,7 +15809,8 @@ Convenience function for use with many defaults, without geometry shader. All sh
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15756,7 +15820,8 @@ Convenience function for use with many defaults, without geometry shader. All sh
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15765,7 +15830,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15775,7 +15841,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15786,7 +15853,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15798,7 +15866,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15811,7 +15880,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,System.String,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.
@@ -15825,14 +15895,16 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created. Default: empty string.</param>
 			<param name="vertexShaderEntryPoint">Name of the entry function of the vertexShaderFileName. Default: "main".</param>
 			<param name="vsCompileTarget">Vertex shader version the high level shader shall be compiled to. Default: VertexShaderType.VS_1_1.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15842,7 +15914,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15853,7 +15926,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="pixelShaderEntryPoint">Name of the entry function of the pixelShaderFileName. Default: "main".</param>
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15865,7 +15939,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="psCompileTarget">Pixel shader version the high level shader shall be compiled to. Default: PixelShaderType.PS_1_1.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,IrrlichtLime.Video.MaterialType,System.Int32,IrrlichtLime.Video.GPUShadingLanguage)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15878,7 +15953,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
 			<param name="shadingLang">A type of shading language used in current shader. Default: GPUShadingLanguage.Default.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15891,7 +15967,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="geometryShaderFileName">Text file containing the source of the geometry shader program. Set to empty string if no geometry shader shall be created. Default: empty string.</param>
 			<param name="geometryShaderEntryPoint">Name of the entry function of the geometryShaderFileName. Default: "main".</param>
 			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15906,7 +15983,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="gsCompileTarget">Geometry shader version the high level shader shall be compiled to. Default: GeometryShaderType.GS_4_0.</param>
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15922,7 +16000,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="inType">Type of vertices passed to geometry shader. Default: PrimitiveType.Triangles.</param>
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15939,7 +16018,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="outType">Type of vertices created by geometry shader. Default: PrimitiveType.TriangleStrip.</param>
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15957,7 +16037,8 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="verticesOut">Maximal number of vertices created by geometry shader. If 0, maximal number supported is assumed. Default: 0.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.VertexShaderType,System.String,System.String,IrrlichtLime.Video.PixelShaderType,System.String,System.String,IrrlichtLime.Video.GeometryShaderType,IrrlichtLime.Scene.PrimitiveType,IrrlichtLime.Scene.PrimitiveType,System.UInt32,IrrlichtLime.Video.MaterialType,System.Int32,IrrlichtLime.Video.GPUShadingLanguage)">
 			<summary>Adds a new high-level shading material renderer from file to the VideoDriver.</summary>
@@ -15976,14 +16057,16 @@ Convenience function for use with many defaults, with geometry shader. All shade
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
 			<param name="shadingLang">A type of shading language used in current shader. Default: GPUShadingLanguage.Default.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String)">
 			<summary>Adds a new ASM shader material renderer to the VideoDriver.
 
 Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
 			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String)">
 			<summary>Adds a new ASM shader material renderer to the VideoDriver.
@@ -15991,7 +16074,8 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
 			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
 			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new ASM shader material renderer to the VideoDriver.
@@ -16000,7 +16084,8 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 			<param name="vertexShaderProgram">String containing the source of the vertex shader program. This can be null if no vertex program shall be used. For DX8 programs, the will always input registers look like this: v0: position, v1: normal, v2: color, v3: texture cooridnates, v4: texture coordinates 2 if available. For DX9 programs, you can manually set the registers using the dcl_ statements.</param>
 			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterial(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new ASM shader material renderer to the VideoDriver.
@@ -16010,14 +16095,16 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 			<param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be null if you don't want to use a pixel shader. Default: null.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String)">
 			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
 
 Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String)">
 			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
@@ -16025,7 +16112,8 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 Note that it is a good idea to call VideoDriver.QueryFeature() in advance to check if the VideoDriver supports the vertex and/or pixel shader version your are using.</summary>
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType)">
 			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
@@ -16034,7 +16122,8 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 			<param name="vertexShaderFileName">Text file containing the source of the vertex shader program. Set to empty string if no vertex shader shall be created.</param>
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.GPUProgrammingServices.AddShaderMaterialFromFiles(System.String,System.String,IrrlichtLime.Video.MaterialType,System.Int32)">
 			<summary>Adds a new ASM shader material renderer from file to the VideoDriver.
@@ -16044,22 +16133,8 @@ Note that it is a good idea to call VideoDriver.QueryFeature() in advance to che
 			<param name="pixelShaderFileName">Text file containing the source of the pixel shader program. Set to empty string if no pixel shader shall be created. Default: empty string.</param>
 			<param name="baseMaterial">Base material to use. Default: MaterialType.Solid.</param>
 			<param name="userData">User data. This int can be set to any value and will be set as parameter to your OnSetConstants event handler.</param>
-			<returns>Material type which can be set in Material.MaterialType to use the renderer. "(int)-1" is returned if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
-		</member>
-		<member name="E:IrrlichtLime.Video.GPUProgrammingServices.OnSetConstants">
-			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
-		</member>
-		<member name="E:IrrlichtLime.Video.GPUProgrammingServices.OnSetMaterial">
-			<summary>Event raises after OnSetConstants.</summary>
-		</member>
-		<member name="T:IrrlichtLime.Video.GPUProgrammingServices.SetConstantsHandler">
-			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
-			<param name="services">Provides methods to set the constants for the shader.</param>
-			<param name="userData">User data which you have specified when creating the shader.</param>
-		</member>
-		<member name="T:IrrlichtLime.Video.GPUProgrammingServices.SetMaterialHandler">
-			<summary>Event raises after OnSetConstants.</summary>
-			<param name="material">Shader material.</param>
+			<returns>ShaderCallback, which provides events, that can be used to set constants for the shader and contains the newly created MaterialType.
+Returns null if an error occured, e.g. if a shader program could not be compiled or a compile target is not reachable. The error strings are then printed to the error log.</returns>
 		</member>
 		<member name="T:IrrlichtLime.Video.GPUShadingLanguage">
 			<summary>Enumeration for different types of shading languages.</summary>
@@ -17018,6 +17093,30 @@ This is typically used for polygons which should appear on top of other elements
 		</member>
 		<member name="F:IrrlichtLime.Video.RenderTargetType.StereoRightBuffer">
 			<summary>Render target is the right color buffer (left is the main buffer).</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ShaderCallBack">
+			<summary>This Shader CallBack class allows you to access the SetConstants and SetMaterial callbacks of a shader and the associated MaterialType.
+
+It can be casted implicitly to MaterialType.
+Casts to (MaterialType)(-1) if null.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.ShaderCallBack.MaterialType">
+			<summary>The MaterialType of the shader.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Video.ShaderCallBack.OnSetConstants">
+			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
+		</member>
+		<member name="E:IrrlichtLime.Video.ShaderCallBack.OnSetMaterial">
+			<summary>Event raises after OnSetConstants.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Video.ShaderCallBack.SetConstantsHandler">
+			<summary>Event raises before OnSetMaterial. Making it possible to set constants for gpu programs every frame.</summary>
+			<param name="services">Provides methods to set the constants for the shader.</param>
+			<param name="userData">User data which you have specified when creating the shader.</param>
+		</member>
+		<member name="T:IrrlichtLime.Video.ShaderCallBack.SetMaterialHandler">
+			<summary>Event raises after OnSetConstants.</summary>
+			<param name="material">Shader material.</param>
 		</member>
 		<member name="T:IrrlichtLime.Video.Texture">
 			<summary>Video driver dependent texture.

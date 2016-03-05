@@ -99,7 +99,7 @@ namespace _20.ManagedLights
 
             while (device.Run())
             {
-                driver.BeginScene(true, true, new Color(100, 101, 140));
+                driver.BeginScene(ClearBufferFlag.All, new Color(100, 101, 140));
                 smgr.DrawAll();
                 guienv.DrawAll();
                 driver.EndScene();

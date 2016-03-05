@@ -127,7 +127,7 @@ namespace L12.StencilShadows
 					lightMovementHelperNode.Rotation = cameraNode.AbsoluteTransformation.Rotation;
 				}
 
-				driver.BeginScene(true, true, new Color(0xff112244));
+				driver.BeginScene(ClearBufferFlag.All, new Color(0xff112244));
 
 				scene.DrawAll();
 

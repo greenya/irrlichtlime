@@ -14,10 +14,8 @@ public ref class CursorControl : ReferenceCounted
 {
 public:
 
-	//TODO
-	// *** CursorSprite is not implemented yet ***
-	//CursorIcon AddIcon(CursorSprite icon);
-	//void ChangeIcon(CursorIcon iconId, CursorSprite sprite);
+	CursorIcon AddIcon(CursorSprite^ icon);
+	void ChangeIcon(CursorIcon iconId, CursorSprite^ sprite);
 	void SetReferenceRect(Nullable<Recti> rect_or_null);
 
 	property CursorIcon ActiveIcon { CursorIcon get(); void set(CursorIcon value); }

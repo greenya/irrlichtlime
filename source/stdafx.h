@@ -119,6 +119,7 @@
 #include "AttributeReadWriteOptions.h"
 #include "GUISpriteFrame.h"
 #include "GUISprite.h"
+#include "CursorSprite.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"

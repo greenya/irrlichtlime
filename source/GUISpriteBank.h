@@ -8,6 +8,7 @@ using namespace System;
 using namespace IrrlichtLime::Core;
 
 namespace IrrlichtLime {
+namespace Video { ref class Texture; }
 namespace GUI {
 
 public ref class GUISpriteBank : ReferenceCounted

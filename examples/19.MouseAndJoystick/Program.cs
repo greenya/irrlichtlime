@@ -163,7 +163,7 @@ namespace _19.MouseAndJoystick
 				node.SetMaterialFlag(MaterialFlag.Lighting, mouseState.IsLeftButtonDown);
 
 				// Draw all.
-				driver.BeginScene(true, true, new Color(113, 113, 133));
+				driver.BeginScene(ClearBufferFlag.All, new Color(113, 113, 133));
 				smgr.DrawAll();
 				driver.EndScene();
 			}

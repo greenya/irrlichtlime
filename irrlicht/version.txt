@@ -1,5 +1,5 @@
 SRC: https://irrlicht.svn.sourceforge.net/svnroot/irrlicht/trunk
-REV: 5266
+REV: 5269
 
 IrrCompileConfig.h
 	+ _IRR_WCHAR_FILESYSTEM

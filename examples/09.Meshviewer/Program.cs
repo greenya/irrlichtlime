@@ -744,7 +744,6 @@ namespace _09.Meshviewer
 			else
 			{
 				AnimatedMeshSceneNode n = device.SceneManager.AddAnimatedMeshSceneNode(m);
-				n.AnimationSpeed = 30;
 				model = n;
 			}
 

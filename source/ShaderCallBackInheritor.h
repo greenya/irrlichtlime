@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "GPUProgrammingServices.h"
 #include "MaterialRendererServices.h"
+#include "ShaderCallBack.h"
 
 namespace IrrlichtLime {
 namespace Video {
@@ -12,18 +13,22 @@ class ShaderCallBackInheritor : public video::IShaderConstantSetCallBack
 {
 public:
 
-	gcroot<GPUProgrammingServices::SetConstantsHandler^> m_SetConstantsHandler;
+	gcroot<ShaderCallBack^> m_ShaderCallBack;
+
 	virtual void OnSetConstants(video::IMaterialRendererServices* services, int userData)
 	{
-		m_SetConstantsHandler->Invoke(
+		LIME_ASSERT((ShaderCallBack^)m_ShaderCallBack != nullptr)	//If it is null, creating the material failed. Irrlicht should not call this at all.
+
+		m_ShaderCallBack->SetConstants(
 			MaterialRendererServices::Wrap(services),
 			userData);
 	}
 
-	gcroot<GPUProgrammingServices::SetMaterialHandler^> m_SetMaterialHandler;
 	virtual void OnSetMaterial(const SMaterial& material)
 	{
-		m_SetMaterialHandler->Invoke(
+		LIME_ASSERT((ShaderCallBack^)m_ShaderCallBack != nullptr)	//If it is null, creating the material failed. Irrlicht should not call this at all.
+
+		m_ShaderCallBack->SetMaterial(
 			Material::Wrap((SMaterial*)&material)); // !!! cast to non-const
 	}
 };
