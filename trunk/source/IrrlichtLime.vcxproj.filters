@@ -685,6 +685,9 @@
     <ClInclude Include="CursorSprite.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="IShaderConstant.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">

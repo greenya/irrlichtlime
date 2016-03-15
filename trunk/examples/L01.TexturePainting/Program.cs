@@ -36,6 +36,8 @@ namespace L01.TexturePainting
 				return;
 			}
 
+			device.VideoDriver.SetTextureCreationFlag(TextureCreationFlag.AllowMemoryCopy, true);	//workaround: bug in irrlicht
+
 			Application app = new Application(device);
 
 			int lastFPS = -1;
