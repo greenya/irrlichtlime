@@ -33,6 +33,15 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #define LIME_SAFESTRINGTOSTRINGC_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringC(string).c_str())
 #define LIME_SAFESTRINGTOSTRINGW_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringW(string).c_str())
 
+//experimental macros. not in use.
+/*#define LIME_STACK(object, managedClass) managedClass##_native object##_stack = (object).m_NativeValue
+#define LIME_ACCESS(object, nativeClass) (*(nativeClass*)&object##_stack)
+#define LIME_UNSTACK(object) object.m_NativeValue = object##_stack
+
+#define LIME_STACK_THIS(managedClass) managedClass##_native this_stack = (*this).m_NativeValue
+#define LIME_ACCESS_THIS(nativeClass) (*(nativeClass*)&this_stack)
+#define LIME_UNSTACK_THIS() (*this).m_NativeValue = this_stack*/
+
 //Note: Warning 4714 is disabled. It shows up, when something could not be inlined. Happens when using Irrlicht math.
 
 namespace IrrlichtLime {

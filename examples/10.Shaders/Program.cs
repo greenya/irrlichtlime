@@ -247,9 +247,9 @@ namespace _10.Shaders
 			invWorld.MakeInverse();
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderInvWorldId, invWorld.ToArray(), true);
+				services.SetVertexShaderConstant(shaderInvWorldId, invWorld, true);
 			else
-				services.SetVertexShaderConstant(0, invWorld.ToArray());
+				services.SetVertexShaderConstant(0, invWorld, false);
 
 			// set clip matrix
 
@@ -258,27 +258,27 @@ namespace _10.Shaders
 			worldViewProj *= driver.GetTransform(TransformationState.World);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj.ToArray(), true);
+				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj, true);
 			else
-				services.SetVertexShaderConstant(4, worldViewProj.ToArray());
+				services.SetVertexShaderConstant(4, worldViewProj, false);
 
 			// set camera position
 
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray(), true);
+				services.SetVertexShaderConstant(shaderLightPosId, pos, true);
 			else
-				services.SetVertexShaderConstant(8, pos.ToArray());
+				services.SetVertexShaderConstant(8, pos, false);
 
 			// set light color
 
 			Colorf col = new Colorf(0, 1, 1, 0);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightColorId, col.ToArray(), true);
+				services.SetVertexShaderConstant(shaderLightColorId, col, true);
 			else
-				services.SetVertexShaderConstant(9, col.ToArray());
+				services.SetVertexShaderConstant(9, col, false);
 
 			// set transposed world matrix
 
@@ -286,13 +286,13 @@ namespace _10.Shaders
 
 			if (useHighLevelShaders)
 			{
-				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray(), true);
+				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld, true);
 				if(driver.DriverType == DriverType.OpenGL)
-                    services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 }, true);
+                    services.SetPixelShaderConstant(shaderTextureId, 0, true);
 			}
 			else
 			{
-				services.SetVertexShaderConstant(10, transpWorld.ToArray());
+				services.SetVertexShaderConstant(10, transpWorld, false);
 			}
 		}
 

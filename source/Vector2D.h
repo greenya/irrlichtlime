@@ -4,7 +4,7 @@
 
 #include "irrMath.h"
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class _REFCLASS_ : public IComparable<_REFCLASS_>, public IEquatable<_REFCLASS_>
+public value class _REFCLASS_ : public IComparable<_REFCLASS_>, public IEquatable<_REFCLASS_>, public Video::IShaderConstant
 {
 
 public:
@@ -326,6 +326,13 @@ public:
 	virtual String^ ToString() override
 	{
 		return String::Format("{0}, {1}", X, Y);
+	}
+
+	virtual int GetData(float* data) sealed
+	{
+		data[0] = (float)X;
+		data[1] = (float)Y;
+		return 2;
 	}
 
 internal:

@@ -1,5 +1,18 @@
 ============================
-Changes in 1.5
+Changes in 1.6 (TBA)
+============================
+
+- Updated Irrlicht SDK to trunk rev. 5281
+- Documentation updated
+- Example 24.CursorControl added
+- Changes to TexturePainter due to API changes of Irrlicht
+- Changes to L01.TexturePainting due to API changes + bug workaround
+- MaterialRendererServices: Set*ShaderConstant can now take some core types (Vector3D, Colorf, Matrix, ...) as argument directly, and parameter "highLevelShader" is no longer optional
+
+
+
+============================
+Changes in 1.5 (05-Mar-2016)
 ============================
 
 - Updated Irrlicht SDK to trunk rev. 5269

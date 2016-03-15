@@ -127,6 +127,7 @@ void Material::SetTextureMatrix(int index, Matrix^ mat)
 
 List<MaterialLayer^>^ Material::Layer::get()
 {
+	//TODO: use native list here?
 	List<MaterialLayer^>^ l = gcnew List<MaterialLayer^>();
 
 	for (int i = 0; i < Material::MaxTextures; i++)

@@ -2102,6 +2102,12 @@ Generate texture coordinates as linear functions so that: u = Ux*x + Uy*y + Uz*z
 		<member name="P:IrrlichtLime.Core.Matrix.DefinitelyIdentity">
 			<summary>Gets/sets if the matrix is definitely identity matrix.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.GetData(System.Single*)">
+			<summary>Get the data from this Matrix written to a float pointer.
+Returns how many floats have been written (always 16).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 16 floats.</param>
+			<returns>Always 16.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.GetElement(System.Int32)">
 			<summary>Gets separate element of the matrix by its index.</summary>
 			<param name="index">Index of matrix element from 0 to 15.</param>
@@ -2476,6 +2482,12 @@ This is NOT the same as new Quaternion().</summary>
 			<summary>Calculates the dot product.</summary>
 			<param name="other">Other quaternion.</param>
 			<returns>Dot product result.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetData(System.Single*)">
+			<summary>Get the data from this Quaternion written to a float pointer.
+Returns how many floats have been written (always 4).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 4 floats.</param>
+			<returns>Always 4.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrix">
 			<summary>Gets matrix from this quatertion.</summary>
@@ -3064,6 +3076,12 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 			<param name="other">Other vector to test with.</param>
 			<returns>Returns a value between 0 and 90.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 2).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 2 floats.</param>
+			<returns>Always 2.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.GetDistanceFrom(IrrlichtLime.Core.Vector2Dd)">
 			<summary>Gets distance from another point.
 
@@ -3175,6 +3193,12 @@ The null vector is left untouched.</summary>
 			<summary>Calculates the angle between this vector and another one in degree.</summary>
 			<param name="other">Other vector to test with.</param>
 			<returns>Returns a value between 0 and 90.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 2).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 2 floats.</param>
+			<returns>Always 2.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.GetDistanceFrom(IrrlichtLime.Core.Vector2Df)">
 			<summary>Gets distance from another point.
@@ -3288,6 +3312,12 @@ The null vector is left untouched.</summary>
 			<param name="other">Other vector to test with.</param>
 			<returns>Returns a value between 0 and 90.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 2).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 2 floats.</param>
+			<returns>Always 2.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.GetDistanceFrom(IrrlichtLime.Core.Vector2Di)">
 			<summary>Gets distance from another point.
 
@@ -3395,6 +3425,12 @@ The Vector3D class is used in Irrlicht for three main purposes: 1) As a directio
 			<summary>Get the dot product with another vector.</summary>
 			<param name="other">Other vector.</param>
 			<returns>Dot product result.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Dd.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 3).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 3 floats.</param>
+			<returns>Always 3.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Dd.GetDistanceFrom(IrrlichtLime.Core.Vector3Dd)">
 			<summary>Get distance from another point.
@@ -3559,6 +3595,12 @@ The Vector3D class is used in Irrlicht for three main purposes: 1) As a directio
 			<param name="other">Other vector.</param>
 			<returns>Dot product result.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Df.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 3).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 3 floats.</param>
+			<returns>Always 3.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Df.GetDistanceFrom(IrrlichtLime.Core.Vector3Df)">
 			<summary>Get distance from another point.
 
@@ -3721,6 +3763,12 @@ The Vector3D class is used in Irrlicht for three main purposes: 1) As a directio
 			<summary>Get the dot product with another vector.</summary>
 			<param name="other">Other vector.</param>
 			<returns>Dot product result.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector3Di.GetData(System.Single*)">
+			<summary>Get the data from this Vector written to a float pointer.
+Returns how many floats have been written (always 3).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 3 floats.</param>
+			<returns>Always 3.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector3Di.GetDistanceFrom(IrrlichtLime.Core.Vector3Di)">
 			<summary>Get distance from another point.
@@ -15063,6 +15111,12 @@ The color values for red, green, blue and alpha are each stored in a 32 bit floa
 			<param name="b">Blue component. Must be value between 0.0f and 1.0f.</param>
 			<param name="a">Alpha component. Must be value between 0.0f and 1.0f. Default: 1.0f (fully opaque).</param>
 		</member>
+		<member name="M:IrrlichtLime.Video.Colorf.GetData(System.Single*)">
+			<summary>Get the data from this Color written to a float pointer.
+Returns how many floats have been written (always 4).</summary>
+			<param name="data">Where to store the data. Minimum capacity of 4 floats.</param>
+			<returns>Always 4.</returns>
+		</member>
 		<member name="P:IrrlichtLime.Video.Colorf.Green">
 			<summary>Green component of the color.</summary>
 		</member>
@@ -16355,6 +16409,16 @@ Returns an array of newly created images.</summary>
 		<member name="F:IrrlichtLime.Video.IndexType._32Bit">
 			<summary>32 bit indexes.</summary>
 		</member>
+		<member name="T:IrrlichtLime.Video.IShaderConstant">
+			<summary>Allows a type to be set as a Shader Constant via MaterialRendererServices.Set*ShaderConstant.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Video.IShaderConstant.GetData(System.Single*)">
+			<summary>Gets the data from the type.
+A pointer to an array with a capacity of 16 floats will be passed.
+Returns how many floats have been written.</summary>
+			<param name="data">A pointer to an array with a size of 16 floats.</param>
+			<returns>The amount of floats that have been written into data.</returns>
+		</member>
 		<member name="T:IrrlichtLime.Video.IVertex3D">
 			<summary>Vertex Interface. Please do not implement.</summary>
 		</member>
@@ -16772,12 +16836,26 @@ Sets all basic render states if needed. Basic render states are diffuse, ambient
 			<param name="lastMaterial">The material used until now.</param>
 			<param name="resetAllRenderStates">Set to true if all renderstates should be set, regardless of their current state.</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single[])">
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant``1(System.Int32,``0[],System.Boolean)">
 			<summary>Sets a constant for the pixel shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
-			<param name="valueFloats">Floats to set.</param>
-			<returns>True if successful.</returns>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32,System.Boolean)">
+			<summary>Sets a constant for the pixel shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single,System.Boolean)">
+			<summary>Sets a constant for the pixel shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single[],System.Boolean)">
 			<summary>Sets a constant for the pixel shader based on an index of the constant.
@@ -16786,26 +16864,12 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 			<param name="valueFloats">Floats to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32[])">
-			<summary>Sets a constant for the pixel shader based on an index of the constant.
-When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
-			<param name="index">Index of the constant.</param>
-			<param name="valueInts">Ints to set.</param>
-			<returns>True if successful.</returns>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32[],System.Boolean)">
 			<summary>Sets a constant for the pixel shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
 			<param name="valueInts">Ints to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstantList(System.Int32,System.Single[])">
-			<summary>Sets a pixel shader register (s).
-
-Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
-			<param name="startRegisterIndex">First register to be set.</param>
-			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstantList(System.Int32,System.Single[],System.Boolean)">
 			<summary>Sets a pixel shader register (s).
@@ -16815,12 +16879,26 @@ Can be used if you created a shader using pixel/vertex shader assembler or ARB_f
 			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 			<param name="highLevelShader">Is this value for a high level shader?</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single[])">
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant``1(System.Int32,``0[],System.Boolean)">
 			<summary>Sets a constant for the vertex shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
-			<param name="valueFloats">Floats to set.</param>
-			<returns>True if successful.</returns>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32,System.Boolean)">
+			<summary>Sets a constant for the vertex shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single,System.Boolean)">
+			<summary>Sets a constant for the vertex shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="value">The value to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single[],System.Boolean)">
 			<summary>Sets a constant for the vertex shader based on an index of the constant.
@@ -16829,26 +16907,12 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 			<param name="valueFloats">Floats to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32[])">
-			<summary>Sets a constant for the vertex shader based on an index of the constant.
-When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
-			<param name="index">Index of the constant.</param>
-			<param name="valueInts">Ints to set.</param>
-			<returns>True if successful.</returns>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32[],System.Boolean)">
 			<summary>Sets a constant for the vertex shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
 			<param name="valueInts">Ints to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
-		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstantList(System.Int32,System.Single[])">
-			<summary>Sets a vertex shader register(s).
-
-Can be used if you created a shader using pixel/vertex shader assembler or ARB_fragment_program or ARB_vertex_program.</summary>
-			<param name="startRegisterIndex">First register to be set.</param>
-			<param name="valueFloats">Data to be set in the registers. One register consists of 4 floats. Note: the length of this array must be multiple of 4.</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstantList(System.Int32,System.Single[],System.Boolean)">
 			<summary>Sets a vertex shader register(s).
@@ -17263,30 +17327,29 @@ Note: all the members in this class requires texture to be locked using Lock() b
 			<returns>Color of the pixel.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.TexturePainter.Lock">
-			<summary>Locks mip map level 0 (main level) for reading and writing.</summary>
+			<summary>Locks for reading and writing.</summary>
 			<returns>True on success.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(IrrlichtLime.Video.TextureLockMode)">
-			<summary>Locks mip map level 0 (main level) in specified mode.</summary>
+			<summary>Locks in specified mode.</summary>
 			<param name="lockMode">Lock mode. Default: ReadWrite.</param>
 			<returns>True on success.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.TexturePainter.Lock(IrrlichtLime.Video.TextureLockMode,System.Int32)">
-			<summary>Locks specified mip map level in specified mode.</summary>
+			<summary>Locks specified layer in specified mode.
+Allows you to access the different faces / layers of a cubemap texture.</summary>
 			<param name="lockMode">Lock mode. Default: ReadWrite.</param>
-			<param name="mipmapLevel">Mip map level to lock. Must be less than MipMapLevelCount. Default: 0.</param>
+			<param name="layer">Which layer to access.</param>
 			<returns>True on success.</returns>
 		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.Locked">
 			<summary>True if Texture is locked and you can access the content of currently locked mip map level.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.LockLayer">
+			<summary>The currently locked layer.</summary>
+		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.LockMode">
 			<summary>Lock mode currently used.</summary>
-		</member>
-		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevel">
-			<summary>Currently locked mip map level.
-
-Note: can be from 0 to MipMapLevelCount-1.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Video.TexturePainter.MipMapLevelCount">
 			<summary>Total number of mip map levels in the texture. This value depends on the size of the texture: larger textures has more mip map levels.</summary>
@@ -17303,6 +17366,9 @@ Note: if MipMapLevel == 0, then real height of the texture is stored here.</summ
 			<summary>Width of currently locked mip map level.
 
 Note: if MipMapLevel == 0, then real width of the texture is stored here.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Video.TexturePainter.Pointer">
+			<summary>Pointer to unmanaged memory containing texture pixel buffer of currently locked layer.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Video.TexturePainter.SetLine(System.Int32,System.Int32,System.Int32,System.Int32,IrrlichtLime.Video.Color)">
 			<summary>Draws a line on the currently locked mip map level.</summary>

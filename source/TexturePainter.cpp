@@ -23,40 +23,34 @@ TexturePainter::TexturePainter(Video::Texture^ texture)
 	core::dimension2du d = texture->m_Texture->getSize();
 	int m = d.Width < d.Height ? d.Width : d.Height;
 	m_mipmapLevelCount = (int)ceil(log((float)m) / log(2.0f)) + 1;
-	m_mipmapLevel = -1;
-	m_mipmapLevelWidth = -1;
-	m_mipmapLevelHeight = -1;
+	m_lockLayer = -1;
 }
 
 Color TexturePainter::GetPixel(int x, int y)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::ReadOnly);
-	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
-	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
+	LIME_ASSERT(x >= 0 && x < (int)m_texture->m_Texture->getSize().Width);
+	LIME_ASSERT(y >= 0 && y < (int)m_texture->m_Texture->getSize().Height);
 
 	Color c = Color();
 	c.SetData(
-		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
+		(unsigned char*)m_pointer + y * m_rowSize + x * m_pixelSize,
 		(ColorFormat)m_format);
 
 	return c;
 }
 
-bool TexturePainter::Lock(TextureLockMode lockMode, int mipmapLevel)
+bool TexturePainter::Lock(TextureLockMode lockMode, int layer)
 {
-	LIME_ASSERT(mipmapLevel >= 0 && mipmapLevel < m_mipmapLevelCount);
+	LIME_ASSERT(layer >= 0 && layer < m_mipmapLevelCount);
 
-	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode, mipmapLevel);
+	m_pointer = m_texture->m_Texture->lock((video::E_TEXTURE_LOCK_MODE)lockMode, layer);
 	if (m_pointer == nullptr)
 		return false;
 
 	m_lockMode = lockMode;
-	m_mipmapLevel = mipmapLevel;
-
-	int f = 1 << m_mipmapLevel;
-	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width / f;
-	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height / f;
+	m_lockLayer = layer;
 
 	return true;
 }
@@ -68,9 +62,7 @@ bool TexturePainter::Lock(TextureLockMode lockMode)
 		return false;
 
 	m_lockMode = lockMode;
-	m_mipmapLevel = 0;
-	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width;
-	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height;
+	m_lockLayer = 0;
 
 	return true;
 }
@@ -82,9 +74,7 @@ bool TexturePainter::Lock()
 		return false;
 
 	m_lockMode = TextureLockMode::ReadWrite;
-	m_mipmapLevel = 0;
-	m_mipmapLevelWidth = m_texture->m_Texture->getSize().Width;
-	m_mipmapLevelHeight = m_texture->m_Texture->getSize().Height;
+	m_lockLayer = 0;
 
 	return true;
 }
@@ -93,10 +83,10 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color color)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
-	LIME_ASSERT(x1 >= 0 && x1 < MipMapLevelWidth);
-	LIME_ASSERT(y1 >= 0 && y1 < MipMapLevelHeight);
-	LIME_ASSERT(x2 >= 0 && x2 < MipMapLevelWidth);
-	LIME_ASSERT(y2 >= 0 && y2 < MipMapLevelHeight);
+	LIME_ASSERT(x1 >= 0 && x1 < (int)m_texture->m_Texture->getSize().Width);
+	LIME_ASSERT(y1 >= 0 && y1 < (int)m_texture->m_Texture->getSize().Height);
+	LIME_ASSERT(x2 >= 0 && x2 < (int)m_texture->m_Texture->getSize().Width);
+	LIME_ASSERT(y2 >= 0 && y2 < (int)m_texture->m_Texture->getSize().Height);
 
 	bool t = abs(y2 - y1) > abs(x2 - x1);
 
@@ -118,17 +108,15 @@ void TexturePainter::SetLine(int x1, int y1, int x2, int y2, Color color)
 	int e = dx / 2;
 	int y = y1;
 
-	int rs = m_rowSize / (1 << m_mipmapLevel);
-
 	for (int x = x1; x <= x2; x++)
 	{
 		if (t)
 			color.GetData(
-				(unsigned char*)m_pointer + x * rs + y * m_pixelSize, // set pixel to y,x
+				(unsigned char*)m_pointer + x * m_rowSize + y * m_pixelSize, // set pixel to y,x
 				(ColorFormat)m_format);
 		else
 			color.GetData(
-				(unsigned char*)m_pointer + y * rs + x * m_pixelSize, // set pixel to x,y
+				(unsigned char*)m_pointer + y * m_rowSize + x * m_pixelSize, // set pixel to x,y
 				(ColorFormat)m_format);
 
 		e -= dy;
@@ -144,11 +132,11 @@ void TexturePainter::SetPixel(int x, int y, Color color)
 {
 	LIME_ASSERT(Locked);
 	LIME_ASSERT(LockMode == TextureLockMode::ReadWrite || LockMode == TextureLockMode::WriteOnly);
-	LIME_ASSERT(x >= 0 && x < MipMapLevelWidth);
-	LIME_ASSERT(y >= 0 && y < MipMapLevelHeight);
+	LIME_ASSERT(x >= 0 && x < (int)m_texture->m_Texture->getSize().Width);
+	LIME_ASSERT(y >= 0 && y < (int)m_texture->m_Texture->getSize().Height);
 
 	color.GetData(
-		(unsigned char*)m_pointer + y * (m_rowSize/(1 << m_mipmapLevel)) + x * m_pixelSize,
+		(unsigned char*)m_pointer + y * m_rowSize + x * m_pixelSize,
 		(ColorFormat)m_format);
 }
 
@@ -161,9 +149,7 @@ void TexturePainter::Unlock(bool alsoRegenerateMipMapLevels)
 	if (alsoRegenerateMipMapLevels)
 		m_texture->m_Texture->regenerateMipMapLevels();
 
-	m_mipmapLevel = -1;
-	m_mipmapLevelWidth = -1;
-	m_mipmapLevelHeight = -1;
+	m_lockLayer = -1;
 	m_pointer = nullptr;
 }
 
@@ -172,15 +158,13 @@ void TexturePainter::Unlock()
 	LIME_ASSERT(Locked);
 
 	m_texture->m_Texture->unlock();
-	m_mipmapLevel = -1;
-	m_mipmapLevelWidth = -1;
-	m_mipmapLevelHeight = -1;
+	m_lockLayer = -1;
 	m_pointer = nullptr;
 }
 
 bool TexturePainter::Locked::get()
 {
-	return m_mipmapLevel != -1;
+	return m_lockLayer != -1;
 }
 
 TextureLockMode TexturePainter::LockMode::get()
@@ -189,10 +173,10 @@ TextureLockMode TexturePainter::LockMode::get()
 	return m_lockMode;
 }
 
-int TexturePainter::MipMapLevel::get()
+int TexturePainter::LockLayer::get()
 {
 	LIME_ASSERT(Locked);
-	return m_mipmapLevel;
+	return m_lockLayer;
 }
 
 int TexturePainter::MipMapLevelCount::get()
@@ -203,10 +187,10 @@ int TexturePainter::MipMapLevelCount::get()
 int TexturePainter::MipMapLevelHeight::get()
 {
 	LIME_ASSERT(Locked);
-	return m_mipmapLevelHeight;
+	return m_texture->m_Texture->getSize().Height;
 }
 
-System::IntPtr TexturePainter::MipMapLevelData::get()
+System::IntPtr TexturePainter::Pointer::get()
 {
 	LIME_ASSERT(Locked);
 	return System::IntPtr(m_pointer);
@@ -215,7 +199,7 @@ System::IntPtr TexturePainter::MipMapLevelData::get()
 int TexturePainter::MipMapLevelWidth::get()
 {
 	LIME_ASSERT(Locked);
-	return m_mipmapLevelWidth;
+	return m_texture->m_Texture->getSize().Width;
 }
 
 Video::Texture^ TexturePainter::Texture::get()
@@ -227,11 +211,11 @@ String^ TexturePainter::ToString()
 {
 	if (Locked)
 	{
-		return String::Format("TexturePainter: [Locked] <{0}> MipMap#{1}: {2}x{3}",
+		return String::Format("TexturePainter: [Locked] <{0}> Layer#{1}: {2}x{3}",
 			m_lockMode,
-			m_mipmapLevel,
-			m_mipmapLevelWidth,
-			m_mipmapLevelHeight);
+			m_lockLayer,
+			m_texture->m_Texture->getSize().Width,
+			m_texture->m_Texture->getSize().Height);
 	}
 	else
 	{

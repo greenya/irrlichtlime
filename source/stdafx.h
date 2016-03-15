@@ -99,6 +99,7 @@
 #include "ZWriteFineControl.h"
 
 // basic types
+#include "IShaderConstant.h"
 #include "Vector.h"
 #include "Plane.h"
 #include "Line.h"

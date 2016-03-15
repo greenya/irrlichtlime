@@ -263,7 +263,7 @@ private:
 };
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Colorf
+public value class Colorf : public Video::IShaderConstant
 {
 public:
 
@@ -426,6 +426,15 @@ public:
 	{
 		float get() { return r; }
 		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); r = value; }
+	}
+
+	virtual int GetData(float* data) sealed
+	{
+		data[0] = r;
+		data[1] = g;
+		data[2] = b;
+		data[3] = a;
+		return 4;
 	}
 
 	virtual String^ ToString() override

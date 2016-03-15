@@ -9,6 +9,7 @@
 #include "position2d.h"
 #include "rect.h"
 #include "SColor.h"
+#include "irrAllocator.h"
 #include <string.h>
 
 namespace irr
@@ -36,8 +37,7 @@ public:
 
 	//! constructor
 	IImage(ECOLOR_FORMAT format, const core::dimension2d<u32>& size, bool deleteMemory) :
-		Format(format), Size(size), Data(0), MipMapsData(0), BytesPerPixel(0), Pitch(0),
-		DeleteMemory(deleteMemory), DeleteMipMapsMemory(false)
+		Format(format), Size(size), Data(0), MipMapsData(0), BytesPerPixel(0), Pitch(0), DeleteMemory(deleteMemory), DeleteMipMapsMemory(false)
 	{
 		BytesPerPixel = getBitsPerPixelFromFormat(Format) / 8;
 		Pitch = BytesPerPixel * Size.Width;
@@ -50,7 +50,7 @@ public:
 			delete[] Data;
 
 		if (DeleteMipMapsMemory)
-			delete[] MipMapsData;
+			Allocator.deallocate(MipMapsData);
 	}
 
 	//! Returns the color format
@@ -213,37 +213,49 @@ public:
 	destruction. */
 	void setMipMapsData(void* data, bool ownForeignMemory, bool deleteMemory)
 	{
-		if (DeleteMipMapsMemory && data != MipMapsData)
-			delete[] MipMapsData;
-
-		if (data)
+		if (data != MipMapsData)
 		{
-			if (ownForeignMemory)
+			if (DeleteMipMapsMemory)
 			{
-				DeleteMipMapsMemory = deleteMemory;
-				MipMapsData = static_cast<u8*>(data);
+				Allocator.deallocate(MipMapsData);
+
+				DeleteMipMapsMemory = false;
+			}
+
+			if (data)
+			{
+				if (ownForeignMemory)
+				{
+					MipMapsData = static_cast<u8*>(data);
+
+					DeleteMipMapsMemory = deleteMemory;
+				}
+				else
+				{
+					u32 dataSize = 0;
+					u32 width = Size.Width;
+					u32 height = Size.Height;
+
+					do
+					{
+						if (width > 1)
+							width >>= 1;
+
+						if (height > 1)
+							height >>= 1;
+
+						dataSize += getDataSizeFromFormat(Format, width, height);
+					} while (width != 1 || height != 1);
+
+					MipMapsData = Allocator.allocate(dataSize);
+					memcpy(MipMapsData, data, dataSize);
+
+					DeleteMipMapsMemory = true;
+				}
 			}
 			else
 			{
-				u32 dataSize = 0;
-				u32 width = Size.Width;
-				u32 height = Size.Height;
-
-				do
-				{
-					if (width > 1)
-						width >>= 1;
-
-					if (height > 1)
-						height >>= 1;
-
-					dataSize += getDataSizeFromFormat(Format, width, height);
-				}
-				while (width != 1 || height != 1);
-
-				DeleteMipMapsMemory = true;
-				MipMapsData = new u8[dataSize];
-				memcpy(MipMapsData, data, dataSize);
+				MipMapsData = 0;
 			}
 		}
 	}
@@ -483,6 +495,8 @@ protected:
 
 	bool DeleteMemory;
 	bool DeleteMipMapsMemory;
+
+	core::irrAllocator<u8> Allocator;
 };
 
 } // end namespace video

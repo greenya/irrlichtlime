@@ -8,7 +8,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-public ref class Matrix : Lime::NativeValue<core::matrix4>
+public ref class Matrix : Lime::NativeValue<core::matrix4>, public Video::IShaderConstant
 {
 public:
 
@@ -470,6 +470,28 @@ public:
 		core::vector3df v = vect.ToNative();
 		m_NativeValue->translateVect(v);
 		vect = Vector3Df(v);
+	}
+
+	virtual int GetData(float* data) sealed
+	{
+		float* p = m_NativeValue->pointer();
+		data[0] =	p[0];
+		data[1] =	p[1];
+		data[2] =	p[2];
+		data[3] =	p[3];
+		data[4] =	p[4];
+		data[5] =	p[5];
+		data[6] =	p[6];
+		data[7] =	p[7];
+		data[8] =	p[8];
+		data[9] =	p[9];
+		data[10] =	p[10];
+		data[11] =	p[11];
+		data[12] =	p[12];
+		data[13] =	p[13];
+		data[14] =	p[14];
+		data[15] =	p[15];
+		return 16;
 	}
 
 	property bool DefinitelyIdentity

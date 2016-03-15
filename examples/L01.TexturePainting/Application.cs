@@ -96,8 +96,8 @@ namespace L01.TexturePainting
 
 			TexturePainter p = texture.Painter;
 			p.Lock(TextureLockMode.WriteOnly);
-			for (int i = 0; i < p.MipMapLevelHeight; i++)
-				p.SetLine(0, i, p.MipMapLevelWidth - 1, i, new Color(200, 200, 200));
+			for (int i = 0; i < texture.Size.Height; i++)
+				p.SetLine(0, i, texture.Size.Width - 1, i, new Color(200, 200, 200));
 			p.Unlock(true);
 
 			guiImage.Image = texture;
@@ -125,7 +125,7 @@ namespace L01.TexturePainting
 
 						if (p.X < texture.Size.Width &&
 							p.Y < texture.Size.Height &&
-							t.Lock(TextureLockMode.WriteOnly))
+							t.Lock(TextureLockMode.WriteOnly))	//note: only WriteOnly seems to work for OpenGL in Debug due to a bug. TODO: report
 						{
 							t.SetLine(oldMouseX, oldMouseY, p.X, p.Y, new Color(255, 0, 0));
 							t.Unlock(true);

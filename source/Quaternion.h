@@ -10,7 +10,7 @@ namespace IrrlichtLime {
 namespace Core {
 
 [StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Quaternion : public IEquatable<Quaternion>
+public value class Quaternion : public IEquatable<Quaternion>, public Video::IShaderConstant
 {
 public:
 
@@ -520,6 +520,15 @@ public:
 	virtual String^ ToString() override
 	{
 		return String::Format("({0}) W={1}", Vector3Df(X, Y, Z), W);
+	}
+
+	virtual int GetData(float* data) sealed
+	{
+		data[0] = X;
+		data[1] = Y;
+		data[2] = Z;
+		data[3] = W;
+		return 4;
 	}
 
 internal:

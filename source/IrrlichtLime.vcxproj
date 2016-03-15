@@ -104,7 +104,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Debug\Irrlicht.dll" "..\bin\Debug\Irrlicht.dll" &gt;nul</Command>
+      <Command>copy /y "..\irrlicht\dll\Debug\Irrlicht.dll" "..\bin\Debug\Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug\IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -227,6 +228,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IndexType.h" />
+    <ClInclude Include="IShaderConstant.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="LightManagerInheritor.h" />
