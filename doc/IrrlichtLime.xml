@@ -6128,6 +6128,33 @@ For example " " would not draw any space which is usually blank in most fonts.</
 		<member name="P:IrrlichtLime.GUI.GUIFont.Type">
 			<summary>The type of this font.</summary>
 		</member>
+		<member name="T:IrrlichtLime.GUI.GUIFontBitmap">
+			<summary>A GUI bitmap font.
+May be cast from GUIFont.</summary>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIFontBitmap.GetKerningWidth">
+			<summary>Gets kerning values (distance between letters) for the font. If no parameters are provided, the global kerning distance is returned.</summary>
+			<returns>Global Kerning Distance.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIFontBitmap.GetKerningWidth(System.Nullable{System.Char})">
+			<summary>Gets kerning values (distance between letters) for the font. If no parameters are provided, the global kerning distance is returned.</summary>
+			<param name="thisLetter">If this parameter is provided, the left side kerning for this letter is added to the global kerning value. For example, a space might only be one pixel wide, but it may be displayed as several pixels.</param>
+			<returns>Kerning Distance.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIFontBitmap.GetKerningWidth(System.Nullable{System.Char},System.Nullable{System.Char})">
+			<summary>Gets kerning values (distance between letters) for the font. If no parameters are provided, the global kerning distance is returned.</summary>
+			<param name="thisLetter">If this parameter is provided, the left side kerning for this letter is added to the global kerning value. For example, a space might only be one pixel wide, but it may be displayed as several pixels.</param>
+			<param name="previousLetter">If provided, kerning is calculated for both letters and added to the global kerning value. For example, GUIFontType.Bitmap will add the right kerning value of previousLetter to the left side kerning value of thisLetter, then add the global value.</param>
+			<returns>Kerning Distance.</returns>
+		</member>
+		<member name="M:IrrlichtLime.GUI.GUIFontBitmap.GetSpriteNoFromChar(System.Char)">
+			<summary>Returns the sprite number from a given character.</summary>
+			<param name="c">The character.</param>
+			<returns>The sprite number.</returns>
+		</member>
+		<member name="P:IrrlichtLime.GUI.GUIFontBitmap.SpriteBank">
+			<summary>The parsed Symbol Information.</summary>
+		</member>
 		<member name="T:IrrlichtLime.GUI.GUIFontType">
 			<summary>The different types of GUI font.</summary>
 		</member>
@@ -16843,18 +16870,11 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 			<param name="value">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32,System.Boolean)">
-			<summary>Sets a constant for the pixel shader based on an index of the constant.
-When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
-			<param name="index">Index of the constant.</param>
-			<param name="value">The value to set.</param>
-			<param name="highLevelShader">Is this a constant for a high level shader?</param>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single,System.Boolean)">
 			<summary>Sets a constant for the pixel shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
-			<param name="value">The value to set.</param>
+			<param name="valueFloat">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Single[],System.Boolean)">
@@ -16862,6 +16882,13 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
 			<param name="valueFloats">Floats to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32,System.Boolean)">
+			<summary>Sets a constant for the pixel shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueInt">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetPixelShaderConstant(System.Int32,System.Int32[],System.Boolean)">
@@ -16886,18 +16913,11 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 			<param name="value">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
-		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32,System.Boolean)">
-			<summary>Sets a constant for the vertex shader based on an index of the constant.
-When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
-			<param name="index">Index of the constant.</param>
-			<param name="value">The value to set.</param>
-			<param name="highLevelShader">Is this a constant for a high level shader?</param>
-		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single,System.Boolean)">
 			<summary>Sets a constant for the vertex shader based on an index of the constant.
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
-			<param name="value">The value to set.</param>
+			<param name="valueFloat">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Single[],System.Boolean)">
@@ -16905,6 +16925,13 @@ When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelSh
 When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
 			<param name="index">Index of the constant.</param>
 			<param name="valueFloats">Floats to set.</param>
+			<param name="highLevelShader">Is this a constant for a high level shader?</param>
+		</member>
+		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32,System.Boolean)">
+			<summary>Sets a constant for the vertex shader based on an index of the constant.
+When you use a high level shader (eg. HLSL, GLSL, CG), the parameter highLevelShader has to be true.</summary>
+			<param name="index">Index of the constant.</param>
+			<param name="valueInt">The value to set.</param>
 			<param name="highLevelShader">Is this a constant for a high level shader?</param>
 		</member>
 		<member name="M:IrrlichtLime.Video.MaterialRendererServices.SetVertexShaderConstant(System.Int32,System.Int32[],System.Boolean)">

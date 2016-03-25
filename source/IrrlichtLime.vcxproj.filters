@@ -688,6 +688,9 @@
     <ClInclude Include="IShaderConstant.h">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="GUIFontBitmap.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -1007,6 +1010,9 @@
     </ClCompile>
     <ClCompile Include="ContextManager.cpp">
       <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIFontBitmap.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
