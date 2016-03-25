@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GUIFont.h"
+#include "GUIFontBitmap.h"
 #include "ReferenceCounted.h"
 
 using namespace irr;
@@ -14,7 +15,16 @@ GUIFont^ GUIFont::Wrap(gui::IGUIFont* ref)
 	if (ref == nullptr)
 		return nullptr;
 
-	return gcnew GUIFont(ref);
+	switch (ref->getType())
+	{
+	case gui::EGFT_BITMAP:
+		return gcnew GUIFontBitmap((gui::IGUIFontBitmap*)ref);
+	case gui::EGFT_VECTOR:
+	case gui::EGFT_OS:
+	case gui::EGFT_CUSTOM:
+	default:
+		return gcnew GUIFont(ref);
+	}
 }
 
 GUIFont::GUIFont(gui::IGUIFont* ref)

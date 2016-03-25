@@ -221,6 +221,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="GPUShadingLanguage.h" />
     <ClInclude Include="GUIButtonImageState.h" />
     <ClInclude Include="GUIElementInheritor.h" />
+    <ClInclude Include="GUIFontBitmap.h" />
     <ClInclude Include="GUIProfiler.h" />
     <ClInclude Include="GUISpinBoxValidation.h" />
     <ClInclude Include="GUISprite.h" />
@@ -439,6 +440,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
   <ItemGroup>
     <ClCompile Include="ContextManager.cpp" />
     <ClCompile Include="GPUProgrammingServices.cpp" />
+    <ClCompile Include="GUIFontBitmap.cpp" />
     <ClCompile Include="GUIProfiler.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageLoader.cpp" />

@@ -95,11 +95,11 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ val
 	return b;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(int index, float value, bool highLevelShader)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, float valueFloat, bool highLevelShader)
 {
 	LIME_ASSERT(index >= 0);
 
-	float valueFloats = value; 
+	float valueFloats = valueFloat; 
 	float* f = &valueFloats;
 
 	bool b;
@@ -113,11 +113,11 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, float value, bo
 	return b;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(int index, int value, bool highLevelShader)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, int valueInt, bool highLevelShader)
 {
 	LIME_ASSERT(index >= 0);
 
-	int valueInts = value; 
+	int valueInts = valueInt; 
 	int* v = &valueInts;
 
 	bool b;
@@ -212,11 +212,11 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ va
 	return b;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(int index, float value, bool highLevelShader)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, float valueFloat, bool highLevelShader)
 {
 	LIME_ASSERT(index >= 0);
 
-	float valueFloats = value;
+	float valueFloats = valueFloat;
 	float* f = &valueFloats;
 
 	bool b;
@@ -230,11 +230,11 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, float value, b
 	return b;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(int index, int value, bool highLevelShader)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, int valueInt, bool highLevelShader)
 {
 	LIME_ASSERT(index >= 0);
 
-	int valueInts = value;
+	int valueInts = valueInt;
 	int* v = &valueInts;
 
 	bool b;

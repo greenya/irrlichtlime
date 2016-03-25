@@ -8,7 +8,7 @@ Changes in 1.6 (TBA)
 - Changes to TexturePainter due to API changes of Irrlicht
 - Changes to L01.TexturePainting due to API changes + bug workaround
 - MaterialRendererServices: Set*ShaderConstant can now take some core types (Vector3D, Colorf, Matrix, ...) as argument directly, and parameter "highLevelShader" is no longer optional
-
+- GUIFontBitmap class wrapped. Can be cast from GUIFont.
 
 
 ============================

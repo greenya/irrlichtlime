@@ -22,8 +22,8 @@ public:
 	void SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader);
 	bool SetPixelShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader);
 	bool SetPixelShaderConstant(int index, array<int>^ valueInts, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, float value, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, int value, bool highLevelShader);
+	bool SetPixelShaderConstant(int index, float valueFloat, bool highLevelShader);
+	bool SetPixelShaderConstant(int index, int valueInt, bool highLevelShader);
 	generic<typename T> where T : IShaderConstant bool SetPixelShaderConstant(int index, T value, bool highLevelShader);
 
 
@@ -31,8 +31,8 @@ public:
 	void SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader);
 	bool SetVertexShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader);
 	bool SetVertexShaderConstant(int index, array<int>^ valueInts, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, float value, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, int value, bool highLevelShader);
+	bool SetVertexShaderConstant(int index, float valueFloat, bool highLevelShader);
+	bool SetVertexShaderConstant(int index, int valueInt, bool highLevelShader);
 	generic<typename T> where T : IShaderConstant bool SetVertexShaderConstant(int index, T value, bool highLevelShader);
 
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
