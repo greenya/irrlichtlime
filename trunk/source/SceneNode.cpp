@@ -74,18 +74,20 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	case scene::ESNT_VOLUME_LIGHT:
 		return gcnew VolumeLightSceneNode((scene::IVolumeLightSceneNode*)ref);
 
+	case scene::ESNT_UNKNOWN:
+		try {
+			SceneNodeInheritor* node;
+			node = dynamic_cast<SceneNodeInheritor*>(ref);
+			if (node != 0)
+				return node->m_userSceneNode;
+		} catch (...){}
+		//no break!
 	case scene::ESNT_SCENE_MANAGER:
 	case scene::ESNT_WATER_SURFACE:
 	case scene::ESNT_SKY_BOX:
 	case scene::ESNT_SKY_DOME:
 	case scene::ESNT_EMPTY:
 	default:
-		try {
-			SceneNodeInheritor * node;
-			node = dynamic_cast<SceneNodeInheritor*> (ref);
-			if (node != 0)
-				return node->m_userSceneNode;
-		} catch (...){}
 		return gcnew SceneNode(ref);
 	}
 }
