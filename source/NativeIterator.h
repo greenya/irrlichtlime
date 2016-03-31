@@ -60,8 +60,8 @@ public:
 		{
 			if (list->empty())
 				return false;
-			iter = new irr::core::list<NativeClass*>::ConstIterator();
-			*iter = list->getLast();
+
+			iter = new irr::core::list<NativeClass*>::ConstIterator(list->getLast());
 			return true;
 		}
 		else if ((*iter) == (list->begin()))
@@ -80,8 +80,7 @@ public:
 			if (list->empty())
 				return false;
 
-			iter = new irr::core::list<NativeClass*>::ConstIterator();
-			*iter = list->begin();
+			iter = new irr::core::list<NativeClass*>::ConstIterator(list->begin());
 			return true;
 		}
 		else if ((*iter) == (list->getLast()))

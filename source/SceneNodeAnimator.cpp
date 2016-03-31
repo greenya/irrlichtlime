@@ -29,6 +29,14 @@ SceneNodeAnimator^ SceneNodeAnimator::Wrap(scene::ISceneNodeAnimator* ref)
 	case scene::ESNAT_CAMERA_MAYA:
 		return gcnew CameraMayaSceneNodeAnimator((scene::ISceneNodeAnimatorCameraMaya*)ref);
 
+	case scene::ESNAT_UNKNOWN:
+		try {
+			SceneNodeAnimatorInheritor* animator;
+			animator = dynamic_cast<SceneNodeAnimatorInheritor*>(ref);
+			if (animator != 0)
+				return animator->m_userSceneNodeAnimator;
+		} catch (...){}
+		//no break here!
 	case scene::ESNAT_FLY_CIRCLE:
 	case scene::ESNAT_FLY_STRAIGHT:
 	case scene::ESNAT_FOLLOW_SPLINE:
@@ -36,12 +44,6 @@ SceneNodeAnimator^ SceneNodeAnimator::Wrap(scene::ISceneNodeAnimator* ref)
 	case scene::ESNAT_TEXTURE:
 	case scene::ESNAT_DELETION:
 	default:
-		try {
-			SceneNodeAnimatorInheritor * animator;
-			animator = dynamic_cast<SceneNodeAnimatorInheritor*> (ref);
-			if (animator != 0)
-				return animator->m_userSceneNodeAnimator;
-		} catch (...){}
 		return gcnew SceneNodeAnimator(ref);
 	}
 }

@@ -11,8 +11,10 @@ using namespace System::Runtime::InteropServices; // for Marshal
 //maybe test it some day, but disabled for now, actually only generates the cpblk instruction for quaternion, not for others (don't know why, maybe because it's exactly 16 bytes)
 
 #ifdef _DEBUG
-#define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
-#define LIME_ASSERT2(condition, details) System::Diagnostics::Debug::Assert(condition, #condition, details);
+//#define LIME_ASSERT(condition) System::Diagnostics::Debug::Assert(condition, #condition);
+//#define LIME_ASSERT2(condition, details) System::Diagnostics::Debug::Assert(condition, #condition, details);
+#define LIME_ASSERT(condition) System::Diagnostics::Contracts::Contract::Assert(condition, #condition);
+#define LIME_ASSERT2(condition, details) System::Diagnostics::Contracts::Contract::Assert(condition, #condition details);
 #else
 #define LIME_ASSERT(condition) 
 #define LIME_ASSERT2(condition, details) 
@@ -80,6 +82,8 @@ public:
 		NativeValue(bool deleteOnFinalize)
 		{
 			m_DeleteOnFinalize = deleteOnFinalize;
+			if (!deleteOnFinalize)
+				GC::SuppressFinalize(this);	
 		}
 
 	private:
