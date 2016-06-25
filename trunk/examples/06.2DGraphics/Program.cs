@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.GUI;
+using IrrlichtLime.IO;
 
 namespace _06._2DGraphics
 {
@@ -26,7 +28,13 @@ namespace _06._2DGraphics
 
 			VideoDriver driver = device.VideoDriver;
 
-			Texture images = driver.GetTexture("../../media/2ddemo.png");
+			Texture images;
+			using (Stream testStream = new FileStream("../../media/2ddemo.png", FileMode.Open, FileAccess.Read))
+			{
+				StreamReadFile readFile = new StreamReadFile(testStream, "2ddemo.png");
+				images = driver.GetTexture(readFile);
+				readFile.Drop();
+			}
 			driver.MakeColorKeyTexture(images, new Vector2Di(0, 0));
 
 			GUIFont font = device.GUIEnvironment.BuiltInFont;

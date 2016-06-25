@@ -269,7 +269,8 @@ internal:
 	operator _WRAPCLASS_()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<_WRAPCLASS_>)this;
+		return (_WRAPCLASS_&)*this;
+		//return *(interior_ptr<_WRAPCLASS_>)this;
 #else
 		return _WRAPCLASS_(UpperLeftCorner.ToNative(), LowerRightCorner.ToNative());
 #endif

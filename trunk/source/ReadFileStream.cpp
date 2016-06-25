@@ -100,6 +100,9 @@ int ReadFileStream::Read(array<Byte>^ buffer, int offset, int count)
 	if (m_ReadFile == nullptr)
 		throw gcnew InvalidOperationException("File is null!");
 
+	if (buffer == nullptr)
+		throw gcnew ArgumentNullException("buffer");
+
 	if (Position == Length || count + offset > buffer->Length)
 		return 0;
 

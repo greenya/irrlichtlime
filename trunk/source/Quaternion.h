@@ -1,7 +1,8 @@
 #pragma once
 
 #include "stdafx.h"
-#include "irrMath.h"
+//#include "irrMath.h"
+#include "LimeMath.h"
 
 using namespace irr;
 using namespace System;
@@ -19,7 +20,7 @@ public:
 	float Z;
 	float W;
 
-	static property Quaternion^ Identity { Quaternion^ get() { return gcnew Quaternion(0, 0, 0, 1); } }
+	static property Quaternion Identity { Quaternion get() { return Quaternion(0, 0, 0, 1); } }
 
 	
 	static bool operator == (Quaternion v1, Quaternion v2)
@@ -29,18 +30,18 @@ public:
 
 	virtual bool Equals(Quaternion other) sealed
 	{
-		return core::equals(X, other.X, ROUNDING_ERROR_f32) &&
-			core::equals(Y, other.Y, ROUNDING_ERROR_f32) &&
-			core::equals(Z, other.Z, ROUNDING_ERROR_f32) &&
-			core::equals(W, other.W, ROUNDING_ERROR_f32);
+		return LimeM::Equals(X, other.X, LimeM::ROUNDING_ERROR_f32) &&
+			LimeM::Equals(Y, other.Y, LimeM::ROUNDING_ERROR_f32) &&
+			LimeM::Equals(Z, other.Z, LimeM::ROUNDING_ERROR_f32) &&
+			LimeM::Equals(W, other.W, LimeM::ROUNDING_ERROR_f32);
 	}
 
 	bool Equals(Quaternion other, float tolerance)
 	{
-		return core::equals(X, other.X, tolerance) &&
-			core::equals(Y, other.Y, tolerance) &&
-			core::equals(Z, other.Z, tolerance) &&
-			core::equals(W, other.W, tolerance);
+		return LimeM::Equals(X, other.X, tolerance) &&
+			LimeM::Equals(Y, other.Y, tolerance) &&
+			LimeM::Equals(Z, other.Z, tolerance) &&
+			LimeM::Equals(W, other.W, tolerance);
 	}
 
 	virtual bool Equals(Object^ other) override sealed
@@ -133,7 +134,7 @@ public:
 
 		if( diag > 0.0f )
 		{
-			const f32 scale = sqrtf(diag) * 2.0f; // get scale from diagonal
+			const f32 scale = LimeM::Sqrtf(diag) * 2.0f; // get scale from diagonal
 
 			// TODO: speed this up
 			X = (m[6] - m[9]) / scale;
@@ -147,7 +148,7 @@ public:
 			{
 				// 1st element of diag is greatest value
 				// find scale according to 1st element, and double it
-				const f32 scale = sqrtf(1.0f + m[0] - m[5] - m[10]) * 2.0f;
+				const f32 scale = LimeM::Sqrtf(1.0f + m[0] - m[5] - m[10]) * 2.0f;
 
 				// TODO: speed this up
 				X = 0.25f * scale;
@@ -159,7 +160,7 @@ public:
 			{
 				// 2nd element of diag is greatest value
 				// find scale according to 2nd element, and double it
-				const f32 scale = sqrtf(1.0f + m[5] - m[0] - m[10]) * 2.0f;
+				const f32 scale = LimeM::Sqrtf(1.0f + m[5] - m[0] - m[10]) * 2.0f;
 
 				// TODO: speed this up
 				X = (m[4] + m[1]) / scale;
@@ -171,7 +172,7 @@ public:
 			{
 				// 3rd element of diag is greatest value
 				// find scale according to 3rd element, and double it
-				const f32 scale = sqrtf(1.0f + m[10] - m[0] - m[5]) * 2.0f;
+				const f32 scale = LimeM::Sqrtf(1.0f + m[10] - m[0] - m[5]) * 2.0f;
 
 				// TODO: speed this up
 				X = (m[8] + m[2]) / scale;
@@ -387,7 +388,7 @@ public:
 			return *this;
 		}
 
-		const f32 s = sqrtf( (1+d)*2 ); // optimize inv_sqrt
+		const f32 s = LimeM::Sqrtf( (1+d)*2 ); // optimize inv_sqrt
 		const f32 invs = 1.f / s;
 		Vector3Df c = from.CrossProduct(to)*invs;
 		Set(c.X, c.Y, c.Z, s * 0.5f);
@@ -398,8 +399,8 @@ public:
 	Quaternion MakeRotation(float angle, Vector3Df axis)
 	{
 		const f32 fHalfAngle = 0.5f*angle;
-		const f32 fSin = sinf(fHalfAngle);
-		W = cosf(fHalfAngle);
+		const f32 fSin = LimeM::Sinf(fHalfAngle);
+		W = LimeM::Cosf(fHalfAngle);
 		X = fSin*axis.X;
 		Y = fSin*axis.Y;
 		Z = fSin*axis.Z;
@@ -414,7 +415,7 @@ public:
 			return *this;
 
 		//n = 1.0f / sqrtf(n);
-		return (*this *= core::reciprocal_squareroot ( n ));
+		return (*this *= LimeM::Reciprocal_squareroot ( n ));
 	}
 
 	Quaternion Slerp(Quaternion other, float time)
@@ -440,10 +441,10 @@ public:
 
 		if (angle <= (1-threshold)) // spherical interpolation
 		{
-			const f32 theta = acosf(angle);
-			const f32 invsintheta = core::reciprocal(sinf(theta));
-			const f32 scale = sinf(theta * (1.0f-time)) * invsintheta;
-			const f32 invscale = sinf(theta * time) * invsintheta;
+			const f32 theta = LimeM::Acosf(angle);
+			const f32 invsintheta = LimeM::Reciprocal(LimeM::Sinf(theta));
+			const f32 scale = LimeM::Sinf(theta * (1.0f-time)) * invsintheta;
+			const f32 invscale = LimeM::Sinf(theta * time) * invsintheta;
 			return (*this = (*this*scale) + (other*invscale));
 		}
 		else // linear interploation
@@ -457,9 +458,9 @@ public:
 
 	void ToAngleAxis([Out] float% angle, [Out] Vector3Df% axis)
 	{
-		const f32 scale = sqrtf(X*X + Y*Y + Z*Z);
+		const f32 scale = LimeM::Sqrtf(X*X + Y*Y + Z*Z);
 
-		if (core::iszero(scale) || W > 1.0f || W < -1.0f)
+		if (LimeM::Iszero(scale) || W > 1.0f || W < -1.0f)
 		{
 			angle = 0.0f;
 			axis.X = 0.0f;
@@ -468,8 +469,8 @@ public:
 		}
 		else
 		{
-			const f32 invscale = core::reciprocal(scale);
-			angle = 2.0f * acosf(W);
+			const f32 invscale = LimeM::Reciprocal(scale);
+			angle = 2.0f * LimeM::Acosf(W);
 			axis.X = X * invscale;
 			axis.Y = Y * invscale;
 			axis.Z = Z * invscale;
@@ -486,23 +487,23 @@ public:
 		const f64 sqz = Z*Z;
 		const f64 test = 2.0 * (Y*W - X*Z);
 
-		if (core::equals(test, 1.0, 0.000001))
+		if (LimeM::Equals(test, 1.0, 0.000001))
 		{
 			// heading = rotation about z-axis
-			euler.Z = (f32) (-2.0*atan2(X, W));
+			euler.Z = (f32) (-2.0*LimeM::Atan2(X, W));
 			// bank = rotation about x-axis
 			euler.X = 0;
 			// attitude = rotation about y-axis
-			euler.Y = (f32) (core::PI64/2.0);
+			euler.Y = (f32) (LimeM::PI64/2.0);
 		}
-		else if (core::equals(test, -1.0, 0.000001))
+		else if (LimeM::Equals(test, -1.0, 0.000001))
 		{
 			// heading = rotation about z-axis
-			euler.Z = (f32) (2.0*atan2(X, W));
+			euler.Z = (f32) (2.0*LimeM::Atan2(X, W));
 			// bank = rotation about x-axis
 			euler.X = 0;
 			// attitude = rotation about y-axis
-			euler.Y = (f32) (core::PI64/-2.0);
+			euler.Y = (f32) (LimeM::PI64/-2.0);
 		}
 		else
 		{
@@ -511,7 +512,7 @@ public:
 			// bank = rotation about x-axis
 			euler.X = (f32) atan2(2.0 * (Y*Z +X*W),(-sqx - sqy + sqz + sqw));
 			// attitude = rotation about y-axis
-			euler.Y = (f32) asin( core::clamp(test, -1.0, 1.0) );
+			euler.Y = (f32) asin( LimeM::Clamp(test, -1.0, 1.0) );
 		}
 		
 		return euler;
@@ -541,7 +542,8 @@ internal:
 	operator core::quaternion()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<core::quaternion>)this;
+		return (core::quaternion&)*this;
+		//return *(interior_ptr<core::quaternion>)this;
 #else
 		return core::quaternion(X, Y, Z, W);
 #endif

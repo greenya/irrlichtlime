@@ -2,7 +2,7 @@
 #error _REFCLASS_, _WRAPCLASS_ and _WRAPTYPE_ must be defined for this file to process.
 #endif
 
-#include "irrMath.h"
+//#include "irrMath.h"
 [StructLayoutAttribute(LayoutKind::Sequential)]
 public value class _REFCLASS_ : public IComparable<_REFCLASS_>, public IEquatable<_REFCLASS_>, public Video::IShaderConstant
 {
@@ -31,8 +31,8 @@ public:
 		else
 			return +1;
 		*/
-		if (core::equals(X, other.X))
-			if (core::equals(Y, other.Y))
+		if (LimeM::Equals(X, other.X))
+			if (LimeM::Equals(Y, other.Y))
 				return 0;
 			else
 				if (Y > other.Y)
@@ -49,13 +49,13 @@ public:
 
 	virtual bool Equals(_REFCLASS_ other) sealed
 	{
-		const _WRAPTYPE_ tolerance = (_WRAPTYPE_)ROUNDING_ERROR_f32;
-		return core::equals(X, other.X, tolerance) && core::equals(Y, other.Y, tolerance);
+		const _WRAPTYPE_ tolerance = (_WRAPTYPE_)LimeM::ROUNDING_ERROR_f32;
+		return LimeM::Equals(X, other.X, tolerance) && LimeM::Equals(Y, other.Y, tolerance);
 	}
 
 	bool Equals(_REFCLASS_ other, _WRAPTYPE_ tolerance)
 	{
-		return core::equals(X, other.X, tolerance) && core::equals(Y, other.Y, tolerance);
+		return LimeM::Equals(X, other.X, tolerance) && LimeM::Equals(Y, other.Y, tolerance);
 	}
 
 	virtual bool Equals(Object^ other) override sealed
@@ -81,26 +81,26 @@ public:
 
 	static bool operator > (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.X>v2.X && !core::equals(v1.X, v2.X)) ||
-				(core::equals(v1.X, v2.X) && v1.Y>v2.Y && !core::equals(v1.Y, v2.Y));
+		return (v1.X>v2.X && !LimeM::Equals(v1.X, v2.X)) ||
+				(LimeM::Equals(v1.X, v2.X) && v1.Y>v2.Y && !LimeM::Equals(v1.Y, v2.Y));
 	}
 
 	static bool operator >= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.X>v2.X || core::equals(v1.X, v2.X)) ||
-				(core::equals(v1.X, v2.X) && (v1.Y>v2.Y || core::equals(v1.Y, v2.Y)));
+		return (v1.X>v2.X || LimeM::Equals(v1.X, v2.X)) ||
+				(LimeM::Equals(v1.X, v2.X) && (v1.Y>v2.Y || LimeM::Equals(v1.Y, v2.Y)));
 	}
 
 	static bool operator < (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.X<v2.X && !core::equals(v1.X, v2.X)) ||
-				(core::equals(v1.X, v2.X) && v1.Y<v2.Y && !core::equals(v1.Y, v2.Y));
+		return (v1.X<v2.X && !LimeM::Equals(v1.X, v2.X)) ||
+				(LimeM::Equals(v1.X, v2.X) && v1.Y<v2.Y && !LimeM::Equals(v1.Y, v2.Y));
 	}
 
 	static bool operator <= (_REFCLASS_ v1, _REFCLASS_ v2)
 	{
-		return (v1.X<v2.X || core::equals(v1.X, v2.X)) ||
-				(core::equals(v1.X, v2.X) && (v1.Y<v2.Y || core::equals(v1.Y, v2.Y)));
+		return (v1.X<v2.X || LimeM::Equals(v1.X, v2.X)) ||
+				(LimeM::Equals(v1.X, v2.X) && (v1.Y<v2.Y || LimeM::Equals(v1.Y, v2.Y)));
 	}
 
 	static _REFCLASS_ operator + (_REFCLASS_ v1, _REFCLASS_ v2)
@@ -163,18 +163,18 @@ public:
 		if (tmp == 0.0)
 			return 90.0;
 
-		tmp = tmp / core::squareroot((double)((X*X + Y*Y) * (other.X*other.X + other.Y*other.Y)));
+		tmp = tmp / LimeM::Squareroot((double)((X*X + Y*Y) * (other.X*other.X + other.Y*other.Y)));
 		if (tmp < 0.0)
 			tmp = -tmp;
 		if ( tmp > 1.0 ) //   avoid floating-point trouble
 			tmp = 1.0;
 
-		return atan(sqrt(1 - tmp*tmp) / tmp) * RADTODEG64;
+		return atan(sqrt(1 - tmp*tmp) / tmp) * LimeM::RADTODEG64;
 	}
 
 	_REFCLASS_ RotateBy(double degrees, _REFCLASS_ center)
 	{
-		degrees *= DEGTORAD64;
+		degrees *= LimeM::DEGTORAD64;
 		const f64 cs = cos(degrees);
 		const f64 sn = sin(degrees);
 
@@ -204,8 +204,8 @@ public:
 
 			// don't use getLength here to avoid precision loss with s32 vectors
 			// avoid floating-point trouble as sqrt(Y*Y) is occasionally larger than Y, so clamp
-			const f64 tmp = core::clamp(Y / sqrt((f64)(X*X + Y*Y)), -1.0, 1.0);
-			const f64 angle = atan( core::squareroot(1 - tmp*tmp) / tmp) * RADTODEG64;
+			const f64 tmp = LimeM::Clamp(Y / sqrt((f64)(X*X + Y*Y)), -1.0, 1.0);
+			const f64 angle = atan( LimeM::Squareroot(1 - tmp*tmp) / tmp) * LimeM::RADTODEG64;
 
 			if (X>0 && Y>0)
 				return angle + 270;
@@ -235,20 +235,20 @@ public:
 
 			if (Y > 0)
 				if (X > 0)
-					return atan((irr::f64)Y/(irr::f64)X) * RADTODEG64;
+					return atan((irr::f64)Y/(irr::f64)X) * LimeM::RADTODEG64;
 				else
-					return 180.0-atan((irr::f64)Y/-(irr::f64)X) * RADTODEG64;
+					return 180.0-atan((irr::f64)Y/-(irr::f64)X) * LimeM::RADTODEG64;
 			else
 				if (X > 0)
-					return 360.0-atan(-(irr::f64)Y/(irr::f64)X) * RADTODEG64;
+					return 360.0-atan(-(irr::f64)Y/(irr::f64)X) * LimeM::RADTODEG64;
 				else
-					return 180.0+atan(-(irr::f64)Y/-(irr::f64)X) * RADTODEG64;
+					return 180.0+atan(-(irr::f64)Y/-(irr::f64)X) * LimeM::RADTODEG64;
 		}
 	}
 
 	property _WRAPTYPE_ Length
 	{
-		_WRAPTYPE_ get() {  return core::squareroot(X*X + Y*Y); }
+		_WRAPTYPE_ get() {  return LimeM::Squareroot(X*X + Y*Y); }
 	}
 
 
@@ -310,7 +310,7 @@ public:
 		f32 length = (f32)(X*X + Y*Y);
 		if ( length == 0 )
 			return *this;
-		length = core::reciprocal_squareroot ( length );
+		length = LimeM::Reciprocal_squareroot ( length );
 		X = (_WRAPTYPE_)(X * length);
 		Y = (_WRAPTYPE_)(Y * length);
 		return *this;
@@ -339,14 +339,19 @@ internal:
 
 	_REFCLASS_(const _WRAPCLASS_& other)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (_REFCLASS_&)other;
+#else
 		X = other.X;
 		Y = other.Y;
+#endif
 	}
 	
 	operator _WRAPCLASS_()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<_WRAPCLASS_>)this;
+		return (_WRAPCLASS_&)*this;
+		//return *(interior_ptr<_WRAPCLASS_>)this;
 #else
 		return _WRAPCLASS_(X, Y);
 #endif

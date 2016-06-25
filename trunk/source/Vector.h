@@ -6,12 +6,10 @@
 
 #include "stdafx.h"
 
+#include "LimeMath.h"
+
 using namespace irr;
 using namespace System;
-
-using core::ROUNDING_ERROR_f32;
-using core::RADTODEG64;
-using core::DEGTORAD64;
 
 namespace IrrlichtLime {
 namespace Core {
