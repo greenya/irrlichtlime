@@ -691,6 +691,13 @@
     <ClInclude Include="GUIFontBitmap.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="LimeMath.h" />
+    <ClInclude Include="StreamReadFileNative.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamReadFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -1013,6 +1020,9 @@
     </ClCompile>
     <ClCompile Include="GUIFontBitmap.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamReadFile.cpp">
+      <Filter>IO</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

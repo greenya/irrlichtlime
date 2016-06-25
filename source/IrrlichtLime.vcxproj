@@ -229,6 +229,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IndexType.h" />
+    <ClInclude Include="LimeMath.h" />
     <ClInclude Include="IShaderConstant.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />
@@ -260,6 +261,8 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="ShaderCallBack.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
     <ClInclude Include="StaticMesh.h" />
+    <ClInclude Include="StreamReadFile.h" />
+    <ClInclude Include="StreamReadFileNative.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureClamp.h" />
     <ClInclude Include="TextureCreationFlag.h" />
@@ -456,6 +459,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClCompile Include="ReadFileStream.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
+    <ClCompile Include="StreamReadFile.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
     <ClCompile Include="VideoDriver.cpp" />

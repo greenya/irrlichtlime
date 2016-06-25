@@ -32,7 +32,8 @@ internal:
 	operator gui::SGUISpriteFrame()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<gui::SGUISpriteFrame>)this;
+		return (gui::SGUISpriteFrame&)*this;
+		//return *(interior_ptr<gui::SGUISpriteFrame>)this;
 #else
 		return gui::SGUISpriteFrame(TextureNumber, RectNumber);
 #endif

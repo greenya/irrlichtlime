@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-#include "irrMath.h"	//for core::min_ and core::max_, etc
+//#include "irrMath.h"	//for core::min_ and core::max_, etc
 
 using namespace irr;
 using namespace System;
@@ -120,13 +120,13 @@ public:
 
 	Color GetInterpolated(Color other, float d)
 	{
-		d = core::clamp(d, 0.f, 1.f);
+		d = LimeM::Clamp(d, 0.f, 1.f);
 		const f32 inv = 1.0f - d;
 		return Color(
-			(u32)core::round32(other.Red*inv + Red*d),
-			(u32)core::round32(other.Green*inv + Green*d),
-			(u32)core::round32(other.Blue*inv + Blue*d),
-			(u32)core::round32(other.Alpha*inv + Alpha*d));
+			(u32)LimeM::Round32(other.Red*inv + Red*d),
+			(u32)LimeM::Round32(other.Green*inv + Green*d),
+			(u32)LimeM::Round32(other.Blue*inv + Blue*d),
+			(u32)LimeM::Round32(other.Alpha*inv + Alpha*d));
 	}
 
 	void SetData(const void* data, ColorFormat format)
@@ -220,7 +220,7 @@ public:
 
 	property float Lightness
 	{
-		float get() { return 0.5f*(core::max_(core::max_(Red,Green),Blue)+core::min_(core::min_(Red,Green),Blue)); }
+		float get() { return 0.5f*(LimeM::Max_(LimeM::Max_(Red,Green),Blue)+LimeM::Min_(LimeM::Min_(Red,Green),Blue)); }
 	}
 
 	property float Luminance
@@ -401,7 +401,7 @@ public:
 
 	Color ToColor()
 	{
-		return Color((unsigned int)core::round32(a*255.0f), (unsigned int)core::round32(r*255.0f), (unsigned int)core::round32(g*255.0f), (unsigned int)core::round32(b*255.0f));
+		return Color((unsigned int)LimeM::Round32(a*255.0f), (unsigned int)LimeM::Round32(r*255.0f), (unsigned int)LimeM::Round32(g*255.0f), (unsigned int)LimeM::Round32(b*255.0f));
 	}
 
 	property float Alpha
@@ -579,7 +579,7 @@ public:
 	Colorf ToColorf()
 	{
 		const float l = luminance/100;
-		if (core::iszero(saturation)) // grey
+		if (LimeM::Iszero(saturation)) // grey
 		{
 			Colorf(l, l, l);
 		}
@@ -668,10 +668,10 @@ private:
 	static ColorHSL fromRGB(Colorf copyColor)
 	{
 		ColorHSL ret;
-		const float maxVal = core::max_(copyColor.Red, copyColor.Green, copyColor.Blue);
-		const float minVal = (float)core::min_(copyColor.Red, copyColor.Green, copyColor.Blue);
+		const float maxVal = LimeM::Max_(copyColor.Red, copyColor.Green, copyColor.Blue);
+		const float minVal = (float)LimeM::Min_(copyColor.Red, copyColor.Green, copyColor.Blue);
 		ret.luminance = (maxVal+minVal)*50;
-		if (core::equals(maxVal, minVal))
+		if (LimeM::Equals(maxVal, minVal))
 		{
 			ret.hue=0.f;
 			ret.saturation=0.f;
@@ -689,9 +689,9 @@ private:
 		}
 		ret.saturation *= 100;
 
-		if (core::equals(maxVal, copyColor.Red))
+		if (LimeM::Equals(maxVal, copyColor.Red))
 			ret.hue = (copyColor.Green-copyColor.Blue)/delta;
-		else if (core::equals(maxVal, copyColor.Green))
+		else if (LimeM::Equals(maxVal, copyColor.Green))
 			ret.hue = 2+((copyColor.Blue-copyColor.Red)/delta);
 		else // blue is max
 			ret.hue = 4+((copyColor.Red-copyColor.Green)/delta);

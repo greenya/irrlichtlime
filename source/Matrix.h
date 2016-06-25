@@ -440,6 +440,7 @@ public:
 		return m;
 	}
 
+	[Obsolete("Very inaccurate. Use TransformBoxEx instead.", false)]
 	void TransformBox(AABBox^% box)
 	{
 		LIME_ASSERT(box != nullptr);

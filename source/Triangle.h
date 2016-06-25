@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "LimeMath.h"
 
 using namespace irr;
 using namespace System;
@@ -129,7 +130,7 @@ public:
 
 		// We count border-points as inside to keep downward compatibility.
 		// Rounding-error also needed for some test-cases.
-		return (u > -ROUNDING_ERROR_f32) && (v >= 0) && (u + v < 1+ROUNDING_ERROR_f32);
+		return (u > -LimeM::ROUNDING_ERROR_f32) && (v >= 0) && (u + v < 1+LimeM::ROUNDING_ERROR_f32);
 	}
 
 	bool GetIntersectionWithLine(Vector3Df linePoint, Vector3Df lineVect, [Out] Vector3Df% intersection)
@@ -161,7 +162,7 @@ public:
 		const core::vector3d<irr::f64> normalf64 = trianglef64.getNormal().normalize();
 		f64 t2;
 
-		if ( core::iszero ( t2 = normalf64.dotProduct(lineVectf64) ) )
+		if ( LimeM::Iszero ( t2 = normalf64.dotProduct(lineVectf64) ) )
 			return false;
 
 		f64 d = trianglef64.pointA.dotProduct(normalf64);
@@ -198,15 +199,20 @@ internal:
 
 	Triangle3Df(const core::triangle3df& value)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (Triangle3Df&)value;
+#else
 		A = Vector3Df(value.pointA);
 		B = Vector3Df(value.pointB);
 		C = Vector3Df(value.pointC);
+#endif
 	}
 
 	operator core::triangle3df()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<core::triangle3df>)this;
+		return (core::triangle3df&)*this;
+		//return *(interior_ptr<core::triangle3df>)this;
 #else
 		return core::triangle3df(A.ToNative(), B.ToNative(), C.ToNative());
 #endif
@@ -231,9 +237,9 @@ private:
 			// This catches some floating point troubles.
 			// Unfortunately slightly expensive and we don't really know the best epsilon for iszero.
 			Vector3Dd cp1 = bminusa.Normalize().CrossProduct((p1 - a).Normalize());
-			if (core::iszero(cp1.X, (f64)ROUNDING_ERROR_f32)
-				&& core::iszero(cp1.Y, (f64)ROUNDING_ERROR_f32)
-				&& core::iszero(cp1.Z, (f64)ROUNDING_ERROR_f32) )
+			if (LimeM::Iszero(cp1.X, (f64)LimeM::ROUNDING_ERROR_f32)
+				&& LimeM::Iszero(cp1.Y, (f64)LimeM::ROUNDING_ERROR_f32)
+				&& LimeM::Iszero(cp1.Z, (f64)LimeM::ROUNDING_ERROR_f32) )
 			{
 				res = 0.f;
 			}

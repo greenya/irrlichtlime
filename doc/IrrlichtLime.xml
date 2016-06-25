@@ -8397,6 +8397,27 @@ If you've created the ReadFile, you can drop it, if you don't need it anymore. T
 		<member name="M:IrrlichtLime.IO.ReadFileStream.Write(System.Byte[],System.Int32,System.Int32)">
 			<summary>Throws a NotSupportedException.</summary>
 		</member>
+		<member name="T:IrrlichtLime.IO.StreamReadFile">
+			<summary>Allows Irrlicht methods which expect a ReadFile to read from a Stream.</summary>
+		</member>
+		<member name="M:IrrlichtLime.IO.StreamReadFile.#ctor(System.IO.Stream)">
+			<summary>Creates a new StreamReadFile.
+The stream must be able to read and to seek.</summary>
+			<param name="stream">The stream to read from.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.StreamReadFile.#ctor(System.IO.Stream,System.String)">
+			<summary>Creates a new StreamReadFile.
+The stream must be able to read and to seek.</summary>
+			<param name="stream">The stream to read from.</param>
+			<param name="filename">A filename for the FileName property of ReadFile. Default: null.</param>
+		</member>
+		<member name="M:IrrlichtLime.IO.StreamReadFile.#ctor(System.IO.Stream,System.String,System.Boolean)">
+			<summary>Creates a new StreamReadFile.
+The stream must be able to read and to seek.</summary>
+			<param name="stream">The stream to read from.</param>
+			<param name="filename">A filename for the FileName property of ReadFile. Default: null.</param>
+			<param name="leaveInnerStreamOpen">If false, the stream will be disposed once the ReadFile is dropped. If it is true, it won't. Default: false.</param>
+		</member>
 		<member name="T:IrrlichtLime.IO.WriteFile">
 			<summary>Provides write acess to a file.</summary>
 		</member>

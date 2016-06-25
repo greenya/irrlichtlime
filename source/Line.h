@@ -82,7 +82,7 @@ public:
 		if (d < 0.0)
 			return false;
 
-		distance = v - core::squareroot ( d );
+		distance = v - LimeM::Squareroot ( d );
 		return true;
 	}
 
@@ -115,14 +115,19 @@ internal:
 
 	Line3Df(const core::line3df& value)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (Line3Df&)value;
+#else
 		Start = Vector3Df(value.start);
 		End = Vector3Df(value.end);
+#endif
 	}
 
 	operator core::line3df()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<core::line3df>)this;
+		return (core::line3df&)*this;
+		//return *(interior_ptr<core::line3df>)this;
 #else
 		return core::line3df(Start.ToNative(), End.ToNative());
 #endif

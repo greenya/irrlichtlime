@@ -107,19 +107,24 @@ internal:
 
 	Vertex3D(const S3DVertex& other)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (Vertex3D&)other;
+#else
 		Position = Vector3Df(other.Pos);
 		Normal = Vector3Df(other.Normal);
 		Color = Video::Color(other.Color);
 		TCoords = Vector2Df(other.TCoords);
+#endif
 	}
 
 	operator video::S3DVertex()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<S3DVertex>)this;
+		return (S3DVertex&)*this;
+		//return *(interior_ptr<S3DVertex>)this;
 #else
 		return S3DVertex(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative());
-#endif
+#endif		
 	}
 
 	video::S3DVertex ToNative()
@@ -220,17 +225,22 @@ internal:
 
 	Vertex3DTTCoords(const S3DVertex2TCoords& other)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (Vertex3DTTCoords&)other;
+#else
 		Position = Vector3Df(other.Pos);
 		Normal = Vector3Df(other.Normal);
 		Color = Video::Color(other.Color);
 		TCoords = Vector2Df(other.TCoords);
 		TCoords2 = Vector2Df(other.TCoords2);
+#endif
 	}
 
 	operator video::S3DVertex2TCoords()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<S3DVertex2TCoords>)this;
+		return (S3DVertex2TCoords&)*this;
+		//return *(interior_ptr<S3DVertex2TCoords>)this;
 #else
 		return S3DVertex2TCoords(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), TCoords2.ToNative());
 #endif
@@ -350,18 +360,23 @@ internal:
 
 	Vertex3DTangents(const S3DVertexTangents& other)
 	{
+#ifdef FAST_FROM_NATIVE
+		*this = (Vertex3DTangents&)other;
+#else
 		Position = Vector3Df(other.Pos);
 		Normal = Vector3Df(other.Normal);
 		Color = Video::Color(other.Color);
 		TCoords = Vector2Df(other.TCoords);
 		Tangent = Vector3Df(other.Tangent);
 		Binormal = Vector3Df(other.Binormal);
+#endif
 	}
 
 	operator video::S3DVertexTangents()
 	{
 #ifdef FAST_TO_NATIVE
-		return *(interior_ptr<S3DVertexTangents>)this;
+		return (S3DVertexTangents&)*this;
+		//return *(interior_ptr<S3DVertexTangents>)this;
 #else
 		return S3DVertexTangents(Position.ToNative(), Normal.ToNative(), Color.ToNative(), TCoords.ToNative(), Tangent.ToNative(), Binormal.ToNative());
 #endif
