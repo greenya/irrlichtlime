@@ -120,26 +120,78 @@ array<unsigned char>^ Image::CopyTo()
 	return r;
 }
 
-System::Drawing::Bitmap^ Image::CopyToBitmap()
+void Image::copyRBGFlip(void* source, void* dest, int count)
 {
-	if (GetPixelFormat(ColorFormat) == System::Drawing::Imaging::PixelFormat::Undefined)	//return null, if the format is not supported
+	const int blockLength = 12;	//how many bytes we process per loop
+
+    int countRest = (count % blockLength) * blockLength;	//how many bytes we cannot process in the fast loop
+    int countFast = count - countRest;	//how many bytes we can process in the fast loop
+
+	//fast loop, read 3 * 4 bytes
+
+	unsigned int* sourceUint = (unsigned int*)source;
+	unsigned int* destUint = (unsigned int*)dest;
+
+    for (int i = 0; i < countFast; i += blockLength)
+    {
+        int index = i/4;
+        unsigned int sourceA = sourceUint[index];
+        unsigned int sourceB = sourceUint[index + 1];
+        unsigned int sourceC = sourceUint[index + 2];
+
+        destUint[index] =
+            (sourceA & 0x000000FFU) << 16 | (sourceA & 0x0000FF00U) |
+            (sourceA & 0x00FF0000U) >> 16 | (sourceB & 0x0000FF00U) << 16;
+        destUint[index + 1] =
+            (sourceB & 0x000000FFU) |       (sourceA & 0xFF000000U) >> 16 |
+            (sourceC & 0x000000FFU) << 16 | (sourceB & 0xFF000000U);
+        destUint[index + 2] =
+            (sourceB & 0x00FF0000U) >> 16 | (sourceC & 0xFF000000U) >> 16 |
+            (sourceC & 0x00FF0000U) |       (sourceC & 0x0000FF00U) << 16;
+    }
+
+	//slow loop, to process the rest (if it does not
+
+	unsigned char* sourceB = (unsigned char*)source;
+    unsigned char* destB = (unsigned char*)dest;
+
+    const int unitLength = 3;
+    for (int i = countFast; i < count; i += unitLength)
+    {
+        for (int j = 0; j < unitLength; j++)
+        {
+            destB[i + j] = sourceB[i + (unitLength - 1) - j];
+        }
+    }
+}
+
+System::Drawing::Bitmap^ Image::CopyToBitmap()
+{	
+	/*if (GetPixelFormat(ColorFormat) == System::Drawing::Imaging::PixelFormat::Undefined)	//return null, if the format is not supported
+		return nullptr;*/
+	if (ColorFormat != Video::ColorFormat::R8G8B8 && ColorFormat != Video::ColorFormat::A8R8G8B8)	//only 24bit RGB and 32bit ARGB are supported
 		return nullptr;
+
+	System::Drawing::Imaging::PixelFormat pixelFormat;
+	if (ColorFormat == Video::ColorFormat::R8G8B8)
+		pixelFormat = System::Drawing::Imaging::PixelFormat::Format24bppRgb;
+	else
+		pixelFormat = System::Drawing::Imaging::PixelFormat::Format32bppArgb;
 
 	System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(
 		m_Image->getDimension().Width,
 		m_Image->getDimension().Height,
-		GetPixelFormat(ColorFormat));
+		pixelFormat);
 
 	System::Drawing::Imaging::BitmapData^ d = b->LockBits(
 		System::Drawing::Rectangle(0, 0, b->Width, b->Height),
 		System::Drawing::Imaging::ImageLockMode::WriteOnly,
 		b->PixelFormat);
 
-	m_Image->copyToScaling(
-		d->Scan0.ToPointer(),
-		m_Image->getDimension().Width,
-		m_Image->getDimension().Height,
-		m_Image->getColorFormat());
+	if (ColorFormat == Video::ColorFormat::A8R8G8B8)
+		memcpy(d->Scan0.ToPointer(), m_Image->getData(), d->Height * d->Stride);
+	else //R8G8B8: we have to flip...
+		copyRBGFlip(m_Image->getData(), d->Scan0.ToPointer(), d->Height * d->Stride);
 
 	b->UnlockBits(d);
 	return b;
@@ -268,6 +320,12 @@ Color Image::GetPixel(int x, int y)
 
 	return Color(m_Image->getPixel(x, y));
 }
+
+IntPtr Image::GetData()
+{
+	return IntPtr(m_Image->getData());
+}
+
 
 void Image::SetPixel(int x, int y, Color color, bool blend)
 {

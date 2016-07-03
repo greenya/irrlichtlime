@@ -42,6 +42,7 @@ public:
 
 	void Fill(Color color);
 	Color GetPixel(int x, int y);
+	IntPtr GetData();
 	void SetPixel(int x, int y, Color color, bool blend);
 	void SetPixel(int x, int y, Color color);
 
@@ -69,6 +70,10 @@ internal:
 	Image(video::IImage* ref);
 
 	video::IImage* m_Image;
+
+private:
+
+	static void copyRBGFlip(void* srcPtr, void* destPtr, int count);
 };
 
 } // end namespace Video
