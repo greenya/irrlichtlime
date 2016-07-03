@@ -18,6 +18,9 @@ Changes in 1.6 (TBA)
 - Many maths functions replaced to calls to new LimeMath class.
 - StreamReadFile class added: Allows Irrlicht to read from .NET Streams
 - Example 06.2DGraphics changed to show how StreamReadFile works
+- Image: CopyToBitmap now only supports R8G8B8 and A8R8G8B8. Others are untested.
+  Also R8G8B8 now works correctly (formerly, it had the wrong byte order)
+  GetData() method added.
 
 
 ============================
