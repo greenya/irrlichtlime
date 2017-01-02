@@ -295,6 +295,13 @@ WriteFile^ FileSystem::CreateMemoryWriteFile(String^ filename, int length)
 	return WriteFile::Wrap(f);
 }
 
+bool FileSystem::ExistFile(String^ filename)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	return m_FileSystem->existFile(Lime::StringToPath(filename));
+}
+
 ArchiveLoader^ FileSystem::GetArchiveLoader(int index)
 {
 	LIME_ASSERT(index >= 0 && index < ArchiveLoaderCount);

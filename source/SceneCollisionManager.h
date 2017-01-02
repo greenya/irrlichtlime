@@ -11,6 +11,7 @@ namespace IrrlichtLime {
 namespace Scene {
 
 ref class CameraSceneNode;
+ref class CollisionHit;
 ref class SceneNode;
 ref class TriangleSelector;
 
@@ -18,6 +19,7 @@ public ref class SceneCollisionManager : ReferenceCounted
 {
 public:
 
+	bool GetCollisionPoint(CollisionHit^ hitResult, Line3Df ray, TriangleSelector^ selector);
 	bool GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle, [Out] SceneNode^% collisionNode);
 	bool GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle);
 
@@ -27,6 +29,11 @@ public:
 
 	Line3Df GetRayFromScreenCoordinates(Vector2Di pos, CameraSceneNode^ camera);
 	Line3Df GetRayFromScreenCoordinates(Vector2Di pos);
+
+	SceneNode^ GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray);
+	SceneNode^ GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask);
+	SceneNode^ GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask, SceneNode^ collisionRootNode);
+	SceneNode^ GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask, SceneNode^ collisionRootNode, bool noDebugObjects);
 
 	SceneNode^ GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode, bool noDebugObjects);
 	SceneNode^ GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint, [Out] Triangle3Df% collisionTriangle, int idBitMask, SceneNode^ collisionRootNode);
