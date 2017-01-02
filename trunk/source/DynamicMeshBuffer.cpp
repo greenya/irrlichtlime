@@ -25,6 +25,11 @@ DynamicMeshBuffer::DynamicMeshBuffer(scene::IDynamicMeshBuffer* ref)
 	m_DynamicMeshBuffer = ref;
 }
 
+DynamicMeshBuffer^ DynamicMeshBuffer::Create(Video::VertexType vertexType, Video::IndexType indexType)
+{
+	return gcnew DynamicMeshBuffer(new CDynamicMeshBuffer((video::E_VERTEX_TYPE)vertexType, (video::E_INDEX_TYPE)indexType));
+}
+
 Scene::IndexBuffer^ DynamicMeshBuffer::IndexBuffer::get()
 {
 	scene::IIndexBuffer* b = &m_DynamicMeshBuffer->getIndexBuffer();

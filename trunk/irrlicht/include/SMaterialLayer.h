@@ -165,8 +165,7 @@ namespace video
 				return true;
 			else
 				different |= (TextureMatrix != b.TextureMatrix) &&
-					TextureMatrix && b.TextureMatrix &&
-					(*TextureMatrix != *(b.TextureMatrix));
+					(!TextureMatrix || !b.TextureMatrix || (*TextureMatrix != *(b.TextureMatrix)));
 			return different;
 		}
 
@@ -215,7 +214,7 @@ namespace video
 
 		//! Texture Matrix
 		/** Do not access this element directly as the internal
-		ressource management has to cope with Null pointers etc. */
+		resource management has to cope with Null pointers etc. */
 		core::matrix4* TextureMatrix;
 	};
 

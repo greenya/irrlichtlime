@@ -311,7 +311,7 @@ public:
 	}
 
 
-	//! Constructor for unicode and ascii strings
+	//! Constructor for Unicode and ASCII strings
 	template <class B>
 	string(const B* const c)
 	: array(0), allocated(0), used(0)
@@ -357,7 +357,7 @@ public:
 	}
 
 
-	//! Assignment operator for strings, ascii and unicode
+	//! Assignment operator for strings, ASCII and Unicode
 	template <class B>
 	string<T,TAlloc>& operator=(const B* const c)
 	{
@@ -414,7 +414,7 @@ public:
 	}
 
 
-	//! Append operator for strings, ascii and unicode
+	//! Append operator for strings, ASCII and Unicode
 	template <class B>
 	string<T,TAlloc> operator+(const B* const c) const
 	{
@@ -508,6 +508,16 @@ public:
 	bool empty() const
 	{
 		return (size() == 0);
+	}
+
+	void clear(bool releaseMemory=true)
+	{
+		if ( releaseMemory )
+		{
+			reallocate(1);
+		}
+		array[0] = 0;
+		used = 1;
 	}
 
 	//! Returns character string
@@ -1296,14 +1306,14 @@ public:
 		return used > 1 ? array[used-2] : 0;
 	}
 
-	//! split string into parts.
+	//! Split string into parts (tokens).
 	/** This method will split a string at certain delimiter characters
 	into the container passed in as reference. The type of the container
 	has to be given as template parameter. It must provide a push_back and
 	a size method.
-	\param ret The result container
-	\param c C-style string of delimiter characters
-	\param count Number of delimiter characters
+	\param ret The result container. Tokens are added, the container is not cleared.
+	\param delimiter C-style string of delimiter characters
+	\param countDelimiters Number of delimiter characters
 	\param ignoreEmptyTokens Flag to avoid empty substrings in the result
 	container. If two delimiters occur without a character in between, an
 	empty substring would be placed in the result. If this flag is set,
@@ -1315,33 +1325,39 @@ public:
 	\return The number of resulting substrings
 	*/
 	template<class container>
-	u32 split(container& ret, const T* const c, u32 count=1, bool ignoreEmptyTokens=true, bool keepSeparators=false) const
+	u32 split(container& ret, const T* const delimiter, u32 countDelimiters=1, bool ignoreEmptyTokens=true, bool keepSeparators=false) const
 	{
-		if (!c)
+		if (!delimiter)
 			return 0;
 
 		const u32 oldSize=ret.size();
-		u32 lastpos = 0;
-		bool lastWasSeparator = false;
+		
+		u32 tokenStartIdx = 0;
 		for (u32 i=0; i<used; ++i)
 		{
-			bool foundSeparator = false;
-			for (u32 j=0; j<count; ++j)
+			for (u32 j=0; j<countDelimiters; ++j)
 			{
-				if (array[i] == c[j])
+				if (array[i] == delimiter[j])
 				{
-					if ((!ignoreEmptyTokens || i - lastpos != 0) &&
-							!lastWasSeparator)
-						ret.push_back(string<T,TAlloc>(&array[lastpos], i - lastpos));
-					foundSeparator = true;
-					lastpos = (keepSeparators ? i : i + 1);
+					if ( keepSeparators )
+					{
+						ret.push_back(string<T,TAlloc>(&array[tokenStartIdx], i+1 - tokenStartIdx));
+					}
+					else
+					{
+						if (i - tokenStartIdx > 0)
+							ret.push_back(string<T,TAlloc>(&array[tokenStartIdx], i - tokenStartIdx));
+						else if ( !ignoreEmptyTokens )
+							ret.push_back(string<T,TAlloc>());
+					}
+					tokenStartIdx = i+1;					
 					break;
 				}
 			}
-			lastWasSeparator = foundSeparator;
 		}
-		if ((used - 1) > lastpos)
-			ret.push_back(string<T,TAlloc>(&array[lastpos], (used - 1) - lastpos));
+		if ((used - 1) > tokenStartIdx)
+			ret.push_back(string<T,TAlloc>(&array[tokenStartIdx], (used - 1) - tokenStartIdx));
+		
 		return ret.size()-oldSize;
 	}
 
@@ -1387,7 +1403,7 @@ typedef string<wchar_t> stringw;
 What the function does exactly depends on the LC_CTYPE of the current c locale.
 \param destination Wide-character string receiving the converted source
 \param source multibyte string
-\return The number of wide characters written to destination, not including the eventual terminating null character. */
+\return The number of wide characters written to destination, not including the eventual terminating null character or -1 when conversion failed */
 static inline size_t multibyteToWString(string<wchar_t>& destination, const core::string<c8>& source)
 {
 	return multibyteToWString(destination, source.c_str(), (u32)source.size());
@@ -1398,7 +1414,7 @@ static inline size_t multibyteToWString(string<wchar_t>& destination, const core
 What the function does exactly depends on the LC_CTYPE of the current c locale.
 \param destination Wide-character string receiving the converted source
 \param source multibyte string
-\return The number of wide characters written to destination, not including the eventual terminating null character. */
+\return The number of wide characters written to destination, not including the eventual terminating null character  or -1 when conversion failed. */
 static inline size_t multibyteToWString(string<wchar_t>& destination, const char* source)
 {
 	u32 s = source ? (u32)strlen(source) : 0;
@@ -1419,13 +1435,22 @@ static size_t multibyteToWString(string<wchar_t>& destination, const char* sourc
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
-		destination.used = (u32)written;
-		destination.array[destination.used] = 0;
+		if ( written != (size_t)-1 )
+		{
+			destination.used = (u32)written+1;
+			destination.array[destination.used-1] = 0;
+		}
+		else
+		{
+			// Likely character which got converted until the invalid character was encountered are in destination now.
+			// And it seems even 0-terminated, but I found no documentation anywhere that this (the 0-termination) is guaranteed :-(
+			destination.clear();
+		}
 		return written;
 	}
 	else
 	{
-		destination.empty();
+		destination.clear();
 		return 0;
 	}
 }

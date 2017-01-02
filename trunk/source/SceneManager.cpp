@@ -16,6 +16,7 @@
 #include "LightManager.h"
 #include "LightSceneNode.h"
 #include "Mesh.h"
+#include "MeshBuffer.h"
 #include "MeshCache.h"
 #include "MeshLoader.h"
 #include "MeshManipulator.h"
@@ -2630,6 +2631,27 @@ TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(Mesh^ mesh, SceneNo
 	return TriangleSelector::Wrap(s);
 }
 
+TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node, int minimalPolysPerNode)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createOctreeTriangleSelector(
+		LIME_SAFEREF(meshBuffer, m_MeshBuffer),
+		materialIndex,
+		LIME_SAFEREF(node, m_SceneNode),
+		minimalPolysPerNode);
+
+	return TriangleSelector::Wrap(s);
+}
+
+TriangleSelector^ SceneManager::CreateOctreeTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createOctreeTriangleSelector(
+		LIME_SAFEREF(meshBuffer, m_MeshBuffer),
+		materialIndex,
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return TriangleSelector::Wrap(s);
+}
+
 SceneNodeAnimator^ SceneManager::CreateRotationAnimator(Vector3Df rotationSpeed)
 {
 	scene::ISceneNodeAnimator* a = m_SceneManager->createRotationAnimator(rotationSpeed);
@@ -2721,6 +2743,15 @@ SceneNodeAnimator^ SceneManager::CreateTextureAnimator(ICollection<Video::Textur
 	return SceneNodeAnimator::Wrap(a);
 }
 
+TriangleSelector^ SceneManager::CreateTriangleSelector(AnimatedMeshSceneNode^ node, bool separateMeshbuffers)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
+		LIME_SAFEREF(node, m_AnimatedMeshSceneNode),
+		separateMeshbuffers);
+
+	return TriangleSelector::Wrap(s);
+}
+
 TriangleSelector^ SceneManager::CreateTriangleSelector(AnimatedMeshSceneNode^ node)
 {
 	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
@@ -2729,10 +2760,30 @@ TriangleSelector^ SceneManager::CreateTriangleSelector(AnimatedMeshSceneNode^ no
 	return TriangleSelector::Wrap(s);
 }
 
+TriangleSelector^ SceneManager::CreateTriangleSelector(Mesh^ mesh, SceneNode^ node, bool separateMeshbuffers)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
+		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(node, m_SceneNode),
+		separateMeshbuffers);
+
+	return TriangleSelector::Wrap(s);
+}
+
 TriangleSelector^ SceneManager::CreateTriangleSelector(Mesh^ mesh, SceneNode^ node)
 {
 	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
 		LIME_SAFEREF(mesh, m_Mesh),
+		LIME_SAFEREF(node, m_SceneNode));
+
+	return TriangleSelector::Wrap(s);
+}
+
+TriangleSelector^ SceneManager::CreateTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node)
+{
+	scene::ITriangleSelector* s = m_SceneManager->createTriangleSelector(
+		LIME_SAFEREF(meshBuffer, m_MeshBuffer),
+		materialIndex,
 		LIME_SAFEREF(node, m_SceneNode));
 
 	return TriangleSelector::Wrap(s);

@@ -24,6 +24,7 @@ ref class GeometryCreator;
 ref class LightManager;
 ref class LightSceneNode;
 ref class Mesh;
+ref class MeshBuffer;
 ref class MeshCache;
 ref class MeshLoader;
 ref class MeshManipulator;
@@ -288,6 +289,8 @@ public:
 
 	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node, int minimalPolysPerNode);
 	TriangleSelector^ CreateOctreeTriangleSelector(Mesh^ mesh, SceneNode^ node);
+	TriangleSelector^ CreateOctreeTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node, int minimalPolysPerNode);
+	TriangleSelector^ CreateOctreeTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node);
 
 	SceneNodeAnimator^ CreateRotationAnimator(Vector3Df rotationSpeed);
 
@@ -302,8 +305,12 @@ public:
 	SceneNodeAnimator^ CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame, bool loop);
 	SceneNodeAnimator^ CreateTextureAnimator(ICollection<Video::Texture^>^ textures, float timePerFrame);
 
+	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node, bool separateMeshbuffers);
 	TriangleSelector^ CreateTriangleSelector(AnimatedMeshSceneNode^ node);
+	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node, bool separateMeshbuffers);
 	TriangleSelector^ CreateTriangleSelector(Mesh^ mesh, SceneNode^ node);
+	TriangleSelector^ CreateTriangleSelector(MeshBuffer^ meshBuffer, unsigned int materialIndex, SceneNode^ node);
+
 	TriangleSelector^ CreateTriangleSelectorFromBoundingBox(SceneNode^ node);
 
 	void DrawAll();

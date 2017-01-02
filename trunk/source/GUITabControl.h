@@ -20,6 +20,7 @@ public:
 
 	void Clear();
 
+	GUITab^ GetTab(int index);
 	int GetTabAt(int xpos, int ypos);
 
 	GUITab^ InsertTab(int indexAt, String^ caption, int id);

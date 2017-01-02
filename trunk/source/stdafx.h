@@ -121,6 +121,7 @@
 #include "GUISpriteFrame.h"
 #include "GUISprite.h"
 #include "CursorSprite.h"
+#include "CollisionTriangleRange.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"

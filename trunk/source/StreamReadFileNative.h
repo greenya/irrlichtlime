@@ -42,17 +42,20 @@ public:
 		return (static_cast<Stream^>(innerStream) != nullptr);
 	}
 
-	virtual s32 read(void* buffer, u32 sizeToRead)
+	virtual size_t read(void* buffer, size_t sizeToRead)
 	{
 		//static casts to make sure it is unboxed from gcroot
 
 		if (!isOpen())
 			return 0;
 
+		if (sizeToRead > Int32::MaxValue)	//.net stream read method takes an int parameter
+			sizeToRead = Int32::MaxValue;
+
 		if (static_cast<cli::array<unsigned char>^>(readBuffer) == nullptr || readBuffer->Length < (int)sizeToRead)	//make sure read buffer is big enough
 			readBuffer = gcnew cli::array<unsigned char>(sizeToRead);
 
-		int readCount = innerStream->Read(readBuffer, 0, sizeToRead);
+		int readCount = innerStream->Read(readBuffer, 0, (int)sizeToRead);	//cast is safe
 		if (readCount == 0)
 			return 0;
 	

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CameraSceneNode.h"
+#include "CollisionHit.h"
 #include "SceneCollisionManager.h"
 #include "SceneNode.h"
 #include "TriangleSelector.h"
@@ -24,6 +25,22 @@ SceneCollisionManager::SceneCollisionManager(scene::ISceneCollisionManager* ref)
 	LIME_ASSERT(ref != nullptr);
 	m_SceneCollisionManager = ref;
 }
+
+bool SceneCollisionManager::GetCollisionPoint(CollisionHit^ hitResult, Line3Df ray, TriangleSelector^ selector)
+{
+	LIME_ASSERT(hitResult != nullptr);
+
+	scene::SCollisionHit hitResultNative;
+	bool b = m_SceneCollisionManager->getCollisionPoint(
+		hitResultNative,
+		ray,
+		LIME_SAFEREF(selector, m_TriangleSelector));
+
+	*hitResult->m_NativeValue = hitResultNative;
+
+	return b;
+}
+
 
 bool SceneCollisionManager::GetCollisionPoint(Line3Df ray, TriangleSelector^ selector, [Out] Vector3Df% collisionPoint,
 	[Out] Triangle3Df% collisionTriangle, [Out] SceneNode^% collisionNode)
@@ -151,6 +168,72 @@ Line3Df SceneCollisionManager::GetRayFromScreenCoordinates(Vector2Di pos, Camera
 Line3Df SceneCollisionManager::GetRayFromScreenCoordinates(Vector2Di pos)
 {
 	return Line3Df(m_SceneCollisionManager->getRayFromScreenCoordinates(pos));
+}
+
+SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask, SceneNode^ collisionRootNode, bool noDebugObjects)
+{
+	LIME_ASSERT(hitResult != nullptr);
+
+	scene::SCollisionHit hitResultNative;
+
+	scene::ISceneNode* n = m_SceneCollisionManager->getSceneNodeAndCollisionPointFromRay(
+		hitResultNative,
+		ray,
+		idBitMask,
+		LIME_SAFEREF(collisionRootNode, m_SceneNode),
+		noDebugObjects);
+
+	*hitResult->m_NativeValue = hitResultNative;
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask, SceneNode^ collisionRootNode)
+{
+	LIME_ASSERT(hitResult != nullptr);
+
+	scene::SCollisionHit hitResultNative;
+
+	scene::ISceneNode* n = m_SceneCollisionManager->getSceneNodeAndCollisionPointFromRay(
+		hitResultNative,
+		ray,
+		idBitMask,
+		LIME_SAFEREF(collisionRootNode, m_SceneNode));
+
+	*hitResult->m_NativeValue = hitResultNative;
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray, int idBitMask)
+{
+	LIME_ASSERT(hitResult != nullptr);
+
+	scene::SCollisionHit hitResultNative;
+
+	scene::ISceneNode* n = m_SceneCollisionManager->getSceneNodeAndCollisionPointFromRay(
+		hitResultNative,
+		ray,
+		idBitMask);
+
+	*hitResult->m_NativeValue = hitResultNative;
+
+	return SceneNode::Wrap(n);
+}
+
+SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(CollisionHit^ hitResult, Line3Df ray)
+{
+	LIME_ASSERT(hitResult != nullptr);
+
+	scene::SCollisionHit hitResultNative;
+
+	scene::ISceneNode* n = m_SceneCollisionManager->getSceneNodeAndCollisionPointFromRay(
+		hitResultNative,
+		ray);
+
+	*hitResult->m_NativeValue = hitResultNative;
+
+	return SceneNode::Wrap(n);
 }
 
 SceneNode^ SceneCollisionManager::GetSceneNodeAndCollisionPointFromRay(Line3Df ray, [Out] Vector3Df% collisionPoint,

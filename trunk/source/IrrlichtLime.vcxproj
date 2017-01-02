@@ -202,6 +202,8 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="BlendFactor.h" />
     <ClInclude Include="BlendOperation.h" />
     <ClInclude Include="ClearBufferFlag.h" />
+    <ClInclude Include="CollisionHit.h" />
+    <ClInclude Include="CollisionTriangleRange.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorFormat.h" />
     <ClInclude Include="ColorMaterial.h" />
@@ -441,6 +443,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="ZWriteFineControl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionHit.cpp" />
     <ClCompile Include="ContextManager.cpp" />
     <ClCompile Include="GPUProgrammingServices.cpp" />
     <ClCompile Include="GUIFontBitmap.cpp" />

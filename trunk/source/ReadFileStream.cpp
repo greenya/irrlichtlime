@@ -108,7 +108,7 @@ int ReadFileStream::Read(array<Byte>^ buffer, int offset, int count)
 
 	pin_ptr<Byte> bufferPtr = &buffer[0];
 	Byte* offsettedPtr = &bufferPtr[offset];
-	int s = m_ReadFile->read(offsettedPtr, count);
+	int s = (int)m_ReadFile->read(offsettedPtr, count);	//cast is safe, because count is int too
 	return s;
 }
 

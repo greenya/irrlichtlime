@@ -2,8 +2,9 @@
 Changes in 1.6 (TBA)
 ============================
 
-- Updated Irrlicht SDK to trunk rev. 5306
-- Documentation updated
+- Updated Irrlicht SDK to trunk rev. 5355
+- Now using DirectX SDK June 2010 for Irrlicht builds, so End Users need the 2010 June Redist.
+- Documentation updated and fixed typos
 - Example 24.CursorControl added
 - Changes to TexturePainter due to API changes of Irrlicht
 - Changes to L01.TexturePainting due to API changes + bug workaround
@@ -21,6 +22,13 @@ Changes in 1.6 (TBA)
 - Image: CopyToBitmap now only supports R8G8B8 and A8R8G8B8. Others are untested.
   Also R8G8B8 now works correctly (formerly, it had the wrong byte order)
   GetData() method added.
+- Added Create method to DynamicMeshBuffer
+- Added ExistFile to FileSystem
+- Added GetTab(int) to GUITabControl
+- Wrapped new CollisionHit class and added corresponding methods to SceneCollisionManager
+- Wrapped new CreateTriangleSelector methods in SceneManager
+- Updated StreamReadFileNative to work with size_t internally
+- Wrapped new CollisionTriangleRange struct and added corresponding methods to TriangleSelector
 
 
 ============================
