@@ -258,6 +258,50 @@ public:
 		const int tolerance = ROUNDING_ERROR_S32;
 		return (a + tolerance >= b) && (a - tolerance <= b);
 	}
+
+	template <class T>
+	static bool EqualsRelative(const T a, const T b, const T factor)
+	{
+		const T maxi = Max_( a, b);
+		const T mini = Min_( a, b);
+		const T maxMagnitude = Max_( maxi, -mini);
+
+		return	(maxMagnitude*factor + maxi) == (maxMagnitude*factor + mini); // MAD Wise
+	}
+
+	template <class T>
+	static bool EqualsRelative(const T a, const T b)
+	{
+		const T factor = RelativeErrorFactor<T>::Value;
+		return EqualsRelative(a, b, factor);
+	}
+
+internal:
+
+	template<class T>
+	value class RoundingError { };
+
+	template<>
+	value class RoundingError<float> { public: literal float Value = LimeM::ROUNDING_ERROR_f32; };
+
+	template<>
+	value class RoundingError<double> { public:  literal double Value = LimeM::ROUNDING_ERROR_f64; };
+
+	template<>
+	value class RoundingError<int> { public:  literal int Value = LimeM::ROUNDING_ERROR_S32; };
+
+	template<>
+	value class RoundingError<long long> { public: literal long long Value = LimeM::ROUNDING_ERROR_S64; };
+
+
+	template<class T>
+	value class RelativeErrorFactor { public: literal int Value = 1; };
+
+	template<>
+	value class RelativeErrorFactor<float> { public: literal float Value = 4; };
+
+	template<>
+	value class RelativeErrorFactor<double> { public: literal double Value = 8; };
 };
 
 } // end namespace IrrlichtLime

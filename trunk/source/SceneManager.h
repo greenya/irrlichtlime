@@ -31,6 +31,7 @@ ref class MeshManipulator;
 ref class MeshSceneNode;
 ref class MeshWriter;
 ref class MetaTriangleSelector;
+ref class OctreeSceneNode;
 ref class ParticleSystemSceneNode;
 ref class SceneCollisionManager;
 ref class SceneLoader;
@@ -145,11 +146,11 @@ public:
 	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh, SceneNode^ parent);
 	MeshSceneNode^ AddMeshSceneNode(Mesh^ mesh);
 
-	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
-	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode);
-	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
-	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
-	MeshSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
+	OctreeSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero);
+	OctreeSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode);
+	OctreeSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id);
+	OctreeSceneNode^ AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent);
+	OctreeSceneNode^ AddOctreeSceneNode(Mesh^ mesh);
 
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id, Vector3Df position, Vector3Df rotation, Vector3Df scale);
 	ParticleSystemSceneNode^ AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id, Vector3Df position, Vector3Df rotation);
@@ -317,6 +318,7 @@ public:
 
 	String^ GetAnimatorTypeName(SceneNodeAnimatorType type);
 
+	AnimatedMesh^ GetMesh(String^ filename, String^ alternativeCacheName);
 	AnimatedMesh^ GetMesh(String^ filename);
 	AnimatedMesh^ GetMesh(IO::ReadFile^ file);
 

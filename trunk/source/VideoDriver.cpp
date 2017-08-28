@@ -1523,6 +1523,11 @@ bool VideoDriver::QueryFeature(VideoDriverFeature feature)
 	return m_VideoDriver->queryFeature((video::E_VIDEO_DRIVER_FEATURE)feature);
 }
 
+bool VideoDriver::QueryTextureFormat(Video::ColorFormat format)
+{
+	return m_VideoDriver->queryTextureFormat((ECOLOR_FORMAT)format);
+}
+
 void VideoDriver::RemoveAllHardwareBuffers()
 {
 	m_VideoDriver->removeAllHardwareBuffers();

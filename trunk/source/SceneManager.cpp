@@ -23,6 +23,7 @@
 #include "MeshSceneNode.h"
 #include "MetaTriangleSelector.h"
 #include "MeshWriter.h"
+#include "OctreeSceneNode.h"
 #include "ParticleSystemSceneNode.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
@@ -1074,54 +1075,54 @@ MeshSceneNode^ SceneManager::AddMeshSceneNode(Mesh^ mesh)
 	return MeshSceneNode::Wrap(n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
+OctreeSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode, bool alsoAddIfMeshPointerZero)
 {
-	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+	scene::IOctreeSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
 		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		minimalPolysPerNode,
 		alsoAddIfMeshPointerZero);
 
-	return MeshSceneNode::Wrap(n);
+	return OctreeSceneNode::Wrap(n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode)
+OctreeSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id, int minimalPolysPerNode)
 {
-	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+	scene::IOctreeSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
 		LIME_SAFEREF(parent, m_SceneNode),
 		id,
 		minimalPolysPerNode);
 
-	return MeshSceneNode::Wrap(n);
+	return OctreeSceneNode::Wrap(n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id)
+OctreeSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent, int id)
 {
-	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+	scene::IOctreeSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
 		LIME_SAFEREF(parent, m_SceneNode),
 		id);
 
-	return MeshSceneNode::Wrap(n);
+	return OctreeSceneNode::Wrap(n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent)
+OctreeSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh, SceneNode^ parent)
 {
-	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+	scene::IOctreeSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh),
 		LIME_SAFEREF(parent, m_SceneNode));
 
-	return MeshSceneNode::Wrap(n);
+	return OctreeSceneNode::Wrap(n);
 }
 
-MeshSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
+OctreeSceneNode^ SceneManager::AddOctreeSceneNode(Mesh^ mesh)
 {
-	scene::IMeshSceneNode* n = m_SceneManager->addOctreeSceneNode(
+	scene::IOctreeSceneNode* n = m_SceneManager->addOctreeSceneNode(
 		LIME_SAFEREF(mesh, m_Mesh));
 
-	return MeshSceneNode::Wrap(n);
+	return OctreeSceneNode::Wrap(n);
 }
 
 ParticleSystemSceneNode^ SceneManager::AddParticleSystemSceneNode(bool withDefaultEmitter, SceneNode^ parent, int id,
@@ -2805,6 +2806,18 @@ void SceneManager::DrawAll()
 String^ SceneManager::GetAnimatorTypeName(SceneNodeAnimatorType type)
 {
 	return gcnew String(m_SceneManager->getAnimatorTypeName((scene::ESCENE_NODE_ANIMATOR_TYPE)type));
+}
+
+AnimatedMesh^ SceneManager::GetMesh(String^ filename, String^ alternativeCacheName)
+{
+	LIME_ASSERT(filename != nullptr);
+
+	io::path altCacheName;
+	if (alternativeCacheName != nullptr)
+		altCacheName = Lime::StringToPath(alternativeCacheName);
+
+	scene::IAnimatedMesh* m = m_SceneManager->getMesh(Lime::StringToPath(filename), altCacheName);
+	return AnimatedMesh::Wrap(m);
 }
 
 AnimatedMesh^ SceneManager::GetMesh(String^ filename)

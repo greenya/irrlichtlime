@@ -74,6 +74,8 @@
 #include "MeshWriterType.h"
 #include "ModulateFunc.h"
 #include "MouseEventType.h"
+#include "OctreePolygonChecks.h"
+#include "OctreeVBO.h"
 #include "ParticleAffectorType.h"
 #include "ParticleBehavior.h"
 #include "ParticleEmitterType.h"

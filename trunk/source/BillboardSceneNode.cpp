@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BillboardSceneNode.h"
+#include "CameraSceneNode.h"
 #include "SceneNode.h"
 
 using namespace irr;
@@ -40,6 +41,11 @@ void BillboardSceneNode::SetSize(float height, float bottomWidth, float topWidth
 	LIME_ASSERT(topWidth > 0.0f);
 
 	m_BillboardSceneNode->setSize(height, bottomWidth, topWidth);
+}
+
+AABBox^ BillboardSceneNode::GetTransformedBillboardBoundingBox(CameraSceneNode^ camera)
+{
+	return gcnew AABBox(m_BillboardSceneNode->getTransformedBillboardBoundingBox(camera->m_CameraSceneNode));
 }
 
 Video::Color BillboardSceneNode::BottomColor::get()

@@ -230,6 +230,13 @@ public:
 		return m;
 	}
 
+	Matrix^ GetMatrixFast()
+	{
+		Matrix^ m = gcnew Matrix();
+		GetMatrixFast(m);
+		return m;
+	}
+
 	Matrix^ GetMatrix(Vector3Df center)
 	{
 		Matrix^ m = gcnew Matrix();
@@ -256,9 +263,45 @@ public:
 		GetMatrix(m, Vector3Df());
 	}
 
+	void GetMatrixFast(Matrix^ m)
+	{
+		LIME_ASSERT(m != nullptr);
+		core::matrix4% dest = *(m->m_NativeValue);
+
+		dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
+		dest[1] = 2.0f*X*Y + 2.0f*Z*W;
+		dest[2] = 2.0f*X*Z - 2.0f*Y*W;
+		dest[3] = 0.0f;
+
+		dest[4] = 2.0f*X*Y - 2.0f*Z*W;
+		dest[5] = 1.0f - 2.0f*X*X - 2.0f*Z*Z;
+		dest[6] = 2.0f*Z*Y + 2.0f*X*W;
+		dest[7] = 0.0f;
+
+		dest[8] = 2.0f*X*Z + 2.0f*Y*W;
+		dest[9] = 2.0f*Z*Y - 2.0f*X*W;
+		dest[10] = 1.0f - 2.0f*X*X - 2.0f*Y*Y;
+		dest[11] = 0.0f;
+
+		dest[12] = 0.f;
+		dest[13] = 0.f;
+		dest[14] = 0.f;
+		dest[15] = 1.f;
+
+		dest.setDefinitelyIdentityMatrix(false);
+	}
+
 	void GetMatrix(Matrix^ m, Vector3Df center)
 	{
 		LIME_ASSERT(m != nullptr);
+
+		Quaternion q = *this;
+		q.Normalize();
+		f32 X = q.X;
+		f32 Y = q.Y;
+		f32 Z = q.Z;
+		f32 W = q.W;
+
 		core::matrix4& dest = *(m->m_NativeValue);
 
 		dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
@@ -287,6 +330,14 @@ public:
 	void GetMatrixCenter(Matrix^ m, Vector3Df center, Vector3Df translation)
 	{
 		LIME_ASSERT(m != nullptr);
+
+		Quaternion q = *this;
+		q.Normalize();
+		f32 X = q.X;
+		f32 Y = q.Y;
+		f32 Z = q.Z;
+		f32 W = q.W;
+
 		core::matrix4& dest = *(m->m_NativeValue);
 
 		dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
@@ -310,6 +361,14 @@ public:
 	void GetMatrixTransposed(Matrix^ m)
 	{
 		LIME_ASSERT(m != nullptr);
+
+		Quaternion q = *this;
+		q.Normalize();
+		f32 X = q.X;
+		f32 Y = q.Y;
+		f32 Z = q.Z;
+		f32 W = q.W;
+
 		core::matrix4& dest = *(m->m_NativeValue);
 
 		dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
@@ -409,13 +468,7 @@ public:
 
 	Quaternion Normalize()
 	{
-		const f32 n = X*X + Y*Y + Z*Z + W*W;
-
-		if (n == 1)
-			return *this;
-
-		//n = 1.0f / sqrtf(n);
-		return (*this *= LimeM::Reciprocal_squareroot ( n ));
+		return (*this *= LimeM::Reciprocal_squareroot ( X*X + Y*Y + Z*Z + W*W ));
 	}
 
 	Quaternion Slerp(Quaternion other, float time)

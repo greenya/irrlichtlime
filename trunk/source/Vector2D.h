@@ -49,7 +49,7 @@ public:
 
 	virtual bool Equals(_REFCLASS_ other) sealed
 	{
-		const _WRAPTYPE_ tolerance = (_WRAPTYPE_)LimeM::ROUNDING_ERROR_f32;
+		const _WRAPTYPE_ tolerance = LimeM::RoundingError<_WRAPTYPE_>::Value;
 		return LimeM::Equals(X, other.X, tolerance) && LimeM::Equals(Y, other.Y, tolerance);
 	}
 
@@ -257,6 +257,21 @@ public:
 		return X*other.X + Y*other.Y;
 	}
 
+	bool NearlyParallel(_REFCLASS_ other, _WRAPTYPE_ factor)
+	{
+		return LimeM::EqualsRelative( X*other.Y, other.X* Y, factor)
+		&& // a bit counterintuitive, but makes sure  that
+		   // only y or only x are 0, and at same time deals
+		   // with the case where one vector is zero vector.
+			(X*other.X + Y*other.Y) != 0;
+	}
+
+	bool NearlyParallel(_REFCLASS_ other)
+	{
+		_WRAPTYPE_ factor = LimeM::RelativeErrorFactor<_WRAPTYPE_>::Value;
+		return NearlyParallel(other, factor);
+	}
+
 	_WRAPTYPE_ GetDistanceFrom(_REFCLASS_ other)
 	{
 		return _REFCLASS_(X - other.X, Y - other.Y).Length;
@@ -282,6 +297,32 @@ public:
 
 		return _REFCLASS_( (_WRAPTYPE_)(X * mul0 + other1.X * mul1 + other2.X * mul2),
 					(_WRAPTYPE_)(Y * mul0 + other1.Y * mul1 + other2.Y * mul2));
+	}
+
+	int CheckOrientation(_REFCLASS_ b, _REFCLASS_ c) 
+	{
+		_WRAPTYPE_ val = (b.Y - Y) * (c.X - b.X) -
+			(b.X - X) * (c.Y - b.Y);
+
+		if (val == 0) return 0;  // colinear
+
+		return (val > 0) ? 1 : 2; // clock or counterclock wise
+	}
+
+	bool AreClockwise(_REFCLASS_ b, _REFCLASS_ c)
+	{
+		_WRAPTYPE_ val = (b.Y - Y) * (c.X - b.X) -
+			(b.X - X) * (c.Y - b.Y);
+
+		return val > 0;
+	}
+
+	bool AreCounterClockwise(_REFCLASS_ b, _REFCLASS_ c)
+	{
+		_WRAPTYPE_ val = (b.Y - Y) * (c.X - b.X) -
+			(b.X - X) * (c.Y - b.Y);
+
+		return val < 0;
 	}
 
 	_REFCLASS_ Interpolate(_REFCLASS_ other1, _REFCLASS_ other2, double d)

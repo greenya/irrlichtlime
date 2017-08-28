@@ -3,11 +3,13 @@
 #include "AttributeExchangingObject.h"
 #include "Attributes.h"
 #include "BillboardSceneNode.h"
+#include "BillboardTextSceneNode.h"
 #include "CameraSceneNode.h"
 #include "DummyTransformationSceneNode.h"
 #include "LightSceneNode.h"
 #include "Material.h"
 #include "MeshSceneNode.h"
+#include "OctreeSceneNode.h"
 #include "ParticleSystemSceneNode.h"
 #include "SceneNode.h"
 #include "SceneNodeAnimator.h"
@@ -36,11 +38,13 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	{
 	case scene::ESNT_CUBE:
 	case scene::ESNT_SPHERE:
-	case scene::ESNT_OCTREE:
 	case scene::ESNT_MESH:
 	case scene::ESNT_Q3SHADER_SCENE_NODE:
 	case scene::ESNT_MD3_SCENE_NODE:
 		return gcnew MeshSceneNode((scene::IMeshSceneNode*)ref);
+
+	case scene::ESNT_OCTREE:
+		return gcnew OctreeSceneNode((scene::IOctreeSceneNode*)ref);
 
 	case scene::ESNT_CAMERA:
 	case scene::ESNT_CAMERA_MAYA:
@@ -64,6 +68,9 @@ SceneNode^ SceneNode::Wrap(scene::ISceneNode* ref)
 	
 	case scene::ESNT_BILLBOARD:
 		return gcnew BillboardSceneNode((scene::IBillboardSceneNode*)ref);
+
+	case scene::ESNT_BILLBOARD_TEXT:
+		return gcnew BillboardTextSceneNode((scene::IBillboardTextSceneNode*)ref);
 
 	case scene::ESNT_ANIMATED_MESH:
 		return gcnew AnimatedMeshSceneNode((scene::IAnimatedMeshSceneNode*)ref);

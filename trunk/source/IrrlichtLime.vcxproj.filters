@@ -704,6 +704,15 @@
     <ClInclude Include="CollisionTriangleRange.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="OctreeSceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OctreeVBO.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OctreePolygonChecks.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GPUProgrammingServices.cpp">
@@ -1031,6 +1040,9 @@
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="CollisionHit.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="OctreeSceneNode.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
