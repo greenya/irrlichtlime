@@ -641,6 +641,21 @@ Video::Material^ MeshBuffer::Material::get()
 	return Video::Material::Wrap(&m_MeshBuffer->getMaterial());
 }
 
+unsigned int MeshBuffer::PrimitiveCount::get()
+{
+	return m_MeshBuffer->getPrimitiveCount();
+}
+
+Scene::PrimitiveType MeshBuffer::PrimitiveType::get()
+{
+	return (Scene::PrimitiveType)m_MeshBuffer->getPrimitiveType();
+}
+
+void MeshBuffer::PrimitiveType::set(Scene::PrimitiveType value)
+{
+	m_MeshBuffer->setPrimitiveType((E_PRIMITIVE_TYPE)value);
+}
+
 int MeshBuffer::VertexCount::get()
 {
 	return m_MeshBuffer->getVertexCount();

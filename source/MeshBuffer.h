@@ -57,6 +57,8 @@ public:
 	property Video::IndexType IndexType { Video::IndexType get(); }
 	//property Object^ Indices { Object^ get(); }
 	property Video::Material^ Material { Video::Material^ get(); }
+	property unsigned int PrimitiveCount { unsigned int get(); }
+	property Scene::PrimitiveType PrimitiveType { Scene::PrimitiveType get(); void set(Scene::PrimitiveType value); }
 	property int VertexCount { int get(); }
 	property Video::VertexType VertexType { Video::VertexType get(); }
 

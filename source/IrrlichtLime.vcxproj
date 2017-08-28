@@ -251,6 +251,9 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="NativeArray.h" />
     <ClInclude Include="NativeIterator.h" />
     <ClInclude Include="NativeList.h" />
+    <ClInclude Include="OctreePolygonChecks.h" />
+    <ClInclude Include="OctreeSceneNode.h" />
+    <ClInclude Include="OctreeVBO.h" />
     <ClInclude Include="ParticleBehavior.h" />
     <ClInclude Include="PixelShaderType.h" />
     <ClInclude Include="PolygonOffset.h" />
@@ -458,6 +461,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClCompile Include="MaterialRendererServices.cpp" />
     <ClCompile Include="MeshTextureLoader.cpp" />
     <ClCompile Include="MeshWriter.cpp" />
+    <ClCompile Include="OctreeSceneNode.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="ReadFileStream.cpp" />
     <ClCompile Include="RenderTarget.cpp" />

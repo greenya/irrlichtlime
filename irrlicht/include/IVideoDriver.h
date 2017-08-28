@@ -13,12 +13,12 @@
 #include "plane3d.h"
 #include "dimension2d.h"
 #include "position2d.h"
-#include "SMaterial.h"
 #include "IMeshBuffer.h"
 #include "triangle3d.h"
 #include "EDriverTypes.h"
 #include "EDriverFeatures.h"
 #include "SExposedVideoData.h"
+#include "SOverrideMaterial.h"
 
 namespace irr
 {
@@ -156,71 +156,6 @@ namespace video
 		0
 	};
 
-	struct SOverrideMaterial
-	{
-		//! The Material values
-		SMaterial Material;
-		//! Which values are taken for override
-		/** OR'ed values from E_MATERIAL_FLAGS. */
-		u32 EnableFlags;
-		//! Set in which render passes the material override is active.
-		/** OR'ed values from E_SCENE_NODE_RENDER_PASS. */
-		u16 EnablePasses;
-		//! Global enable flag, overwritten by the SceneManager in each pass
-		/** The Scenemanager uses the EnablePass array and sets Enabled to
-		true if the Override material is enabled in the current pass. */
-		bool Enabled;
-
-		//! Default constructor
-		SOverrideMaterial() : EnableFlags(0), EnablePasses(0), Enabled(false) {}
-
-		//! Apply the enabled overrides
-		void apply(SMaterial& material)
-		{
-			if (Enabled)
-			{
-				for (u32 i=0; i<32; ++i)
-				{
-					const u32 num=(1<<i);
-					if (EnableFlags & num)
-					{
-						switch (num)
-						{
-						case EMF_WIREFRAME: material.Wireframe = Material.Wireframe; break;
-						case EMF_POINTCLOUD: material.PointCloud = Material.PointCloud; break;
-						case EMF_GOURAUD_SHADING: material.GouraudShading = Material.GouraudShading; break;
-						case EMF_LIGHTING: material.Lighting = Material.Lighting; break;
-						case EMF_ZBUFFER: material.ZBuffer = Material.ZBuffer; break;
-						case EMF_ZWRITE_ENABLE: material.ZWriteEnable = Material.ZWriteEnable; break;
-						case EMF_BACK_FACE_CULLING: material.BackfaceCulling = Material.BackfaceCulling; break;
-						case EMF_FRONT_FACE_CULLING: material.FrontfaceCulling = Material.FrontfaceCulling; break;
-						case EMF_BILINEAR_FILTER: material.TextureLayer[0].BilinearFilter = Material.TextureLayer[0].BilinearFilter; break;
-						case EMF_TRILINEAR_FILTER: material.TextureLayer[0].TrilinearFilter = Material.TextureLayer[0].TrilinearFilter; break;
-						case EMF_ANISOTROPIC_FILTER: material.TextureLayer[0].AnisotropicFilter = Material.TextureLayer[0].AnisotropicFilter; break;
-						case EMF_FOG_ENABLE: material.FogEnable = Material.FogEnable; break;
-						case EMF_NORMALIZE_NORMALS: material.NormalizeNormals = Material.NormalizeNormals; break;
-						case EMF_TEXTURE_WRAP:
-							material.TextureLayer[0].TextureWrapU = Material.TextureLayer[0].TextureWrapU;
-							material.TextureLayer[0].TextureWrapV = Material.TextureLayer[0].TextureWrapV;
-							material.TextureLayer[0].TextureWrapW = Material.TextureLayer[0].TextureWrapW;
-							break;
-						case EMF_ANTI_ALIASING: material.AntiAliasing = Material.AntiAliasing; break;
-						case EMF_COLOR_MASK: material.ColorMask = Material.ColorMask; break;
-						case EMF_COLOR_MATERIAL: material.ColorMaterial = Material.ColorMaterial; break;
-						case EMF_USE_MIP_MAPS: material.UseMipMaps = Material.UseMipMaps; break;
-						case EMF_BLEND_OPERATION: material.BlendOperation = Material.BlendOperation; break;
-						case EMF_BLEND_FACTOR: material.BlendFactor = Material.BlendFactor; break;
-						case EMF_POLYGON_OFFSET:
-							material.PolygonOffsetDirection = Material.PolygonOffsetDirection;
-							material.PolygonOffsetFactor = Material.PolygonOffsetFactor; break;
-						}
-					}
-				}
-			}
-		}
-
-	};
-
 	//! Interface to driver which is able to perform 2d and 3d graphics functions.
 	/** This interface is one of the most important interfaces of
 	the Irrlicht Engine: All rendering and texture manipulation is done with
@@ -250,8 +185,8 @@ namespace video
 		virtual bool beginScene(u16 clearFlag=(u16)(ECBF_COLOR|ECBF_DEPTH), SColor clearColor = SColor(255,0,0,0), f32 clearDepth = 1.f, u8 clearStencil = 0,
 			const SExposedVideoData& videoData=SExposedVideoData(), core::rect<s32>* sourceRect = 0) = 0;
 
-		//! Old beginScene implementation for downward compatibility. Can't clearn stencil buffer, but otherwise identical to other beginScene
-		_IRR_DEPRECATED_ bool beginScene(bool backBuffer, bool zBuffer, SColor color = SColor(255,0,0,0),
+		//! Alternative beginScene implementation. Can't clear stencil buffer, but otherwise identical to other beginScene
+		bool beginScene(bool backBuffer, bool zBuffer, SColor color = SColor(255,0,0,0),
 			const SExposedVideoData& videoData = SExposedVideoData(), core::rect<s32>* sourceRect = 0)
 		{
 			u16 flag = 0;
@@ -390,7 +325,8 @@ namespace video
 		//! Creates an empty texture of specified size.
 		/** \param size: Size of the texture.
 		\param name A name for the texture. Later calls to
-		getTexture() with this name will return this texture
+		getTexture() with this name will return this texture.
+		The name can _not_ be empty.
 		\param format Desired color format of the texture. Please note
 		that the driver may choose to create the texture in another
 		color format.
@@ -402,7 +338,8 @@ namespace video
 
 		//! Creates a texture from an IImage.
 		/** \param name A name for the texture. Later calls of
-		getTexture() with this name will return this texture
+		getTexture() with this name will return this texture.
+		The name can _not_ be empty.
 		\param image Image the texture is created from.
 		\param mipmapData Optional pointer to a mipmaps data.
 		If this parameter is not given, the mipmaps are derived from image.
@@ -419,7 +356,8 @@ namespace video
 
 		//! Creates a texture from an IImage.
 		/** \param name A name for the texture. Later calls of
-		getTexture() with this name will return this texture
+		getTexture() with this name will return this texture.
+		The name can _not_ be empty.
 		\param image Image the texture is created from.
 		\return Pointer to the newly created texture. This pointer
 		should not be dropped. See IReferenceCounted::drop() for more
@@ -428,6 +366,7 @@ namespace video
 
 		//! Creates a cubemap texture from loaded IImages.
 		/** \param name A name for the texture. Later calls of getTexture() with this name will return this texture.
+		The name can _not_ be empty.
 		\param imagePosX Image (positive X) the texture is created from.
 		\param imageNegX Image (negative X) the texture is created from.
 		\param imagePosY Image (positive Y) the texture is created from.
@@ -443,7 +382,8 @@ namespace video
 		height should be a power of two (e.g. 64, 128, 256, 512, ...)
 		and it should not be bigger than the backbuffer, because it
 		shares the zbuffer with the screen buffer.
-		\param name An optional name for the RTT.
+		\param name A name for the texture. Later calls of getTexture() with this name will return this texture.
+		The name can _not_ be empty.
 		\param format The color format of the render target. Floating point formats are supported.
 		\return Pointer to the created texture or 0 if the texture
 		could not be created. This pointer should not be dropped. See
@@ -621,9 +561,9 @@ namespace video
 			f32 clearDepth = 1.f, u8 clearStencil = 0) = 0;
 
 		//! Sets a new render target.
-		// Prefer to use the setRenderTarget function taking flags as parameter as this one can't clear the stencil buffer.
-		// It's still offered for backward compatibility.
-		_IRR_DEPRECATED_ bool setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color = SColor(255,0,0,0))
+		//! Prefer to use the setRenderTarget function taking flags as parameter as this one can't clear the stencil buffer.
+		//! It's still offered for backward compatibility.
+		bool setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color = SColor(255,0,0,0))
 		{
 			u16 flag = 0;
 
@@ -966,8 +906,11 @@ namespace video
 		virtual void draw2DRectangleOutline(const core::recti& pos,
 				SColor color=SColor(255,255,255,255)) =0;
 
-		//! Draws a 2d line. Both start and end will be included in coloring.
-		/** \param start Screen coordinates of the start of the line
+		//! Draws a 2d line.
+		/** In theory both start and end will be included in coloring.
+		BUG: Currently hardware drivers (d3d/opengl) ignore the last pixel
+		(they use the so called "diamond exit rule" for drawing lines).
+		\param start Screen coordinates of the start of the line
 		in pixels.
 		\param end Screen coordinates of the start of the line in
 		pixels.
@@ -1550,6 +1493,10 @@ namespace video
 		*/
 		virtual void convertColor(const void* sP, ECOLOR_FORMAT sF, s32 sN,
 				void* dP, ECOLOR_FORMAT dF) const =0;
+
+		//! Check if the driver supports creating textures with the given color format
+		/**	\return True if the format is available, false if not. */
+		virtual bool queryTextureFormat(ECOLOR_FORMAT format) const = 0;
 	};
 
 } // end namespace video

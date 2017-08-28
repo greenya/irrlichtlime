@@ -214,6 +214,7 @@ public:
 	void MakeNormalMapTexture(Texture^ texture);
 
 	bool QueryFeature(VideoDriverFeature feature);
+	bool QueryTextureFormat(Video::ColorFormat format);
 
 	void RemoveAllHardwareBuffers();
 	void RemoveAllOcclusionQueries();

@@ -161,7 +161,8 @@ public enum class KeyCode
 	Play = KEY_PLAY,
 	Zoom = KEY_ZOOM,
 	PA1 = KEY_PA1,
-	OEM_Clear = KEY_OEM_CLEAR
+	OEM_Clear = KEY_OEM_CLEAR,
+	None = KEY_NONE
 };
 
 } // end namespace IrrlichtLime

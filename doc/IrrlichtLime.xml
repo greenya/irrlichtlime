@@ -118,7 +118,7 @@ This device uses the X11 windowing system and works in Linux, Solaris, FreeBSD, 
 			<param name="shift">True if shift was also pressed.</param>
 			<param name="control">True if ctrl was also pressed.</param>
 		</member>
-		<member name="M:IrrlichtLime.Event.#ctor(System.Int32,System.Int32)">
+		<member name="M:IrrlichtLime.Event.#ctor(System.IntPtr,System.IntPtr)">
 			<summary>Constructs user event.</summary>
 			<param name="userData1">Some user specified data as int.</param>
 			<param name="userData2">Another user specified data as int.</param>
@@ -714,6 +714,12 @@ This is an internal Irrlicht index; it does not map directly to any particular h
 		<member name="F:IrrlichtLime.KeyAction.MoveForward">
 			<summary>Move forward action.</summary>
 		</member>
+		<member name="F:IrrlichtLime.KeyAction.RotateLeft">
+			<summary>Rotate left action.</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyAction.RotateRight">
+			<summary>Rotate right action.</summary>
+		</member>
 		<member name="F:IrrlichtLime.KeyAction.StrafeLeft">
 			<summary>Strafe left action.</summary>
 		</member>
@@ -1040,6 +1046,9 @@ This is an internal Irrlicht index; it does not map directly to any particular h
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Multiply">
 			<summary>Multiply key</summary>
+		</member>
+		<member name="F:IrrlichtLime.KeyCode.None">
+			<summary>Usually no key mapping, but some laptops use it for fn key.</summary>
 		</member>
 		<member name="F:IrrlichtLime.KeyCode.Num0">
 			<summary>Numeric keypad 0 key</summary>
@@ -2172,6 +2181,25 @@ NOTE: You will have the same end-rotation as set in Rotation, but it might not u
 			<summary>Creates separate copy.</summary>
 			<param name="copy">Value to copy.</param>
 		</member>
+		<member name="M:IrrlichtLime.Core.Matrix.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+			<summary>Constructor with value initialization</summary>
+			<param name="r0c0">Row 0, column 0.</param>
+			<param name="r0c1">Row 0, column 1.</param>
+			<param name="r0c2">Row 0, column 2.</param>
+			<param name="r0c3">Row 0, column 3.</param>
+			<param name="r1c0">Row 1, column 0.</param>
+			<param name="r1c1">Row 1, column 1.</param>
+			<param name="r1c2">Row 1, column 2.</param>
+			<param name="r1c3">Row 1, column 3.</param>
+			<param name="r2c0">Row 2, column 0.</param>
+			<param name="r2c1">Row 2, column 1.</param>
+			<param name="r2c2">Row 2, column 2.</param>
+			<param name="r2c3">Row 2, column 3.</param>
+			<param name="r3c0">Row 3, column 0.</param>
+			<param name="r3c1">Row 3, column 1.</param>
+			<param name="r3c2">Row 3, column 2.</param>
+			<param name="r3c3">Row 3, column 3.</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Matrix.#ctor(IrrlichtLime.Core.Vector3Df)">
 			<summary>Creates new matrix with provided initial values.</summary>
 			<param name="translation">Translation vector. Default: (0).</param>
@@ -2517,6 +2545,13 @@ Returns how many floats have been written (always 4).</summary>
 			<param name="m">The matrix, to write to.</param>
 			<param name="center">Rotation vector.</param>
 			<param name="translation">Translation vector.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrixFast">
+			<summary>Faster method to create a rotation matrix, you should normalize the quaternion before!</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrixFast(IrrlichtLime.Core.Matrix)">
+			<summary>Faster method to create a rotation matrix, you should normalize the quaternion before!</summary>
+			<param name="m">The matrix, to write to.</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Quaternion.GetMatrixTransposed">
 			<summary>Creates a matrix from this quaternion.</summary>
@@ -3064,6 +3099,22 @@ This method uses a barycentric coordinate system. It is faster than IsPointInsid
 		<member name="P:IrrlichtLime.Core.Vector2Dd.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.AreClockwise(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns true if points (a,b,c) are clockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.AreCounterClockwise(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Returns true if points (a,b,c) are counterclockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.CheckOrientation(IrrlichtLime.Core.Vector2Dd,IrrlichtLime.Core.Vector2Dd)">
+			<summary>Test if this point and another 2 points taken as triplet are colinear, clockwise, anticlockwise. This can be used also to check winding order in triangles for 2D meshes.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+			<returns>0 if points are colinear, 1 if clockwise, 2 if anticlockwise.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.CompareTo(IrrlichtLime.Core.Vector2Dd)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
 			<param name="other">The vector to compare with.</param>
@@ -3132,6 +3183,15 @@ It is assumed that the point is on the line.</summary>
 		<member name="P:IrrlichtLime.Core.Vector2Dd.LengthSQ">
 			<summary>The squared length of the vector.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.NearlyParallel(IrrlichtLime.Core.Vector2Dd)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Dd.NearlyParallel(IrrlichtLime.Core.Vector2Dd,System.Double)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+			<param name="factor">Maximum allowed error factor. Default: 4</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Dd.Normalize">
 			<summary>Normalizes the vector.
 
@@ -3181,6 +3241,22 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Df.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.AreClockwise(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns true if points (a,b,c) are clockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.AreCounterClockwise(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Returns true if points (a,b,c) are counterclockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.CheckOrientation(IrrlichtLime.Core.Vector2Df,IrrlichtLime.Core.Vector2Df)">
+			<summary>Test if this point and another 2 points taken as triplet are colinear, clockwise, anticlockwise. This can be used also to check winding order in triangles for 2D meshes.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+			<returns>0 if points are colinear, 1 if clockwise, 2 if anticlockwise.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.CompareTo(IrrlichtLime.Core.Vector2Df)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
@@ -3250,6 +3326,15 @@ It is assumed that the point is on the line.</summary>
 		<member name="P:IrrlichtLime.Core.Vector2Df.LengthSQ">
 			<summary>The squared length of the vector.</summary>
 		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.NearlyParallel(IrrlichtLime.Core.Vector2Df)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Df.NearlyParallel(IrrlichtLime.Core.Vector2Df,System.Single)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+			<param name="factor">Maximum allowed error factor. Default: 8</param>
+		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Df.Normalize">
 			<summary>Normalizes the vector.
 
@@ -3299,6 +3384,22 @@ The null vector is left untouched.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.AngleTrig">
 			<summary>Value between 0 and 360. The angle of this vector in degrees in the trigonometric sense. 0 is to the right (3 o'clock), values increase counter-clockwise. This method has been suggested by Pr3t3nd3r.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.AreClockwise(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns true if points (a,b,c) are clockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.AreCounterClockwise(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Returns true if points (a,b,c) are counterclockwise on the X,Y plane.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.CheckOrientation(IrrlichtLime.Core.Vector2Di,IrrlichtLime.Core.Vector2Di)">
+			<summary>Test if this point and another 2 points taken as triplet are colinear, clockwise, anticlockwise. This can be used also to check winding order in triangles for 2D meshes.</summary>
+			<param name="b">Second point in triangle.</param>
+			<param name="c">Third point in triangle.</param>
+			<returns>0 if points are colinear, 1 if clockwise, 2 if anticlockwise.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.CompareTo(IrrlichtLime.Core.Vector2Di)">
 			<summary>Returns -1 if this vector is smaller than the other, 0 if they are equal (with default tolerance) and +1 if this vector is bigger than the other.</summary>
@@ -3367,6 +3468,15 @@ It is assumed that the point is on the line.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Core.Vector2Di.LengthSQ">
 			<summary>The squared length of the vector.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.NearlyParallel(IrrlichtLime.Core.Vector2Di)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+		</member>
+		<member name="M:IrrlichtLime.Core.Vector2Di.NearlyParallel(IrrlichtLime.Core.Vector2Di,System.Int32)">
+			<summary>Check if this vector is parallel to another vector.</summary>
+			<param name="other">The vector to compare with.</param>
+			<param name="factor">Maximum allowed error factor. Default: 1</param>
 		</member>
 		<member name="M:IrrlichtLime.Core.Vector2Di.Normalize">
 			<summary>Normalizes the vector.
@@ -8335,7 +8445,7 @@ Irrlicht is internally not case-sensitive when it comes to names.</summary>
 			<summary>Name of the file.</summary>
 		</member>
 		<member name="P:IrrlichtLime.IO.ReadFile.Position">
-			<summary>Current position in the file in bytes.</summary>
+			<summary>Current position in the file in bytes on success or -1 on failure.</summary>
 		</member>
 		<member name="M:IrrlichtLime.IO.ReadFile.Read(System.Int32)">
 			<summary>Reads an amount of bytes from the file.</summary>
@@ -8441,7 +8551,7 @@ The stream must be able to read and to seek.</summary>
 			<returns>True if successful, otherwise false.</returns>
 		</member>
 		<member name="P:IrrlichtLime.IO.WriteFile.Position">
-			<summary>Current position in the file in bytes.</summary>
+			<summary>Current position in the file in bytes on success or -1L on failure.</summary>
 		</member>
 		<member name="M:IrrlichtLime.IO.WriteFile.Seek(System.Int32)">
 			<summary>Changes position in file.</summary>
@@ -8768,6 +8878,11 @@ A billboard is like a 3d sprite: A 2d element, which always looks to the camera.
 			<param name="bottomWidth">The width of the bottom edge of the billboard.</param>
 			<param name="topWidth">The width of the top edge of the billboard.</param>
 		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardSceneNode.GetTransformedBillboardBoundingBox(IrrlichtLime.Scene.CameraSceneNode)">
+			<summary>Get the real boundingbox used by the billboard, which can depend on the active camera.
+The boundingbox returned will use absolute coordinates.</summary>
+			<param name="camera">The camera.</param>
+		</member>
 		<member name="P:IrrlichtLime.Scene.BillboardSceneNode.Height">
 			<summary>The height of the billboard.</summary>
 		</member>
@@ -8787,6 +8902,12 @@ A billboard is like a 3d sprite: A 2d element, which always looks to the camera.
 			<summary>A billboard text scene node.
 
 Acts like a billboard which displays the currently set text.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.BillboardTextSceneNode.Font">
+			<summary>Get the font used to draw the text.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.BillboardTextSceneNode.GetText">
+			<summary>Get the text string.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.BillboardTextSceneNode.SetText(System.String)">
 			<summary>Sets the text string.</summary>
@@ -8853,9 +8974,12 @@ Used with SkinnedMesh and AnimatedMeshSceneNode.</summary>
 			<summary>The speed of movement in units per millisecond.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.RotateSpeed">
-			<summary>The rotation speed in degrees.
+			<summary>The rotation speed in degrees when using mouse.
 
 The degrees are equivalent to a half screen movement of the mouse, i.e. if the mouse cursor had been moved to the border of the screen since the last animation.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.RotateSpeedKeyboard">
+			<summary>Rotation speed when using keyboard.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.CameraFPSSceneNodeAnimator.SetInvertMouse(System.Boolean)">
 			<summary>Sets whether the Y axis of the mouse should be inverted.
@@ -9070,10 +9194,10 @@ Usually they will try to fill it when they can and set values to 0 otherwise.</s
 Is null when the TriangleSelector doesn't support meshbuffer selection.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CollisionTriangleRange.RangeSize">
-			<summary>Number of elements in the array for which this struct is valid (starting with RangeStart).</summary>
+			<summary>Number of elements in the returned triangle array for which this struct is valid (starting with RangeStart).</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CollisionTriangleRange.RangeStart">
-			<summary>First index in the array for which this struct is valid.</summary>
+			<summary>First index in the returned triangle array for which this struct is valid.</summary>
 		</member>
 		<member name="P:IrrlichtLime.Scene.CollisionTriangleRange.SceneNode">
 			<summary>SceneNode from which the triangles are from.</summary>
@@ -9722,6 +9846,14 @@ For a seperate copy, please use ToArray().</summary>
 		<member name="P:IrrlichtLime.Scene.MeshBuffer.Material">
 			<summary>The material of this mesh buffer.</summary>
 		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.PrimitiveCount">
+			<summary>Calculate how many geometric primitives are used by this meshbuffer.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.MeshBuffer.PrimitiveType">
+			<summary>The kind of primitive geometry which is used by the meshbuffer.
+Note: Default is EPT_TRIANGLES. Using other types is fine for rendering.
+But meshbuffer manipulation functions might expect type TRIANGLES to work correctly. Also mesh writers will generally fail (badly!) with other types than TRIANGLES.</summary>
+		</member>
 		<member name="M:IrrlichtLime.Scene.MeshBuffer.RecalculateBoundingBox">
 			<summary>Recalculates the bounding box. Should be called if the mesh buffer has changed.</summary>
 		</member>
@@ -10270,6 +10402,37 @@ This is nothing more than a collection of one or more triangle selectors providi
 			<summary>Removes a specific triangle selector from the collection.</summary>
 			<param name="selector">Triangle selector which is in the list but will be removed.</param>
 			<returns>True if successful, false if not.</returns>
+		</member>
+		<member name="T:IrrlichtLime.Scene.OctreePolygonChecks">
+			<summary>Kind of checks polygons of the octree scene nodes use against camera.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.OctreePolygonChecks.Box">
+			<summary>Check against box of the camera frustum (default).</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.OctreePolygonChecks.Frustum">
+			<summary>Check against the camera frustum.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.OctreeSceneNode">
+			<summary>A scene node displaying a static mesh.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.OctreeSceneNode.PolygonChecks">
+			<summary>Set the kind of tests polygons do for visibility against the camera.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.OctreeSceneNode.UseVBO">
+			<summary>Set if/how vertex buffer object are used for the meshbuffers.
+NOTE: When there is already a mesh in the node this will rebuild the octree.</summary>
+		</member>
+		<member name="T:IrrlichtLime.Scene.OctreeVBO">
+			<summary>Settings if/how octree scene nodes are using hardware mesh-buffers.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.OctreeVBO.NoVBO">
+			<summary>No VBO's used. Vertices+indices send to graphic-card on each render.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.OctreeVBO.UseVBO">
+			<summary>VBO's used. Draw the complete meshbuffers if any polygon in it is visible.</summary>
+		</member>
+		<member name="F:IrrlichtLime.Scene.OctreeVBO.USeVBOWithVisibility">
+			<summary>VBO's used. The index-buffer information is updated each frame with only the visible parts of a tree-node (default).</summary>
 		</member>
 		<member name="T:IrrlichtLime.Scene.Particle">
 			<summary>Holding particle data.</summary>
@@ -11313,13 +11476,18 @@ If they are, the particles are affected by the movement of the particle system s
 			<summary>The single vertices are expanded to quad billboards on the GPU.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Scene.PrimitiveType.Polygon">
-			<summary>Just as LineLoop, but filled.</summary>
+			<summary>Just as LineLoop, but filled.
+Not supported by Direct3D.
+Deprecated with newer OpenGL drivers.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Scene.PrimitiveType.Quads">
-			<summary>Every four vertices create a quad.</summary>
+			<summary>Every four vertices create a quad.
+Not supported by Direct3D.
+Deprecated with newer OpenGL drivers.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Scene.PrimitiveType.QuadStrip">
-			<summary>After the first two vertices each further two vertices create a quad with the preceding two.</summary>
+			<summary>After the first two vertices each further two vertices create a quad with the preceding two.
+Not supported by Direct3D.</summary>
 		</member>
 		<member name="F:IrrlichtLime.Scene.PrimitiveType.TriangleFan">
 			<summary>After the first two vertices each vertex defines a new triangle. All around the common first vertex.</summary>
@@ -13644,6 +13812,35 @@ Stereolithography (.stl).</summary>
 			<param name="filename">Mesh to load.</param>
 			<returns>Pointer on the loaded mesh or null if loading failed.</returns>
 		</member>
+		<member name="M:IrrlichtLime.Scene.SceneManager.GetMesh(System.String,System.String)">
+			<summary>Gets a pointer to an animateable mesh. Loads the file if not loaded already. If you want to remove a loaded mesh from the cache again, use RemoveMesh().
+
+Currently there are the following mesh formats supported:
+3D Studio (.3ds),
+3D World Studio (.smf),
+Bliz Basic B3D (.b3d),
+Cartography shop 4 (.csm),
+COLLADA (.dae, .xml),
+Delgine DeleD (.dmf),
+DirectX (.x),
+Half-Life model (.mdl),
+Irrlicht Mesh (.irrMesh),
+LightWave (.lwo),
+Maya (.obj),
+Milkshape (.ms3d),
+My3D (.my3d),
+OCT (.oct),
+OGRE Meshes (.mesh),
+Pulsar LMTools (.lmts),
+Quake 3 levels (.bsp),
+Quake 2 models (.md2),
+Quake 3 models (.md3),
+Stanford Triangle (.ply),
+Stereolithography (.stl).</summary>
+			<param name="filename">Mesh to load.</param>
+			<param name="alternativeCacheName">In case you want to have the mesh under another name in the cache (to create real copies).</param>
+			<returns>Pointer on the loaded mesh or null if loading failed.</returns>
+		</member>
 		<member name="M:IrrlichtLime.Scene.SceneManager.GetMeshLoader(System.Int32)">
 			<summary>Gets specific mesh loader.</summary>
 			<param name="index">The index of the loader to retrieve. Must be from 0 to MeshLoaderCount-1.</param>
@@ -14369,6 +14566,9 @@ A scene node type is represented by a four character code such as 'cube' or 'mes
 		<member name="F:IrrlichtLime.Scene.SceneNodeType.Billboard">
 			<summary>Billboard scene node.</summary>
 		</member>
+		<member name="F:IrrlichtLime.Scene.SceneNodeType.BillboardText">
+			<summary>Billboard text scene node.</summary>
+		</member>
 		<member name="F:IrrlichtLime.Scene.SceneNodeType.Camera">
 			<summary>Camera scene node.</summary>
 		</member>
@@ -14800,6 +15000,15 @@ For determining the LOD a patch is rendered at. If any LOD is overridden, then t
 		</member>
 		<member name="T:IrrlichtLime.Scene.TextSceneNode">
 			<summary>A scene node for displaying 2d text at a position in three dimensional space.</summary>
+		</member>
+		<member name="P:IrrlichtLime.Scene.TextSceneNode.Font">
+			<summary>The font used to draw the text.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TextSceneNode.GetText">
+			<summary>Get the text string.</summary>
+		</member>
+		<member name="M:IrrlichtLime.Scene.TextSceneNode.GetTextColor">
+			<summary>Get the color of the text.</summary>
 		</member>
 		<member name="M:IrrlichtLime.Scene.TextSceneNode.SetText(System.String)">
 			<summary>Sets the text string.</summary>
@@ -18116,39 +18325,39 @@ Use node for identification and mesh for occlusion test.</summary>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di,System.String)">
 			<summary>Adds a new render target texture to the texture cache.</summary>
 			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
-			<param name="name">An optional name for the RTT. Default: "rt".</param>
+			<param name="name">An optional name for the RTT. Default: "rt". Cannot be empty.</param>
 			<returns>Pointer to the created texture or null if the texture could not be created.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddRenderTargetTexture(IrrlichtLime.Core.Dimension2Di,System.String,IrrlichtLime.Video.ColorFormat)">
 			<summary>Adds a new render target texture to the texture cache.</summary>
 			<param name="size">Size of the texture, in pixels. Width and height should be a power of two (e.g. 64, 128, 256, 512, ...) and it should not be bigger than the backbuffer, because it shares the zbuffer with the screen buffer.</param>
-			<param name="name">An optional name for the RTT. Default: "rt".</param>
+			<param name="name">An optional name for the RTT. Default: "rt". Cannot be empty.</param>
 			<param name="format">The color format of the render target. Floating point formats are supported. Default: ColorFormat.Unknown.</param>
 			<returns>Pointer to the created texture or null if the texture could not be created.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(System.String,IrrlichtLime.Video.Image)">
 			<summary>Creates a texture from an Image object.</summary>
-			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="name">Name for the texture. Cannot be empty. Later calls of GetTexture() with this name will return this texture.</param>
 			<param name="image">Image the texture is created from.</param>
 			<returns>Pointer to the newly created texture.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(IrrlichtLime.Core.Dimension2Di,System.String)">
 			<summary>Creates an empty texture of specified size.</summary>
 			<param name="size">Size of the texture.</param>
-			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="name">Name for the texture. Cannot be empty. Later calls of GetTexture() with this name will return this texture.</param>
 			<returns>Pointer to the newly created texture.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddTexture(IrrlichtLime.Core.Dimension2Di,System.String,IrrlichtLime.Video.ColorFormat)">
 			<summary>Creates an empty texture of specified size.</summary>
 			<param name="size">Size of the texture.</param>
-			<param name="name">Name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="name">Name for the texture. Cannot be empty. Later calls of GetTexture() with this name will return this texture.</param>
 			<param name="format">Desired color format of the texture. Please note that the driver may choose to create the texture in another color format. Default: ColorFormat.A8R8G8B8.</param>
 			<returns>Pointer to the newly created texture.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.AddTextureCubemap(System.String,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image,IrrlichtLime.Video.Image)">
 			<summary>Creates a cubemap texture from loaded Images.
 Returns the newly created texture. This pointer should not be dropped.</summary>
-			<param name="name">A name for the texture. Later calls of GetTexture() with this name will return this texture.</param>
+			<param name="name">A name for the texture. Cannot be empty. Later calls of GetTexture() with this name will return this texture.</param>
 			<param name="imagePosX">Image (positive X) the texture is created from.</param>
 			<param name="imageNegX">Image (negative X) the texture is created from.</param>
 			<param name="imagePosY">Image (positive Y) the texture is created from.</param>
@@ -19006,6 +19215,11 @@ This material allows to alter certain render states of the 2d methods. Not all m
 Returns true if the feature is available.</summary>
 			<param name="feature">Feature to query.</param>
 			<returns>True if the feature is available, false if not.</returns>
+		</member>
+		<member name="M:IrrlichtLime.Video.VideoDriver.QueryTextureFormat(IrrlichtLime.Video.ColorFormat)">
+			<summary>Check if the driver supports creating textures with the given color format.</summary>
+			<param name="format">Format to query.</param>
+			<returns>True if the format is available, false if not.</returns>
 		</member>
 		<member name="M:IrrlichtLime.Video.VideoDriver.RemoveAllHardwareBuffers">
 			<summary>Removes all hardware buffers.</summary>
