@@ -1,0 +1,8 @@
+obj/
+bin/
+*.user
+/.vs/
+/source/Debug/
+/source/Debug-x64/
+/source/Release/
+/source/Release-x64/
