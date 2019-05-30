@@ -1,0 +1,3 @@
+https://github.com/AndresTraks/BulletSharp
+Version 2.87
+"Release Generic" 

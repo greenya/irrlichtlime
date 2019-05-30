@@ -9,13 +9,6 @@ using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
 using IrrlichtLime.GUI;
 
-// NOTE: this example requires BulletSharp.dll for compiling and for running.
-
-// Well, I don't want to ship 1.6 megs dll with Lime just for this example.
-// In future if there are will be more examples using BulletSharp.dll - probably i will include it into Lime package.
-// For now I will left it like this - if you want to see example running - you should download dll manually.
-// See checkBulletSharpDllPresence() implementation for more details: what url and what version to use.
-
 namespace L11.BulletSharpTest
 {
 	class Program
@@ -59,8 +52,6 @@ namespace L11.BulletSharpTest
 
 		static void Main(string[] args)
 		{
-			checkBulletSharpDllPresence();
-
 			// setup Irrlicht
             DriverType driverType;
             if (!AskUserForDriver(out driverType))
@@ -245,32 +236,6 @@ namespace L11.BulletSharpTest
 			}
 
 			return false;
-		}
-
-		static void checkBulletSharpDllPresence()
-		{
-			const string bulletSharpDllFilename = "BulletSharp.dll";
-			const string bulletSharpUrl = "http://code.google.com/p/bulletsharp/";
-			const string bulletSharpDllUrl = "http://code.google.com/p/bulletsharp/downloads/detail?name=bulletsharp-r396.zip";
-
-			if (System.IO.File.Exists(bulletSharpDllFilename))
-				return;
-
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine(bulletSharpDllFilename + " not found.");
-			Console.ForegroundColor = ConsoleColor.Gray;
-			Console.WriteLine();
-			Console.WriteLine("If you want to run this example you have to place it near this EXE file.");
-			Console.WriteLine("This example was tested with bulletsharp-r396 a \"Release Generic\" dll.");
-			Console.WriteLine("You can get it from " + bulletSharpUrl);
-			Console.WriteLine();
-			Console.WriteLine("Press any key to exit or F1 if you want to navigate your web browser right now.");
-
-			ConsoleKeyInfo k = Console.ReadKey();
-			if (k.Key == ConsoleKey.F1)
-				System.Diagnostics.Process.Start(bulletSharpDllUrl);
-
-			Environment.Exit(0);
 		}
 	}
 }
