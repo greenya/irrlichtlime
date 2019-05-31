@@ -289,25 +289,27 @@ namespace core
 			bool getInverse(CMatrix4<T>& out) const;
 
 			//! Builds a right-handed perspective projection matrix based on a field of view
-			CMatrix4<T>& buildProjectionMatrixPerspectiveFovRH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar);
+			//\param zClipFromZero: Clipping of z can be projected from 0 to w when true (D3D style) and from -w to w when false (OGL style).
+			CMatrix4<T>& buildProjectionMatrixPerspectiveFovRH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a left-handed perspective projection matrix based on a field of view
-			CMatrix4<T>& buildProjectionMatrixPerspectiveFovLH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar);
+			CMatrix4<T>& buildProjectionMatrixPerspectiveFovLH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a left-handed perspective projection matrix based on a field of view, with far plane at infinity
 			CMatrix4<T>& buildProjectionMatrixPerspectiveFovInfinityLH(f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 epsilon=0);
 
 			//! Builds a right-handed perspective projection matrix.
-			CMatrix4<T>& buildProjectionMatrixPerspectiveRH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar);
+			CMatrix4<T>& buildProjectionMatrixPerspectiveRH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a left-handed perspective projection matrix.
-			CMatrix4<T>& buildProjectionMatrixPerspectiveLH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar);
+			CMatrix4<T>& buildProjectionMatrixPerspectiveLH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a left-handed orthogonal projection matrix.
-			CMatrix4<T>& buildProjectionMatrixOrthoLH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar);
+			//\param zClipFromZero: Clipping of z can be projected from 0 to 1 when true (D3D style) and from -1 to 1 when false (OGL style).
+			CMatrix4<T>& buildProjectionMatrixOrthoLH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a right-handed orthogonal projection matrix.
-			CMatrix4<T>& buildProjectionMatrixOrthoRH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar);
+			CMatrix4<T>& buildProjectionMatrixOrthoRH(f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero=true);
 
 			//! Builds a left-handed look-at matrix.
 			CMatrix4<T>& buildCameraLookAtMatrixLH(
@@ -1235,9 +1237,8 @@ namespace core
 		// Transform the normal by the transposed inverse of the matrix
 		CMatrix4<T> transposedInverse(*this, EM4CONST_INVERSE_TRANSPOSED);
 		vector3df normal = plane.Normal;
-		transposedInverse.transformVect(normal);
-
-		plane.setPlane(member, normal);
+		transposedInverse.rotateVect(normal);
+		plane.setPlane(member, normal.normalize());
 	}
 
 	//! Transforms a plane by this matrix
@@ -1371,66 +1372,66 @@ namespace core
 #endif
 		const CMatrix4<T> &m = *this;
 
-		f32 d = (m(0, 0) * m(1, 1) - m(0, 1) * m(1, 0)) * (m(2, 2) * m(3, 3) - m(2, 3) * m(3, 2)) -
-			(m(0, 0) * m(1, 2) - m(0, 2) * m(1, 0)) * (m(2, 1) * m(3, 3) - m(2, 3) * m(3, 1)) +
-			(m(0, 0) * m(1, 3) - m(0, 3) * m(1, 0)) * (m(2, 1) * m(3, 2) - m(2, 2) * m(3, 1)) +
-			(m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)) * (m(2, 0) * m(3, 3) - m(2, 3) * m(3, 0)) -
-			(m(0, 1) * m(1, 3) - m(0, 3) * m(1, 1)) * (m(2, 0) * m(3, 2) - m(2, 2) * m(3, 0)) +
-			(m(0, 2) * m(1, 3) - m(0, 3) * m(1, 2)) * (m(2, 0) * m(3, 1) - m(2, 1) * m(3, 0));
+		f32 d = (m[0] * m[5] - m[1] * m[4]) * (m[10] * m[15] - m[11] * m[14]) -
+			(m[0] * m[6] - m[2] * m[4]) * (m[9] * m[15] - m[11] * m[13]) +
+			(m[0] * m[7] - m[3] * m[4]) * (m[9] * m[14] - m[10] * m[13]) +
+			(m[1] * m[6] - m[2] * m[5]) * (m[8] * m[15] - m[11] * m[12]) -
+			(m[1] * m[7] - m[3] * m[5]) * (m[8] * m[14] - m[10] * m[12]) +
+			(m[2] * m[7] - m[3] * m[6]) * (m[8] * m[13] - m[9] * m[12]);
 
 		if( core::iszero ( d, FLT_MIN ) )
 			return false;
 
 		d = core::reciprocal ( d );
 
-		out(0, 0) = d * (m(1, 1) * (m(2, 2) * m(3, 3) - m(2, 3) * m(3, 2)) +
-				m(1, 2) * (m(2, 3) * m(3, 1) - m(2, 1) * m(3, 3)) +
-				m(1, 3) * (m(2, 1) * m(3, 2) - m(2, 2) * m(3, 1)));
-		out(0, 1) = d * (m(2, 1) * (m(0, 2) * m(3, 3) - m(0, 3) * m(3, 2)) +
-				m(2, 2) * (m(0, 3) * m(3, 1) - m(0, 1) * m(3, 3)) +
-				m(2, 3) * (m(0, 1) * m(3, 2) - m(0, 2) * m(3, 1)));
-		out(0, 2) = d * (m(3, 1) * (m(0, 2) * m(1, 3) - m(0, 3) * m(1, 2)) +
-				m(3, 2) * (m(0, 3) * m(1, 1) - m(0, 1) * m(1, 3)) +
-				m(3, 3) * (m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)));
-		out(0, 3) = d * (m(0, 1) * (m(1, 3) * m(2, 2) - m(1, 2) * m(2, 3)) +
-				m(0, 2) * (m(1, 1) * m(2, 3) - m(1, 3) * m(2, 1)) +
-				m(0, 3) * (m(1, 2) * m(2, 1) - m(1, 1) * m(2, 2)));
-		out(1, 0) = d * (m(1, 2) * (m(2, 0) * m(3, 3) - m(2, 3) * m(3, 0)) +
-				m(1, 3) * (m(2, 2) * m(3, 0) - m(2, 0) * m(3, 2)) +
-				m(1, 0) * (m(2, 3) * m(3, 2) - m(2, 2) * m(3, 3)));
-		out(1, 1) = d * (m(2, 2) * (m(0, 0) * m(3, 3) - m(0, 3) * m(3, 0)) +
-				m(2, 3) * (m(0, 2) * m(3, 0) - m(0, 0) * m(3, 2)) +
-				m(2, 0) * (m(0, 3) * m(3, 2) - m(0, 2) * m(3, 3)));
-		out(1, 2) = d * (m(3, 2) * (m(0, 0) * m(1, 3) - m(0, 3) * m(1, 0)) +
-				m(3, 3) * (m(0, 2) * m(1, 0) - m(0, 0) * m(1, 2)) +
-				m(3, 0) * (m(0, 3) * m(1, 2) - m(0, 2) * m(1, 3)));
-		out(1, 3) = d * (m(0, 2) * (m(1, 3) * m(2, 0) - m(1, 0) * m(2, 3)) +
-				m(0, 3) * (m(1, 0) * m(2, 2) - m(1, 2) * m(2, 0)) +
-				m(0, 0) * (m(1, 2) * m(2, 3) - m(1, 3) * m(2, 2)));
-		out(2, 0) = d * (m(1, 3) * (m(2, 0) * m(3, 1) - m(2, 1) * m(3, 0)) +
-				m(1, 0) * (m(2, 1) * m(3, 3) - m(2, 3) * m(3, 1)) +
-				m(1, 1) * (m(2, 3) * m(3, 0) - m(2, 0) * m(3, 3)));
-		out(2, 1) = d * (m(2, 3) * (m(0, 0) * m(3, 1) - m(0, 1) * m(3, 0)) +
-				m(2, 0) * (m(0, 1) * m(3, 3) - m(0, 3) * m(3, 1)) +
-				m(2, 1) * (m(0, 3) * m(3, 0) - m(0, 0) * m(3, 3)));
-		out(2, 2) = d * (m(3, 3) * (m(0, 0) * m(1, 1) - m(0, 1) * m(1, 0)) +
-				m(3, 0) * (m(0, 1) * m(1, 3) - m(0, 3) * m(1, 1)) +
-				m(3, 1) * (m(0, 3) * m(1, 0) - m(0, 0) * m(1, 3)));
-		out(2, 3) = d * (m(0, 3) * (m(1, 1) * m(2, 0) - m(1, 0) * m(2, 1)) +
-				m(0, 0) * (m(1, 3) * m(2, 1) - m(1, 1) * m(2, 3)) +
-				m(0, 1) * (m(1, 0) * m(2, 3) - m(1, 3) * m(2, 0)));
-		out(3, 0) = d * (m(1, 0) * (m(2, 2) * m(3, 1) - m(2, 1) * m(3, 2)) +
-				m(1, 1) * (m(2, 0) * m(3, 2) - m(2, 2) * m(3, 0)) +
-				m(1, 2) * (m(2, 1) * m(3, 0) - m(2, 0) * m(3, 1)));
-		out(3, 1) = d * (m(2, 0) * (m(0, 2) * m(3, 1) - m(0, 1) * m(3, 2)) +
-				m(2, 1) * (m(0, 0) * m(3, 2) - m(0, 2) * m(3, 0)) +
-				m(2, 2) * (m(0, 1) * m(3, 0) - m(0, 0) * m(3, 1)));
-		out(3, 2) = d * (m(3, 0) * (m(0, 2) * m(1, 1) - m(0, 1) * m(1, 2)) +
-				m(3, 1) * (m(0, 0) * m(1, 2) - m(0, 2) * m(1, 0)) +
-				m(3, 2) * (m(0, 1) * m(1, 0) - m(0, 0) * m(1, 1)));
-		out(3, 3) = d * (m(0, 0) * (m(1, 1) * m(2, 2) - m(1, 2) * m(2, 1)) +
-				m(0, 1) * (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2)) +
-				m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0)));
+		out[0] = d * (m[5] * (m[10] * m[15] - m[11] * m[14]) +
+				m[6] * (m[11] * m[13] - m[9] * m[15]) +
+				m[7] * (m[9] * m[14] - m[10] * m[13]));
+		out[1] = d * (m[9] * (m[2] * m[15] - m[3] * m[14]) +
+				m[10] * (m[3] * m[13] - m[1] * m[15]) +
+				m[11] * (m[1] * m[14] - m[2] * m[13]));
+		out[2] = d * (m[13] * (m[2] * m[7] - m[3] * m[6]) +
+				m[14] * (m[3] * m[5] - m[1] * m[7]) +
+				m[15] * (m[1] * m[6] - m[2] * m[5]));
+		out[3] = d * (m[1] * (m[7] * m[10] - m[6] * m[11]) +
+				m[2] * (m[5] * m[11] - m[7] * m[9]) +
+				m[3] * (m[6] * m[9] - m[5] * m[10]));
+		out[4] = d * (m[6] * (m[8] * m[15] - m[11] * m[12]) +
+				m[7] * (m[10] * m[12] - m[8] * m[14]) +
+				m[4] * (m[11] * m[14] - m[10] * m[15]));
+		out[5] = d * (m[10] * (m[0] * m[15] - m[3] * m[12]) +
+				m[11] * (m[2] * m[12] - m[0] * m[14]) +
+				m[8] * (m[3] * m[14] - m[2] * m[15]));
+		out[6] = d * (m[14] * (m[0] * m[7] - m[3] * m[4]) +
+				m[15] * (m[2] * m[4] - m[0] * m[6]) +
+				m[12] * (m[3] * m[6] - m[2] * m[7]));
+		out[7] = d * (m[2] * (m[7] * m[8] - m[4] * m[11]) +
+				m[3] * (m[4] * m[10] - m[6] * m[8]) +
+				m[0] * (m[6] * m[11] - m[7] * m[10]));
+		out[8] = d * (m[7] * (m[8] * m[13] - m[9] * m[12]) +
+				m[4] * (m[9] * m[15] - m[11] * m[13]) +
+				m[5] * (m[11] * m[12] - m[8] * m[15]));
+		out[9] = d * (m[11] * (m[0] * m[13] - m[1] * m[12]) +
+				m[8] * (m[1] * m[15] - m[3] * m[13]) +
+				m[9] * (m[3] * m[12] - m[0] * m[15]));
+		out[10] = d * (m[15] * (m[0] * m[5] - m[1] * m[4]) +
+				m[12] * (m[1] * m[7] - m[3] * m[5]) +
+				m[13] * (m[3] * m[4] - m[0] * m[7]));
+		out[11] = d * (m[3] * (m[5] * m[8] - m[4] * m[9]) +
+				m[0] * (m[7] * m[9] - m[5] * m[11]) +
+				m[1] * (m[4] * m[11] - m[7] * m[8]));
+		out[12] = d * (m[4] * (m[10] * m[13] - m[9] * m[14]) +
+				m[5] * (m[8] * m[14] - m[10] * m[12]) +
+				m[6] * (m[9] * m[12] - m[8] * m[13]));
+		out[13] = d * (m[8] * (m[2] * m[13] - m[1] * m[14]) +
+				m[9] * (m[0] * m[14] - m[2] * m[12]) +
+				m[10] * (m[1] * m[12] - m[0] * m[13]));
+		out[14] = d * (m[12] * (m[2] * m[5] - m[1] * m[6]) +
+				m[13] * (m[0] * m[6] - m[2] * m[4]) +
+				m[14] * (m[1] * m[4] - m[0] * m[5]));
+		out[15] = d * (m[0] * (m[5] * m[10] - m[6] * m[9]) +
+				m[1] * (m[6] * m[8] - m[4] * m[10]) +
+				m[2] * (m[4] * m[9] - m[5] * m[8]));
 
 #if defined ( USE_MATRIX_TEST )
 		out.definitelyIdentityMatrix = definitelyIdentityMatrix;
@@ -1542,7 +1543,7 @@ namespace core
 	// Builds a right-handed perspective projection matrix based on a field of view
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixPerspectiveFovRH(
-			f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar)
+			f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		const f64 h = reciprocal(tan(fieldOfViewRadians*0.5));
 		_IRR_DEBUG_BREAK_IF(aspectRatio==0.f); //divide by zero
@@ -1561,15 +1562,24 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(zFar/(zNear-zFar)); // DirectX version
-//		M[10] = (T)(zFar+zNear/(zNear-zFar)); // OpenGL version
+		//M[10]
 		M[11] = -1;
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear*zFar/(zNear-zFar)); // DirectX version
-//		M[14] = (T)(2.0f*zNear*zFar/(zNear-zFar)); // OpenGL version
+		//M[14]
 		M[15] = 0;
+
+		if ( zClipFromZero ) // DirectX version
+		{
+			M[10] = (T)(zFar/(zNear-zFar));
+			M[14] = (T)(zNear*zFar/(zNear-zFar));
+		}
+		else	// OpenGL version
+		{
+			M[10] = (T)((zFar+zNear)/(zNear-zFar));
+			M[14] = (T)(2.0f*zNear*zFar/(zNear-zFar));
+		}
 
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
@@ -1581,7 +1591,7 @@ namespace core
 	// Builds a left-handed perspective projection matrix based on a field of view
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixPerspectiveFovLH(
-			f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar)
+			f32 fieldOfViewRadians, f32 aspectRatio, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		const f64 h = reciprocal(tan(fieldOfViewRadians*0.5));
 		_IRR_DEBUG_BREAK_IF(aspectRatio==0.f); //divide by zero
@@ -1600,13 +1610,24 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(zFar/(zFar-zNear));
+		//M[10]
 		M[11] = 1;
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(-zNear*zFar/(zFar-zNear));
+		//M[14]
 		M[15] = 0;
+
+		if ( zClipFromZero ) // DirectX version
+		{
+			M[10] = (T)(zFar/(zFar-zNear));
+			M[14] = (T)(-zNear*zFar/(zFar-zNear));
+		}
+		else	// OpenGL version
+		{
+			M[10] = (T)((zFar+zNear)/(zFar-zNear));
+			M[14] = (T)(2.0f*zNear*zFar/(zNear-zFar));
+		}
 
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
@@ -1654,7 +1675,7 @@ namespace core
 	// Builds a left-handed orthogonal projection matrix.
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixOrthoLH(
-			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)
+			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		_IRR_DEBUG_BREAK_IF(widthOfViewVolume==0.f); //divide by zero
 		_IRR_DEBUG_BREAK_IF(heightOfViewVolume==0.f); //divide by zero
@@ -1671,13 +1692,24 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(1/(zFar-zNear));
+		// M[10] 
 		M[11] = 0;
-
+		
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear/(zNear-zFar));
+		// M[14]
 		M[15] = 1;
+
+		if ( zClipFromZero )
+		{
+			M[10] = (T)(1/(zFar-zNear));
+			M[14] = (T)(zNear/(zNear-zFar));
+		}
+		else
+		{
+			M[10] = (T)(2/(zFar-zNear));
+			M[14] = (T)-(zFar+zNear)/(zFar-zNear);
+		}
 
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
@@ -1689,7 +1721,7 @@ namespace core
 	// Builds a right-handed orthogonal projection matrix.
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixOrthoRH(
-			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)
+			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		_IRR_DEBUG_BREAK_IF(widthOfViewVolume==0.f); //divide by zero
 		_IRR_DEBUG_BREAK_IF(heightOfViewVolume==0.f); //divide by zero
@@ -1706,13 +1738,24 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(1/(zNear-zFar));
+		// M[10] 
 		M[11] = 0;
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear/(zNear-zFar));
+		// M[14] 
 		M[15] = 1;
+
+		if ( zClipFromZero )
+		{
+			M[10] = (T)(1/(zNear-zFar));
+			M[14] = (T)(zNear/(zNear-zFar));
+		}
+		else
+		{
+			M[10] = (T)(2/(zNear-zFar));
+			M[14] = (T)-(zFar+zNear)/(zFar-zNear);
+		}
 
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
@@ -1724,7 +1767,7 @@ namespace core
 	// Builds a right-handed perspective projection matrix.
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixPerspectiveRH(
-			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)
+			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		_IRR_DEBUG_BREAK_IF(widthOfViewVolume==0.f); //divide by zero
 		_IRR_DEBUG_BREAK_IF(heightOfViewVolume==0.f); //divide by zero
@@ -1741,13 +1784,24 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(zFar/(zNear-zFar));
+		//M[10]
 		M[11] = -1;
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear*zFar/(zNear-zFar));
+		//M[14]
 		M[15] = 0;
+
+		if ( zClipFromZero ) // DirectX version
+		{
+			M[10] = (T)(zFar/(zNear-zFar));
+			M[14] = (T)(zNear*zFar/(zNear-zFar));
+		}
+		else	// OpenGL version
+		{
+			M[10] = (T)((zFar+zNear)/(zNear-zFar));
+			M[14] = (T)(2.0f*zNear*zFar/(zNear-zFar));
+		}
 
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
@@ -1759,7 +1813,7 @@ namespace core
 	// Builds a left-handed perspective projection matrix.
 	template <class T>
 	inline CMatrix4<T>& CMatrix4<T>::buildProjectionMatrixPerspectiveLH(
-			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar)
+			f32 widthOfViewVolume, f32 heightOfViewVolume, f32 zNear, f32 zFar, bool zClipFromZero)
 	{
 		_IRR_DEBUG_BREAK_IF(widthOfViewVolume==0.f); //divide by zero
 		_IRR_DEBUG_BREAK_IF(heightOfViewVolume==0.f); //divide by zero
@@ -1776,13 +1830,25 @@ namespace core
 
 		M[8] = 0;
 		M[9] = 0;
-		M[10] = (T)(zFar/(zFar-zNear));
+		//M[10]
 		M[11] = 1;
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear*zFar/(zNear-zFar));
+		//M[14] = (T)(zNear*zFar/(zNear-zFar));
 		M[15] = 0;
+
+		if ( zClipFromZero ) // DirectX version
+		{
+			M[10] = (T)(zFar/(zFar-zNear));
+			M[14] = (T)(zNear*zFar/(zNear-zFar));
+		}
+		else	// OpenGL version
+		{
+			M[10] = (T)((zFar+zNear)/(zFar-zNear));
+			M[14] = (T)(2.0f*zNear*zFar/(zNear-zFar));
+		}
+
 #if defined ( USE_MATRIX_TEST )
 		definitelyIdentityMatrix=false;
 #endif

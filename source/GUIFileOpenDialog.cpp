@@ -26,15 +26,14 @@ GUIFileOpenDialog::GUIFileOpenDialog(gui::IGUIFileOpenDialog* ref)
 
 String^ GUIFileOpenDialog::DirectoryName::get()
 {
-	const wchar_t* dirname = m_GUIFileOpenDialog->getDirectoryNameW();
-	return dirname == nullptr ? nullptr : gcnew String(dirname);
+	io::path p = m_GUIFileOpenDialog->getDirectoryName();
+	return p == nullptr ? nullptr : gcnew String(p.c_str());
 }
-
 
 String^ GUIFileOpenDialog::FileName::get()
 {
-	const wchar_t* filename = m_GUIFileOpenDialog->getFileName(); // Note: gui::IGUIFileOpenDialog::getFileName() returns wchar_t*
-	return filename == nullptr ? nullptr : gcnew String(filename);
+	io::path p = m_GUIFileOpenDialog->getFileName(); // Note: gui::IGUIFileOpenDialog::getFileName() returns wchar_t*
+	return p == nullptr ? nullptr : gcnew String(p.c_str());
 }
 
 } // end namespace GUI

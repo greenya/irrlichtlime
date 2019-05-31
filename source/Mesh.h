@@ -15,18 +15,26 @@ ref class MeshBuffer;
 public ref class Mesh : ReferenceCounted
 {
 public:
+
+	static Mesh^ Create();
+
+	void AddMeshBuffer(MeshBuffer^ buffer);
 	
 	MeshBuffer^ GetMeshBuffer(Video::Material^ material);
 	MeshBuffer^ GetMeshBuffer(int index);
+
+	void RecalculateBoundingBox();
+
+	void RemoveMeshBuffer(int index);
+	void RemoveMeshBuffer(int index, int count);
 
 	void SetDirty(HardwareBufferType buffer);
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
 
-	property AnimatedMeshType MeshType { AnimatedMeshType get(); }
 	property AABBox^ BoundingBox { AABBox^ get(); void set(AABBox^ value); }
 	property int MeshBufferCount { int get(); }
-	property NativeArray<MeshBuffer^>^ MeshBuffers { NativeArray<MeshBuffer^>^ get(); }
+	property array<MeshBuffer^>^ MeshBuffers { array<MeshBuffer^>^ get(); }
 
 	virtual String^ ToString() override;
 

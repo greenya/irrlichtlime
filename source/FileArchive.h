@@ -20,7 +20,6 @@ public:
 	ReadFile^ CreateAndOpenFile(int index);
 	ReadFile^ CreateAndOpenFile(String^ filename);
 
-	property String^ ArchiveName { String^ get(); }
 	property IrrlichtLime::IO::FileList^ FileList { IrrlichtLime::IO::FileList^ get(); }
 	property String^ Password { String^ get(); void set(String^ value); }
 	property FileArchiveType Type { FileArchiveType get(); }

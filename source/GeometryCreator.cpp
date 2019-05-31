@@ -27,7 +27,7 @@ GeometryCreator::GeometryCreator(scene::IGeometryCreator* ref)
 }
 
 Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselation, float arrowHeight, float cylinderHeight, float cylinderWidth,
-	float coneWidth, Video::Color cylinderColor, Video::Color coneColor)
+	float coneWidth, Video::Color^ cylinderColor, Video::Color^ coneColor)
 {
 	LIME_ASSERT(cylinderTesselation > 0);
 	LIME_ASSERT(coneTesselation > 0);
@@ -36,6 +36,8 @@ Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselat
 	LIME_ASSERT(cylinderHeight > 0.0f);
 	LIME_ASSERT(cylinderWidth > 0.0f);
 	LIME_ASSERT(coneWidth > 0.0f);
+	LIME_ASSERT(cylinderColor != nullptr);
+	LIME_ASSERT(coneColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createArrowMesh(
 		cylinderTesselation,
@@ -44,14 +46,14 @@ Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselat
 		cylinderHeight,
 		cylinderWidth,
 		coneWidth,
-		cylinderColor,
-		coneColor);
+		*cylinderColor->m_NativeValue,
+		*coneColor->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
 
 Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselation, float arrowHeight, float cylinderHeight, float cylinderWidth,
-	float coneWidth, Video::Color arrowColor)
+	float coneWidth, Video::Color^ arrowColor)
 {
 	LIME_ASSERT(cylinderTesselation > 0);
 	LIME_ASSERT(coneTesselation > 0);
@@ -60,6 +62,7 @@ Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselat
 	LIME_ASSERT(cylinderHeight > 0.0f);
 	LIME_ASSERT(cylinderWidth > 0.0f);
 	LIME_ASSERT(coneWidth > 0.0f);
+	LIME_ASSERT(arrowColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createArrowMesh(
 		cylinderTesselation,
@@ -68,8 +71,8 @@ Mesh^ GeometryCreator::CreateArrowMesh(int cylinderTesselation, int coneTesselat
 		cylinderHeight,
 		cylinderWidth,
 		coneWidth,
-		arrowColor,
-		arrowColor);
+		*arrowColor->m_NativeValue,
+		*arrowColor->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
@@ -131,51 +134,56 @@ Mesh^ GeometryCreator::CreateArrowMesh()
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color topColor, Video::Color bottomColor, float oblique)
+Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color^ topColor, Video::Color^ bottomColor, float oblique)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(topColor != nullptr);
+	LIME_ASSERT(bottomColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createConeMesh(
 		radius,
 		length,
 		tesselation,
-		topColor,
-		bottomColor,
+		*topColor->m_NativeValue,
+		*bottomColor->m_NativeValue,
 		oblique);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color topColor, Video::Color bottomColor)
+Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color^ topColor, Video::Color^ bottomColor)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(topColor != nullptr);
+	LIME_ASSERT(bottomColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createConeMesh(
 		radius,
 		length,
 		tesselation,
-		topColor,
-		bottomColor);
+		*topColor->m_NativeValue,
+		*bottomColor->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color coneColor)
+Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselation, Video::Color^ coneColor)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(coneColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createConeMesh(
 		radius,
 		length,
 		tesselation,
-		coneColor,
-		coneColor);
+		*coneColor->m_NativeValue,
+		*coneColor->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
@@ -194,10 +202,12 @@ Mesh^ GeometryCreator::CreateConeMesh(float radius, float length, int tesselatio
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateCubeMesh(Vector3Df size)
+Mesh^ GeometryCreator::CreateCubeMesh(Vector3Df^ size)
 {
+	LIME_ASSERT(size != nullptr);
+
 	scene::IMesh* m = m_GeometryCreator->createCubeMesh(
-		size);
+		*size->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
@@ -208,50 +218,53 @@ Mesh^ GeometryCreator::CreateCubeMesh()
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color color, bool closeTop, float oblique)
+Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color^ color, bool closeTop, float oblique)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(color != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createCylinderMesh(
 		radius,
 		length,
 		tesselation,
-		color,
+		*color->m_NativeValue,
 		closeTop,
 		oblique);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color color, bool closeTop)
+Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color^ color, bool closeTop)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(color != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createCylinderMesh(
 		radius,
 		length,
 		tesselation,
-		color,
+		*color->m_NativeValue,
 		closeTop);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color color)
+Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tesselation, Video::Color^ color)
 {
 	LIME_ASSERT(radius > 0.0f);
 	LIME_ASSERT(length > 0.0f);
 	LIME_ASSERT(tesselation > 0);
+	LIME_ASSERT(color != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createCylinderMesh(
 		radius,
 		length,
 		tesselation,
-		color);
+		*color->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
@@ -266,20 +279,6 @@ Mesh^ GeometryCreator::CreateCylinderMesh(float radius, float length, int tessel
 		radius,
 		length,
 		tesselation);
-
-	return Mesh::Wrap(m);
-}
-
-Mesh^ GeometryCreator::CreateGeoplaneMesh(float radius, unsigned __int32 rows, unsigned __int32 columns)
-{
-	LIME_ASSERT(radius > 0.0f);
-	LIME_ASSERT(rows > 0);
-	LIME_ASSERT(columns > 0);
-
-	scene::IMesh* m = m_GeometryCreator->createGeoplaneMesh(
-		radius,
-		rows,
-		columns);
 
 	return Mesh::Wrap(m);
 }
@@ -456,54 +455,61 @@ Mesh^ GeometryCreator::CreateTerrainMesh(Video::Image^ texture, Video::Image^ he
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color footColor, Video::Color tailColor,
-	float lightPointDistance, Vector3Df lightDimensions)
+Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color^ footColor, Video::Color^ tailColor,
+	float lightPointDistance, Vector3Df^ lightDimensions)
 {
 	LIME_ASSERT(subdivideU > 0);
 	LIME_ASSERT(subdivideV > 0);
+	LIME_ASSERT(footColor != nullptr);
+	LIME_ASSERT(tailColor != nullptr);
 	LIME_ASSERT(lightPointDistance > 0.0f);
-	LIME_ASSERT(lightDimensions.X > 0.0f);
-	LIME_ASSERT(lightDimensions.Y > 0.0f);
-	LIME_ASSERT(lightDimensions.Z > 0.0f);
+	LIME_ASSERT(lightDimensions != nullptr);
+	LIME_ASSERT(lightDimensions->X > 0.0f);
+	LIME_ASSERT(lightDimensions->Y > 0.0f);
+	LIME_ASSERT(lightDimensions->Z > 0.0f);
 
 	scene::IMesh* m = m_GeometryCreator->createVolumeLightMesh(
 		subdivideU,
 		subdivideV,
-		footColor,
-		tailColor,
+		*footColor->m_NativeValue,
+		*tailColor->m_NativeValue,
 		lightPointDistance,
-		lightDimensions);
+		*lightDimensions->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color footColor, Video::Color tailColor,
+Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color^ footColor, Video::Color^ tailColor,
 	float lightPointDistance)
 {
 	LIME_ASSERT(subdivideU > 0);
 	LIME_ASSERT(subdivideV > 0);
+	LIME_ASSERT(footColor != nullptr);
+	LIME_ASSERT(tailColor != nullptr);
 	LIME_ASSERT(lightPointDistance > 0.0f);
 
 	scene::IMesh* m = m_GeometryCreator->createVolumeLightMesh(
 		subdivideU,
 		subdivideV,
-		footColor,
-		tailColor,
+		*footColor->m_NativeValue,
+		*tailColor->m_NativeValue,
 		lightPointDistance);
 
 	return Mesh::Wrap(m);
 }
 
-Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color footColor, Video::Color tailColor)
+Mesh^ GeometryCreator::CreateVolumeLightMesh(int subdivideU, int subdivideV, Video::Color^ footColor, Video::Color^ tailColor)
 {
 	LIME_ASSERT(subdivideU > 0);
 	LIME_ASSERT(subdivideV > 0);
+	LIME_ASSERT(footColor != nullptr);
+	LIME_ASSERT(tailColor != nullptr);
 
 	scene::IMesh* m = m_GeometryCreator->createVolumeLightMesh(
 		subdivideU,
 		subdivideV,
-		footColor,
-		tailColor);
+		*footColor->m_NativeValue,
+		*tailColor->m_NativeValue);
 
 	return Mesh::Wrap(m);
 }

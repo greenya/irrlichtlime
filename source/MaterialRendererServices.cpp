@@ -41,7 +41,7 @@ int MaterialRendererServices::GetPixelShaderConstantID(String^ name)
 	return m_MaterialRendererServices->getPixelShaderConstantID(LIME_SAFESTRINGTOSTRINGC_C_STR(name));
 }
 
-void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader)
+void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
 {
 	LIME_ASSERT(startRegisterIndex >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
@@ -49,106 +49,50 @@ void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex
 	LIME_ASSERT((valueFloats->Length % 4) == 0);
 
 	int c = valueFloats->Length;
-	pin_ptr<float> f = &valueFloats[0];
+	float* f = new float[c];
 
-	if (!highLevelShader)
-		c = (c - 1) / 4 + 1;
+	for (int i = 0; i < c; i++)
+		f[i] = valueFloats[i];
 
 	m_MaterialRendererServices->setPixelShaderConstant(
 		f,
 		startRegisterIndex,
 		c / 4);
+
+	delete[] f;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ valueFloats)
 {
 	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
-	pin_ptr<float> f = &valueFloats[0];
+	float* f = new float[c];
 
-	bool b;
-	if (!highLevelShader)
-	{
-		c = (c - 1) / 4 + 1;
-		m_MaterialRendererServices->setPixelShaderConstant(f, index, c);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
+	for (int i = 0; i < c; i++)
+		f[i] = valueFloats[i];
 
+	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
+
+	delete[] f;
 	return b;
 }
 
-bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ valueInts, bool highLevelShader)
+bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ valueInts)
 {
 	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
-	pin_ptr<int> v = &valueInts[0];
+	int* v = new int[c];
 
-	if (!highLevelShader)
-		c = (c - 1) / 4 + 1;
+	for (int i = 0; i < c; i++)
+		v[i] = valueInts[i];
+
 	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, v, c);
 
-	return b;
-}
-
-bool MaterialRendererServices::SetPixelShaderConstant(int index, float valueFloat, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	float valueFloats = valueFloat; 
-	float* f = &valueFloats;
-
-	bool b;
-	if (!highLevelShader)
-	{
-		m_MaterialRendererServices->setPixelShaderConstant(f, index, 1);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setPixelShaderConstant(index, f, 1);
-
-	return b;
-}
-
-bool MaterialRendererServices::SetPixelShaderConstant(int index, int valueInt, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	int valueInts = valueInt; 
-	int* v = &valueInts;
-
-	bool b;
-	if (!highLevelShader)
-	{
-		m_MaterialRendererServices->setPixelShaderConstant(reinterpret_cast<float*>(v), index, 1);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setPixelShaderConstant(index, v, 1);
-
-	return b;
-}
-
-generic<typename T> where T : IShaderConstant
-bool MaterialRendererServices::SetPixelShaderConstant(int index, T value, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	float valueFloats[16]; 
-	float* f = &valueFloats[0];
-	int c = value->GetData(f);
-
-	bool b;
-	if (!highLevelShader)
-	{
-		c = (c - 1) / 4 + 1;
-		m_MaterialRendererServices->setPixelShaderConstant(f, index, c);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
-
+	delete[] v;
 	return b;
 }
 
@@ -158,7 +102,7 @@ int MaterialRendererServices::GetVertexShaderConstantID(String^ name)
 	return m_MaterialRendererServices->getVertexShaderConstantID(LIME_SAFESTRINGTOSTRINGC_C_STR(name));
 }
 
-void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader)
+void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats)
 {
 	LIME_ASSERT(startRegisterIndex >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
@@ -166,106 +110,50 @@ void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterInde
 	LIME_ASSERT((valueFloats->Length % 4) == 0);
 
 	int c = valueFloats->Length;
-	pin_ptr<float> f = &valueFloats[0];
+	float* f = new float[c];
 
-	if (!highLevelShader)
-		c = (c - 1) / 4 + 1;
+	for (int i = 0; i < c; i++)
+		f[i] = valueFloats[i];
 
 	m_MaterialRendererServices->setVertexShaderConstant(
 		f,
 		startRegisterIndex,
 		c / 4);
+
+	delete[] f;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ valueFloats)
 {
 	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueFloats != nullptr);
 
 	int c = valueFloats->Length;
-	pin_ptr<float> f = &valueFloats[0];
+	float* f = new float[c];
 
-	bool b;
-	if (!highLevelShader)
-	{
-		c = (c - 1) / 4 + 1;
-		m_MaterialRendererServices->setVertexShaderConstant(f, index, c);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
+	for (int i = 0; i < c; i++)
+		f[i] = valueFloats[i];
 
+	bool b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
+
+	delete[] f;
 	return b;
 }
 
-bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ valueInts, bool highLevelShader)
+bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ valueInts)
 {
 	LIME_ASSERT(index >= 0);
 	LIME_ASSERT(valueInts != nullptr);
 
 	int c = valueInts->Length;
-	pin_ptr<int> v = &valueInts[0];
+	int* v = new int[c];
 
-	if (!highLevelShader)
-		c = (c - 1) / 4 + 1;
+	for (int i = 0; i < c; i++)
+		v[i] = valueInts[i];
+
 	bool b = m_MaterialRendererServices->setVertexShaderConstant(index,	v, c);
 
-	return b;
-}
-
-bool MaterialRendererServices::SetVertexShaderConstant(int index, float valueFloat, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	float valueFloats = valueFloat;
-	float* f = &valueFloats;
-
-	bool b;
-	if (!highLevelShader)
-	{
-		m_MaterialRendererServices->setVertexShaderConstant(f, index, 1);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setVertexShaderConstant(index, f, 1);
-
-	return b;
-}
-
-bool MaterialRendererServices::SetVertexShaderConstant(int index, int valueInt, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	int valueInts = valueInt;
-	int* v = &valueInts;
-
-	bool b;
-	if (!highLevelShader)
-	{
-		m_MaterialRendererServices->setVertexShaderConstant(reinterpret_cast<float*>(v), index, 1);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setVertexShaderConstant(index, v, 1);
-
-	return b;
-}
-
-generic<typename T> where T : IShaderConstant
-bool MaterialRendererServices::SetVertexShaderConstant(int index, T value, bool highLevelShader)
-{
-	LIME_ASSERT(index >= 0);
-
-	float valueFloats[16]; 
-	float* f = &valueFloats[0];
-	int c = value->GetData(f);
-
-	bool b;
-	if (!highLevelShader)
-	{
-		c = (c - 1) / 4 + 1;
-		m_MaterialRendererServices->setVertexShaderConstant(f, index, c);
-		b = true;
-	} else
-		b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
-
+	delete[] v;
 	return b;
 }
 

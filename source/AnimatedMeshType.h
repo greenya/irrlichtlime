@@ -22,8 +22,7 @@ public enum class AnimatedMeshType
 	CSM = EAMT_CSM,
 	OCT = EAMT_OCT,
 	MDL_HalfLife = EAMT_MDL_HALFLIFE,
-	Skinned = EAMT_SKINNED,
-	Static = EAMT_STATIC
+	Skinned = EAMT_SKINNED
 };
 
 } // end namespace Scene

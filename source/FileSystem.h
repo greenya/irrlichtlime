@@ -54,8 +54,6 @@ public:
 	ReadFile^ CreateMemoryReadFile(String^ filename, array<unsigned char>^ content);
 	WriteFile^ CreateMemoryWriteFile(String^ filename, int length);
 
-	bool ExistFile(String^ filename);
-
 	ArchiveLoader^ GetArchiveLoader(int index);
 	String^ GetFileAbsolutePath(String^ filename);
 	FileArchive^ GetFileArchive(int index);

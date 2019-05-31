@@ -20,7 +20,6 @@ public:
 	bool IsLoadableFileExtension(String^ filename);
 	bool IsLoadableFileFormat(IO::ReadFile^ file);
 	Image^ LoadImage(IO::ReadFile^ file);
-	array<Image^>^ LoadImages(IO::ReadFile^ file, [Out] TextureType% type);
 
 internal:
 

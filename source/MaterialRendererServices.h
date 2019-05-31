@@ -19,21 +19,14 @@ public:
 	void SetBasicRenderStates(Material^ newMaterial, Material^ lastMaterial, bool resetAllRenderStates);
 
 	int GetPixelShaderConstantID(String^ name);
-	void SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, array<int>^ valueInts, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, float valueFloat, bool highLevelShader);
-	bool SetPixelShaderConstant(int index, int valueInt, bool highLevelShader);
-	generic<typename T> where T : IShaderConstant bool SetPixelShaderConstant(int index, T value, bool highLevelShader);
-
+	void SetPixelShaderConstantList(int startRegisterIndex, array<float>^ valueFloats);
+	bool SetPixelShaderConstant(int index, array<float>^ valueFloats);
+	bool SetPixelShaderConstant(int index, array<int>^ valueInts);
 
 	int GetVertexShaderConstantID(String^ name);
-	void SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, array<float>^ valueFloats, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, array<int>^ valueInts, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, float valueFloat, bool highLevelShader);
-	bool SetVertexShaderConstant(int index, int valueInt, bool highLevelShader);
-	generic<typename T> where T : IShaderConstant bool SetVertexShaderConstant(int index, T value, bool highLevelShader);
+	void SetVertexShaderConstantList(int startRegisterIndex, array<float>^ valueFloats);
+	bool SetVertexShaderConstant(int index, array<float>^ valueFloats);
+	bool SetVertexShaderConstant(int index, array<int>^ valueInts);
 
 	property Video::VideoDriver^ VideoDriver { Video::VideoDriver^ get(); }
 

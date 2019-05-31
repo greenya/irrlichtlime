@@ -43,50 +43,6 @@ Material::Material(Material^ other)
 	m_NativeValue = new video::SMaterial(*other->m_NativeValue);
 }
 
-float Material::PackTextureBlendFunc(BlendFactor srcFact, BlendFactor dstFact, ModulateFunc modulate, AlphaSource alphaSource)
-{
-	return pack_textureBlendFunc((E_BLEND_FACTOR)srcFact, (E_BLEND_FACTOR)dstFact, (E_MODULATE_FUNC)modulate, (u32)alphaSource);
-}
-
-float Material::PackTextureBlendFuncSeparate(BlendFactor srcRGBFact, BlendFactor dstRGBFact, BlendFactor srcAlphaFact, BlendFactor dstAlphaFact, ModulateFunc modulate, AlphaSource alphaSource)
-{
-	return pack_textureBlendFuncSeparate((E_BLEND_FACTOR)srcRGBFact, (E_BLEND_FACTOR)dstRGBFact, (E_BLEND_FACTOR)srcAlphaFact, (E_BLEND_FACTOR)dstAlphaFact, (E_MODULATE_FUNC)modulate, (u32)alphaSource);
-}
-
-void Material::UnpackTextureBlendFunc([Out]BlendFactor% srcFact, [Out]BlendFactor% dstFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param)
-{
-	E_BLEND_FACTOR _srcFact;
-	E_BLEND_FACTOR _dstFact;
-	E_MODULATE_FUNC _modulate;
-	u32 _alphaSource;
-
-	unpack_textureBlendFunc(_srcFact, _dstFact, _modulate, _alphaSource, param);
-
-	srcFact = (BlendFactor)_srcFact;
-	dstFact = (BlendFactor)_dstFact;
-	modulate = (ModulateFunc)_modulate;
-	alphaSource = (AlphaSource)_alphaSource;
-}
-
-void Material::UnpackTextureBlendFuncSeparate([Out]BlendFactor% srcRGBFact, [Out]BlendFactor% dstRGBFact, [Out]BlendFactor% srcAlphaFact, [Out]BlendFactor% dstAlphaFact, [Out]ModulateFunc% modulate, [Out]AlphaSource% alphaSource, float param)
-{
-	E_BLEND_FACTOR _srcRGBFact;
-	E_BLEND_FACTOR _dstRGBFact;
-	E_BLEND_FACTOR _srcAlphaFact;
-	E_BLEND_FACTOR _dstAlphaFact;
-	E_MODULATE_FUNC _modulate;
-	u32 _alphaSource;
-
-	unpack_textureBlendFuncSeparate(_srcRGBFact, _dstRGBFact, _srcAlphaFact, _dstAlphaFact, _modulate, _alphaSource, param);
-
-	srcRGBFact = (BlendFactor)_srcRGBFact;
-	dstRGBFact = (BlendFactor)_dstRGBFact;
-	srcAlphaFact = (BlendFactor)_srcAlphaFact;
-	dstAlphaFact = (BlendFactor)_dstAlphaFact;
-	modulate = (ModulateFunc)_modulate;
-	alphaSource = (AlphaSource)_alphaSource;
-}
-
 bool Material::GetFlag(MaterialFlag flag)
 {
 	return m_NativeValue->getFlag((E_MATERIAL_FLAG)flag);
@@ -127,7 +83,6 @@ void Material::SetTextureMatrix(int index, Matrix^ mat)
 
 List<MaterialLayer^>^ Material::Layer::get()
 {
-	//TODO: use native list here?
 	List<MaterialLayer^>^ l = gcnew List<MaterialLayer^>();
 
 	for (int i = 0; i < Material::MaxTextures; i++)
@@ -150,14 +105,15 @@ void Material::Type::set(Video::MaterialType value)
 	m_NativeValue->MaterialType = (video::E_MATERIAL_TYPE)value;
 }
 
-Color Material::AmbientColor::get()
+Color^ Material::AmbientColor::get()
 {
-	return Color(m_NativeValue->AmbientColor);
+	return gcnew Color(m_NativeValue->AmbientColor);
 }
 
-void Material::AmbientColor::set(Color value)
+void Material::AmbientColor::set(Color^ value)
 {
-	m_NativeValue->AmbientColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->AmbientColor = *value->m_NativeValue;
 }
 
 Video::BlendOperation Material::BlendOperation::get()
@@ -191,32 +147,35 @@ void Material::PolygonOffsetFactor::set(unsigned char value)
 	m_NativeValue->PolygonOffsetFactor = value;
 }
 
-Color Material::DiffuseColor::get()
+Color^ Material::DiffuseColor::get()
 {
-	return Color(m_NativeValue->DiffuseColor);
+	return gcnew Color(m_NativeValue->DiffuseColor);
 }
-void Material::DiffuseColor::set(Color value)
+void Material::DiffuseColor::set(Color^ value)
 {
-	m_NativeValue->DiffuseColor = value;
-}
-
-Color Material::EmissiveColor::get()
-{
-	return Color(m_NativeValue->EmissiveColor);
-}
-void Material::EmissiveColor::set(Color value)
-{
-	m_NativeValue->EmissiveColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->DiffuseColor = *value->m_NativeValue;
 }
 
-Color Material::SpecularColor::get()
+Color^ Material::EmissiveColor::get()
 {
-	return Color(m_NativeValue->SpecularColor);
+	return gcnew Color(m_NativeValue->EmissiveColor);
+}
+void Material::EmissiveColor::set(Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->EmissiveColor = *value->m_NativeValue;
 }
 
-void Material::SpecularColor::set(Color value)
+Color^ Material::SpecularColor::get()
 {
-	m_NativeValue->SpecularColor = value;
+	return gcnew Color(m_NativeValue->SpecularColor);
+}
+
+void Material::SpecularColor::set(Color^ value)
+{
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->SpecularColor = *value->m_NativeValue;
 }
 
 float Material::Shininess::get()
@@ -402,35 +361,6 @@ void Material::Mipmaps::set(bool value)
 bool Material::Transparent::get()
 {
 	return m_NativeValue->isTransparent();
-}
-
-Video::ZWriteFineControl Material::ZWriteFineControl::get()
-{
-	return (Video::ZWriteFineControl)m_NativeValue->ZWriteFineControl;
-}
-
-void Material::ZWriteFineControl::set(Video::ZWriteFineControl value)
-{
-	m_NativeValue->ZWriteFineControl = (E_ZWRITE_FINE_CONTROL)value;
-}
-
-bool Material::Equals(Object^ other)
-{
-	if (other == nullptr)
-		return false;
-
-	if (other->GetType() == Material::typeid)
-		return *m_NativeValue == *((Material^)other)->m_NativeValue;
-	else
-		return false;
-}
-
-bool Material::Equals(Material^ other)
-{
-	if (other == nullptr)
-		return false;
-	
-	return *m_NativeValue == *other->m_NativeValue;
 }
 
 String^ Material::ToString()

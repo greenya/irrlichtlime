@@ -25,6 +25,20 @@ Mesh::Mesh(scene::IMesh* ref)
 	m_Mesh = ref;
 }
 
+Mesh^ Mesh::Create()
+{
+	scene::IMesh* m = new scene::SMesh();
+	return gcnew Mesh(m);
+}
+
+void Mesh::AddMeshBuffer(MeshBuffer^ buffer)
+{
+	LIME_ASSERT(buffer != nullptr);
+
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+	m->addMeshBuffer(buffer->m_MeshBuffer);
+}
+
 MeshBuffer^ Mesh::GetMeshBuffer(Video::Material^ material)
 {
 	LIME_ASSERT(material != nullptr);
@@ -41,6 +55,33 @@ MeshBuffer^ Mesh::GetMeshBuffer(int index)
 	return MeshBuffer::Wrap(b);
 }
 
+void Mesh::RecalculateBoundingBox()
+{
+	((scene::SMesh*)m_Mesh)->recalculateBoundingBox(); // !!! cast to SMesh*
+}
+
+void Mesh::RemoveMeshBuffer(int index)
+{
+	LIME_ASSERT(index >= 0 && index < MeshBufferCount);
+	
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+	m->MeshBuffers[index]->drop();
+	m->MeshBuffers.erase(index);
+}
+
+void Mesh::RemoveMeshBuffer(int index, int count)
+{
+	LIME_ASSERT(index >= 0 && index < MeshBufferCount);
+	LIME_ASSERT(count >= 1 && index + count <= MeshBufferCount);
+	
+	scene::SMesh* m = (scene::SMesh*)m_Mesh; // !!! cast to SMesh*
+
+	for (int i = index; i < index + count; i++)
+		m->MeshBuffers[i]->drop();
+
+	m->MeshBuffers.erase(index, count);
+}
+
 void Mesh::SetDirty(HardwareBufferType buffer)
 {
 	m_Mesh->setDirty((scene::E_BUFFER_TYPE)buffer);
@@ -54,11 +95,6 @@ void Mesh::SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBuffe
 void Mesh::SetMaterialFlag(Video::MaterialFlag flag, bool newvalue)
 {
 	m_Mesh->setMaterialFlag((video::E_MATERIAL_FLAG)flag, newvalue);
-}
-
-AnimatedMeshType Mesh::MeshType::get()
-{
-	return (AnimatedMeshType)m_Mesh->getMeshType();
 }
 
 AABBox^ Mesh::BoundingBox::get()
@@ -77,66 +113,9 @@ int Mesh::MeshBufferCount::get()
 	return m_Mesh->getMeshBufferCount();
 }
 
-//This class provides direct access to the mesh buffers of a mesh
-//In debug builds, it performs range checks
-private ref class MeshBufferArray sealed : public NativeArray<MeshBuffer^>
+array<MeshBuffer^>^ Mesh::MeshBuffers::get()
 {
-
-internal:
-
-	MeshBufferArray(IMesh* mesh)
-	{
-		this->mesh = mesh;
-	}
-
-	virtual void* GetPointer() override sealed
-	{
-		return nullptr;
-	}
-
-public:
-
-	property MeshBuffer^ default [int]
-	{
-		virtual MeshBuffer^ get(int index) override sealed
-		{
-			LIME_ASSERT(index >= 0 && index < Count);
-			return MeshBuffer::Wrap(mesh->getMeshBuffer(index));
-		}
-
-#pragma warning (push)
-#pragma warning (disable: 4100)
-		virtual void set(int index, MeshBuffer^ value) override sealed
-		{
-			throw gcnew NotSupportedException();
-		}
-#pragma warning (pop)
-	}
-
-	property int Count
-	{
-		virtual int get() override sealed
-		{
-			return mesh->getMeshBufferCount();
-		}
-	}
-
-	property bool IsReadOnly
-	{
-		virtual bool get() override sealed
-		{
-			return true;
-		}
-	}
-
-internal:
-	
-	IMesh* mesh;
-};
-
-NativeArray<MeshBuffer^>^ Mesh::MeshBuffers::get()
-{
-	/*array<MeshBuffer^>^ l = gcnew array<MeshBuffer^>(m_Mesh->getMeshBufferCount());
+	array<MeshBuffer^>^ l = gcnew array<MeshBuffer^>(m_Mesh->getMeshBufferCount());
 	int li = 0;
 
 	for (int i = 0; i < l->Length; i++)
@@ -147,8 +126,7 @@ NativeArray<MeshBuffer^>^ Mesh::MeshBuffers::get()
 			l[li++] = mb;
 	}
 
-	return l;*/
-	return gcnew MeshBufferArray(m_Mesh);
+	return l;
 }
 
 String^ Mesh::ToString()

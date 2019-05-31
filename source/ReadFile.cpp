@@ -29,7 +29,7 @@ array<unsigned char>^ ReadFile::Read(int bytesToRead)
 
 	unsigned char* b = new unsigned char[bytesToRead];
 
-	int s = m_ReadFile->read(b, bytesToRead);
+	int s = m_ReadFile->read(b, (size_t) bytesToRead);
 	LIME_ASSERT(s >= 0);
 
 	array<unsigned char>^ a = gcnew array<unsigned char>(s);

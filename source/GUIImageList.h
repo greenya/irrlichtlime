@@ -13,8 +13,8 @@ public ref class GUIImageList : ReferenceCounted
 {
 public:
 
-	void Draw(int index, Vector2Di destPos, Nullable<Recti> clip);
-	void Draw(int index, Vector2Di destPos);
+	void Draw(int index, Vector2Di^ destPos, Recti^ clip);
+	void Draw(int index, Vector2Di^ destPos);
 
 	property int ImageCount { int get(); }
 	property Dimension2Di^ ImageSize { Dimension2Di^ get(); }

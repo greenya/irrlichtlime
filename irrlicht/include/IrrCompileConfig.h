@@ -110,7 +110,7 @@
 
 
 //! Maximum number of texture an SMaterial can have, up to 8 are supported by Irrlicht.
-#define _IRR_MATERIAL_MAX_TEXTURES_ 4
+#define _IRR_MATERIAL_MAX_TEXTURES_ 8
 
 //! Whether to support XML and XML-based formats (irrmesh, collada...)
 #define _IRR_COMPILE_WITH_XML_
@@ -243,6 +243,13 @@ you will not be able to use anything provided by the GUI Environment, including 
 #undef _IRR_COMPILE_WITH_GUI_
 #endif
 
+//! Define _IRR_COMPILE_WITH_PARTICLES to compile the engine the withe build-in particle system
+/** You can disable this if you don't need particles or use an external particle system. */
+#define _IRR_COMPILE_WITH_PARTICLES_
+#ifdef NO_IRR_COMPILE_WITH_PARTICLES_
+#undef _IRR_COMPILE_WITH_PARTICLES_
+#endif
+
 //! Define _IRR_WCHAR_FILESYSTEM to enable unicode filesystem support for the engine.
 /** This enables the engine to read/write from unicode filesystem. If you
 disable this feature, the engine behave as before (ansi). This is currently only supported
@@ -340,6 +347,54 @@ tool <http://developer.nvidia.com/object/nvperfhud_home.html>. */
 
 //! Uncomment the following line if you want to ignore the deprecated warnings
 //#define IGNORE_DEPRECATED_WARNING
+
+//! Define _IRR_COMPILE_WITH_SHADOW_VOLUME_SCENENODE_ to support ShadowVolumes
+#define _IRR_COMPILE_WITH_SHADOW_VOLUME_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_SHADOW_VOLUME_SCENENODE_
+#undef _IRR_COMPILE_WITH_SHADOW_VOLUME_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_OCTREE_SCENENODE_ to support OctreeSceneNodes
+#define _IRR_COMPILE_WITH_OCTREE_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_OCTREE_SCENENODE_
+#undef _IRR_COMPILE_WITH_OCTREE_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_TERRAIN_SCENENODE_ to support TerrainSceneNodes
+#define _IRR_COMPILE_WITH_TERRAIN_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_TERRAIN_SCENENODE_
+#undef _IRR_COMPILE_WITH_TERRAIN_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_BILLBOARD_SCENENODE_ to support BillboardSceneNodes
+#define _IRR_COMPILE_WITH_BILLBOARD_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_BILLBOARD_SCENENODE_
+#undef _IRR_COMPILE_WITH_BILLBOARD_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_ to support WaterSurfaceSceneNodes
+#define _IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_
+#undef _IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_SKYDOME_SCENENODE_ to support SkydomeSceneNodes
+#define _IRR_COMPILE_WITH_SKYDOME_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_SKYDOME_SCENENODE_
+#undef _IRR_COMPILE_WITH_SKYDOME_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_CUBE_SCENENODE_ to support CubeSceneNodes
+#define _IRR_COMPILE_WITH_CUBE_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_CUBE_SCENENODE_
+#undef _IRR_COMPILE_WITH_CUBE_SCENENODE_
+#endif
+
+//! Define _IRR_COMPILE_WITH_SPHERE_SCENENODE_ to support CubeSceneNodes
+#define _IRR_COMPILE_WITH_SPHERE_SCENENODE_
+#ifdef NO_IRR_COMPILE_WITH_SPHERE_SCENENODE_
+#undef _IRR_COMPILE_WITH_SPHERE_SCENENODE_
+#endif
 
 //! Define _IRR_COMPILE_WITH_IRR_SCENE_LOADER_ if you want to be able to load
 /** .irr scenes using ISceneManager::loadScene */
@@ -772,6 +827,10 @@ precision will be lower but speed higher. currently X86 only
 		#define _tfindnext   __tfindnext
 		typedef long intptr_t;
 	#endif
+#endif
+
+#ifndef __has_feature
+  #define __has_feature(x) 0  // Compatibility with non-clang compilers.
 #endif
 
 #ifdef _DEBUG

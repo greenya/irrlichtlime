@@ -34,24 +34,15 @@ void GUIImage::AlphaChannel::set(bool value)
 	m_GUIImage->setUseAlphaChannel(value);
 }
 
-Video::Color GUIImage::Color::get()
+Video::Color^ GUIImage::Color::get()
 {
-	return Video::Color(m_GUIImage->getColor());
+	return gcnew Video::Color(m_GUIImage->getColor());
 }
 
-void GUIImage::Color::set(Video::Color value)
+void GUIImage::Color::set(Video::Color^ value)
 {
-	m_GUIImage->setColor(value);
-}
-
-Rectf GUIImage::DrawBounds::get()
-{
-	return Rectf(m_GUIImage->getDrawBounds());
-}
-
-void GUIImage::DrawBounds::set(Rectf value)
-{
-	m_GUIImage->setDrawBounds(value);
+	LIME_ASSERT(value != nullptr);
+	m_GUIImage->setColor(*value->m_NativeValue);
 }
 
 Video::Texture^ GUIImage::Image::get()
@@ -73,16 +64,6 @@ bool GUIImage::ScaleImage::get()
 void GUIImage::ScaleImage::set(bool value)
 {
 	m_GUIImage->setScaleImage(value);
-}
-
-Recti GUIImage::SourceRect::get()
-{
-	return Recti(m_GUIImage->getSourceRect());
-}
-
-void GUIImage::SourceRect::set(Recti value)
-{
-	m_GUIImage->setSourceRect(value);
 }
 
 } // end namespace GUI

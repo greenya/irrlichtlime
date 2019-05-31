@@ -26,39 +26,26 @@ GUIButton::GUIButton(gui::IGUIButton* ref)
 	m_GUIButton = ref;
 }
 
-void GUIButton::SetImage(GUIButtonImageState state, Video::Texture^ image, Recti sourceRect)
+void GUIButton::SetNormalImage(Video::Texture^ image, Recti^ pos)
 {
-	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state, LIME_SAFEREF(image, m_Texture), sourceRect);
+	LIME_ASSERT(pos != nullptr);
+	m_GUIButton->setImage(LIME_SAFEREF(image, m_Texture), *pos->m_NativeValue);
 }
 
-void GUIButton::SetImage(GUIButtonImageState state, Video::Texture^ image)
-{
-	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state, LIME_SAFEREF(image, m_Texture));
-}
-
-void GUIButton::SetImage(GUIButtonImageState state)
-{
-	m_GUIButton->setImage((EGUI_BUTTON_IMAGE_STATE)state);
-}
-
-void GUIButton::SetImage(Video::Texture^ image, Recti sourceRect)
-{
-	m_GUIButton->setImage(LIME_SAFEREF(image, m_Texture), sourceRect);
-}
-
-void GUIButton::SetImage(Video::Texture^ image)
+void GUIButton::SetNormalImage(Video::Texture^ image)
 {
 	m_GUIButton->setImage(LIME_SAFEREF(image, m_Texture));
 }
 
-void GUIButton::SetImage()
+void GUIButton::SetNormalImage()
 {
 	m_GUIButton->setImage();
 }
 
-void GUIButton::SetPressedImage(Video::Texture^ image, Recti sourceRect)
+void GUIButton::SetPressedImage(Video::Texture^ image, Recti^ pos)
 {
-	m_GUIButton->setPressedImage(LIME_SAFEREF(image, m_Texture), sourceRect);
+	LIME_ASSERT(pos != nullptr);
+	m_GUIButton->setPressedImage(LIME_SAFEREF(image, m_Texture), *pos->m_NativeValue);
 }
 
 void GUIButton::SetPressedImage(Video::Texture^ image)
@@ -71,14 +58,16 @@ void GUIButton::SetPressedImage()
 	m_GUIButton->setImage();
 }
 
-void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color color, bool loop)
+void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color^ color, bool loop)
 {
-	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, color, loop);
+	LIME_ASSERT(color != nullptr);
+	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, *color->m_NativeValue, loop);
 }
 
-void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color color)
+void GUIButton::SetSprite(GUIButtonState state, int index, Video::Color^ color)
 {
-	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, color);
+	LIME_ASSERT(color != nullptr);
+	m_GUIButton->setSprite((gui::EGUI_BUTTON_STATE)state, index, *color->m_NativeValue);
 }
 
 void GUIButton::SetSprite(GUIButtonState state, int index)

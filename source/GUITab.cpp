@@ -23,14 +23,15 @@ GUITab::GUITab(gui::IGUITab* ref)
 	m_GUITab = ref;
 }
 
-Video::Color GUITab::BackgroundColor::get()
+Video::Color^ GUITab::BackgroundColor::get()
 {
-	return Video::Color(m_GUITab->getBackgroundColor());
+	return gcnew Video::Color(m_GUITab->getBackgroundColor());
 }
 
-void GUITab::BackgroundColor::set(Video::Color value)
+void GUITab::BackgroundColor::set(Video::Color^ value)
 {
-	m_GUITab->setBackgroundColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_GUITab->setBackgroundColor(*value->m_NativeValue);
 }
 
 bool GUITab::DrawBackground::get()
@@ -48,14 +49,15 @@ int GUITab::Index::get()
 	return m_GUITab->getNumber();
 }
 
-Video::Color GUITab::TextColor::get()
+Video::Color^ GUITab::TextColor::get()
 {
-	return Video::Color(m_GUITab->getTextColor());
+	return gcnew Video::Color(m_GUITab->getTextColor());
 }
 
-void GUITab::TextColor::set(Video::Color value)
+void GUITab::TextColor::set(Video::Color^ value)
 {
-	m_GUITab->setTextColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_GUITab->setTextColor(*value->m_NativeValue);
 }
 
 } // end namespace GUI

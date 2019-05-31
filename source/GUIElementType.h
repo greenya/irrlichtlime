@@ -35,8 +35,7 @@ public enum class GUIElementType
 	TreeView = EGUIET_TREE_VIEW,
 	Window = EGUIET_WINDOW,
 	Unknown = EGUIET_ELEMENT,
-	Root = EGUIET_ROOT,
-	Profiler = EGUIET_PROFILER
+	Root = EGUIET_ROOT
 };
 
 } // end namespace GUI

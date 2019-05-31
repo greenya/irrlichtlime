@@ -64,24 +64,15 @@ void ParticleAttractionAffector::Attract::set(bool value)
 	m_ParticleAttractionAffector->setAttract(value);
 }
 
-Vector3Df ParticleAttractionAffector::Point::get()
+Vector3Df^ ParticleAttractionAffector::Point::get()
 {
-	return Vector3Df(m_ParticleAttractionAffector->getPoint());
+	return gcnew Vector3Df(m_ParticleAttractionAffector->getPoint());
 }
 
-void ParticleAttractionAffector::Point::set(Vector3Df value)
+void ParticleAttractionAffector::Point::set(Vector3Df^ value)
 {
-	m_ParticleAttractionAffector->setPoint(value);
-}
-
-float ParticleAttractionAffector::Speed::get()
-{
-	return m_ParticleAttractionAffector->getSpeed();
-}
-
-void ParticleAttractionAffector::Speed::set(float value)
-{
-	m_ParticleAttractionAffector->setSpeed(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleAttractionAffector->setPoint(*value->m_NativeValue);
 }
 
 } // end namespace Scene

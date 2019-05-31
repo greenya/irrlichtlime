@@ -45,14 +45,8 @@ public enum class VideoDriverFeature
 	OcclusionQuery = EVDF_OCCLUSION_QUERY,
 	PolygonOffset = EVDF_POLYGON_OFFSET,
 	BlendOperations = EVDF_BLEND_OPERATIONS,
-	BlendSeperate = EVDF_BLEND_SEPARATE,
 	TextureMatrix = EVDF_TEXTURE_MATRIX,
-	TextureCompressedDXT = EVDF_TEXTURE_COMPRESSED_DXT,
-	TextureCompressedPVRTC = EVDF_TEXTURE_COMPRESSED_PVRTC,
-	TextureCompressedPVRTC2 = EVDF_TEXTURE_COMPRESSED_PVRTC2,
-	TextureCompressedETC1 = EVDF_TEXTURE_COMPRESSED_ETC1,
-	TextureCompressedETC2 = EVDF_TEXTURE_COMPRESSED_ETC2,
-	TextureCubemap = EVDF_TEXTURE_CUBEMAP
+	TextureCompressedDXT = EVDF_TEXTURE_COMPRESSED_DXT
 };
 
 } // end namespace Video

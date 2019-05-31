@@ -13,7 +13,6 @@ namespace Scene {
 ref class AnimatedMesh;
 ref class Mesh;
 ref class MeshBuffer;
-ref class StaticMesh;
 
 public ref class MeshManipulator : ReferenceCounted
 {
@@ -24,7 +23,7 @@ public:
 
 	Mesh^ CreateForsythOptimizedMesh(Mesh^ mesh);
 
-	StaticMesh^ CreateMeshCopy(Mesh^ mesh);
+	Mesh^ CreateMeshCopy(Mesh^ mesh);
 
 	Mesh^ CreateMeshUniquePrimitives(Mesh^ mesh);
 
@@ -51,10 +50,10 @@ public:
 	void HeightmapOptimizeMesh(MeshBuffer^ buffer, float tolerance);
 	void HeightmapOptimizeMesh(MeshBuffer^ buffer);
 
-	void MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df offset);
+	void MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
 	void MakePlanarTextureMapping(Mesh^ mesh, float resolution);
 	void MakePlanarTextureMapping(Mesh^ mesh);
-	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df offset);
+	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset);
 	void MakePlanarTextureMapping(MeshBuffer^ buffer, float resolution);
 	void MakePlanarTextureMapping(MeshBuffer^ buffer);
 
@@ -75,19 +74,19 @@ public:
 	void RecalculateTangents(MeshBuffer^ buffer, bool recalculateNormals);
 	void RecalculateTangents(MeshBuffer^ buffer);
 
-	void Scale(MeshBuffer^ buffer, Vector3Df factor);
-	void Scale(Mesh^ mesh, Vector3Df factor);
+	void Scale(MeshBuffer^ buffer, Vector3Df^ factor);
+	void Scale(Mesh^ mesh, Vector3Df^ factor);
 
-	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df factor, int level);
-	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df factor);
-	void ScaleTCoords(Mesh^ mesh, Vector2Df factor, int level);
-	void ScaleTCoords(Mesh^ mesh, Vector2Df factor);
+	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, int level);
+	void ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor);
+	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, int level);
+	void ScaleTCoords(Mesh^ mesh, Vector2Df^ factor);
 
 	void SetVertexColorAlpha(Mesh^ mesh, int alpha);
 	void SetVertexColorAlpha(MeshBuffer^ buffer, int alpha);
 
-	void SetVertexColors(Mesh^ mesh, Video::Color color);
-	void SetVertexColors(MeshBuffer^ buffer, Video::Color color);
+	void SetVertexColors(Mesh^ mesh, Video::Color^ color);
+	void SetVertexColors(MeshBuffer^ buffer, Video::Color^ color);
 
 	void Transform(MeshBuffer^ buffer, Matrix^ m);
 	void Transform(Mesh^ mesh, Matrix^ m);

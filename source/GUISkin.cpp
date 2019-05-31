@@ -27,264 +27,339 @@ GUISkin::GUISkin(gui::IGUISkin* ref)
 	m_GUISkin = ref;
 }
 
-void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color color, Recti pos, Nullable<Recti> clip)
+void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color^ color, Recti^ pos, Recti^ clip)
 {
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(pos != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw2DRectangle(
 		LIME_SAFEREF(element, m_GUIElement),
-		color,
-		pos,
-		LIME_NULLABLE(clip));
+		*color->m_NativeValue,
+		*pos->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color color, Recti pos)
+void GUISkin::Draw2DRectangle(GUIElement^ element, Video::Color^ color, Recti^ pos)
 {
+	LIME_ASSERT(color != nullptr);
+	LIME_ASSERT(pos != nullptr);
+
 	m_GUISkin->draw2DRectangle(
 		LIME_SAFEREF(element, m_GUIElement),
-		color,
-		pos);
+		*color->m_NativeValue,
+		*pos->m_NativeValue);
 }
 
-void GUISkin::Draw3DButtonPanePressed(GUIElement^ element, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DButtonPanePressed(GUIElement^ element, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DButtonPanePressed(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DButtonPanePressed(GUIElement^ element, Recti rect)
+void GUISkin::Draw3DButtonPanePressed(GUIElement^ element, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DButtonPanePressed(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DButtonPaneStandard(GUIElement^ element, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DButtonPaneStandard(GUIElement^ element, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DButtonPaneStandard(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DButtonPaneStandard(GUIElement^ element, Recti rect)
+void GUISkin::Draw3DButtonPaneStandard(GUIElement^ element, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DButtonPaneStandard(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DMenuPane(GUIElement^ element, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DMenuPane(GUIElement^ element, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DMenuPane(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DMenuPane(GUIElement^ element, Recti rect)
+void GUISkin::Draw3DMenuPane(GUIElement^ element, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DMenuPane(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color^ bgcolor, bool flat, bool fillBackGround, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(bgcolor != nullptr);
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DSunkenPane(
 		LIME_SAFEREF(element, m_GUIElement),
-		bgcolor,
+		*bgcolor->m_NativeValue,
 		flat,
 		fillBackGround,
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color bgcolor, bool flat, bool fillBackGround, Recti rect)
+void GUISkin::Draw3DSunkenPane(GUIElement^ element, Video::Color^ bgcolor, bool flat, bool fillBackGround, Recti^ rect)
 {
+	LIME_ASSERT(bgcolor != nullptr);
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DSunkenPane(
 		LIME_SAFEREF(element, m_GUIElement),
-		bgcolor,
+		*bgcolor->m_NativeValue,
 		flat,
 		fillBackGround,
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip, int tabHeight, GUIAlignment alignment)
+void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip, int tabHeight, GUIAlignment alignment)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DTabBody(
 		LIME_SAFEREF(element, m_GUIElement),
 		border,
 		background,
-		rect,
-		LIME_NULLABLE(clip),
+		*rect->m_NativeValue,
+		clip->m_NativeValue,
 		tabHeight,
 		(gui::EGUI_ALIGNMENT)alignment);
 }
 
-void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip, int tabHeight)
+void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip, int tabHeight)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DTabBody(
 		LIME_SAFEREF(element, m_GUIElement),
 		border,
 		background,
-		rect,
-		LIME_NULLABLE(clip),
+		*rect->m_NativeValue,
+		clip->m_NativeValue,
 		tabHeight);
 }
 
-void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DTabBody(
 		LIME_SAFEREF(element, m_GUIElement),
 		border,
 		background,
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti rect)
+void GUISkin::Draw3DTabBody(GUIElement^ element, bool border, bool background, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DTabBody(
 		LIME_SAFEREF(element, m_GUIElement),
 		border,
 		background,
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti rect, Nullable<Recti> clip, GUIAlignment alignment)
+void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect, Recti^ clip, GUIAlignment alignment)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DTabButton(
 		LIME_SAFEREF(element, m_GUIElement),
 		active,
-		rect,
-		LIME_NULLABLE(clip),
+		*rect->m_NativeValue,
+		clip->m_NativeValue,
 		(gui::EGUI_ALIGNMENT)alignment);
 }
 
-void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DTabButton(
 		LIME_SAFEREF(element, m_GUIElement),
 		active,
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti rect)
+void GUISkin::Draw3DTabButton(GUIElement^ element, bool active, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DTabButton(
 		LIME_SAFEREF(element, m_GUIElement),
 		active,
-		rect);
+		*rect->m_NativeValue);
 }
 
-void GUISkin::Draw3DToolBar(GUIElement^ element, Recti rect, Nullable<Recti> clip)
+void GUISkin::Draw3DToolBar(GUIElement^ element, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	m_GUISkin->draw3DToolBar(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect,
-		LIME_NULLABLE(clip));
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 }
 
-void GUISkin::Draw3DToolBar(GUIElement^ element, Recti rect)
+void GUISkin::Draw3DToolBar(GUIElement^ element, Recti^ rect)
 {
+	LIME_ASSERT(rect != nullptr);
+
 	m_GUISkin->draw3DToolBar(
 		LIME_SAFEREF(element, m_GUIElement),
-		rect);
+		*rect->m_NativeValue);
 }
 
-Recti GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect, Nullable<Recti> clip, [Out] Recti% checkClientArea)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect, Recti^ clip, [Out] Recti^ checkClientArea)
 {
+	LIME_ASSERT(titleBarColor != nullptr);
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	core::recti rclient;
 	core::recti rtitle = m_GUISkin->draw3DWindowBackground(
 		LIME_SAFEREF(element, m_GUIElement),
 		drawTitleBar,
-		titleBarColor,
-		rect,
-		LIME_NULLABLE(clip),
+		*titleBarColor->m_NativeValue,
+		*rect->m_NativeValue,
+		clip->m_NativeValue,
 		&rclient);
 
-	checkClientArea = Recti(rclient);
-	return Recti(rtitle);
+	checkClientArea = gcnew Recti(rclient);
+	return gcnew Recti(rtitle);
 }
 
-Recti GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect, Nullable<Recti> clip)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect, Recti^ clip)
 {
+	LIME_ASSERT(titleBarColor != nullptr);
+	LIME_ASSERT(rect != nullptr);
+	LIME_ASSERT(clip != nullptr);
+
 	core::recti rtitle = m_GUISkin->draw3DWindowBackground(
 		LIME_SAFEREF(element, m_GUIElement),
 		drawTitleBar,
-		titleBarColor,
-		rect,
-		LIME_NULLABLE(clip));
+		*titleBarColor->m_NativeValue,
+		*rect->m_NativeValue,
+		clip->m_NativeValue);
 
-	return Recti(rtitle);
+	return gcnew Recti(rtitle);
 }
 
-Recti GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color titleBarColor, Recti rect)
+Recti^ GUISkin::Draw3DWindowBackground(GUIElement^ element, bool drawTitleBar, Video::Color^ titleBarColor, Recti^ rect)
 {
+	LIME_ASSERT(titleBarColor != nullptr);
+	LIME_ASSERT(rect != nullptr);
+
 	core::recti rtitle = m_GUISkin->draw3DWindowBackground(
 		LIME_SAFEREF(element, m_GUIElement),
 		drawTitleBar,
-		titleBarColor,
-		rect);
+		*titleBarColor->m_NativeValue,
+		*rect->m_NativeValue);
 
-	return Recti(rtitle);
+	return gcnew Recti(rtitle);
 }
 
-void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime, bool loop, Nullable<Recti> clip)
+void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ position, unsigned int starttime, unsigned int currenttime, bool loop, Recti^ clip)
 {
+	LIME_ASSERT(position != nullptr);
+	LIME_ASSERT(clip != nullptr);
+	
 	m_GUISkin->drawIcon(
 		LIME_SAFEREF(element, m_GUIElement),
 		(gui::EGUI_DEFAULT_ICON)icon,
-		position,
+		*position->m_NativeValue,
 		starttime,
 		currenttime,
 		loop,
-		LIME_NULLABLE(clip));
+		clip->m_NativeValue);
 }
 
-void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime, bool loop)
+void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ position, unsigned int starttime, unsigned int currenttime, bool loop)
 {
+	LIME_ASSERT(position != nullptr);
+	
 	m_GUISkin->drawIcon(
 		LIME_SAFEREF(element, m_GUIElement),
 		(gui::EGUI_DEFAULT_ICON)icon,
-		position,
+		*position->m_NativeValue,
 		starttime,
 		currenttime,
 		loop);
 }
 
-void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime, unsigned int currenttime)
+void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ position, unsigned int starttime, unsigned int currenttime)
 {
+	LIME_ASSERT(position != nullptr);
+	
 	m_GUISkin->drawIcon(
 		LIME_SAFEREF(element, m_GUIElement),
 		(gui::EGUI_DEFAULT_ICON)icon,
-		position,
+		*position->m_NativeValue,
 		starttime,
 		currenttime);
 }
 
-void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position, unsigned int starttime)
+void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ position, unsigned int starttime)
 {
+	LIME_ASSERT(position != nullptr);
+	
 	m_GUISkin->drawIcon(
 		LIME_SAFEREF(element, m_GUIElement),
 		(gui::EGUI_DEFAULT_ICON)icon,
-		position,
+		*position->m_NativeValue,
 		starttime);
 }
 
-void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di position)
+void GUISkin::DrawIcon(GUIElement^ element, GUIDefaultIcon icon, Vector2Di^ position)
 {
+	LIME_ASSERT(position != nullptr);
+	
 	m_GUISkin->drawIcon(
 		LIME_SAFEREF(element, m_GUIElement),
 		(gui::EGUI_DEFAULT_ICON)icon,
-		position);
+		*position->m_NativeValue);
 }
 
-Video::Color GUISkin::GetColor(GUIDefaultColor color)
+Video::Color^ GUISkin::GetColor(GUIDefaultColor color)
 {
-	return Video::Color(m_GUISkin->getColor((gui::EGUI_DEFAULT_COLOR)color));
+	return gcnew Video::Color(m_GUISkin->getColor((gui::EGUI_DEFAULT_COLOR)color));
 }
 
 String^ GUISkin::GetText(GUIDefaultText text)
@@ -307,9 +382,10 @@ int GUISkin::GetSize(GUIDefaultSize size)
 	return m_GUISkin->getSize((gui::EGUI_DEFAULT_SIZE)size);
 }
 
-void GUISkin::SetColor(Video::Color newColor, GUIDefaultColor which)
+void GUISkin::SetColor(Video::Color^ newColor, GUIDefaultColor which)
 {
-	m_GUISkin->setColor((gui::EGUI_DEFAULT_COLOR)which, newColor);
+	LIME_ASSERT(newColor != nullptr);
+	m_GUISkin->setColor((gui::EGUI_DEFAULT_COLOR)which, *newColor->m_NativeValue);
 }
 
 void GUISkin::SetText(String^ newText, GUIDefaultText which)

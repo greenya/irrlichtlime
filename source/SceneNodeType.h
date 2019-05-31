@@ -14,7 +14,6 @@ public enum class SceneNodeType
 	Cube = ESNT_CUBE,
 	Sphere = ESNT_SPHERE,
 	Text = ESNT_TEXT,
-	BillboardText = ESNT_BILLBOARD_TEXT,
 	WaterSurface = ESNT_WATER_SURFACE,
 	Terrain = ESNT_TERRAIN,
 	SkyBox = ESNT_SKY_BOX,

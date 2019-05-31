@@ -35,7 +35,7 @@ GUITreeViewNode^ GUITreeViewNode::AddChildBack(String^ text, String^ icon, int i
 		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
-		(void*)data);
+		(void*) data);
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -93,7 +93,7 @@ GUITreeViewNode^ GUITreeViewNode::AddChildFront(String^ text, String^ icon, int 
 		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
-		(void*)data);
+		(void*) data);
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -154,7 +154,7 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildAfter(GUITreeViewNode^ other, Strin
 		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
-		(void*)data);
+		(void*) data);
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -229,7 +229,7 @@ GUITreeViewNode^ GUITreeViewNode::InsertChildBefore(GUITreeViewNode^ other, Stri
 		LIME_SAFESTRINGTOSTRINGW_C_STR(icon),
 		imageIndex,
 		selectedImageIndex,
-		(void*)data);
+		(void*) data);
 
 	return GUITreeViewNode::Wrap(n);
 }
@@ -327,12 +327,12 @@ int GUITreeViewNode::ChildCount::get()
 
 int GUITreeViewNode::Data::get()
 {
-	return (int)m_GUITreeViewNode->getData();
+	return (int) m_GUITreeViewNode->getData();
 }
 
 void GUITreeViewNode::Data::set(int value)
 {
-	m_GUITreeViewNode->setData((void*)value);
+	m_GUITreeViewNode->setData((void*) value);
 }
 
 bool GUITreeViewNode::Expanded::get()

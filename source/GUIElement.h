@@ -27,16 +27,15 @@ public:
 
 	GUIElement^ GetElementFromID(int id, bool searchchildren);
 	GUIElement^ GetElementFromID(int id);
-	GUIElement^ GetElementFromPoint(Vector2Di point);
+	GUIElement^ GetElementFromPoint(Vector2Di^ point);
 
-	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible, bool includeDisabled);
 	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible);
 	bool GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest);
 
 	bool IsMyChild(GUIElement^ child);
-	bool IsPointInside(Vector2Di point);
+	bool IsPointInside(Vector2Di^ point);
 
-	void Move(Vector2Di absoluteMovement);
+	void Move(Vector2Di^ absoluteMovement);
 
 	void Remove();
 	void RemoveChild(GUIElement^ child);
@@ -46,19 +45,19 @@ public:
 	void SetMaxSize(Dimension2Di^ size);
 	void SetMinSize(Dimension2Di^ size);
 
-	void SetRelativePositionProportional(Rectf relativePosition);
+	void SetRelativePositionProportional(Rectf^ relativePosition);
 
 	void UpdateAbsolutePosition();
 
-	property Recti AbsoluteClippingRect { Recti get(); }
-	property Recti AbsolutePosition { Recti get(); }
-	property NativeCollection<GUIElement^>^ Children { NativeCollection<GUIElement^>^ get(); }
+	property Recti^ AbsoluteClippingRect { Recti^ get(); }
+	property Recti^ AbsolutePosition { Recti^ get(); }
+	property array<GUIElement^>^ Children { array<GUIElement^>^ get(); }
 	property bool Clipped { bool get(); void set(bool value); }
 	property bool Enabled { bool get(); void set(bool value); }
 	property int ID { int get(); void set(int value); }
 	property String^ Name { String^ get(); void set(String^ value); }
 	property GUIElement^ Parent { GUIElement^ get(); }
-	property Recti RelativePosition { Recti get(); void set(Recti value); }
+	property Recti^ RelativePosition { Recti^ get(); void set(Recti^ value); }
 	property bool SubElement { bool get(); void set(bool value); }
 	property bool TabGroup { bool get(); void set(bool value); }
 	property GUIElement^ TabGroupElement { GUIElement^ get(); }
@@ -78,8 +77,8 @@ public:
 
 protected:
 
-	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti rectangle, int id);
-	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti rectangle);
+	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle, int id);
+	GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle);
 
 	event DrawEventHandler^ OnDraw;
 	event OnEventEventHandler^ OnEvent;

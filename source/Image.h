@@ -16,15 +16,13 @@ public:
 
 	static int GetBitsPerPixelFromFormat(Video::ColorFormat format);
 	static bool IsCompressedFormat(Video::ColorFormat format);
-	static bool IsDepthFormat(Video::ColorFormat format);
 	static bool IsRenderTargetOnlyFormat(Video::ColorFormat format);
 	static System::Drawing::Imaging::PixelFormat GetPixelFormat(Video::ColorFormat format);
 
-	void CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect, Nullable<Recti> clipRect);
-	void CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect);
-	void CopyTo(Image^ target, Vector2Di targetPos);
+	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect);
+	void CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect);
+	void CopyTo(Image^ target, Vector2Di^ targetPos);
 	void CopyTo(Image^ target);
-	array<unsigned char>^ CopyTo();
 
 	System::Drawing::Bitmap^ CopyToBitmap();
 
@@ -37,29 +35,28 @@ public:
 	void CopyToScalingBoxFilter(Image^ target, int bias);
 	void CopyToScalingBoxFilter(Image^ target);
 
-	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color, Nullable<Recti> clipRect);
-	void CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color);
+	void CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color, Recti^ clipRect);
+	void CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color);
 
-	void Fill(Color color);
-	Color GetPixel(int x, int y);
-	IntPtr GetData();
-	void SetPixel(int x, int y, Color color, bool blend);
-	void SetPixel(int x, int y, Color color);
+	void Fill(Color^ color);
+	array<u8>^ GetData();
+	Color^ GetPixel(int x, int y);
+	void SetPixel(int x, int y, Color^ color, bool blend);
+	void SetPixel(int x, int y, Color^ color);
 
 	property int BitsPerPixel { int get(); }
 	property int BytesPerPixel { int get(); }
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
-	[Obsolete("Use Image.IsCompressedFormat instead.", false)]
 	property bool Compressed { bool get(); }
 	property Dimension2Di^ Dimension { Dimension2Di^ get(); }
+	property bool HasMipMaps { bool get(); }
 	property int ImageDataSizeInBytes { int get(); }
 	property int ImageDataSizeInPixels { int get(); }
-	property bool MipMaps { bool get(); }
 
-	property unsigned int RedMask { unsigned int get(); }
-	property unsigned int GreenMask { unsigned int get(); }
-	property unsigned int BlueMask { unsigned int get(); }
-	property unsigned int AlphaMask { unsigned int get(); }
+	property int RedMask { int get(); }
+	property int GreenMask { int get(); }
+	property int BlueMask { int get(); }
+	property int AlphaMask { int get(); }
 	property int Pitch { int get(); }
 
 	virtual String^ ToString() override;
@@ -70,10 +67,6 @@ internal:
 	Image(video::IImage* ref);
 
 	video::IImage* m_Image;
-
-private:
-
-	static void copyRBGFlip(void* srcPtr, void* destPtr, int count);
 };
 
 } // end namespace Video

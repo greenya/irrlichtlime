@@ -35,14 +35,15 @@ void ParticleFadeOutAffector::FadeOutTime::set(int value)
 	m_ParticleFadeOutAffector->setFadeOutTime(value);
 }
 
-Video::Color ParticleFadeOutAffector::TargetColor::get()
+Video::Color^ ParticleFadeOutAffector::TargetColor::get()
 {
-	return Video::Color(m_ParticleFadeOutAffector->getTargetColor());
+	return gcnew Video::Color(m_ParticleFadeOutAffector->getTargetColor());
 }
 
-void ParticleFadeOutAffector::TargetColor::set(Video::Color value)
+void ParticleFadeOutAffector::TargetColor::set(Video::Color^ value)
 {
-	m_ParticleFadeOutAffector->setTargetColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleFadeOutAffector->setTargetColor(*value->m_NativeValue);
 }
 
 } // end namespace Scene

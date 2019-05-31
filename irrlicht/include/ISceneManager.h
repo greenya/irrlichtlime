@@ -19,6 +19,7 @@
 #include "SceneParameters.h"
 #include "IGeometryCreator.h"
 #include "ISkinnedMesh.h"
+#include "IXMLWriter.h"
 
 namespace irr
 {
@@ -1118,6 +1119,12 @@ namespace scene
 		\return scene will be rendered ( passed culling ) */
 		virtual u32 registerNodeForRendering(ISceneNode* node,
 			E_SCENE_NODE_RENDER_PASS pass = ESNRP_AUTOMATIC) = 0;
+
+		//! Clear all nodes which are currently registered for rendering
+		/** Usually you don't have to care about this as drawAll will clear nodes
+		after rendering them. But sometimes you might have to manully reset this.
+		For example when you deleted nodes between registering and rendering. */
+		virtual void clearAllRegisteredNodesForRendering() = 0;
 
 		//! Draws all the scene nodes.
 		/** This can only be invoked between

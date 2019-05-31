@@ -18,7 +18,6 @@ ref class ImageLoader;
 ref class Light;
 ref class Material;
 ref class MaterialRenderer;
-ref class RenderTarget;
 ref class Texture;
 
 public ref class VideoDriver : ReferenceCounted
@@ -33,8 +32,6 @@ public:
 	void AddOcclusionQuery(Scene::SceneNode^ node, Scene::Mesh^ mesh);
 	void AddOcclusionQuery(Scene::SceneNode^ node);
 
-	RenderTarget^ AddRenderTarget();
-
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name, Video::ColorFormat format);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddRenderTargetTexture(Dimension2Di^ size);
@@ -43,137 +40,112 @@ public:
 	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
-	Texture^ AddTextureCubemap(String^ name, Image^ imagePosX, Image^ imageNegX, Image^ imagePosY, Image^ imageNegY, Image^ imagePosZ, Image^ imageNegZ);
-
-	[Obsolete("Use the new BeginScene with a clear flag.", false)]
-	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData, Nullable<Recti> sourceRect);
-	[Obsolete("Use the new BeginScene with a clear flag.", false)]
-	bool BeginScene(bool backBuffer, bool zBuffer, Color color, ExposedVideoData^ videoData);
-	[Obsolete("Use the new BeginScene with a clear flag.", false)]
-	bool BeginScene(bool backBuffer, bool zBuffer, Color color);
-	[Obsolete("Use the new BeginScene with a clear flag.", false)]
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData);
+	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color);
 	bool BeginScene(bool backBuffer, bool zBuffer);
-
-	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, ExposedVideoData^ videoData, Nullable<Recti> sourceRect);
-	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil, ExposedVideoData^ videoData);
-	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil);
-	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor, float clearDepth);
-	bool BeginScene(ClearBufferFlag clearFlag, Color clearColor);
-	bool BeginScene(ClearBufferFlag clearFlag);
-
+	bool BeginScene(bool backBuffer);
 	bool BeginScene();
 
 	bool CheckDriverReset();
 
-	void ClearBuffers(ClearBufferFlag flag, Color color, float depth, unsigned char stencil);
-	void ClearBuffers(ClearBufferFlag flag, Color color, float depth);
-	void ClearBuffers(ClearBufferFlag flag, Color color);
+	void ClearBuffers(ClearBufferFlag flag, Color^ color, f32 depth, u8 stencil);
+	void ClearBuffers(ClearBufferFlag flag, Color^ color, f32 depth);
+	void ClearBuffers(ClearBufferFlag flag, Color^ color);
 	void ClearBuffers(ClearBufferFlag flag);
-
-	[Obsolete("Use the new ClearBuffers with a clear flag.", false)]
-	void ClearBuffers(bool backBuffer, bool depthBuffer, bool stencilBuffer, Color color);
-
-	[Obsolete("Obsolete method. Use ClearBuffers() instead.", false)]
-	void ClearZBuffer();
 
 	IO::Attributes^ CreateAttributesFromMaterial(Material^ material);
 	IO::Attributes^ CreateAttributesFromMaterial(Material^ material, IO::AttributeReadWriteOptions^ options);
 
-	Image^ CreateImage(Texture^ texture, Vector2Di pos, Dimension2Di^ size);
+	Image^ CreateImage(Texture^ texture, Vector2Di^ pos, Dimension2Di^ size);
 	Image^ CreateImage(Texture^ texture);
 
 	Image^ CreateImage(Video::ColorFormat format, Dimension2Di^ size);
 	Image^ CreateImage(String^ filename);
 	Image^ CreateImage(IO::ReadFile^ file);
 
-	array<Image^>^ CreateImagesFromFile(String^ filename, [Out] TextureType% type);
-	array<Image^>^ CreateImagesFromFile(String^ filename);
-
-	array<Image^>^ CreateImagesFromFile(IO::ReadFile^ file, [Out] TextureType% type);
-	array<Image^>^ CreateImagesFromFile(IO::ReadFile^ file);
-
 	Image^ CreateScreenShot();
 	Image^ CreateScreenShot(Video::ColorFormat format);
-	Image^ CreateScreenShot(Video::ColorFormat format, Video::RenderTargetType target);
+	Image^ CreateScreenShot(Video::ColorFormat format, Video::RenderTarget target);
 
 	void DeleteAllDynamicLights();
 
 	void DisableFeature(VideoDriverFeature feature, bool flag);
 	void DisableFeature(VideoDriverFeature feature);
 
-	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect, List<Color>^ colors, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect, List<Color>^ colors);
-	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect, Nullable<Recti> clipRect);
-	void Draw2DImage(Texture^ texture, Recti destRect, Recti sourceRect);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect, Color color);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect, Nullable<Recti> clipRect);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos, Recti sourceRect);
-	void Draw2DImage(Texture^ texture, Vector2Di destPos);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect, List<Color^>^ colors);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect, Recti^ clipRect);
+	void Draw2DImage(Texture^ texture, Recti^ destRect, Recti^ sourceRect);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect, Color^ color);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect, Recti^ clipRect);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos, Recti^ sourceRect);
+	void Draw2DImage(Texture^ texture, Vector2Di^ destPos);
 	
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect, Color color);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects, Nullable<Recti> clipRect);
-	void Draw2DImageBatch(Texture^ texture, List<Vector2Di>^ positions, List<Recti>^ sourceRects);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect, Color^ color);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects, Recti^ clipRect);
+	void Draw2DImageBatch(Texture^ texture, List<Vector2Di^>^ positions, List<Recti^>^ sourceRects);
 
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect, Color color, bool useAlphaChannelOfTexture);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect, Color color);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth, Nullable<Recti> clipRect);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices, int kerningWidth);
-	void Draw2DImageBatch(Texture^ texture, Vector2Di position, List<Recti>^ sourceRects, List<int>^ indices);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color^ color, bool useAlphaChannelOfTexture);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect, Color^ color);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth, Recti^ clipRect);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices, int kerningWidth);
+	void Draw2DImageBatch(Texture^ texture, Vector2Di^ position, List<Recti^>^ sourceRects, List<int>^ indices);
 
-	void Draw2DLine(int x1, int y1, int x2, int y2, Color color);
-	void Draw2DLine(Vector2Di start, Vector2Di end, Color color);
+	void Draw2DLine(int x1, int y1, int x2, int y2, Color^ color);
+	void Draw2DLine(Vector2Di^ start, Vector2Di^ end, Color^ color);
 
-	void Draw2DPolygon(int x, int y, float radius, Color color, int vertexCount);
-	void Draw2DPolygon(Vector2Di center, float radius, Color color, int vertexCount);
+	void Draw2DPolygon(int x, int y, float radius, Color^ color, int vertexCount);
+	void Draw2DPolygon(Vector2Di^ center, float radius, Color^ color, int vertexCount);
 
-	void Draw2DRectangle(Recti pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown, Nullable<Recti> clip);
-	void Draw2DRectangle(Recti pos, Color colorLeftUp, Color colorRightUp, Color colorLeftDown, Color colorRightDown);
-	void Draw2DRectangle(Recti pos, Color color, Nullable<Recti> clip);
-	void Draw2DRectangle(Recti pos, Color color);
-	void Draw2DRectangle(int x1, int y1, int x2, int y2, Color color);
+	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown, Recti^ clip);
+	void Draw2DRectangle(Recti^ pos, Color^ colorLeftUp, Color^ colorRightUp, Color^ colorLeftDown, Color^ colorRightDown);
+	void Draw2DRectangle(Recti^ pos, Color^ color, Recti^ clip);
+	void Draw2DRectangle(Recti^ pos, Color^ color);
+	void Draw2DRectangle(int x1, int y1, int x2, int y2, Color^ color);
 
-	void Draw2DRectangleOutline(Recti pos, Color color);
-	void Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color color);
+	void Draw2DRectangleOutline(Recti^ pos, Color^ color);
+	void Draw2DRectangleOutline(int x1, int y1, int x2, int y2, Color^ color);
 
-	generic<typename T> where T : IVertex3D, value class void Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
-	generic<typename T> where T : IVertex3D, value class void Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit);
-	generic<typename T> where T : IVertex3D, value class void Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
-	generic<typename T> where T : IVertex3D, value class void Draw2DVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
+	void Draw2DVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
 	void Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType);
 	void Draw2DVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer);
 
-	void Draw3DBox(AABBox^ box, Color color);
+	void Draw3DBox(AABBox^ box, Color^ color);
 
-	void Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color color);
-	void Draw3DLine(Vector3Df start, Vector3Df end, Color color);
-	void Draw3DLine(Line3Df line, Color color);
+	void Draw3DLine(float x1, float y1, float z1, float x2, float y2, float z2, Color^ color);
+	void Draw3DLine(Vector3Df^ start, Vector3Df^ end, Color^ color);
+	void Draw3DLine(Line3Df^ line, Color^ color);
 
-	void Draw3DTriangle(Vector3Df pointA, Vector3Df pointB, Vector3Df pointC, Color color);
-	void Draw3DTriangle(Triangle3Df triangle, Color color);
+	void Draw3DTriangle(Vector3Df^ pointA, Vector3Df^ pointB, Vector3Df^ pointC, Color^ color);
+	void Draw3DTriangle(Triangle3Df^ triangle, Color^ color);
 
 	void DrawMeshBuffer(Scene::MeshBuffer^ mb);
 
-	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color color);
+	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length, Color^ color);
 	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb, float length);
 	void DrawMeshBufferNormals(Scene::MeshBuffer^ mb);
 
-	void DrawPixel(int x, int y, Color color);
+	void DrawPixel(int x, int y, Color^ color);
 
-	void DrawStencilShadow(bool clearStencilBuffer, Color leftUpEdge, Color rightUpEdge, Color leftDownEdge, Color rightDownEdge);
-	void DrawStencilShadow(bool clearStencilBuffer, Color allEdges);
+	void DrawStencilShadow(bool clearStencilBuffer, Color^ leftUpEdge, Color^ rightUpEdge, Color^ leftDownEdge, Color^ rightDownEdge);
+	void DrawStencilShadow(bool clearStencilBuffer, Color^ allEdges);
 	void DrawStencilShadow(bool clearStencilBuffer);
 	void DrawStencilShadow();
 
-	void DrawStencilShadowVolume(List<Vector3Df>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible);
-	void DrawStencilShadowVolume(List<Vector3Df>^ triangles, bool zfail);
-	void DrawStencilShadowVolume(List<Vector3Df>^ triangles);
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail, Scene::DebugSceneType debugDataVisible);
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles, bool zfail);
+	void DrawStencilShadowVolume(List<Vector3Df^>^ triangles);
 
-	generic<typename T> where T : IVertex3D, value class void DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
-	generic<typename T> where T : IVertex3D, value class void DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned short>^ indices16bit);
-	generic<typename T> where T : IVertex3D, value class void DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
-	generic<typename T> where T : IVertex3D, value class void DrawVertexPrimitiveList(array<T>^ vertices, array<unsigned int>^ indices32bit);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned short>^ indices16bit);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit, Scene::PrimitiveType pType);
+	void DrawVertexPrimitiveList(array<Vertex3D^>^ vertices, array<unsigned int>^ indices32bit);
 	void DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer, Scene::PrimitiveType pType);
 	void DrawVertexPrimitiveList(Scene::VertexBuffer^ vertexBuffer, Scene::IndexBuffer^ indexBuffer);
 
@@ -208,21 +180,18 @@ public:
 
 	Matrix^ GetTransform(TransformationState state);
 
-	void MakeColorKeyTexture(Texture^ texture, Color color);
-	void MakeColorKeyTexture(Texture^ texture, Vector2Di colorKeyPixelPos);
+	void MakeColorKeyTexture(Texture^ texture, Color^ color);
+	void MakeColorKeyTexture(Texture^ texture, Vector2Di^ colorKeyPixelPos);
 	void MakeNormalMapTexture(Texture^ texture, float amplitude);
 	void MakeNormalMapTexture(Texture^ texture);
 
 	bool QueryFeature(VideoDriverFeature feature);
-	bool QueryTextureFormat(Video::ColorFormat format);
 
 	void RemoveAllHardwareBuffers();
 	void RemoveAllOcclusionQueries();
-	void RemoveAllRenderTargets();
 	void RemoveAllTextures();
 	void RemoveHardwareBuffer(Scene::MeshBuffer^ mb);
 	void RemoveOcclusionQuery(Scene::SceneNode^ node);
-	void RemoveRenderTarget(RenderTarget^ renderTarget);
 	void RemoveTexture(Texture^ texture);
 
 	void RenameTexture(Texture^ texture, String^ newName);
@@ -242,28 +211,16 @@ public:
 	void SetMaterialRendererName(MaterialType materialType, String^ name);
 
 	void SetMinHardwareBufferVertexCount(int count);
-	
-	[Obsolete("Use the new SetRenderTarget with a clear flag.", false)]
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color color);
-	[Obsolete("Use the new SetRenderTarget with a clear flag.", false)]
+
+	//bool setRenderTarget (const core::array< video::IRenderTarget > &texture, bool clearBackBuffer=true, bool clearZBuffer=true, SColor color=video::SColor(0, 0, 0, 0));
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color);
 	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
-
-	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth, unsigned char clearStencil);
-	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor,	float clearDepth);
-	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color clearColor);
-	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag);
+	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
 	bool SetRenderTarget(Texture^ texture);
-
-	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth, unsigned char clearStencil);
-	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor, float clearDepth);
-	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag, Color clearColor);
-	bool SetRenderTargetEx(RenderTarget^ target, ClearBufferFlag clearFlag);
-
-	//These were removed, but it looks like it's not possible to access e.g. the stereoBuffers now, so I'll just keep them commented out. If they don't get added again, please remove
-	/*bool SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer, Color color);
-	//bool SetRenderTarget(RenderTargetType target, bool clearTarget, bool clearZBuffer);
-	//bool SetRenderTarget(RenderTargetType target, bool clearTarget);
-	bool SetRenderTarget(RenderTargetType target);*/
+	//bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color^ color);
+	//bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
+	//bool SetRenderTarget(RenderTarget target, bool clearTarget);
+	//bool SetRenderTarget(RenderTarget target);
 
 	void SetTextureCreationFlag(TextureCreationFlag flag, bool enabled);
 
@@ -304,7 +261,7 @@ public:
 	property int TextureCount { int get(); }
 	property List<Texture^>^ TextureList { List<Texture^>^ get(); }
 	property String^ VendorInfo { String^ get(); }
-	property Recti ViewPort { Recti get(); void set(Recti value); }
+	property Recti^ ViewPort { Recti^ get(); void set(Recti^ value); }
 
 	virtual String^ ToString() override;
 

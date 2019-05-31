@@ -14,9 +14,7 @@ public enum class KeyAction
 	StrafeLeft = EKA_STRAFE_LEFT,
 	StrafeRight = EKA_STRAFE_RIGHT,
 	Jump = EKA_JUMP_UP,
-	Crouch = EKA_CROUCH,
-	RotateLeft = EKA_ROTATE_LEFT,
-	RotateRight = EKA_ROTATE_RIGHT
+	Crouch = EKA_CROUCH
 };
 
 } // end namespace IrrlichtLime

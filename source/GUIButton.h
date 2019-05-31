@@ -17,19 +17,16 @@ public ref class GUIButton : GUIElement
 {
 public:
 
-	void SetImage(GUIButtonImageState state, Video::Texture^ image, Recti sourceRect);
-	void SetImage(GUIButtonImageState state, Video::Texture^ image);
-	void SetImage(GUIButtonImageState state);
-	void SetImage(Video::Texture^ image, Recti sourceRect);
-	void SetImage(Video::Texture^ image);
-	void SetImage();
+	void SetNormalImage(Video::Texture^ image, Recti^ pos);
+	void SetNormalImage(Video::Texture^ image);
+	void SetNormalImage();
 
-	void SetPressedImage(Video::Texture^ image, Recti sourceRect);
+	void SetPressedImage(Video::Texture^ image, Recti^ pos);
 	void SetPressedImage(Video::Texture^ image);
 	void SetPressedImage();
 
-	void SetSprite(GUIButtonState state, int index, Video::Color color, bool loop);
-	void SetSprite(GUIButtonState state, int index, Video::Color color);
+	void SetSprite(GUIButtonState state, int index, Video::Color^ color, bool loop);
+	void SetSprite(GUIButtonState state, int index, Video::Color^ color);
 	void SetSprite(GUIButtonState state, int index);
 
 	void SetSpriteBank(GUISpriteBank^ bank);

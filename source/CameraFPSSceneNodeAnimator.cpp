@@ -66,15 +66,5 @@ void CameraFPSSceneNodeAnimator::RotateSpeed::set(float value)
 	m_CameraFPSSceneNodeAnimator->setRotateSpeed(value);
 }
 
-float CameraFPSSceneNodeAnimator::RotateSpeedKeyboard::get()
-{
-	return m_CameraFPSSceneNodeAnimator->getRotateSpeedKeyboard();
-}
-
-void CameraFPSSceneNodeAnimator::RotateSpeedKeyboard::set(float value)
-{
-	m_CameraFPSSceneNodeAnimator->setRotateSpeedKeyboard(value);
-}
-
 } // end namespace Scene
 } // end namespace IrrlichtLime

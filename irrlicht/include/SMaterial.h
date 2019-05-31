@@ -226,8 +226,8 @@ namespace video
 		ECM_DIFFUSE_AND_AMBIENT
 	};
 
-	//! Flags for the definition of the polygon offset feature
-	/** These flags define whether the offset should be into the screen, or towards the eye. */
+	//! DEPRECATED. Will be removed after Irrlicht 1.9.
+	/** Flags for the definition of the polygon offset feature. These flags define whether the offset should be into the screen, or towards the eye. */
 	enum E_POLYGON_OFFSET
 	{
 		//! Push pixel towards the far plane, away from the eye
@@ -259,9 +259,30 @@ namespace video
 
 
 	//! Maximum number of texture an SMaterial can have.
+	/** SMaterial might ignore some textures in most function, like assignment and comparison,
+		when SIrrlichtCreationParameters::MaxTextureUnits is set to a lower number.
+	*/
 	const u32 MATERIAL_MAX_TEXTURES = _IRR_MATERIAL_MAX_TEXTURES_;
 
+	//! By default this is identical to MATERIAL_MAX_TEXTURES
+	/** Users can modify this value if they are certain they don't need all
+		available textures per material in their application. For example if you 
+		never need more than 2 textures per material you can set this to 2.
+
+		We (mostly) avoid dynamic memory in SMaterial, so the extra memory 
+		will still be allocated. But by lowering MATERIAL_MAX_TEXTURES_USED the 
+		material comparisons and assignments can be faster. Also several other 
+		places in the engine can be faster when reducing this value to the limit 
+		you need.
+
+		NOTE: This should only be changed once and before any call to createDevice.
+		NOTE: Do not set it below 1 or above the value of _IRR_MATERIAL_MAX_TEXTURES_.
+		NOTE: Going below 4 is usually not worth it.
+	*/
+	IRRLICHT_API extern u32 MATERIAL_MAX_TEXTURES_USED;
+
 	//! Struct for holding parameters for a material renderer
+	// Note for implementors: Serialization is in CNullDriver
 	class SMaterial
 	{
 	public:
@@ -273,6 +294,7 @@ namespace video
 			ZBuffer(ECFN_LESSEQUAL), AntiAliasing(EAAM_SIMPLE), ColorMask(ECP_ALL),
 			ColorMaterial(ECM_DIFFUSE), BlendOperation(EBO_NONE), BlendFactor(0.0f),
 			PolygonOffsetFactor(0), PolygonOffsetDirection(EPO_FRONT),
+			PolygonOffsetDepthBias(0.f), PolygonOffsetSlopeScale(0.f),
 			Wireframe(false), PointCloud(false), GouraudShading(true),
 			Lighting(true), ZWriteEnable(true), BackfaceCulling(true), FrontfaceCulling(false),
 			FogEnable(false), NormalizeNormals(false), UseMipMaps(true),
@@ -284,7 +306,7 @@ namespace video
 		SMaterial(const SMaterial& other)
 		{
 			// These pointers are checked during assignment
-			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 				TextureLayer[i].TextureMatrix = 0;
 			*this = other;
 		}
@@ -307,7 +329,7 @@ namespace video
 			MaterialTypeParam = other.MaterialTypeParam;
 			MaterialTypeParam2 = other.MaterialTypeParam2;
 			Thickness = other.Thickness;
-			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 			{
 				TextureLayer[i] = other.TextureLayer[i];
 			}
@@ -329,6 +351,8 @@ namespace video
 			BlendFactor = other.BlendFactor;
 			PolygonOffsetFactor = other.PolygonOffsetFactor;
 			PolygonOffsetDirection = other.PolygonOffsetDirection;
+			PolygonOffsetDepthBias = other.PolygonOffsetDepthBias;
+			PolygonOffsetSlopeScale = other.PolygonOffsetSlopeScale;
 			UseMipMaps = other.UseMipMaps;
 			ZWriteFineControl = other.ZWriteFineControl;
 
@@ -439,14 +463,35 @@ namespace video
 		type for this material, this field should be equal to MaterialTypeParam. */
 		f32 BlendFactor;
 
-		//! Factor specifying how far the polygon offset should be made
-		/** Specifying 0 disables the polygon offset. The direction is specified spearately.
-		The factor can be from 0 to 7.*/
+		//! DEPRECATED. Will be removed after Irrlicht 1.9. Please use PolygonOffsetDepthBias instead.
+		/** Factor specifying how far the polygon offset should be made.
+		Specifying 0 disables the polygon offset. The direction is specified separately.
+		The factor can be from 0 to 7.
+		Note: This probably never worked on Direct3D9 (was coded for D3D8 which had different value ranges)	*/
 		u8 PolygonOffsetFactor:3;
 
-		//! Flag defining the direction the polygon offset is applied to.
-		/** Can be to front or to back, specified by values from E_POLYGON_OFFSET. */
+		//! DEPRECATED. Will be removed after Irrlicht 1.9. 
+		/** Flag defining the direction the polygon offset is applied to.
+		Can be to front or to back, specified by values from E_POLYGON_OFFSET. 	*/
 		E_POLYGON_OFFSET PolygonOffsetDirection:1;
+
+		//! A constant z-buffer offset for a polygon/line/point
+		/** The range of the value is driver specific.
+		On OpenGL you get units which are multiplied by the smallest value that is guaranteed to produce a resolvable offset.
+		On D3D9 you can pass a range between -1 and 1. But you should likely divide it by the range of the depthbuffer.
+		Like dividing by 65535.0 for a 16 bit depthbuffer. Thought it still might produce too large of a bias.
+		Some article (https://aras-p.info/blog/2008/06/12/depth-bias-and-the-power-of-deceiving-yourself/) 
+		recommends multiplying by 2.0*4.8e-7 (and strangely on both 16 bit and 24 bit).	*/
+		f32 PolygonOffsetDepthBias;
+
+		//! Variable Z-Buffer offset based on the slope of the polygon.
+		/** For polygons looking flat at a camera you could use 0 (for example in a 2D game)
+		But in most cases you will have polygons rendered at a certain slope.
+		The driver will calculate the slope for you and this value allows to scale that slope.
+		The complete polygon offset is: PolygonOffsetSlopeScale*slope + PolygonOffsetDepthBias
+		A good default here is to use 1.f if you want to push the polygons away from the camera
+		and -1.f to pull them towards the camera.  */
+		f32 PolygonOffsetSlopeScale;
 
 		//! Draw as wireframe or filled triangles? Default: false
 		/** The user can access a material flag using
@@ -490,10 +535,10 @@ namespace video
 		//! Give more control how the ZWriteEnable flag is interpreted
 		/** Note that there is also the global flag AllowZWriteOnTransparent
 		which when set acts like all materials have set EZI_ALLOW_ON_TRANSPARENT. */
-		E_ZWRITE_FINE_CONTROL ZWriteFineControl;
+		E_ZWRITE_FINE_CONTROL ZWriteFineControl:1;
 
 		//! Gets the texture transformation matrix for level i
-		/** \param i The desired level. Must not be larger than MATERIAL_MAX_TEXTURES.
+		/** \param i The desired level. Must not be larger than MATERIAL_MAX_TEXTURES
 		\return Texture matrix for texture level i. */
 		core::matrix4& getTextureMatrix(u32 i)
 		{
@@ -565,23 +610,23 @@ namespace video
 					FrontfaceCulling = value; break;
 				case EMF_BILINEAR_FILTER:
 				{
-					for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+					for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 						TextureLayer[i].BilinearFilter = value;
 				}
 				break;
 				case EMF_TRILINEAR_FILTER:
 				{
-					for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+					for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 						TextureLayer[i].TrilinearFilter = value;
 				}
 				break;
 				case EMF_ANISOTROPIC_FILTER:
 				{
 					if (value)
-						for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+						for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 							TextureLayer[i].AnisotropicFilter = 0xFF;
 					else
-						for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+						for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 							TextureLayer[i].AnisotropicFilter = 0;
 				}
 				break;
@@ -591,7 +636,7 @@ namespace video
 					NormalizeNormals = value; break;
 				case EMF_TEXTURE_WRAP:
 				{
-					for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+					for (u32 i=0; i<MATERIAL_MAX_TEXTURES_USED; ++i)
 					{
 						TextureLayer[i].TextureWrapU = (E_TEXTURE_CLAMP)value;
 						TextureLayer[i].TextureWrapV = (E_TEXTURE_CLAMP)value;
@@ -614,7 +659,8 @@ namespace video
 				case EMF_POLYGON_OFFSET:
 					PolygonOffsetFactor = value?1:0;
 					PolygonOffsetDirection = EPO_BACK;
-					break;
+					PolygonOffsetSlopeScale = value?1.f:0.f;
+					PolygonOffsetDepthBias = value?1.f:0.f;
 				default:
 					break;
 			}
@@ -670,7 +716,7 @@ namespace video
 				case EMF_BLEND_FACTOR:
 					return BlendFactor != 0.f;
 				case EMF_POLYGON_OFFSET:
-					return PolygonOffsetFactor != 0;
+					return PolygonOffsetFactor != 0 || PolygonOffsetDepthBias != 0.f;
 			}
 
 			return false;
@@ -708,10 +754,12 @@ namespace video
 				BlendFactor != b.BlendFactor ||
 				PolygonOffsetFactor != b.PolygonOffsetFactor ||
 				PolygonOffsetDirection != b.PolygonOffsetDirection ||
+				PolygonOffsetDepthBias != b.PolygonOffsetDepthBias ||
+				PolygonOffsetSlopeScale != b.PolygonOffsetSlopeScale ||
 				UseMipMaps != b.UseMipMaps ||
 				ZWriteFineControl != b.ZWriteFineControl;
 				;
-			for (u32 i=0; (i<MATERIAL_MAX_TEXTURES) && !different; ++i)
+			for (u32 i=0; (i<MATERIAL_MAX_TEXTURES_USED) && !different; ++i)
 			{
 				different |= (TextureLayer[i] != b.TextureLayer[i]);
 			}
@@ -752,12 +800,10 @@ namespace video
 
 			return false;
 		}
-
 	};
 
 	//! global const identity Material
 	IRRLICHT_API extern SMaterial IdentityMaterial;
-
 } // end namespace video
 } // end namespace irr
 

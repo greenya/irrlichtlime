@@ -17,19 +17,10 @@ namespace irr
 namespace video
 {
 
-//! Enumeration describing the type of ITexture.
-enum E_TEXTURE_TYPE
-{
-	//! 2D texture.
-	ETT_2D,
-
-	//! Cubemap texture.
-	ETT_CUBEMAP
-};
-
 //! Interface for software image data.
 /** Image loaders create these images from files. IVideoDrivers convert
 these images into their (hardware) textures.
+NOTE: Floating point formats are not well supported yet. Basically only getData() works for them.
 */
 class IImage : public virtual IReferenceCounted
 {
@@ -279,9 +270,12 @@ public:
 	virtual void copyTo(IImage* target, const core::position2d<s32>& pos, const core::rect<s32>& sourceRect, const core::rect<s32>* clipRect=0) =0;
 
 	//! copies this surface into another, using the alpha mask and cliprect and a color to add with
+	/**	\param combineAlpha - When true then combine alpha channels. When false replace target image alpha with source image alpha.
+	*/
 	virtual void copyToWithAlpha(IImage* target, const core::position2d<s32>& pos,
 			const core::rect<s32>& sourceRect, const SColor &color,
-			const core::rect<s32>* clipRect = 0) =0;
+			const core::rect<s32>* clipRect = 0,
+			bool combineAlpha=false) =0;
 
 	//! copies this surface into another, scaling it to fit, applying a box filter
 	virtual void copyToScalingBoxFilter(IImage* target, s32 bias = 0, bool blend = false) = 0;
@@ -451,7 +445,7 @@ public:
 		}
 	}
 
-	//! check if the color format is only viable for RenderTarget textures
+	//! Check if the color format is only viable for RenderTarget textures
 	/** Since we don't have support for e.g. floating point IImage formats
 	one should test if the color format can be used for arbitrary usage, or
 	if it is restricted to RTTs. */
@@ -479,6 +473,7 @@ public:
 			case ECF_ETC2_ARGB:
 				return false;
 			default:
+				// All floating point formats. Function name should really be isFloatingPointFormat.
 				return true;
 		}
 	}

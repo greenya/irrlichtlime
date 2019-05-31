@@ -24,14 +24,15 @@ ParticleCylinderEmitter::ParticleCylinderEmitter(scene::IParticleCylinderEmitter
 	m_ParticleCylinderEmitter = ref;
 }
 
-Vector3Df ParticleCylinderEmitter::Center::get()
+Vector3Df^ ParticleCylinderEmitter::Center::get()
 {
-	return Vector3Df(m_ParticleCylinderEmitter->getCenter());
+	return gcnew Vector3Df(m_ParticleCylinderEmitter->getCenter());
 }
 
-void ParticleCylinderEmitter::Center::set(Vector3Df value)
+void ParticleCylinderEmitter::Center::set(Vector3Df^ value)
 {
-	m_ParticleCylinderEmitter->setCenter(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleCylinderEmitter->setCenter(*value->m_NativeValue);
 }
 
 float ParticleCylinderEmitter::Length::get()
@@ -44,14 +45,15 @@ void ParticleCylinderEmitter::Length::set(float value)
 	m_ParticleCylinderEmitter->setLength(value);
 }
 
-Vector3Df ParticleCylinderEmitter::Normal::get()
+Vector3Df^ ParticleCylinderEmitter::Normal::get()
 {
-	return Vector3Df(m_ParticleCylinderEmitter->getNormal());
+	return gcnew Vector3Df(m_ParticleCylinderEmitter->getNormal());
 }
 
-void ParticleCylinderEmitter::Normal::set(Vector3Df value)
+void ParticleCylinderEmitter::Normal::set(Vector3Df^ value)
 {
-	m_ParticleCylinderEmitter->setNormal(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleCylinderEmitter->setNormal(*value->m_NativeValue);
 }
 
 bool ParticleCylinderEmitter::OutlineOnly::get()

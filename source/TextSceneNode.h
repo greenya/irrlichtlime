@@ -7,22 +7,14 @@ using namespace irr;
 using namespace System;
 
 namespace IrrlichtLime {
-
-namespace GUI { ref class GUIFont; }
-
 namespace Scene {
 
 public ref class TextSceneNode : SceneNode
 {
 public:
 
-	String^ GetText();
 	void SetText(String^ text);
-
-	Video::Color GetTextColor();
-	void SetTextColor(Video::Color color);
-
-	property GUI::GUIFont^ Font { GUI::GUIFont^ get(); void set(GUI::GUIFont^ value); }
+	void SetTextColor(Video::Color^ color);
 
 internal:
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
+#include "SceneNode.h"
 #include "TextSceneNode.h"
-#include "GUIFont.h"
 
 using namespace irr;
 using namespace System;
@@ -23,34 +23,15 @@ TextSceneNode::TextSceneNode(scene::ITextSceneNode* ref)
 	m_TextSceneNode = ref;
 }
 
-String^ TextSceneNode::GetText()
-{
-	return gcnew String(m_TextSceneNode->getText());
-}
-
 void TextSceneNode::SetText(String^ text)
 {
 	m_TextSceneNode->setText(LIME_SAFESTRINGTOSTRINGW_C_STR(text));
 }
 
-Video::Color TextSceneNode::GetTextColor()
+void TextSceneNode::SetTextColor(Video::Color^ color)
 {
-	return Video::Color(m_TextSceneNode->getTextColor());
-}
-
-void TextSceneNode::SetTextColor(Video::Color color)
-{
-	m_TextSceneNode->setTextColor(color);
-}
-
-GUI::GUIFont^ TextSceneNode::Font::get()
-{
-	return GUI::GUIFont::Wrap(m_TextSceneNode->getFont());
-}
-
-void TextSceneNode::Font::set(GUI::GUIFont^ value)
-{
-	m_TextSceneNode->setFont(value->m_GUIFont);
+	LIME_ASSERT(color != nullptr);
+	m_TextSceneNode->setTextColor(*color->m_NativeValue);
 }
 
 } // end namespace Scene

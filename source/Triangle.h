@@ -1,7 +1,6 @@
 #pragma once
 
 #include "stdafx.h"
-#include "LimeMath.h"
 
 using namespace irr;
 using namespace System;
@@ -9,185 +8,177 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Core {
 
-[StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Triangle3Df : public IEquatable<Triangle3Df>
+public ref class Triangle3Df : Lime::NativeValue<core::triangle3df>
 {
 public:
 
-	Vector3Df A;
-	Vector3Df B;
-	Vector3Df C;
-
-	virtual bool Equals(Triangle3Df other) sealed
+	static bool operator == (Triangle3Df^ v1, Triangle3Df^ v2)
 	{
-		return A == other.A && B == other.B && C == other.C;
-	}
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
 
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
 			return false;
 
-		if (other->GetType() == Triangle3Df::typeid)
-			return Equals((Triangle3Df)other);
-		else
-			return false;
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
 	}
 
-	static bool operator == (Triangle3Df v1, Triangle3Df v2)
+	static bool operator != (Triangle3Df^ v1, Triangle3Df^ v2)
 	{
-		return v1.Equals(v2);
+		return !(v1 == v2);
 	}
 
-	static bool operator != (Triangle3Df v1, Triangle3Df v2)
+	Triangle3Df()
+		: Lime::NativeValue<core::triangle3df>(true)
 	{
-		return !v1.Equals(v2);
+		m_NativeValue = new core::triangle3df();
 	}
 
-	Triangle3Df(Vector3Df point1, Vector3Df point2, Vector3Df point3)
-		: A(point1), B(point2), C(point3)
+	Triangle3Df(Triangle3Df^ copy)
+		: Lime::NativeValue<core::triangle3df>(true)
 	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new core::triangle3df(copy->m_NativeValue->pointA, copy->m_NativeValue->pointB, copy->m_NativeValue->pointC);
 	}
 
-	void Set(Vector3Df point1, Vector3Df point2, Vector3Df point3)
+	Triangle3Df(Vector3Df^ point1, Vector3Df^ point2, Vector3Df^ point3)
+		: Lime::NativeValue<core::triangle3df>(true)
 	{
-		A = point1;
-		B = point2;
-		C = point3;
+		LIME_ASSERT(point1 != nullptr);
+		LIME_ASSERT(point2 != nullptr);
+		LIME_ASSERT(point3 != nullptr);
+
+		m_NativeValue = new core::triangle3df(*point1->m_NativeValue, *point2->m_NativeValue, *point3->m_NativeValue);
 	}
 
-	Vector3Df GetClosestPointOnTriangle(Vector3Df point)
+	void Set(Vector3Df^ point1, Vector3Df^ point2, Vector3Df^ point3)
 	{
-		Vector3Df rab = Line3Df(A, B).GetClosestPoint(point);
-		Vector3Df rbc = Line3Df(B, C).GetClosestPoint(point);
-		Vector3Df rca = Line3Df(C, A).GetClosestPoint(point);
+		LIME_ASSERT(point1 != nullptr);
+		LIME_ASSERT(point2 != nullptr);
+		LIME_ASSERT(point3 != nullptr);
 
-		float d1 = rab.GetDistanceFrom(point);
-		float d2 = rbc.GetDistanceFrom(point);
-		float d3 = rca.GetDistanceFrom(point);
+		m_NativeValue->set(*point1->m_NativeValue, *point2->m_NativeValue, *point3->m_NativeValue);
+	}
 
-		if (d1 < d2)
-			return d1 < d3 ? rab : rca;
-
-		return d2 < d3 ? rbc : rca;
+	Vector3Df^ GetClosestPointOnTriangle(Vector3Df^ point)
+	{
+		LIME_ASSERT(point != nullptr);
+		return gcnew Vector3Df(m_NativeValue->closestPointOnTriangle(*point->m_NativeValue));
 	}
 
 	bool IsTotalInsideBox(AABBox^ box)
 	{
 		LIME_ASSERT(box != nullptr);
-		return (box->IsInside(A) &&
-				box->IsInside(B) &&
-				box->IsInside(C));
+		return m_NativeValue->isTotalInsideBox(*box->m_NativeValue);
 	}
 
 	bool IsTotalOutsideBox(AABBox^ box)
 	{
 		LIME_ASSERT(box != nullptr);
-		Vector3Df minEdge = box->MinEdge;
-		Vector3Df maxEdge = box->MaxEdge;
-		return ((A.X > maxEdge.X && B.X > maxEdge.X && C.X > maxEdge.X) ||
-				(A.Y > maxEdge.Y && B.Y > maxEdge.Y && C.Y > maxEdge.Y) ||
-				(A.Z > maxEdge.Z && B.Z > maxEdge.Z && C.Z > maxEdge.Z) ||
-				(A.X < minEdge.X && B.X < minEdge.X && C.X < minEdge.X) ||
-				(A.Y < minEdge.Y && B.Y < minEdge.Y && C.Y < minEdge.Y) ||
-				(A.Z < minEdge.Z && B.Z < minEdge.Z && C.Z < minEdge.Z));
+		return m_NativeValue->isTotalOutsideBox(*box->m_NativeValue);
 	}
 
-	bool IsFrontFacing(Vector3Df lookDirection)
+	bool IsFrontFacing(Vector3Df^ lookDirection)
 	{
-		Vector3Df n = Normal.Normalize();
-		float d = (float)n.DotProduct(lookDirection);
-		return F32_LOWER_EQUAL_0(d);
+		LIME_ASSERT(lookDirection != nullptr);
+		return m_NativeValue->isFrontFacing(*lookDirection->m_NativeValue);
 	}
 
-	bool IsPointInside(Vector3Df point)
+	bool IsPointInside(Vector3Df^ point)
 	{
-		Vector3Dd af64((f64)A.X, (f64)A.Y, (f64)A.Z);
-		Vector3Dd bf64((f64)B.X, (f64)B.Y, (f64)B.Z);
-		Vector3Dd cf64((f64)C.X, (f64)C.Y, (f64)C.Z);
-		Vector3Dd pf64((f64)point.X, (f64)point.Y, (f64)point.Z);
-		return (isOnSameSide(pf64, af64, bf64, cf64) &&
-			isOnSameSide(pf64, bf64, af64, cf64) &&
-			isOnSameSide(pf64, cf64, af64, bf64));
+		LIME_ASSERT(point != nullptr);
+		return m_NativeValue->isPointInside(*point->m_NativeValue);
 	}
 
-	bool IsPointInsideFast(Vector3Df point)
+	bool IsPointInsideFast(Vector3Df^ point)
 	{
-		Vector3Df a = C - A;
-		Vector3Df b = B - A;
-		Vector3Df c = point - A;
-
-		const f64 dotAA = a.DotProduct( a);
-		const f64 dotAB = a.DotProduct( b);
-		const f64 dotAC = a.DotProduct( c);
-		const f64 dotBB = b.DotProduct( b);
-		const f64 dotBC = b.DotProduct( c);
-
-		// get coordinates in barycentric coordinate system
-		const f64 invDenom =  1/(dotAA * dotBB - dotAB * dotAB);
-		const f64 u = (dotBB * dotAC - dotAB * dotBC) * invDenom;
-		const f64 v = (dotAA * dotBC - dotAB * dotAC ) * invDenom;
-
-		// We count border-points as inside to keep downward compatibility.
-		// Rounding-error also needed for some test-cases.
-		return (u > -LimeM::ROUNDING_ERROR_f32) && (v >= 0) && (u + v < 1+LimeM::ROUNDING_ERROR_f32);
+		LIME_ASSERT(point != nullptr);
+		return m_NativeValue->isPointInsideFast(*point->m_NativeValue);
 	}
 
-	bool GetIntersectionWithLine(Vector3Df linePoint, Vector3Df lineVect, [Out] Vector3Df% intersection)
+	bool GetIntersectionWithLine(Vector3Df^ linePoint, Vector3Df^ lineVect, [Out] Vector3Df^% intersection)
 	{
-		if (GetIntersectionOfPlaneWithLine(linePoint, lineVect, intersection))
-			return IsPointInside(intersection);
-		return false;
+		LIME_ASSERT(linePoint != nullptr);
+		LIME_ASSERT(lineVect != nullptr);
+
+		core::vector3df i;
+		bool b = m_NativeValue->getIntersectionWithLine(
+			*linePoint->m_NativeValue,
+			*lineVect->m_NativeValue,
+			i);
+
+		if (b)
+			intersection = gcnew Vector3Df(i);
+
+		return b;
 	}
 
-	bool GetIntersectionWithLimitedLine(Line3Df line, [Out] Vector3Df% intersection)
+	bool GetIntersectionWithLimitedLine(Line3Df^ line, [Out] Vector3Df^% intersection)
 	{
-		return GetIntersectionWithLine(line.Start,
-			line.Vector, intersection) &&
-			intersection.IsBetweenPoints(line.Start, line.End);
+		LIME_ASSERT(line != nullptr);
+
+		core::vector3df i;
+		bool b = m_NativeValue->getIntersectionWithLimitedLine(
+			*line->m_NativeValue,
+			i);
+
+		if (b)
+			intersection = gcnew Vector3Df(i);
+
+		return b;
 	}
 
-	bool GetIntersectionOfPlaneWithLine(Vector3Df linePoint, Vector3Df lineVect, [Out] Vector3Df% intersection)
+	bool GetIntersectionOfPlaneWithLine(Vector3Df^ linePoint, Vector3Df^ lineVect, [Out] Vector3Df^% intersection)
 	{
-		//!!! We don't have Triangle3Dd, so we use native classes here to guarantee high precision !!!
+		LIME_ASSERT(linePoint != nullptr);
+		LIME_ASSERT(lineVect != nullptr);
 
-		// Work with f64 to get more precise results (makes enough difference to be worth the casts).
-		const core::vector3d<f64> linePointf64(linePoint.X, linePoint.Y, linePoint.Z);
-		const core::vector3d<f64> lineVectf64(lineVect.X, lineVect.Y, lineVect.Z);
-		core::vector3d<f64> outIntersectionf64;
+		core::vector3df i;
+		bool b = m_NativeValue->getIntersectionOfPlaneWithLine(
+			*linePoint->m_NativeValue,
+			*lineVect->m_NativeValue,
+			i);
 
-		core::triangle3d<irr::f64> trianglef64(core::vector3d<f64>((f64)A.X, (f64)A.Y, (f64)A.Z)
-									,core::vector3d<f64>((f64)B.X, (f64)B.Y, (f64)B.Z)
-									, core::vector3d<f64>((f64)C.X, (f64)C.Y, (f64)C.Z));
-		const core::vector3d<irr::f64> normalf64 = trianglef64.getNormal().normalize();
-		f64 t2;
+		if (b)
+			intersection = gcnew Vector3Df(i);
 
-		if ( LimeM::Iszero ( t2 = normalf64.dotProduct(lineVectf64) ) )
-			return false;
-
-		f64 d = trianglef64.pointA.dotProduct(normalf64);
-		f64 t = -(normalf64.dotProduct(linePointf64) - d) / t2;
-		outIntersectionf64 = linePointf64 + (lineVectf64 * t);
-
-		intersection.X = (float)outIntersectionf64.X;
-		intersection.Y = (float)outIntersectionf64.Y;
-		intersection.Z = (float)outIntersectionf64.Z;
-		return true;
+		return b;
 	}
 
 	property Plane3Df^ Plane
 	{
-		Plane3Df^ get() { return gcnew Plane3Df(A, B, C); }
+		Plane3Df^ get() { return gcnew Plane3Df(m_NativeValue->getPlane()); }
 	}
 
 	property float Area
 	{
-		float get() { return (B - A).CrossProduct(C - A).Length * 0.5f; }
+		float get() { return m_NativeValue->getArea(); }
 	}
 
-	property Vector3Df Normal
+	property Vector3Df^ Normal
 	{
-		Vector3Df get() { return (B - A).CrossProduct(C - A); }
+		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->getNormal()); }
+	}
+
+	property Vector3Df^ A
+	{
+		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointA); }
+		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointA = *value->m_NativeValue; }
+	}
+
+	property Vector3Df^ B
+	{
+		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointB); }
+		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointB = *value->m_NativeValue; }
+	}
+
+	property Vector3Df^ C
+	{
+		Vector3Df^ get() { return gcnew Vector3Df(m_NativeValue->pointC); }
+		void set(Vector3Df^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->pointC = *value->m_NativeValue; }
 	}
 
 	virtual String^ ToString() override
@@ -198,55 +189,10 @@ public:
 internal:
 
 	Triangle3Df(const core::triangle3df& value)
+		: Lime::NativeValue<core::triangle3df>(true)
 	{
-#ifdef FAST_FROM_NATIVE
-		*this = (Triangle3Df&)value;
-#else
-		A = Vector3Df(value.pointA);
-		B = Vector3Df(value.pointB);
-		C = Vector3Df(value.pointC);
-#endif
+		m_NativeValue = new core::triangle3df(value);
 	}
-
-	operator core::triangle3df()
-	{
-#ifdef FAST_TO_NATIVE
-		return (core::triangle3df&)*this;
-		//return *(interior_ptr<core::triangle3df>)this;
-#else
-		return core::triangle3df(A.ToNative(), B.ToNative(), C.ToNative());
-#endif
-	}
-
-	core::triangle3df ToNative()
-	{
-		return (core::triangle3df)*this;
-	}
-
-private:
-
-	bool isOnSameSide(Vector3Dd p1, Vector3Dd p2,
-			Vector3Dd a, Vector3Dd b)
-	{
-		Vector3Dd bminusa = b - a;
-		Vector3Dd cp1 = bminusa.CrossProduct(p1 - a);
-		Vector3Dd cp2 = bminusa.CrossProduct(p2 - a);
-		f64 res = cp1.DotProduct(cp2);
-		if ( res < 0 )
-		{
-			// This catches some floating point troubles.
-			// Unfortunately slightly expensive and we don't really know the best epsilon for iszero.
-			Vector3Dd cp1 = bminusa.Normalize().CrossProduct((p1 - a).Normalize());
-			if (LimeM::Iszero(cp1.X, (f64)LimeM::ROUNDING_ERROR_f32)
-				&& LimeM::Iszero(cp1.Y, (f64)LimeM::ROUNDING_ERROR_f32)
-				&& LimeM::Iszero(cp1.Z, (f64)LimeM::ROUNDING_ERROR_f32) )
-			{
-				res = 0.f;
-			}
-		}
-		return (res >= 0.0f);
-	}
-
 };
 
 } // end namespace Core

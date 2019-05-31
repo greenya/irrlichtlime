@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GUIElement.h"
 #include "GUIListBox.h"
-#include "GUIScrollBar.h"
 #include "GUISpriteBank.h"
 
 using namespace irr;
@@ -63,15 +62,15 @@ int GUIListBox::GetItemAt(int xpos, int ypos)
 	return m_GUIListBox->getItemAt(xpos, ypos);
 }
 
-Video::Color GUIListBox::GetItemDefaultColor(GUIListBoxColor colorType)
+Video::Color^ GUIListBox::GetItemDefaultColor(GUIListBoxColor colorType)
 {
-	return Video::Color(m_GUIListBox->getItemDefaultColor((gui::EGUI_LISTBOX_COLOR)colorType));
+	return gcnew Video::Color(m_GUIListBox->getItemDefaultColor((gui::EGUI_LISTBOX_COLOR)colorType));
 }
 
-Video::Color GUIListBox::GetItemColor(int index, GUIListBoxColor colorType)
+Video::Color^ GUIListBox::GetItemColor(int index, GUIListBoxColor colorType)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
-	return Video::Color(m_GUIListBox->getItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType));
+	return gcnew Video::Color(m_GUIListBox->getItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType));
 }
 
 int GUIListBox::GetItemIcon(int index)
@@ -121,11 +120,12 @@ void GUIListBox::SetItem(int index, String^ text)
 	m_GUIListBox->setItem(index, LIME_SAFESTRINGTOSTRINGW_C_STR(text), -1);
 }
 
-void GUIListBox::SetItemColor(int index, GUIListBoxColor colorType, Video::Color color)
+void GUIListBox::SetItemColor(int index, GUIListBoxColor colorType, Video::Color^ color)
 {
 	LIME_ASSERT(index >= 0 && index < ItemCount);
+	LIME_ASSERT(color != nullptr);
 
-	m_GUIListBox->setItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType, color);
+	m_GUIListBox->setItemOverrideColor(index, (gui::EGUI_LISTBOX_COLOR)colorType, *color->m_NativeValue);
 }
 
 void GUIListBox::SetItemHeight(int height)
@@ -189,11 +189,6 @@ void GUIListBox::SelectedItem::set(String^ value)
 		m_GUIListBox->setSelected(nullptr);
 
 	m_GUIListBox->setSelected(LIME_SAFESTRINGTOSTRINGW_C_STR(value));
-}
-
-GUIScrollBar^ GUIListBox::VerticalScrollBar::get()
-{
-	return GUIScrollBar::Wrap(m_GUIListBox->getVerticalScrollBar());
 }
 
 } // end namespace GUI

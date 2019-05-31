@@ -46,13 +46,6 @@ void GUITabControl::Clear()
 	m_GUITabControl->clear();
 }
 
-GUITab^ GUITabControl::GetTab(int index)
-{
-	LIME_ASSERT(index >= 0 && index < TabCount);
-
-	return GUITab::Wrap(m_GUITabControl->getTab(index));
-}
-
 int GUITabControl::GetTabAt(int xpos, int ypos)
 {
 	return m_GUITabControl->getTabAt(xpos, ypos);

@@ -19,11 +19,6 @@ bool Image::IsCompressedFormat(Video::ColorFormat format)
 	return video::IImage::isCompressedFormat((ECOLOR_FORMAT)format);
 }
 
-bool Image::IsDepthFormat(Video::ColorFormat format)
-{
-	return video::IImage::isDepthFormat((ECOLOR_FORMAT)format);
-}
-
 bool Image::IsRenderTargetOnlyFormat(Video::ColorFormat format)
 {
 	return video::IImage::isRenderTargetOnlyFormat((ECOLOR_FORMAT)format);
@@ -73,34 +68,39 @@ Image::Image(video::IImage* ref)
 	m_Image = ref;
 }
 
-void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect, Nullable<Recti> clipRect)
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Recti^ clipRect)
 {
 	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		targetPos,
-		sourceRect,
-		LIME_NULLABLE(clipRect));
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void Image::CopyTo(Image^ target, Vector2Di targetPos, Recti sourceRect)
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect)
 {
 	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		targetPos,
-		sourceRect);
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue);
 }
 
-void Image::CopyTo(Image^ target, Vector2Di targetPos)
+void Image::CopyTo(Image^ target, Vector2Di^ targetPos)
 {
 	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
 
 	m_Image->copyTo(
 		target->m_Image,
-		targetPos);
+		*targetPos->m_NativeValue);
 }
 
 void Image::CopyTo(Image^ target)
@@ -109,89 +109,25 @@ void Image::CopyTo(Image^ target)
 	m_Image->copyTo(target->m_Image);
 }
 
-array<unsigned char>^ Image::CopyTo()
-{
-	int s = m_Image->getImageDataSizeInBytes();
-	array<unsigned char>^ r = gcnew array<unsigned char>(s);
-
-	unsigned char* a = (unsigned char*)m_Image->getData();
-	Marshal::Copy(IntPtr(a), r, 0, s);
-	
-	return r;
-}
-
-void Image::copyRBGFlip(void* source, void* dest, int count)
-{
-	const int blockLength = 12;	//how many bytes we process per loop
-
-    int countRest = (count % blockLength) * blockLength;	//how many bytes we cannot process in the fast loop
-    int countFast = count - countRest;	//how many bytes we can process in the fast loop
-
-	//fast loop, read 3 * 4 bytes
-
-	unsigned int* sourceUint = (unsigned int*)source;
-	unsigned int* destUint = (unsigned int*)dest;
-
-    for (int i = 0; i < countFast; i += blockLength)
-    {
-        int index = i/4;
-        unsigned int sourceA = sourceUint[index];
-        unsigned int sourceB = sourceUint[index + 1];
-        unsigned int sourceC = sourceUint[index + 2];
-
-        destUint[index] =
-            (sourceA & 0x000000FFU) << 16 | (sourceA & 0x0000FF00U) |
-            (sourceA & 0x00FF0000U) >> 16 | (sourceB & 0x0000FF00U) << 16;
-        destUint[index + 1] =
-            (sourceB & 0x000000FFU) |       (sourceA & 0xFF000000U) >> 16 |
-            (sourceC & 0x000000FFU) << 16 | (sourceB & 0xFF000000U);
-        destUint[index + 2] =
-            (sourceB & 0x00FF0000U) >> 16 | (sourceC & 0xFF000000U) >> 16 |
-            (sourceC & 0x00FF0000U) |       (sourceC & 0x0000FF00U) << 16;
-    }
-
-	//slow loop, to process the rest (if it does not
-
-	unsigned char* sourceB = (unsigned char*)source;
-    unsigned char* destB = (unsigned char*)dest;
-
-    const int unitLength = 3;
-    for (int i = countFast; i < count; i += unitLength)
-    {
-        for (int j = 0; j < unitLength; j++)
-        {
-            destB[i + j] = sourceB[i + (unitLength - 1) - j];
-        }
-    }
-}
-
 System::Drawing::Bitmap^ Image::CopyToBitmap()
-{	
-	/*if (GetPixelFormat(ColorFormat) == System::Drawing::Imaging::PixelFormat::Undefined)	//return null, if the format is not supported
-		return nullptr;*/
-	if (ColorFormat != Video::ColorFormat::R8G8B8 && ColorFormat != Video::ColorFormat::A8R8G8B8)	//only 24bit RGB and 32bit ARGB are supported
-		return nullptr;
-
-	System::Drawing::Imaging::PixelFormat pixelFormat;
-	if (ColorFormat == Video::ColorFormat::R8G8B8)
-		pixelFormat = System::Drawing::Imaging::PixelFormat::Format24bppRgb;
-	else
-		pixelFormat = System::Drawing::Imaging::PixelFormat::Format32bppArgb;
+{
+	LIME_ASSERT(GetPixelFormat(ColorFormat) != System::Drawing::Imaging::PixelFormat::Undefined);
 
 	System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(
 		m_Image->getDimension().Width,
 		m_Image->getDimension().Height,
-		pixelFormat);
+		GetPixelFormat(ColorFormat));
 
 	System::Drawing::Imaging::BitmapData^ d = b->LockBits(
 		System::Drawing::Rectangle(0, 0, b->Width, b->Height),
 		System::Drawing::Imaging::ImageLockMode::WriteOnly,
 		b->PixelFormat);
 
-	if (ColorFormat == Video::ColorFormat::A8R8G8B8)
-		memcpy(d->Scan0.ToPointer(), m_Image->getData(), d->Height * d->Stride);
-	else //R8G8B8: we have to flip...
-		copyRBGFlip(m_Image->getData(), d->Scan0.ToPointer(), d->Height * d->Stride);
+	m_Image->copyToScaling(
+		d->Scan0.ToPointer(),
+		m_Image->getDimension().Width,
+		m_Image->getDimension().Height,
+		m_Image->getColorFormat());
 
 	b->UnlockBits(d);
 	return b;
@@ -285,62 +221,76 @@ void Image::CopyToScalingBoxFilter(Image^ target)
 	m_Image->copyToScalingBoxFilter(target->m_Image);
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color, Nullable<Recti> clipRect)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color, Recti^ clipRect)
 {
 	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
-		targetPos,
-		sourceRect,
-		color,
-		LIME_NULLABLE(clipRect));
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		*color->m_NativeValue,
+		LIME_SAFEREF(clipRect, m_NativeValue));
 }
 
-void Image::CopyToWithAlpha(Image^ target, Vector2Di targetPos, Recti sourceRect, Color color)
+void Image::CopyToWithAlpha(Image^ target, Vector2Di^ targetPos, Recti^ sourceRect, Color^ color)
 {
 	LIME_ASSERT(target != nullptr);
+	LIME_ASSERT(targetPos != nullptr);
+	LIME_ASSERT(sourceRect != nullptr);
+	LIME_ASSERT(color != nullptr);
 
 	m_Image->copyToWithAlpha(
 		target->m_Image,
-		targetPos,
-		sourceRect,
-		color);
+		*targetPos->m_NativeValue,
+		*sourceRect->m_NativeValue,
+		*color->m_NativeValue);
 }
 
-void Image::Fill(Color color)
+void Image::Fill(Color^ color)
 {
-	m_Image->fill(color);
+	LIME_ASSERT(color != nullptr);
+	m_Image->fill(*color->m_NativeValue);
 }
 
-Color Image::GetPixel(int x, int y)
+array<u8>^ Image::GetData()
 {
-	LIME_ASSERT(x >= 0 && x < Dimension->Width);
-	LIME_ASSERT(y >= 0 && y < Dimension->Height);
+	int s = m_Image->getImageDataSizeInBytes();
+	array<u8>^ r = gcnew array<u8>(s);
 
-	return Color(m_Image->getPixel(x, y));
+	u8* a = (u8*) m_Image->getData();
+	Marshal::Copy(IntPtr(a), r, 0, s);
+
+	return r;
 }
 
-IntPtr Image::GetData()
-{
-	return IntPtr(m_Image->getData());
-}
-
-
-void Image::SetPixel(int x, int y, Color color, bool blend)
+Color^ Image::GetPixel(int x, int y)
 {
 	LIME_ASSERT(x >= 0 && x < Dimension->Width);
 	LIME_ASSERT(y >= 0 && y < Dimension->Height);
 
-	m_Image->setPixel(x, y, color, blend);
+	return gcnew Color(m_Image->getPixel(x, y));
 }
 
-void Image::SetPixel(int x, int y, Color color)
+void Image::SetPixel(int x, int y, Color^ color, bool blend)
 {
 	LIME_ASSERT(x >= 0 && x < Dimension->Width);
 	LIME_ASSERT(y >= 0 && y < Dimension->Height);
+	LIME_ASSERT(color != nullptr);
 
-	m_Image->setPixel(x, y, color);
+	m_Image->setPixel(x, y, *color->m_NativeValue, blend);
+}
+
+void Image::SetPixel(int x, int y, Color^ color)
+{
+	LIME_ASSERT(x >= 0 && x < Dimension->Width);
+	LIME_ASSERT(y >= 0 && y < Dimension->Height);
+	LIME_ASSERT(color != nullptr);
+
+	m_Image->setPixel(x, y, *color->m_NativeValue);
 }
 
 int Image::BitsPerPixel::get()
@@ -360,12 +310,17 @@ Video::ColorFormat Image::ColorFormat::get()
 
 bool Image::Compressed::get()
 {
-	return m_Image->isCompressed();
+	return IsCompressedFormat(this->ColorFormat);
 }
 
 Dimension2Di^ Image::Dimension::get()
 {
 	return gcnew Dimension2Di(m_Image->getDimension());
+}
+
+bool Image::HasMipMaps::get()
+{
+	return m_Image->getMipMapsData() != nullptr;
 }
 
 int Image::ImageDataSizeInBytes::get()
@@ -378,27 +333,22 @@ int Image::ImageDataSizeInPixels::get()
 	return m_Image->getImageDataSizeInPixels();
 }
 
-bool Image::MipMaps::get()
-{
-	return m_Image->hasMipMaps();
-}
-
-unsigned int Image::RedMask::get()
+int Image::RedMask::get()
 {
 	return m_Image->getRedMask();
 }
 
-unsigned int Image::GreenMask::get()
+int Image::GreenMask::get()
 {
 	return m_Image->getGreenMask();
 }
 
-unsigned int Image::BlueMask::get()
+int Image::BlueMask::get()
 {
 	return m_Image->getBlueMask();
 }
 
-unsigned int Image::AlphaMask::get()
+int Image::AlphaMask::get()
 {
 	return m_Image->getAlphaMask();
 }

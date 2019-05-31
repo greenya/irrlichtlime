@@ -1,7 +1,6 @@
 #pragma once
 
 #include "stdafx.h"
-//#include "irrMath.h"	//for core::min_ and core::max_, etc
 
 using namespace irr;
 using namespace System;
@@ -9,154 +8,82 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-[StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Color : public IEquatable<Color>, public IEquatable<unsigned int>
+public ref class Color : Lime::NativeValue<video::SColor>
 {
 public:
 
-	static property Color OpaqueBlack { Color get() { return Color(0, 0, 0); } }
-	static property Color OpaqueBlue { Color get() { return Color(0, 0, 255); } }
-	static property Color OpaqueCyan { Color get() { return Color(0, 255, 255); } }
-	static property Color OpaqueGreen { Color get() { return Color(0, 255, 0); } }
-	static property Color OpaqueMagenta { Color get() { return Color(255, 0, 255); } }
-	static property Color OpaqueRed { Color get() { return Color(255, 0, 0); } }
-	static property Color OpaqueWhite { Color get() { return Color(255, 255, 255); } }
-	static property Color OpaqueYellow { Color get() { return Color(255, 255, 0); } }
+	static property Color^ OpaqueBlack { Color^ get() { return gcnew Color(0, 0, 0); } }
+	static property Color^ OpaqueBlue { Color^ get() { return gcnew Color(0, 0, 255); } }
+	static property Color^ OpaqueCyan { Color^ get() { return gcnew Color(0, 255, 255); } }
+	static property Color^ OpaqueGreen { Color^ get() { return gcnew Color(0, 255, 0); } }
+	static property Color^ OpaqueMagenta { Color^ get() { return gcnew Color(255, 0, 255); } }
+	static property Color^ OpaqueRed { Color^ get() { return gcnew Color(255, 0, 0); } }
+	static property Color^ OpaqueWhite { Color^ get() { return gcnew Color(255, 255, 255); } }
+	static property Color^ OpaqueYellow { Color^ get() { return gcnew Color(255, 255, 0); } }
 
-	virtual bool Equals(Color other) sealed
+	static bool operator == (Color^ v1, Color^ v2)
 	{
-		return (color == other.color);
-	}
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
 
-	virtual bool Equals(unsigned int other) sealed
-	{
-		return (color == other);
-	}
+		if (v1n && v2n)
+			return true;
 
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
+		if (v1n || v2n)
 			return false;
 
-		if (other->GetType() == Color::typeid)
-			return Equals((Color)other);
-		else
-			return false;
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
 	}
 
-	static bool operator == (Color v1, Color v2)
+	static bool operator != (Color^ v1, Color^ v2)
 	{
-		return v1.color == v2.color;
+		return !(v1 == v2);
 	}
 
-	static bool operator != (Color v1, Color v2)
+	Color()
+		: Lime::NativeValue<video::SColor>(true)
 	{
-		return v1.color != v2.color;
+		m_NativeValue = new video::SColor();
+	}
+
+	Color(Color^ copy)
+		: Lime::NativeValue<video::SColor>(true)
+	{
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue = new video::SColor(copy->m_NativeValue->color);
 	}
 
 	Color(unsigned int argb)
+		: Lime::NativeValue<video::SColor>(true)
 	{
-		color = argb;
+		m_NativeValue = new video::SColor(argb);
 	}
 
 	Color(int r, int g, int b, int a)
-	
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		LIME_ASSERT(r >= 0 && r <= 255);
 		LIME_ASSERT(g >= 0 && g <= 255);
 		LIME_ASSERT(b >= 0 && b <= 255);
 		LIME_ASSERT(a >= 0 && a <= 255);
 
-		color = (((a & 0xff)<<24) | ((r & 0xff)<<16) | ((g & 0xff)<<8) | (b & 0xff));
+		m_NativeValue = new video::SColor(a, r, g, b);
 	}
 
 	Color(int r, int g, int b)
+		: Lime::NativeValue<video::SColor>(true)
 	{
 		LIME_ASSERT(r >= 0 && r <= 255);
 		LIME_ASSERT(g >= 0 && g <= 255);
 		LIME_ASSERT(b >= 0 && b <= 255);
 
-		color = (((255 & 0xff)<<24) | ((r & 0xff)<<16) | ((g & 0xff)<<8) | (b & 0xff));
+		m_NativeValue = new video::SColor(255, r, g, b);
 	}
 
-	void GetData(void *data, ColorFormat format)
+	void Set(Color^ copy)
 	{
-		switch(format)
-		{
-			case ColorFormat::A1R5G5B5:
-			{
-				u16 * dest = (u16*)data;
-				*dest = video::A8R8G8B8toA1R5G5B5( color );
-			}
-			break;
-
-			case ColorFormat::R5G6B5:
-			{
-				u16 * dest = (u16*)data;
-				*dest = video::A8R8G8B8toR5G6B5( color );
-			}
-			break;
-
-			case ColorFormat::R8G8B8:
-			{
-				u8* dest = (u8*)data;
-				dest[0] = (u8)Red;
-				dest[1] = (u8)Green;
-				dest[2] = (u8)Blue;
-			}
-			break;
-
-			case ColorFormat::A8R8G8B8:
-			{
-				u32 * dest = (u32*)data;
-				*dest = color;
-			}
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	Color GetInterpolated(Color other, float d)
-	{
-		d = LimeM::Clamp(d, 0.f, 1.f);
-		const f32 inv = 1.0f - d;
-		return Color(
-			(u32)LimeM::Round32(other.Red*inv + Red*d),
-			(u32)LimeM::Round32(other.Green*inv + Green*d),
-			(u32)LimeM::Round32(other.Blue*inv + Blue*d),
-			(u32)LimeM::Round32(other.Alpha*inv + Alpha*d));
-	}
-
-	void SetData(const void* data, ColorFormat format)
-	{
-		switch (format)
-		{
-			case ColorFormat::A1R5G5B5:
-				color = A1R5G5B5toA8R8G8B8(*(u16*)data);
-				break;
-			case ColorFormat::R5G6B5:
-				color = R5G6B5toA8R8G8B8(*(u16*)data);
-				break;
-			case ColorFormat::A8R8G8B8:
-				color = *(u32*)data;
-				break;
-			case ColorFormat::R8G8B8:
-				{
-					u8* p = (u8*)data;
-					Set(p[0],p[1],p[2], 255);
-				}
-				break;
-			default:
-				color = 0xffffffff;
-			break;
-		}
-	}
-
-	void Set(unsigned int col)
-	{
-		color = col;
+		LIME_ASSERT(copy != nullptr);
+		m_NativeValue->set(copy->m_NativeValue->color);
 	}
 
 	void Set(int r, int g, int b, int a)
@@ -166,72 +93,71 @@ public:
 		LIME_ASSERT(b >= 0 && b <= 255);
 		LIME_ASSERT(a >= 0 && a <= 255);
 
-		color = (((a & 0xff)<<24) | ((r & 0xff)<<16) | ((g & 0xff)<<8) | (b & 0xff));
+		m_NativeValue->set(a, r, g, b);
 	}
 
-	/*void Set(int r, int g, int b)
+	void Set(int r, int g, int b)
 	{
 		LIME_ASSERT(r >= 0 && r <= 255);
 		LIME_ASSERT(g >= 0 && g <= 255);
 		LIME_ASSERT(b >= 0 && b <= 255);
 
 		m_NativeValue->set(m_NativeValue->getAlpha(), r, g, b);
-	}*/
+	}
 
-	/*void Set(unsigned int argb)
+	void Set(unsigned int argb)
 	{
 		m_NativeValue->set(argb);
-	}*/
+	}
 
 	property unsigned __int16 A1R5G5B5
 	{
-		unsigned __int16 get() { return A8R8G8B8toA1R5G5B5(color); }
+		unsigned __int16 get() { return m_NativeValue->toA1R5G5B5(); }
 	}
 
-	property unsigned int Alpha
+	property int Alpha
 	{
-		unsigned int get() { return color>>24;; }
-		void set(unsigned int value) { LIME_ASSERT(value >= 0 && value <= 255); color = ((value & 0xff)<<24) | (color & 0x00ffffff); }
+		int get() { return m_NativeValue->getAlpha(); }
+		void set(int value) { LIME_ASSERT(value >= 0 && value <= 255); m_NativeValue->setAlpha(value); }
 	}
 
 	property unsigned int ARGB
 	{
-		unsigned int get() { return color; }
-		void set(unsigned int value) { color = value; }
+		unsigned int get() { return m_NativeValue->color; }
+		void set(unsigned int value) { m_NativeValue->color = value; }
 	}
 
 	property int Average
 	{
-		int get() { return (Red + Green + Blue) / 3; }
+		int get() { return m_NativeValue->getAverage(); }
 	}
 
-	property unsigned int Blue
+	property int Blue
 	{
-		unsigned int get() { return color & 0xff; }
-		void set(unsigned int value) { LIME_ASSERT(value >= 0 && value <= 255); color = (value & 0xff) | (color & 0xffffff00); }
+		int get() { return m_NativeValue->getBlue(); }
+		void set(int value) { LIME_ASSERT(value >= 0 && value <= 255); m_NativeValue->setBlue(value); }
 	}
 
-
-	property unsigned int Green
+	property int Green
 	{
-		unsigned int get() { return (color>>8) & 0xff; }
-		void set(unsigned int value) { LIME_ASSERT(value >= 0 && value <= 255); color = ((value & 0xff)<<8) | (color & 0xffff00ff); }
+		int get() { return m_NativeValue->getGreen(); }
+		void set(int value) { LIME_ASSERT(value >= 0 && value <= 255); m_NativeValue->setGreen(value); }
 	}
 
 	property float Lightness
 	{
-		float get() { return 0.5f*(LimeM::Max_(LimeM::Max_(Red,Green),Blue)+LimeM::Min_(LimeM::Min_(Red,Green),Blue)); }
+		float get() { return m_NativeValue->getLightness(); }
 	}
 
 	property float Luminance
 	{
-		float get() { return 0.3f*Red + 0.59f*Green + 0.11f*Blue; }
+		float get() { return m_NativeValue->getLuminance(); }
 	}
 
-	property unsigned int Red
+	property int Red
 	{
-		unsigned int get() { return (color>>16) & 0xff; }
-		void set(unsigned int value) { LIME_ASSERT(value >= 0 && value <= 255); color = ((value & 0xff)<<16) | (color & 0xff00ffff); }
+		int get() { return m_NativeValue->getRed(); }
+		void set(int value) { LIME_ASSERT(value >= 0 && value <= 255); m_NativeValue->setRed(value); }
 	}
 
 	virtual String^ ToString() override
@@ -242,33 +168,17 @@ public:
 internal:
 
 	Color(const video::SColor& value)
+		: Lime::NativeValue<video::SColor>(true)
 	{
-		color = value.color;
+		m_NativeValue = new video::SColor(value);
 	}
-
-	operator SColor()	//Allow cast to SColor without cast
-	{
-		return color;
-	}
-
-	SColor ToNative()
-	{
-		return color;
-	}
-
-private:
-
-	unsigned int color;
-
 };
 
-[StructLayoutAttribute(LayoutKind::Sequential)]
-public value class Colorf : public Video::IShaderConstant
+public ref class Colorf : Lime::NativeValue<video::SColorf>
 {
 public:
 
-	/*
-	static bool operator == (Colorf v1, Colorf v2)
+	static bool operator == (Colorf^ v1, Colorf^ v2)
 	{
 		bool v1n = Object::ReferenceEquals(v1, nullptr);
 		bool v2n = Object::ReferenceEquals(v2, nullptr);
@@ -289,21 +199,18 @@ public:
 			core::equals(c1.a, c2.a);
 	}
 
-	static bool operator != (Colorf v1, Colorf v2)
+	static bool operator != (Colorf^ v1, Colorf^ v2)
 	{
 		return !(v1 == v2);
 	}
-	*/
 
-	/*Colorf()
+	Colorf()
+		: Lime::NativeValue<video::SColorf>(true)
 	{
-		r = 0.0f;
-		g = 0.0f;
-		b = 0.0f;
-		a = 1.0f;
-	}*/
+		m_NativeValue = new video::SColorf();
+	}
 
-	/*Colorf(Colorf copyColorf)
+	Colorf(Colorf^ copyColorf)
 		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(copyColorf != nullptr);
@@ -312,36 +219,37 @@ public:
 			copyColorf->m_NativeValue->g,
 			copyColorf->m_NativeValue->b,
 			copyColorf->m_NativeValue->a);
-	}*/
+	}
 
-	Colorf(Color copyColor)
+	Colorf(Color^ copyColor)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
-		const f32 inv = 1.0f / 255.0f;
-		r = copyColor.Red * inv;
-		g = copyColor.Green * inv;
-		b = copyColor.Blue * inv;
-		a = copyColor.Alpha * inv;
+		LIME_ASSERT(copyColor != nullptr);
+		m_NativeValue = new video::SColorf(*copyColor->m_NativeValue);
 	}
 
 	Colorf(float r, float g, float b, float a)
-		: r(r), g(g), b(b), a(a)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
 		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
 		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
 		LIME_ASSERT(a >= 0.0f && a <= 1.0f);
+
+		m_NativeValue = new video::SColorf(r, g, b, a);
 	}
 
 	Colorf(float r, float g, float b)
-		: r(r), g(g), b(b), a(255)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
 		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
 		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
 		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+
+		m_NativeValue = new video::SColorf(r, g, b);
 	}
 
-	/*
-	void Set(Colorf copyColorf)
+	void Set(Colorf^ copyColorf)
 	{
 		LIME_ASSERT(copyColorf != nullptr);
 		m_NativeValue->set(
@@ -351,7 +259,7 @@ public:
 			copyColorf->m_NativeValue->b);
 	}
 
-	void Set(Color copyColor)
+	void Set(Color^ copyColor)
 	{
 		LIME_ASSERT(copyColor != nullptr);
 		m_NativeValue->set(
@@ -360,81 +268,64 @@ public:
 			copyColor->m_NativeValue->getGreen() / 255.0f,
 			copyColor->m_NativeValue->getBlue() / 255.0f);
 	}
-	*/
 
-	void Set(float rr, float gg, float bb, float aa)
+	void Set(float r, float g, float b, float a)
 	{
-		LIME_ASSERT(rr >= 0.0f && rr <= 1.0f);
-		LIME_ASSERT(gg >= 0.0f && gg <= 1.0f);
-		LIME_ASSERT(bb >= 0.0f && bb <= 1.0f);
-		LIME_ASSERT(aa >= 0.0f && aa <= 1.0f);
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
+		LIME_ASSERT(a >= 0.0f && a <= 1.0f);
 
-		a = aa;
-		r = rr;
-		g = gg;
-		b = bb;
+		m_NativeValue->set(a, r, g, b);
 	}
 
-	void Set(float rr, float gg, float bb)
+	void Set(float r, float g, float b)
 	{
-		LIME_ASSERT(rr >= 0.0f && rr <= 1.0f);
-		LIME_ASSERT(gg >= 0.0f && gg <= 1.0f);
-		LIME_ASSERT(bb >= 0.0f && bb <= 1.0f);
+		LIME_ASSERT(r >= 0.0f && r <= 1.0f);
+		LIME_ASSERT(g >= 0.0f && g <= 1.0f);
+		LIME_ASSERT(b >= 0.0f && b <= 1.0f);
 
-		r = rr;
-		g = gg;
-		b = bb;
+		m_NativeValue->set(r, g, b);
 	}
-
 
 	array<float>^ ToArray()
 	{
-		array<float>^ ar = gcnew array<float>(4);
+		array<float>^ a = gcnew array<float>(4);
+		float* c = (float*)m_NativeValue;
 
-		ar[0] = r;
-		ar[1] = g;
-		ar[2] = b;
-		ar[3] = a;
+		for (int i = 0; i < 4; i++)
+			a[i] = c[i];
 
-		return ar;
+		return a;
 	}
 
-	Color ToColor()
+	Color^ ToColor()
 	{
-		return Color((unsigned int)LimeM::Round32(a*255.0f), (unsigned int)LimeM::Round32(r*255.0f), (unsigned int)LimeM::Round32(g*255.0f), (unsigned int)LimeM::Round32(b*255.0f));
+		return gcnew Color(m_NativeValue->toSColor());
 	}
 
 	property float Alpha
 	{
-		float get() { return a; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); a = value; }
+		float get() { return m_NativeValue->a; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->a = value; }
 	}
 
 	property float Blue
 	{
-		float get() { return b; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); b = value; }
+		float get() { return m_NativeValue->b; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->b = value; }
 	}
 
 	property float Green
 	{
-		float get() { return g; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); g = value; }
+		float get() { return m_NativeValue->g; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->g = value; }
 	}
 
 	property float Red
 	{
-		float get() { return r; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); r = value; }
-	}
-
-	virtual int GetData(float* data) sealed
-	{
-		data[0] = r;
-		data[1] = g;
-		data[2] = b;
-		data[3] = a;
-		return 4;
+		float get() { return m_NativeValue->r; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 1.0f); m_NativeValue->r = value; }
 	}
 
 	virtual String^ ToString() override
@@ -445,34 +336,17 @@ public:
 internal:
 
 	Colorf(const video::SColorf& value)
+		: Lime::NativeValue<video::SColorf>(true)
 	{
-		r = value.r;
-		g = value.g;
-		b = value.b;
-		a = value.a;
+		m_NativeValue = new video::SColorf(value);
 	}
-
-	operator SColorf()
-	{
-		return SColorf(r, g, b, a);
-	}
-
-private:
-
-	float r;
-	float g;
-	float b;
-	float a;
-
 };
 
-[StructLayoutAttribute(LayoutKind::Sequential)]
-public value class ColorHSL
+public ref class ColorHSL : Lime::NativeValue<video::SColorHSL>
 {
 public:
 
-	/*
-	static bool operator == (ColorHSL v1, ColorHSL v2)
+	static bool operator == (ColorHSL^ v1, ColorHSL^ v2)
 	{
 		bool v1n = Object::ReferenceEquals(v1, nullptr);
 		bool v2n = Object::ReferenceEquals(v2, nullptr);
@@ -492,7 +366,7 @@ public:
 			core::equals(c1.Luminance, c2.Luminance);
 	}
 
-	static bool operator != (ColorHSL v1, ColorHSL v2)
+	static bool operator != (ColorHSL^ v1, ColorHSL^ v2)
 	{
 		return !(v1 == v2);
 	}
@@ -503,7 +377,7 @@ public:
 		m_NativeValue = new video::SColorHSL();
 	}
 
-	ColorHSL(ColorHSL copyColorHSL)
+	ColorHSL(ColorHSL^ copyColorHSL)
 		: Lime::NativeValue<video::SColorHSL>(true)
 	{
 		LIME_ASSERT(copyColorHSL != nullptr);
@@ -511,33 +385,36 @@ public:
 		video::SColorHSL &c = *copyColorHSL->m_NativeValue;
 		m_NativeValue = new video::SColorHSL(c.Hue, c.Saturation, c.Luminance);
 	}
-	*/
 
-	ColorHSL(Color copyColor)
+	ColorHSL(Color^ copyColor)
+		: Lime::NativeValue<video::SColorHSL>(true)
 	{
-		ColorHSL copy = fromRGB(Colorf(copyColor));
-		hue = copy.hue;
-		saturation = copy.saturation;
-		luminance = copy.luminance;
+		LIME_ASSERT(copyColor != nullptr);
+
+		m_NativeValue = new video::SColorHSL();
+		m_NativeValue->fromRGB(video::SColorf(*copyColor->m_NativeValue));
 	}
 
-	ColorHSL(Colorf copyColorf)
+	ColorHSL(Colorf^ copyColorf)
+		: Lime::NativeValue<video::SColorHSL>(true)
 	{
-		ColorHSL copy = fromRGB(copyColorf);
-		hue = copy.hue;
-		saturation = copy.saturation;
-		luminance = copy.luminance;
+		LIME_ASSERT(copyColorf != nullptr);
+
+		m_NativeValue = new video::SColorHSL();
+		m_NativeValue->fromRGB(*copyColorf->m_NativeValue);
 	}
 
 	ColorHSL(float hue, float saturation, float luminance)
-		: hue(hue), saturation(saturation), luminance(luminance)
+		: Lime::NativeValue<video::SColorHSL>(true)
 	{
 		LIME_ASSERT(hue >= 0.0f && hue <= 360.0f);
 		LIME_ASSERT(saturation >= 0.0f && saturation <= 100.0f);
 		LIME_ASSERT(luminance >= 0.0f && luminance <= 100.0f);
+
+		m_NativeValue = new video::SColorHSL(hue, saturation, luminance);
 	}
-	/*
-	void Set(ColorHSL copyColorHSL)
+
+	void Set(ColorHSL^ copyColorHSL)
 	{
 		LIME_ASSERT(copyColorHSL != nullptr);
 
@@ -547,79 +424,61 @@ public:
 		m_NativeValue->Luminance = c.Luminance;
 	}
 
-	void Set(Color copyColor)
+	void Set(Color^ copyColor)
 	{
 		LIME_ASSERT(copyColor != nullptr);
 		m_NativeValue->fromRGB(video::SColorf(*copyColor->m_NativeValue));
 	}
 
-	void Set(Colorf copyColorf)
+	void Set(Colorf^ copyColorf)
 	{
 		LIME_ASSERT(copyColorf != nullptr);
 		m_NativeValue->fromRGB(*copyColorf->m_NativeValue);
-	}*/
-
-	void Set(float h, float s, float l)
-	{
-		LIME_ASSERT(h >= 0.0f && h <= 360.0f);
-		LIME_ASSERT(s >= 0.0f && s <= 100.0f);
-		LIME_ASSERT(l >= 0.0f && l <= 100.0f);
-
-		hue = h;
-		saturation = s;
-		luminance = l;
 	}
 
-	Color ToColor()
+	void Set(float hue, float saturation, float luminance)
 	{
-		Colorf c = ToColorf();
-		return c.ToColor();
+		LIME_ASSERT(hue >= 0.0f && hue <= 360.0f);
+		LIME_ASSERT(saturation >= 0.0f && saturation <= 100.0f);
+		LIME_ASSERT(luminance >= 0.0f && luminance <= 100.0f);
+
+		m_NativeValue->Hue = hue;
+		m_NativeValue->Saturation = saturation;
+		m_NativeValue->Luminance = luminance;
 	}
 
-	Colorf ToColorf()
+	Color^ ToColor()
 	{
-		const float l = luminance/100;
-		if (LimeM::Iszero(saturation)) // grey
-		{
-			Colorf(l, l, l);
-		}
+		Colorf^ c = gcnew Colorf();
+		m_NativeValue->toRGB(*c->m_NativeValue);
 
-		float rm2;
+		return c->ToColor();
+	}
 
-		if ( luminance <= 50 )
-		{
-			rm2 = l + l * (saturation/100);
-		}
-		else
-		{
-			rm2 = l + (1 - l) * (saturation/100);
-		}
+	Colorf^ ToColorf()
+	{
+		Colorf^ c = gcnew Colorf();
+		m_NativeValue->toRGB(*c->m_NativeValue);
 
-		const float rm1 = 2.0f * l - rm2;
-
-		const float h = hue / 360.0f;
-		return Colorf( toRGB1(rm1, rm2, h + 1.f/3.f),
-			toRGB1(rm1, rm2, h),
-			toRGB1(rm1, rm2, h - 1.f/3.f)
-			);
+		return c;
 	}
 
 	property float Hue
 	{
-		float get() { return hue; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 360.0f); hue = value; }
+		float get() { return m_NativeValue->Hue; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 360.0f); m_NativeValue->Hue = value; }
 	}
 
 	property float Luminance
 	{
-		float get() { return luminance; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); luminance = value; }
+		float get() { return m_NativeValue->Luminance; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); m_NativeValue->Luminance = value; }
 	}
 
 	property float Saturation
 	{
-		float get() { return saturation; }
-		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); saturation = value; }
+		float get() { return m_NativeValue->Saturation; }
+		void set(float value) { LIME_ASSERT(value >= 0.0f && value <= 100.0f); m_NativeValue->Saturation = value; }
 	}
 
 	virtual String^ ToString() override
@@ -630,77 +489,9 @@ public:
 internal:
 
 	ColorHSL(const video::SColorHSL& value)
+		: Lime::NativeValue<video::SColorHSL>(true)
 	{
-		hue = value.Hue;
-		saturation = value.Saturation;
-		luminance = value.Luminance;
-	}
-
-	operator SColorHSL()
-	{
-		return SColorHSL(hue, saturation, luminance);
-	}
-
-private:
-
-	float hue;
-	float saturation;
-	float luminance;
-
-	// algorithm from Foley/Van-Dam
-	inline float toRGB1(f32 rm1, f32 rm2, f32 rh)
-	{
-		if (rh<0)
-			rh += 1;
-		if (rh>1)
-			rh -= 1;
-
-		if (rh < 1.f/6.f)
-			rm1 = rm1 + (rm2 - rm1) * rh*6.f;
-		else if (rh < 0.5f)
-			rm1 = rm2;
-		else if (rh < 2.f/3.f)
-			rm1 = rm1 + (rm2 - rm1) * ((2.f/3.f)-rh)*6.f;
-
-		return rm1;
-	}
-
-	static ColorHSL fromRGB(Colorf copyColor)
-	{
-		ColorHSL ret;
-		const float maxVal = LimeM::Max_(copyColor.Red, copyColor.Green, copyColor.Blue);
-		const float minVal = (float)LimeM::Min_(copyColor.Red, copyColor.Green, copyColor.Blue);
-		ret.luminance = (maxVal+minVal)*50;
-		if (LimeM::Equals(maxVal, minVal))
-		{
-			ret.hue=0.f;
-			ret.saturation=0.f;
-			return ret;
-		}
-
-		const f32 delta = maxVal-minVal;
-		if ( ret.luminance <= 50 )
-		{
-			ret.saturation = (delta)/(maxVal+minVal);
-		}
-		else
-		{
-			ret.saturation = (delta)/(2-maxVal-minVal);
-		}
-		ret.saturation *= 100;
-
-		if (LimeM::Equals(maxVal, copyColor.Red))
-			ret.hue = (copyColor.Green-copyColor.Blue)/delta;
-		else if (LimeM::Equals(maxVal, copyColor.Green))
-			ret.hue = 2+((copyColor.Blue-copyColor.Red)/delta);
-		else // blue is max
-			ret.hue = 4+((copyColor.Red-copyColor.Green)/delta);
-
-		ret.hue *= 60.0f;
-		while ( ret.hue < 0.f )
-			ret.hue += 360;
-
-		return ret;
+		m_NativeValue = new video::SColorHSL(value);
 	}
 };
 

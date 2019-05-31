@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "GUIElement.h"
-#include "GUIFont.h"
 #include "GUITable.h"
-#include "GUIScrollBar.h"
 
 using namespace irr;
 using namespace System;
@@ -57,7 +55,7 @@ int GUITable::GetCellData(int rowIndex, int columnIndex)
 	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
 	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
 
-	return (int)m_GUITable->getCellData(rowIndex, columnIndex);
+	return (int) m_GUITable->getCellData(rowIndex, columnIndex);
 }
 
 String^ GUITable::GetCellText(int rowIndex, int columnIndex)
@@ -103,15 +101,16 @@ void GUITable::RemoveRow(int rowIndex)
 	m_GUITable->removeRow(rowIndex);
 }
 
-void GUITable::SetCellColor(int rowIndex, int columnIndex, Video::Color color)
+void GUITable::SetCellColor(int rowIndex, int columnIndex, Video::Color^ color)
 {
 	LIME_ASSERT(rowIndex >= 0 && rowIndex < RowCount);
 	LIME_ASSERT(columnIndex >= 0 && columnIndex < ColumnCount);
+	LIME_ASSERT(color != nullptr);
 
 	m_GUITable->setCellColor(
 		rowIndex,
 		columnIndex,
-		color);
+		*color->m_NativeValue);
 }
 
 void GUITable::SetCellData(int rowIndex, int columnIndex, int data)
@@ -122,7 +121,7 @@ void GUITable::SetCellData(int rowIndex, int columnIndex, int data)
 	m_GUITable->setCellData(
 		rowIndex,
 		columnIndex,
-		(void*)data);
+		(void*) data);
 }
 
 void GUITable::SetCellText(int rowIndex, int columnIndex, String^ text)
@@ -167,11 +166,6 @@ void GUITable::SwapRows(int rowIndexA, int rowIndexB)
 		rowIndexB);
 }
 
-GUIFont^ GUITable::ActiveFont::get()
-{
-	return GUIFont::Wrap(m_GUITable->getActiveFont());
-}
-
 int GUITable::ActiveColumnIndex::get()
 {
 	return m_GUITable->getActiveColumn();
@@ -193,16 +187,6 @@ int GUITable::ColumnCount::get()
 	return m_GUITable->getColumnCount();
 }
 
-bool GUITable::DrawBackground::get()
-{
-	return m_GUITable->isDrawBackgroundEnabled();
-}
-
-void GUITable::DrawBackground::set(bool value)
-{
-	m_GUITable->setDrawBackground(value);
-}
-
 GUITableDrawFlag GUITable::DrawFlags::get()
 {
 	return (GUITableDrawFlag)m_GUITable->getDrawFlags();
@@ -211,26 +195,6 @@ GUITableDrawFlag GUITable::DrawFlags::get()
 void GUITable::DrawFlags::set(GUITableDrawFlag value)
 {
 	m_GUITable->setDrawFlags((gui::EGUI_TABLE_DRAW_FLAGS)value);
-}
-
-GUIScrollBar^ GUITable::HorizontalScrollBar::get()
-{
-	return GUIScrollBar::Wrap(m_GUITable->getHorizontalScrollBar());
-}
-
-int GUITable::ItemHeight::get()
-{
-	return m_GUITable->getItemHeight();
-}
-
-GUIFont^ GUITable::OverrideFont::get()
-{
-	return GUIFont::Wrap(m_GUITable->getOverrideFont());
-}
-
-void GUITable::OverrideFont::set(GUIFont^ value)
-{
-	m_GUITable->setOverrideFont(LIME_SAFEREF(value, m_GUIFont));
 }
 
 bool GUITable::ResizableColumns::get()
@@ -257,11 +221,6 @@ void GUITable::SelectedRowIndex::set(int value)
 {
 	LIME_ASSERT(value >= 0 && value < RowCount);
 	m_GUITable->setSelected(value);
-}
-
-GUIScrollBar^ GUITable::VerticalScrollBar::get()
-{
-	return GUIScrollBar::Wrap(m_GUITable->getVerticalScrollBar());
 }
 
 } // end namespace GUI

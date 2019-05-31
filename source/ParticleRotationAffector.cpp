@@ -24,24 +24,26 @@ ParticleRotationAffector::ParticleRotationAffector(scene::IParticleRotationAffec
 	m_ParticleRotationAffector = ref;
 }
 
-Vector3Df ParticleRotationAffector::Pivot::get()
+Vector3Df^ ParticleRotationAffector::Pivot::get()
 {
-	return Vector3Df(m_ParticleRotationAffector->getPivotPoint());
+	return gcnew Vector3Df(m_ParticleRotationAffector->getPivotPoint());
 }
 
-void ParticleRotationAffector::Pivot::set(Vector3Df value)
+void ParticleRotationAffector::Pivot::set(Vector3Df^ value)
 {
-	m_ParticleRotationAffector->setPivotPoint(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleRotationAffector->setPivotPoint(*value->m_NativeValue);
 }
 
-Vector3Df ParticleRotationAffector::Speed::get()
+Vector3Df^ ParticleRotationAffector::Speed::get()
 {
-	return Vector3Df(m_ParticleRotationAffector->getSpeed());
+	return gcnew Vector3Df(m_ParticleRotationAffector->getSpeed());
 }
 
-void ParticleRotationAffector::Speed::set(Vector3Df value)
+void ParticleRotationAffector::Speed::set(Vector3Df^ value)
 {
-	m_ParticleRotationAffector->setSpeed(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleRotationAffector->setSpeed(*value->m_NativeValue);
 }
 
 } // end namespace Scene

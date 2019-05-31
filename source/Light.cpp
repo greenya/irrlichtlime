@@ -20,24 +20,26 @@ Light::Light()
 	m_NativeValue = new video::SLight();
 }
 
-Colorf Light::AmbientColor::get()
+Colorf^ Light::AmbientColor::get()
 {
-	return Colorf(m_NativeValue->AmbientColor);
+	return gcnew Colorf(m_NativeValue->AmbientColor);
 }
 
-void Light::AmbientColor::set(Colorf value)
+void Light::AmbientColor::set(Colorf^ value)
 {
-	m_NativeValue->AmbientColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->AmbientColor = *value->m_NativeValue;
 }
 
-Vector3Df Light::Attenuation::get()
+Vector3Df^ Light::Attenuation::get()
 {
-	return Vector3Df(m_NativeValue->Attenuation);
+	return gcnew Vector3Df(m_NativeValue->Attenuation);
 }
 
-void Light::Attenuation::set(Vector3Df value)
+void Light::Attenuation::set(Vector3Df^ value)
 {
-	m_NativeValue->Attenuation = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->Attenuation = *value->m_NativeValue;
 }
 
 bool Light::CastShadows::get()
@@ -50,24 +52,26 @@ void Light::CastShadows::set(bool value)
 	m_NativeValue->CastShadows = value;
 }
 
-Colorf Light::DiffuseColor::get()
+Colorf^ Light::DiffuseColor::get()
 {
-	return Colorf(m_NativeValue->DiffuseColor);
+	return gcnew Colorf(m_NativeValue->DiffuseColor);
 }
 
-void Light::DiffuseColor::set(Colorf value)
+void Light::DiffuseColor::set(Colorf^ value)
 {
-	m_NativeValue->DiffuseColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->DiffuseColor = *value->m_NativeValue;
 }
 
-Vector3Df Light::Direction::get()
+Vector3Df^ Light::Direction::get()
 {
-	return Vector3Df(m_NativeValue->Direction);
+	return gcnew Vector3Df(m_NativeValue->Direction);
 }
 
-void Light::Direction::set(Vector3Df value)
+void Light::Direction::set(Vector3Df^ value)
 {
-	m_NativeValue->Direction = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->Direction = *value->m_NativeValue;
 }
 
 float Light::Falloff::get()
@@ -100,14 +104,15 @@ void Light::OuterCone::set(float value)
 	m_NativeValue->OuterCone = value;
 }
 
-Vector3Df Light::Position::get()
+Vector3Df^ Light::Position::get()
 {
-	return Vector3Df(m_NativeValue->Position);
+	return gcnew Vector3Df(m_NativeValue->Position);
 }
 
-void Light::Position::set(Vector3Df value)
+void Light::Position::set(Vector3Df^ value)
 {
-	m_NativeValue->Position = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->Position = *value->m_NativeValue;
 }
 
 float Light::Radius::get()
@@ -120,14 +125,15 @@ void Light::Radius::set(float value)
 	m_NativeValue->Radius = value;
 }
 
-Colorf Light::SpecularColor::get()
+Colorf^ Light::SpecularColor::get()
 {
-	return Colorf(m_NativeValue->SpecularColor);
+	return gcnew Colorf(m_NativeValue->SpecularColor);
 }
 
-void Light::SpecularColor::set(Colorf value)
+void Light::SpecularColor::set(Colorf^ value)
 {
-	m_NativeValue->SpecularColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->SpecularColor = *value->m_NativeValue;
 }
 
 LightType Light::Type::get()

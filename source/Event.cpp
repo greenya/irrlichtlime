@@ -176,14 +176,14 @@ Event::Event(String^ logText)
 	m_NativeValue->LogEvent.Level = ELL_NONE;
 }
 
-Event::Event(IntPtr userData1, IntPtr userData2)
+Event::Event(int userData1, int userData2)
 	: Lime::NativeValue<SEvent>(true)
 {
 	m_NativeValue = new SEvent();
 	m_NativeValue->EventType = EET_USER_EVENT;
 
-	m_NativeValue->UserEvent.UserData1 = (size_t)(void*)userData1;
-	m_NativeValue->UserEvent.UserData2 = (size_t)(void*)userData2;
+	m_NativeValue->UserEvent.UserData1 = userData1;
+	m_NativeValue->UserEvent.UserData2 = userData2;
 }
 
 Event::GUIEvent Event::GUI::get()

@@ -107,12 +107,12 @@ public:
 	value class UserEvent
 	{
 	public:
-		IntPtr UserData1;
-		IntPtr UserData2;
+		int UserData1;
+		int UserData2;
 	internal:
 		UserEvent(const SEvent::SUserEvent& v)
-			: UserData1((void*)v.UserData1)
-			, UserData2((void*)v.UserData2) {}
+			: UserData1(v.UserData1)
+			, UserData2(v.UserData2) {}
 	};
 
 	Event(IrrlichtLime::GUI::GUIEventType type, IrrlichtLime::GUI::GUIElement^ caller, IrrlichtLime::GUI::GUIElement^ element);
@@ -132,7 +132,7 @@ public:
 	Event(String^ logText, LogLevel logLevel);
 	Event(String^ logText);
 
-	Event(IntPtr userData1, IntPtr userData2);
+	Event(int userData1, int userData2);
 
 	property GUIEvent GUI { GUIEvent get(); }
 	property JoystickEvent Joystick { JoystickEvent get(); }

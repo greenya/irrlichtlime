@@ -24,33 +24,9 @@ CursorControl::CursorControl(gui::ICursorControl* ref)
 	m_CursorControl = ref;
 }
 
-CursorIcon CursorControl::AddIcon(CursorSprite^ icon)
+void CursorControl::SetReferenceRect(Recti^ rect_or_null)
 {
-	LIME_ASSERT(icon != nullptr);
-
-	return (CursorIcon)m_CursorControl->addIcon(*icon->m_NativeValue);
-}
-
-void CursorControl::ChangeIcon(CursorIcon iconId, CursorSprite^ sprite)
-{
-	LIME_ASSERT(sprite != nullptr);
-
-	m_CursorControl->changeIcon((ECURSOR_ICON)iconId, *sprite->m_NativeValue);
-}
-
-void CursorControl::SetReferenceRect(Nullable<Recti> rect_or_null)
-{
-	m_CursorControl->setReferenceRect(LIME_NULLABLE(rect_or_null));
-}
-
-CursorIcon CursorControl::ActiveIcon::get()
-{
-	return (CursorIcon)m_CursorControl->getActiveIcon();
-}
-
-void CursorControl::ActiveIcon::set(CursorIcon value)
-{
-	m_CursorControl->setActiveIcon((gui::ECURSOR_ICON)value);
+	m_CursorControl->setReferenceRect(LIME_SAFEREF(rect_or_null, m_NativeValue));
 }
 
 CursorPlatformBehavior CursorControl::PlatformBehavior::get()
@@ -63,24 +39,26 @@ void CursorControl::PlatformBehavior::set(CursorPlatformBehavior value)
 	m_CursorControl->setPlatformBehavior((gui::ECURSOR_PLATFORM_BEHAVIOR)value);
 }
 
-Vector2Di CursorControl::Position::get()
+Vector2Di^ CursorControl::Position::get()
 {
-	return Vector2Di(m_CursorControl->getPosition());
+	return gcnew Vector2Di(m_CursorControl->getPosition());
 }
 
-void CursorControl::Position::set(Vector2Di value)
+void CursorControl::Position::set(Vector2Di^ value)
 {
-	m_CursorControl->setPosition(value);
+	LIME_ASSERT(value != nullptr);
+	m_CursorControl->setPosition(*value->m_NativeValue);
 }
 
-Vector2Df CursorControl::RelativePosition::get()
+Vector2Df^ CursorControl::RelativePosition::get()
 {
-	return Vector2Df(m_CursorControl->getRelativePosition());
+	return gcnew Vector2Df(m_CursorControl->getRelativePosition());
 }
 
-Dimension2Di^ CursorControl::SupportedIconSize::get()
+void CursorControl::RelativePosition::set(Vector2Df^ value)
 {
-	return gcnew Dimension2Di(m_CursorControl->getSupportedIconSize());
+	LIME_ASSERT(value != nullptr);
+	m_CursorControl->setPosition(*value->m_NativeValue);
 }
 
 bool CursorControl::Visible::get()

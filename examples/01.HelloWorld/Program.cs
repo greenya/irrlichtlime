@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
@@ -13,7 +8,7 @@ namespace _01.HelloWorld
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(
 				DriverType.Software, new Dimension2Di(640, 480), 16, false, false, false);
@@ -41,7 +36,7 @@ namespace _01.HelloWorld
 
 			while (device.Run())
 			{
-				driver.BeginScene(ClearBufferFlag.All, new Color(100, 101, 140));
+				driver.BeginScene(true, true, new Color(100, 101, 140));
 				
 				smgr.DrawAll();
 				gui.DrawAll();

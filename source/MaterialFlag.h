@@ -30,8 +30,7 @@ public enum class MaterialFlag
 	ColorMaterial = EMF_COLOR_MATERIAL,
 	Mipmaps = EMF_USE_MIP_MAPS,
 	BlendOperation = EMF_BLEND_OPERATION,
-	PolygonOffset = EMF_POLYGON_OFFSET,
-	BlendFactor = EMF_BLEND_FACTOR
+	PolygonOffset = EMF_POLYGON_OFFSET
 };
 
 } // end namespace Video

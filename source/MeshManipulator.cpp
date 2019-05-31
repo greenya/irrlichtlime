@@ -3,7 +3,6 @@
 #include "Mesh.h"
 #include "MeshBuffer.h"
 #include "MeshManipulator.h"
-#include "StaticMesh.h"
 
 using namespace irr;
 using namespace System;
@@ -47,10 +46,10 @@ Mesh^ MeshManipulator::CreateForsythOptimizedMesh(Mesh^ mesh)
 	return Mesh::Wrap(m);
 }
 
-StaticMesh^ MeshManipulator::CreateMeshCopy(Mesh^ mesh)
+Mesh^ MeshManipulator::CreateMeshCopy(Mesh^ mesh)
 {
-	scene::SMesh* m = m_MeshManipulator->createMeshCopy(LIME_SAFEREF(mesh, m_Mesh));
-	return StaticMesh::Wrap(m);
+	scene::IMesh* m = m_MeshManipulator->createMeshCopy(LIME_SAFEREF(mesh, m_Mesh));
+	return Mesh::Wrap(m);
 }
 
 Mesh^ MeshManipulator::CreateMeshUniquePrimitives(Mesh^ mesh)
@@ -172,8 +171,9 @@ void MeshManipulator::HeightmapOptimizeMesh(MeshBuffer^ buffer)
 		LIME_SAFEREF(buffer, m_MeshBuffer));
 }
 
-void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df offset)
+void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset)
 {
+	LIME_ASSERT(offset != nullptr);
 	LIME_ASSERT(axis <= 2); // The axis along which the texture is projected. The allowed values are 0 (X), 1(Y), and 2(Z).
 
 	m_MeshManipulator->makePlanarTextureMapping(
@@ -181,7 +181,7 @@ void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolutionS, fl
 		resolutionS,
 		resolutionT,
 		axis,
-		offset);
+		*offset->m_NativeValue);
 }
 
 void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh, float resolution)
@@ -194,8 +194,9 @@ void MeshManipulator::MakePlanarTextureMapping(Mesh^ mesh)
 	m_MeshManipulator->makePlanarTextureMapping(LIME_SAFEREF(mesh, m_Mesh));
 }
 
-void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df offset)
+void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolutionS, float resolutionT, unsigned __int8 axis, Vector3Df^ offset)
 {
+	LIME_ASSERT(offset != nullptr);
 	LIME_ASSERT(axis <= 2); // The axis along which the texture is projected. The allowed values are 0 (X), 1(Y), and 2(Z).
 
 	m_MeshManipulator->makePlanarTextureMapping(
@@ -203,7 +204,7 @@ void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolut
 		resolutionS,
 		resolutionT,
 		axis,
-		offset);
+		*offset->m_NativeValue);
 }
 
 void MeshManipulator::MakePlanarTextureMapping(MeshBuffer^ buffer, float resolution)
@@ -286,38 +287,44 @@ void MeshManipulator::RecalculateTangents(MeshBuffer^ buffer)
 	m_MeshManipulator->recalculateTangents(LIME_SAFEREF(buffer, m_MeshBuffer));
 }
 
-void MeshManipulator::Scale(MeshBuffer^ buffer, Vector3Df factor)
+void MeshManipulator::Scale(MeshBuffer^ buffer, Vector3Df^ factor)
 {
-	m_MeshManipulator->scale(LIME_SAFEREF(buffer, m_MeshBuffer), factor);
+	LIME_ASSERT(factor != nullptr);
+	m_MeshManipulator->scale(LIME_SAFEREF(buffer, m_MeshBuffer), *factor->m_NativeValue);
 }
 
-void MeshManipulator::Scale(Mesh^ mesh, Vector3Df factor)
+void MeshManipulator::Scale(Mesh^ mesh, Vector3Df^ factor)
 {
-	m_MeshManipulator->scale(LIME_SAFEREF(mesh, m_Mesh), factor);
+	LIME_ASSERT(factor != nullptr);
+	m_MeshManipulator->scale(LIME_SAFEREF(mesh, m_Mesh), *factor->m_NativeValue);
 }
 
-void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df factor, int level)
+void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor, int level)
 {
+	LIME_ASSERT(factor != nullptr);
 	LIME_ASSERT(level >= 1);
 
-	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), factor, level);
+	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), *factor->m_NativeValue, level);
 }
 
-void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df factor)
+void MeshManipulator::ScaleTCoords(MeshBuffer^ buffer, Vector2Df^ factor)
 {
-	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), factor);
+	LIME_ASSERT(factor != nullptr);
+	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(buffer, m_MeshBuffer), *factor->m_NativeValue);
 }
 
-void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df factor, int level)
+void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df^ factor, int level)
 {
+	LIME_ASSERT(factor != nullptr);
 	LIME_ASSERT(level >= 1);
 
-	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(mesh, m_Mesh), factor, level);
+	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(mesh, m_Mesh), *factor->m_NativeValue, level);
 }
 
-void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df factor)
+void MeshManipulator::ScaleTCoords(Mesh^ mesh, Vector2Df^ factor)
 {
-	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(mesh, m_Mesh), factor);
+	LIME_ASSERT(factor != nullptr);
+	m_MeshManipulator->scaleTCoords(LIME_SAFEREF(mesh, m_Mesh), *factor->m_NativeValue);
 }
 
 void MeshManipulator::SetVertexColorAlpha(Mesh^ mesh, int alpha)
@@ -332,14 +339,16 @@ void MeshManipulator::SetVertexColorAlpha(MeshBuffer^ buffer, int alpha)
 	m_MeshManipulator->setVertexColorAlpha(LIME_SAFEREF(buffer, m_MeshBuffer), alpha);
 }
 
-void MeshManipulator::SetVertexColors(Mesh^ mesh, Video::Color color)
+void MeshManipulator::SetVertexColors(Mesh^ mesh, Video::Color^ color)
 {
-	m_MeshManipulator->setVertexColors(LIME_SAFEREF(mesh, m_Mesh), color);
+	LIME_ASSERT(color != nullptr);
+	m_MeshManipulator->setVertexColors(LIME_SAFEREF(mesh, m_Mesh), *color->m_NativeValue);
 }
 
-void MeshManipulator::SetVertexColors(MeshBuffer^ buffer, Video::Color color)
+void MeshManipulator::SetVertexColors(MeshBuffer^ buffer, Video::Color^ color)
 {
-	m_MeshManipulator->setVertexColors(LIME_SAFEREF(buffer, m_MeshBuffer), color);
+	LIME_ASSERT(color != nullptr);
+	m_MeshManipulator->setVertexColors(LIME_SAFEREF(buffer, m_MeshBuffer), *color->m_NativeValue);
 }
 
 void MeshManipulator::Transform(MeshBuffer^ buffer, Matrix^ m)

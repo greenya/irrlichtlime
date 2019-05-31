@@ -22,14 +22,15 @@ VolumeLightSceneNode::VolumeLightSceneNode(scene::IVolumeLightSceneNode* ref)
 	m_VolumeLightSceneNode = ref;
 }
 
-Video::Color VolumeLightSceneNode::FootColor::get()
+Video::Color^ VolumeLightSceneNode::FootColor::get()
 {
-	return Video::Color(m_VolumeLightSceneNode->getFootColor());
+	return gcnew Video::Color(m_VolumeLightSceneNode->getFootColor());
 }
 
-void VolumeLightSceneNode::FootColor::set(Video::Color value)
+void VolumeLightSceneNode::FootColor::set(Video::Color^ value)
 {
-	m_VolumeLightSceneNode->setFootColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_VolumeLightSceneNode->setFootColor(*value->m_NativeValue);
 }
 
 int VolumeLightSceneNode::SubDivideU::get()
@@ -54,14 +55,15 @@ void VolumeLightSceneNode::SubDivideV::set(int value)
 	m_VolumeLightSceneNode->setSubDivideV(value);
 }
 
-Video::Color VolumeLightSceneNode::TailColor::get()
+Video::Color^ VolumeLightSceneNode::TailColor::get()
 {
-	return Video::Color(m_VolumeLightSceneNode->getTailColor());
+	return gcnew Video::Color(m_VolumeLightSceneNode->getTailColor());
 }
 
-void VolumeLightSceneNode::TailColor::set(Video::Color value)
+void VolumeLightSceneNode::TailColor::set(Video::Color^ value)
 {
-	m_VolumeLightSceneNode->setTailColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_VolumeLightSceneNode->setTailColor(*value->m_NativeValue);
 }
 
 } // end namespace Scene

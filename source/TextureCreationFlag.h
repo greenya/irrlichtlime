@@ -18,8 +18,7 @@ public enum class TextureCreationFlag
 	OptimizedForSpeed = ETCF_OPTIMIZED_FOR_SPEED,
 	CreateMipMaps = ETCF_CREATE_MIP_MAPS,
 	NoAlphaChannel = ETCF_NO_ALPHA_CHANNEL,
-	AllowNonPower2 = ETCF_ALLOW_NON_POWER_2,
-	AllowMemoryCopy = ETCF_ALLOW_MEMORY_COPY
+	AllowNonPower2 = ETCF_ALLOW_NON_POWER_2
 };
 
 } // end namespace Video

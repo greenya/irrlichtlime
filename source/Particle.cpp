@@ -28,14 +28,15 @@ Particle::Particle()
 	m_NativeValue = new scene::SParticle();
 }
 
-Video::Color Particle::Color::get()
+Video::Color^ Particle::Color::get()
 {
-	return Video::Color(m_NativeValue->color);
+	return gcnew Video::Color(m_NativeValue->color);
 }
 
-void Particle::Color::set(Video::Color value)
+void Particle::Color::set(Video::Color^ value)
 {
-	m_NativeValue->color = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->color = *value->m_NativeValue;
 }
 
 unsigned int Particle::EndTime::get()
@@ -48,14 +49,15 @@ void Particle::EndTime::set(unsigned int value)
 	m_NativeValue->endTime = value;
 }
 
-Vector3Df Particle::Position::get()
+Vector3Df^ Particle::Position::get()
 {
-	return Vector3Df(m_NativeValue->pos);
+	return gcnew Vector3Df(m_NativeValue->pos);
 }
 
-void Particle::Position::set(Vector3Df value)
+void Particle::Position::set(Vector3Df^ value)
 {
-	m_NativeValue->pos = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->pos = *value->m_NativeValue;
 }
 
 Dimension2Df^ Particle::Size::get()
@@ -69,14 +71,15 @@ void Particle::Size::set(Dimension2Df^ value)
 	m_NativeValue->size = *value->m_NativeValue;
 }
 
-Video::Color Particle::StartColor::get()
+Video::Color^ Particle::StartColor::get()
 {
-	return Video::Color(m_NativeValue->startColor);
+	return gcnew Video::Color(m_NativeValue->startColor);
 }
 
-void Particle::StartColor::set(Video::Color value)
+void Particle::StartColor::set(Video::Color^ value)
 {
-	m_NativeValue->startColor = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->startColor = *value->m_NativeValue;
 }
 
 Dimension2Df^ Particle::StartSize::get()
@@ -100,24 +103,26 @@ void Particle::StartTime::set(unsigned int value)
 	m_NativeValue->startTime = value;
 }
 
-Vector3Df Particle::StartVector::get()
+Vector3Df^ Particle::StartVector::get()
 {
-	return Vector3Df(m_NativeValue->startVector);
+	return gcnew Vector3Df(m_NativeValue->startVector);
 }
 
-void Particle::StartVector::set(Vector3Df value)
+void Particle::StartVector::set(Vector3Df^ value)
 {
-	m_NativeValue->startVector = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->startVector = *value->m_NativeValue;
 }
 
-Vector3Df Particle::Vector::get()
+Vector3Df^ Particle::Vector::get()
 {
-	return Vector3Df(m_NativeValue->vector);
+	return gcnew Vector3Df(m_NativeValue->vector);
 }
 
-void Particle::Vector::set(Vector3Df value)
+void Particle::Vector::set(Vector3Df^ value)
 {
-	m_NativeValue->vector = value;
+	LIME_ASSERT(value != nullptr);
+	m_NativeValue->vector = *value->m_NativeValue;
 }
 
 String^ Particle::ToString()

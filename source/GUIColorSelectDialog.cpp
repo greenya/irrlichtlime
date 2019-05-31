@@ -23,16 +23,5 @@ GUIColorSelectDialog::GUIColorSelectDialog(gui::IGUIColorSelectDialog* ref)
 	m_GUIColorSelectDialog = ref;
 }
 
-
-Video::Color GUIColorSelectDialog::Color::get()
-{
-	return Video::Color(m_GUIColorSelectDialog->getColor());
-}
-
-Video::ColorHSL GUIColorSelectDialog::ColorHSL::get()
-{
-	return Video::ColorHSL(m_GUIColorSelectDialog->getColorHSL());
-}
-
 } // end namespace GUI
 } // end namespace IrrlichtLime

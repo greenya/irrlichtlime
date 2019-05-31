@@ -62,14 +62,15 @@ List<Particle^>^ ParticleEmitter::Emitt(unsigned int now, unsigned int timeSince
 	return l;
 }
 
-Vector3Df ParticleEmitter::Direction::get()
+Vector3Df^ ParticleEmitter::Direction::get()
 {
-	return Vector3Df(m_ParticleEmitter->getDirection());
+	return gcnew Vector3Df(m_ParticleEmitter->getDirection());
 }
 
-void ParticleEmitter::Direction::set(Vector3Df value)
+void ParticleEmitter::Direction::set(Vector3Df^ value)
 {
-	m_ParticleEmitter->setDirection(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleEmitter->setDirection(*value->m_NativeValue);
 }
 
 int ParticleEmitter::MaxAngleDegrees::get()
@@ -104,14 +105,15 @@ void ParticleEmitter::MaxParticlesPerSecond::set(int value)
 	m_ParticleEmitter->setMaxParticlesPerSecond(value);
 }
 
-Video::Color ParticleEmitter::MaxStartColor::get()
+Video::Color^ ParticleEmitter::MaxStartColor::get()
 {
-	return Video::Color(m_ParticleEmitter->getMaxStartColor());
+	return gcnew Video::Color(m_ParticleEmitter->getMaxStartColor());
 }
 
-void ParticleEmitter::MaxStartColor::set(Video::Color value)
+void ParticleEmitter::MaxStartColor::set(Video::Color^ value)
 {
-	m_ParticleEmitter->setMaxStartColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleEmitter->setMaxStartColor(*value->m_NativeValue);
 }
 
 Dimension2Df^ ParticleEmitter::MaxStartSize::get()
@@ -147,14 +149,15 @@ void ParticleEmitter::MinParticlesPerSecond::set(int value)
 	m_ParticleEmitter->setMinParticlesPerSecond(value);
 }
 
-Video::Color ParticleEmitter::MinStartColor::get()
+Video::Color^ ParticleEmitter::MinStartColor::get()
 {
-	return Video::Color(m_ParticleEmitter->getMinStartColor());
+	return gcnew Video::Color(m_ParticleEmitter->getMinStartColor());
 }
 
-void ParticleEmitter::MinStartColor::set(Video::Color value)
+void ParticleEmitter::MinStartColor::set(Video::Color^ value)
 {
-	m_ParticleEmitter->setMinStartColor(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleEmitter->setMinStartColor(*value->m_NativeValue);
 }
 
 Dimension2Df^ ParticleEmitter::MinStartSize::get()

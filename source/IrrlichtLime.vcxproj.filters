@@ -504,48 +504,6 @@
     <ClInclude Include="GUIWindow.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="ArchiveLoader.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeExchangingObject.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeReadWriteFlag.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeReadWriteOptions.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Attributes.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeType.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="FileArchive.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="FileArchiveType.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="FileList.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystem.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystemType.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="NamedPath.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="ReadFile.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="WriteFile.h">
-      <Filter>IO</Filter>
-    </ClInclude>
     <ClInclude Include="DeviceType.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventReceiverInheritor.h" />
@@ -601,117 +559,62 @@
     <ClInclude Include="MaterialType.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="TextureSource.h">
-      <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshTextureLoader.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIButtonImageState.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="FocusFlag.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleBehavior.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneNodeAnimatorInheritor.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIProfiler.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="LightManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="LightManagerInheritor.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CursorIcon.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ReadFileStream.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="NativeArray.h" />
-    <ClInclude Include="NativeList.h" />
-    <ClInclude Include="NativeIterator.h" />
-    <ClInclude Include="StaticMesh.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ZWriteFineControl.h">
-      <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTargetType.h">
-      <Filter>Video</Filter>
-    </ClInclude>
     <ClInclude Include="RenderTarget.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="MeshWriter.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Vector_common_template.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="MeshWriterType.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Vector2D_template.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="MeshWriterFlag.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GUISpriteFrame.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUISprite.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ContextManager.h">
-      <Filter>Video</Filter>
+    <ClInclude Include="Vector3D_template.h">
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="ClearBufferFlag.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="TextureType.h">
-      <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderCallBack.h">
-      <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="CursorSprite.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="IShaderConstant.h">
-      <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIFontBitmap.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="LimeMath.h" />
-    <ClInclude Include="StreamReadFileNative.h">
+    <ClInclude Include="ArchiveLoader.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="StreamReadFile.h">
+    <ClInclude Include="AttributeReadWriteOptions.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionHit.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="AttributeExchangingObject.h">
+      <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionTriangleRange.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="AttributeReadWriteFlag.h">
+      <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="OctreeSceneNode.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="AttributeType.h">
+      <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="OctreeVBO.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Attributes.h">
+      <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="OctreePolygonChecks.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="FileSystemType.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="FileArchive.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="FileArchiveType.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="FileList.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="NamedPath.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteFile.h">
+      <Filter>IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -976,13 +879,20 @@
     <ClCompile Include="GUIWindow.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="IrrlichtDevice.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="OSOperator.cpp" />
+    <ClCompile Include="ReferenceCounted.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
+    <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="ArchiveLoader.cpp">
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="AttributeExchangingObject.cpp">
-      <Filter>IO</Filter>
-    </ClCompile>
-    <ClCompile Include="Attributes.cpp">
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="FileArchive.cpp">
@@ -999,51 +909,6 @@
     </ClCompile>
     <ClCompile Include="WriteFile.cpp">
       <Filter>IO</Filter>
-    </ClCompile>
-    <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="Event.cpp" />
-    <ClCompile Include="IrrlichtDevice.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="OSOperator.cpp" />
-    <ClCompile Include="ReferenceCounted.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="Randomizer.cpp" />
-    <ClCompile Include="MeshTextureLoader.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GUIProfiler.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="LightManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ReadFileStream.cpp">
-      <Filter>IO</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticMesh.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTarget.cpp">
-      <Filter>Video</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshWriter.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ContextManager.cpp">
-      <Filter>Video</Filter>
-    </ClCompile>
-    <ClCompile Include="GUIFontBitmap.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="StreamReadFile.cpp">
-      <Filter>IO</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionHit.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="OctreeSceneNode.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

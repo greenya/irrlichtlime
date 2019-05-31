@@ -2,181 +2,111 @@
 #error _REFCLASS_, _WRAPCLASS_, _WRAPTYPE_, _OTHERTYPE1_ and _OTHERTYPE2_ must be defined for this file to process.
 #endif
 
-[StructLayoutAttribute(LayoutKind::Sequential)]
-public value class _REFCLASS_ : public IEquatable<_REFCLASS_>
+public ref class _REFCLASS_ : Lime::NativeValue<_WRAPCLASS_>
 {
 public:
 
-	_OTHERTYPE1_ UpperLeftCorner;
-	_OTHERTYPE1_ LowerRightCorner;
-
-	virtual bool Equals(_REFCLASS_ other) sealed
+	static bool operator == (_REFCLASS_^ v1, _REFCLASS_^ v2)
 	{
-		return (UpperLeftCorner == other.UpperLeftCorner &&
-			LowerRightCorner == other.LowerRightCorner);
-	}
+		bool v1n = Object::ReferenceEquals(v1, nullptr);
+		bool v2n = Object::ReferenceEquals(v2, nullptr);
 
-	virtual bool Equals(Object^ other) override sealed
-	{
-		if (other == nullptr)
+		if (v1n && v2n)
+			return true;
+
+		if (v1n || v2n)
 			return false;
 
-		if (other->GetType() == _REFCLASS_::typeid)
-			return Equals((_REFCLASS_)other);
-		else
-			return false;
+		return (*v1->m_NativeValue) == (*v2->m_NativeValue);
 	}
 
-	static bool operator == (_REFCLASS_ v1, _REFCLASS_ v2)
+	static bool operator != (_REFCLASS_^ v1, _REFCLASS_^ v2)
 	{
-		return v1.Equals(v2);
+		return !(v1 == v2);
 	}
 
-	static bool operator != (_REFCLASS_ v1, _REFCLASS_ v2)
+	static _REFCLASS_^ operator + (_REFCLASS_^ v1, _OTHERTYPE1_^ v2)
 	{
-		return !v1.Equals(v2);
+		LIME_ASSERT(v1 != nullptr);
+		LIME_ASSERT(v2 != nullptr);
+
+		return gcnew _REFCLASS_((*v1->m_NativeValue) + (*v2->m_NativeValue));
 	}
 
-	static _REFCLASS_ operator + (_REFCLASS_ v1, _OTHERTYPE1_ v2)
+	static _REFCLASS_^ operator - (_REFCLASS_^ v1, _OTHERTYPE1_^ v2)
 	{
-		v1.UpperLeftCorner += v2;
-		v1.LowerRightCorner += v2;
-		return v1;
+		LIME_ASSERT(v1 != nullptr);
+		LIME_ASSERT(v2 != nullptr);
+
+		return gcnew _REFCLASS_((*v1->m_NativeValue) - (*v2->m_NativeValue));
 	}
 
-	static _REFCLASS_ operator - (_REFCLASS_ v1, _OTHERTYPE1_ v2)
+	_REFCLASS_()
+		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-		v1.UpperLeftCorner -= v2;
-		v1.LowerRightCorner -= v2;
-		return v1;
+		m_NativeValue = new _WRAPCLASS_();
 	}
 
 	_REFCLASS_(_WRAPTYPE_ x1, _WRAPTYPE_ y1, _WRAPTYPE_ x2, _WRAPTYPE_ y2)
-		: UpperLeftCorner(x1, y1), LowerRightCorner(x2, y2)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
+		m_NativeValue = new _WRAPCLASS_(x1, y1, x2, y2);
 	}
 
-	_REFCLASS_(_OTHERTYPE1_ upperLeft, _OTHERTYPE1_ lowerRight)
-		: UpperLeftCorner(upperLeft), LowerRightCorner(lowerRight)
+	_REFCLASS_(_OTHERTYPE1_^ pos, _OTHERTYPE2_^ size)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-	}
-
-	_REFCLASS_(_OTHERTYPE2_^ size)
-	{
+		LIME_ASSERT(pos != nullptr);
 		LIME_ASSERT(size != nullptr);
 		LIME_ASSERT(size->Width >= 0);
 		LIME_ASSERT(size->Height >= 0);
 
-		UpperLeftCorner = _OTHERTYPE1_(0, 0);
-		LowerRightCorner = _OTHERTYPE1_(size->Width, size->Height);
+		m_NativeValue = new _WRAPCLASS_(*pos->m_NativeValue, *size->m_NativeValue);
 	}
 
-	_REFCLASS_(_OTHERTYPE1_ pos, _OTHERTYPE2_^ size)
+	_REFCLASS_(_OTHERTYPE1_^ upperLeft, _OTHERTYPE1_^ lowerRight)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-		LIME_ASSERT(size != nullptr);
-		LIME_ASSERT(size->Width >= 0);
-		LIME_ASSERT(size->Height >= 0);
+		LIME_ASSERT(upperLeft != nullptr);
+		LIME_ASSERT(lowerRight != nullptr);
 
-		UpperLeftCorner = pos;
-		LowerRightCorner = _OTHERTYPE1_(size->Width, size->Height) + pos;
+		m_NativeValue = new _WRAPCLASS_(*upperLeft->m_NativeValue, *lowerRight->m_NativeValue);
 	}
 
 	void Repair()
 	{
-		if (LowerRightCorner.X < UpperLeftCorner.X)
-		{
-			_WRAPTYPE_ t = LowerRightCorner.X;
-			LowerRightCorner.X = UpperLeftCorner.X;
-			UpperLeftCorner.X = t;
-		}
-
-		if (LowerRightCorner.Y < UpperLeftCorner.Y)
-		{
-			_WRAPTYPE_ t = LowerRightCorner.Y;
-			LowerRightCorner.Y = UpperLeftCorner.Y;
-			UpperLeftCorner.Y = t;
-		}
+		m_NativeValue->repair();
 	}
 
 	void AddInternalPoint(_WRAPTYPE_ x, _WRAPTYPE_ y)
 	{
-		if (x>LowerRightCorner.X)
-			LowerRightCorner.X = x;
-		if (y>LowerRightCorner.Y)
-			LowerRightCorner.Y = y;
-
-		if (x<UpperLeftCorner.X)
-			UpperLeftCorner.X = x;
-		if (y<UpperLeftCorner.Y)
-			UpperLeftCorner.Y = y;
+		m_NativeValue->addInternalPoint(x, y);
 	}
 
-	void AddInternalPoint(_OTHERTYPE1_ point)
+	void AddInternalPoint(_OTHERTYPE1_^ point)
 	{
-		AddInternalPoint(point.X, point.Y);
+		LIME_ASSERT(point != nullptr);
+		m_NativeValue->addInternalPoint(*point->m_NativeValue);
 	}
-	
+
 	void Adjust(_WRAPTYPE_ x1, _WRAPTYPE_ y1, _WRAPTYPE_ x2, _WRAPTYPE_ y2)
 	{
-		UpperLeftCorner.X += x1;
-		UpperLeftCorner.Y += y1;
-		LowerRightCorner.X += x2;
-		LowerRightCorner.Y += y2;
+		m_NativeValue->UpperLeftCorner.X += x1;
+		m_NativeValue->UpperLeftCorner.Y += y1;
+		m_NativeValue->LowerRightCorner.X += x2;
+		m_NativeValue->LowerRightCorner.Y += y2;
 	}
 
-	void ClipAgainst(_REFCLASS_ other)
+	void ClipAgainst(_REFCLASS_^ other)
 	{
-		if (other.LowerRightCorner.X < LowerRightCorner.X)
-			LowerRightCorner.X = other.LowerRightCorner.X;
-		if (other.LowerRightCorner.Y < LowerRightCorner.Y)
-			LowerRightCorner.Y = other.LowerRightCorner.Y;
-
-		if (other.UpperLeftCorner.X > UpperLeftCorner.X)
-			UpperLeftCorner.X = other.UpperLeftCorner.X;
-		if (other.UpperLeftCorner.Y > UpperLeftCorner.Y)
-			UpperLeftCorner.Y = other.UpperLeftCorner.Y;
-
-		// correct possible invalid rect resulting from clipping
-		if (UpperLeftCorner.Y > LowerRightCorner.Y)
-			UpperLeftCorner.Y = LowerRightCorner.Y;
-		if (UpperLeftCorner.X > LowerRightCorner.X)
-			UpperLeftCorner.X = LowerRightCorner.X;
+		LIME_ASSERT(other != nullptr);
+		return m_NativeValue->clipAgainst(*other->m_NativeValue);
 	}
 
-	bool ConstrainTo(_REFCLASS_ other)
+	bool ConstrainTo(_REFCLASS_^ other)
 	{
-		if (other.Width < Width || other.Height < Height)
-			return false;
-
-		_WRAPTYPE_ diff = other.LowerRightCorner.X - LowerRightCorner.X;
-		if (diff < 0)
-		{
-			LowerRightCorner.X += diff;
-			UpperLeftCorner.X  += diff;
-		}
-
-		diff = other.LowerRightCorner.Y - LowerRightCorner.Y;
-		if (diff < 0)
-		{
-			LowerRightCorner.Y += diff;
-			UpperLeftCorner.Y  += diff;
-		}
-
-		diff = UpperLeftCorner.X - other.UpperLeftCorner.X;
-		if (diff < 0)
-		{
-			UpperLeftCorner.X  -= diff;
-			LowerRightCorner.X -= diff;
-		}
-
-		diff = UpperLeftCorner.Y - other.UpperLeftCorner.Y;
-		if (diff < 0)
-		{
-			UpperLeftCorner.Y  -= diff;
-			LowerRightCorner.Y -= diff;
-		}
-
-		return true;
+		LIME_ASSERT(other != nullptr);
+		return m_NativeValue->constrainTo(*other->m_NativeValue);
 	}
 
 	void Inflate(_WRAPTYPE_ width, _WRAPTYPE_ height)
@@ -184,74 +114,72 @@ public:
 		_WRAPTYPE_ w2 = width / 2;
 		_WRAPTYPE_ h2 = height / 2;
 
-		UpperLeftCorner.X -= w2;
-		UpperLeftCorner.Y -= h2;
-		LowerRightCorner.X += w2;
-		LowerRightCorner.Y += h2;
+		m_NativeValue->UpperLeftCorner.X -= w2;
+		m_NativeValue->UpperLeftCorner.Y -= h2;
+		m_NativeValue->LowerRightCorner.X += w2;
+		m_NativeValue->LowerRightCorner.Y += h2;
 	}
 
-	bool IsPointInside(_OTHERTYPE1_ pos)
+	bool IsPointInside(_OTHERTYPE1_^ pos)
 	{
-		return (UpperLeftCorner.X <= pos.X &&
-			UpperLeftCorner.Y <= pos.Y &&
-			LowerRightCorner.X >= pos.X &&
-			LowerRightCorner.Y >= pos.Y);
+		LIME_ASSERT(pos != nullptr);
+		return m_NativeValue->isPointInside(*pos->m_NativeValue);
 	}
 
 	bool IsPointInside(_WRAPTYPE_ x, _WRAPTYPE_ y)
 	{
-		return IsPointInside(_OTHERTYPE1_(x, y));
+		return m_NativeValue->isPointInside(core::vector2d<_WRAPTYPE_>(x, y));
 	}
 
-	bool IsRectCollided(_REFCLASS_ other)
+	bool IsRectCollided(_REFCLASS_^ other)
 	{
-		return (LowerRightCorner.Y > other.UpperLeftCorner.Y &&
-			UpperLeftCorner.Y < other.LowerRightCorner.Y &&
-			LowerRightCorner.X > other.UpperLeftCorner.X &&
-			UpperLeftCorner.X < other.LowerRightCorner.X);
+		LIME_ASSERT(other != nullptr);
+		return m_NativeValue->isRectCollided(*other->m_NativeValue);
 	}
 
 	void Offset(_WRAPTYPE_ x, _WRAPTYPE_ y)
 	{
-		UpperLeftCorner.X += x;
-		UpperLeftCorner.Y += y;
-		LowerRightCorner.X += x;
-		LowerRightCorner.Y += y;
+		m_NativeValue->UpperLeftCorner.X += x;
+		m_NativeValue->UpperLeftCorner.Y += y;
+		m_NativeValue->LowerRightCorner.X += x;
+		m_NativeValue->LowerRightCorner.Y += y;
 	}
 
 	property bool Valid
 	{
-		bool get()
-		{
-			return (
-				(LowerRightCorner.X >= UpperLeftCorner.X) &&
-				(LowerRightCorner.Y >= UpperLeftCorner.Y));
-		}
+		bool get() { return m_NativeValue->isValid(); }
 	}
 
 	property _WRAPTYPE_ Width
 	{
-		_WRAPTYPE_ get() { return LowerRightCorner.X - UpperLeftCorner.X; }
+		_WRAPTYPE_ get() { return m_NativeValue->getWidth(); }
 	}
 
 	property _WRAPTYPE_ Height
 	{
-		_WRAPTYPE_ get() { return LowerRightCorner.Y - UpperLeftCorner.Y; }
+		_WRAPTYPE_ get() { return m_NativeValue->getHeight(); }
 	}
 
 	property _WRAPTYPE_ Area
 	{
-		_WRAPTYPE_ get() { return Width * Height; }
+		_WRAPTYPE_ get() { return m_NativeValue->getArea(); }
 	}
 
-	property _OTHERTYPE1_ Center
+	property _OTHERTYPE1_^ Center
 	{
-		_OTHERTYPE1_ get()
-		{
-			return _OTHERTYPE1_(
-				(UpperLeftCorner.X + LowerRightCorner.X) / 2,
-				(UpperLeftCorner.Y + LowerRightCorner.Y) / 2); 
-		}
+		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->getCenter()); }
+	}
+
+	property _OTHERTYPE1_^ UpperLeftCorner
+	{
+		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->UpperLeftCorner); }
+		void set(_OTHERTYPE1_^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->UpperLeftCorner = *value->m_NativeValue; }
+	}
+
+	property _OTHERTYPE1_^ LowerRightCorner
+	{
+		_OTHERTYPE1_^ get() { return gcnew _OTHERTYPE1_(m_NativeValue->LowerRightCorner); }
+		void set(_OTHERTYPE1_^ value) { LIME_ASSERT(value != nullptr); m_NativeValue->LowerRightCorner = *value->m_NativeValue; }
 	}
 
 	virtual String^ ToString() override
@@ -262,27 +190,8 @@ public:
 internal:
 
 	_REFCLASS_(const _WRAPCLASS_& value)
-		: UpperLeftCorner(value.UpperLeftCorner), LowerRightCorner(value.LowerRightCorner)
+		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
-	}
-
-	operator _WRAPCLASS_()
-	{
-#ifdef FAST_TO_NATIVE
-		return (_WRAPCLASS_&)*this;
-		//return *(interior_ptr<_WRAPCLASS_>)this;
-#else
-		return _WRAPCLASS_(UpperLeftCorner.ToNative(), LowerRightCorner.ToNative());
-#endif
-	}
-
-	_WRAPCLASS_ ToNative()
-	{
-		return (_WRAPCLASS_)*this;
-	}
-
-	static _REFCLASS_ Wrap(const _WRAPCLASS_& value)
-	{
-		return _REFCLASS_(value);
+		m_NativeValue = new _WRAPCLASS_(value);
 	}
 };

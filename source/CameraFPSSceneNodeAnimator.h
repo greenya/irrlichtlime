@@ -19,7 +19,6 @@ public:
 	property IrrlichtLime::KeyMap^ KeyMap { IrrlichtLime::KeyMap^ get(); void set(IrrlichtLime::KeyMap^ value); }
 	property float MoveSpeed { float get(); void set(float value); }
 	property float RotateSpeed { float get(); void set(float value); }
-	property float RotateSpeedKeyboard { float get(); void set(float value); }
 
 internal:
 

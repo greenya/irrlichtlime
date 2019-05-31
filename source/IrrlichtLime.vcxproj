@@ -22,6 +22,7 @@
     <ProjectGuid>{4F6EF8E3-F26F-49DB-867D-FD10FB083B0D}</ProjectGuid>
     <RootNamespace>IrrlichtLime</RootNamespace>
     <Keyword>ManagedCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -68,18 +69,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\Debug\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\bin\Debug-x64\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Debug-x64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\$(Configuration)-$(PlatformTarget)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\bin\$(Configuration)-$(PlatformTarget)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)-$(PlatformTarget)\</IntDir>
     <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\Release\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\bin\Release-x64\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Release-x64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\$(Configuration)-$(PlatformTarget)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\bin\$(Configuration)-$(PlatformTarget)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)-$(PlatformTarget)\</IntDir>
     <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release|x64'">*.obj;*.ilk;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.xml;*.log;*.tlog;$(TargetPath)</ExtensionsToDeleteOnClean>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
@@ -98,7 +99,7 @@
       <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\irrlicht\lib\Debug\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
       <TargetMachine>MachineX86</TargetMachine>
@@ -108,8 +109,8 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Debug\Irrlicht.dll" "..\bin\Debug\Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug\IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +126,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug\IrrlichtLime.xml" &gt; nul</Comm
       <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\irrlicht\lib\Debug-x64\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
       <SubSystem>
@@ -134,8 +135,8 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug\IrrlichtLime.xml" &gt; nul</Comm
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Debug-x64\Irrlicht.dll" "..\bin\Debug-x64\Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug-x64\IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,15 +152,15 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Debug-x64\IrrlichtLime.xml" &gt; nul</
       <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\irrlicht\lib\Release\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Release\Irrlicht.dll" "..\bin\Release\Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release\IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -175,14 +176,14 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release\IrrlichtLime.xml" &gt; nul</Co
       <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\irrlicht\lib\Release-x64\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\Release-x64\Irrlicht.dll" "..\bin\Release-x64\Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
+copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -203,43 +204,39 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
   <ItemGroup>
     <ClInclude Include="AlphaSource.h" />
     <ClInclude Include="AntiAliasingMode.h" />
+    <ClInclude Include="ArchiveLoader.h" />
+    <ClInclude Include="AttributeExchangingObject.h" />
+    <ClInclude Include="AttributeReadWriteFlag.h" />
+    <ClInclude Include="AttributeReadWriteOptions.h" />
+    <ClInclude Include="Attributes.h" />
+    <ClInclude Include="AttributeType.h" />
     <ClInclude Include="BlendFactor.h" />
     <ClInclude Include="BlendOperation.h" />
     <ClInclude Include="ClearBufferFlag.h" />
-    <ClInclude Include="CollisionHit.h" />
-    <ClInclude Include="CollisionTriangleRange.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorFormat.h" />
     <ClInclude Include="ColorMaterial.h" />
     <ClInclude Include="ColorPlane.h" />
     <ClInclude Include="ComparisonFunc.h" />
-    <ClInclude Include="ContextManager.h" />
-    <ClInclude Include="CursorIcon.h" />
     <ClInclude Include="CursorPlatformBehavior.h" />
-    <ClInclude Include="CursorSprite.h" />
     <ClInclude Include="DriverType.h" />
     <ClInclude Include="ExposedVideoData.h" />
-    <ClInclude Include="FocusFlag.h" />
+    <ClInclude Include="FileArchive.h" />
+    <ClInclude Include="FileArchiveType.h" />
+    <ClInclude Include="FileList.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="FileSystemType.h" />
     <ClInclude Include="Fog.h" />
     <ClInclude Include="FogType.h" />
     <ClInclude Include="GeometryShaderType.h" />
     <ClInclude Include="GPUProgrammingServices.h" />
     <ClInclude Include="GPUShadingLanguage.h" />
-    <ClInclude Include="GUIButtonImageState.h" />
     <ClInclude Include="GUIElementInheritor.h" />
-    <ClInclude Include="GUIFontBitmap.h" />
-    <ClInclude Include="GUIProfiler.h" />
     <ClInclude Include="GUISpinBoxValidation.h" />
-    <ClInclude Include="GUISprite.h" />
-    <ClInclude Include="GUISpriteFrame.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IndexType.h" />
-    <ClInclude Include="LimeMath.h" />
-    <ClInclude Include="IShaderConstant.h" />
     <ClInclude Include="Light.h" />
-    <ClInclude Include="LightManager.h" />
-    <ClInclude Include="LightManagerInheritor.h" />
     <ClInclude Include="LightType.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialFlag.h" />
@@ -247,39 +244,24 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="MaterialRenderer.h" />
     <ClInclude Include="MaterialRendererServices.h" />
     <ClInclude Include="MaterialType.h" />
-    <ClInclude Include="MeshTextureLoader.h" />
-    <ClInclude Include="MeshWriter.h" />
-    <ClInclude Include="MeshWriterFlag.h" />
-    <ClInclude Include="MeshWriterType.h" />
     <ClInclude Include="ModulateFunc.h" />
-    <ClInclude Include="NativeArray.h" />
-    <ClInclude Include="NativeIterator.h" />
-    <ClInclude Include="NativeList.h" />
-    <ClInclude Include="OctreePolygonChecks.h" />
-    <ClInclude Include="OctreeSceneNode.h" />
-    <ClInclude Include="OctreeVBO.h" />
-    <ClInclude Include="ParticleBehavior.h" />
+    <ClInclude Include="NamedPath.h" />
     <ClInclude Include="PixelShaderType.h" />
     <ClInclude Include="PolygonOffset.h" />
     <ClInclude Include="Randomizer.h" />
-    <ClInclude Include="ReadFileStream.h" />
+    <ClInclude Include="ReadFile.h" />
     <ClInclude Include="RenderTarget.h" />
-    <ClInclude Include="RenderTargetType.h" />
-    <ClInclude Include="SceneNodeAnimatorInheritor.h" />
     <ClInclude Include="SceneParameters.h" />
-    <ClInclude Include="ShaderCallBack.h" />
     <ClInclude Include="ShaderCallBackInheritor.h" />
-    <ClInclude Include="StaticMesh.h" />
-    <ClInclude Include="StreamReadFile.h" />
-    <ClInclude Include="StreamReadFileNative.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureClamp.h" />
     <ClInclude Include="TextureCreationFlag.h" />
     <ClInclude Include="TextureLockMode.h" />
     <ClInclude Include="TexturePainter.h" />
-    <ClInclude Include="TextureSource.h" />
-    <ClInclude Include="TextureType.h" />
     <ClInclude Include="TransformationState.h" />
+    <ClInclude Include="Vector2D_template.h" />
+    <ClInclude Include="Vector3D_template.h" />
+    <ClInclude Include="Vector_common_template.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Vertex_template.h" />
     <ClInclude Include="VertexShaderType.h" />
@@ -302,8 +284,6 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="Rect_template.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Vector3D.h" />
     <ClInclude Include="AnimatedMesh.h" />
     <ClInclude Include="AnimatedMeshSceneNode.h" />
     <ClInclude Include="AnimatedMeshType.h" />
@@ -415,20 +395,6 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="GUITreeView.h" />
     <ClInclude Include="GUITreeViewNode.h" />
     <ClInclude Include="GUIWindow.h" />
-    <ClInclude Include="ArchiveLoader.h" />
-    <ClInclude Include="AttributeExchangingObject.h" />
-    <ClInclude Include="AttributeReadWriteFlag.h" />
-    <ClInclude Include="AttributeReadWriteOptions.h" />
-    <ClInclude Include="Attributes.h" />
-    <ClInclude Include="AttributeType.h" />
-    <ClInclude Include="FileArchive.h" />
-    <ClInclude Include="FileArchiveType.h" />
-    <ClInclude Include="FileList.h" />
-    <ClInclude Include="FileSystem.h" />
-    <ClInclude Include="FileSystemType.h" />
-    <ClInclude Include="NamedPath.h" />
-    <ClInclude Include="ReadFile.h" />
-    <ClInclude Include="WriteFile.h" />
     <ClInclude Include="DeviceType.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventReceiverInheritor.h" />
@@ -447,30 +413,25 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClInclude Include="ReferenceCounted.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="ZWriteFineControl.h" />
+    <ClInclude Include="WriteFile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionHit.cpp" />
-    <ClCompile Include="ContextManager.cpp" />
+    <ClCompile Include="ArchiveLoader.cpp" />
+    <ClCompile Include="AttributeExchangingObject.cpp" />
+    <ClCompile Include="Attributes.cpp" />
+    <ClCompile Include="FileArchive.cpp" />
+    <ClCompile Include="FileList.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="GPUProgrammingServices.cpp" />
-    <ClCompile Include="GUIFontBitmap.cpp" />
-    <ClCompile Include="GUIProfiler.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="Light.cpp" />
-    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialLayer.cpp" />
     <ClCompile Include="MaterialRenderer.cpp" />
     <ClCompile Include="MaterialRendererServices.cpp" />
-    <ClCompile Include="MeshTextureLoader.cpp" />
-    <ClCompile Include="MeshWriter.cpp" />
-    <ClCompile Include="OctreeSceneNode.cpp" />
     <ClCompile Include="Randomizer.cpp" />
-    <ClCompile Include="ReadFileStream.cpp" />
-    <ClCompile Include="RenderTarget.cpp" />
-    <ClCompile Include="StaticMesh.cpp" />
-    <ClCompile Include="StreamReadFile.cpp" />
+    <ClCompile Include="ReadFile.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePainter.cpp" />
     <ClCompile Include="VideoDriver.cpp" />
@@ -550,14 +511,6 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
     <ClCompile Include="GUITreeView.cpp" />
     <ClCompile Include="GUITreeViewNode.cpp" />
     <ClCompile Include="GUIWindow.cpp" />
-    <ClCompile Include="ArchiveLoader.cpp" />
-    <ClCompile Include="AttributeExchangingObject.cpp" />
-    <ClCompile Include="Attributes.cpp" />
-    <ClCompile Include="FileArchive.cpp" />
-    <ClCompile Include="FileList.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
-    <ClCompile Include="ReadFile.cpp" />
-    <ClCompile Include="WriteFile.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="IrrlichtDevice.cpp" />
@@ -571,6 +524,7 @@ copy /y "..\doc\IrrlichtLime.xml" "..\bin\Release-x64\IrrlichtLime.xml" &gt; nul
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WriteFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

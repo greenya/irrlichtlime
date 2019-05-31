@@ -66,9 +66,11 @@ enum E_TEXTURE_CREATION_FLAG
 	ETCF_ALLOW_NON_POWER_2 = 0x00000040,
 
 	//! Allow the driver to keep a copy of the texture in memory
-	/** This makes calls to ITexture::lock a lot faster, but costs main memory.
-	Default is off, except for font-texture which always enable this flag.
-	Currently only used in combination with OpenGL drivers.	*/
+	/** Enabling this makes calls to ITexture::lock a lot faster, but costs main memory.
+	Currently only used in combination with OpenGL drivers.
+	NOTE: Disabling this does not yet work correctly with alpha-textures.
+	So the default is off for now (but might change with Irrlicht 1.9 if we get the alpha-troubles fixed).
+	*/
 	ETCF_ALLOW_MEMORY_COPY = 0x00000080,
 
 	/** This flag is never used, it only forces the compiler to compile
@@ -92,6 +94,30 @@ enum E_TEXTURE_LOCK_MODE
 	ETLM_WRITE_ONLY
 };
 
+//! Additional bitflags for ITexture::lock() call
+enum E_TEXTURE_LOCK_FLAGS
+{
+	ETLF_NONE = 0,
+
+	//! Flip left-bottom origin rendertarget textures upside-down
+	/** Irrlicht usually has all textures with left-top as origin.
+	And for drivers with a left-bottom origin coordinate system (OpenGL)
+	Irrlicht modifies the texture-matrix in the fixed function pipeline to make
+	the textures show up correctly (shader coders have to handle upside down 
+	textures themselves).
+	But rendertarget textures (RTT's) are written by drivers the way the 
+	coordinate system of that driver works. So on OpenGL images tend to look 
+	upside down (aka Y coordinate going up) on lock() when this flag isn't set.
+	When the flag is set it will flip such textures on lock() to make them look
+	like non-rtt textures (origin left-top). Note that this also means the texture
+	will be uploaded flipped on unlock. So mostly you want to have this flag set 
+	when you want to look at the texture or save it, but unset if you want to 
+	upload it again to the card.
+	If you disable this flag you get the memory just as it is on the graphic card.
+	For backward compatibility reasons this flag is enabled by default. */
+	ETLF_FLIP_Y_UP_RTT = 1	
+};
+
 //! Where did the last IVideoDriver::getTexture call find this texture
 enum E_TEXTURE_SOURCE
 {
@@ -103,6 +129,16 @@ enum E_TEXTURE_SOURCE
 
 	//! Texture had to be loaded
 	ETS_FROM_FILE
+};
+
+//! Enumeration describing the type of ITexture.
+enum E_TEXTURE_TYPE
+{
+	//! 2D texture.
+	ETT_2D,
+
+	//! Cubemap texture.
+	ETT_CUBEMAP
 };
 
 //! Interface of a Video Driver dependent Texture.
@@ -139,11 +175,15 @@ public:
 	only mode or read from in write only mode.
 	Support for this feature depends on the driver, so don't rely on the
 	texture being write-protected when locking with read-only, etc.
+	\param mipmapLevel NOTE: Currently broken, sorry, we try if we can repair it for 1.9 release.
+	Number of the mipmapLevel to lock. 0 is main texture.
+	Non-existing levels will silently fail and return 0.
 	\param layer It determines which cubemap face or texture array layer should be locked.
+	\param lockFlags See E_TEXTURE_LOCK_FLAGS documentation.
 	\return Returns a pointer to the pixel data. The format of the pixel can
 	be determined by using getColorFormat(). 0 is returned, if
 	the texture cannot be locked. */
-	virtual void* lock(E_TEXTURE_LOCK_MODE mode = ETLM_READ_WRITE, u32 layer = 0) = 0;
+	virtual void* lock(E_TEXTURE_LOCK_MODE mode = ETLM_READ_WRITE, u32 mipmapLevel=0, u32 layer = 0, E_TEXTURE_LOCK_FLAGS lockFlags = ETLF_FLIP_Y_UP_RTT) = 0;
 
 	//! Unlock function. Must be called after a lock() to the texture.
 	/** One should avoid to call unlock more than once before another lock.
@@ -185,6 +225,12 @@ public:
 	//! Get the color format of texture.
 	/** \return The color format of texture. */
 	ECOLOR_FORMAT getColorFormat() const { return ColorFormat; };
+
+	//! Get the original color format
+	/** When create textures from image data we will often use different color formats.
+	For example depending on driver TextureCreationFlag's. 
+	This can give you the original format which the image used to create the texture had	*/
+	ECOLOR_FORMAT getOriginalColorFormat() const { return OriginalColorFormat; };
 
 	//! Get pitch of the main texture (in bytes).
 	/** The pitch is the amount of bytes used for a row of pixels in a

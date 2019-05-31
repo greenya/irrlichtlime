@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "ContextManager.h"
 #include "CursorControl.h"
 #include "Event.h"
 #include "FileSystem.h"
@@ -280,26 +279,10 @@ Video::ColorFormat IrrlichtDevice::ColorFormat::get()
 	return (Video::ColorFormat)m_IrrlichtDevice->getColorFormat();
 }
 
-Video::ContextManager^ IrrlichtDevice::ContextManager::get()
-{
-	video::IContextManager* c = m_IrrlichtDevice->getContextManager();
-	return Video::ContextManager::Wrap(c);
-}
-
 GUI::CursorControl^ IrrlichtDevice::CursorControl::get()
 {
 	gui::ICursorControl* c = m_IrrlichtDevice->getCursorControl();
 	return GUI::CursorControl::Wrap(c);
-}
-
-unsigned __int32 IrrlichtDevice::DoubleClickTime::get()
-{
-	return m_IrrlichtDevice->getDoubleClickTime();
-}
-
-void IrrlichtDevice::DoubleClickTime::set(unsigned __int32 value)
-{
-	m_IrrlichtDevice->setDoubleClickTime(value);
 }
 
 IO::FileSystem^ IrrlichtDevice::FileSystem::get()
@@ -391,15 +374,9 @@ bool IrrlichtDevice::WindowMinimized::get()
 	return m_IrrlichtDevice->isWindowMinimized();
 }
 
-Vector2Di IrrlichtDevice::WindowPosition::get()
+Vector2Di^ IrrlichtDevice::WindowPosition::get()
 {
-	return Vector2Di(m_IrrlichtDevice->getWindowPosition());
-}
-
-void IrrlichtDevice::WindowSize::set(Dimension2Di^ value)
-{
-	LIME_ASSERT(value != nullptr);
-	m_IrrlichtDevice->setWindowSize((core::dimension2du&)*value->m_NativeValue);
+	return gcnew Vector2Di(m_IrrlichtDevice->getWindowPosition());
 }
 
 String^ IrrlichtDevice::ToString()

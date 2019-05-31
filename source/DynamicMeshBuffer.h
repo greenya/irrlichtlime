@@ -16,8 +16,6 @@ public ref class DynamicMeshBuffer : MeshBuffer
 {
 public:
 
-	static DynamicMeshBuffer^ Create(Video::VertexType vertexType, Video::IndexType indexType);
-
 	property Scene::IndexBuffer^ IndexBuffer { Scene::IndexBuffer^ get(); void set(Scene::IndexBuffer^ value); }
 	property Scene::VertexBuffer^ VertexBuffer { Scene::VertexBuffer^ get(); void set(Scene::VertexBuffer^ value); }
 

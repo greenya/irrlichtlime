@@ -16,8 +16,7 @@ public enum class GUIButtonState
 	MouseOver = EGBS_BUTTON_MOUSE_OVER,
 	MouseOff = EGBS_BUTTON_MOUSE_OFF,
 	Focused = EGBS_BUTTON_FOCUSED,
-	NotFocused = EGBS_BUTTON_NOT_FOCUSED,
-	ButtonDisabled = EGBS_BUTTON_DISABLED
+	NotFocused = EGBS_BUTTON_NOT_FOCUSED
 };
 
 } // end namespace GUI

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "BillboardSceneNode.h"
-#include "CameraSceneNode.h"
 #include "SceneNode.h"
 
 using namespace irr;
@@ -43,23 +42,20 @@ void BillboardSceneNode::SetSize(float height, float bottomWidth, float topWidth
 	m_BillboardSceneNode->setSize(height, bottomWidth, topWidth);
 }
 
-AABBox^ BillboardSceneNode::GetTransformedBillboardBoundingBox(CameraSceneNode^ camera)
-{
-	return gcnew AABBox(m_BillboardSceneNode->getTransformedBillboardBoundingBox(camera->m_CameraSceneNode));
-}
-
-Video::Color BillboardSceneNode::BottomColor::get()
+Video::Color^ BillboardSceneNode::BottomColor::get()
 {
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	return Video::Color(b);
+	return gcnew Video::Color(b);
 }
 
-void BillboardSceneNode::BottomColor::set(Video::Color value)
+void BillboardSceneNode::BottomColor::set(Video::Color^ value)
 {
+	LIME_ASSERT(value != nullptr);
+
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	m_BillboardSceneNode->setColor(t, value);
+	m_BillboardSceneNode->setColor(t, *value->m_NativeValue);
 }
 
 float BillboardSceneNode::BottomWidth::get()
@@ -94,18 +90,20 @@ void BillboardSceneNode::Height::set(float value)
 	m_BillboardSceneNode->setSize(value, b, t);
 }
 
-Video::Color BillboardSceneNode::TopColor::get()
+Video::Color^ BillboardSceneNode::TopColor::get()
 {
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	return Video::Color(t);
+	return gcnew Video::Color(t);
 }
 
-void BillboardSceneNode::TopColor::set(Video::Color value)
+void BillboardSceneNode::TopColor::set(Video::Color^ value)
 {
+	LIME_ASSERT(value != nullptr);
+
 	video::SColor t, b;
 	m_BillboardSceneNode->getColor(t, b);
-	m_BillboardSceneNode->setColor(value, b);
+	m_BillboardSceneNode->setColor(*value->m_NativeValue, b);
 }
 
 float BillboardSceneNode::TopWidth::get()

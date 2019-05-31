@@ -23,11 +23,6 @@ WriteFile::WriteFile(io::IWriteFile* ref)
 	m_WriteFile = ref;
 }
 
-bool WriteFile::Flush()
-{
-	return m_WriteFile->flush();
-}
-
 bool WriteFile::Seek(long position, bool relativeMovement)
 {
 #ifdef _DEBUG
@@ -54,7 +49,7 @@ int WriteFile::Write(array<unsigned char>^ buffer)
 	for (int i = 0; i < c; i++)
 		b[i] = buffer[i];
 
-	int r = m_WriteFile->write(b, c);
+	int r = (size_t) m_WriteFile->write(b, c);
 
 	delete[] b;
 	return r;

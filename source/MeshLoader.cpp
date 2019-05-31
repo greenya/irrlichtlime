@@ -3,7 +3,6 @@
 #include "MeshLoader.h"
 #include "ReadFile.h"
 #include "ReferenceCounted.h"
-#include "MeshTextureLoader.h"
 
 using namespace irr;
 using namespace System;
@@ -24,17 +23,6 @@ MeshLoader::MeshLoader(scene::IMeshLoader* ref)
 {
 	LIME_ASSERT(ref != nullptr);
 	m_MeshLoader = ref;
-}
-
-Scene::MeshTextureLoader^ MeshLoader::MeshTextureLoader::get()
-{
-	scene::IMeshTextureLoader* m = m_MeshLoader->getMeshTextureLoader();
-	return Scene::MeshTextureLoader::Wrap(m);
-}
-
-void MeshLoader::MeshTextureLoader::set(Scene::MeshTextureLoader^ value)
-{
-	m_MeshLoader->setMeshTextureLoader(LIME_SAFEREF(value, m_MeshTextureLoader));
 }
 
 AnimatedMesh^ MeshLoader::CreateMesh(IO::ReadFile^ file)

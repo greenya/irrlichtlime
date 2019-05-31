@@ -118,15 +118,17 @@ GUIElement::GUIElement(gui::IGUIElement* ref)
 	m_GUIElement = ref;
 }
 
-GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti rectangle, int id)
+GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle, int id)
 	: IO::AttributeExchangingObject(nullptr)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	GUIElementInheritor* i = new GUIElementInheritor(
 		(gui::EGUI_ELEMENT_TYPE)type,
 		LIME_SAFEREF(environment, m_GUIEnvironment),
 		LIME_SAFEREF(parent, m_GUIElement),
 		id,
-		rectangle);
+		*rectangle->m_NativeValue);
 
 	initInheritor(i);
 	setAttributeExchangingObject(i);
@@ -134,15 +136,17 @@ GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElem
 	m_Inherited = true;
 }
 
-GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti rectangle)
+GUIElement::GUIElement(GUIElementType type, GUIEnvironment^ environment, GUIElement^ parent, Recti^ rectangle)
 	: IO::AttributeExchangingObject(nullptr)
 {
+	LIME_ASSERT(rectangle != nullptr);
+
 	GUIElementInheritor* i = new GUIElementInheritor(
 		(gui::EGUI_ELEMENT_TYPE)type,
 		LIME_SAFEREF(environment, m_GUIEnvironment),
 		LIME_SAFEREF(parent, m_GUIElement),
 		-1,
-		rectangle);
+		*rectangle->m_NativeValue);
 
 	initInheritor(i);
 	setAttributeExchangingObject(i);
@@ -201,26 +205,11 @@ GUIElement^ GUIElement::GetElementFromID(int id)
 	return Wrap(e);
 }
 
-GUIElement^ GUIElement::GetElementFromPoint(Vector2Di point)
+GUIElement^ GUIElement::GetElementFromPoint(Vector2Di^ point)
 {
-	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(point);
+	LIME_ASSERT(point != nullptr);
+	gui::IGUIElement *e = m_GUIElement->getElementFromPoint(*point->m_NativeValue);
 	return Wrap(e);
-}
-
-bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible, bool includeDisabled)
-{
-	gui::IGUIElement* f;
-	gui::IGUIElement* c;
-
-	bool b = m_GUIElement->getNextElement(startOrder, reverse, group, f, c, includeInvisible, includeDisabled);
-
-	if (b)
-	{
-		first = GUIElement::Wrap(f);
-		closest = GUIElement::Wrap(c);
-	}
-
-	return b;
 }
 
 bool GUIElement::GetNextElement(int startOrder, bool reverse, bool group, [Out] GUIElement^% first, [Out] GUIElement^% closest, bool includeInvisible)
@@ -261,14 +250,16 @@ bool GUIElement::IsMyChild(GUIElement^ child)
 	return m_GUIElement->isMyChild(LIME_SAFEREF(child, m_GUIElement));
 }
 
-bool GUIElement::IsPointInside(Vector2Di point)
+bool GUIElement::IsPointInside(Vector2Di^ point)
 {
-	return m_GUIElement->isPointInside(point);
+	LIME_ASSERT(point != nullptr);
+	return m_GUIElement->isPointInside(*point->m_NativeValue);
 }
 
-void GUIElement::Move(Vector2Di absoluteMovement)
+void GUIElement::Move(Vector2Di^ absoluteMovement)
 {
-	m_GUIElement->move(absoluteMovement);
+	LIME_ASSERT(absoluteMovement != nullptr);
+	m_GUIElement->move(*absoluteMovement->m_NativeValue);
 }
 
 void GUIElement::Remove()
@@ -309,9 +300,10 @@ void GUIElement::SetMinSize(Dimension2Di^ size)
 	m_GUIElement->setMinSize((core::dimension2du&)*size->m_NativeValue);
 }
 
-void GUIElement::SetRelativePositionProportional(Rectf relativePosition)
+void GUIElement::SetRelativePositionProportional(Rectf^ relativePosition)
 {
-	m_GUIElement->setRelativePositionProportional(relativePosition);
+	LIME_ASSERT(relativePosition != nullptr);
+	m_GUIElement->setRelativePositionProportional(*relativePosition->m_NativeValue);
 }
 
 void GUIElement::UpdateAbsolutePosition()
@@ -319,19 +311,30 @@ void GUIElement::UpdateAbsolutePosition()
 	m_GUIElement->updateAbsolutePosition();
 }
 
-Recti GUIElement::AbsoluteClippingRect::get()
+Recti^ GUIElement::AbsoluteClippingRect::get()
 {
-	return Recti(m_GUIElement->getAbsoluteClippingRect());
+	return gcnew Recti(m_GUIElement->getAbsoluteClippingRect());
 }
 
-Recti GUIElement::AbsolutePosition::get()
+Recti^ GUIElement::AbsolutePosition::get()
 {
-	return Recti(m_GUIElement->getAbsolutePosition());
+	return gcnew Recti(m_GUIElement->getAbsolutePosition());
 }
 
-NativeCollection<GUIElement^>^ GUIElement::Children::get()
+array<GUIElement^>^ GUIElement::Children::get()
 {
-	return gcnew CollectionIrrListTemplate<GUIElement^, GUIElement, gui::IGUIElement>(m_GUIElement->getChildren());
+	array<GUIElement^>^ l = gcnew array<GUIElement^>(m_GUIElement->getChildren().size());
+	int li = 0;
+
+	core::list<IGUIElement*> u = m_GUIElement->getChildren();
+	for (core::list<gui::IGUIElement*>::ConstIterator i = u.begin(); i != u.end(); ++i)
+	{
+		GUIElement^ e = Wrap(*i);
+		if (e != nullptr)
+			l[li++] = e;
+	}
+
+	return l;
 }
 
 bool GUIElement::Clipped::get()
@@ -399,14 +402,15 @@ GUIElement^ GUIElement::Parent::get()
 	return GUIElement::Wrap(e);
 }
 
-Recti GUIElement::RelativePosition::get()
+Recti^ GUIElement::RelativePosition::get()
 {
-	return Recti(m_GUIElement->getRelativePosition());
+	return gcnew Recti(m_GUIElement->getRelativePosition());
 }
 
-void GUIElement::RelativePosition::set(Recti value)
+void GUIElement::RelativePosition::set(Recti^ value)
 {
-	m_GUIElement->setRelativePosition(value);
+	LIME_ASSERT(value != nullptr);
+	m_GUIElement->setRelativePosition(*value->m_NativeValue);
 }
 
 bool GUIElement::SubElement::get()

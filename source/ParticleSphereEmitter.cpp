@@ -24,14 +24,15 @@ ParticleSphereEmitter::ParticleSphereEmitter(scene::IParticleSphereEmitter* ref)
 	m_ParticleSphereEmitter = ref;
 }
 
-Vector3Df ParticleSphereEmitter::Center::get()
+Vector3Df^ ParticleSphereEmitter::Center::get()
 {
-	return Vector3Df(m_ParticleSphereEmitter->getCenter());
+	return gcnew Vector3Df(m_ParticleSphereEmitter->getCenter());
 }
 
-void ParticleSphereEmitter::Center::set(Vector3Df value)
+void ParticleSphereEmitter::Center::set(Vector3Df^ value)
 {
-	m_ParticleSphereEmitter->setCenter(value);
+	LIME_ASSERT(value != nullptr);
+	m_ParticleSphereEmitter->setCenter(*value->m_NativeValue);
 }
 
 float ParticleSphereEmitter::Radius::get()
