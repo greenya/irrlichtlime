@@ -96,7 +96,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -123,7 +124,8 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +151,8 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>Full</Optimization>
-      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -173,7 +176,8 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>Full</Optimization>
-      <DisableSpecificWarnings>4238;4714</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
