@@ -21,6 +21,9 @@ using namespace System::Runtime::InteropServices; // for Marshal
 
 namespace IrrlichtLime {
 
+/// <summary>
+/// Irrlicht Lime core class. Provides wrapper common functionality.
+/// </summary>
 public ref class Lime
 {
 public:
@@ -57,6 +60,9 @@ public:
 		bool m_DeleteOnFinalize;
 	};
 
+	/// <summary>
+	/// Irrlicht Lime version.
+	/// </summary>
 	static property String^ Version
 	{
 		String^ get()

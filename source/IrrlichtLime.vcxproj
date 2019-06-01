@@ -98,6 +98,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -110,9 +111,9 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul</Command>
     </PostBuildEvent>
+    <Xdcmake />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,6 +127,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -137,8 +139,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -153,6 +154,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <Optimization>Full</Optimization>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -162,8 +164,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -178,6 +179,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       <Optimization>Full</Optimization>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>..\irrlicht\lib\$(Configuration)-$(PlatformTarget)\Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,8 +188,7 @@ copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Comm
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul
-copy /y "..\doc\IrrlichtLime.xml" "$(OutputPath)IrrlichtLime.xml" &gt; nul</Command>
+      <Command>copy /y "..\irrlicht\dll\$(Configuration)-$(PlatformTarget)\Irrlicht.dll" "$(OutputPath)Irrlicht.dll" &gt;nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
