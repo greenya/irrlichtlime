@@ -11,8 +11,8 @@ namespace Scene {
 
 /// <summary>
 /// Possible types of meshes.
-/// Note: Was previously only used in IAnimatedMesh so it still has the "animated" in the name.
-///	      But can now be used for all mesh-types as we need those casts as well.
+/// <para>Note: was previously only used in <c>AnimatedMesh</c> so it still has the "animated" in the name.
+/// But can now be used for all mesh-types as we need those casts as well.</para>
 /// </summary>
 public enum class AnimatedMeshType
 {
