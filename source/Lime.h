@@ -21,109 +21,110 @@ using namespace System::Runtime::InteropServices; // for Marshal
 
 namespace IrrlichtLime {
 
-/// <summary>
-/// Irrlicht Lime core class. Provides wrapper common functionality.
-/// </summary>
-public ref class Lime
-{
-public:
-
-	template <class T>
-	ref class NativeValue
+	/// <summary>
+	/// Irrlicht Lime core class. Provides wrapper common functionality.
+	/// </summary>
+	public ref class Lime
 	{
 	public:
 
-		~NativeValue()
+		template <class T>
+		ref class NativeValue
 		{
-			this->!NativeValue();
-		}
+		public:
 
-		!NativeValue()
+			~NativeValue()
+			{
+				this->!NativeValue();
+			}
+
+			!NativeValue()
+			{
+				if (m_DeleteOnFinalize)
+					delete m_NativeValue;
+			}
+
+		internal:
+
+			T* m_NativeValue;
+
+		protected:
+
+			NativeValue(bool deleteOnFinalize)
+			{
+				m_DeleteOnFinalize = deleteOnFinalize;
+			}
+
+		private:
+
+			bool m_DeleteOnFinalize;
+		};
+
+		/// <summary>
+		/// Irrlicht Lime version.
+		/// </summary>
+		static property String^ Version
 		{
-			if (m_DeleteOnFinalize)
-				delete m_NativeValue;
+			String^ get()
+			{
+				System::Version^ v = Assembly::GetAssembly(Lime::typeid)->GetName()->Version;
+				String^ s;
+
+				if (v->Build != 0)
+					s = String::Format("{0}.{1}.{2}", v->Major, v->Minor, v->Build);
+				else
+					s = String::Format("{0}.{1}", v->Major, v->Minor);
+
+				#if _DEBUG
+					#if WIN64
+						s += " (Debug-x64)";
+					#else
+						s += " (Debug-x86)";
+					#endif
+				#else
+					#if WIN64
+						s += " (Release-x64)";
+					#else
+						s += " (Release-x86)";
+					#endif
+				#endif
+
+				return s;
+			}
 		}
 
 	internal:
 
-		T* m_NativeValue;
-
-	protected:
-
-		NativeValue(bool deleteOnFinalize)
+		static io::path StringToPath(String^ s)
 		{
-			m_DeleteOnFinalize = deleteOnFinalize;
+			return io::path(StringToStringW(s));
+		}
+
+		static core::stringc StringToStringC(String^ s)
+		{
+			LIME_ASSERT(s != nullptr);
+
+			char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
+			core::stringc strC = core::stringc(c);
+
+			Marshal::FreeHGlobal(IntPtr(c));
+			return strC;
+		}
+
+		static core::stringw StringToStringW(String^ s)
+		{
+			LIME_ASSERT(s != nullptr);
+
+			wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
+			core::stringw strW = core::stringw(w);
+
+			Marshal::FreeHGlobal(IntPtr(w));
+			return strW;
 		}
 
 	private:
 
-		bool m_DeleteOnFinalize;
+		Lime() {}
 	};
-
-	/// <summary>
-	/// Irrlicht Lime version.
-	/// </summary>
-	static property String^ Version
-	{
-		String^ get()
-		{
-			System::Version^ v = Assembly::GetAssembly(Lime::typeid)->GetName()->Version;
-			String^ s;
-
-			if (v->Build != 0)
-				s = String::Format("{0}.{1}.{2}", v->Major, v->Minor, v->Build);
-			else
-				s = String::Format("{0}.{1}", v->Major, v->Minor);
-
-#if _DEBUG
-#if WIN64
-			s += " (Debug-x64)";
-#else
-			s += " (Debug-x86)";
-#endif
-#else
-#if WIN64
-			s += " (Release-x64)";
-#else
-			s += " (Release-x86)";
-#endif
-#endif
-			return s;
-		}
-	}
-
-internal:
-
-	static io::path StringToPath(String^ s)
-	{
-		return io::path(StringToStringW(s));
-	}
-
-	static core::stringc StringToStringC(String^ s)
-	{
-		LIME_ASSERT(s != nullptr);
-
-		char* c = (char*)Marshal::StringToHGlobalAnsi(s).ToPointer();
-		core::stringc strC = core::stringc(c);
-
-		Marshal::FreeHGlobal(IntPtr(c));
-		return strC;
-	}
-
-	static core::stringw StringToStringW(String^ s)
-	{
-		LIME_ASSERT(s != nullptr);
-
-		wchar_t* w = (wchar_t*)Marshal::StringToHGlobalUni(s).ToPointer();
-		core::stringw strW = core::stringw(w);
-
-		Marshal::FreeHGlobal(IntPtr(w));
-		return strW;
-	}
-
-private:
-
-	Lime() {}
-};
 
 } // end namespace IrrlichtLime

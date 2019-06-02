@@ -888,7 +888,6 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Randomizer.cpp" />
-    <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="ArchiveLoader.cpp">
       <Filter>IO</Filter>
     </ClCompile>
@@ -908,6 +907,9 @@
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="WriteFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Attributes.cpp">
       <Filter>IO</Filter>
     </ClCompile>
   </ItemGroup>
