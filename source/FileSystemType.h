@@ -9,11 +9,21 @@ using namespace System;
 namespace IrrlichtLime {
 namespace IO {
 
-public enum class FileSystemType
-{
-	Native = FILESYSTEM_NATIVE,
-	Virtual = FILESYSTEM_VIRTUAL
-};
+	/// <summary>
+	/// Enumeration for all file system types.
+	/// </summary>
+	public enum class FileSystemType
+	{
+		/// <summary>
+		/// Native OS file system.
+		/// </summary>
+		Native = FILESYSTEM_NATIVE,
+
+		/// <summary>
+		/// Virtual file system.
+		/// </summary>
+		Virtual = FILESYSTEM_VIRTUAL
+	};
 
 } // end namespace IO
 } // end namespace IrrlichtLime

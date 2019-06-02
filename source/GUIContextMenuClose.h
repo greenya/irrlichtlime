@@ -9,12 +9,26 @@ using namespace System;
 namespace IrrlichtLime {
 namespace GUI {
 
-public enum class GUIContextMenuClose
-{
-	Ignore = ECMC_IGNORE,
-	Remove = ECMC_REMOVE,
-	Hide = ECMC_HIDE
-};
+	/// <summary>
+	/// Close behavior for a context menu. Default is <see cref="Remove"/>.
+	/// </summary>
+	public enum class GUIContextMenuClose
+	{
+		/// <summary>
+		/// Do nothing - menu stays open.
+		/// </summary>
+		Ignore = ECMC_IGNORE,
+
+		/// <summary>
+		/// Remove the GUI element.
+		/// </summary>
+		Remove = ECMC_REMOVE,
+
+		/// <summary>
+		/// Do <c>element.Visible = false</c>.
+		/// </summary>
+		Hide = ECMC_HIDE
+	};
 
 } // end namespace GUI
 } // end namespace IrrlichtLime
