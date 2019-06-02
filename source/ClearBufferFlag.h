@@ -9,15 +9,37 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-[Flags]
-public enum class ClearBufferFlag
-{
-	None = ECBF_NONE,
-	Color = ECBF_COLOR,
-	Depth = ECBF_DEPTH,
-	Stencil = ECBF_STENCIL,
-	All = ECBF_ALL
-};
+	[Flags]
+	/// <summary>
+	/// Enumeration for the flags of clear buffer.
+	/// </summary>
+	public enum class ClearBufferFlag
+	{
+		/// <summary>
+		/// None.
+		/// </summary>
+		None = ECBF_NONE,
+
+		/// <summary>
+		/// Color buffer.
+		/// </summary>
+		Color = ECBF_COLOR,
+
+		/// <summary>
+		/// Depth buffer.
+		/// </summary>
+		Depth = ECBF_DEPTH,
+
+		/// <summary>
+		/// Stencil buffer.
+		/// </summary>
+		Stencil = ECBF_STENCIL,
+
+		/// <summary>
+		/// All buffers (color, depth, stencil).
+		/// </summary>
+		All = ECBF_ALL
+	};
 
 } // end namespace Video
 } // end namespace IrrlichtLime

@@ -8,11 +8,21 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class BoneSkinningSpace
-{
-	Local = EBSS_LOCAL,
-	Global = EBSS_GLOBAL
-};
+	/// <summary>
+	/// Enumeration for different bone skinning spaces.
+	/// </summary>
+	public enum class BoneSkinningSpace
+	{
+		/// <summary>
+		/// Local skinning, standard.
+		/// </summary>
+		Local = EBSS_LOCAL,
+
+		/// <summary>
+		/// Global skinning.
+		/// </summary>
+		Global = EBSS_GLOBAL
+	};
 
 } // end namespace Scene
 } // end namespace IrrlichtLime
