@@ -126,6 +126,8 @@ void Material::BlendOperation::set(Video::BlendOperation value)
 	m_NativeValue->BlendOperation = (video::E_BLEND_OPERATION)value;
 }
 
+#pragma warning (disable: 4947)
+
 Video::PolygonOffset Material::PolygonOffsetDirection::get()
 {
 	return (Video::PolygonOffset)m_NativeValue->PolygonOffsetDirection;
@@ -135,6 +137,8 @@ void Material::PolygonOffsetDirection::set(Video::PolygonOffset value)
 {
 	m_NativeValue->PolygonOffsetDirection = (video::E_POLYGON_OFFSET)value;
 }
+
+#pragma warning (default: 4947)
 
 unsigned char Material::PolygonOffsetFactor::get()
 {

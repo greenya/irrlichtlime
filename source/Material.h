@@ -34,7 +34,10 @@ public:
 	property Video::MaterialType Type { Video::MaterialType get(); void set(Video::MaterialType value); }
 	property Color^ AmbientColor { Color^ get(); void set(Color^ value); }
 	property Video::BlendOperation BlendOperation { Video::BlendOperation get(); void set(Video::BlendOperation value); }
+#pragma warning (disable: 4947)
+	[ObsoleteAttribute("Deprecated. Will be removed after Irrlicht 1.9.")]
 	property Video::PolygonOffset PolygonOffsetDirection { Video::PolygonOffset get(); void set(Video::PolygonOffset value); }
+#pragma warning (default: 4947)
 	property unsigned char PolygonOffsetFactor { unsigned char get(); void set(unsigned char value); }
 	property Color^ DiffuseColor { Color^ get(); void set(Color^ value); }
 	property Color^ EmissiveColor { Color^ get(); void set(Color^ value); }
