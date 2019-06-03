@@ -12,7 +12,7 @@ namespace GUI {
 	[Flags]
 	/// <summary>
 	/// Enumeration bitflag for when to validate the text typed into the spinbox.
-	/// Default used by Irrlicht is: <see cref="GUISpinBoxValidation.Enter"/> | <see cref="GUISpinBoxValidation.LoseFocus"/>)
+	/// Default used by Irrlicht is: <see cref="Enter"/> | <see cref="LoseFocus"/>)
 	/// </summary>
 	public enum class GUISpinBoxValidation
 	{
