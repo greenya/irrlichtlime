@@ -8,11 +8,21 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-public enum class IndexType
-{
-	_16Bit = EIT_16BIT,
-	_32Bit = EIT_32BIT
-};
+	/// <summary>
+	/// Index types.
+	/// </summary>
+	public enum class IndexType
+	{
+		/// <summary>
+		/// 16 bit indices.
+		/// </summary>
+		_16Bit = EIT_16BIT,
+
+		/// <summary>
+		/// 32 bit indices.
+		/// </summary>
+		_32Bit = EIT_32BIT
+	};
 
 } // end namespace Video
 } // end namespace IrrlichtLime
