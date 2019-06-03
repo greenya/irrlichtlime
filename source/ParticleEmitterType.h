@@ -8,16 +8,46 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class ParticleEmitterType
-{
-	Point = EPET_POINT,
-	AnimatedMesh = EPET_ANIMATED_MESH,
-	Box = EPET_BOX,
-	Cylinder = EPET_CYLINDER,
-	Mesh = EPET_MESH,
-	Ring = EPET_RING,
-	Sphere = EPET_SPHERE
-};
+	/// <summary>
+	/// Types of built in particle emitters.
+	/// </summary>
+	public enum class ParticleEmitterType
+	{
+		/// <summary>
+		/// Point emitter.
+		/// </summary>
+		Point = EPET_POINT,
+
+		/// <summary>
+		/// Animated mesh emitter.
+		/// </summary>
+		AnimatedMesh = EPET_ANIMATED_MESH,
+
+		/// <summary>
+		/// Box shape emitter.
+		/// </summary>
+		Box = EPET_BOX,
+
+		/// <summary>
+		/// Cylinder shape emitter.
+		/// </summary>
+		Cylinder = EPET_CYLINDER,
+
+		/// <summary>
+		/// Mesh emitter.
+		/// </summary>
+		Mesh = EPET_MESH,
+
+		/// <summary>
+		/// Ring shape emitter.
+		/// </summary>
+		Ring = EPET_RING,
+
+		/// <summary>
+		/// Sphere shape emitter.
+		/// </summary>
+		Sphere = EPET_SPHERE
+	};
 
 } // end namespace Scene
 } // end namespace IrrlichtLime
