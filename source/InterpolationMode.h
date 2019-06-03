@@ -9,11 +9,21 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class InterpolationMode
-{
-	Constant = EIM_CONSTANT,
-	Linear = EIM_LINEAR
-};
+	/// <summary>
+	/// Interpolation modes.
+	/// </summary>
+	public enum class InterpolationMode
+	{
+		/// <summary>
+		/// Constant does use the current key-values without interpolation.
+		/// </summary>
+		Constant = EIM_CONSTANT,
+
+		/// <summary>
+		/// Linear interpolation.
+		/// </summary>
+		Linear = EIM_LINEAR
+	};
 
 } // end namespace Scene
 } // end namespace IrrlichtLime
