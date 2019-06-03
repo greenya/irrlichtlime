@@ -8,15 +8,41 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Scene {
 
-public enum class ParticleAffectorType
-{
-	None = EPAT_NONE,
-	Attract = EPAT_ATTRACT,
-	FadeOut = EPAT_FADE_OUT,
-	Gravity = EPAT_GRAVITY,
-	Rotate = EPAT_ROTATE,
-	Scale = EPAT_SCALE
-};
+	/// <summary>
+	/// Types of built in particle affectors.
+	/// </summary>
+	public enum class ParticleAffectorType
+	{
+		/// <summary>
+		/// Particles are not affected.
+		/// </summary>
+		None = EPAT_NONE,
+
+		/// <summary>
+		/// Particles are attracted.
+		/// </summary>
+		Attract = EPAT_ATTRACT,
+
+		/// <summary>
+		/// Particles fade out over time.
+		/// </summary>
+		FadeOut = EPAT_FADE_OUT,
+
+		/// <summary>
+		/// Particles are affected by the gravity.
+		/// </summary>
+		Gravity = EPAT_GRAVITY,
+
+		/// <summary>
+		/// Particles are rotated over time.
+		/// </summary>
+		Rotate = EPAT_ROTATE,
+
+		/// <summary>
+		/// Particles are scaled over time.
+		/// </summary>
+		Scale = EPAT_SCALE
+	};
 
 } // end namespace Scene
 } // end namespace IrrlichtLime
