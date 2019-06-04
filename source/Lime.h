@@ -75,19 +75,19 @@ namespace IrrlichtLime {
 				else
 					s = String::Format("{0}.{1}", v->Major, v->Minor);
 
-				#if _DEBUG
-					#if WIN64
-						s += " (Debug-x64)";
-					#else
-						s += " (Debug-x86)";
-					#endif
-				#else
-					#if WIN64
-						s += " (Release-x64)";
-					#else
-						s += " (Release-x86)";
-					#endif
-				#endif
+#if _DEBUG
+#if WIN64
+				s += " (Debug-x64)";
+#else
+				s += " (Debug-x86)";
+#endif
+#else
+#if WIN64
+				s += " (Release-x64)";
+#else
+				s += " (Release-x86)";
+#endif
+#endif
 
 				return s;
 			}
