@@ -77,7 +77,7 @@
 #include "SceneNodeAnimatorType.h"
 #include "SceneNodeRenderPass.h"
 #include "SceneNodeType.h"
-#include "SceneParameters.h"
+#include "SceneParameters.h" // string enum (e.g. abstract sealed class with static getters)
 #include "TerrainPatchSize.h"
 #include "TextureClamp.h"
 #include "TextureCreationFlag.h"
@@ -89,24 +89,26 @@
 #include "VideoModeAspectRatio.h"
 
 // basic types
-#include "Vector.h"
-#include "Plane.h"
-#include "Line.h"
-#include "Color.h"
-#include "Fog.h"
-#include "Vertex.h"
-#include "Dimension.h"
-#include "Rect.h"
+#include "Vector.h" // must be before AABBox.h
 #include "AABBox.h"
+#include "Color.h"
+#include "Dimension.h"
+#include "Line.h"
+#include "Rect.h" // must be before Matrix.h
+#include "Plane.h" // must be before Matrix.h
 #include "Matrix.h"
 #include "Quaternion.h"
-#include "ViewFrustum.h"
 #include "Triangle.h"
-#include "VideoMode.h"
-#include "KeyMap.h"
-#include "ExposedVideoData.h"
-#include "NamedPath.h"
+#include "Vertex.h"
+
+// other header-only types
 #include "AttributeReadWriteOptions.h"
+#include "ExposedVideoData.h"
+#include "Fog.h"
+#include "KeyMap.h"
+#include "NamedPath.h"
+#include "VideoMode.h"
+#include "ViewFrustum.h"
 
 // inheritors
 #include "EventReceiverInheritor.h"
