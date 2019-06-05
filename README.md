@@ -11,7 +11,11 @@
 
 # The Irrlicht Lime SDK version 1.6
 
-Irrlicht Lime (or simply "Lime") is a .NET wrapper for [Irrlicht Engine](http://irrlicht.sourceforge.net).
+The Irrlicht Lime (or simply "Lime") is a .NET wrapper for the [Irrlicht Engine](http://irrlicht.sourceforge.net). It wraps most of the API available in native library, easily allowing you to use 2D/3D graphics in your application, written in C#, VB.NET or other .NET language.
+
+Currently Lime is being develop under Visual Studio 2019 with .NET Framework 4.0. It includes bunch of examples and IntelliSense documentation.
+
+Lime is not a distinct "engine", it is a wrapper with almost the same architecture whitch native Irrlicht Engine has. You do not need to download/compile Irrlicht Engine, as wrapper already has it and ready to be used straight from the box.
 
 #### Table of Contents
 
@@ -41,7 +45,7 @@ Community Edition (its free).
 Directory | Description
 --- | ---
 `bin` | This is the output directory. When you compile Lime and its examples, it fills with binaries.
-`examples` | Directory with examples of usage. The examples starting strait with a number are ports from real Irrlicht Engine SDK examples written on C++. Other ones (starting with `L`) are Lime examples.
+`examples` | Directory with examples of usage. The examples starting straight with a number are ports from real Irrlicht Engine SDK examples written on C++. Other ones (starting with `L`) are Lime examples.
 `irrlicht` | Contains Irrlicht Engine SDK used for compiling Lime. It has `README.md` file describing which exact version of the Irrlicht Engine SDK is used. Sub folders stores necessary files: `lib`, `include` and `dll`.
 `media` | Media resources for the examples.
 `source` | Source code of the Irrlicht Lime.
