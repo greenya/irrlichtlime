@@ -16,6 +16,7 @@ using namespace System::Runtime::InteropServices; // for Marshal
 #endif
 
 #define LIME_SAFEREF(object, member) ((object) == nullptr ? nullptr : (object)->member)
+#define LIME_SAFEVAL(object, value) ((object) == nullptr ? (value) : *(object)->m_NativeValue)
 #define LIME_SAFESTRINGTOSTRINGC_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringC(string).c_str())
 #define LIME_SAFESTRINGTOSTRINGW_C_STR(string) ((string) == nullptr ? nullptr : Lime::StringToStringW(string).c_str())
 

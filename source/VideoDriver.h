@@ -40,11 +40,60 @@ public:
 	Texture^ AddTexture(Dimension2Di^ size, String^ name);
 	Texture^ AddTexture(String^ name, Image^ image); // 3rd argument "void* mipmapData=0" currently not supported
 
-	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData, Recti^ sourceRect);
-	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color, ExposedVideoData^ videoData);
-	bool BeginScene(bool backBuffer, bool zBuffer, Color^ color);
-	bool BeginScene(bool backBuffer, bool zBuffer);
-	bool BeginScene(bool backBuffer);
+	// BeginScene
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <param name="clearStencil">The clear value for the stencil buffer. Default is 0.</param>
+	/// <param name="videoData">Handle of another window, if you want the bitmap to be displayed on another window.
+	/// If this is an empty element, everything will be displayed in the default window.
+	/// Note: This feature is not fully implemented for all devices. Default is null.</param>
+	/// <param name="sourceRect">Rectangle defining the source rectangle of the area to be presented.
+	/// Note: not implemented in all devices. Default is null (present everything).</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, ExposedVideoData^ videoData, Recti^ sourceRect);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <param name="clearStencil">The clear value for the stencil buffer. Default is 0.</param>
+	/// <param name="videoData">Handle of another window, if you want the bitmap to be displayed on another window.
+	/// If this is an empty element, everything will be displayed in the default window.
+	/// Note: This feature is not fully implemented for all devices. Default is null.</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, ExposedVideoData^ videoData);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <param name="clearStencil">The clear value for the stencil buffer. Default is 0.</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <returns>False if failed.</returns>
+	bool BeginScene(ClearBufferFlag clearFlag);
+
+	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <returns>False if failed.</returns>
 	bool BeginScene();
 
 	bool CheckDriverReset();

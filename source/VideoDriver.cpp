@@ -149,37 +149,55 @@ Texture^ VideoDriver::AddTexture(String^ name, Image^ image)
 	return Texture::Wrap(t);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color^ color, Video::ExposedVideoData^ videoData, Recti^ sourceRect)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, Video::ExposedVideoData^ videoData, Recti^ sourceRect)
 {
-	LIME_ASSERT(color != nullptr);
-	LIME_ASSERT(videoData != nullptr);
-	LIME_ASSERT(sourceRect != nullptr);
-
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue, sourceRect->m_NativeValue);
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		LIME_SAFEVAL(clearColor, SColor(255, 0, 0, 0)),
+		clearDepth,
+		clearStencil,
+		LIME_SAFEVAL(videoData, SExposedVideoData()),
+		LIME_SAFEREF(sourceRect, m_NativeValue));
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color^ color, Video::ExposedVideoData^ videoData)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, Video::ExposedVideoData^ videoData)
 {
-	LIME_ASSERT(color != nullptr);
-	LIME_ASSERT(videoData != nullptr);
-
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue, *videoData->m_NativeValue);
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		LIME_SAFEVAL(clearColor, SColor(255, 0, 0, 0)),
+		clearDepth,
+		clearStencil,
+		LIME_SAFEVAL(videoData, SExposedVideoData()));
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer, Color ^color)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil)
 {
-	LIME_ASSERT(color != nullptr);
-	return m_VideoDriver->beginScene(backBuffer, zBuffer, *color->m_NativeValue);
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		LIME_SAFEVAL(clearColor, SColor(255, 0, 0, 0)),
+		clearDepth,
+		clearStencil);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer, bool zBuffer)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth)
 {
-	return m_VideoDriver->beginScene(backBuffer, zBuffer);
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		LIME_SAFEVAL(clearColor, SColor(255, 0, 0, 0)),
+		clearDepth);
 }
 
-bool VideoDriver::BeginScene(bool backBuffer)
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag, Color^ clearColor)
 {
-	return m_VideoDriver->beginScene(backBuffer);
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag,
+		LIME_SAFEVAL(clearColor, SColor(255, 0, 0, 0)));
+}
+
+bool VideoDriver::BeginScene(ClearBufferFlag clearFlag)
+{
+	return m_VideoDriver->beginScene(
+		(u16)clearFlag);
 }
 
 bool VideoDriver::BeginScene()
