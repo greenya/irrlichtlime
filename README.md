@@ -45,7 +45,7 @@ Community Edition (its free).
 Directory | Description
 --- | ---
 `bin` | This is the output directory. When you compile Lime and its examples, it fills with binaries.
-`examples` | Directory with examples of usage. The examples starting straight with a number are ports from real Irrlicht Engine SDK examples written on C++. Other ones (starting with `L`) are Lime examples.
+`examples` | Directory with examples of usage. The examples starting straight with a number are examples from Irrlicht Engine SDK ported from C++ to C#. Other ones (starting with `L`) are Lime native examples.
 `irrlicht` | Contains Irrlicht Engine SDK used for compiling Lime. It has `README.md` file describing which exact version of the Irrlicht Engine SDK is used. Sub folders stores necessary files: `lib`, `include` and `dll`.
 `media` | Media resources for the examples.
 `source` | Source code of the Irrlicht Lime.
