@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -12,15 +10,15 @@ namespace _08.SpecialFX
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
-			bool shadows = AskUserForRealtimeShadows();
+			bool shadows = AskForRealtimeShadows();
 
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480), 16, false, shadows);
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(640, 480), 16, false, shadows);
 			if (device == null)
 				return;
 
@@ -31,11 +29,9 @@ namespace _08.SpecialFX
 
 			smgr.MeshManipulator.MakePlanarTextureMapping(mesh.GetMesh(0), 0.004f);
 
-			SceneNode node = null;
-
-			node = smgr.AddAnimatedMeshSceneNode(mesh);
+			SceneNode node = smgr.AddAnimatedMeshSceneNode(mesh);
 			node.SetMaterialTexture(0, driver.GetTexture("../../media/wall.jpg"));
-			node.GetMaterial(0).SpecularColor.Set(0, 0, 0, 0);
+			node.GetMaterial(0).SpecularColor = new Color(0);
 
 			mesh = smgr.AddHillPlaneMesh("myHill",
 				new Dimension2Df(20, 20),
@@ -174,35 +170,33 @@ namespace _08.SpecialFX
 			device.Drop();
 		}
 
-		static bool AskUserForRealtimeShadows()
+		static bool AskForRealtimeShadows()
 		{
 			Console.WriteLine("Please press 'y' if you want to use realtime shadows.");
 			return Console.ReadKey().Key == ConsoleKey.Y;
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
