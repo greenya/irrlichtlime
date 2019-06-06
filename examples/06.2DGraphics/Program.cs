@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.GUI;
-using IrrlichtLime.IO;
 
 namespace _06._2DGraphics
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(512, 384));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(512, 384));
 			if (device == null)
 				return;
 
@@ -28,14 +23,8 @@ namespace _06._2DGraphics
 
 			VideoDriver driver = device.VideoDriver;
 
-			Texture images;
-			using (Stream testStream = new FileStream("../../media/2ddemo.png", FileMode.Open, FileAccess.Read))
-			{
-				StreamReadFile readFile = new StreamReadFile(testStream, "2ddemo.png");
-				images = driver.GetTexture(readFile);
-				readFile.Drop();
-			}
-			driver.MakeColorKeyTexture(images, new Vector2Di(0, 0));
+			Texture images = driver.GetTexture("../../media/2ddemo.png");
+			driver.MakeColorKeyTexture(images, new Vector2Di());
 
 			GUIFont font = device.GUIEnvironment.BuiltInFont;
 			GUIFont font2 = device.GUIEnvironment.GetFont("../../media/fonthaettenschweiler.bmp");
@@ -93,29 +82,27 @@ namespace _06._2DGraphics
 			device.Drop();
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
