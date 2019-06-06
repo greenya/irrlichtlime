@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -21,13 +18,13 @@ namespace _05.UserInterface
 		const int GUI_ID_ButtonFileOpen = 103;
 		const int GUI_ID_ScrollbarTransparency = 104;
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
+			device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(640, 480));
 			if (device == null)
 				return;
 
@@ -51,9 +48,9 @@ namespace _05.UserInterface
 			env.AddStaticText("Transparent Control:", new Recti(150, 20, 350, 40), true);
 			GUIScrollBar scrollbar = env.AddScrollBar(true, new Recti(150, 45, 350, 60), null, GUI_ID_ScrollbarTransparency);
 			scrollbar.MaxValue = 255;
-			scrollbar.Position = (int)env.Skin.GetColor(GUIDefaultColor.WindowBackground).Alpha;
+			scrollbar.Position = env.Skin.GetColor(GUIDefaultColor.WindowBackground).Alpha;
 
-			GUIStaticText trq = env.AddStaticText("Logging ListBox:", new Recti(50,110,250,130), true);
+			GUIStaticText trq = env.AddStaticText("Logging ListBox:", new Recti(50, 110, 250, 130), true);
 			listbox = env.AddListBox(new Recti(50, 140, 250, 210));
 			env.AddEditBox("Editable Text", new Recti(350, 80, 550, 100));
 
@@ -88,7 +85,7 @@ namespace _05.UserInterface
 							foreach (GUIDefaultColor which in Enum.GetValues(typeof(GUIDefaultColor)))
 							{
 								Color color = env.Skin.GetColor(which);
-								color.Alpha = (uint)pos;
+								color.Alpha = pos;
 								env.Skin.SetColor(color, which);
 							}
 						}
@@ -141,29 +138,27 @@ namespace _05.UserInterface
 			return false;
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
