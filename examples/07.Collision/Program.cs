@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -16,13 +13,13 @@ namespace _07.Collision
 		const int IDFlag_IsPickable = 1 << 0;
 		const int IDFlag_IsHighlightable = 1 << 1;
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(640, 480));
 			if (device == null)
 				return;
 
@@ -49,7 +46,7 @@ namespace _07.Collision
 			}
 
 			// Set a jump speed of 3 units per second, which gives a fairly realistic jump
-			// when used with the gravity of (0, -10, 0) in the collision response animator.
+			// when used with the gravity of (0, -1000, 0) in the collision response animator.
 			CameraSceneNode camera = smgr.AddCameraSceneNodeFPS(null, 100.0f, 0.3f, ID_IsNotPickable, null, true, 3.0f);
 			camera.Position = new Vector3Df(50, 50, -60);
 			camera.Target = new Vector3Df(-70, 30, -60);
@@ -57,9 +54,10 @@ namespace _07.Collision
 			if (selector != null)
 			{
 				SceneNodeAnimator anim = smgr.CreateCollisionResponseAnimator(
-					selector, camera,
+					selector,
+					camera,
 					new Vector3Df(30, 50, 30),
-					new Vector3Df(0, -10, 0),
+					new Vector3Df(0, -1000, 0),
 					new Vector3Df(0, 30, 0));
 
 				selector.Drop(); // As soon as we're done with the selector, drop it.
@@ -163,15 +161,10 @@ namespace _07.Collision
 				// All intersections in this example are done with a ray cast out from the camera to
 				// a distance of 1000.  You can easily modify this to check (e.g.) a bullet
 				// trajectory or a sword's position, or create a ray from a mouse click position using
-				// ISceneCollisionManager::getRayFromScreenCoordinates()
+				// collMan.GetRayFromScreenCoordinates()
 				Line3Df ray = new Line3Df();
 				ray.Start = camera.Position;
 				ray.End = ray.Start + (camera.Target - ray.Start).Normalize() * 1000.0f;
-
-				// Tracks the current intersection point with the level or a mesh
-				Vector3Df intersection;
-				// Used to show with triangle has been hit
-				Triangle3Df hitTriangle;
 
 				// This call is all you need to perform ray/triangle collision on every scene node
 				// that has a triangle selector, including the Quake level mesh.  It finds the nearest
@@ -182,8 +175,8 @@ namespace _07.Collision
 				SceneNode selectedSceneNode =
 					collMan.GetSceneNodeAndCollisionPointFromRay(
 						ray,
-						out intersection, // This will be the position of the collision
-						out hitTriangle, // This will be the triangle hit in the collision
+						out Vector3Df intersection, // This will be the position of the collision
+						out Triangle3Df hitTriangle, // This will be the triangle hit in the collision
 						IDFlag_IsPickable); // This ensures that only nodes that we have set up to be pickable are considered
 
 				// If the ray hit anything, move the billboard to the collision position
@@ -226,29 +219,27 @@ namespace _07.Collision
 			device.Drop();
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
