@@ -69,4 +69,5 @@ See `LICENSE` file.
 * [Project on GitHub](https://github.com/greenya/irrlichtlime)
 * [Issues, bugs, feature requests](https://github.com/greenya/irrlichtlime/issues)
 * [Discussion thread on official Irrlicht Engine forum](http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512)
-* [Old SourceForge project location](https://sourceforge.net/projects/irrlichtlime/)
+* [Playlist on YouTube](https://www.youtube.com/playlist?list=PL6AFEBCA167138B03)
+* [Old project on SourceForge](https://sourceforge.net/projects/irrlichtlime/) (with previous releases)
