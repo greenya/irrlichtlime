@@ -23,7 +23,7 @@ Lime is not a distinct "engine", it is a wrapper with almost the same architectu
 * [Directory Structure Overview](#directory-structure-overview)
 * [Release Notes](#release-notes)
 * [License](#license)
-* [Contact](#contact)
+* [Links](#links)
 
 ## How to Start
 
@@ -64,8 +64,9 @@ an acknowledgement would be highly appreciated.
 
 See `LICENSE` file.
 
-## Contact
+## Links
 
-* [Project page](https://github.com/greenya/irrlichtlime)
+* [Project on GitHub](https://github.com/greenya/irrlichtlime)
 * [Issues, bugs, feature requests](https://github.com/greenya/irrlichtlime/issues)
-* [Irrlicht Engine forum thread](http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512)
+* [Discussion thread on official Irrlicht Engine forum](http://irrlicht.sourceforge.net/forum/viewtopic.php?f=6&t=38512)
+* [Old SourceForge project location](https://sourceforge.net/projects/irrlichtlime/)
