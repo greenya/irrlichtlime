@@ -50,14 +50,8 @@ void MaterialRendererServices::SetPixelShaderConstantList(int startRegisterIndex
 
 	int c = valueFloats->Length;
 	float* f = new float[c];
-
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
-
-	m_MaterialRendererServices->setPixelShaderConstant(
-		f,
-		startRegisterIndex,
-		c / 4);
+	Marshal::Copy(valueFloats, 0, IntPtr(f), c);
+	m_MaterialRendererServices->setPixelShaderConstant(f, startRegisterIndex, c / 4);
 
 	delete[] f;
 }
@@ -69,10 +63,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<float>^ v
 
 	int c = valueFloats->Length;
 	float* f = new float[c];
-
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
-
+	Marshal::Copy(valueFloats, 0, IntPtr(f), c);
 	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, f, c);
 
 	delete[] f;
@@ -86,10 +77,7 @@ bool MaterialRendererServices::SetPixelShaderConstant(int index, array<int>^ val
 
 	int c = valueInts->Length;
 	int* v = new int[c];
-
-	for (int i = 0; i < c; i++)
-		v[i] = valueInts[i];
-
+	Marshal::Copy(valueInts, 0, IntPtr(v), c);
 	bool b = m_MaterialRendererServices->setPixelShaderConstant(index, v, c);
 
 	delete[] v;
@@ -111,14 +99,8 @@ void MaterialRendererServices::SetVertexShaderConstantList(int startRegisterInde
 
 	int c = valueFloats->Length;
 	float* f = new float[c];
-
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
-
-	m_MaterialRendererServices->setVertexShaderConstant(
-		f,
-		startRegisterIndex,
-		c / 4);
+	Marshal::Copy(valueFloats, 0, IntPtr(f), c);
+	m_MaterialRendererServices->setVertexShaderConstant(f, startRegisterIndex, c / 4);
 
 	delete[] f;
 }
@@ -130,10 +112,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<float>^ 
 
 	int c = valueFloats->Length;
 	float* f = new float[c];
-
-	for (int i = 0; i < c; i++)
-		f[i] = valueFloats[i];
-
+	Marshal::Copy(valueFloats, 0, IntPtr(f), c);
 	bool b = m_MaterialRendererServices->setVertexShaderConstant(index, f, c);
 
 	delete[] f;
@@ -147,10 +126,7 @@ bool MaterialRendererServices::SetVertexShaderConstant(int index, array<int>^ va
 
 	int c = valueInts->Length;
 	int* v = new int[c];
-
-	for (int i = 0; i < c; i++)
-		v[i] = valueInts[i];
-
+	Marshal::Copy(valueInts, 0, IntPtr(v), c);
 	bool b = m_MaterialRendererServices->setVertexShaderConstant(index,	v, c);
 
 	delete[] v;
