@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
-using IrrlichtLime.GUI;
 
 namespace _10.Shaders
 {
@@ -24,15 +20,15 @@ namespace _10.Shaders
 		static int shaderTransWorldId;
 		static int shaderTextureId;
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			useHighLevelShaders = AskUserForHighLevelShaders(driverType);
+			useHighLevelShaders = AskForHighLevelShaders(driverType.Value);
 
-			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(640, 480));
+			device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(640, 480));
 			if (device == null)
 				return;
 
@@ -47,7 +43,6 @@ namespace _10.Shaders
 				case DriverType.Direct3D9:
 					if (useHighLevelShaders)
 					{
-						// Cg can also handle this syntax
 						psFileName = "../../media/d3d9.hlsl";
 						vsFileName = psFileName; // both shaders are in the same file
 					}
@@ -74,11 +69,17 @@ namespace _10.Shaders
 
 			if (!driver.QueryFeature(VideoDriverFeature.PixelShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_FragmentProgram_1))
+			{
 				device.Logger.Log("WARNING: Pixel shaders disabled because of missing driver/hardware support.");
+				psFileName = null;
+			}
 
 			if (!driver.QueryFeature(VideoDriverFeature.VertexShader_1_1) &&
 				!driver.QueryFeature(VideoDriverFeature.ARB_VertexProgram_1))
+			{
 				device.Logger.Log("WARNING: Vertex shaders disabled because of missing driver/hardware support.");
+				vsFileName = null;
+			}
 
 			// create materials
 			
@@ -86,52 +87,38 @@ namespace _10.Shaders
 			MaterialType newMaterialType1 = MaterialType.Solid;
 			MaterialType newMaterialType2 = MaterialType.TransparentAddColor;
 
-			ShaderCallBack shaderCallback1 = null;
-			ShaderCallBack shaderCallback2 = null;
-
-			if (gpu != null && psFileName != null && vsFileName != null)
+			if (gpu != null && vsFileName != null && psFileName != null)
 			{
+				gpu.OnSetConstants += gpu_OnSetConstants;
+
 				// create the shaders depending on if the user wanted high level or low level shaders
 
 				if (useHighLevelShaders)
 				{
-					GPUShadingLanguage shadingLanguage = GPUShadingLanguage.Default;
-
-					shaderCallback1 = gpu.AddHighLevelShaderMaterialFromFiles(
+					newMaterialType1 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
-						MaterialType.Solid, 0, shadingLanguage);
+						MaterialType.Solid);
 
-					shaderCallback2 = gpu.AddHighLevelShaderMaterialFromFiles(
+					newMaterialType2 = gpu.AddHighLevelShaderMaterialFromFiles(
 						vsFileName, "vertexMain", VertexShaderType.VS_1_1,
 						psFileName, "pixelMain", PixelShaderType.PS_1_1,
-						MaterialType.TransparentAddColor, 0, shadingLanguage);
+						MaterialType.TransparentAddColor);
 				}
 				else
 				{
 					// create material from low level shaders (asm or arb_asm)
 
-					shaderCallback1 = gpu.AddShaderMaterialFromFiles(vsFileName,
-						psFileName, MaterialType.Solid);
-
-					shaderCallback2 = gpu.AddShaderMaterialFromFiles(vsFileName,
-						psFileName, MaterialType.TransparentAddColor);
+					newMaterialType1 = gpu.AddShaderMaterialFromFiles(vsFileName, psFileName, MaterialType.Solid);
+					newMaterialType2 = gpu.AddShaderMaterialFromFiles(vsFileName, psFileName, MaterialType.TransparentAddColor);
 				}
 			}
 
-			if (shaderCallback1 != null)	//if we got a shader callback (shader was created successfully)
-			{
-				shaderCallback1.OnSetConstants += gpu_OnSetConstants;	//add the event handler
-				newMaterialType1 = shaderCallback1;	//assign the new material type. ShaderCallback implicitly converts to MaterialType.
-			}
+			if ((int)newMaterialType1 == -1)
+				newMaterialType1 = MaterialType.Solid;
 
-			if (shaderCallback2 != null)
-			{
-				shaderCallback2.OnSetConstants += gpu_OnSetConstants;
-				newMaterialType2 = shaderCallback2;
-			}
-
-
+			if ((int)newMaterialType2 == -1)
+				newMaterialType1 = MaterialType.TransparentAddColor;
 
 			// create test scene node 1, with the new created material type 1
 
@@ -175,7 +162,7 @@ namespace _10.Shaders
 
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, false);
 
-			SceneNode skybox = smgr.AddSkyBoxSceneNode(
+			smgr.AddSkyBoxSceneNode(
 				"../../media/irrlicht2_up.jpg",
 				"../../media/irrlicht2_dn.jpg",
 				"../../media/irrlicht2_lf.jpg",
@@ -224,6 +211,8 @@ namespace _10.Shaders
 		{
 			VideoDriver driver = services.VideoDriver;
 
+			// get shader constants id
+
 			if (useHighLevelShaders && shaderFirstUpdate)
 			{
 				shaderWorldViewProjId = services.GetVertexShaderConstantID("mWorldViewProj");
@@ -247,9 +236,9 @@ namespace _10.Shaders
 			invWorld.MakeInverse();
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderInvWorldId, invWorld, true);
+				services.SetVertexShaderConstant(shaderInvWorldId, invWorld.ToArray());
 			else
-				services.SetVertexShaderConstant(0, invWorld, false);
+				services.SetVertexShaderConstantList(0, invWorld.ToArray());
 
 			// set clip matrix
 
@@ -258,27 +247,27 @@ namespace _10.Shaders
 			worldViewProj *= driver.GetTransform(TransformationState.World);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj, true);
+				services.SetVertexShaderConstant(shaderWorldViewProjId, worldViewProj.ToArray());
 			else
-				services.SetVertexShaderConstant(4, worldViewProj, false);
+				services.SetVertexShaderConstantList(4, worldViewProj.ToArray());
 
 			// set camera position
 
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightPosId, pos, true);
+				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray());
 			else
-				services.SetVertexShaderConstant(8, pos, false);
+				services.SetVertexShaderConstantList(8, pos.ToArray());
 
 			// set light color
 
 			Colorf col = new Colorf(0, 1, 1, 0);
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightColorId, col, true);
+				services.SetVertexShaderConstant(shaderLightColorId, col.ToArray());
 			else
-				services.SetVertexShaderConstant(9, col, false);
+				services.SetVertexShaderConstantList(9, col.ToArray());
 
 			// set transposed world matrix
 
@@ -286,17 +275,17 @@ namespace _10.Shaders
 
 			if (useHighLevelShaders)
 			{
-				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld, true);
-				if(driver.DriverType == DriverType.OpenGL)
-                    services.SetPixelShaderConstant(shaderTextureId, 0, true);
+				services.SetVertexShaderConstant(shaderTransWorldId, transpWorld.ToArray());
+				if (driver.DriverType == DriverType.OpenGL)
+					services.SetPixelShaderConstant(shaderTextureId, new int[] { 0 });
 			}
 			else
 			{
-				services.SetVertexShaderConstant(10, transpWorld, false);
+				services.SetVertexShaderConstantList(10, transpWorld.ToArray());
 			}
 		}
 
-		static bool AskUserForHighLevelShaders(DriverType driverType)
+		static bool AskForHighLevelShaders(DriverType driverType)
 		{
 			if (driverType != DriverType.Direct3D9 &&
 				driverType != DriverType.OpenGL)
@@ -306,29 +295,27 @@ namespace _10.Shaders
 			return Console.ReadKey().Key == ConsoleKey.Y;
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
