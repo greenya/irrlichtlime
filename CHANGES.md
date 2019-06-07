@@ -1,33 +1,45 @@
-============================
-Changes in 1.6 (TBA)
-============================
+## Changes in 1.6 (not yet released)
+
+- Updated Irrlicht SDK to trunk r5817.
+- Moved to Visual Studio 2019 (Community Edition is free).
+- Updated output dir for x86 builds to "Debug-x86" (was "Debug") and "Release-x86" (was "Release").
+- Updated AssemblyDescription attribute for IrrlichtLime.dll to state exaclty what build and what platform it is.
+- Updated documentation support approach:
+    - Removed docs/IrrlchtLime.xml and docs dir
+    - IrrlichtLime.xml now generated at build time from source files using XML comments
+- Added BulletSharp.dll files (x86 and x64) version 2.87. Now you can build L11.BulletSharpTest straight from Lime SDK.
+- Added TextureCubemapSeamless to VideoDriverFeature.
+- Added RotateLeft and RotateRight to KeyAction.
+- Renamed MultiRenderTexture into MultiRenderTextures to match native API.
+- Deprecated PolygonOffset and Material.PolygonOffsetDirection.
+- Deprecated B3D_TexturePath, CSM_TexturePath, DMF_TexturePath, LMTS_TexturePath, MY3D_TexturePath and OBJ_TexturePath in SceneParameters.
+- Fixed camera gravity value in 07.Collision.
+- Fixed room specular color in 08.SpecialFX.
+- Fixed crash (for Direct3D9) and console error spam (for OpenGL) when don't using high level shaders in 10.Shaders.
+- Removed unused media: d3d8.psh and d3d8.vsh.
+
+## Changes in r538 (final commit on SF)
 
 - Updated Irrlicht SDK to trunk rev. 5538
-- Now using DirectX SDK June 2010 for Irrlicht builds, so End Users need the 2010 June Redist.
-- Documentation updated and fixed typos
 - Example 24.CursorControl added
 - Changes to TexturePainter due to API changes of Irrlicht
 - Changes to L01.TexturePainting due to API changes + bug workaround
-- MaterialRendererServices: Set*ShaderConstant can now take some core types (Vector3D, Colorf, Matrix, ...) as argument directly, and parameter "highLevelShader" is no longer optional
 - GUIFontBitmap class wrapped. Can be cast from GUIFont.
 - little Code cleanup:
-  moved VertexArray and IndexArray classes from .cpp to header
-  use copy constructor in NativeIterator to init the ConstIterator
+    - moved VertexArray and IndexArray classes from .cpp to header
+    - use copy constructor in NativeIterator to init the ConstIterator
 - SceneNode and SceneNodeAnimator: check for user scene node type only, if the type is ESNT_UNKNOWN. This solves SEHExceptions that were sometimes logged
-- Use System.Diagnostics.Contracts.Contract.Assert instead of System.Diagnostics.Debug.Assert
-- Small optimization in Lime::NativeValue: SuppressFinalize is called, if deleteOnFinalize is false
 - Many maths functions replaced to calls to new LimeMath class.
 - StreamReadFile class added: Allows Irrlicht to read from .NET Streams
-- Example 06.2DGraphics changed to show how StreamReadFile works
+    - Updated StreamReadFileNative to work with size_t internally
 - Image: CopyToBitmap now only supports R8G8B8 and A8R8G8B8. Others are untested.
-  Also R8G8B8 now works correctly (formerly, it had the wrong byte order)
-  GetData() method added.
+    - Also R8G8B8 now works correctly (formerly, it had the wrong byte order)
+    - GetData() method added.
 - Added Create method to DynamicMeshBuffer
 - Added ExistFile to FileSystem
 - Added GetTab(int) to GUITabControl
 - Wrapped new CollisionHit class and added corresponding methods to SceneCollisionManager
 - Wrapped new CreateTriangleSelector methods in SceneManager
-- Updated StreamReadFileNative to work with size_t internally
 - Wrapped new CollisionTriangleRange struct and added corresponding methods to TriangleSelector
 - Wrapped OctreeSceneNode
 - VideoDriver: added QueryTextureFormat function
@@ -42,10 +54,7 @@ Changes in 1.6 (TBA)
 - BillboardTextSceneNode: added GetText function and Font property
 - BillboardSceneNode: added GetTransformedBillboardBoundingBox function
 
-
-============================
-Changes in 1.5 (05-Mar-2016)
-============================
+## Changes in 1.5 (05-Mar-2016)
 
 - Updated Irrlicht SDK to trunk rev. 5269
 - Added x64 support
@@ -78,7 +87,7 @@ Changes in 1.5 (05-Mar-2016)
 - Crash with low level shaders in example 10.Shaders solved
 - Example 10.Shaders crash with DX9 with CG-Shaders fixed
 - SceneNodeAnimator can be inherited
-- New Example: 19.CustomSceneNodeAnimator
+- New Examples: L18.LightningShots and L19.CustomSceneNodeAnimator
 - Enum GUIElementType modifier: Profiler added
 - GUIEnvironment: AddProfilerDisplay(...) added
 - Enum MaterialFlag: BlendFactor added
@@ -102,7 +111,7 @@ Changes in 1.5 (05-Mar-2016)
 - Example L19.CustomSceneNodeAnimator: Animator shows message when disposed in debug mode.
 - MaterialRendererServices: float and int arrays are passed with pin_ptrs in Set|Vertex/Pixel|ShaderConstant(List)(...)
 - Some classes are now structs: Color, Vector3Di/f/d, Vertex3D(TTCoords/Tangents), Line3Df, Triangle3Df, Quaternion
-  Every class and example has been updated to use them correctly, but not all of them have been tested.
+    - Every class and example has been updated to use them correctly, but not all of them have been tested.
 - Line3Df: Operator + and - Vector3Df added
 - Vector2/3D now inherits IComparable<T>, can be sorted, etc
 - Vector2/3D and Quaternion inherit IEquatable<T>, makes comparing consistent
@@ -119,11 +128,11 @@ Changes in 1.5 (05-Mar-2016)
 - GUITable.DrawBackground property added
 - NativeValue template now overrides the GetHashCode method, so two equal native objects (e.g. Material) return the same hash code
 - MeshBuffer:
-  Indices property split up into two methods: GetIndices16Bit and GetIndices32Bit, both return NativeArray<>s
-  Vertices property changed to a generic method, returns a NativeArray<>
-  UpdateIndices and UpdateVertices methods removed
-  GetVertex returns a IVertex3D
-  Append methods aren't generic anymore, old overloadings are back
+    - Indices property split up into two methods: GetIndices16Bit and GetIndices32Bit, both return NativeArray<>s
+    - Vertices property changed to a generic method, returns a NativeArray<>
+    - UpdateIndices and UpdateVertices methods removed
+    - GetVertex returns a IVertex3D
+    - Append methods aren't generic anymore, old overloadings are back
 - ParticleSystemSceneNode.AffectorList returns a NativeCollection now
 - ReferenceCounted: now IEquatable, GetHashCode returns the first four bytes of the pointer (so two References to the same object have the same hash)
 - SceneNode: AnimatorList and Children properties return NativeCollections now
@@ -172,13 +181,11 @@ Changes in 1.5 (05-Mar-2016)
 - new VideoDriverFeatures added
 - WriteFile: Flush method added
 - Changed the way setting up ShaderCallBacks:
-  Add*ShaderMaterial now returns a ShaderCallBack, which provides the events and the MaterialType
+    - Add*ShaderMaterial now returns a ShaderCallBack, which provides the events and the MaterialType
 - CursorControl: AddIcon and ChangeIcon added.
 - Examples updated to work with API changes
 
-============================
-Changes in 1.4 (19-May-2013)
-============================
+## Changes in 1.4 (19-May-2013)
 
 - Added examples L16.SphereCamera and L17.Minesweeper.
 - Updated Irrlicht SDK to trunk rev. 4527.
@@ -207,9 +214,7 @@ Changes in 1.4 (19-May-2013)
 - Added TextureCompressedDXT value to VideoDriverFeature enum.
 - Added LMTS value to AnimatedMeshType enum.
 
-============================
-Changes in 1.3 (20-Jan-2013)
-============================
+## Changes in 1.3 (20-Jan-2013)
 
 - Added examples L14.Pathfinding and L15.AbstractTrace.
 - Updated Irrlicht SDK to trunk rev. 4446.
@@ -222,9 +227,7 @@ Changes in 1.3 (20-Jan-2013)
 - Added ButtonPressedImageOffsetX, ButtonPressedImageOffsetY, ButtonPressedTextOffsetX and ButtonPressedTextOffsetY to GUIDefaultSize enum.
 - Added Disabled to ComparisonFunc enum.
 
-============================
-Changes in 1.2 (21-Aug-2012)
-============================
+## Changes in 1.2 (21-Aug-2012)
 
 - Added examples L11.BulletSharpTest, L12.StencilShadows and L13.FractalBrowser.
 - Updated Irrlicht SDK to trunk rev. 4295.
@@ -241,9 +244,7 @@ Changes in 1.2 (21-Aug-2012)
 - Added useAlphaChannel argument to AddImage() to GUIEnvironment.
 - Added Name prop to GUIElement.
 
-============================
-Changes in 1.1 (09-Mar-2012)
-============================
+## Changes in 1.1 (09-Mar-2012)
 
 - Added example L10.ImageBrowser.
 - Updated Irrlicht SDK to trunk rev. 4098.
@@ -265,9 +266,7 @@ Changes in 1.1 (09-Mar-2012)
 - Added Inflate() to Dimension2Di/f, Recti/f. Added Offset() and Adjust() to Recti/f.
 - Added handling of OnAnimate event in custom scene node.
 
-============================
-Changes in 1.0 (22-Dec-2011)
-============================
+## Changes in 1.0 (22-Dec-2011)
 
 - Added example L09.SimpleLOD.
 - Updated Irrlicht SDK to trunk rev. 4021.
@@ -288,9 +287,7 @@ Changes in 1.0 (22-Dec-2011)
 - Added Distance prop to CameraMayaSceneNodeAnimator.
 - Added Vector2Df type support to Attributes.
 
-==============================
-Changes in 0.9.1 (30-May-2011)
-==============================
+## Changes in 0.9.1 (30-May-2011)
 
 - Updated Irrlicht SDK to trunk rev. 3767: fixed bug with "blend oparations" which causes all the objects to be transparent under OpenGL renderer.
 - Added overloadings to MakePlanarTextureMapping(), RecalculateTangents(), SetVertexColorAlpha() and SetVertexColors() to MeshManipulator.
@@ -298,9 +295,7 @@ Changes in 0.9.1 (30-May-2011)
 - Added HandleSRGB to IrrlichtCreationParameters.
 - Added CreateMeshCopy() to MeshManipulator.
 
-============================
-Changes in 0.9 (19-May-2011)
-============================
+## Changes in 0.9 (19-May-2011)
 
 - Added examples 23.MeshHandling, 26.OcclusionQuery, L06.AnalogueClock, L07.FastStaticRenderin and L08.WPFWindow.
 - Updated Irrlicht SDK to trunk rev. 3727: added GetItemAt() to GUIListBox. Added GetSelector() and SelectorCount to TriangleSelector. Added BlendOperation and PolygonOffset to MaterialFlag enum. Added BlendOperations and PolygonOffset to VideoDriverFeature enum. Added BlendOperation, PolygonOffsetDirection and PolygonOffsetFactor to Material. Added VideoDriver.CreateAttributesFromMaterial overloading with AttributeReadWriteOptions argument. Renamed CreateOcclusionQuery to AddOcclusionQuery in VideoDriver.
@@ -325,9 +320,7 @@ Changes in 0.9 (19-May-2011)
 - Added more constructors and Set()s to AABBox.
 - Added SetProjectionMatrix() to CameraSceneNode.
 
-============================
-Changes in 0.8 (03-Mar-2011)
-============================
+## Changes in 0.8 (03-Mar-2011)
 
 - Added examples 19.MouseAndJoystick and L05.ScreenshotToTexture.
 - Updated Irrlicht SDK to trunk rev. 3601: added new items to GUIDefaultColor; added MaxAngleDegrees, MaxLifeTime and MinLifeTime to ParticleEmitter; ParticleFadeOutAffector.FadeOutTime now has int type; added AffectorList to ParticleSystemSceneNode. GUIElement.BringToBack renamed to SendToBack. BoneSceneNode.BoneName renamed to Name.
@@ -354,9 +347,7 @@ Changes in 0.8 (03-Mar-2011)
 - GUIImage changes: added props Color and Image (get and set); removed SetColor() and SetImage() methods.
 - Added classes CameraFPSSceneNodeAnimator and CameraMayaSceneNodeAnimator.
 
-============================
-Changes in 0.7 (12-Oct-2010)
-============================
+## Changes in 0.7 (12-Oct-2010)
 
 - Added examples 10.Shaders, L03.RGBSwirl and L04.ParticleEmitterViewer.
 - Updated Irrlicht SDK to trunk rev. 3427: added Timer.RealTimeAndDate prop, Timer.RealTimeDate class, Timer.WeekDay enum, IrrlichtCreationParameters.UsePerformanceTimer prop. Also some bugs were fixed (see Irrlicht Engine svn trunk logs for details).
@@ -377,9 +368,7 @@ Changes in 0.7 (12-Oct-2010)
 - Added class SkinnedMesh, enum InterpolationMode. Added method SceneManager.CreateSkinnedMesh.
 - Added class ImageLoader. Added prop ImageLoaderCount and method GetImageLoader to VideoDriver.
 
-============================
-Changes in 0.6 (25-Jul-2010)
-============================
+## Changes in 0.6 (25-Jul-2010)
 
 - Added examples 12.TerrainRendering, 13.RenderToTexture, 15.LoadIrrFile, 18.SplitScreen, L01.TexturePainting and L02.WinFormsWindow.
 - Updated Irrlicht SDK to trunk rev. 3368. Added AnimatedMeshType.MDL_HalfLife, FileArchiveType.WAD, FileList.GetFileOffset() and GUIElement.BringToBack().
@@ -394,9 +383,7 @@ Changes in 0.6 (25-Jul-2010)
 - Class Matrix improved: added most of methods and operators; added static property Identity.
 - Removed class Line2Di.
 
-============================
-Changes in 0.5 (04-Jul-2010)
-============================
+## Changes in 0.5 (04-Jul-2010)
 
 - Added examples 09.Meshviewer and 11.PerPixelLighting.
 - Updated Irrlicht SDK to trunk rev. 3330. Added LogLevel.Debug; GUIEditBox changes: removed method SetOverrideColor; added props OverrideColor, OverrideColorEnabled.
@@ -422,9 +409,7 @@ Changes in 0.5 (04-Jul-2010)
 - Added enum GUIMessageBoxFlag, method GUIEnvironment.AddMessageBox. Class GUIElement extended with methods AddChild, BringToFront, Draw, GetNextElement, Move, Remove, RemoveChild, SetAlignment, SetMaxSize, SetMinSize, SetRelativePositionProportional and UpdateAbsolutePosition; props ChildList, Parent, SubElement, TabGroup, TabGroupElement and TypeName.
 - Added prop GUIEnvironment.RootElement. Renamed prop SceneManager.RootSceneNode to RootNode. Changed argument order in GUISkin class for methods SetColor, SetText, SetFont, SetIcon, SetSize; added overloading for SetFont with only 1 argument - a font. Updated examples to this changes.
 
-============================
-Changes in 0.4 (19-Jun-2010)
-============================
+## Changes in 0.4 (19-Jun-2010)
 
 - Added and completly ported examples 07.Collision and 08.SpecialFX.
 - Added class VolumeLightSceneNode. Added methods AddVolumeLightSceneNode and CreateTextureAnimator to SceneManager.
@@ -451,9 +436,7 @@ Changes in 0.4 (19-Jun-2010)
 - Added enum LightType, classes LightSceneNode, Light and Colorf. Normalized argument list of RGBA values in constructors and Set() methods of Coloru/f classes: for constructors: R, G, B, A = 255 or 1.0f, for Set(): R, G, B, A? (if A not set, than it will not be changed). All the examples updated to this change, since there is no need to specify alpha value all the time now (if its 255).
 - Added props AspectRatio, FarValue, FOV, InputReceiverEnabled, NearValue, Orthogonal, ProjectionMatrix, Rotation (setter overridden), Target, TargetAndRotationBinding, UpVector, ViewMatrix and ViewMatrixAffector to CameraSceneNode.
 
-============================
-Changes in 0.3 (05-Jun-2010)
-============================
+## Changes in 0.3 (05-Jun-2010)
 
 - Added and completly ported examples 05.UserInterface and 06.2DGraphics.
 - Changes in IrrlichtDevice class: prop WindowResizable became SetWindowResizable method, prop WindowCaption became SetWindowCaption method (since they both had only setters).
@@ -470,9 +453,7 @@ Changes in 0.3 (05-Jun-2010)
 - Added enums GUIAlignment, GUIDefaultColor, GUIDefaultFont, GUIDefaultIcon, GUIDefaultSize, GUIDefaultText, GUIFontType and GUISkinType. Added classes GUIFont, GUISkin and GUISpriteBank. Added to GUIEnvironment: GetFont(), BuiltInFont, Skin. Added IrrlichtDevice.Close().
 - Fixed bug when IrrlichtDevice::createDevice() returns null, IrrlichtLime fails.
 
-============================
-Changes in 0.2 (29-May-2010)
-============================
+## Changes in 0.2 (29-May-2010)
 
 - Added and completly ported examples 03.CustomSceneNode and 04.Movement.
 - Added classes Event, GUIEvent, MouseEvent, KeyEvent, JoystickEvent, LogEvent, UserEvent. Added enums EventType, GUIEventType, MouseEventType, LogLevel. Added event IrrlichtDevice.OnEvent.
@@ -496,9 +477,7 @@ Changes in 0.2 (29-May-2010)
 - Added Dimension2Di class.
 - Added CursorControl.ReferenceRect property.
 
-============================
-Changes in 0.1 (19-May-2010)
-============================
+## Changes in 0.1 (19-May-2010)
 
 - Added and completly ported examples 01.HelloWorld and 02.Quake3Map.
 - Added classes Coloru, Texture and VideoDriver; enums DriverType and MaterialFlag.
