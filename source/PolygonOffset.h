@@ -9,7 +9,7 @@ using namespace System;
 namespace IrrlichtLime {
 namespace Video {
 
-	[ObsoleteAttribute("Deprecated. Will be removed after Irrlicht 1.9.")]
+	[Obsolete("Deprecated. Will be removed after Irrlicht 1.9.")]
 	/// <summary>
 	/// Flags for the definition of the polygon offset feature. These flags define whether the offset should be into the screen, or towards the eye.
 	/// </summary>

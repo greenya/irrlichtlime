@@ -34,13 +34,13 @@ namespace GUI {
 		/// </summary>
 		CheckBoxWidth = EGDS_CHECK_BOX_WIDTH,
 
-		[ObsoleteAttribute("Deprecated. This may be removed by Irrlicht 1.9.")]
+		[Obsolete("Deprecated. This may be removed by Irrlicht 1.9.")]
 		/// <summary>
 		/// Width of the message box.
 		/// </summary>
 		MessageBoxWidth = EGDS_MESSAGE_BOX_WIDTH,
 
-		[ObsoleteAttribute("Deprecated. This may be removed by Irrlicht 1.9.")]
+		[Obsolete("Deprecated. This may be removed by Irrlicht 1.9.")]
 		/// <summary>
 		/// Height of the message box.
 		/// </summary>

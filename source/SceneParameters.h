@@ -32,7 +32,7 @@ namespace Scene {
 		/// </summary>
 		static property String^ B3D_IgnoreMipmapFlag { String^ get() { return gcnew String(B3D_LOADER_IGNORE_MIPMAP_FLAG); }}
 
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used for changing the texture path of the built-in b3d loader
 		/// like this: <c>SceneManager.Attributes.SetValue(SceneParameters.B3D_TexturePath, "path/to/your/textures");</c>
@@ -48,7 +48,7 @@ namespace Scene {
 		/// </summary>
 		static property String^ COLLADA_CreateSceneInstances { String^ get() { return gcnew String(COLLADA_CREATE_SCENE_INSTANCES); }}
 	
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used for changing the texture path of the built-in csm loader
 		/// like this: <c>SceneManager.Attributes.SetValue(SceneParameters.CSM_TexturePath, "path/to/your/textures");</c>
@@ -87,7 +87,7 @@ namespace Scene {
 		/// </summary>
 		static property String^ DMF_IgnoreMaterialsDir { String^ get() { return gcnew String(DMF_IGNORE_MATERIALS_DIRS); }}
 
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used to set path which will get prefixed to the file names defined in the Deled file when loading textures.
 		/// This allows to alter the paths for a specific project setting
@@ -101,14 +101,14 @@ namespace Scene {
 		/// </summary>
 		static property String^ IRR_Editor { String^ get() { return gcnew String(IRR_SCENE_MANAGER_IS_EDITOR); }}
 	
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used for changing the texture path of the built-in lmts loader
 		/// like this: <c>SceneManager.Attributes.SetValue(SceneParameters.LMTS_TexturePath, "path/to/your/textures");</c>
 		/// </summary>
 		static property String^ LMTS_TexturePath { String^ get() { return gcnew String(LMTS_TEXTURE_PATH); }}
 	
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used for changing the texture path of the built-in MY3D loader
 		/// like this: <c>SceneManager.Attributes.SetValue(SceneParameters.MY3D_TexturePath, "path/to/your/textures");</c>
@@ -127,7 +127,7 @@ namespace Scene {
 		/// </summary>
 		static property String^ OBJ_IgnoreMaterialFiles { String^ get() { return gcnew String(OBJ_LOADER_IGNORE_MATERIAL_FILES); }}
 
-		[ObsoleteAttribute("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
+		[Obsolete("Deprecated, use IMeshLoader::getMeshTextureLoader()->setTexturePath instead. LIME_NO_SUPPORT_YET")]
 		/// <summary>
 		/// Deprecated. Was used for changing the texture path of the built-in obj loader
 		/// like this: <c>SceneManager.Attributes.SetValue(SceneParameters.OBJ_TexturePath, "path/to/your/textures");</c>
