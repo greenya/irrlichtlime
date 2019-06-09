@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -23,13 +20,13 @@ namespace _18.SplitScreen
 		// cameras
 		static CameraSceneNode[] camera = new CameraSceneNode[4] { null, null, null, null };
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(ResX, ResY), 32, fullScreen);
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(ResX, ResY), 32, fullScreen);
 			if (device == null)
 				return;
 
@@ -129,29 +126,27 @@ namespace _18.SplitScreen
 			return false;
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 }
