@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
-using IrrlichtLime.Core;
 using IrrlichtLime.Video;
-using IrrlichtLime.Scene;
-using IrrlichtLime.GUI;
 
 namespace L01.TexturePainting
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			DriverSettingsForm driverSettings = new DriverSettingsForm(
 				"Texture paint example",

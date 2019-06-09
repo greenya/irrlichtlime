@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
@@ -125,7 +120,7 @@ namespace L01.TexturePainting
 
 						if (p.X < texture.Size.Width &&
 							p.Y < texture.Size.Height &&
-							t.Lock(TextureLockMode.WriteOnly))	//note: only WriteOnly seems to work for OpenGL in Debug due to a bug. TODO: report
+							t.Lock(TextureLockMode.WriteOnly))
 						{
 							t.SetLine(oldMouseX, oldMouseY, p.X, p.Y, new Color(255, 0, 0));
 							t.Unlock(true);

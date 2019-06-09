@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -65,8 +62,6 @@ namespace L01.TexturePainting
 			foreach (DriverType t in Enum.GetValues(typeof(DriverType)))
 			{
 				if (t == DriverType.Null)
-					continue;
-				if (t == DriverType.Direct3D8)	//D3D8 doesn't exist anymore
 					continue;
 
 				int i = guiDriverType.AddItem(t.ToString(), (int)t);
