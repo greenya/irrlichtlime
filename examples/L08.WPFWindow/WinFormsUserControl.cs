@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using IrrlichtLime;
@@ -142,7 +137,7 @@ namespace L08.WPFWindow
 
 			while (device.Run())
 			{
-				driver.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Stencil);
+				driver.BeginScene(ClearBufferFlag.Depth);
 				
 				smgr.DrawAll();
 				gui.DrawAll();
