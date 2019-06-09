@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using IrrlichtLime;
@@ -20,9 +16,9 @@ namespace L02.WinFormsWindow
 		// we are extending IrrlichtCreationParameters with our custom settings
 		class DeviceSettings : IrrlichtCreationParameters
 		{
-			public Color? BackColor; // "null" for skybox
+			public Color BackColor; // "null" for skybox
 			
-			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color? bc, bool vs)
+			public DeviceSettings(IntPtr hh, DriverType dt, byte aa, Color bc, bool vs)
 			{
 				WindowID = hh;
 				DriverType = dt;
@@ -49,7 +45,7 @@ namespace L02.WinFormsWindow
 
 			// fill combobox with all available video drivers, except Null
 			foreach (DriverType v in Enum.GetValues(typeof(DriverType)))
-				if (v != DriverType.Null && v != DriverType.Direct3D8)
+				if (v != DriverType.Null)
 					comboBoxVideoDriver.Items.Add(v);
 		}
 
@@ -70,14 +66,11 @@ namespace L02.WinFormsWindow
 			}
 
 			// collect settings and start background worker with these settings
-            Color? backcolor = null;
-            if (comboBoxBackground.SelectedIndex != 0)
-                backcolor = new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF);
 			DeviceSettings s = new DeviceSettings(
 				checkBoxUseSeparateWindow.Checked ? IntPtr.Zero : panelRenderingWindow.Handle,
 				(DriverType)comboBoxVideoDriver.SelectedItem,
 				(byte)(comboBoxAntiAliasing.SelectedIndex == 0 ? 0 : Math.Pow(2, comboBoxAntiAliasing.SelectedIndex)),
-				backcolor,
+				comboBoxBackground.SelectedIndex == 0 ? null : new Color(comboBoxBackground.SelectedIndex == 1 ? 0xFF000000 : 0xFFFFFFFF),
 				checkBoxUseVSync.Checked
 			);
 
@@ -134,28 +127,18 @@ namespace L02.WinFormsWindow
 			// draw all
 
 			int lastFPS = -1;
-            int maxFPS = 50;
-            int averageFrameLenght = 1000 / maxFPS;
 
 			while (dev.Run())
 			{
-                long frameStart = dev.Timer.Time;
 				if (settings.BackColor == null)
 					// indeed, we do not need to spend time on cleaning color buffer if we use skybox
-					drv.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Stencil);
+					drv.BeginScene(ClearBufferFlag.Depth);
 				else
-					drv.BeginScene(ClearBufferFlag.All, (Color)settings.BackColor);
+					drv.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Color, settings.BackColor);
 
 				smgr.DrawAll();
 				dev.GUIEnvironment.DrawAll();
 				drv.EndScene();
-
-                dev.Timer.Tick();
-                long frameEnd = dev.Timer.Time;
-                long frameLenght = frameEnd - frameStart;
-
-                if (frameLenght < averageFrameLenght)
-                    dev.Yield();
 
 				int fps = drv.FPS;
 				if (lastFPS != fps)
