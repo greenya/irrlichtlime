@@ -16,6 +16,7 @@
 - Fixed camera gravity value in 07.Collision.
 - Fixed room specular color in 08.SpecialFX.
 - Fixed crash (for Direct3D9) and console error spam (for OpenGL) when don't using high level shaders in 10.Shaders.
+- Removed 20.ManagedLights and 24.CursorControl due to lack of support.
 - Removed unused media: d3d8.psh and d3d8.vsh.
 
 ## Changes in r538 (final commit on SF)
