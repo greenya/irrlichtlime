@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Scene;
 using IrrlichtLime.Video;
 using IrrlichtLime.Core;
@@ -12,7 +7,7 @@ namespace L03.RGBSwirl
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(800, 600));
 			device.SetWindowCaption("RGB swirl example - Irrlicht Lime");

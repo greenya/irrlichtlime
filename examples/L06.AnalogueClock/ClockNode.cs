@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;

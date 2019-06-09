@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
@@ -12,7 +7,7 @@ namespace L06.AnalogueClock
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9);
 			device.SetWindowCaption("Analogue Clock - Irrlicht Lime");

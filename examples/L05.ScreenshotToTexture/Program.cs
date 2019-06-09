@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms; // for SystemInformation only
 using System.IO;
@@ -17,7 +13,7 @@ namespace L05.ScreenshotToTexture
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			IrrlichtDevice device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(512, 512));
 			device.SetWindowCaption("Screenshot to texture - Irrlicht Lime");
@@ -44,7 +40,7 @@ namespace L05.ScreenshotToTexture
 				Texture t = getDesktopTexture(device);
 				cube.SetMaterialTexture(0, t);
 
-				device.VideoDriver.BeginScene(ClearBufferFlag.Depth | ClearBufferFlag.Stencil);
+				device.VideoDriver.BeginScene(ClearBufferFlag.Depth);
 
 				device.VideoDriver.Draw2DImage(t, device.VideoDriver.ViewPort, new Recti(new Vector2Di(0), t.Size));
 				device.VideoDriver.Draw2DRectangle(device.VideoDriver.ViewPort, new IrrlichtLime.Video.Color(0, 0, 0, 160));
