@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
-using IrrlichtLime;
 
 using BulletSharp;
 
@@ -29,11 +26,8 @@ namespace L11.BulletSharpTest
 		List<CollisionShape> bulletShapes = new List<CollisionShape>();
 
 		Thread simThread = null;
-        readonly object simLock = new Object();
 		float simTimeStep = 0;
-        volatile float lastTimeStep = 0;
-        private volatile bool stopSim;
-        private volatile bool simWaiting;
+
 		public void Setup(Vector3Df gravity)
 		{
 			bulletCollisionConfiguration = new DefaultCollisionConfiguration();
@@ -46,15 +40,8 @@ namespace L11.BulletSharpTest
 
 		public void Drop()
 		{
-            stopSim = true;
-            if (simThread != null)
-            {
-                lock (simLock)
-                {
-                    Monitor.Pulse(simLock);
-                }
-                simThread.Join();
-            }
+			if (simThread != null)
+				simThread.Join();
 
 			for (int i = bulletWorld.NumConstraints - 1; i >= 0; i--)
 			{
@@ -85,93 +72,73 @@ namespace L11.BulletSharpTest
 			bulletCollisionConfiguration.Dispose();
 		}
 
-		public void AddShape(Shape shape, SceneNode node, float mass = 0.0f, bool sleeping = true, Vector3Df? startImpulse = null)
+		public void AddShape(Shape shape, SceneNode node, float mass = 0.0f, bool sleeping = true, Vector3Df startImpulse = null)
 		{
 			CollisionShape collShape = bulletGetCollisionShape(shape, node);
 
-			//if (simThread != null)
-				//simThread.Join();
-            lock (simLock)
-            {
-                bulletShapes.Add(collShape);
+			if (simThread != null)
+				simThread.Join();
 
-                RigidBody body = bulletCreateRigidBody(
-                    mass,
-                    BulletSharp.Matrix.Translation(node.Position.X, node.Position.Y, node.Position.Z),
-                    collShape);
+			bulletShapes.Add(collShape);
 
-                if (sleeping)
-                    body.ForceActivationState(ActivationState.IslandSleeping);
+			RigidBody body = bulletCreateRigidBody(
+				mass,
+				BulletSharp.Matrix.Translation(node.Position.X, node.Position.Y, node.Position.Z),
+				collShape);
 
-                if (startImpulse != null)
-                    body.ApplyCentralImpulse(new Vector3(startImpulse.Value.X, startImpulse.Value.Y, startImpulse.Value.Z));
+			if (sleeping)
+				body.ForceActivationState(ActivationState.IslandSleeping);
 
-                body.SetSleepingThresholds(body.LinearSleepingThreshold * 20, body.AngularSleepingThreshold * 20);
+			if (startImpulse != null)
+				body.ApplyCentralImpulse(new Vector3(startImpulse.X, startImpulse.Y, startImpulse.Z));
 
-                body.UserObject = node;
-            }
+			body.SetSleepingThresholds(body.LinearSleepingThreshold * 20, body.AngularSleepingThreshold * 20);
+
+			body.UserObject = node;
 		}
 
 		public bool StepSimulation(float timeStep)
 		{
 			simTimeStep += timeStep;
-            lastTimeStep = timeStep;
 
-            if (simThread != null)
-            {
-                if (simWaiting)
-                {
-                    lock(simLock)
-                        Monitor.Pulse(simLock);
-                    return true;
-                }
-                return false;
-            }
+			if (simThread != null)
+				return false;
 
-            stopSim = false;
-            
-			simThread = new System.Threading.Thread(new ThreadStart(delegate()
+			simThread = new Thread(new ParameterizedThreadStart(delegate (object t)
 			{
-                while (!stopSim)
-                {
-                    lock (simLock)
-                    {
-                        float s = lastTimeStep;
-                        if (s > 1.0f / 60)
-                            s = 1.0f / 60;
+				float s = (float)t;
+				if (s > 1.0f / 60)
+					s = 1.0f / 60;
 
-                        bulletWorld.StepSimulation(s);
+				bulletWorld.StepSimulation(s);
 
-                        IrrlichtLime.Core.Matrix m = new IrrlichtLime.Core.Matrix();
-                        AlignedCollisionObjectArray collObjects = bulletWorld.CollisionObjectArray;
-                        for (int i = collObjects.Count - 1; i >= 0; i--)
-                        {
-                            CollisionObject collObject = collObjects[i];
-                            if (collObject.IsStaticObject || !collObject.IsActive)
-                                continue;
+				IrrlichtLime.Core.Matrix m = new IrrlichtLime.Core.Matrix();
+				AlignedCollisionObjectArray collObjects = bulletWorld.CollisionObjectArray;
+				for (int i = collObjects.Count - 1; i >= 0; i--)
+				{
+					CollisionObject collObject = collObjects[i];
+					if (collObject.IsStaticObject || !collObject.IsActive)
+						continue;
 
-                            m.SetElementArray(collObject.WorldTransform.ToArray());
+					m.SetElementArray(collObject.WorldTransform.ToArray());
 
-                            SceneNode n = collObject.UserObject as SceneNode;
-                            n.Position = m.Translation;
-                            n.Rotation = m.Rotation;
+					SceneNode n = collObject.UserObject as SceneNode;
+					n.Position = m.Translation;
+					n.Rotation = m.Rotation;
 
-                            if (m.Translation.Y < -40000)
-                            {
-                                n.SceneManager.AddToDeletionQueue(n);
-                                bulletWorld.RemoveCollisionObject(collObject);
-                                collObject.Dispose();
-                            }
-                        }
-                        simWaiting = true;
-                        Monitor.Wait(simLock);
-                        simWaiting = false;
-                    }
-                }
-				//simThread = null;
+					if (m.Translation.Y < -40000)
+					{
+						n.SceneManager.AddToDeletionQueue(n);
+						bulletWorld.RemoveCollisionObject(collObject);
+						collObject.Dispose();
+					}
+				}
+
+				simThread = null;
 			}));
 
-			simThread.Start();
+			simThread.Start(simTimeStep);
+			simTimeStep = 0;
 
 			return true;
 		}
@@ -202,13 +169,13 @@ namespace L11.BulletSharpTest
 						for (int i = 0; i < meshNode.Mesh.MeshBufferCount; i++)
 						{
 							MeshBuffer b = meshNode.Mesh.GetMeshBuffer(i);
-							NativeArray<ushort> inds = b.GetIndices16Bit();
-							NativeArray<Vertex3DTTCoords> verts = b.GetVertices<Vertex3DTTCoords>();
+							ushort[] inds = b.Indices as ushort[];
+							Vertex3DTTCoords[] verts = b.Vertices as Vertex3DTTCoords[];
 
 							if (inds == null || verts == null)
 								throw new ArgumentException();
 
-							for (int j = 0; j < inds.Count; j += 3)
+							for (int j = 0; j < inds.Length; j += 3)
 							{
 								Vector3Df v0 = verts[inds[j + 0]].Position;
 								Vector3Df v1 = verts[inds[j + 1]].Position;
