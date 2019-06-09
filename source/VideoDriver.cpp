@@ -1567,47 +1567,33 @@ void VideoDriver::SetMinHardwareBufferVertexCount(int count)
 	m_VideoDriver->setMinHardwareBufferVertexCount(count);
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color)
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil)
 {
-	LIME_ASSERT(color != nullptr);
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer, *color->m_NativeValue);
+	LIME_ASSERT(clearColor != nullptr);
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), (u16)clearFlag, *clearColor->m_NativeValue, clearDepth, clearStencil);
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer)
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth)
 {
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer, clearZBuffer);
+	LIME_ASSERT(clearColor != nullptr);
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), (u16)clearFlag, *clearColor->m_NativeValue, clearDepth);
 }
 
-bool VideoDriver::SetRenderTarget(Texture^ texture, bool clearBackBuffer)
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor)
 {
-	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), clearBackBuffer);
+	LIME_ASSERT(clearColor != nullptr);
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), (u16)clearFlag, *clearColor->m_NativeValue);
+}
+
+bool VideoDriver::SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag)
+{
+	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture), (u16)clearFlag);
 }
 
 bool VideoDriver::SetRenderTarget(Texture^ texture)
 {
 	return m_VideoDriver->setRenderTarget(LIME_SAFEREF(texture, m_Texture));
 }
-
-//bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color^ color)
-//{
-//	LIME_ASSERT(color != nullptr);
-//	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer, *color->m_NativeValue);
-//}
-//
-//bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer)
-//{
-//	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget, clearZBuffer);
-//}
-//
-//bool VideoDriver::SetRenderTarget(RenderTarget target, bool clearTarget)
-//{
-//	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target, clearTarget);
-//}
-//
-//bool VideoDriver::SetRenderTarget(RenderTarget target)
-//{
-//	return m_VideoDriver->setRenderTarget((E_RENDER_TARGET)target);
-//}
 
 void VideoDriver::SetTextureCreationFlag(TextureCreationFlag flag, bool enabled)
 {

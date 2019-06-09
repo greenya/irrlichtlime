@@ -261,15 +261,65 @@ public:
 
 	void SetMinHardwareBufferVertexCount(int count);
 
-	//bool setRenderTarget (const core::array< video::IRenderTarget > &texture, bool clearBackBuffer=true, bool clearZBuffer=true, SColor color=video::SColor(0, 0, 0, 0));
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer, Color^ color);
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer, bool clearZBuffer);
-	bool SetRenderTarget(Texture^ texture, bool clearBackBuffer);
+	/// <summary>Sets a new render target.
+	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
+	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
+	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
+	/// </summary>
+	/// <param name="texture">New render target. Must be a texture created with <c>AddRenderTargetTexture()</c>.
+	/// If set to <c>null</c>, it sets the previous render target which was set before the last method call.</param>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is black.</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <param name="clearStencil">The clear value for the stencil buffer. Default is 0.</param>
+	/// <returns>True if successful and false if not.</returns>
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil);
+
+	/// <summary>Sets a new render target.
+	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
+	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
+	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
+	/// </summary>
+	/// <param name="texture">New render target. Must be a texture created with <c>AddRenderTargetTexture()</c>.
+	/// If set to <c>null</c>, it sets the previous render target which was set before the last method call.</param>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is black.</param>
+	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
+	/// <returns>True if successful and false if not.</returns>
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth);
+
+	/// <summary>Sets a new render target.
+	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
+	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
+	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
+	/// </summary>
+	/// <param name="texture">New render target. Must be a texture created with <c>AddRenderTargetTexture()</c>.
+	/// If set to <c>null</c>, it sets the previous render target which was set before the last method call.</param>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <param name="clearColor">The clear color for the color buffer. Default is black.</param>
+	/// <returns>True if successful and false if not.</returns>
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor);
+
+	/// <summary>Sets a new render target.
+	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
+	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
+	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
+	/// </summary>
+	/// <param name="texture">New render target. Must be a texture created with <c>AddRenderTargetTexture()</c>.
+	/// If set to <c>null</c>, it sets the previous render target which was set before the last method call.</param>
+	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
+	/// <returns>True if successful and false if not.</returns>
+	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag);
+
+	/// <summary>Sets a new render target.
+	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
+	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
+	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
+	/// </summary>
+	/// <param name="texture">New render target. Must be a texture created with <c>AddRenderTargetTexture()</c>.
+	/// If set to <c>null</c>, it sets the previous render target which was set before the last method call.</param>
+	/// <returns>True if successful and false if not.</returns>
 	bool SetRenderTarget(Texture^ texture);
-	//bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer, Color^ color);
-	//bool SetRenderTarget(RenderTarget target, bool clearTarget, bool clearZBuffer);
-	//bool SetRenderTarget(RenderTarget target, bool clearTarget);
-	//bool SetRenderTarget(RenderTarget target);
 
 	void SetTextureCreationFlag(TextureCreationFlag flag, bool enabled);
 
