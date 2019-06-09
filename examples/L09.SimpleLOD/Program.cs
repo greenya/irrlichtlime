@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -17,15 +15,15 @@ namespace L09.SimpleLOD
 		static bool isLabelMode = false;
 		static bool isStatsMode = false;
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			int lodItemCount = AskUserForLODItemCount();
+			int lodItemCount = AskForLODItemCount();
 
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(800, 600));
+			device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(800, 600));
 			if (device == null)
 				return;
 
@@ -271,7 +269,7 @@ namespace L09.SimpleLOD
 			return false;
 		}
 
-		static int AskUserForLODItemCount()
+		static int AskForLODItemCount()
 		{
 			Console.Write("Enter number of planets to generate (recommended value is 5000): ");
 			string s = Console.ReadLine();
@@ -282,29 +280,27 @@ namespace L09.SimpleLOD
 			return i;
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 	}
 
@@ -392,13 +388,13 @@ namespace L09.SimpleLOD
 				// which higher when current LOD is higher - which also means that for now we are
 				// a distant object and it is less possible that we will need to change LOD at all;
 				// but close objects (with small LOD value, like 0, 1 or 2) we need to pick quite short time.
-				// This is OK if it will be really short, because this objects are too close and indeed may
+				// This is OK if it will be really short, because these objects are too close and indeed may
 				// change their LOD value very soon, however, we also understand, that in general all the objects
 				// takes very large area, so in general we will have something like less than 2% with LOD level 0, 1 or 2,
 				// all other will get higher LOD, and about more than 50% will have maximum LOD value -- they take more time to recalc
 				// their LOD than to draw them, so we need to calc their LOD less frequent.
-				// p.s.: we also uses that fact, that we do not give ability to user to reach oposite side of our world in 1 frame,
-				// the speed which user uses for movement is slow in general.
+				// p.s.: we also use the fact, that we do not give user ability to reach oposite side of our world in 1 frame,
+				// the speed at which user moves is slow in general.
 
 				nextUpdateAt = time + updateIntervals[currentLOD];
 			}

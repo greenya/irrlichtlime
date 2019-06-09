@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 
 using IrrlichtLime;
@@ -230,8 +227,7 @@ namespace L10.ImageBrowser
 			node.SetMaterialTexture(0, t);
 			irrDevice.Unlock();
 
-			if (OnTextureLoaded != null)
-				OnTextureLoaded(node, t, si);
+			OnTextureLoaded?.Invoke(node, t, si);
 
 			node.Drop();
 		}

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -38,8 +35,8 @@ namespace L10.ImageBrowser
 		static SceneNode selectedNode;
 		static Dictionary<int, string> previewPlateInfo = new Dictionary<int, string>();
 
-		[STAThreadAttribute]
-		static void Main(string[] args)
+		[STAThread]
+		static void Main()
 		{
 			irr = new IrrDevice();
 			irr.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 600));
@@ -354,7 +351,7 @@ namespace L10.ImageBrowser
 			v.Draw2DLine(v.ScreenSize.Width - 26, 80, v.ScreenSize.Width - 26, v.ScreenSize.Height - 80, new Color(0x88446699));
 
 			float y = (v.ScreenSize.Height - 80 - 80 - 40) * (1.0f - p);
-			Recti r = new Recti(v.ScreenSize.Width - 30, (int)y + 80, v.ScreenSize.Width - 23, (int)y + 80 + 40);
+			Recti r = new Recti(v.ScreenSize.Width - 29, (int)y + 80, v.ScreenSize.Width - 22, (int)y + 80 + 40);
 			v.Draw2DRectangle(r, new Color(0x88446699));
 		}
 
@@ -381,7 +378,6 @@ namespace L10.ImageBrowser
 			Recti r = new Recti(v.ScreenSize.Width - 140, 20, v.ScreenSize.Width - 24, 30);
 			v.Draw2DRectangleOutline(r, new Color(0x88446699));
 
-			r.Inflate(-4, -4);
 			r.LowerRightCorner = new Vector2Di(r.UpperLeftCorner.X + (int)(r.Width * p), r.LowerRightCorner.Y);
 			v.Draw2DRectangle(r, new Color(0x88446699));
 		}

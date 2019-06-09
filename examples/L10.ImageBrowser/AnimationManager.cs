@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
 
@@ -19,7 +15,7 @@ namespace L10.ImageBrowser
 			this.irrDevice = irrDevice;
 		}
 
-		public void Add(SceneNode node, uint duration, Vector3Df? targetPosition, Vector3Df? targetRotation, Vector3Df? targetScale)
+		public void Add(SceneNode node, uint duration, Vector3Df targetPosition, Vector3Df targetRotation, Vector3Df targetScale)
 		{
 			Remove(node);
 
@@ -33,19 +29,19 @@ namespace L10.ImageBrowser
 			
 			if (targetPosition != null)
 			{
-				a.TargetPosition = (Vector3Df)targetPosition;
+				a.TargetPosition = targetPosition;
 				a.StartPosition = node.Position;
 			}
 
 			if (targetRotation != null)
 			{
-				a.TargetRotation = (Vector3Df)targetRotation;
+				a.TargetRotation = targetRotation;
 				a.StartRotation = node.Rotation;
 			}
 
 			if (targetScale != null)
 			{
-				a.TargetScale = (Vector3Df)targetScale;
+				a.TargetScale = targetScale;
 				a.StartScale = node.Scale;
 			}
 
