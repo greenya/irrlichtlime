@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -12,16 +11,16 @@ namespace L07.FastStaticRendering
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			int N = AskUserForN();
 			bool B = AskUserForB();
 
-			DriverType driverType;
-			if (!AskUserForDriver(out driverType))
+			DriverType? driverType = AskForDriver();
+			if (!driverType.HasValue)
 				return;
 
-			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType, new Dimension2Di(800, 600));
+			IrrlichtDevice device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(800, 600));
 			if (device == null)
 				return;
 
@@ -37,11 +36,8 @@ namespace L07.FastStaticRendering
 			while (device.Run())
 			{
 				device.VideoDriver.BeginScene();
-
 				device.SceneManager.DrawAll();
-
 				batch.Draw();
-
 				device.VideoDriver.EndScene();
 
 				device.SetWindowCaption(
@@ -77,29 +73,27 @@ namespace L07.FastStaticRendering
 			return k.KeyChar == '1';
 		}
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static DriverType? AskForDriver()
 		{
-			driverType = DriverType.Null;
-
 			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
+				" (a) OpenGL\n" +
+				" (b) Direct3D 9.0c\n" +
+				" (c) Burning's Software Renderer\n" +
+				" (d) Software Renderer\n" +
+				" (e) NullDevice\n" +
+				" (otherKey) exit\n\n");
 
 			ConsoleKeyInfo i = Console.ReadKey();
 
 			switch (i.Key)
 			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
+				case ConsoleKey.A: return DriverType.OpenGL;
+				case ConsoleKey.B: return DriverType.Direct3D9;
+				case ConsoleKey.C: return DriverType.BurningsVideo;
+				case ConsoleKey.D: return DriverType.Software;
+				case ConsoleKey.E: return DriverType.Null;
+				default: return null;
 			}
-
-			return true;
 		}
 
 		//Cache the process object as it is quite heavy...
@@ -120,7 +114,7 @@ namespace L07.FastStaticRendering
 		IrrlichtDevice device;
 		Material material;
 		Matrix matrix;
-		StaticMesh mesh;
+		Mesh mesh;
 
 		public MeshBuffersBatch(IrrlichtDevice device, int N, bool B)
 		{
@@ -129,7 +123,7 @@ namespace L07.FastStaticRendering
 			material.Lighting = false;
 			matrix = new Matrix();
 
-			mesh = StaticMesh.Create();
+			mesh = Mesh.Create();
 
 			if (B)
 				generateMultiple16bitMeshbuffers(N);
@@ -190,7 +184,7 @@ namespace L07.FastStaticRendering
 					MeshBuffer mb = MeshBuffer.Create(VertexType.Standard, IndexType._16Bit);
 					mb.SetHardwareMappingHint(HardwareMappingHint.Static, HardwareBufferType.VertexAndIndex);
 					//mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());
-					mb.Append(verticesChunk, indicesChunk);
+					mb.Append(verticesChunk.ToArray(), indicesChunk.ToArray());
 					mb.RecalculateBoundingBox();
 					mesh.AddMeshBuffer(mb);
 					mb.Drop();
@@ -236,20 +230,25 @@ namespace L07.FastStaticRendering
 			// ask Irrlicht to generate cube mesh for us (we use it like a template)
 
 			Mesh cubeMesh = device.SceneManager.GeometryCreator.CreateCubeMesh(new Vector3Df(cubeSide));
-			NativeArray<ushort> cubeIndices = cubeMesh.GetMeshBuffer(0).GetIndices16Bit();
-			NativeArray<Vertex3D> cubeVertices = cubeMesh.GetMeshBuffer(0).GetVertices<Vertex3D>();
+			ushort[] cubeIndices = cubeMesh.GetMeshBuffer(0).Indices as ushort[];
+			Vertex3D[] cubeVertices = cubeMesh.GetMeshBuffer(0).Vertices as Vertex3D[];
+			cubeMesh.Drop();
 
 			// generate cubes
 
 			device.Logger.Log("Generating " + N * N * N + " cubes...");
 
-			vertices = new Vertex3D[N * N * N * cubeVertices.Count];
-			indices = new uint[N * N * N * cubeIndices.Count];
+			vertices = new Vertex3D[N * N * N * cubeVertices.Length];
+			indices = new uint[N * N * N * cubeIndices.Length];
 
 			int verticesIndex = 0;
 			int indicesIndex = 0;
-			int colorBase = (255 - cubeVertices.Count) / N;
+			int colorBase = (255 - cubeVertices.Length) / N;
 			float cubePosOffset = 2.0f * cubeSide;
+
+			// instead of creating N*N*N objects of (color and vector) we are going to reuse this temp values
+			Color tempColor = new Color();
+			Vector3Df tempVector = new Vector3Df();
 
 			for (int i = 0; i < N; i++)
 			{
@@ -259,15 +258,17 @@ namespace L07.FastStaticRendering
 					{
 						// add indices
 						uint firstfreeIndex = (uint)verticesIndex;
-						for (int l = 0; l < cubeIndices.Count; l++)
+						for (int l = 0; l < cubeIndices.Length; l++)
 							indices[indicesIndex++] = firstfreeIndex + cubeIndices[l];
 
 						// add vertices
-						for (int l = 0; l < cubeVertices.Count; l++)
+						for (int l = 0; l < cubeVertices.Length; l++)
 						{
-							Vertex3D v = cubeVertices[l];
-							v.Color = new Color(i * colorBase + l, j * colorBase + l, k * colorBase + l);
-							v.Position += new Vector3Df(i, j, k) * cubePosOffset;
+							Vertex3D v = new Vertex3D(cubeVertices[l]);
+							tempColor.Set(i * colorBase + l, j * colorBase + l, k * colorBase + l);
+							v.Color = tempColor;
+							tempVector.Set(i * cubePosOffset, j * cubePosOffset, k * cubePosOffset);
+							v.Position += tempVector;
 							vertices[verticesIndex++] = v;
 						}
 					}
@@ -281,8 +282,6 @@ namespace L07.FastStaticRendering
 				if ((i & 0xf) == 0xf)
 					GC.Collect();
 			}
-
-			cubeMesh.Drop();	//free now, because we don't access cubeVertices and cubeIndices anymore
 		}
 	}
 }
