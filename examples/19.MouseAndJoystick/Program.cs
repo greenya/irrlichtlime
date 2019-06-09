@@ -53,7 +53,7 @@ namespace _19.MouseAndJoystick
 				logger.Log("Joystick support is not enabled.");
 			}
 
-			device.SetWindowCaption("Mouse and joystick - Irrlicht Lime - " + joystickList.Count.ToString() + " joystick(s)");
+			device.SetWindowCaption("Mouse and joystick - Irrlicht Engine - " + joystickList.Count.ToString() + " joystick(s)");
 
 			// Create an arrow mesh and move it around either with the joystick axis/hat,
 			// or make it follow the mouse pointer (when no joystick movement).

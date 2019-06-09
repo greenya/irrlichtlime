@@ -21,7 +21,7 @@ namespace _23.MeshHandling
 				return;
 
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
-			device.SetWindowCaption("Mesh handling - Irrlicht Lime");
+			device.SetWindowCaption("Mesh handling - Irrlicht Engine - press [1], [2], [3] to regenerate mesh");
 			VideoDriver driver = device.VideoDriver;
 			SceneManager scene = device.SceneManager;
 
@@ -310,14 +310,14 @@ namespace _23.MeshHandling
 		int height;
 		float scale;
 
-		public StaticMesh Mesh { get; private set; }
+		public Mesh Mesh { get; private set; }
 
 		public HeightMesh()
 		{
 			width = 0;
 			height = 0;
 			scale = 1.0f;
-			Mesh = StaticMesh.Create();
+			Mesh = Mesh.Create();
 		}
 
 		public void Drop()
@@ -349,6 +349,7 @@ namespace _23.MeshHandling
 				addStrip(map, cf, y0, y1);
 			}
 
+			Mesh.SetDirty();
 			Mesh.RecalculateBoundingBox();
 		}
 

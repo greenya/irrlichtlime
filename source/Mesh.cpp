@@ -87,6 +87,11 @@ void Mesh::SetDirty(HardwareBufferType buffer)
 	m_Mesh->setDirty((scene::E_BUFFER_TYPE)buffer);
 }
 
+void Mesh::SetDirty()
+{
+	m_Mesh->setDirty();
+}
+
 void Mesh::SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer)
 {
 	m_Mesh->setHardwareMappingHint((scene::E_HARDWARE_MAPPING)mappingHint, (scene::E_BUFFER_TYPE)buffer);

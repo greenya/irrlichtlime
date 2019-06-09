@@ -28,7 +28,15 @@ public:
 	void RemoveMeshBuffer(int index);
 	void RemoveMeshBuffer(int index, int count);
 
+	/// <summary>Flag the meshbuffer as changed, reloads hardware buffers.
+	/// This method has to be called every time the vertices or indices have changed. Otherwise, changes won't be updated on the GPU in the next render cycle.</summary>
+	/// <param name="buffer">Type of buffer to flag as changed. Default: <see cref="HardwareBufferType::VertexAndIndex"/>.</param>
 	void SetDirty(HardwareBufferType buffer);
+
+	/// <summary>Flag the meshbuffer as changed, reloads hardware buffers.
+	/// This method has to be called every time the vertices or indices have changed. Otherwise, changes won't be updated on the GPU in the next render cycle.</summary>
+	void SetDirty();
+
 	void SetHardwareMappingHint(HardwareMappingHint mappingHint, HardwareBufferType buffer);
 	void SetMaterialFlag(Video::MaterialFlag flag, bool newvalue);
 
