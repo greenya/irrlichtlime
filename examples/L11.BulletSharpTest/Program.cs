@@ -26,11 +26,7 @@ namespace L11.BulletSharpTest
 		{
 			// setup Irrlicht
 
-			DriverType? driverType = AskForDriver();
-			if (!driverType.HasValue)
-				return;
-
-			device = IrrlichtDevice.CreateDevice(driverType.Value, new Dimension2Di(1024, 768));
+			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 768));
 			if (device == null)
 				return;
 
@@ -210,29 +206,6 @@ namespace L11.BulletSharpTest
 			}
 
 			return false;
-		}
-
-		static DriverType? AskForDriver()
-		{
-			Console.Write("Please select the driver you want for this example:\n" +
-				" (a) OpenGL\n" +
-				" (b) Direct3D 9.0c\n" +
-				" (c) Burning's Software Renderer\n" +
-				" (d) Software Renderer\n" +
-				" (e) NullDevice\n" +
-				" (otherKey) exit\n\n");
-
-			ConsoleKeyInfo i = Console.ReadKey();
-
-			switch (i.Key)
-			{
-				case ConsoleKey.A: return DriverType.OpenGL;
-				case ConsoleKey.B: return DriverType.Direct3D9;
-				case ConsoleKey.C: return DriverType.BurningsVideo;
-				case ConsoleKey.D: return DriverType.Software;
-				case ConsoleKey.E: return DriverType.Null;
-				default: return null;
-			}
 		}
 	}
 }
