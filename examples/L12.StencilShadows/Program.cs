@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Video;
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
@@ -30,11 +25,11 @@ namespace L12.StencilShadows
 		static bool useShadowsQuakeLevel = false;
 		static bool useFlashlight = false;
 
-		static void Main(string[] args)
+		static void Main()
 		{
 			// setup Irrlicht
 
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 768), 32, false, true);
+			device = IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(1024, 768), 32, false, true);
 			if (device == null)
 				return;
 
@@ -45,7 +40,6 @@ namespace L12.StencilShadows
 			SceneManager scene = device.SceneManager;
 
 			GUIFont statsFont = device.GUIEnvironment.GetFont("../../media/fontlucida.png");
-			Material statsMaterial = Material.IdentityNoLighting;
 
 			cameraNode = scene.AddCameraSceneNodeFPS();
 			cameraNode.FarValue = 20000;
@@ -135,8 +129,6 @@ namespace L12.StencilShadows
 					shadows.DrawShadowVolume(driver);
 
 				// display stats
-
-				device.VideoDriver.SetMaterial(statsMaterial);
 
 				driver.Draw2DRectangle(new Recti(10, 10, 150, 220), new Color(0x7f000000));
 

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
 using IrrlichtLime.Video;
-using IrrlichtLime;
 
 namespace L12.StencilShadows
 {
@@ -19,8 +16,8 @@ namespace L12.StencilShadows
 		float shadowInfinityRange = 1000.0f;
 		float shadowNearMultiplier = 1.0f / 40;
 
-		List<Vector3Df> visibleShadowVerticesBuffer = null;
-		object visibleShadowVerticesBufferLocker = new object();
+		readonly List<Vector3Df> visibleShadowVerticesBuffer = new List<Vector3Df>();
+		readonly object visibleShadowVerticesBufferLocker = new object();
 
 		Thread buildThread = null;
 
@@ -79,8 +76,7 @@ namespace L12.StencilShadows
 		{
 			lock (visibleShadowVerticesBufferLocker)
 			{
-				if (visibleShadowVerticesBuffer == null ||
-					visibleShadowVerticesBuffer.Count == 0)
+				if (visibleShadowVerticesBuffer.Count == 0)
 					return;
 
 				driver.SetTransform(TransformationState.World, Matrix.Identity);
@@ -124,7 +120,7 @@ namespace L12.StencilShadows
 			{
 				lock (visibleShadowVerticesBufferLocker)
 				{
-					return visibleShadowVerticesBuffer != null ? visibleShadowVerticesBuffer.Count : 0;
+					return visibleShadowVerticesBuffer.Count;
 				}
 			}
 		}
@@ -136,15 +132,7 @@ namespace L12.StencilShadows
 
 			buildThread = new Thread(new ThreadStart(delegate()
 			{
-				int va = 10000;
-
-				lock (visibleShadowVerticesBufferLocker)
-				{
-					if (visibleShadowVerticesBuffer != null)
-						va = visibleShadowVerticesBuffer.Count;
-				}
-
-				List<Vector3Df> v = new List<Vector3Df>(va);
+				List<Vector3Df> v = new List<Vector3Df>();
 
 				foreach (SceneNode lightNode in lights)
 				{
@@ -173,11 +161,11 @@ namespace L12.StencilShadows
 
 				lock (visibleShadowVerticesBufferLocker)
 				{
-					if (visibleShadowVerticesBuffer != null)
-						visibleShadowVerticesBuffer.Clear();
-
-					visibleShadowVerticesBuffer = v;
+					visibleShadowVerticesBuffer.Clear();
+					visibleShadowVerticesBuffer.AddRange(v);
 				}
+
+				Thread.Sleep(300); // let GC actually do its work
 
 				buildThread = null;
 			}));
@@ -189,14 +177,14 @@ namespace L12.StencilShadows
 
 		void buildShadowVolume(List<Vector3Df> shadowVertices, MeshBuffer meshbuffer, Matrix matrix, Vector3Df light)
 		{
-			NativeArray<ushort> indices = meshbuffer.GetIndices16Bit();
+			ushort[] indices = meshbuffer.Indices as ushort[];
 
 			if (indices == null)
 				throw new ArgumentException();
 
 			Triangle3Df t123 = new Triangle3Df();
 
-			for (int i = 0; i < indices.Count; i += 3)
+			for (int i = 0; i < indices.Length; i += 3)
 			{
 				Vector3Df v1 = meshbuffer.GetPosition(indices[i]);
 				Vector3Df v2 = meshbuffer.GetPosition(indices[i + 1]);
@@ -229,11 +217,13 @@ namespace L12.StencilShadows
 				Vector3Df v3inf = v3 + v3Dir.Normalize() * shadowInfinityRange;
 
 				// top
+
 				shadowVertices.Add(v1near);
 				shadowVertices.Add(v2near);
 				shadowVertices.Add(v3near);
 
 				// bottom
+
 				shadowVertices.Add(v3inf);
 				shadowVertices.Add(v2inf);
 				shadowVertices.Add(v1inf);
