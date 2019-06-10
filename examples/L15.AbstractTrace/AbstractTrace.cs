@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Threading;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
 using IrrlichtLime.Video;
-using System.Diagnostics;
-using System.Threading;
 
 namespace L15.AbstractTrace
 {
 	class AbstractTrace
 	{
-		public const int GridDim = 500; // defines size of the grid: GridDim x GridDim; if we would place cube into each cell, that would be also cube count for single grid (but actual cube count is much much less)
-		public const int GridLayerCount = 200; // defines trace length and total number of distinct meshes
+		public const int GridDim = 400; // defines size of the grid: GridDim x GridDim; if we would place cube into each cell, that would be also cube count for single grid (but actual cube count is much much less)
+		public const int GridLayerCount = 150; // defines trace length and total number of distinct meshes
 		public const float CubeSize = 10;
 		private const int maxCubesPerBuffer = 3600; // maximum is 65536 div 8 (where 8 is number of vertices per cube); we could pick 8000+ and reduce number of meshbuffers, but on some video cards fully loaded meshbuffers works much slower
 
@@ -72,7 +69,7 @@ namespace L15.AbstractTrace
 			if (meshGeneratorThread != null)
 				return;
 
-			meshGeneratorThread = new System.Threading.Thread(new ParameterizedThreadStart(delegate(object i)
+			meshGeneratorThread = new Thread(new ParameterizedThreadStart(delegate(object i)
 			{
 				meshGeneratorThread_generateGrid();
 				meshGeneratorThread_generateMesh((int)i);
@@ -158,7 +155,7 @@ namespace L15.AbstractTrace
 			if (l.Mesh != null)
 				l.Mesh.Drop();
 
-			l.Mesh = StaticMesh.Create();
+			l.Mesh = Mesh.Create();
 
 			if (gridCubeCount > 0)
 			{
@@ -369,7 +366,7 @@ namespace L15.AbstractTrace
 			public bool MeshIsReady = false;
 			public int Generation = -1;
 			public int CubeCount = -1;
-			public StaticMesh Mesh = null;
+			public Mesh Mesh = null;
 			public Matrix Transform = new Matrix();
 		}
 	}
