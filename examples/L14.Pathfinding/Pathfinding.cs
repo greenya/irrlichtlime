@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 using IrrlichtLime.Video;
 using IrrlichtLime.Core;
-using System.Diagnostics;
 
 namespace L14.Pathfinding
 {
@@ -92,7 +89,7 @@ namespace L14.Pathfinding
 					break;
 
 				case CellType.Start:
-					if (cells[x, y] == -2 || cells[x, y] == -4) // don't change if its impassable or "finish"
+					if (cells[x, y] == -2 || cells[x, y] == -4) // don't change if its "impassable" or "finish"
 						return;
 
 					cells[StartX, StartY] = -1;
@@ -101,7 +98,7 @@ namespace L14.Pathfinding
 					break;
 
 				case CellType.Finish:
-					if (cells[x, y] == -2 || cells[x, y] == -3) // don't change if its impassable or "start"
+					if (cells[x, y] == -2 || cells[x, y] == -3) // don't change if its "impassable" or "start"
 						return;
 
 					cells[FinishX, FinishY] = -1;

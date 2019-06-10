@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Video;
@@ -16,9 +13,9 @@ namespace L14.Pathfinding
 		static Pathfinding pathfinding;
 		static bool workMode = true;
 
-		static void Main(string[] args)
+		static void Main()
 		{
-			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1280, 768));
+			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1280, 768)); // minimum: 1024 (which is 16x64) x 768 (which is 16x48)
 			if (device == null)
 				return;
 
