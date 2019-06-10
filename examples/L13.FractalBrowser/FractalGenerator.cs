@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 using IrrlichtLime;
@@ -54,16 +52,13 @@ namespace L13.FractalBrowser
 			foreach (Tile t in tiles)
 			{
 				t.MaxIterations = maxIterations;
-				t.ImageIsReady = false;
-                driver.RemoveTexture(t.Texture);
-                t.Texture = null;
+				t.TextureIsReady = false;
 				t.WindowRect = new Rectd(
 					GetWindowCoord(t.ScreenPos.X, t.ScreenPos.Y),
 					GetWindowCoord(t.ScreenPos.X + TileSize, t.ScreenPos.Y + TileSize));
 			}
 
 			threads[0] = new Thread(new ThreadStart(threadTileManager_main));
-            run = true;
 			threads[0].Start();
 		}
 
@@ -105,17 +100,15 @@ namespace L13.FractalBrowser
 			return new Vector2Dd(x, y);
 		}
 
-		public float DrawAll(Vector2Di? screenOffset = null)
+		public float DrawAll(Vector2Di screenOffset = null)
 		{
 			Vector2Di zero = new Vector2Di(0);
 			int n = 0;
 
 			foreach (Tile tile in tiles)
 			{
-				if (tile.ImageIsReady)
+				if (tile.TextureIsReady)
 				{
-                    if (tile.Texture == null)
-                        tile.Texture = driver.AddTexture(String.Format("Texture{0}{1}", tile.ScreenPos.X, tile.ScreenPos.Y), tile.Image);
 					driver.Draw2DImage(tile.Texture, tile.ScreenPos + (screenOffset ?? zero));
 					n++;
 				}
@@ -126,12 +119,11 @@ namespace L13.FractalBrowser
 
 		void abortThreads()
 		{
-            run = false;
 			for (int i = 0; i < threads.Length; i++)
 			{
 				if (threads[i] != null)
 				{
-                    threads[i].Join();
+					threads[i].Abort();
 					threads[i] = null;
 				}
 			}
@@ -141,8 +133,10 @@ namespace L13.FractalBrowser
 		{
 			clearTiles();
 
-			bool o = driver.GetTextureCreationFlag(TextureCreationFlag.CreateMipMaps);
+			bool prevCreateMipMaps = driver.GetTextureCreationFlag(TextureCreationFlag.CreateMipMaps);
 			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, false);
+			bool prevAllowMemoryCopy = driver.GetTextureCreationFlag(TextureCreationFlag.AllowMemoryCopy);
+			driver.SetTextureCreationFlag(TextureCreationFlag.AllowMemoryCopy, true);
 
 			int y = 0;
 			int x = 0;
@@ -160,7 +154,8 @@ namespace L13.FractalBrowser
 				}
 			}
 
-			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, o);
+			driver.SetTextureCreationFlag(TextureCreationFlag.CreateMipMaps, prevCreateMipMaps);
+			driver.SetTextureCreationFlag(TextureCreationFlag.AllowMemoryCopy, prevAllowMemoryCopy);
 
 			// sort tiles: closest to center of the screen goes first
 
@@ -194,17 +189,11 @@ namespace L13.FractalBrowser
 
 		void clearTiles()
 		{
-            foreach (Tile t in tiles)
-            {
-                if (t.Texture != null)
-                    driver.RemoveTexture(t.Texture);
-                t.Image.Drop();
-            }
+			foreach (Tile t in tiles)
+				driver.RemoveTexture(t.Texture);
 
 			tiles.Clear();
 		}
-
-        bool run;
 
 		void threadTileManager_main()
 		{
@@ -212,8 +201,6 @@ namespace L13.FractalBrowser
 
 			foreach (Tile tile in tiles)
 			{
-                if (!run)
-                    return;
 				while (true)
 				{
 					j = -1;
@@ -242,72 +229,67 @@ namespace L13.FractalBrowser
 		{
 			Tile tile = tileObject as Tile;
 
-			//if (!tile.TexturePainter.Lock(TextureLockMode.WriteOnly))
-				//return;
+			if (!tile.TexturePainter.Lock(TextureLockMode.WriteOnly))
+				return;
 
-			try
+			// generate Mandelbrot set
+
+			int w = tile.TexturePainter.MipMapLevelWidth;
+			double rx = tile.WindowRect.UpperLeftCorner.X;
+			double rxu = tile.WindowRect.Width / w;
+
+			int h = tile.TexturePainter.MipMapLevelHeight;
+			double ry = tile.WindowRect.UpperLeftCorner.Y;
+			double ryu = tile.WindowRect.Height / h;
+
+			Color c = new Color();
+			int i;
+
+			for (int y = 0; y < h; y++)
 			{
-				// generate Mandelbrot set
-
-                int w = tile.Image.Dimension.Width;
-				double rx = tile.WindowRect.UpperLeftCorner.X;
-				double rxu = tile.WindowRect.Width / w;
-
-                int h = tile.Image.Dimension.Height;
-				double ry = tile.WindowRect.UpperLeftCorner.Y;
-				double ryu = tile.WindowRect.Height / h;
-
-				Color c = new Color();
-				int i;
-
-				for (int y = 0; y < h; y++)
+				for (int x = 0; x < w; x++)
 				{
-					for (int x = 0; x < w; x++)
+					double ax0 = rx + x * rxu;
+					double ay0 = ry + y * ryu;
+					double ax1 = ax0;
+					double ay1 = ay0;
+					double ac = ax0 * ax0 + ay0 * ay0;
+
+					for (i = 0; i < tile.MaxIterations && ac < 16; i++)
 					{
-						double ax0 = rx + x * rxu;
-						double ay0 = ry + y * ryu;
-						double ax1 = ax0;
-						double ay1 = ay0;
-						double ac = ax0 * ax0 + ay0 * ay0;
-
-						for (i = 0; i < tile.MaxIterations && ac < 16; i++)
-						{
-							double ax2 = ax1 * ax1 - ay1 * ay1 + ax0;
-							ay1 = 2 * ax1 * ay1 + ay0;
-							ax1 = ax2;
-							ac = ax1 * ax1 + ay1 * ay1;
-						}
-
-						if (i < tile.MaxIterations)
-							c.Set((uint)(i * 0x0102f4));
-						else
-							c.Set(0);
-
-						tile.Image.SetPixel(x, y, c);
+						double ax2 = ax1 * ax1 - ay1 * ay1 + ax0;
+						ay1 = 2 * ax1 * ay1 + ay0;
+						ax1 = ax2;
+						ac = ax1 * ax1 + ay1 * ay1;
 					}
+
+					if (i < tile.MaxIterations)
+						c.Set((uint)(i * 0x0102f4));
+					else
+						c.Set(0);
+
+					tile.TexturePainter.SetPixel(x, y, c);
 				}
 			}
-			finally
-			{
-				//tile.TexturePainter.Unlock();
-				tile.ImageIsReady = true;
-			}
+
+			tile.TexturePainter.Unlock();
+			tile.TextureIsReady = true;
 		}
 
 		class Tile
 		{
 			public Vector2Di ScreenPos;
 			public Rectd WindowRect;
-			public Image Image;
-            public Texture Texture;
-			public bool ImageIsReady;
+			public Texture Texture;
+			public TexturePainter TexturePainter;
+			public bool TextureIsReady;
 			public int MaxIterations;
 
 			public Tile(int screenX, int screenY, Dimension2Di screenDimension, VideoDriver driver)
 			{
 				ScreenPos = new Vector2Di(screenX, screenY);
-                Image = driver.CreateImage(ColorFormat.A8R8G8B8, screenDimension);
-                Texture = null;
+				Texture = driver.AddTexture(screenDimension, string.Format("TileTexture({0},{1})", screenX, screenY));
+				TexturePainter = Texture.Painter;
 			}
 		}
 	}

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
-using IrrlichtLime.Scene;
 using IrrlichtLime.GUI;
 
 namespace L13.FractalBrowser
@@ -15,45 +11,12 @@ namespace L13.FractalBrowser
 	{
 		static IrrlichtDevice device;
 		static FractalGenerator fGen;
-		static Vector2Di? mouseMoveStart = null;
+		static Vector2Di mouseMoveStart = null;
 		static bool showHelp = false;
 
-		static bool AskUserForDriver(out DriverType driverType)
+		static void Main()
 		{
-			driverType = DriverType.Null;
-
-			Console.Write("Please select the driver you want for this example:\n" +
-						" (a) OpenGL\n (b) Direct3D 9.0c\n" +
-						" (c) Burning's Software Renderer\n (d) Software Renderer\n" +
-						" (e) NullDevice\n (otherKey) exit\n\n");
-
-			ConsoleKeyInfo i = Console.ReadKey();
-
-			switch (i.Key)
-			{
-				case ConsoleKey.A: driverType = DriverType.OpenGL; break;
-				case ConsoleKey.B: driverType = DriverType.Direct3D9; break;
-				case ConsoleKey.C: driverType = DriverType.BurningsVideo; break;
-				case ConsoleKey.D: driverType = DriverType.Software; break;
-				case ConsoleKey.E: driverType = DriverType.Null; break;
-				default:
-					return false;
-			}
-
-			return true;
-		}
-
-		static void Main(string[] args)
-		{
-           
-            DriverType t;
-            AskUserForDriver(out t);
-
-            IrrlichtCreationParameters param = new IrrlichtCreationParameters();
-            //param.DriverMultithreaded = true;
-            param.DriverType = t;
-            param.WindowSize = new Dimension2Di(1024, 768);
-			device = IrrlichtDevice.CreateDevice(param);
+			device = IrrlichtDevice.CreateDevice(DriverType.Direct3D9, new Dimension2Di(1024, 768));
 			if (device == null)
 				return;
 
@@ -77,7 +40,7 @@ namespace L13.FractalBrowser
 			{
 				driver.BeginScene(ClearBufferFlag.None);
 
-				Vector2Di? o = null;
+				Vector2Di o = null;
 				if (mouseMoveStart != null)
 					o = device.CursorControl.Position - mouseMoveStart;
 
@@ -173,7 +136,7 @@ namespace L13.FractalBrowser
 				if (evnt.Mouse.Type == MouseEventType.LeftUp)
 				{
 					Vector2Dd p1 = fGen.GetWindowCoord(evnt.Mouse.X, evnt.Mouse.Y);
-					Vector2Dd p2 = fGen.GetWindowCoord(mouseMoveStart.Value.X, mouseMoveStart.Value.Y);
+					Vector2Dd p2 = fGen.GetWindowCoord(mouseMoveStart.X, mouseMoveStart.Y);
 					Rectd r = fGen.GetWindow() + p2 - p1;
 
 					fGen.Generate(r);
