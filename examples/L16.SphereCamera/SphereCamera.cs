@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using IrrlichtLime;
 using IrrlichtLime.Core;
@@ -11,7 +8,6 @@ namespace L16.SphereCamera
 {
 	class SphereCamera
 	{
-		IrrlichtDevice device;
 		CameraSceneNode camera;
 		Vector3Df target;
 
@@ -21,9 +17,7 @@ namespace L16.SphereCamera
 
 		public SphereCamera(IrrlichtDevice device, Vector3Df target, double minRadius, double maxRadius, double initRadius, double initInclination, double initAzimuth)
 		{
-			this.device = device;
 			this.target = target;
-
 			this.camera = device.SceneManager.AddCameraSceneNode();
 
 			this.minRadius = minRadius;
@@ -103,7 +97,9 @@ namespace L16.SphereCamera
 				}
 
 				if (evnt.Mouse.Type == MouseEventType.Move && // rotation
-					evnt.Mouse.IsLeftPressed())
+					evnt.Mouse.IsLeftPressed() &&
+					prevMouseX != evnt.Mouse.X &&
+					prevMouseY != evnt.Mouse.Y)
 				{
 					Inclination -= (evnt.Mouse.X - prevMouseX) / 4;
 					Azimuth += (evnt.Mouse.Y - prevMouseY) / 3;

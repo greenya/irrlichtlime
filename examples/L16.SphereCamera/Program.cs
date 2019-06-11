@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Video;
 using IrrlichtLime.Core;
 using IrrlichtLime.Scene;
@@ -21,7 +16,7 @@ namespace L16.SphereCamera
 		static SphereCamera camera;
 		static SpherePath path;
 
-		static void Main(string[] args)
+		static void Main()
 		{
 			device = IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(800, 600));
 			device.SetWindowCaption("Sphere Camera - Irrlicht Engine");
@@ -64,6 +59,7 @@ namespace L16.SphereCamera
 				font.Draw(camera.ToString(), 10, driver.ScreenSize.Height - 20, Color.OpaqueYellow);
 
 				driver.EndScene();
+				device.Yield();
 			}
 
 			path.Drop();

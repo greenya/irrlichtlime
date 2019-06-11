@@ -17,6 +17,8 @@
 - Fixed room specular color in 08.SpecialFX.
 - Fixed crash (for Direct3D9) and console error spam (for OpenGL) when don't using high level shaders in 10.Shaders.
 - Fixed rare crashes with accessing removed textures in L13.FractalBrowser.
+- Added more interactivity to L15.AbstractTrace: ability to show/hide generator; ability to pause/resume trace.
+- Fixed Earth rotation with mouse left button in L16.SphereCamera.
 - Removed 20.ManagedLights and 24.CursorControl due to lack of support.
 - Removed unused media: d3d8.psh and d3d8.vsh.
 

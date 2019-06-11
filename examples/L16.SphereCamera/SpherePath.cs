@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 using IrrlichtLime.Core;
@@ -60,7 +58,7 @@ namespace L16.SphereCamera
 
 			// add back line
 			Vertex3D v1back = v1front;
-            Vertex3D v2back = v2front;
+            Vertex3D v2back = new Vertex3D(v2front);
 			v2back.Color = BackColor;
 			vertBack.Add(v1back);
 			vertBack.Add(v2back);
@@ -135,12 +133,13 @@ namespace L16.SphereCamera
 
 			XDocument d = XDocument.Load(filename);
 
-            Center = new Vector3Df(Convert.ToSingle(d.Root.Element("center").Attribute("x").Value),
-                                   Convert.ToSingle(d.Root.Element("center").Attribute("y").Value),
-                                   Convert.ToSingle(d.Root.Element("center").Attribute("z").Value));
+			Center = new Vector3Df(
+				Convert.ToSingle(d.Root.Element("center").Attribute("x").Value),
+				Convert.ToSingle(d.Root.Element("center").Attribute("y").Value),
+				Convert.ToSingle(d.Root.Element("center").Attribute("z").Value));
 
-			FrontColor = new Color(Convert.ToUInt32(d.Root.Element("frontColor").Value));
-			BackColor = new Color(Convert.ToUInt32(d.Root.Element("backColor").Value));
+			FrontColor.ARGB = Convert.ToUInt32(d.Root.Element("frontColor").Value);
+			BackColor.ARGB = Convert.ToUInt32(d.Root.Element("backColor").Value);
 
 			foreach (XElement e in d.Root.Elements("point"))
 			{
