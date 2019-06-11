@@ -19,6 +19,7 @@
 - Fixed rare crashes with accessing removed textures in L13.FractalBrowser.
 - Added more interactivity to L15.AbstractTrace: ability to show/hide generator; ability to pause/resume trace.
 - Fixed Earth rotation with mouse left button in L16.SphereCamera.
+- Added showing all bombs when game is lost in L17.Minesweeper.
 - Removed 20.ManagedLights and 24.CursorControl due to lack of support.
 - Removed unused media: d3d8.psh and d3d8.vsh.
 

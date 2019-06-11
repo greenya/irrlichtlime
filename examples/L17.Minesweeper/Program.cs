@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
@@ -28,7 +23,7 @@ namespace L17.Minesweeper
 		static bool optionBackground = true;
 		static bool optionFPS = false;
 
-		static void Main(string[] args)
+		static void Main()
 		{
 			device = IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(1024, 768), 32, false, true);
 			device.OnEvent += new IrrlichtDevice.EventHandler(device_OnEvent);
