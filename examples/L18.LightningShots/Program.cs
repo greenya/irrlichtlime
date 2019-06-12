@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using IrrlichtLime;
+﻿using IrrlichtLime;
 using IrrlichtLime.Core;
 using IrrlichtLime.Video;
 using IrrlichtLime.Scene;
@@ -16,7 +11,7 @@ namespace L18.LightningShots
 		static IrrlichtDevice device;
 		static LightningShot lightningShot;
 
-		static void Main(string[] args)
+		static void Main()
 		{
 			device = IrrlichtDevice.CreateDevice(DriverType.OpenGL, new Dimension2Di(1024, 600));
 			device.SetWindowCaption("LightningShots - Irrlicht Engine");
