@@ -20,7 +20,7 @@
 - Added more interactivity to L15.AbstractTrace: ability to show/hide generator; ability to pause/resume trace.
 - Fixed Earth rotation with mouse left button in L16.SphereCamera.
 - Added showing all bombs when game is lost in L17.Minesweeper.
-- Removed 20.ManagedLights and 24.CursorControl due to lack of support.
+- Removed 20.ManagedLights, 24.CursorControl and L19.CustomSceneNodeAnimator due to lack of support.
 - Removed unused media: d3d8.psh and d3d8.vsh.
 
 ## Changes in r538 (final commit on SF)
