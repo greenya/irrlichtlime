@@ -7,15 +7,16 @@
 - Updated documentation support approach:
     - Removed docs/IrrlchtLime.xml and docs dir
     - IrrlichtLime.xml now generated at build time from source files using XML comments
-- Added BulletSharp.dll files (x86 and x64) version 2.87. Now you can build L11.BulletSharpTest straight from Lime SDK.
+- Renamed Empty to IsEmpty in AABBox.
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
-- Renamed MultiRenderTexture into MultiRenderTextures to match native API.
+- Renamed MultiRenderTexture to MultiRenderTextures in RenderTarget to match native API.
 - Deprecated PolygonOffset and Material.PolygonOffsetDirection.
 - Deprecated B3D_TexturePath, CSM_TexturePath, DMF_TexturePath, LMTS_TexturePath, MY3D_TexturePath and OBJ_TexturePath in SceneParameters.
 - Fixed camera gravity value in 07.Collision.
 - Fixed room specular color in 08.SpecialFX.
 - Fixed crash (for Direct3D9) and console error spam (for OpenGL) when don't using high level shaders in 10.Shaders.
+- Added BulletSharp.dll files (x86 and x64) version 2.87. Now you can build L11.BulletSharpTest straight from Lime SDK.
 - Fixed rare crashes with accessing removed textures in L13.FractalBrowser.
 - Added more interactivity to L15.AbstractTrace: ability to show/hide generator; ability to pause/resume trace.
 - Fixed Earth rotation with mouse left button in L16.SphereCamera.
