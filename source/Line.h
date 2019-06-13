@@ -103,9 +103,9 @@ public:
 	/// <param name="endX">End X coord.</param>
 	/// <param name="endY">End Y coord.</param>
 	/// <param name="endZ">End Z coord.</param>
-	void Set(float newStartX, float newStartY, float newStartZ, float newEndX, float newEndY, float newEndZ)
+	void Set(float startX, float startY, float startZ, float endX, float endY, float endZ)
 	{
-		m_NativeValue->setLine(newStartX, newStartY, newStartZ, newEndX, newEndY, newEndZ);
+		m_NativeValue->setLine(startX, startY, startZ, endX, endY, endZ);
 	}
 
 	/// <summary>
@@ -113,12 +113,12 @@ public:
 	/// </summary>
 	/// <param name="start">Start point.</param>
 	/// <param name="end">End point.</param>
-	void Set(Vector3Df^ newStart, Vector3Df^ newEnd)
+	void Set(Vector3Df^ start, Vector3Df^ end)
 	{
-		LIME_ASSERT(newStart != nullptr);
-		LIME_ASSERT(newEnd != nullptr);
+		LIME_ASSERT(start != nullptr);
+		LIME_ASSERT(end != nullptr);
 
-		m_NativeValue->setLine(*newStart->m_NativeValue, *newEnd->m_NativeValue);
+		m_NativeValue->setLine(*start->m_NativeValue, *end->m_NativeValue);
 	}
 
 	/// <summary>
