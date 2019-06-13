@@ -19,7 +19,6 @@ public:
 	/// <summary>
 	/// Equality operator.
 	/// </summary>
-	/// <returns>True if both boxes are equal, else false.</returns>
 	static bool operator == (AABBox^ v1, AABBox^ v2)
 	{
 		bool v1n = Object::ReferenceEquals(v1, nullptr);
@@ -37,7 +36,6 @@ public:
 	/// <summary>
 	/// Inequality operator.
 	/// </summary>
-	/// <returns>True if both boxes are different, else false.</returns>
 	static bool operator != (AABBox^ v1, AABBox^ v2)
 	{
 		return !(v1 == v2);

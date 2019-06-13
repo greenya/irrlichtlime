@@ -18,7 +18,6 @@ public:
 	/// <summary>
 	/// Equality operator.
 	/// </summary>
-	/// <returns>True if both lines are equal, else false.</returns>
 	static bool operator == (Line3Df^ v1, Line3Df^ v2)
 	{
 		bool v1n = Object::ReferenceEquals(v1, nullptr);
@@ -36,7 +35,6 @@ public:
 	/// <summary>
 	/// Inequality operator.
 	/// </summary>
-	/// <returns>True if both lines are different, else false.</returns>
 	static bool operator != (Line3Df^ v1, Line3Df^ v2)
 	{
 		return !(v1 == v2);

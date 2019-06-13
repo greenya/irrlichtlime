@@ -42,7 +42,9 @@ public:
 
 	// BeginScene
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
 	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
@@ -55,7 +57,9 @@ public:
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, ExposedVideoData^ videoData, Recti^ sourceRect);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
 	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
@@ -66,7 +70,9 @@ public:
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil, ExposedVideoData^ videoData);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
 	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
@@ -74,25 +80,33 @@ public:
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
 	/// <param name="clearDepth">The clear value for the depth buffer. Default is 1.f.</param>
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <param name="clearColor">The clear color for the color buffer. Default is null (black).</param>
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag, Color^ clearColor);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <param name="clearFlag">A combination of the <see cref="ClearBufferFlag"/> bit-flags. Default is <see cref="ClearBufferFlag::Color"/> | <see cref="ClearBufferFlag::Depth"/>.</param>
 	/// <returns>False if failed.</returns>
 	bool BeginScene(ClearBufferFlag clearFlag);
 
-	/// <summary>Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.</summary>
+	/// <summary>
+	/// Applications must call this method before performing any rendering. This method can clear the back- and the z-buffer.
+	/// </summary>
 	/// <returns>False if failed.</returns>
 	bool BeginScene();
 
@@ -261,7 +275,8 @@ public:
 
 	void SetMinHardwareBufferVertexCount(int count);
 
-	/// <summary>Sets a new render target.
+	/// <summary>
+	/// Sets a new render target.
 	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
 	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
 	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
@@ -275,7 +290,8 @@ public:
 	/// <returns>True if successful and false if not.</returns>
 	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth, u8 clearStencil);
 
-	/// <summary>Sets a new render target.
+	/// <summary>
+	/// Sets a new render target.
 	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
 	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
 	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
@@ -288,7 +304,8 @@ public:
 	/// <returns>True if successful and false if not.</returns>
 	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor, f32 clearDepth);
 
-	/// <summary>Sets a new render target.
+	/// <summary>
+	/// Sets a new render target.
 	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
 	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
 	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
@@ -300,7 +317,8 @@ public:
 	/// <returns>True if successful and false if not.</returns>
 	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag, Color^ clearColor);
 
-	/// <summary>Sets a new render target.
+	/// <summary>
+	/// Sets a new render target.
 	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
 	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
 	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
@@ -311,7 +329,8 @@ public:
 	/// <returns>True if successful and false if not.</returns>
 	bool SetRenderTarget(Texture^ texture, ClearBufferFlag clearFlag);
 
-	/// <summary>Sets a new render target.
+	/// <summary>
+	/// Sets a new render target.
 	/// This will only work if the driver supports the <see cref="VideoDriverFeature::RenderToTarget"/>, which can be queried with <c>QueryFeature()</c>.
 	/// Please note that you cannot render 3D or 2D geometry with a render target as texture on it when you are rendering the scene into this render target
 	/// at the same time. It is usually only possible to render into a texture between the <c>BeginScene()</c> and <c>EndScene()</c> calls.
