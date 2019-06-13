@@ -90,10 +90,10 @@
 
 // basic types
 #include "Vector.h" // must be before AABBox.h
+#include "Line.h" // must be before AABBox.h
 #include "AABBox.h"
 #include "Color.h"
 #include "Dimension.h"
-#include "Line.h"
 #include "Rect.h" // must be before Matrix.h
 #include "Plane.h" // must be before Matrix.h
 #include "Matrix.h"

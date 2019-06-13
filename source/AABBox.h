@@ -213,6 +213,45 @@ public:
 	}
 
 	/// <summary>
+	/// Returns the intersection of this box with another, if possible.
+	/// </summary>
+	/// <param name="other">Other bounding box.</param>
+	/// <returns>AABBox if there is an intersection and null if no intersection.</returns>
+	AABBox^ Intersect(AABBox^ other)
+	{
+		LIME_ASSERT(other != nullptr);
+
+		if (m_NativeValue->intersectsWithBox(*other->m_NativeValue))
+		{
+			return gcnew AABBox(m_NativeValue->intersect(*other->m_NativeValue));
+		}
+
+		return nullptr;
+	}
+
+	/// <summary>
+	/// Determines if the axis-aligned box intersects with another axis-aligned box.
+	/// </summary>
+	/// <param name="other">Other box to check a intersection with.</param>
+	/// <returns>True if there is an intersection with the other box, otherwise false.</returns>
+	bool IntersectsWithBox(AABBox^ other)
+	{
+		LIME_ASSERT(other != nullptr);
+		return m_NativeValue->intersectsWithBox(*other->m_NativeValue);
+	}
+
+	/// <summary>
+	/// Tests if the box intersects with a line.
+	/// </summary>
+	/// <param name="line">Line to test intersection with.</param>
+	/// <returns>True if there is an intersection, else false.</returns>
+	bool IntersectsWithLine(Line3Df^ line)
+	{
+		LIME_ASSERT(line != nullptr);
+		return m_NativeValue->intersectsWithLine(*line->m_NativeValue);
+	}
+
+	/// <summary>
 	/// Determines if a point is within this box.
 	/// Border is included (IS part of the box)!
 	/// </summary>

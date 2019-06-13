@@ -7,7 +7,7 @@
 - Updated documentation support approach:
     - Removed docs/IrrlchtLime.xml and docs dir
     - IrrlichtLime.xml now generated at build time from source files using XML comments
-- Renamed Empty to IsEmpty in AABBox.
+- Added IntersectsWithBox() and IntersectsWithLine(); renamed Empty to IsEmpty in AABBox.
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
 - Renamed MultiRenderTexture to MultiRenderTextures in RenderTarget to match native API.
