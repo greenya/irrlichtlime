@@ -1,7 +1,7 @@
 # Irrlicht Engine
 
 * Source: https://sourceforge.net/p/irrlicht/code/HEAD/tree/trunk/
-* Revision: `5817`
+* Revision: `5824`
 
 ### `IrrCompileConfig.h`
 

@@ -346,6 +346,14 @@ public:
 	}
 
 	/// <summary>
+	/// Check if MaxEdge &gt; MinEdge.
+	/// </summary>
+	property bool IsValid
+	{
+		bool get() { return m_NativeValue->isValid(); }
+	}
+
+	/// <summary>
 	/// The far edge.
 	/// </summary>
 	property Vector3Df^ MaxEdge

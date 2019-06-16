@@ -1,13 +1,13 @@
 ## Changes in 1.6 (not yet released)
 
-- Updated Irrlicht SDK to trunk r5817.
+- Updated Irrlicht SDK to trunk r5824.
 - Moved to Visual Studio 2019 (Community Edition is free).
 - Updated output dir for x86 builds to "Debug-x86" (was "Debug") and "Release-x86" (was "Release").
 - Updated AssemblyDescription attribute for IrrlichtLime.dll to state exaclty what build and what platform it is.
 - Updated documentation support approach:
     - Removed docs/IrrlchtLime.xml and docs dir
     - IrrlichtLime.xml now generated at build time from source files using XML comments
-- Added IntersectsWithBox() and IntersectsWithLine(); renamed Empty to IsEmpty in AABBox.
+- Added IntersectsWithBox(), IntersectsWithLine() and IsValid; renamed Empty to IsEmpty in AABBox.
 - Added zClipFromZero flag to BuildProjectionMatrix*() methods in Matrix.
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
