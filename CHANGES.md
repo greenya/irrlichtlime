@@ -7,6 +7,7 @@
 - Updated documentation support approach:
     - Removed docs/IrrlchtLime.xml and docs dir
     - IrrlichtLime.xml now generated at build time from source files using XML comments
+- Added GetMatrixFast() to Quaternion.
 - Added IntersectsWithBox(), IntersectsWithLine() and IsValid; renamed Empty to IsEmpty in AABBox.
 - Added zClipFromZero flag to BuildProjectionMatrix*() methods in Matrix.
 - Added TextureCubemapSeamless to VideoDriverFeature.
