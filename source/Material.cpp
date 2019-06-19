@@ -126,31 +126,6 @@ void Material::BlendOperation::set(Video::BlendOperation value)
 	m_NativeValue->BlendOperation = (video::E_BLEND_OPERATION)value;
 }
 
-#pragma warning (disable: 4947)
-
-Video::PolygonOffset Material::PolygonOffsetDirection::get()
-{
-	return (Video::PolygonOffset)m_NativeValue->PolygonOffsetDirection;
-}
-
-void Material::PolygonOffsetDirection::set(Video::PolygonOffset value)
-{
-	m_NativeValue->PolygonOffsetDirection = (video::E_POLYGON_OFFSET)value;
-}
-
-#pragma warning (default: 4947)
-
-unsigned char Material::PolygonOffsetFactor::get()
-{
-	return m_NativeValue->PolygonOffsetFactor;
-}
-
-void Material::PolygonOffsetFactor::set(unsigned char value)
-{
-	LIME_ASSERT(value >= 0 && value <= 7);
-	m_NativeValue->PolygonOffsetFactor = value;
-}
-
 Color^ Material::DiffuseColor::get()
 {
 	return gcnew Color(m_NativeValue->DiffuseColor);
@@ -260,6 +235,26 @@ Video::ColorMaterial Material::ColorMaterial::get()
 void Material::ColorMaterial::set(Video::ColorMaterial value)
 {
 	m_NativeValue->ColorMaterial = (E_COLOR_PLANE)value;
+}
+
+f32 Material::PolygonOffsetDepthBias::get()
+{
+	return m_NativeValue->PolygonOffsetDepthBias;
+}
+
+void Material::PolygonOffsetDepthBias::set(f32 value)
+{
+	m_NativeValue->PolygonOffsetDepthBias = value;
+}
+
+f32 Material::PolygonOffsetSlopeScale::get()
+{
+	return m_NativeValue->PolygonOffsetSlopeScale;
+}
+
+void Material::PolygonOffsetSlopeScale::set(f32 value)
+{
+	m_NativeValue->PolygonOffsetSlopeScale = value;
 }
 
 bool Material::Wireframe::get()

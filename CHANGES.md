@@ -15,9 +15,10 @@
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
 - Renamed MultiRenderTexture to MultiRenderTextures in RenderTarget to match native API.
-- Renamed Opaque* to Solid* in Color.
-- Deprecated PolygonOffset and Material.PolygonOffsetDirection.
+- Removed deprecated PolygonOffset enum.
+- Removed deprecated PolygonOffsetDirection and PolygonOffsetFactor; added PolygonOffsetDepthBias and PolygonOffsetSlopeScale to Material.
 - Deprecated B3D_TexturePath, CSM_TexturePath, DMF_TexturePath, LMTS_TexturePath, MY3D_TexturePath and OBJ_TexturePath in SceneParameters.
+- Renamed Opaque* to Solid* in Color.
 - Fixed camera gravity value in 07.Collision.
 - Fixed room specular color in 08.SpecialFX.
 - Fixed crash (for Direct3D9) and console error spam (for OpenGL) when don't using high level shaders in 10.Shaders.

@@ -252,7 +252,6 @@
     <ClInclude Include="ModulateFunc.h" />
     <ClInclude Include="NamedPath.h" />
     <ClInclude Include="PixelShaderType.h" />
-    <ClInclude Include="PolygonOffset.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="RenderTarget.h" />

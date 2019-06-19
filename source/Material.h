@@ -105,13 +105,6 @@ public:
 	/// </summary>
 	property Video::BlendOperation BlendOperation { Video::BlendOperation get(); void set(Video::BlendOperation value); }
 
-#pragma warning (disable: 4947)
-	[Obsolete("Deprecated. Will be removed after Irrlicht 1.9.")]
-	property Video::PolygonOffset PolygonOffsetDirection { Video::PolygonOffset get(); void set(Video::PolygonOffset value); }
-#pragma warning (default: 4947)
-
-	property unsigned char PolygonOffsetFactor { unsigned char get(); void set(unsigned char value); }
-
 	/// <summary>
 	/// How much diffuse light coming from a light source is reflected by this material.
 	/// The default is full white.
@@ -185,6 +178,27 @@ public:
 	/// The default, <see cref="Video::ColorMaterial::Diffuse"/>, will result in a very similar rendering as with lighting turned off, just with light shading.
 	/// </summary>
 	property Video::ColorMaterial ColorMaterial { Video::ColorMaterial get(); void set(Video::ColorMaterial value); }
+
+	/// <summary>
+	/// A constant z-buffer offset for a polygon/line/point.
+	/// The range of the value is driver specific.
+	/// On OpenGL you get units which are multiplied by the smallest value that is guaranteed to produce a resolvable offset.
+	/// On D3D9 you can pass a range between -1 and 1. But you should likely divide it by the range of the depthbuffer.
+	/// Like dividing by 65535.0 for a 16 bit depthbuffer. Thought it still might produce too large of a bias.
+	/// Some article (https://aras-p.info/blog/2008/06/12/depth-bias-and-the-power-of-deceiving-yourself/)
+	/// recommends multiplying by 2.0*4.8e-7 (and strangely on both 16 bit and 24 bit).
+	/// </summary>
+	property f32 PolygonOffsetDepthBias { f32 get(); void set(f32 values); }
+
+	/// <summary>
+	/// Variable z-buffer offset based on the slope of the polygon.
+	/// For polygons looking flat at a camera you could use 0 (for example in a 2D game).
+	/// But in most cases you will have polygons rendered at a certain slope.
+	/// The driver will calculate the slope for you and this value allows to scale that slope.
+	/// The complete polygon offset is: PolygonOffsetSlopeScale * slope + PolygonOffsetDepthBias.
+	/// A good default here is to use 1.f if you want to push the polygons away from the camera and -1.f to pull them towards the camera.
+	/// </summary>
+	property f32 PolygonOffsetSlopeScale { f32 get(); void set(f32 values); }
 
 	/// <summary>
 	/// Draw as wireframe or filled triangles?

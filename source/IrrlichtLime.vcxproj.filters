@@ -537,9 +537,6 @@
     <ClInclude Include="AlphaSource.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="PolygonOffset.h">
-      <Filter>Video</Filter>
-    </ClInclude>
     <ClInclude Include="GUIElementInheritor.h">
       <Filter>GUI</Filter>
     </ClInclude>

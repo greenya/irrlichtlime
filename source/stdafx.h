@@ -71,7 +71,6 @@
 #include "ParticleAffectorType.h"
 #include "ParticleEmitterType.h"
 #include "PixelShaderType.h"
-#include "PolygonOffset.h"
 #include "PrimitiveType.h"
 #include "RenderTarget.h"
 #include "SceneNodeAnimatorType.h"
