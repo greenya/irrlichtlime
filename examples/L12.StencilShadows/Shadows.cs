@@ -12,7 +12,7 @@ namespace L12.StencilShadows
 	{
 		List<SceneNode> objects = new List<SceneNode>();
 		List<SceneNode> lights = new List<SceneNode>();
-		Color shadowColor = Color.OpaqueBlack;
+		Color shadowColor = Color.SolidBlack;
 		float shadowInfinityRange = 1000.0f;
 		float shadowNearMultiplier = 1.0f / 40;
 

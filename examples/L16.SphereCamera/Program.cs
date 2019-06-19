@@ -49,14 +49,14 @@ namespace L16.SphereCamera
 
 				path.Draw(driver);
 
-				font.Draw("Press [Arrows], [LMB] and [Mouse Scroll] to change view", 10, 10, Color.OpaqueYellow);
-				font.Draw("Press [RMB] on Earth to place new path point", 10, 20, Color.OpaqueYellow);
-				font.Draw("Press [R] to reload path data from file", 10, 30, Color.OpaqueYellow);
-				font.Draw("Press [C] to clean up", 10, 40, Color.OpaqueYellow);
+				font.Draw("Press [Arrows], [LMB] and [Mouse Scroll] to change view", 10, 10, Color.SolidYellow);
+				font.Draw("Press [RMB] on Earth to place new path point", 10, 20, Color.SolidYellow);
+				font.Draw("Press [R] to reload path data from file", 10, 30, Color.SolidYellow);
+				font.Draw("Press [C] to clean up", 10, 40, Color.SolidYellow);
 
-				font.Draw(driver.FPS.ToString() + " fps", 10, driver.ScreenSize.Height - 40, Color.OpaqueYellow);
-				font.Draw(path.PointCount.ToString() + " point(s)", 10, driver.ScreenSize.Height - 30, Color.OpaqueYellow);
-				font.Draw(camera.ToString(), 10, driver.ScreenSize.Height - 20, Color.OpaqueYellow);
+				font.Draw(driver.FPS.ToString() + " fps", 10, driver.ScreenSize.Height - 40, Color.SolidYellow);
+				font.Draw(path.PointCount.ToString() + " point(s)", 10, driver.ScreenSize.Height - 30, Color.SolidYellow);
+				font.Draw(camera.ToString(), 10, driver.ScreenSize.Height - 20, Color.SolidYellow);
 
 				driver.EndScene();
 				device.Yield();

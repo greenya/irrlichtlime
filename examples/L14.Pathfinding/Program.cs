@@ -24,8 +24,8 @@ namespace L14.Pathfinding
 
 			VideoDriver driver = device.VideoDriver;
 			GUIFont font = device.GUIEnvironment.GetFont("../../media/fontlucida.png");
-			Color fontNormalColor = Color.OpaqueWhite;
-			Color fontActionColor = Color.OpaqueYellow;
+			Color fontNormalColor = Color.SolidWhite;
+			Color fontActionColor = Color.SolidYellow;
 
 			Texture pathfindingTexture = driver.GetTexture("../../media/pathfinding.png");
 			int cellSize = pathfindingTexture.Size.Height;

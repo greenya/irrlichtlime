@@ -143,7 +143,7 @@ public:
 
 	/// <summary>
 	/// Free parameter, dependent on the material type.
-	/// Mostly ignored, used for example in <see cref="MaterialType.ParallaxMapSolid"/> and <see cref="MaterialType.TransparentAlphaChannel"/>.
+	/// Mostly ignored, used for example in <see cref="MaterialType::ParallaxMapSolid"/> and <see cref="MaterialType::TransparentAlphaChannel"/>.
 	/// </summary>
 	property float MaterialTypeParam { float get(); void set(float value); }
 
@@ -160,14 +160,14 @@ public:
 
 	/// <summary>
 	/// Is the ZBuffer enabled?
-	/// Default is <see cref="ComparisonFunc.LessEqual"/>.
-	/// If you want to disable depth test for this material just set this parameter to <see cref="ComparisonFunc.Disabled"/>.
+	/// Default is <see cref="ComparisonFunc::LessEqual"/>.
+	/// If you want to disable depth test for this material just set this parameter to <see cref="ComparisonFunc::Disabled"/>.
 	/// </summary>
 	property ComparisonFunc ZBuffer { ComparisonFunc get(); void set(ComparisonFunc value); }
 
 	/// <summary>
 	/// The antialiasing mode.
-	/// Default is <see cref="AntiAliasingMode.Simple"/>.
+	/// Default is <see cref="AntiAliasingMode::Simple"/>.
 	/// </summary>
 	property AntiAliasingMode AntiAliasing { AntiAliasingMode get(); void set(AntiAliasingMode value); }
 
@@ -182,7 +182,7 @@ public:
 	/// Defines the interpretation of vertex color in the lighting equation.
 	/// When lighting is enabled, vertex color can be used instead of the material values for light modulation.
 	/// This allows to easily change e.g. the diffuse light behavior of each face.
-	/// The default, <see cref="Video.ColorMaterial.Diffuse"/>, will result in a very similar rendering as with lighting turned off, just with light shading.
+	/// The default, <see cref="Video::ColorMaterial::Diffuse"/>, will result in a very similar rendering as with lighting turned off, just with light shading.
 	/// </summary>
 	property Video::ColorMaterial ColorMaterial { Video::ColorMaterial get(); void set(Video::ColorMaterial value); }
 
@@ -214,7 +214,7 @@ public:
 	/// Is the zbuffer writable or is it read-only.
 	/// Default is true.
 	/// This flag is forced to false if the Type is a transparent material type and the <c>SceneParameters.AllowZWriteOnTransparent</c> is not set.
-	/// If you set this parameter to true, make sure that ZBuffer value is other than <see cref="ComparisonFunc.Disabled"/>.
+	/// If you set this parameter to true, make sure that ZBuffer value is other than <see cref="ComparisonFunc::Disabled"/>.
 	/// </summary>
 	property bool ZWrite { bool get(); void set(bool value); }
 

@@ -30,8 +30,8 @@ namespace L16.SphereCamera
 			this.height = height;
 
 			Center = new Vector3Df(0);
-			FrontColor = Color.OpaqueCyan;
-			BackColor = Color.OpaqueBlue;
+			FrontColor = Color.SolidCyan;
+			BackColor = Color.SolidBlue;
 
 			// we allocated once 64000 indices, initialize the sequence and never touch them in future... we will only use SetCount() method to set actual number of used indices
 			indBoth.Reallocate(64000);

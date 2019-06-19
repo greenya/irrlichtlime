@@ -61,7 +61,7 @@ public:
 	/// <summary>
 	/// An indication of whether the joystick has a POV hat.
 	/// A Windows device will identify the presence or absence of the POV hat.
-	/// A Linux device cannot, and will always return <see cref="PovHatPresence.Unknown"/>.
+	/// A Linux device cannot, and will always return <see cref="PovHatPresence::Unknown"/>.
 	/// </summary>
 	PovHatPresence PovHat;
 

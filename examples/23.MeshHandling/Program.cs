@@ -423,7 +423,7 @@ namespace _23.MeshHandling
 					return new Color(128 + (int)(127.0f * x), 128 + (int)(127.0f * y), 255);
 
 				case ColorFunc.PureWhite:
-					return Color.OpaqueWhite;
+					return Color.SolidWhite;
 
 				default:
 					throw new ArgumentException("Unexpected color function value: " + cf.ToString());

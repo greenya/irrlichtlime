@@ -141,8 +141,8 @@ namespace _19.MouseAndJoystick
 
 					// And intersect the ray with a plane around the node facing towards the camera.
 					Plane3Df plane = new Plane3Df(nodePosition, new Vector3Df(0, 0, -1));
-					Vector3Df mousePosition;
-					if (plane.GetIntersectionWithLine(ray.Start, ray.Vector, out mousePosition))
+					Vector3Df mousePosition = plane.GetIntersectionWithLine(ray.Start, ray.Vector);
+					if (mousePosition != null)
 					{
 						// We now have a mouse position in 3d space; move towards it.
 						Vector3Df toMousePosition = mousePosition - nodePosition;

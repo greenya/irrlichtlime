@@ -285,7 +285,7 @@ namespace L10.ImageBrowser
 
 			GUIStaticText t = irr.GUI.AddStaticText("???", new Recti(180, 10, irr.Device.VideoDriver.ScreenSize.Width - 20, 40), false, false, null, CurrentFolderStaticTextId);
 			t.SetTextAlignment(GUIAlignment.UpperLeft, GUIAlignment.Center);
-			t.OverrideColor = Color.OpaqueWhite;
+			t.OverrideColor = Color.SolidWhite;
 		}
 
 		static void openFolder(string newFolder)
@@ -421,7 +421,7 @@ namespace L10.ImageBrowser
 				v.Draw2DRectangle(r, new Color(0xbb223355));
 				v.Draw2DRectangleOutline(r, new Color(0xbb445577));
 
-				f.Draw(s, r.UpperLeftCorner + new Vector2Di(8, 6), Color.OpaqueYellow);
+				f.Draw(s, r.UpperLeftCorner + new Vector2Di(8, 6), Color.SolidYellow);
 			}
 		}
 	}

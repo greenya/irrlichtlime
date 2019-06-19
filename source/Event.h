@@ -64,7 +64,7 @@ public:
 
 		/// <summary>
 		/// Mouse wheel delta, often 1.0 or -1.0, but can have other values &lt;0.0f or &gt;0.0f.
-		/// Only valid if event was <see cref="MouseEventType.Wheel"/>.
+		/// Only valid if event was <see cref="MouseEventType::Wheel"/>.
 		/// </summary>
 		float Wheel;
 
@@ -81,7 +81,7 @@ public:
 		/// <summary>
 		/// A bitmap of button states.
 		/// You can use Is[button]Pressed() to determine if a button is pressed or not.
-		/// Currently only valid if the event was <see cref="MouseEventType.Move"/>.
+		/// Currently only valid if the event was <see cref="MouseEventType::Move"/>.
 		/// </summary>
 		unsigned int ButtonStates;
 
@@ -355,37 +355,37 @@ public:
 
 	/// <summary>
 	/// GUI event.
-	/// Valid only when Type is <see cref="EventType.GUI"/>.
+	/// Valid only when Type is <see cref="EventType::GUI"/>.
 	/// </summary>
 	property GUIEvent GUI { GUIEvent get(); }
 
 	/// <summary>
 	/// Joystick event.
-	/// Valid only when Type is <see cref="EventType.Joystick"/>.
+	/// Valid only when Type is <see cref="EventType::Joystick"/>.
 	/// </summary>
 	property JoystickEvent Joystick { JoystickEvent get(); }
 
 	/// <summary>
 	/// Keyboard event.
-	/// Valid only when Type is <see cref="EventType.Key"/>.
+	/// Valid only when Type is <see cref="EventType::Key"/>.
 	/// </summary>
 	property KeyEvent Key { KeyEvent get(); }
 
 	/// <summary>
 	/// Log event.
-	/// Valid only when Type is <see cref="EventType.Log"/>.
+	/// Valid only when Type is <see cref="EventType::Log"/>.
 	/// </summary>
 	property LogEvent Log { LogEvent get(); }
 
 	/// <summary>
 	/// Mouse event.
-	/// Valid only when Type is <see cref="EventType.Mouse"/>.
+	/// Valid only when Type is <see cref="EventType::Mouse"/>.
 	/// </summary>
 	property MouseEvent Mouse { MouseEvent get(); }
 
 	/// <summary>
 	/// User event.
-	/// Valid only when Type is <see cref="EventType.User"/>.
+	/// Valid only when Type is <see cref="EventType::User"/>.
 	/// </summary>
 	property UserEvent User { UserEvent get(); }
 

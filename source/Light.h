@@ -47,7 +47,7 @@ public:
 
 	/// <summary>
 	/// Direction of the light.
-	/// If Type is <see cref="LightType.Point"/>, it is ignored.
+	/// If Type is <see cref="LightType::Point"/>, it is ignored.
 	/// Changed via light scene node's rotation.
 	/// </summary>
 	property Vector3Df^ Direction { Vector3Df^ get(); void set(Vector3Df^ value); }
@@ -71,7 +71,7 @@ public:
 
 	/// <summary>
 	/// Position of the light.
-	/// If Type is <see cref="LightType.Directional"/>, it is ignored.
+	/// If Type is <see cref="LightType::Directional"/>, it is ignored.
 	/// Changed via light scene node's position.
 	/// </summary>
 	property Vector3Df^ Position { Vector3Df^ get(); void set(Vector3Df^ value); }

@@ -83,7 +83,7 @@ namespace L17.Minesweeper
 			// add gui hint
 
 			text = gui.AddStaticText(TextStart, new Recti(10, 10, 200, 40));
-			text.OverrideColor = Color.OpaqueYellow;
+			text.OverrideColor = Color.SolidYellow;
 
 			// main loop
 
@@ -94,7 +94,7 @@ namespace L17.Minesweeper
 				gui.DrawAll();
 
 				if (optionFPS)
-					gui.BuiltInFont.Draw(driver.FPS + " FPS", driver.ScreenSize.Width - 50, 10, Color.OpaqueWhite);
+					gui.BuiltInFont.Draw(driver.FPS + " FPS", driver.ScreenSize.Width - 50, 10, Color.SolidWhite);
 
 				driver.EndScene();
 			}
@@ -110,8 +110,8 @@ namespace L17.Minesweeper
 				Vector2Di m = new Vector2Di(evnt.Mouse.X, evnt.Mouse.Y);
 				Line3Df l = device.SceneManager.SceneCollisionManager.GetRayFromScreenCoordinates(m);
 				Plane3Df p = new Plane3Df(new Vector3Df(0, 0, 0), new Vector3Df(100, 0, 0), new Vector3Df(0, 0, 100));
-				Vector3Df i;
-				if (p.GetIntersectionWithLimitedLine(l.Start, l.End, out i))
+				Vector3Df i = p.GetIntersectionWithLimitedLine(l.Start, l.End);
+				if (i != null)
 				{
 					camera.Target = game.CenterOfTheBoard + new Vector3Df(
 						(m.Y - device.VideoDriver.ScreenSize.Height / 2) / 100.0f,

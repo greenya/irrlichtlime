@@ -55,7 +55,7 @@ namespace L18.LightningShots
 
 			s.node = sceneManager.AddSphereSceneNode(10);
 			s.node.SetMaterialFlag(MaterialFlag.Lighting, false);
-			sceneManager.MeshManipulator.SetVertexColors(((MeshSceneNode)s.node).Mesh, Color.OpaqueWhite);
+			sceneManager.MeshManipulator.SetVertexColors(((MeshSceneNode)s.node).Mesh, Color.SolidWhite);
 
 			var animator = sceneManager.CreateFlyStraightAnimator(position, e, (s.deathTime - time) / 1000.0f);
 			s.node.AddAnimator(animator);

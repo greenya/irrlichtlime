@@ -15,6 +15,7 @@
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
 - Renamed MultiRenderTexture to MultiRenderTextures in RenderTarget to match native API.
+- Renamed Opaque* to Solid* in Color.
 - Deprecated PolygonOffset and Material.PolygonOffsetDirection.
 - Deprecated B3D_TexturePath, CSM_TexturePath, DMF_TexturePath, LMTS_TexturePath, MY3D_TexturePath and OBJ_TexturePath in SceneParameters.
 - Fixed camera gravity value in 07.Collision.

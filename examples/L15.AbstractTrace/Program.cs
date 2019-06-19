@@ -27,7 +27,7 @@ namespace L15.AbstractTrace
 			device.OnEvent += Device_OnEvent;
 
 			GUIFont font = device.GUIEnvironment.GetFont("../../media/fontlucida.png");
-			Color textColor = Color.OpaqueWhite;
+			Color textColor = Color.SolidWhite;
 
 			CameraSceneNode camera = scene.AddCameraSceneNode();
 			camera.FarValue = 20000;

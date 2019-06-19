@@ -47,10 +47,10 @@ namespace L18.LightningShots
 				lightningShot.Draw(device.Timer.Time);
 
 				GUIFont f = device.GUIEnvironment.BuiltInFont;
-				f.Draw("Use [LMB] to shoot", 10, 10, Color.OpaqueYellow);
-				f.Draw("Total lightnings: " + lightningShot.TotalLightnings, 10, 20, Color.OpaqueWhite);
-				f.Draw("Total shots: " + lightningShot.TotalShots, 10, 30, Color.OpaqueWhite);
-				f.Draw(driver.FPS + " fps", 10, 40, Color.OpaqueWhite);
+				f.Draw("Use [LMB] to shoot", 10, 10, Color.SolidYellow);
+				f.Draw("Total lightnings: " + lightningShot.TotalLightnings, 10, 20, Color.SolidWhite);
+				f.Draw("Total shots: " + lightningShot.TotalShots, 10, 30, Color.SolidWhite);
+				f.Draw(driver.FPS + " fps", 10, 40, Color.SolidWhite);
 
 				driver.EndScene();
 			}

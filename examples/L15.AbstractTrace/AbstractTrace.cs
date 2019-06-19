@@ -317,7 +317,7 @@ namespace L15.AbstractTrace
 						driver.SetMaterial(Material.IdentityRedWireframe);
 						driver.SetTransform(TransformationState.World, l.Transform);
 
-						Color c = Color.OpaqueRed;
+						Color c = Color.SolidRed;
 						float x1 = -(CubeSize * GridDim) / 2;
 						float z1 = -(CubeSize * GridDim) / 2;
 						float x2 = x1 + (GridDim - 1) * CubeSize;

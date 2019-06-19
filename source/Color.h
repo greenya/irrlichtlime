@@ -213,7 +213,7 @@ public:
 		LIME_ASSERT(c1 != nullptr);
 		LIME_ASSERT(c2 != nullptr);
 
-		return gcnew Color(m_NativeValue->getInterpolated_quadratic(*other->m_NativeValue, d));
+		return gcnew Color(m_NativeValue->getInterpolated_quadratic(*c1->m_NativeValue, *c2->m_NativeValue, d));
 	}
 
 	/// <summary>
@@ -496,7 +496,7 @@ public:
 		LIME_ASSERT(c1 != nullptr);
 		LIME_ASSERT(c2 != nullptr);
 
-		return gcnew Colorf(m_NativeValue->getInterpolated_quadratic(*other->m_NativeValue, d));
+		return gcnew Colorf(m_NativeValue->getInterpolated_quadratic(*c1->m_NativeValue, *c2->m_NativeValue, d));
 	}
 
 	/// <summary>
@@ -633,7 +633,7 @@ public:
 	{
 		LIME_ASSERT(copy != nullptr);
 
-		video::SColorHSL &c = *copyColorHSL->m_NativeValue;
+		video::SColorHSL &c = *copy->m_NativeValue;
 		m_NativeValue = new video::SColorHSL(c.Hue, c.Saturation, c.Luminance);
 	}
 

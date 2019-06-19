@@ -271,7 +271,7 @@ namespace L17.Minesweeper
 			s.FlipSurfaces(m_meshCell); // i don't know why, but somehow this one OBJ exported by Blender has flipped faces when opened by Irrlicht
 			fitMesh(m_meshCell);
 
-			s.SetVertexColors(m_meshCell, Color.OpaqueWhite);
+			s.SetVertexColors(m_meshCell, Color.SolidWhite);
 			s.MakePlanarTextureMapping(m_meshCell, 0.10f);
 			
 			Material m = new Material();

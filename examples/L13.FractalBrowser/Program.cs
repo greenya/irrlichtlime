@@ -26,8 +26,8 @@ namespace L13.FractalBrowser
 			VideoDriver driver = device.VideoDriver;
 			GUIFont font = device.GUIEnvironment.GetFont("../../media/fontlucida.png");
 			Color fontBackgroundColor = new Color(0x7f000000);
-			Color fontNormalColor = Color.OpaqueWhite;
-			Color fontActionColor = Color.OpaqueYellow;
+			Color fontNormalColor = Color.SolidWhite;
+			Color fontActionColor = Color.SolidYellow;
 
 			fGen = new FractalGenerator(device);
 			fGen.Generate(new Rectd(

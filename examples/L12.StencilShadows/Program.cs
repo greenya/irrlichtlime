@@ -133,25 +133,25 @@ namespace L12.StencilShadows
 				driver.Draw2DRectangle(new Recti(10, 10, 150, 220), new Color(0x7f000000));
 
 				Vector2Di v = new Vector2Di(20, 20);
-				statsFont.Draw("Rendering", v, Color.OpaqueYellow);
+				statsFont.Draw("Rendering", v, Color.SolidYellow);
 				v.Y += 16;
-				statsFont.Draw(driver.FPS + " fps", v, Color.OpaqueWhite);
+				statsFont.Draw(driver.FPS + " fps", v, Color.SolidWhite);
 				v.Y += 16;
-				statsFont.Draw("[S]hadows " + (useShadowsRendering ? "ON" : "OFF"), v, Color.OpaqueGreen);
+				statsFont.Draw("[S]hadows " + (useShadowsRendering ? "ON" : "OFF"), v, Color.SolidGreen);
 				v.Y += 16;
-				statsFont.Draw("[L]ight binding " + (useLightBinding ? "ON" : "OFF"), v, Color.OpaqueGreen);
+				statsFont.Draw("[L]ight binding " + (useLightBinding ? "ON" : "OFF"), v, Color.SolidGreen);
 				v.Y += 16;
-				statsFont.Draw("[F]lashlight " + (useFlashlight ? "ON" : "OFF"), v, Color.OpaqueGreen);
+				statsFont.Draw("[F]lashlight " + (useFlashlight ? "ON" : "OFF"), v, Color.SolidGreen);
 				v.Y += 32;
-				statsFont.Draw("Shadows", v, Color.OpaqueYellow);
+				statsFont.Draw("Shadows", v, Color.SolidYellow);
 				v.Y += 16;
-				statsFont.Draw(shdFps + " fps", v, Color.OpaqueWhite);
+				statsFont.Draw(shdFps + " fps", v, Color.SolidWhite);
 				v.Y += 16;
-				statsFont.Draw(shadows.VerticesBuilt + " vertices", v, Color.OpaqueWhite);
+				statsFont.Draw(shadows.VerticesBuilt + " vertices", v, Color.SolidWhite);
 				v.Y += 16;
-				statsFont.Draw("[R]ebuilding " + (useShadowsRebuilding ? "ON" : "OFF"), v, Color.OpaqueGreen);
+				statsFont.Draw("[R]ebuilding " + (useShadowsRebuilding ? "ON" : "OFF"), v, Color.SolidGreen);
 				v.Y += 16;
-				statsFont.Draw("[Q]uake level " + (useShadowsQuakeLevel ? "ON" : "OFF"), v, Color.OpaqueGreen);
+				statsFont.Draw("[Q]uake level " + (useShadowsQuakeLevel ? "ON" : "OFF"), v, Color.SolidGreen);
 
 				driver.EndScene();
 			}

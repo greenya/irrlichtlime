@@ -131,21 +131,21 @@ namespace L11.BulletSharpTest
 					driver.Draw2DRectangle(new Recti(10, 10, 140, 180), new Color(0x7f000000));
 
 					Vector2Di v = new Vector2Di(20, 20);
-					font.Draw("Rendering", v, Color.OpaqueYellow);
+					font.Draw("Rendering", v, Color.SolidYellow);
 					v.Y += 16;
-					font.Draw(scene.Attributes.GetValue("calls") + " nodes", v, Color.OpaqueWhite);
+					font.Draw(scene.Attributes.GetValue("calls") + " nodes", v, Color.SolidWhite);
 					v.Y += 16;
-					font.Draw(driver.FPS + " fps", v, Color.OpaqueWhite);
+					font.Draw(driver.FPS + " fps", v, Color.SolidWhite);
 					v.Y += 16;
-					font.Draw("[T]rails " + (useTrails ? "ON" : "OFF"), v, Color.OpaqueGreen);
+					font.Draw("[T]rails " + (useTrails ? "ON" : "OFF"), v, Color.SolidGreen);
 					v.Y += 32;
-					font.Draw("Physics" + (simPaused ? " (paused)" : ""), v, Color.OpaqueYellow);
+					font.Draw("Physics" + (simPaused ? " (paused)" : ""), v, Color.SolidYellow);
 					v.Y += 16;
-					font.Draw(physics.NumCollisionObjects + " shapes", v, Color.OpaqueWhite);
+					font.Draw(physics.NumCollisionObjects + " shapes", v, Color.SolidWhite);
 					v.Y += 16;
-					font.Draw(simFps + " fps", v, Color.OpaqueWhite);
+					font.Draw(simFps + " fps", v, Color.SolidWhite);
 					v.Y += 16;
-					font.Draw("[Space] to pause", v, Color.OpaqueGreen);
+					font.Draw("[Space] to pause", v, Color.SolidGreen);
 
 					driver.EndScene();
 				}

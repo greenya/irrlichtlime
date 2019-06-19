@@ -182,14 +182,14 @@ namespace L09.SimpleLOD
 						driver.Draw2DLine(
 							LODItem.LabelPositions[i] - new Vector2Di(10, 0),
 							LODItem.LabelPositions[i] + new Vector2Di(50, 0),
-							Color.OpaqueGreen);
+							Color.SolidGreen);
 
 						driver.Draw2DLine(
 							LODItem.LabelPositions[i] - new Vector2Di(0, 10),
 							LODItem.LabelPositions[i] + new Vector2Di(0, 50),
-							Color.OpaqueGreen);
+							Color.SolidGreen);
 
-						font.Draw(LODItem.LabelTexts[i], LODItem.LabelPositions[i], Color.OpaqueGreen);
+						font.Draw(LODItem.LabelTexts[i], LODItem.LabelPositions[i], Color.SolidGreen);
 					}
 				}
 
@@ -213,7 +213,7 @@ namespace L09.SimpleLOD
 					font.Draw(
 						string.Format("Stats\n{0}\n{1}{2}\nTotal: {3} [100%] objects", l, f, l, lodItemCount),
 						new Vector2Di(10, 140),
-						Color.OpaqueMagenta);
+						Color.SolidMagenta);
 				}
 
 				// show general stats
@@ -225,13 +225,13 @@ namespace L09.SimpleLOD
 					driver.PrimitiveCountDrawn,
 					driver.Name,
 					driver.FPS),
-					10, 10, Color.OpaqueYellow);
+					10, 10, Color.SolidYellow);
 
 				// show active keys
 
 				font.Draw(
 				    "[S] Toggle stats\n[W] Toggle wireframe\n[L] Toggle labels (only for LODs from 0 to 4)\n[Esc] Exit application",
-				    10, driver.ScreenSize.Height - 80, Color.OpaqueCyan);
+				    10, driver.ScreenSize.Height - 80, Color.SolidCyan);
 
 				driver.EndScene();
 			}
