@@ -189,23 +189,6 @@ Event::Event(int userData1, int userData2)
 Event::GUIEvent Event::GUI::get()
 {
 	LIME_ASSERT(Type == EventType::GUI);
-
-	// !!! patch for currently present bug (http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=38669) {
-	switch (m_NativeValue->GUIEvent.EventType)
-	{
-	case gui::EGET_ELEMENT_LEFT :
-	case gui::EGET_TABLE_HEADER_CHANGED :
-	case gui::EGET_TABLE_CHANGED :
-	case gui::EGET_TABLE_SELECTED_AGAIN :
-	case gui::EGET_TREEVIEW_NODE_DESELECT :
-	case gui::EGET_TREEVIEW_NODE_SELECT :
-	case gui::EGET_TREEVIEW_NODE_EXPAND :
-	case gui::EGET_TREEVIEW_NODE_COLLAPS :
-		m_NativeValue->GUIEvent.Element = nullptr;
-		break;
-	}
-	// }
-
 	return Event::GUIEvent(m_NativeValue->GUIEvent);
 }
 
