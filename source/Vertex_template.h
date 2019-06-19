@@ -4,12 +4,19 @@
 
 public:
 
+	/// <summary>
+	/// Default constructor.
+	/// Data is not initialized.
+	/// </summary>
 	_REFCLASS_()
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
 		m_NativeValue = new _WRAPCLASS_();
 	}
 
+	/// <summary>
+	/// Copy constructor.
+	/// </summary>
 	_REFCLASS_(_REFCLASS_^ copy)
 		: Lime::NativeValue<_WRAPCLASS_>(true)
 	{
@@ -17,6 +24,9 @@ public:
 		m_NativeValue = new _WRAPCLASS_(*copy->m_NativeValue);
 	}
 
+	/// <summary>
+	/// Get interpolated vertex from other (d=0) to this (d=1) vertex.
+	/// </summary>
 	_REFCLASS_^ GetInterpolated(_REFCLASS_^ other, float d)
 	{
 		LIME_ASSERT(other != nullptr);
@@ -25,6 +35,9 @@ public:
 		return gcnew _REFCLASS_(m_NativeValue->getInterpolated(*other->m_NativeValue, d));
 	}
 
+	/// <summary>
+	/// Position.
+	/// </summary>
 	property Vector3Df^ Position
 	{
 		Vector3Df^ get()
@@ -38,6 +51,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Normal vector.
+	/// </summary>
 	property Vector3Df^ Normal
 	{
 		Vector3Df^ get()
@@ -51,6 +67,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Color.
+	/// </summary>
 	property Video::Color^ Color
 	{
 		Video::Color^ get()
@@ -64,6 +83,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Texture coordinates.
+	/// </summary>
 	property Vector2Df^ TCoords
 	{
 		Vector2Df^ get()
@@ -77,6 +99,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Type of this vertex.
+	/// </summary>
 	property VertexType Type
 	{
 		VertexType get() { return (VertexType)m_NativeValue->getType(); }
