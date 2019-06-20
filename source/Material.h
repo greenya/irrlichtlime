@@ -228,9 +228,19 @@ public:
 	/// Is the zbuffer writable or is it read-only.
 	/// Default is true.
 	/// This flag is forced to false if the Type is a transparent material type and the <c>SceneParameters.AllowZWriteOnTransparent</c> is not set.
-	/// If you set this parameter to true, make sure that ZBuffer value is other than <see cref="ComparisonFunc::Disabled"/>.
+	/// If you set this parameter to true, make sure that <c>ZBuffer</c> value is other than <see cref="ComparisonFunc::Disabled"/>.
 	/// </summary>
 	property bool ZWrite { bool get(); void set(bool value); }
+
+	/// <summary>
+	/// Give more control how the <c>ZWrite</c> is interpreted.
+	/// Default is false.
+	/// When set to true: writing will just be based on <c>ZBuffer</c>, transparency is ignored.
+	/// When set to false: only write zbuffer when When <c>ZBuffer</c> is true and <c>Transparent</c> is false.
+	/// <para>Note that there is also the global flag <c>SceneParameters.AllowZWriteOnTransparent</c> which when set
+	/// acts like all materials have set this value to <c>true</c>.</para>
+	/// </summary>
+	property bool ZWriteFineControl { bool get(); void set(bool value); }
 
 	/// <summary>
 	/// Is backface culling enabled?
