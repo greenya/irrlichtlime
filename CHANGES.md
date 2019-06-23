@@ -1,4 +1,4 @@
-## Changes in 1.6 (not yet released)
+## Changes in 1.6 (23-Jun-2019)
 
 - Updated Irrlicht SDK to trunk r5824.
 - Moved to Visual Studio 2019 (Community Edition is free).
