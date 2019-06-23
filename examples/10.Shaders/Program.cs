@@ -256,9 +256,9 @@ namespace _10.Shaders
 			Vector3Df pos = device.SceneManager.ActiveCamera.AbsolutePosition;
 
 			if (useHighLevelShaders)
-				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArray());
+				services.SetVertexShaderConstant(shaderLightPosId, pos.ToArrayOf4());
 			else
-				services.SetVertexShaderConstantList(8, pos.ToArray());
+				services.SetVertexShaderConstantList(8, pos.ToArrayOf4());
 
 			// set light color
 

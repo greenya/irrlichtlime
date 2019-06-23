@@ -11,6 +11,7 @@
 - Added IntersectsWithBox(), IntersectsWithLine() and IsValid; renamed Empty to IsEmpty in AABBox.
 - Added zClipFromZero flag to BuildProjectionMatrix*() methods in Matrix.
 - Added Size in Rect*.
+- Updated Interpolate(), Invert(), Normalize() and RotateBy() in Vector2D*/3D* to return self vector (was new vector).
 - Updated GetIntersectionWithLine(), GetIntersectionWithLimitedLine() and GetIntersectionWithPlanes() to return Vector3Df of the intersection and null if none in Plane3Df. Instead of returning bool and having out arg.
 - Added TextureCubemapSeamless to VideoDriverFeature.
 - Added RotateLeft and RotateRight to KeyAction.
