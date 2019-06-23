@@ -23,6 +23,12 @@ ref class OSOperator;
 ref class Randomizer;
 ref class Timer;
 
+/// <summary>
+/// The Irrlicht device. You can create it with <c>IrrlichtDevice.CreateDevice()</c>.
+/// This is the most important class of the Irrlicht Engine.
+/// You can access everything in the engine if you have a pointer to an instance of this class.
+/// There should be only one instance of this class at any time.
+/// </summary>
 public ref class IrrlichtDevice : ReferenceCounted
 {
 public:
@@ -57,6 +63,12 @@ public:
 
 	void RestoreWindow();
 	
+	/// <summary>
+	/// Runs the device.
+	/// Also increments the virtual timer by calling <c>Timer.Tick()</c>.
+	/// You can prevent this by calling <c>Timer.Stop()</c>; before and <c>Timer.Start()</c> after calling this method.
+	/// </summary>
+	/// <returns>False if device wants to be deleted.</returns>
 	bool Run();
 
 	bool SetGammaRamp(float red, float green, float blue, float relativebrightness, float relativecontrast);
@@ -66,6 +78,11 @@ public:
 
 	void Sleep(int timeMs, bool pauseTimer);
 	void Sleep(int timeMs);
+
+	/// <summary>
+	/// Cause the device to temporarily pause execution and let other processes run.
+	/// This should bring down processor usage without major performance loss for Irrlicht.
+	/// </summary>
 	void Yield();
 
 	property Video::ColorFormat ColorFormat { Video::ColorFormat get(); }
