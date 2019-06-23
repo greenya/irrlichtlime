@@ -1,14 +1,3 @@
-***
-
-#### Important Note
-
-* The project has moved from SourceForge to GitHub.
-* This is work-in-progress, upcomming Irrlicht Lime version 1.6.
-* The latest (old) release is 1.5 availble at the old project location - https://sourceforge.net/projects/irrlichtlime/.
-* Known issue: 1.5 version doesn't work well with Visual Studio 2019 (Debug version gives `FileNotFoundException`); please use Visual Studio 2015.
-
-***
-
 # The Irrlicht Lime SDK version 1.6
 
 The Irrlicht Lime (or simply "Lime") is a .NET wrapper for the [Irrlicht Engine](http://irrlicht.sourceforge.net). It wraps most of the API available in native library, easily allowing you to use 2D/3D graphics in your application, written in C#, VB.NET or other .NET language.
